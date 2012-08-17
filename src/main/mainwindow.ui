@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>ObjectController</string>
   </property>
+  <property name="locale">
+   <locale language="English" country="UnitedStates"/>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
@@ -21,6 +24,235 @@
     <property name="margin">
      <number>4</number>
     </property>
+    <item>
+     <widget class="QLabel" name="controlledLabel">
+      <property name="text">
+       <string>Controlled objects:</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QListWidget" name="controlledListWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>80</height>
+       </size>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>4</number>
+      </property>
+      <item>
+       <widget class="QComboBox" name="objectsComboBox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <item>
+         <property name="text">
+          <string>QObject</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QWidget</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QFrame</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QPushButton</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QToolButton</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QRadioButton</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QCheckbox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QListWidget</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QTreeWidget</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QTableWidget</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QCombobox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QFontCombobox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QLineEdit</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QGroupBox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QTabWidget</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QTextEdit</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QPlainTextEdit</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QSpinBox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QDoubleSpinBox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QTimeEdit</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QDateEdit</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QDateTimeEdit</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QDial</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QHorizontalSlider</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QVerticallSlider</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QLabel</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QCalendar</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QProgressBar</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QHorizontalLine</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QVerticalLine</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QWebView</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="createButton">
+        <property name="text">
+         <string>Create</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="clearButton">
+        <property name="text">
+         <string>Clear</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QWidget" name="objectController" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="timeLabel">
+      <property name="text">
+       <string>Time:</string>
+      </property>
+     </widget>
+    </item>
    </layout>
   </widget>
  </widget>

@@ -5,33 +5,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    loadState();
 }
 
 MainWindow::~MainWindow()
 {
-    saveState();
-
     delete ui;
 }
 
-void MainWindow::saveState()
+void MainWindow::on_createButton_clicked()
 {
-    QDir(dir).mkpath(dir+"data");
-    QFile::remove(dir+"data/Config.ini");
-    QSettings aSettings(dir+"data/Config.ini",QSettings::IniFormat);
+    QString aNewObjectName=ui->objectsComboBox->currentText();
+    ui->controlledListWidget->addItem(aNewObjectName);
 
-    aSettings.beginGroup("States");
-    aSettings.setValue("Geometry",saveGeometry());
-    aSettings.endGroup();
+    qint64 aStartTime=QDateTime::currentMSecsSinceEpoch();
+
+    ui->timeLabel->setText("Time: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
 }
 
-void MainWindow::loadState()
+void MainWindow::on_clearButton_clicked()
 {
-    QSettings aSettings(dir+"data/Config.ini",QSettings::IniFormat);
-
-    aSettings.beginGroup("States");
-    restoreGeometry(aSettings.value("Geometry").toByteArray());
-    aSettings.endGroup();
+    ui->controlledListWidget->clear();
 }

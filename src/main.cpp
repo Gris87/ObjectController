@@ -7,18 +7,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
 
-    a.setApplicationName("ObjectController");
-    a.setApplicationVersion(applicationVersion);
-
-    a.setOrganizationName("None");
-    a.setOrganizationDomain("None");
-
     allowDumpCrashes();
-
-
-
-    dir=QApplication::applicationDirPath()+"/";
-
 
 
     mainWindow=new MainWindow;

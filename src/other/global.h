@@ -10,10 +10,4 @@
 // FORMS
 extern MainWindow *mainWindow;
 
-// GENERAL
-
-// OTHERS
-extern QString     dir;
-extern QString     applicationVersion;
-
 #endif // GLOBAL_H
