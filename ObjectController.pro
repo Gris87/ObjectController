@@ -29,9 +29,11 @@ CONFIG (debug, debug|release) {
 
 SOURCES +=  src/main.cpp\
             src/main/mainwindow.cpp \
-            src/other/global.cpp
+            src/other/global.cpp \
+            src/widgets/comboboxwithenter.cpp
 
 HEADERS  += src/main/mainwindow.h \
-            src/other/global.h
+            src/other/global.h \
+            src/widgets/comboboxwithenter.h
 
 FORMS    += src/main/mainwindow.ui

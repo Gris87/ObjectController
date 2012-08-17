@@ -12,19 +12,159 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    on_clearButton_clicked();
+
+    event->accept();
+}
+
 void MainWindow::on_createButton_clicked()
 {
+    QTimer::singleShot(0, this, SLOT(setFocutToObjectsComboBox()));
+
     QString aNewObjectName=ui->objectsComboBox->currentText();
 
     QObject *aNewObject=0;
 
     if (aNewObjectName=="QObject")
     {
-        aNewObject=new QObject(this);
+        aNewObject=new QObject();
+    }
+    else
+    if (aNewObjectName=="QWidget")
+    {
+        aNewObject=new QWidget();
+    }
+    else
+    if (aNewObjectName=="QFrame")
+    {
+        aNewObject=new QFrame();
+    }
+    else
+    if (aNewObjectName=="QPushButton")
+    {
+        aNewObject=new QPushButton();
+    }
+    else
+    if (aNewObjectName=="QToolButton")
+    {
+        aNewObject=new QToolButton();
+    }
+    else
+    if (aNewObjectName=="QRadioButton")
+    {
+        aNewObject=new QRadioButton();
+    }
+    else
+    if (aNewObjectName=="QCheckBox")
+    {
+        aNewObject=new QCheckBox();
+    }
+    else
+    if (aNewObjectName=="QListWidget")
+    {
+        aNewObject=new QListWidget();
+    }
+    else
+    if (aNewObjectName=="QTreeWidget")
+    {
+        aNewObject=new QTreeWidget();
+    }
+    else
+    if (aNewObjectName=="QTableWidget")
+    {
+        aNewObject=new QTableWidget();
+    }
+    else
+    if (aNewObjectName=="QGroupBox")
+    {
+        aNewObject=new QGroupBox();
+    }
+    else
+    if (aNewObjectName=="QTabWidget")
+    {
+        aNewObject=new QTabWidget();
+    }
+    else
+    if (aNewObjectName=="QComboBox")
+    {
+        aNewObject=new QComboBox();
+    }
+    else
+    if (aNewObjectName=="QFontComboBox")
+    {
+        aNewObject=new QFontComboBox();
+    }
+    else
+    if (aNewObjectName=="QLineEdit")
+    {
+        aNewObject=new QLineEdit();
+    }
+    else
+    if (aNewObjectName=="QTextEdit")
+    {
+        aNewObject=new QTextEdit();
+    }
+    else
+    if (aNewObjectName=="QPlainTextEdit")
+    {
+        aNewObject=new QPlainTextEdit();
+    }
+    else
+    if (aNewObjectName=="QSpinBox")
+    {
+        aNewObject=new QSpinBox();
+    }
+    else
+    if (aNewObjectName=="QDoubleSpinBox")
+    {
+        aNewObject=new QDoubleSpinBox();
+    }
+    else
+    if (aNewObjectName=="QTimeEdit")
+    {
+        aNewObject=new QTimeEdit();
+    }
+    else
+    if (aNewObjectName=="QDateEdit")
+    {
+        aNewObject=new QDateEdit();
+    }
+    else
+    if (aNewObjectName=="QDateTimeEdit")
+    {
+        aNewObject=new QDateTimeEdit();
+    }
+    else
+    if (aNewObjectName=="QDial")
+    {
+        aNewObject=new QDial();
+    }
+    else
+    if (aNewObjectName=="QSlider")
+    {
+        aNewObject=new QSlider();
+    }
+    else
+    if (aNewObjectName=="QLabel")
+    {
+        aNewObject=new QLabel();
+    }
+    else
+    if (aNewObjectName=="QCalendarWidget")
+    {
+        aNewObject=new QCalendarWidget();
+    }
+    else
+    if (aNewObjectName=="QProgressBar")
+    {
+        aNewObject=new QProgressBar();
     }
 
     if (aNewObject==0)
     {
+        QMessageBox::warning(this, "Creating object", "Unknown object type: "+aNewObjectName);
         return;
     }
 
@@ -36,8 +176,8 @@ void MainWindow::on_createButton_clicked()
 
         r.setSize(aNewWidget->sizeHint());
         r.setWidth(qMax(r.width(), 200));
-        r.setHeight(qMax(r.height(), 100));
-        r.moveCenter(QApplication::desktop()->geometry().center());
+        r.setHeight(qMax(r.height(), 30));
+        r.moveTopLeft(geometry().topRight());
 
         aNewWidget->setGeometry(r);
         aNewWidget->setWindowTitle(aNewObjectName);
@@ -66,4 +206,15 @@ void MainWindow::on_clearButton_clicked()
     }
 
     ui->objectController->clear();
+}
+
+void MainWindow::on_objectsComboBox_enterPressed()
+{
+    on_createButton_clicked();
+}
+
+void MainWindow::setFocutToObjectsComboBox()
+{
+    QApplication::setActiveWindow(this);
+    ui->objectsComboBox->setFocus();
 }

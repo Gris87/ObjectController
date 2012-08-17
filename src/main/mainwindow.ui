@@ -56,7 +56,7 @@
        <number>4</number>
       </property>
       <item>
-       <widget class="QComboBox" name="objectsComboBox">
+       <widget class="ComboBoxWithEnter" name="objectsComboBox">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -95,7 +95,7 @@
         </item>
         <item>
          <property name="text">
-          <string>QCheckbox</string>
+          <string>QCheckBox</string>
          </property>
         </item>
         <item>
@@ -115,27 +115,27 @@
         </item>
         <item>
          <property name="text">
-          <string>QCombobox</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QFontCombobox</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QLineEdit</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
           <string>QGroupBox</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>QTabWidget</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QComboBox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QFontComboBox</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>QLineEdit</string>
          </property>
         </item>
         <item>
@@ -180,12 +180,7 @@
         </item>
         <item>
          <property name="text">
-          <string>QHorizontalSlider</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QVerticallSlider</string>
+          <string>QSlider</string>
          </property>
         </item>
         <item>
@@ -195,27 +190,12 @@
         </item>
         <item>
          <property name="text">
-          <string>QCalendar</string>
+          <string>QCalendarWidget</string>
          </property>
         </item>
         <item>
          <property name="text">
           <string>QProgressBar</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QHorizontalLine</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QVerticalLine</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>QWebView</string>
          </property>
         </item>
        </widget>
@@ -225,12 +205,21 @@
         <property name="text">
          <string>Create</string>
         </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>true</bool>
+        </property>
        </widget>
       </item>
       <item>
        <widget class="QPushButton" name="clearButton">
         <property name="text">
          <string>Clear</string>
+        </property>
+        <property name="autoDefault">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -263,6 +252,14 @@
    <extends>QWidget</extends>
    <header>src/property/objectcontroller.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ComboBoxWithEnter</class>
+   <extends>QComboBox</extends>
+   <header>src/widgets/comboboxwithenter.h</header>
+   <slots>
+    <signal>enterPressed()</signal>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
