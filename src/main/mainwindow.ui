@@ -237,7 +237,7 @@
      </layout>
     </item>
     <item>
-     <widget class="QWidget" name="objectController" native="true">
+     <widget class="ObjectController" name="objectController" native="true">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
         <horstretch>0</horstretch>
@@ -257,6 +257,14 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>ObjectController</class>
+   <extends>QWidget</extends>
+   <header>src/property/objectcontroller.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

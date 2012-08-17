@@ -10,6 +10,7 @@ int main(int argc, char *argv[])
     allowDumpCrashes();
 
 
+
     mainWindow=new MainWindow;
     mainWindow->show();
 

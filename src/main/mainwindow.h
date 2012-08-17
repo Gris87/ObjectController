@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "ui_mainwindow.h"
 
+#include <QDesktopWidget>
+
 namespace Ui {
 class MainWindow;
 }

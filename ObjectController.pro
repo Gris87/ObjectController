@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 include (src/dump/dump.pri)
+include (src/property/property.pri)
 
 QT       += core gui
 
