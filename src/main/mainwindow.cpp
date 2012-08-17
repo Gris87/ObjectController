@@ -44,7 +44,7 @@ void MainWindow::on_createButton_clicked()
     else
     if (aNewObjectName=="QPushButton")
     {
-        aNewObject=new QPushButton();
+        aNewObject=new QPushButton("Button");
     }
     else
     if (aNewObjectName=="QToolButton")
@@ -54,12 +54,12 @@ void MainWindow::on_createButton_clicked()
     else
     if (aNewObjectName=="QRadioButton")
     {
-        aNewObject=new QRadioButton();
+        aNewObject=new QRadioButton("Radio button");
     }
     else
     if (aNewObjectName=="QCheckBox")
     {
-        aNewObject=new QCheckBox();
+        aNewObject=new QCheckBox("CheckBox");
     }
     else
     if (aNewObjectName=="QListWidget")
@@ -74,12 +74,12 @@ void MainWindow::on_createButton_clicked()
     else
     if (aNewObjectName=="QTableWidget")
     {
-        aNewObject=new QTableWidget();
+        aNewObject=new QTableWidget(5, 3);
     }
     else
     if (aNewObjectName=="QGroupBox")
     {
-        aNewObject=new QGroupBox();
+        aNewObject=new QGroupBox("GroupBox");
     }
     else
     if (aNewObjectName=="QTabWidget")
@@ -99,17 +99,17 @@ void MainWindow::on_createButton_clicked()
     else
     if (aNewObjectName=="QLineEdit")
     {
-        aNewObject=new QLineEdit();
+        aNewObject=new QLineEdit("LineEdit");
     }
     else
     if (aNewObjectName=="QTextEdit")
     {
-        aNewObject=new QTextEdit();
+        aNewObject=new QTextEdit("TextEdit");
     }
     else
     if (aNewObjectName=="QPlainTextEdit")
     {
-        aNewObject=new QPlainTextEdit();
+        aNewObject=new QPlainTextEdit("PlainTextEdit");
     }
     else
     if (aNewObjectName=="QSpinBox")
@@ -149,7 +149,7 @@ void MainWindow::on_createButton_clicked()
     else
     if (aNewObjectName=="QLabel")
     {
-        aNewObject=new QLabel();
+        aNewObject=new QLabel("Label");
     }
     else
     if (aNewObjectName=="QCalendarWidget")
