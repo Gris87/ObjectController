@@ -52,7 +52,7 @@ public:
     void closeEvent(QCloseEvent *event);
 
 private slots:
-    void setFocutToObjectsComboBox();
+    void setFocusToObjectsComboBox();
 
     void on_createButton_clicked();
     void on_clearButton_clicked();

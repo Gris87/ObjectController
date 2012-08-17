@@ -21,7 +21,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_createButton_clicked()
 {
-    QTimer::singleShot(0, this, SLOT(setFocutToObjectsComboBox()));
+    QTimer::singleShot(0, this, SLOT(setFocusToObjectsComboBox()));
 
     QString aNewObjectName=ui->objectsComboBox->currentText();
 
@@ -213,7 +213,7 @@ void MainWindow::on_objectsComboBox_enterPressed()
     on_createButton_clicked();
 }
 
-void MainWindow::setFocutToObjectsComboBox()
+void MainWindow::setFocusToObjectsComboBox()
 {
     QApplication::setActiveWindow(this);
     ui->objectsComboBox->setFocus();
