@@ -3,13 +3,9 @@
 
 #include <QWidget>
 
-#include <QVBoxLayout>
 #include <QTreeWidget>
 
-#include <QStack>
-#include <QMetaObject>
-#include <QMetaProperty>
-#include <QDebug>
+#include "handleobject.h"
 
 class ObjectController : public QWidget
 {
@@ -18,6 +14,7 @@ public:
     explicit ObjectController(QWidget *parent = 0);
 
     void invalidate();
+    void reset();
     void clear();
 
     void setObject(QObject *aObject);
@@ -28,8 +25,11 @@ public:
     bool rootIsDecorated();
 
 protected:
-    QObjectList  mObjects;
-    QTreeWidget* mTreeWidget;
+    typedef QMap<QObject*, HandleObject*> HandledObjects;
+
+    QTreeWidget*   mTreeWidget;
+    QObjectList    mObjects;
+    HandledObjects mHandledObjects;
 };
 
 #endif // OBJECTCONTROLLER_H

@@ -191,7 +191,14 @@ void MainWindow::on_createButton_clicked()
 
     qint64 aStartTime=QDateTime::currentMSecsSinceEpoch();
     ui->objectController->setObjects(aObjects);
-    ui->timeLabel->setText("Time: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
+    ui->timeLabel->setText("Time to set objects: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
+}
+
+void MainWindow::on_resetButton_clicked()
+{
+    qint64 aStartTime=QDateTime::currentMSecsSinceEpoch();
+    ui->objectController->reset();
+    ui->timeLabel->setText("Time to reset: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
 }
 
 void MainWindow::on_clearButton_clicked()

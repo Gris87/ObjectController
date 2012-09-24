@@ -1,5 +1,7 @@
 #include "objectcontroller.h"
 
+#include <QVBoxLayout>
+
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
 {
@@ -9,9 +11,8 @@ ObjectController::ObjectController(QWidget *parent) :
     mTreeWidget->setHeaderLabels(QStringList() << "Property" << "Value");
 
     QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(mTreeWidget);
-
-
 
     setRootIsDecorated(false);
 }
@@ -19,36 +20,30 @@ ObjectController::ObjectController(QWidget *parent) :
 void ObjectController::invalidate()
 {
     mTreeWidget->clear();
+}
 
-    for (int i=0; i<mObjects.length(); ++i)
+void ObjectController::reset()
+{
+    for (HandledObjects::iterator i=mHandledObjects.begin(); i!=mHandledObjects.end(); ++i)
     {
-        QStack<const QMetaObject *> aMetaObjects;
-
-        const QMetaObject *aMetaObject=mObjects.at(i)->metaObject();
-
-        while (aMetaObject)
-        {
-            aMetaObjects.push(aMetaObject);
-
-            aMetaObject=aMetaObject->superClass();
-        }
-
-        while (!aMetaObjects.isEmpty())
-        {
-            aMetaObject=aMetaObjects.pop();
-
-            for (int j=aMetaObject->propertyOffset(); j<aMetaObject->propertyCount(); ++j)
-            {
-                QMetaProperty aProperty=aMetaObject->property(j);
-            }
-        }
+        i.value()->reset();
     }
+
+    invalidate();
 }
 
 void ObjectController::clear()
 {
-    mObjects.clear();
     mTreeWidget->clear();
+    mObjects.clear();
+
+    while (mHandledObjects.count()>0)
+    {
+        HandledObjects::iterator first=mHandledObjects.begin();
+
+        delete first.value();
+        mHandledObjects.erase(first);
+    }
 }
 
 void ObjectController::setObject(QObject *aObject)
@@ -60,6 +55,30 @@ void ObjectController::setObject(QObject *aObject)
 
 void ObjectController::setObjects(const QObjectList &aObjects)
 {
+    for (HandledObjects::iterator i=mHandledObjects.begin(); i!=mHandledObjects.end(); )
+    {
+        if (aObjects.contains(i.key()))
+        {
+            ++i;
+        }
+        else
+        {
+            HandledObjects::iterator it=i;
+            ++i;
+
+            delete it.value();
+            mHandledObjects.erase(it);
+        }
+    }
+
+    for (int i=0; i<aObjects.length(); ++i)
+    {
+        if (!mHandledObjects.contains(aObjects.at(i)))
+        {
+            mHandledObjects[aObjects.at(i)]=new HandleObject(aObjects.at(i));
+        }
+    }
+
     mObjects=aObjects;
     invalidate();
 }

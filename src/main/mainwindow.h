@@ -55,6 +55,7 @@ private slots:
     void setFocusToObjectsComboBox();
 
     void on_createButton_clicked();
+    void on_resetButton_clicked();
     void on_clearButton_clicked();
     void on_objectsComboBox_enterPressed();
 };

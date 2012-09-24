@@ -4,7 +4,13 @@
 #
 #-------------------------------------------------
 
-HEADERS += $$PWD/objectcontroller.h
+HEADERS += $$PWD/objectcontroller.h \
+           $$PWD/handleobject.h \
+           $$PWD/property.h \
+           $$PWD/propertygroup.h
 
-SOURCES += $$PWD/objectcontroller.cpp
+SOURCES += $$PWD/objectcontroller.cpp \
+           $$PWD/handleobject.cpp \
+           $$PWD/property.cpp \
+           $$PWD/propertygroup.cpp
 
