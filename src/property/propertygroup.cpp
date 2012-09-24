@@ -5,11 +5,6 @@ PropertyGroup::PropertyGroup(const QMetaObject *aMetaObject)
     mName=aMetaObject->className();
 }
 
-PropertyGroup::~PropertyGroup()
-{
-    clear();
-}
-
 void PropertyGroup::addProperty(Property *aNewProperty)
 {
     mProperties.append(aNewProperty);

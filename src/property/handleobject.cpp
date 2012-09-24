@@ -2,7 +2,6 @@
 
 #include <QStack>
 #include <QMetaProperty>
-#include <QDebug>
 
 #include "objectcontroller.h"
 
@@ -51,6 +50,7 @@ void HandleObject::clear()
 {
     for (int i=0; i<mClassProperties.length(); ++i)
     {
+        mClassProperties.at(i)->clear();
         delete mClassProperties.at(i);
     }
 

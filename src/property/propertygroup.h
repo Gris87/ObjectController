@@ -2,16 +2,14 @@
 #define PROPERTYGROUP_H
 
 #include <QMetaObject>
-#include <QString>
-#include <QList>
 
 #include "property.h"
 
 class PropertyGroup
 {
+    friend class HandleObject;
 public:
     PropertyGroup(const QMetaObject *aMetaObject);
-    ~PropertyGroup();
 
     void addProperty(Property *aNewProperty);
 

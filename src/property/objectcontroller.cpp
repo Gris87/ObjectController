@@ -20,6 +20,37 @@ ObjectController::ObjectController(QWidget *parent) :
 void ObjectController::invalidate()
 {
     mTreeWidget->clear();
+
+    if (mObjects.length()==0)
+    {
+        return;
+    }
+
+    QList<PropertyGroup *> aClassProperties=mHandledObjects.begin().value()->classProperties();
+    QList<QTreeWidgetItem *> aTopLevelItems;
+
+    for (int i=0; i<aClassProperties.length(); ++i)
+    {
+        QTreeWidgetItem* aTopItem=new QTreeWidgetItem();
+        aTopItem->setText(0, aClassProperties.at(i)->name());
+
+        QList<Property *> aProperties=aClassProperties.at(i)->properties();
+
+        for (int j=0; j<aProperties.length(); ++j)
+        {
+            QTreeWidgetItem* aItem=new QTreeWidgetItem(aTopItem);
+            aItem->setText(0, aProperties.at(j)->name());
+        }
+
+        aTopLevelItems.append(aTopItem);
+    }
+
+    mTreeWidget->addTopLevelItems(aTopLevelItems);
+
+    for (int i=0; i<aTopLevelItems.length(); ++i)
+    {
+        aTopLevelItems.at(i)->setExpanded(true);
+    }
 }
 
 void ObjectController::reset()
@@ -49,7 +80,12 @@ void ObjectController::clear()
 void ObjectController::setObject(QObject *aObject)
 {
     QObjectList aTempList;
-    aTempList.append(aObject);
+
+    if (aObject)
+    {
+        aTempList.append(aObject);
+    }
+
     setObjects(aTempList);
 }
 

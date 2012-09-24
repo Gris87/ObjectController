@@ -7,6 +7,11 @@ class Property
 {
 public:
     Property(const QMetaProperty aProperty);
+
+    QString name() const;
+
+protected:
+    QString mName;
 };
 
 #endif // PROPERTY_H
