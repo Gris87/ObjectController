@@ -75,7 +75,7 @@ void ObjectController::setObjects(const QObjectList &aObjects)
     {
         if (!mHandledObjects.contains(aObjects.at(i)))
         {
-            mHandledObjects[aObjects.at(i)]=new HandleObject(aObjects.at(i));
+            mHandledObjects[aObjects.at(i)]=new HandleObject(this, aObjects.at(i));
         }
     }
 

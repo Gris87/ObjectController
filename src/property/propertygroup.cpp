@@ -1,7 +1,28 @@
 #include "propertygroup.h"
 
-PropertyGroup::PropertyGroup()
+PropertyGroup::PropertyGroup(const QMetaObject *aMetaObject)
 {
+    mName=aMetaObject->className();
+}
+
+PropertyGroup::~PropertyGroup()
+{
+    clear();
+}
+
+void PropertyGroup::addProperty(Property *aNewProperty)
+{
+    mProperties.append(aNewProperty);
+}
+
+void PropertyGroup::clear()
+{
+    for (int i=0; i<mProperties.length(); ++i)
+    {
+        delete mProperties.at(i);
+    }
+
+    mProperties.clear();
 }
 
 QString PropertyGroup::name() const
@@ -9,17 +30,7 @@ QString PropertyGroup::name() const
     return mName;
 }
 
-void PropertyGroup::setName(const QString aName)
-{
-    mName=aName;
-}
-
-QList<Property> PropertyGroup::properties() const
+QList<Property *> PropertyGroup::properties() const
 {
     return mProperties;
-}
-
-void PropertyGroup::setProperties(const QList<Property> aProperties)
-{
-    mProperties=aProperties;
 }

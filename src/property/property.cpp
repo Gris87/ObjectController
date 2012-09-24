@@ -1,5 +1,5 @@
 #include "property.h"
 
-Property::Property()
+Property::Property(const QMetaProperty aProperty)
 {
 }
