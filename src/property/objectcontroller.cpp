@@ -22,9 +22,51 @@ void ObjectController::invalidate()
         return;
     }
 
-    QList<PropertyGroup *> aClassProperties=mHandledObjects.begin().value()->classProperties();
+    QList<PropertyGroup *> aCommonProperties;
 
-    mTreeWidget->fillByPropertyGroups(aClassProperties);
+    for (HandledObjects::iterator i=mHandledObjects.begin(); i!=mHandledObjects.end(); ++i)
+    {
+        QList<PropertyGroup *> aClassProperties=i.value()->classProperties();
+
+        if (i==mHandledObjects.begin())
+        {
+            for (int j=0; j<aClassProperties.length(); ++j)
+            {
+                aCommonProperties.append(new PropertyGroup(aClassProperties.at(j)));
+            }
+        }
+        else
+        {
+            for (int j=0; j<aCommonProperties.length(); ++j)
+            {
+                bool good=false;
+
+                for (int k=0; k<aClassProperties.length(); ++k)
+                {
+                    if (aCommonProperties.at(j)->equals(aClassProperties.at(k)))
+                    {
+                        aCommonProperties[j]->intersect(aClassProperties.at(k));
+                        good=aCommonProperties.at(j)->properties().length()>0;
+                        break;
+                    }
+                }
+
+                if (!good)
+                {
+                    delete aCommonProperties.at(j);
+                    aCommonProperties.removeAt(j);
+                    --j;
+                }
+            }
+        }
+    }
+
+    mTreeWidget->fillByPropertyGroups(aCommonProperties);
+
+    for (int i=0; i<aCommonProperties.length(); ++i)
+    {
+        delete aCommonProperties.at(i);
+    }
 }
 
 void ObjectController::reset()

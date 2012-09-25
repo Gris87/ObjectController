@@ -10,6 +10,8 @@ class Property
 public:
     Property(const QMetaProperty &aMetaProperty);
 
+    bool equals(const Property *aProperty);
+
     QString name() const;
     QColor  backgroundColor() const;
 

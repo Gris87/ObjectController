@@ -10,15 +10,21 @@ class PropertyGroup
     friend class HandleObject;
 public:
     PropertyGroup(const QMetaObject *aMetaObject, const QString &aName);
+    PropertyGroup(PropertyGroup *aPropertyGroup);
+
+    bool equals(const PropertyGroup *aPropertyGroup);
 
     void addProperty(Property *aNewProperty);
+    void intersect(PropertyGroup *aPropertyGroup);
 
-    QString           name() const;
-    QList<Property *> properties() const;
+    const QMetaObject* metaObject() const;
+    QString            name() const;
+    QList<Property *>  properties() const;
 
 protected:
-    QString           mName;
-    QList<Property *> mProperties;
+    const QMetaObject *mMetaObject;
+    QString            mName;
+    QList<Property *>  mProperties;
 
     void clear();
 };
