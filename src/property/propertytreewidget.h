@@ -12,6 +12,7 @@ public:
     explicit PropertyTreeWidget(QWidget *parent = 0);
 
     void fillByPropertyGroups(QList<PropertyGroup *> aGroups);
+    void update(const QObjectList &aObjects);
 
 protected:
     void keyPressEvent(QKeyEvent *event);

@@ -18,6 +18,8 @@ public:
     PropertyTreeWidgetItem(PropertyTreeWidgetItem *parent, PropertyTreeWidgetItem *preceding, int type = Type);
     PropertyTreeWidgetItem(const PropertyTreeWidgetItem &other);
 
+    void update(const QObjectList &aObjects);
+
     Property* property();
     void setProperty(Property* aProperty);
 

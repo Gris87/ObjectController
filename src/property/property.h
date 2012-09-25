@@ -12,6 +12,9 @@ public:
 
     bool equals(const Property *aProperty);
 
+    QVariant read(const QObjectList &aObjects);
+    void write(const QObjectList &aObjects, const QVariant &aValue);
+
     QString name() const;
     QColor  backgroundColor() const;
 

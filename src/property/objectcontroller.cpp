@@ -67,6 +67,13 @@ void ObjectController::invalidate()
     {
         delete aCommonProperties.at(i);
     }
+
+    update();
+}
+
+void ObjectController::update()
+{
+    mTreeWidget->update(mObjects);
 }
 
 void ObjectController::reset()

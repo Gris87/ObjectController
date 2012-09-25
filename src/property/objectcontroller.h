@@ -16,6 +16,7 @@ public:
     explicit ObjectController(QWidget *parent = 0);
 
     void invalidate();
+    void update();
     void reset();
     void clear();
 

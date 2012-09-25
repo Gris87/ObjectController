@@ -110,3 +110,16 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
         aTopLevelItems.at(i)->setFirstColumnSpanned(true);
     }
 }
+
+void PropertyTreeWidget::update(const QObjectList &aObjects)
+{
+    for (int i=0; i<topLevelItemCount(); ++i)
+    {
+        QTreeWidgetItem *aItem=topLevelItem(i);
+
+        for (int j=0; j<aItem->childCount(); ++j)
+        {
+            ((PropertyTreeWidgetItem *)aItem->child(j))->update(aObjects);
+        }
+    }
+}

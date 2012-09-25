@@ -45,6 +45,16 @@ PropertyTreeWidgetItem::PropertyTreeWidgetItem(const PropertyTreeWidgetItem &oth
     mProperty=0;
 }
 
+void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
+{
+    if (mProperty==0)
+    {
+        return;
+    }
+
+    setText(1, mProperty->read(aObjects).toString());
+}
+
 Property* PropertyTreeWidgetItem::property()
 {
     return mProperty;
