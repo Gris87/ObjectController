@@ -9,3 +9,8 @@ QString Property::name() const
 {
     return mName;
 }
+
+QColor Property::backgroundColor() const
+{
+    return mBackgroundColor;
+}

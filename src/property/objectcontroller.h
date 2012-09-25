@@ -3,9 +3,8 @@
 
 #include <QWidget>
 
-#include <QTreeWidget>
-
 #include "handleobject.h"
+#include "propertytreewidget.h"
 
 class ObjectController : public QWidget
 {
@@ -27,9 +26,9 @@ public:
 protected:
     typedef QMap<QObject*, HandleObject*> HandledObjects;
 
-    QTreeWidget*   mTreeWidget;
-    QObjectList    mObjects;
-    HandledObjects mHandledObjects;
+    PropertyTreeWidget* mTreeWidget;
+    QObjectList         mObjects;
+    HandledObjects      mHandledObjects;
 };
 
 #endif // OBJECTCONTROLLER_H

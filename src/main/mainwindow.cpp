@@ -5,6 +5,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QTimer::singleShot(0, this, SLOT(on_createButton_clicked()));
 }
 
 MainWindow::~MainWindow()
@@ -178,6 +180,7 @@ void MainWindow::on_createButton_clicked()
         r.setWidth(qMax(r.width(), 200));
         r.setHeight(qMax(r.height(), 30));
         r.moveTopLeft(geometry().topRight());
+        r.translate(8, 0);
 
         aNewWidget->setGeometry(r);
         aNewWidget->setWindowTitle(aNewObjectName);
