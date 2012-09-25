@@ -24,9 +24,6 @@ public:
     void setObjects(const QObjectList &aObjects);
     QObjectList objects() const;
 
-    void setRootIsDecorated(bool aDecorated);
-    bool rootIsDecorated();
-
 protected:
     typedef QMap<QObject*, HandleObject*> HandledObjects;
 

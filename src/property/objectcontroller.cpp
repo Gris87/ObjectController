@@ -11,7 +11,7 @@ ObjectController::ObjectController(QWidget *parent) :
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(mTreeWidget);
 
-    setRootIsDecorated(false);
+    mTreeWidget->setRootIsDecorated(false);
 }
 
 void ObjectController::invalidate()
@@ -146,16 +146,6 @@ void ObjectController::setObjects(const QObjectList &aObjects)
 QObjectList ObjectController::objects() const
 {
     return mObjects;
-}
-
-void ObjectController::setRootIsDecorated(bool aDecorated)
-{
-    mTreeWidget->setRootIsDecorated(aDecorated);
-}
-
-bool ObjectController::rootIsDecorated()
-{
-    return mTreeWidget->rootIsDecorated();
 }
 
 bool ObjectController::filterClass(QString &/*aClassName*/)

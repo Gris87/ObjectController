@@ -23,7 +23,8 @@ protected:
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
-    void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    // TODO: Maybe useless. Remove it
+    //void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
 };
 
 #endif // PROPERTYTREEWIDGET_H

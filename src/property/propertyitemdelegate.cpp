@@ -42,6 +42,9 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     else
     {
         painter->fillRect(option.rect, option.palette.color(QPalette::Dark));
+        opt.font.setPointSize(opt.font.pointSize()+2);
+        opt.font.setBold(true);
+        opt.fontMetrics = QFontMetrics(opt.font);
     }
 
     opt.state&=~QStyle::State_HasFocus;
@@ -61,6 +64,7 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
         painter->drawLine(right, option.rect.y(), right, option.rect.bottom());
     }
 
+    painter->drawLine(0, option.rect.bottom(), option.rect.right(), option.rect.bottom());
     painter->restore();
 }
 
