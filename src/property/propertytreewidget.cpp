@@ -9,6 +9,8 @@
 PropertyTreeWidget::PropertyTreeWidget(QWidget *parent) :
     QTreeWidget(parent)
 {
+    setColumnCount(2);
+    setHeaderLabels(QStringList() << "Property" << "Value");
 }
 
 void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
@@ -85,6 +87,8 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
         PropertyTreeWidgetItem* aTopItem=new PropertyTreeWidgetItem();
         aTopItem->setText(0, aGroups.at(i)->name());
 
+
+
         QList<Property *> aProperties=aGroups.at(i)->properties();
 
         for (int j=0; j<aProperties.length(); ++j)
@@ -92,6 +96,8 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
             PropertyTreeWidgetItem* aItem=new PropertyTreeWidgetItem(aTopItem);
             aItem->setProperty(aProperties.at(j));
         }
+
+
 
         aTopLevelItems.append(aTopItem);
     }
@@ -101,5 +107,6 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
     for (int i=0; i<aTopLevelItems.length(); ++i)
     {
         aTopLevelItems.at(i)->setExpanded(true);
+        aTopLevelItems.at(i)->setFirstColumnSpanned(true);
     }
 }

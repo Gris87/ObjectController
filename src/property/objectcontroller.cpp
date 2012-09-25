@@ -7,9 +7,6 @@ ObjectController::ObjectController(QWidget *parent) :
 {
     mTreeWidget=new PropertyTreeWidget(this);
 
-    mTreeWidget->setColumnCount(2);
-    mTreeWidget->setHeaderLabels(QStringList() << "Property" << "Value");
-
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(mTreeWidget);
