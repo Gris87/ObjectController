@@ -35,13 +35,28 @@ void HandleObject::reset()
     while (!aMetaObjects.isEmpty())
     {
         aMetaObject=aMetaObjects.pop();
-        PropertyGroup *aPropertyGroup=new PropertyGroup(aMetaObject);
+
+        QString aClassName=aMetaObject->className();
+
+        if (!mController->filterClass(aClassName))
+        {
+            continue;
+        }
+
+        PropertyGroup *aPropertyGroup=new PropertyGroup(aMetaObject, aClassName);
 
         mClassProperties.append(aPropertyGroup);
 
         for (int j=aMetaObject->propertyOffset(); j<aMetaObject->propertyCount(); ++j)
         {
-            aPropertyGroup->addProperty(new Property(aMetaObject->property(j)));
+            QMetaProperty aProperty=aMetaObject->property(j);
+
+            if (!mController->filterProperty(aMetaObject, aProperty.name()))
+            {
+                continue;
+            }
+
+            aPropertyGroup->addProperty(new Property(aProperty));
         }
     }
 }

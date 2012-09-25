@@ -108,3 +108,18 @@ bool ObjectController::rootIsDecorated()
 {
     return mTreeWidget->rootIsDecorated();
 }
+
+bool ObjectController::filterClass(QString &/*aClassName*/)
+{
+    return true;
+}
+
+bool ObjectController::filterProperty(const QMetaObject * /*aMetaObject*/, QString /*aMetaPropertyName*/)
+{
+    return true;
+}
+
+void ObjectController::propertyAdded(const QMetaObject * /*aMetaObject*/, Property * /*aProperty*/)
+{
+    // Nothing
+}

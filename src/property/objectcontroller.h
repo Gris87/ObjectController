@@ -9,6 +9,9 @@
 class ObjectController : public QWidget
 {
     Q_OBJECT
+
+    friend class HandleObject;
+
 public:
     explicit ObjectController(QWidget *parent = 0);
 
@@ -29,6 +32,10 @@ protected:
     PropertyTreeWidget* mTreeWidget;
     QObjectList         mObjects;
     HandledObjects      mHandledObjects;
+
+    virtual bool filterClass(QString &aClassName);
+    virtual bool filterProperty(const QMetaObject *aMetaObject, QString aMetaPropertyName);
+    virtual void propertyAdded(const QMetaObject *aMetaObject, Property *aProperty);
 };
 
 #endif // OBJECTCONTROLLER_H

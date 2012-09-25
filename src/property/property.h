@@ -8,14 +8,15 @@
 class Property
 {
 public:
-    Property(const QMetaProperty aProperty);
+    Property(const QMetaProperty &aMetaProperty);
 
     QString name() const;
     QColor  backgroundColor() const;
 
 protected:
-    QString mName;
-    QColor  mBackgroundColor;
+    QMetaProperty mMetaProperty;
+    QString       mName;
+    QColor        mBackgroundColor;
 };
 
 #endif // PROPERTY_H

@@ -9,7 +9,7 @@ class PropertyGroup
 {
     friend class HandleObject;
 public:
-    PropertyGroup(const QMetaObject *aMetaObject);
+    PropertyGroup(const QMetaObject *aMetaObject, const QString &aName);
 
     void addProperty(Property *aNewProperty);
 

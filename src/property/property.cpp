@@ -1,8 +1,10 @@
 #include "property.h"
 
-Property::Property(const QMetaProperty aProperty)
+Property::Property(const QMetaProperty &aMetaProperty)
 {
-    mName=aProperty.name();
+    mMetaProperty=aMetaProperty;
+
+    mName=mMetaProperty.name();
 }
 
 QString Property::name() const

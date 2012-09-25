@@ -1,8 +1,8 @@
 #include "propertygroup.h"
 
-PropertyGroup::PropertyGroup(const QMetaObject *aMetaObject)
+PropertyGroup::PropertyGroup(const QMetaObject *aMetaObject, const QString &aName)
 {
-    mName=aMetaObject->className();
+    mName=aName;
 }
 
 void PropertyGroup::addProperty(Property *aNewProperty)
