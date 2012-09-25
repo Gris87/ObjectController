@@ -71,6 +71,11 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
 
         if (aColor.isValid())
         {
+            if (opt.features & QStyleOptionViewItemV2::Alternate)
+            {
+                aColor=aColor.lighter(112);
+            }
+
             painter->fillRect(option.rect, aColor);
         }
     }
@@ -83,10 +88,13 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
     }
 
     QTreeWidget::drawRow(painter, opt, index);
+
+
+
     QColor color = static_cast<QRgb>(QApplication::style()->styleHint(QStyle::SH_Table_GridLineColor, &opt));
     painter->save();
     painter->setPen(QPen(color));
-    painter->drawLine(opt.rect.x(), opt.rect.bottom(), opt.rect.right(), opt.rect.bottom());
+    painter->drawLine(option.rect.x(), option.rect.bottom(), option.rect.right(), option.rect.bottom());
     painter->restore();
 }
 

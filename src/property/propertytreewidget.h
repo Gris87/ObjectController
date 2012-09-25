@@ -9,6 +9,9 @@
 class PropertyTreeWidget : public QTreeWidget
 {
     Q_OBJECT
+
+    friend class PropertyItemDelegate;
+
 public:
     explicit PropertyTreeWidget(QWidget *parent = 0);
 

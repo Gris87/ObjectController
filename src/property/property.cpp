@@ -5,6 +5,7 @@ Property::Property(const QMetaProperty &aMetaProperty)
     mMetaProperty=aMetaProperty;
 
     mName=mMetaProperty.name();
+    mModified=false;
 }
 
 bool Property::equals(const Property *aProperty)
@@ -50,4 +51,14 @@ QString Property::name() const
 QColor Property::backgroundColor() const
 {
     return mBackgroundColor;
+}
+
+bool Property::isModified() const
+{
+    return mModified;
+}
+
+void Property::setModified(const bool aModified)
+{
+    mModified=aModified;
 }

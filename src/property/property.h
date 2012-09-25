@@ -18,10 +18,14 @@ public:
     QString name() const;
     QColor  backgroundColor() const;
 
+    bool    isModified() const;
+    void    setModified(const bool aModified);
+
 protected:
     QMetaProperty mMetaProperty;
     QString       mName;
     QColor        mBackgroundColor;
+    bool          mModified;
 };
 
 #endif // PROPERTY_H
