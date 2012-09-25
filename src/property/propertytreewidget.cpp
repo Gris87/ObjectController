@@ -3,14 +3,25 @@
 #include <QKeyEvent>
 #include <QApplication>
 #include <QPainter>
+#include <QHeaderView>
 
 #include "propertytreewidgetitem.h"
 
 PropertyTreeWidget::PropertyTreeWidget(QWidget *parent) :
     QTreeWidget(parent)
 {
+    mItemDelegate=new PropertyItemDelegate(this);
+    setItemDelegate(mItemDelegate);
+
+    setIconSize(QSize(18, 18));
+
     setColumnCount(2);
-    setHeaderLabels(QStringList() << "Property" << "Value");
+    setHeaderLabels(QStringList() << tr("Property") << tr("Value"));
+    setColumnWidth(0, 200);
+
+    header()->setMovable(false);
+
+    setEditTriggers(QAbstractItemView::EditKeyPressed);
 }
 
 void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
@@ -21,21 +32,21 @@ void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
         case Qt::Key_Enter:
         case Qt::Key_Space:
         {
-            /*
-            if (!m_editorPrivate->editedItem())
-                if (const QTreeWidgetItem *item = currentItem())
-                    if (item->columnCount() >= 2 && ((item->flags() & (Qt::ItemIsEditable | Qt::ItemIsEnabled)) == (Qt::ItemIsEditable | Qt::ItemIsEnabled))) {
-                        event->accept();
-                        // If the current position is at column 0, move to 1.
-                        QModelIndex index = currentIndex();
-                        if (index.column() == 0) {
-                            index = index.sibling(index.row(), 1);
-                            setCurrentIndex(index);
-                        }
-                        edit(index);
-                        return;
-                    }
-                    */
+            QTreeWidgetItem *aItem=currentItem();
+
+            if (
+                aItem
+                &&
+                (
+                 (aItem->flags() & (Qt::ItemIsEditable | Qt::ItemIsEnabled)) == (Qt::ItemIsEditable | Qt::ItemIsEnabled)
+                )
+               )
+            {
+                event->accept();
+                editItem(aItem, 1);
+
+                return;
+            }
         }
         break;
     }
@@ -66,6 +77,9 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
     else
     {
         painter->fillRect(option.rect, option.palette.color(QPalette::Dark));
+        opt.font.setPointSize(opt.font.pointSize()+2);
+        opt.font.setBold(true);
+        opt.fontMetrics = QFontMetrics(opt.font);
     }
 
     QTreeWidget::drawRow(painter, opt, index);

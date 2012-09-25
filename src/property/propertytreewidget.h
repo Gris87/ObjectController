@@ -4,6 +4,7 @@
 #include <QTreeWidget>
 
 #include "propertygroup.h"
+#include "propertyitemdelegate.h"
 
 class PropertyTreeWidget : public QTreeWidget
 {
@@ -15,6 +16,8 @@ public:
     void update(const QObjectList &aObjects);
 
 protected:
+    PropertyItemDelegate *mItemDelegate;
+
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
     void drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;

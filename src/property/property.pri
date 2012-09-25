@@ -9,12 +9,13 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/property.h \
            $$PWD/propertygroup.h \
            $$PWD/propertytreewidget.h \
-           $$PWD/propertytreewidgetitem.h
+           $$PWD/propertytreewidgetitem.h \
+           $$PWD/propertyitemdelegate.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
            $$PWD/property.cpp \
            $$PWD/propertygroup.cpp \
            $$PWD/propertytreewidget.cpp \
-           $$PWD/propertytreewidgetitem.cpp
-
+           $$PWD/propertytreewidgetitem.cpp \
+           $$PWD/propertyitemdelegate.cpp
