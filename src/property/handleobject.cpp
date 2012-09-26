@@ -72,6 +72,8 @@ void HandleObject::clear()
     mClassProperties.clear();
 }
 
+// -------------------------------------------------------------------------------------
+
 ObjectController* HandleObject::controller() const
 {
     return mController;

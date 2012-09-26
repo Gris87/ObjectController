@@ -17,6 +17,8 @@ public:
     void addProperty(Property *aNewProperty);
     void intersect(PropertyGroup *aPropertyGroup);
 
+    // -------------------------------------------------------------------------------------
+
     const QMetaObject* metaObject() const;
     QString            name() const;
     QList<Property *>  properties() const;

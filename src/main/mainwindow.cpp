@@ -34,6 +34,11 @@ void MainWindow::on_createButton_clicked()
         aNewObject=new QObject();
     }
     else
+    if (aNewObjectName=="TestObject")
+    {
+        aNewObject=new TestObject();
+    }
+    else
     if (aNewObjectName=="QWidget")
     {
         aNewObject=new QWidget();

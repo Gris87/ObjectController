@@ -15,6 +15,8 @@ public:
 
     void reset();
 
+    // -------------------------------------------------------------------------------------
+
     ObjectController*      controller() const;
     QObject*               object() const;
     QList<PropertyGroup *> classProperties() const;

@@ -57,6 +57,8 @@ void PropertyGroup::clear()
     mProperties.clear();
 }
 
+// -------------------------------------------------------------------------------------
+
 const QMetaObject* PropertyGroup::metaObject() const
 {
     return mMetaObject;

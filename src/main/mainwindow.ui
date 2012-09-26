@@ -73,6 +73,11 @@
         </item>
         <item>
          <property name="text">
+          <string>TestObject</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>QWidget</string>
          </property>
         </item>

@@ -20,6 +20,8 @@ public:
 
     void update(const QObjectList &aObjects);
 
+    // -------------------------------------------------------------------------------------
+
     Property* property();
     void setProperty(Property* aProperty);
 
