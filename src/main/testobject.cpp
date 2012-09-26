@@ -67,14 +67,14 @@ QChar                  TestObject::getChar()
     return mChar;
 }
 
-QMap<quint32, QString> TestObject::getMap()
+QVariantMap            TestObject::getMap()
 {
-    return mMap;
+    return QVariantMap();// mMap;
 }
 
-QList<quint8>          TestObject::getList()
+QVariantList           TestObject::getList()
 {
-    return mList;
+    return QVariantList();//mList;
 }
 
 QStringList            TestObject::getStringList()
@@ -157,9 +157,9 @@ QRegExp                TestObject::getRegExp()
     return mRegExp;
 }
 
-QHash<QString, qint16> TestObject::getHash()
+QVariantHash           TestObject::getHash()
 {
-    return mHash;
+    return QVariantHash(); //mHash;
 }
 
 QEasingCurve           TestObject::getEasingCurve()

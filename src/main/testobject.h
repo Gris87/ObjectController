@@ -36,8 +36,8 @@ public:
     Q_PROPERTY(float          Float         READ getFloat)
     Q_PROPERTY(double         Double        READ getDouble)
     Q_PROPERTY(QChar          Char          READ getChar)
-    Q_PROPERTY(QMap           Map           READ getMap)
-    Q_PROPERTY(QList          List          READ getList)
+    Q_PROPERTY(QVariantMap    Map           READ getMap)
+    Q_PROPERTY(QVariantList   List          READ getList)
     Q_PROPERTY(QStringList    StringList    READ getStringList)
     Q_PROPERTY(QByteArray     ByteArray     READ getByteArray)
     Q_PROPERTY(QBitArray      BitArray      READ getBitArray)
@@ -54,7 +54,7 @@ public:
     Q_PROPERTY(QPoint         Point         READ getPoint)
     Q_PROPERTY(QPointF        PointF        READ getPointF)
     Q_PROPERTY(QRegExp        RegExp        READ getRegExp)
-    Q_PROPERTY(QHash          Hash          READ getHash)
+    Q_PROPERTY(QVariantHash   Hash          READ getHash)
     Q_PROPERTY(QEasingCurve   EasingCurve   READ getEasingCurve)
     Q_PROPERTY(QFont          Font          READ getFont)
     Q_PROPERTY(QPixmap        Pixmap        READ getPixmap)
@@ -160,8 +160,8 @@ public:
     float                  getFloat();
     double                 getDouble();
     QChar                  getChar();
-    QMap<quint32, QString> getMap();
-    QList<quint8>          getList();
+    QVariantMap            getMap();
+    QVariantList           getList();
     QStringList            getStringList();
     QByteArray             getByteArray();
     QBitArray              getBitArray();
@@ -178,7 +178,7 @@ public:
     QPoint                 getPoint();
     QPointF                getPointF();
     QRegExp                getRegExp();
-    QHash<QString, qint16> getHash();
+    QVariantHash           getHash();
     QEasingCurve           getEasingCurve();
     QFont                  getFont();
     QPixmap                getPixmap();
