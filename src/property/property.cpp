@@ -494,3 +494,13 @@ QString Property::valueToString(const QQuaternion &aValue)
 {
     return "";
 }
+
+QString Property::valueToString(void *aValue)
+{
+    return "";
+}
+
+QString Property::valueToString(QObject *aValue)
+{
+    return "";
+}

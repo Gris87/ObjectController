@@ -94,6 +94,8 @@ protected:
     QString valueToString(const QVector3D &aValue);
     QString valueToString(const QVector4D &aValue);
     QString valueToString(const QQuaternion &aValue);
+    QString valueToString(void *aValue);
+    QString valueToString(QObject *aValue);
 };
 
 #endif // PROPERTY_H
