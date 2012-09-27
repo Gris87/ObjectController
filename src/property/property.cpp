@@ -173,7 +173,7 @@ void Property::setModified(const bool aModified)
 
 bool Property::isNumber(const QVariant &aValue)
 {
-    QVariant::Type aType=aValue.type();
+    int aType=aValue.type();
 
     return (
             aType==QVariant::Int
