@@ -516,7 +516,7 @@ QString Property::valueToString(const QColor &aValue)
     return "("+QString::number(aValue.red())+", "+QString::number(aValue.green())+", "+QString::number(aValue.blue())+")"+"["+QString::number(aValue.alpha())+"]";
 }
 
-QString Property::valueToString(const QPalette &aValue)
+QString Property::valueToString(const QPalette &/*aValue*/)
 {
     return "Palette";
 }
@@ -568,7 +568,23 @@ QString Property::valueToString(const QPolygon &aValue)
 
 QString Property::valueToString(const QRegion &aValue)
 {
-    return "";
+    QVector<QRect> aRects=aValue.rects();
+
+    QString res="[";
+
+    for (int i=0; i<aRects.count(); ++i)
+    {
+        res.append(valueToString(aRects.at(i)));
+
+        if (i<aRects.count()-1)
+        {
+            res.append("; ");
+        }
+    }
+
+    res.append("]");
+
+    return res;
 }
 
 QString Property::valueToString(const QBitmap &aValue)
@@ -611,70 +627,195 @@ QString Property::valueToString(const QCursor &aValue)
 
 QString Property::valueToString(const QSizePolicy &aValue)
 {
-    return "";
+    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
+    return "["+
+            QString::fromUtf8(aEnum.valueToKey(aValue.horizontalPolicy()))+
+            ", "+
+            QString::fromUtf8(aEnum.valueToKey(aValue.verticalPolicy()))+
+            ", "+
+            QString::number(aValue.horizontalStretch())+
+            ", "+
+            QString::number(aValue.verticalStretch())+
+            "]";
 }
 
 QString Property::valueToString(const QKeySequence &aValue)
 {
-    return "";
+    return aValue.toString();
 }
 
-QString Property::valueToString(const QPen &aValue)
+QString Property::valueToString(const QPen &/*aValue*/)
 {
-    return "";
+    return "Pen";
 }
 
 QString Property::valueToString(const QTextLength &aValue)
 {
-    return "";
+    QString res="[";
+
+    switch (aValue.type())
+    {
+        case QTextLength::VariableLength:   res.append("VariableLength");   break;
+        case QTextLength::FixedLength:      res.append("FixedLength");      break;
+        case QTextLength::PercentageLength: res.append("PercentageLength"); break;
+    }
+
+    res.append(", ");
+    res.append(QString::number(aValue.rawValue()));
+
+    return res;
 }
 
 QString Property::valueToString(const QTextFormat &aValue)
 {
-    return "";
+    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("FormatType"));
+    return aEnum.valueToKey(aValue.type());
 }
 
 QString Property::valueToString(const QMatrix &aValue)
 {
-    return "";
+    return "[("+
+           QString::number(aValue.m11())+
+           ", "+
+           QString::number(aValue.m12())+
+           "), ("+
+           QString::number(aValue.m21())+
+           ", "+
+           QString::number(aValue.m22())+
+           "), ("+
+           QString::number(aValue.dx())+
+           ", "+
+           QString::number(aValue.dy())+
+           ")]";
 }
 
 QString Property::valueToString(const QTransform &aValue)
 {
-    return "";
+    return "[("+
+           QString::number(aValue.m11())+
+           ", "+
+           QString::number(aValue.m12())+
+           ", "+
+           QString::number(aValue.m13())+
+           "), ("+
+           QString::number(aValue.m21())+
+           ", "+
+           QString::number(aValue.m22())+
+           ", "+
+           QString::number(aValue.m23())+
+           "), ("+
+           QString::number(aValue.m31())+
+           ", "+
+           QString::number(aValue.m32())+
+           ", "+
+           QString::number(aValue.m33())+
+           ")]";
 }
 
 QString Property::valueToString(const QMatrix4x4 &aValue)
 {
-    return "";
+    qreal matrix[16];
+
+    aValue.copyDataTo(matrix);
+
+    QString res="[";
+
+    for (int i=0; i<4; ++i)
+    {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
+        res.append("(");
+
+        for (int j=0; j<4; ++j)
+        {
+            if (j>0)
+            {
+                res.append(", ");
+            }
+
+            res.append(QString::number(matrix[i*4+j]));
+        }
+
+        res.append(")");
+    }
+
+    res.append("]");
+
+    return res;
 }
 
 QString Property::valueToString(const QVector2D &aValue)
 {
-    return "";
+    return "["+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           "]";
 }
 
 QString Property::valueToString(const QVector3D &aValue)
 {
-    return "";
+    return "["+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ", "+
+           QString::number(aValue.z())+
+           "]";
 }
 
 QString Property::valueToString(const QVector4D &aValue)
 {
-    return "";
+    return "["+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ", "+
+           QString::number(aValue.z())+
+           ", "+
+           QString::number(aValue.w())+
+           "]";
 }
 
 QString Property::valueToString(const QQuaternion &aValue)
 {
-    return "";
+    return "["+
+           QString::number(aValue.scalar())+
+           "; "+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ", "+
+           QString::number(aValue.z())+
+           "]";
 }
 
 QString Property::valueToString(void *aValue)
 {
-    return "";
+    return "0x"+QString::number((qint64)aValue, 16).toUpper();
 }
 
 QString Property::valueToString(QObject *aValue)
 {
-    return "";
+    if (aValue==0)
+    {
+        return "0x0";
+    }
+
+    QString res=aValue->metaObject()->className();
+
+    if (aValue->objectName()!="")
+    {
+        res.append(" (");
+        res.append(aValue->objectName());
+        res.append(")");
+    }
+
+    res.append(" 0x");
+    res.append(QString::number((qint64)aValue, 16).toUpper());
+
+    return res;
 }
