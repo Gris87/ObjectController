@@ -98,6 +98,67 @@ protected:
     QString valueToString(const QQuaternion &aValue);
     QString valueToString(void *aValue);
     QString valueToString(QObject *aValue);
+
+    // -------------------------------------------------------------------------------------
+
+    QIcon iconForValue(const bool &aValue);
+    QIcon iconForValue(const qint8 &aValue);
+    QIcon iconForValue(const quint8 &aValue);
+    QIcon iconForValue(const qint16 &aValue);
+    QIcon iconForValue(const quint16 &aValue);
+    QIcon iconForValue(const qint32 &aValue);
+    QIcon iconForValue(const quint32 &aValue);
+    QIcon iconForValue(const qint64 &aValue);
+    QIcon iconForValue(const quint64 &aValue);
+    QIcon iconForValue(const float &aValue);
+    QIcon iconForValue(const double &aValue);
+    QIcon iconForValue(const QChar &aValue);
+    QIcon iconForValue(const QVariantMap &aValue);
+    QIcon iconForValue(const QVariantList &aValue);
+    QIcon iconForValue(const QStringList &aValue);
+    QIcon iconForValue(const QByteArray &aValue);
+    QIcon iconForValue(const QBitArray &aValue);
+    QIcon iconForValue(const QDate &aValue);
+    QIcon iconForValue(const QTime &aValue);
+    QIcon iconForValue(const QDateTime &aValue);
+    QIcon iconForValue(const QUrl &aValue);
+    QIcon iconForValue(const QLocale &aValue);
+    QIcon iconForValue(const QRect &aValue);
+    QIcon iconForValue(const QRectF &aValue);
+    QIcon iconForValue(const QSize &aValue);
+    QIcon iconForValue(const QSizeF &aValue);
+    QIcon iconForValue(const QLine &aValue);
+    QIcon iconForValue(const QLineF &aValue);
+    QIcon iconForValue(const QPoint &aValue);
+    QIcon iconForValue(const QPointF &aValue);
+    QIcon iconForValue(const QRegExp &aValue);
+    QIcon iconForValue(const QVariantHash &aValue);
+    QIcon iconForValue(const QEasingCurve &aValue);
+    QIcon iconForValue(const QFont &aValue);
+    QIcon iconForValue(const QPixmap &aValue);
+    QIcon iconForValue(const QBrush &aValue);
+    QIcon iconForValue(const QColor &aValue);
+    QIcon iconForValue(const QPalette &aValue);
+    QIcon iconForValue(const QIcon &aValue);
+    QIcon iconForValue(const QImage &aValue);
+    QIcon iconForValue(const QPolygon &aValue);
+    QIcon iconForValue(const QRegion &aValue);
+    QIcon iconForValue(const QBitmap &aValue);
+    QIcon iconForValue(const QCursor &aValue);
+    QIcon iconForValue(const QSizePolicy &aValue);
+    QIcon iconForValue(const QKeySequence &aValue);
+    QIcon iconForValue(const QPen &aValue);
+    QIcon iconForValue(const QTextLength &aValue);
+    QIcon iconForValue(const QTextFormat &aValue);
+    QIcon iconForValue(const QMatrix &aValue);
+    QIcon iconForValue(const QTransform &aValue);
+    QIcon iconForValue(const QMatrix4x4 &aValue);
+    QIcon iconForValue(const QVector2D &aValue);
+    QIcon iconForValue(const QVector3D &aValue);
+    QIcon iconForValue(const QVector4D &aValue);
+    QIcon iconForValue(const QQuaternion &aValue);
+    QIcon iconForValue(void *aValue);
+    QIcon iconForValue(QObject *aValue);
 };
 
 #endif // PROPERTY_H

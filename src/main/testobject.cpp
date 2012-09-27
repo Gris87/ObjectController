@@ -64,16 +64,18 @@ TestObject::TestObject(QObject *parent) :
     mFont=QFont("Times New Roman", 12);
 
     mPixmap=QPixmap(64, 64);
+    mPixmap.fill(QColor(255, 255, 255, 0));
     QPainter aPainter(&mPixmap);
+    aPainter.setPen(QColor(0, 0, 0));
     aPainter.drawEllipse(0, 0, 63, 63);
     aPainter.end();
 
-    QRadialGradient aGradient(50, 50, 50, 50, 50);
-    aGradient.setColorAt(0, QColor::fromRgbF(0, 1, 0, 1));
-    aGradient.setColorAt(1, QColor::fromRgbF(0, 0, 0, 0));
+    QRadialGradient aGradient(16, 16, 16);
+    aGradient.setColorAt(0, QColor::fromRgbF(1, 1, 1, 1));
+    aGradient.setColorAt(1, QColor::fromRgbF(0, 0, 0, 1));
     mBrush=QBrush(aGradient);
 
-    mColor.setRgb(240, 200, 240);
+    mColor.setRgb(128, 0, 255, 128);
     mPalette.setColor(QPalette::Base, QColor(1, 2, 3));
     mIcon=QIcon::fromTheme("edit-undo");
     mImage=mPixmap.toImage();

@@ -9,6 +9,7 @@
 #include <QTextLength>
 #include <QMatrix4x4>
 #include <QVector2D>
+#include <QPainter>
 
 #include "propertytreewidgetitem.h"
 
@@ -137,7 +138,7 @@ QString Property::valueText(const QVariant &aValue)
 
 QIcon Property::valueIcon(const QVariant &aValue)
 {
-    return QIcon();
+    FUNCTION_FOR_VARIANT(aValue, iconForValue, QIcon());
 }
 
 // -------------------------------------------------------------------------------------
@@ -879,4 +880,315 @@ QString Property::valueToString(QObject *aValue)
     res.append(QString::number((qint64)aValue, 16).toUpper());
 
     return res;
+}
+
+// -------------------------------------------------------------------------------------
+
+QIcon Property::iconForValue(const bool &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const qint8 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const quint8 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const qint16 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const quint16 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const qint32 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const quint32 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const qint64 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const quint64 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const float &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const double &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QChar &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QVariantMap &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QVariantList &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QStringList &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QByteArray &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QBitArray &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QDate &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QTime &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QDateTime &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QUrl &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QLocale &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QRect &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QRectF &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QSize &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QSizeF &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QLine &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QLineF &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QPoint &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QPointF &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QRegExp &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QVariantHash &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QEasingCurve &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QFont &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QPixmap &aValue)
+{
+    return QIcon(aValue);
+}
+
+QIcon Property::iconForValue(const QBrush &aValue)
+{
+    QPixmap aBrushPixmap=QPixmap(32, 32);
+    aBrushPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aBrushPixmap);
+    aPainter.fillRect(0, 0, aBrushPixmap.width(), aBrushPixmap.height(), aValue);
+    aPainter.end();
+
+    return QIcon(aBrushPixmap);
+}
+
+QIcon Property::iconForValue(const QColor &aValue)
+{
+    QColor aSolidColor(aValue.red(), aValue.green(), aValue.blue());
+
+    QPixmap aColorPixmap=QPixmap(32, 32);
+    aColorPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aColorPixmap);
+
+    aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), aValue);
+    aPainter.fillRect(8, 8, aColorPixmap.width()-16, aColorPixmap.height()-16, aSolidColor);
+
+    aPainter.end();
+
+    return QIcon(aColorPixmap);
+}
+
+QIcon Property::iconForValue(const QPalette &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QIcon &aValue)
+{
+    return aValue;
+}
+
+QIcon Property::iconForValue(const QImage &aValue)
+{
+    return QIcon(QPixmap::fromImage(aValue));
+}
+
+QIcon Property::iconForValue(const QPolygon &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QRegion &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QBitmap &aValue)
+{
+    return QIcon(QPixmap::fromImage(aValue.toImage()));
+}
+
+QIcon Property::iconForValue(const QCursor &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QSizePolicy &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QKeySequence &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QPen &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QTextLength &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QTextFormat &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QMatrix &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QTransform &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QMatrix4x4 &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QVector2D &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QVector3D &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QVector4D &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(const QQuaternion &aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(void *aValue)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValue(QObject *aValue)
+{
+    return QIcon();
 }
