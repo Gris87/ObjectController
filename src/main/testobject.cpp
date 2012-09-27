@@ -18,10 +18,9 @@ TestObject::TestObject(QObject *parent) :
     mDouble=1.23456789;
     mChar='T';
 
-    mMap["World!"]=2;
-    mMap["Russia"]=4;
-    mMap["Hello"]=1;
-    mMap["From"]=3;
+    mMap["13.04.95"]=2;
+    mMap["03.12.87"]=5;
+    mMap["27.09.12"]=4;
 
     mList.append(8);
     mList.append(2);
@@ -56,9 +55,10 @@ TestObject::TestObject(QObject *parent) :
     mPointF=QPoint(240, 320);
     mRegExp.setPattern("^[a-z]");
 
-    mHash["03.12.87"]=5;
-    mHash["13.04.95"]=2;
-    mHash["27.09.12"]=4;
+    mHash["Hello"]=6;
+    mHash["World!"]=9;
+    mHash["From"]=7;
+    mHash["Russia"]=2;
 
     mEasingCurve.setType(QEasingCurve::InOutCubic);
     mFont=QFont("Times New Roman", 12);
@@ -270,7 +270,14 @@ QRegExp                TestObject::getRegExp() const
 
 QVariantHash           TestObject::getHash() const
 {
-    return QVariantHash(); //mHash;
+    QVariantHash res;
+
+    for (QHash<QString, qint16>::const_iterator i=mHash.constBegin(); i!=mHash.constEnd(); ++i)
+    {
+        res[i.key()]=i.value();
+    }
+
+    return res;
 }
 
 QEasingCurve           TestObject::getEasingCurve() const

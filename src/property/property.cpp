@@ -469,7 +469,8 @@ QString Property::valueToString(const QVariantHash &aValue)
 
 QString Property::valueToString(const QEasingCurve &aValue)
 {
-    return "";
+    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
+    return aEnum.valueToKey(aValue.type());
 }
 
 QString Property::valueToString(const QFont &aValue)
@@ -484,7 +485,30 @@ QString Property::valueToString(const QPixmap &aValue)
 
 QString Property::valueToString(const QBrush &aValue)
 {
-    return "";
+    switch (aValue.style())
+    {
+        case Qt::NoBrush:                return "NoBrush";
+        case Qt::SolidPattern:           return "SolidPattern";
+        case Qt::Dense1Pattern:          return "Dense1Pattern";
+        case Qt::Dense2Pattern:          return "Dense2Pattern";
+        case Qt::Dense3Pattern:          return "Dense3Pattern";
+        case Qt::Dense4Pattern:          return "Dense4Pattern";
+        case Qt::Dense5Pattern:          return "Dense5Pattern";
+        case Qt::Dense6Pattern:          return "Dense6Pattern";
+        case Qt::Dense7Pattern:          return "Dense7Pattern";
+        case Qt::HorPattern:             return "HorPattern";
+        case Qt::VerPattern:             return "VerPattern";
+        case Qt::CrossPattern:           return "CrossPattern";
+        case Qt::BDiagPattern:           return "BDiagPattern";
+        case Qt::FDiagPattern:           return "FDiagPattern";
+        case Qt::DiagCrossPattern:       return "DiagCrossPattern";
+        case Qt::LinearGradientPattern:  return "LinearGradientPattern";
+        case Qt::RadialGradientPattern:  return "RadialGradientPattern";
+        case Qt::ConicalGradientPattern: return "ConicalGradientPattern";
+        case Qt::TexturePattern:         return "TexturePattern";
+    }
+
+    return "[Unknown brush style]";
 }
 
 QString Property::valueToString(const QColor &aValue)
@@ -494,12 +518,19 @@ QString Property::valueToString(const QColor &aValue)
 
 QString Property::valueToString(const QPalette &aValue)
 {
-    return "";
+    return "Palette";
 }
 
 QString Property::valueToString(const QIcon &aValue)
 {
-    return aValue.name();
+    QString res=aValue.name();
+
+    if (res!="")
+    {
+        return res;
+    }
+
+    return "Icon";
 }
 
 QString Property::valueToString(const QImage &aValue)
@@ -509,7 +540,30 @@ QString Property::valueToString(const QImage &aValue)
 
 QString Property::valueToString(const QPolygon &aValue)
 {
-    return "";
+    QString res="[";
+
+    for (int i=0; i<aValue.count(); ++i)
+    {
+        int x;
+        int y;
+
+        aValue.point(i, &x, &y);
+
+        res.append("(");
+        res.append(QString::number(x));
+        res.append(", ");
+        res.append(QString::number(y));
+        res.append(")");
+
+        if (i<aValue.count()-1)
+        {
+            res.append("; ");
+        }
+    }
+
+    res.append("]");
+
+    return res;
 }
 
 QString Property::valueToString(const QRegion &aValue)
