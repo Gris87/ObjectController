@@ -26,7 +26,7 @@ TestObject::TestObject(QObject *parent) :
     mList.append(2);
     mList.append(6);
 
-    mStringList << "Ann" << "Jhon" << "Mary";
+    mStringList << "Ann" << "John" << "Mary";
 
     mString="It is a string";
 
@@ -81,7 +81,7 @@ TestObject::TestObject(QObject *parent) :
 
     mColor.setRgb(128, 0, 255, 128);
     mPalette.setColor(QPalette::Base, QColor(1, 2, 3));
-    mIcon=QIcon::fromTheme("edit-undo");
+    mIcon=QIcon(mPixmap);
     mImage=mPixmap.toImage();
     mPolygon.setPoints(3, 10, 40, 30, 97, 43, 16);
     mRegion=QRegion(10, 30, 40, 90);
@@ -89,7 +89,10 @@ TestObject::TestObject(QObject *parent) :
     mCursor.setShape(Qt::PointingHandCursor);
     mSizePolicy=QSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
     mKeySequence=QKeySequence("Ctrl+O");
-    mPen.setStyle(Qt::DashDotLine);
+
+    mPen.setStyle(Qt::DotLine);
+    mPen.setWidth(2);
+
     mTextLength=QTextLength(QTextLength::PercentageLength, 90);
     mTextFormat=QTextFormat(QTextFormat::TableFormat);
     mMatrix.setMatrix(6, 9, 12, 5, 7, 6);

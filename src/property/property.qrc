@@ -18,15 +18,21 @@
         <file>images/Cursor-UpArrowCursor.png</file>
         <file>images/Cursor-WaitCursor.png</file>
         <file>images/Cursor-WhatsThisCursor.png</file>
+        <file>images/Vector4D.png</file>
         <file>images/Date.png</file>
         <file>images/DateTime.png</file>
         <file>images/EasingCurve.png</file>
         <file>images/Line.png</file>
+        <file>images/Matrix4x4.png</file>
+        <file>images/Matrix.png</file>
         <file>images/Palette.png</file>
         <file>images/Point.png</file>
         <file>images/Polygon.png</file>
         <file>images/Rect.png</file>
         <file>images/Region.png</file>
         <file>images/Time.png</file>
+        <file>images/Transform.png</file>
+        <file>images/Vector2D.png</file>
+        <file>images/Vector3D.png</file>
     </qresource>
 </RCC>

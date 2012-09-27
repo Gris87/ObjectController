@@ -743,7 +743,7 @@ QString Property::valueToString(const QMatrix &aValue)
            QString::number(aValue.m21())+
            ", "+
            QString::number(aValue.m22())+
-           "), ("+
+           "); ("+
            QString::number(aValue.dx())+
            ", "+
            QString::number(aValue.dy())+
@@ -1051,7 +1051,38 @@ QIcon Property::iconForValue(const QEasingCurve &/*aValue*/)
 
 QIcon Property::iconForValue(const QFont &aValue)
 {
-    return QIcon();
+    QFontMetrics aMetrics(aValue);
+
+    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-4;
+
+    if (!aValue.underline())
+    {
+        aSize-=2;
+    }
+
+    if (aSize<1)
+    {
+        aSize=1;
+    }
+
+    QRect aBoundingRect(0, 0, aSize, aSize);
+
+    QPixmap aPenPixmap=QPixmap(aSize, aSize);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setFont(aValue);
+    aPainter.drawText(aBoundingRect, Qt::AlignCenter, "A", &aBoundingRect);
+    aPainter.end();
+
+    if (aSize<32)
+    {
+        return QIcon(aPenPixmap.scaled(32, 32));
+    }
+    else
+    {
+        return QIcon(aPenPixmap);
+    }
 }
 
 QIcon Property::iconForValue(const QPixmap &aValue)
@@ -1075,13 +1106,13 @@ QIcon Property::iconForValue(const QColor &aValue)
 {
     QColor aSolidColor(aValue.red(), aValue.green(), aValue.blue());
 
-    QPixmap aColorPixmap=QPixmap(32, 32);
+    QPixmap aColorPixmap=QPixmap(16, 16);
     aColorPixmap.fill(QColor(255, 255, 255, 0));
 
     QPainter aPainter(&aColorPixmap);
 
     aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), aValue);
-    aPainter.fillRect(8, 8, aColorPixmap.width()-16, aColorPixmap.height()-16, aSolidColor);
+    aPainter.fillRect(aColorPixmap.width()/4, aColorPixmap.height()/4, aColorPixmap.width()*3/4, aColorPixmap.height()*3/4, aSolidColor);
 
     aPainter.end();
 
@@ -1149,60 +1180,68 @@ QIcon Property::iconForValue(const QKeySequence &/*aValue*/)
 
 QIcon Property::iconForValue(const QPen &aValue)
 {
-    return QIcon();
+    QPixmap aPenPixmap=QPixmap(16, 16);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setPen(aValue);
+    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
+    aPainter.end();
+
+    return QIcon(aPenPixmap);
 }
 
-QIcon Property::iconForValue(const QTextLength &aValue)
+QIcon Property::iconForValue(const QTextLength &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QTextFormat &aValue)
+QIcon Property::iconForValue(const QTextFormat &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QMatrix &aValue)
+QIcon Property::iconForValue(const QMatrix &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Matrix.png");
+}
+
+QIcon Property::iconForValue(const QTransform &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Transform.png");
+}
+
+QIcon Property::iconForValue(const QMatrix4x4 &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Matrix4x4.png");
+}
+
+QIcon Property::iconForValue(const QVector2D &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Vector2D.png");
+}
+
+QIcon Property::iconForValue(const QVector3D &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Vector3D.png");
+}
+
+QIcon Property::iconForValue(const QVector4D &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Vector4D.png");
+}
+
+QIcon Property::iconForValue(const QQuaternion &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QTransform &aValue)
+QIcon Property::iconForValue(void * /*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QMatrix4x4 &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QVector2D &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QVector3D &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QVector4D &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QQuaternion &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(void *aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(QObject *aValue)
+QIcon Property::iconForValue(QObject * /*aValue*/)
 {
     return QIcon();
 }
