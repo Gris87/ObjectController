@@ -257,7 +257,7 @@ QString Property::valueToString(const QChar &aValue)
 
 QString Property::valueToString(const QVariantMap &aValue)
 {
-    QString res="(";
+    QString res="[";
 
     for (QVariantMap::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
@@ -266,7 +266,7 @@ QString Property::valueToString(const QVariantMap &aValue)
             res.append("; ");
         }
 
-        res.append("[");
+        res.append("(");
 
         res.append("\"");
         res.append(i.key());
@@ -285,17 +285,17 @@ QString Property::valueToString(const QVariantMap &aValue)
             res.append("\"");
         }
 
-        res.append("]");
+        res.append(")");
     }
 
-    res.append(")");
+    res.append("]");
 
     return res;
 }
 
 QString Property::valueToString(const QVariantList &aValue)
 {
-    QString res="(";
+    QString res="[";
 
     for (int i=0; i<aValue.length(); ++i)
     {
@@ -316,14 +316,14 @@ QString Property::valueToString(const QVariantList &aValue)
         }
     }
 
-    res.append(")");
+    res.append("]");
 
     return res;
 }
 
 QString Property::valueToString(const QStringList &aValue)
 {
-    QString res="(";
+    QString res="[";
 
     for (int i=0; i<aValue.length(); ++i)
     {
@@ -337,7 +337,7 @@ QString Property::valueToString(const QStringList &aValue)
         }
     }
 
-    res.append(")");
+    res.append("]");
 
     return res;
 }
@@ -381,47 +381,93 @@ QString Property::valueToString(const QUrl &aValue)
 
 QString Property::valueToString(const QLocale &aValue)
 {
-    return aValue.languageToString(aValue.language())+", "+aValue.countryToString(aValue.country());
+    return aValue.languageToString(aValue.language())+
+           ", "+
+           aValue.countryToString(aValue.country());
 }
 
 QString Property::valueToString(const QRect &aValue)
 {
-    return "[("+QString::number(aValue.x())+", "+QString::number(aValue.y())+"), "+QString::number(aValue.width())+" x "+QString::number(aValue.height())+"]";
+    return "[("+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           "), "+
+           QString::number(aValue.width())+
+           " x "+
+           QString::number(aValue.height())+
+           "]";
 }
 
 QString Property::valueToString(const QRectF &aValue)
 {
-    return "[("+QString::number(aValue.x())+", "+QString::number(aValue.y())+"), "+QString::number(aValue.width())+" x "+QString::number(aValue.height())+"]";
+    return "[("+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           "), "+
+           QString::number(aValue.width())+
+           " x "+
+           QString::number(aValue.height())+
+           "]";
 }
 
 QString Property::valueToString(const QSize &aValue)
 {
-    return QString::number(aValue.width())+" x "+QString::number(aValue.height());
+    return QString::number(aValue.width())+
+           " x "+
+           QString::number(aValue.height());
 }
 
 QString Property::valueToString(const QSizeF &aValue)
 {
-    return QString::number(aValue.width())+" x "+QString::number(aValue.height());
+    return QString::number(aValue.width())+
+           " x "+
+           QString::number(aValue.height());
 }
 
 QString Property::valueToString(const QLine &aValue)
 {
-    return "[("+QString::number(aValue.x1())+", "+QString::number(aValue.y1())+"), ("+QString::number(aValue.x2())+", "+QString::number(aValue.y2())+")]";
+    return "[("+
+           QString::number(aValue.x1())+
+           ", "+
+           QString::number(aValue.y1())+
+           "), ("+
+           QString::number(aValue.x2())+
+           ", "+
+           QString::number(aValue.y2())+
+           ")]";
 }
 
 QString Property::valueToString(const QLineF &aValue)
 {
-    return "[("+QString::number(aValue.x1())+", "+QString::number(aValue.y1())+"), ("+QString::number(aValue.x2())+", "+QString::number(aValue.y2())+")]";
+    return "[("+
+           QString::number(aValue.x1())+
+           ", "+
+           QString::number(aValue.y1())+
+           "), ("+
+           QString::number(aValue.x2())+
+           ", "+
+           QString::number(aValue.y2())+
+           ")]";
 }
 
 QString Property::valueToString(const QPoint &aValue)
 {
-    return "("+QString::number(aValue.x())+", "+QString::number(aValue.y())+")";
+    return "("+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ")";
 }
 
 QString Property::valueToString(const QPointF &aValue)
 {
-    return "("+QString::number(aValue.x())+", "+QString::number(aValue.y())+")";
+    return "("+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ")";
 }
 
 QString Property::valueToString(const QRegExp &aValue)
@@ -431,7 +477,7 @@ QString Property::valueToString(const QRegExp &aValue)
 
 QString Property::valueToString(const QVariantHash &aValue)
 {
-    QString res="(";
+    QString res="[";
 
     for (QVariantHash::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
@@ -440,7 +486,7 @@ QString Property::valueToString(const QVariantHash &aValue)
             res.append("; ");
         }
 
-        res.append("[");
+        res.append("(");
 
         res.append("\"");
         res.append(i.key());
@@ -459,10 +505,10 @@ QString Property::valueToString(const QVariantHash &aValue)
             res.append("\"");
         }
 
-        res.append("]");
+        res.append(")");
     }
 
-    res.append(")");
+    res.append("]");
 
     return res;
 }
@@ -475,7 +521,11 @@ QString Property::valueToString(const QEasingCurve &aValue)
 
 QString Property::valueToString(const QFont &aValue)
 {
-    return "["+aValue.family()+", "+QString::number(aValue.pointSize())+"]";
+    return "["+
+           aValue.family()+
+           ", "+
+           QString::number(aValue.pointSize())+
+           "]";
 }
 
 QString Property::valueToString(const QPixmap &aValue)
@@ -513,7 +563,15 @@ QString Property::valueToString(const QBrush &aValue)
 
 QString Property::valueToString(const QColor &aValue)
 {
-    return "("+QString::number(aValue.red())+", "+QString::number(aValue.green())+", "+QString::number(aValue.blue())+")"+"["+QString::number(aValue.alpha())+"]";
+    return "("+
+           QString::number(aValue.red())+
+           ", "+
+           QString::number(aValue.green())+
+           ", "+
+           QString::number(aValue.blue())+
+           ") ["+
+           QString::number(aValue.alpha())+
+           "]";
 }
 
 QString Property::valueToString(const QPalette &/*aValue*/)
@@ -628,15 +686,16 @@ QString Property::valueToString(const QCursor &aValue)
 QString Property::valueToString(const QSizePolicy &aValue)
 {
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
+
     return "["+
-            QString::fromUtf8(aEnum.valueToKey(aValue.horizontalPolicy()))+
-            ", "+
-            QString::fromUtf8(aEnum.valueToKey(aValue.verticalPolicy()))+
-            ", "+
-            QString::number(aValue.horizontalStretch())+
-            ", "+
-            QString::number(aValue.verticalStretch())+
-            "]";
+           QString::fromUtf8(aEnum.valueToKey(aValue.horizontalPolicy()))+
+           ", "+
+           QString::fromUtf8(aEnum.valueToKey(aValue.verticalPolicy()))+
+           ", "+
+           QString::number(aValue.horizontalStretch())+
+           ", "+
+           QString::number(aValue.verticalStretch())+
+           "]";
 }
 
 QString Property::valueToString(const QKeySequence &aValue)
@@ -662,6 +721,7 @@ QString Property::valueToString(const QTextLength &aValue)
 
     res.append(", ");
     res.append(QString::number(aValue.rawValue()));
+    res.append("]");
 
     return res;
 }
@@ -806,11 +866,12 @@ QString Property::valueToString(QObject *aValue)
     }
 
     QString res=aValue->metaObject()->className();
+    QString aObjectName=aValue->objectName();
 
-    if (aValue->objectName()!="")
+    if (aObjectName!="")
     {
         res.append(" (");
-        res.append(aValue->objectName());
+        res.append(aObjectName);
         res.append(")");
     }
 
