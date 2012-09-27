@@ -24,11 +24,11 @@ void ObjectController::invalidate()
 
     QList<PropertyGroup *> aCommonProperties;
 
-    for (HandledObjects::iterator i=mHandledObjects.begin(); i!=mHandledObjects.end(); ++i)
+    for (HandledObjects::const_iterator i=mHandledObjects.constBegin(); i!=mHandledObjects.constEnd(); ++i)
     {
         QList<PropertyGroup *> aClassProperties=i.value()->classProperties();
 
-        if (i==mHandledObjects.begin())
+        if (i==mHandledObjects.constBegin())
         {
             for (int j=0; j<aClassProperties.length(); ++j)
             {
@@ -78,7 +78,7 @@ void ObjectController::update()
 
 void ObjectController::reset()
 {
-    for (HandledObjects::iterator i=mHandledObjects.begin(); i!=mHandledObjects.end(); ++i)
+    for (HandledObjects::const_iterator i=mHandledObjects.constBegin(); i!=mHandledObjects.constEnd(); ++i)
     {
         i.value()->reset();
     }

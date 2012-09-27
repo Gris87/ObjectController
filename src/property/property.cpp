@@ -1078,14 +1078,12 @@ QIcon Property::iconForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetI
 
 QIcon Property::iconForValue(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QFontMetrics aMetrics(aValue);
+    QFont aFont=aValue;
+    aFont.setPixelSize(32);
 
-    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-4;
+    QFontMetrics aMetrics(aFont);
 
-    if (!aValue.underline())
-    {
-        aSize-=2;
-    }
+    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-6;
 
     if (aSize<1)
     {
@@ -1098,7 +1096,7 @@ QIcon Property::iconForValue(const QFont &aValue, PropertyTreeWidgetItem * /*aPa
     aPenPixmap.fill(QColor(255, 255, 255, 0));
 
     QPainter aPainter(&aPenPixmap);
-    aPainter.setFont(aValue);
+    aPainter.setFont(aFont);
     aPainter.drawText(aBoundingRect, Qt::AlignCenter, "A", &aBoundingRect);
     aPainter.end();
 

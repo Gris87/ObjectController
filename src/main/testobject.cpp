@@ -172,7 +172,7 @@ QVariantMap            TestObject::getMap() const
 {
     QVariantMap res;
 
-    for (QMap<QString, quint32>::iterator i=mMap.begin(); i!=mMap.end(); ++i)
+    for (QMap<QString, quint32>::const_iterator i=mMap.constBegin(); i!=mMap.constEnd(); ++i)
     {
         res[i.key()]=i.value();
     }
