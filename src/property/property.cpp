@@ -164,6 +164,37 @@ void Property::setModified(const bool aModified)
 
 // -------------------------------------------------------------------------------------
 
+bool Property::isNumber(const QVariant &aValue)
+{
+    QVariant::Type aType=aValue.type();
+
+    return (
+            aType==QVariant::Int
+            ||
+            aType==QVariant::UInt
+            ||
+            aType==QVariant::LongLong
+            ||
+            aType==QVariant::ULongLong
+            ||
+            aType==QVariant::Double
+            ||
+            aType==QMetaType::Float
+            ||
+            aType==QMetaType::Long
+            ||
+            aType==QMetaType::Short
+            ||
+            aType==QMetaType::Char
+            ||
+            aType==QMetaType::ULong
+            ||
+            aType==QMetaType::UShort
+            ||
+            aType==QMetaType::UChar
+           );
+}
+
 QString Property::valueToString(const bool &aValue)
 {
     return aValue ? "true" : "false";
@@ -226,12 +257,68 @@ QString Property::valueToString(const QChar &aValue)
 
 QString Property::valueToString(const QVariantMap &aValue)
 {
-    return "";
+    QString res="(";
+
+    for (QVariantMap::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
+    {
+        if (res.length()>1)
+        {
+            res.append("; ");
+        }
+
+        res.append("[");
+
+        res.append("\"");
+        res.append(i.key());
+        res.append("\"");
+
+        res.append(", ");
+
+        if (isNumber(i.value()))
+        {
+            res.append(valueText(i.value()));
+        }
+        else
+        {
+            res.append("\"");
+            res.append(valueText(i.value()));
+            res.append("\"");
+        }
+
+        res.append("]");
+    }
+
+    res.append(")");
+
+    return res;
 }
 
 QString Property::valueToString(const QVariantList &aValue)
 {
-    return "";
+    QString res="(";
+
+    for (int i=0; i<aValue.length(); ++i)
+    {
+        if (isNumber(aValue.at(i)))
+        {
+            res.append(valueText(aValue.at(i)));
+        }
+        else
+        {
+            res.append("\"");
+            res.append(valueText(aValue.at(i)));
+            res.append("\"");
+        }
+
+        if (i<aValue.length()-1)
+        {
+            res.append("; ");
+        }
+    }
+
+    res.append(")");
+
+    return res;
 }
 
 QString Property::valueToString(const QStringList &aValue)
@@ -246,7 +333,7 @@ QString Property::valueToString(const QStringList &aValue)
 
         if (i<aValue.length()-1)
         {
-            res.append(";");
+            res.append("; ");
         }
     }
 
@@ -329,12 +416,12 @@ QString Property::valueToString(const QLineF &aValue)
 
 QString Property::valueToString(const QPoint &aValue)
 {
-    return QString::number(aValue.x())+", "+QString::number(aValue.y());
+    return "("+QString::number(aValue.x())+", "+QString::number(aValue.y())+")";
 }
 
 QString Property::valueToString(const QPointF &aValue)
 {
-    return QString::number(aValue.x())+", "+QString::number(aValue.y());
+    return "("+QString::number(aValue.x())+", "+QString::number(aValue.y())+")";
 }
 
 QString Property::valueToString(const QRegExp &aValue)
@@ -344,7 +431,40 @@ QString Property::valueToString(const QRegExp &aValue)
 
 QString Property::valueToString(const QVariantHash &aValue)
 {
-    return "";
+    QString res="(";
+
+    for (QVariantHash::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
+    {
+        if (res.length()>1)
+        {
+            res.append("; ");
+        }
+
+        res.append("[");
+
+        res.append("\"");
+        res.append(i.key());
+        res.append("\"");
+
+        res.append(", ");
+
+        if (isNumber(i.value()))
+        {
+            res.append(valueText(i.value()));
+        }
+        else
+        {
+            res.append("\"");
+            res.append(valueText(i.value()));
+            res.append("\"");
+        }
+
+        res.append("]");
+    }
+
+    res.append(")");
+
+    return res;
 }
 
 QString Property::valueToString(const QEasingCurve &aValue)

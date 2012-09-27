@@ -38,6 +38,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
+    bool isNumber(const QVariant &aValue);
+
     QString valueToString(const bool &aValue);
     QString valueToString(const qint8 &aValue);
     QString valueToString(const quint8 &aValue);
