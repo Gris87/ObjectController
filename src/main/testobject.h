@@ -39,6 +39,7 @@ public:
     Q_PROPERTY(QVariantMap    Map           READ getMap)
     Q_PROPERTY(QVariantList   List          READ getList)
     Q_PROPERTY(QStringList    StringList    READ getStringList)
+    Q_PROPERTY(QString        String        READ getString)
     Q_PROPERTY(QByteArray     ByteArray     READ getByteArray)
     Q_PROPERTY(QBitArray      BitArray      READ getBitArray)
     Q_PROPERTY(QDate          Date          READ getDate)
@@ -104,6 +105,7 @@ public:
     QMap<QString, quint32> mMap;
     QList<quint8>          mList;
     QStringList            mStringList;
+    QString                mString;
     QByteArray             mByteArray;
     QBitArray              mBitArray;
     QDate                  mDate;
@@ -165,6 +167,7 @@ public:
     QVariantMap            getMap() const;
     QVariantList           getList() const;
     QStringList            getStringList() const;
+    QString                getString() const;
     QByteArray             getByteArray() const;
     QBitArray              getBitArray() const;
     QDate                  getDate() const;

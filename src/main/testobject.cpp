@@ -28,6 +28,8 @@ TestObject::TestObject(QObject *parent) :
 
     mStringList << "Ann" << "Jhon" << "Mary";
 
+    mString="It is a string";
+
     mByteArray=QString("Maxim").toUtf8();
 
     mBitArray.resize(8);
@@ -190,6 +192,11 @@ QVariantList           TestObject::getList() const
 QStringList            TestObject::getStringList() const
 {
     return mStringList;
+}
+
+QString                TestObject::getString() const
+{
+    return mString;
 }
 
 QByteArray             TestObject::getByteArray() const

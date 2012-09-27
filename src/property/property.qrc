@@ -20,9 +20,13 @@
         <file>images/Cursor-WhatsThisCursor.png</file>
         <file>images/Date.png</file>
         <file>images/DateTime.png</file>
+        <file>images/EasingCurve.png</file>
         <file>images/Line.png</file>
+        <file>images/Palette.png</file>
         <file>images/Point.png</file>
+        <file>images/Polygon.png</file>
         <file>images/Rect.png</file>
+        <file>images/Region.png</file>
         <file>images/Time.png</file>
     </qresource>
 </RCC>

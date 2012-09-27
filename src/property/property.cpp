@@ -1034,19 +1034,19 @@ QIcon Property::iconForValue(const QPointF &/*aValue*/)
     return QIcon(":/objectcontroller/images/Point.png");
 }
 
-QIcon Property::iconForValue(const QRegExp &aValue)
+QIcon Property::iconForValue(const QRegExp &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QVariantHash &aValue)
+QIcon Property::iconForValue(const QVariantHash &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QEasingCurve &aValue)
+QIcon Property::iconForValue(const QEasingCurve &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/EasingCurve.png");
 }
 
 QIcon Property::iconForValue(const QFont &aValue)
@@ -1088,9 +1088,9 @@ QIcon Property::iconForValue(const QColor &aValue)
     return QIcon(aColorPixmap);
 }
 
-QIcon Property::iconForValue(const QPalette &aValue)
+QIcon Property::iconForValue(const QPalette &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Palette.png");
 }
 
 QIcon Property::iconForValue(const QIcon &aValue)
@@ -1103,14 +1103,14 @@ QIcon Property::iconForValue(const QImage &aValue)
     return QIcon(QPixmap::fromImage(aValue));
 }
 
-QIcon Property::iconForValue(const QPolygon &aValue)
+QIcon Property::iconForValue(const QPolygon &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Polygon.png");
 }
 
-QIcon Property::iconForValue(const QRegion &aValue)
+QIcon Property::iconForValue(const QRegion &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Region.png");
 }
 
 QIcon Property::iconForValue(const QBitmap &aValue)
@@ -1134,15 +1134,15 @@ QIcon Property::iconForValue(const QCursor &aValue)
         return iconForValue(aPixmap);
     }
 
-    return QIcon(":/objectcontroller/images/cursor-"+valueToString(aValue)+".png");
+    return QIcon(":/objectcontroller/images/Cursor-"+valueToString(aValue)+".png");
 }
 
-QIcon Property::iconForValue(const QSizePolicy &aValue)
+QIcon Property::iconForValue(const QSizePolicy &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QKeySequence &aValue)
+QIcon Property::iconForValue(const QKeySequence &/*aValue*/)
 {
     return QIcon();
 }
