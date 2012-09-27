@@ -10,6 +10,7 @@
 #include <QMatrix4x4>
 #include <QVector2D>
 #include <QPainter>
+#include <QApplication>
 
 #include "propertytreewidgetitem.h"
 
@@ -60,85 +61,90 @@ void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects
 {
     QVariant aValue=read(aObjects);
 
-    aItem->setText(1, valueText(aValue));
-    aItem->setIcon(1, valueIcon(aValue));
+    aItem->setText(1, valueText(aValue, aItem));
+    aItem->setIcon(1, valueIcon(aValue, aItem));
 }
 
-#define FUNCTION_FOR_VARIANT(aValue, aFunction, aDefaultResult) \
+#define FUNCTION_FOR_VARIANT(aValue, aParentItem, aFunction, aDefaultResult) \
     switch (aValue.type()) \
     { \
-        case QVariant::Bool:         return aFunction(aValue.value<bool>()); \
-        case QVariant::Int:          return aFunction(aValue.value<qint32>()); \
-        case QVariant::UInt:         return aFunction(aValue.value<quint32>()); \
-        case QVariant::LongLong:     return aFunction(aValue.value<qint64>()); \
-        case QVariant::ULongLong:    return aFunction(aValue.value<quint64>()); \
-        case QVariant::Double:       return aFunction(aValue.value<double>()); \
-        case QVariant::Char:         return aFunction(aValue.value<QChar>()); \
-        case QVariant::Map:          return aFunction(aValue.value<QVariantMap>()); \
-        case QVariant::List:         return aFunction(aValue.value<QVariantList>()); \
-        case QVariant::StringList:   return aFunction(aValue.value<QStringList>()); \
-        case QVariant::ByteArray:    return aFunction(aValue.value<QByteArray>()); \
-        case QVariant::BitArray:     return aFunction(aValue.value<QBitArray>()); \
-        case QVariant::Date:         return aFunction(aValue.value<QDate>()); \
-        case QVariant::Time:         return aFunction(aValue.value<QTime>()); \
-        case QVariant::DateTime:     return aFunction(aValue.value<QDateTime>()); \
-        case QVariant::Url:          return aFunction(aValue.value<QUrl>()); \
-        case QVariant::Locale:       return aFunction(aValue.value<QLocale>()); \
-        case QVariant::Rect:         return aFunction(aValue.value<QRect>()); \
-        case QVariant::RectF:        return aFunction(aValue.value<QRectF>()); \
-        case QVariant::Size:         return aFunction(aValue.value<QSize>()); \
-        case QVariant::SizeF:        return aFunction(aValue.value<QSizeF>()); \
-        case QVariant::Line:         return aFunction(aValue.value<QLine>()); \
-        case QVariant::LineF:        return aFunction(aValue.value<QLineF>()); \
-        case QVariant::Point:        return aFunction(aValue.value<QPoint>()); \
-        case QVariant::PointF:       return aFunction(aValue.value<QPointF>()); \
-        case QVariant::RegExp:       return aFunction(aValue.value<QRegExp>()); \
-        case QVariant::Hash:         return aFunction(aValue.value<QVariantHash>()); \
-        case QVariant::EasingCurve:  return aFunction(aValue.value<QEasingCurve>()); \
-        case QVariant::Font:         return aFunction(aValue.value<QFont>()); \
-        case QVariant::Pixmap:       return aFunction(aValue.value<QPixmap>()); \
-        case QVariant::Brush:        return aFunction(aValue.value<QBrush>()); \
-        case QVariant::Color:        return aFunction(aValue.value<QColor>()); \
-        case QVariant::Palette:      return aFunction(aValue.value<QPalette>()); \
-        case QVariant::Icon:         return aFunction(aValue.value<QIcon>()); \
-        case QVariant::Image:        return aFunction(aValue.value<QImage>()); \
-        case QVariant::Polygon:      return aFunction(aValue.value<QPolygon>()); \
-        case QVariant::Region:       return aFunction(aValue.value<QRegion>()); \
-        case QVariant::Bitmap:       return aFunction(aValue.value<QBitmap>()); \
-        case QVariant::Cursor:       return aFunction(aValue.value<QCursor>()); \
-        case QVariant::SizePolicy:   return aFunction(aValue.value<QSizePolicy>()); \
-        case QVariant::KeySequence:  return aFunction(aValue.value<QKeySequence>()); \
-        case QVariant::Pen:          return aFunction(aValue.value<QPen>()); \
-        case QVariant::TextLength:   return aFunction(aValue.value<QTextLength>()); \
-        case QVariant::TextFormat:   return aFunction(aValue.value<QTextFormat>()); \
-        case QVariant::Matrix:       return aFunction(aValue.value<QMatrix>()); \
-        case QVariant::Transform:    return aFunction(aValue.value<QTransform>()); \
-        case QVariant::Matrix4x4:    return aFunction(aValue.value<QMatrix4x4>()); \
-        case QVariant::Vector2D:     return aFunction(aValue.value<QVector2D>()); \
-        case QVariant::Vector3D:     return aFunction(aValue.value<QVector3D>()); \
-        case QVariant::Vector4D:     return aFunction(aValue.value<QVector4D>()); \
-        case QVariant::Quaternion:   return aFunction(aValue.value<QQuaternion>()); \
-        case QMetaType::Long:        return aFunction(aValue.value<qint32>()); \
-        case QMetaType::Short:       return aFunction(aValue.value<qint16>()); \
-        case QMetaType::Char:        return aFunction(aValue.value<qint8>()); \
-        case QMetaType::ULong:       return aFunction(aValue.value<quint32>()); \
-        case QMetaType::UShort:      return aFunction(aValue.value<quint16>()); \
-        case QMetaType::UChar:       return aFunction(aValue.value<quint8>()); \
-        case QMetaType::Float:       return aFunction(aValue.value<float>()); \
-        case QMetaType::VoidStar:    return aFunction(aValue.value<void *>()); \
-        case QMetaType::QObjectStar: return aFunction(aValue.value<QObject *>()); \
-        case QMetaType::QWidgetStar: return aFunction(aValue.value<QWidget *>()); \
+        case QVariant::Bool:         return aFunction(aValue.value<bool>(), aParentItem); \
+        case QVariant::Int:          return aFunction(aValue.value<qint32>(), aParentItem); \
+        case QVariant::UInt:         return aFunction(aValue.value<quint32>(), aParentItem); \
+        case QVariant::LongLong:     return aFunction(aValue.value<qint64>(), aParentItem); \
+        case QVariant::ULongLong:    return aFunction(aValue.value<quint64>(), aParentItem); \
+        case QVariant::Double:       return aFunction(aValue.value<double>(), aParentItem); \
+        case QVariant::Char:         return aFunction(aValue.value<QChar>(), aParentItem); \
+        case QVariant::Map:          return aFunction(aValue.value<QVariantMap>(), aParentItem); \
+        case QVariant::List:         return aFunction(aValue.value<QVariantList>(), aParentItem); \
+        case QVariant::StringList:   return aFunction(aValue.value<QStringList>(), aParentItem); \
+        case QVariant::ByteArray:    return aFunction(aValue.value<QByteArray>(), aParentItem); \
+        case QVariant::BitArray:     return aFunction(aValue.value<QBitArray>(), aParentItem); \
+        case QVariant::Date:         return aFunction(aValue.value<QDate>(), aParentItem); \
+        case QVariant::Time:         return aFunction(aValue.value<QTime>(), aParentItem); \
+        case QVariant::DateTime:     return aFunction(aValue.value<QDateTime>(), aParentItem); \
+        case QVariant::Url:          return aFunction(aValue.value<QUrl>(), aParentItem); \
+        case QVariant::Locale:       return aFunction(aValue.value<QLocale>(), aParentItem); \
+        case QVariant::Rect:         return aFunction(aValue.value<QRect>(), aParentItem); \
+        case QVariant::RectF:        return aFunction(aValue.value<QRectF>(), aParentItem); \
+        case QVariant::Size:         return aFunction(aValue.value<QSize>(), aParentItem); \
+        case QVariant::SizeF:        return aFunction(aValue.value<QSizeF>(), aParentItem); \
+        case QVariant::Line:         return aFunction(aValue.value<QLine>(), aParentItem); \
+        case QVariant::LineF:        return aFunction(aValue.value<QLineF>(), aParentItem); \
+        case QVariant::Point:        return aFunction(aValue.value<QPoint>(), aParentItem); \
+        case QVariant::PointF:       return aFunction(aValue.value<QPointF>(), aParentItem); \
+        case QVariant::RegExp:       return aFunction(aValue.value<QRegExp>(), aParentItem); \
+        case QVariant::Hash:         return aFunction(aValue.value<QVariantHash>(), aParentItem); \
+        case QVariant::EasingCurve:  return aFunction(aValue.value<QEasingCurve>(), aParentItem); \
+        case QVariant::Font:         return aFunction(aValue.value<QFont>(), aParentItem); \
+        case QVariant::Pixmap:       return aFunction(aValue.value<QPixmap>(), aParentItem); \
+        case QVariant::Brush:        return aFunction(aValue.value<QBrush>(), aParentItem); \
+        case QVariant::Color:        return aFunction(aValue.value<QColor>(), aParentItem); \
+        case QVariant::Palette:      return aFunction(aValue.value<QPalette>(), aParentItem); \
+        case QVariant::Icon:         return aFunction(aValue.value<QIcon>(), aParentItem); \
+        case QVariant::Image:        return aFunction(aValue.value<QImage>(), aParentItem); \
+        case QVariant::Polygon:      return aFunction(aValue.value<QPolygon>(), aParentItem); \
+        case QVariant::Region:       return aFunction(aValue.value<QRegion>(), aParentItem); \
+        case QVariant::Bitmap:       return aFunction(aValue.value<QBitmap>(), aParentItem); \
+        case QVariant::Cursor:       return aFunction(aValue.value<QCursor>(), aParentItem); \
+        case QVariant::SizePolicy:   return aFunction(aValue.value<QSizePolicy>(), aParentItem); \
+        case QVariant::KeySequence:  return aFunction(aValue.value<QKeySequence>(), aParentItem); \
+        case QVariant::Pen:          return aFunction(aValue.value<QPen>(), aParentItem); \
+        case QVariant::TextLength:   return aFunction(aValue.value<QTextLength>(), aParentItem); \
+        case QVariant::TextFormat:   return aFunction(aValue.value<QTextFormat>(), aParentItem); \
+        case QVariant::Matrix:       return aFunction(aValue.value<QMatrix>(), aParentItem); \
+        case QVariant::Transform:    return aFunction(aValue.value<QTransform>(), aParentItem); \
+        case QVariant::Matrix4x4:    return aFunction(aValue.value<QMatrix4x4>(), aParentItem); \
+        case QVariant::Vector2D:     return aFunction(aValue.value<QVector2D>(), aParentItem); \
+        case QVariant::Vector3D:     return aFunction(aValue.value<QVector3D>(), aParentItem); \
+        case QVariant::Vector4D:     return aFunction(aValue.value<QVector4D>(), aParentItem); \
+        case QVariant::Quaternion:   return aFunction(aValue.value<QQuaternion>(), aParentItem); \
+        case QMetaType::Long:        return aFunction(aValue.value<qint32>(), aParentItem); \
+        case QMetaType::Short:       return aFunction(aValue.value<qint16>(), aParentItem); \
+        case QMetaType::Char:        return aFunction(aValue.value<qint8>(), aParentItem); \
+        case QMetaType::ULong:       return aFunction(aValue.value<quint32>(), aParentItem); \
+        case QMetaType::UShort:      return aFunction(aValue.value<quint16>(), aParentItem); \
+        case QMetaType::UChar:       return aFunction(aValue.value<quint8>(), aParentItem); \
+        case QMetaType::Float:       return aFunction(aValue.value<float>(), aParentItem); \
+        case QMetaType::VoidStar:    return aFunction(aValue.value<void *>(), aParentItem); \
+        case QMetaType::QObjectStar: return aFunction(aValue.value<QObject *>(), aParentItem); \
+        case QMetaType::QWidgetStar: return aFunction(aValue.value<QWidget *>(), aParentItem); \
         default: return aDefaultResult; \
     } \
 
-QString Property::valueText(const QVariant &aValue)
+QString Property::valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    FUNCTION_FOR_VARIANT(aValue, valueToString, aValue.toString());
+    FUNCTION_FOR_VARIANT(aValue, aParentItem, valueToString, aValue.toString());
 }
 
-QIcon Property::valueIcon(const QVariant &aValue)
+QIcon Property::valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    FUNCTION_FOR_VARIANT(aValue, iconForValue, QIcon());
+    FUNCTION_FOR_VARIANT(aValue, aParentItem, iconForValue, QIcon());
+}
+
+int Property::valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    FUNCTION_FOR_VARIANT(aValue, aParentItem, subPropertiesForValue, 0);
 }
 
 // -------------------------------------------------------------------------------------
@@ -196,67 +202,67 @@ bool Property::isNumber(const QVariant &aValue)
            );
 }
 
-QString Property::valueToString(const bool &aValue)
+QString Property::valueToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue ? "true" : "false";
 }
 
-QString Property::valueToString(const qint8 &aValue)
+QString Property::valueToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const quint8 &aValue)
+QString Property::valueToString(const quint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const qint16 &aValue)
+QString Property::valueToString(const qint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const quint16 &aValue)
+QString Property::valueToString(const quint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const qint32 &aValue)
+QString Property::valueToString(const qint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const quint32 &aValue)
+QString Property::valueToString(const quint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const qint64 &aValue)
+QString Property::valueToString(const qint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const quint64 &aValue)
+QString Property::valueToString(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const float &aValue)
+QString Property::valueToString(const float &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const double &aValue)
+QString Property::valueToString(const double &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue);
 }
 
-QString Property::valueToString(const QChar &aValue)
+QString Property::valueToString(const QChar &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString(aValue);
 }
 
-QString Property::valueToString(const QVariantMap &aValue)
+QString Property::valueToString(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QString res="[";
 
@@ -277,12 +283,12 @@ QString Property::valueToString(const QVariantMap &aValue)
 
         if (isNumber(i.value()))
         {
-            res.append(valueText(i.value()));
+            res.append(valueText(i.value(), aParentItem));
         }
         else
         {
             res.append("\"");
-            res.append(valueText(i.value()));
+            res.append(valueText(i.value(), aParentItem));
             res.append("\"");
         }
 
@@ -294,7 +300,7 @@ QString Property::valueToString(const QVariantMap &aValue)
     return res;
 }
 
-QString Property::valueToString(const QVariantList &aValue)
+QString Property::valueToString(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QString res="[";
 
@@ -302,12 +308,12 @@ QString Property::valueToString(const QVariantList &aValue)
     {
         if (isNumber(aValue.at(i)))
         {
-            res.append(valueText(aValue.at(i)));
+            res.append(valueText(aValue.at(i), aParentItem));
         }
         else
         {
             res.append("\"");
-            res.append(valueText(aValue.at(i)));
+            res.append(valueText(aValue.at(i), aParentItem));
             res.append("\"");
         }
 
@@ -322,7 +328,7 @@ QString Property::valueToString(const QVariantList &aValue)
     return res;
 }
 
-QString Property::valueToString(const QStringList &aValue)
+QString Property::valueToString(const QStringList &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[";
 
@@ -343,12 +349,12 @@ QString Property::valueToString(const QStringList &aValue)
     return res;
 }
 
-QString Property::valueToString(const QByteArray &aValue)
+QString Property::valueToString(const QByteArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toHex().toUpper();
 }
 
-QString Property::valueToString(const QBitArray &aValue)
+QString Property::valueToString(const QBitArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res;
 
@@ -360,34 +366,34 @@ QString Property::valueToString(const QBitArray &aValue)
     return res;
 }
 
-QString Property::valueToString(const QDate &aValue)
+QString Property::valueToString(const QDate &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString("dd.MM.yyyy");
 }
 
-QString Property::valueToString(const QTime &aValue)
+QString Property::valueToString(const QTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString("HH:mm:ss");
 }
 
-QString Property::valueToString(const QDateTime &aValue)
+QString Property::valueToString(const QDateTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString("dd.MM.yyyy HH:mm:ss");
 }
 
-QString Property::valueToString(const QUrl &aValue)
+QString Property::valueToString(const QUrl &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString();
 }
 
-QString Property::valueToString(const QLocale &aValue)
+QString Property::valueToString(const QLocale &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.languageToString(aValue.language())+
            ", "+
            aValue.countryToString(aValue.country());
 }
 
-QString Property::valueToString(const QRect &aValue)
+QString Property::valueToString(const QRect &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.x())+
@@ -400,7 +406,7 @@ QString Property::valueToString(const QRect &aValue)
            "]";
 }
 
-QString Property::valueToString(const QRectF &aValue)
+QString Property::valueToString(const QRectF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.x())+
@@ -413,21 +419,21 @@ QString Property::valueToString(const QRectF &aValue)
            "]";
 }
 
-QString Property::valueToString(const QSize &aValue)
+QString Property::valueToString(const QSize &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue.width())+
            " x "+
            QString::number(aValue.height());
 }
 
-QString Property::valueToString(const QSizeF &aValue)
+QString Property::valueToString(const QSizeF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue.width())+
            " x "+
            QString::number(aValue.height());
 }
 
-QString Property::valueToString(const QLine &aValue)
+QString Property::valueToString(const QLine &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.x1())+
@@ -440,7 +446,7 @@ QString Property::valueToString(const QLine &aValue)
            ")]";
 }
 
-QString Property::valueToString(const QLineF &aValue)
+QString Property::valueToString(const QLineF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.x1())+
@@ -453,7 +459,7 @@ QString Property::valueToString(const QLineF &aValue)
            ")]";
 }
 
-QString Property::valueToString(const QPoint &aValue)
+QString Property::valueToString(const QPoint &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "("+
            QString::number(aValue.x())+
@@ -462,7 +468,7 @@ QString Property::valueToString(const QPoint &aValue)
            ")";
 }
 
-QString Property::valueToString(const QPointF &aValue)
+QString Property::valueToString(const QPointF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "("+
            QString::number(aValue.x())+
@@ -471,12 +477,12 @@ QString Property::valueToString(const QPointF &aValue)
            ")";
 }
 
-QString Property::valueToString(const QRegExp &aValue)
+QString Property::valueToString(const QRegExp &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.pattern();
 }
 
-QString Property::valueToString(const QVariantHash &aValue)
+QString Property::valueToString(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QString res="[";
 
@@ -497,12 +503,12 @@ QString Property::valueToString(const QVariantHash &aValue)
 
         if (isNumber(i.value()))
         {
-            res.append(valueText(i.value()));
+            res.append(valueText(i.value(), aParentItem));
         }
         else
         {
             res.append("\"");
-            res.append(valueText(i.value()));
+            res.append(valueText(i.value(), aParentItem));
             res.append("\"");
         }
 
@@ -514,13 +520,13 @@ QString Property::valueToString(const QVariantHash &aValue)
     return res;
 }
 
-QString Property::valueToString(const QEasingCurve &aValue)
+QString Property::valueToString(const QEasingCurve &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
     return aEnum.valueToKey(aValue.type());
 }
 
-QString Property::valueToString(const QFont &aValue)
+QString Property::valueToString(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "["+
            aValue.family()+
@@ -529,12 +535,12 @@ QString Property::valueToString(const QFont &aValue)
            "]";
 }
 
-QString Property::valueToString(const QPixmap &aValue)
+QString Property::valueToString(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return valueToString(aValue.size());
+    return valueToString(aValue.size(), aParentItem);
 }
 
-QString Property::valueToString(const QBrush &aValue)
+QString Property::valueToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     switch (aValue.style())
     {
@@ -562,7 +568,7 @@ QString Property::valueToString(const QBrush &aValue)
     return "[Unknown brush style]";
 }
 
-QString Property::valueToString(const QColor &aValue)
+QString Property::valueToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "("+
            QString::number(aValue.red())+
@@ -575,12 +581,12 @@ QString Property::valueToString(const QColor &aValue)
            "]";
 }
 
-QString Property::valueToString(const QPalette &/*aValue*/)
+QString Property::valueToString(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "Palette";
 }
 
-QString Property::valueToString(const QIcon &aValue)
+QString Property::valueToString(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res=aValue.name();
 
@@ -592,12 +598,12 @@ QString Property::valueToString(const QIcon &aValue)
     return "Icon";
 }
 
-QString Property::valueToString(const QImage &aValue)
+QString Property::valueToString(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return valueToString(aValue.size());
+    return valueToString(aValue.size(), aParentItem);
 }
 
-QString Property::valueToString(const QPolygon &aValue)
+QString Property::valueToString(const QPolygon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[";
 
@@ -625,7 +631,7 @@ QString Property::valueToString(const QPolygon &aValue)
     return res;
 }
 
-QString Property::valueToString(const QRegion &aValue)
+QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QVector<QRect> aRects=aValue.rects();
 
@@ -633,7 +639,7 @@ QString Property::valueToString(const QRegion &aValue)
 
     for (int i=0; i<aRects.count(); ++i)
     {
-        res.append(valueToString(aRects.at(i)));
+        res.append(valueToString(aRects.at(i), aParentItem));
 
         if (i<aRects.count()-1)
         {
@@ -646,12 +652,12 @@ QString Property::valueToString(const QRegion &aValue)
     return res;
 }
 
-QString Property::valueToString(const QBitmap &aValue)
+QString Property::valueToString(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return valueToString(aValue.size());
+    return valueToString(aValue.size(), aParentItem);
 }
 
-QString Property::valueToString(const QCursor &aValue)
+QString Property::valueToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     switch (aValue.shape())
     {
@@ -684,7 +690,7 @@ QString Property::valueToString(const QCursor &aValue)
     return "[Unknown cursor]";
 }
 
-QString Property::valueToString(const QSizePolicy &aValue)
+QString Property::valueToString(const QSizePolicy &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
 
@@ -699,17 +705,17 @@ QString Property::valueToString(const QSizePolicy &aValue)
            "]";
 }
 
-QString Property::valueToString(const QKeySequence &aValue)
+QString Property::valueToString(const QKeySequence &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString();
 }
 
-QString Property::valueToString(const QPen &/*aValue*/)
+QString Property::valueToString(const QPen &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "Pen";
 }
 
-QString Property::valueToString(const QTextLength &aValue)
+QString Property::valueToString(const QTextLength &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[";
 
@@ -727,13 +733,13 @@ QString Property::valueToString(const QTextLength &aValue)
     return res;
 }
 
-QString Property::valueToString(const QTextFormat &aValue)
+QString Property::valueToString(const QTextFormat &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("FormatType"));
     return aEnum.valueToKey(aValue.type());
 }
 
-QString Property::valueToString(const QMatrix &aValue)
+QString Property::valueToString(const QMatrix &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.m11())+
@@ -750,7 +756,7 @@ QString Property::valueToString(const QMatrix &aValue)
            ")]";
 }
 
-QString Property::valueToString(const QTransform &aValue)
+QString Property::valueToString(const QTransform &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.m11())+
@@ -773,7 +779,7 @@ QString Property::valueToString(const QTransform &aValue)
            ")]";
 }
 
-QString Property::valueToString(const QMatrix4x4 &aValue)
+QString Property::valueToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     qreal matrix[16];
 
@@ -808,7 +814,7 @@ QString Property::valueToString(const QMatrix4x4 &aValue)
     return res;
 }
 
-QString Property::valueToString(const QVector2D &aValue)
+QString Property::valueToString(const QVector2D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "["+
            QString::number(aValue.x())+
@@ -817,7 +823,7 @@ QString Property::valueToString(const QVector2D &aValue)
            "]";
 }
 
-QString Property::valueToString(const QVector3D &aValue)
+QString Property::valueToString(const QVector3D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "["+
            QString::number(aValue.x())+
@@ -828,7 +834,7 @@ QString Property::valueToString(const QVector3D &aValue)
            "]";
 }
 
-QString Property::valueToString(const QVector4D &aValue)
+QString Property::valueToString(const QVector4D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "["+
            QString::number(aValue.x())+
@@ -841,7 +847,7 @@ QString Property::valueToString(const QVector4D &aValue)
            "]";
 }
 
-QString Property::valueToString(const QQuaternion &aValue)
+QString Property::valueToString(const QQuaternion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "["+
            QString::number(aValue.scalar())+
@@ -854,12 +860,12 @@ QString Property::valueToString(const QQuaternion &aValue)
            "]";
 }
 
-QString Property::valueToString(void *aValue)
+QString Property::valueToString(void *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "0x"+QString::number((qint64)aValue, 16).toUpper();
 }
 
-QString Property::valueToString(QObject *aValue)
+QString Property::valueToString(QObject *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     if (aValue==0)
     {
@@ -884,172 +890,193 @@ QString Property::valueToString(QObject *aValue)
 
 // -------------------------------------------------------------------------------------
 
-QIcon Property::iconForValue(const bool &aValue)
+QIcon Property::iconForValue(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    QPixmap aBoolPixmap=QPixmap(13, 13);
+    aBoolPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aBoolPixmap);
+
+    QStyleOptionButton checkboxstyle;
+    checkboxstyle.rect.setRect(0, 0, aBoolPixmap.width(), aBoolPixmap.height());
+
+    if (aValue)
+    {
+        checkboxstyle.state = QStyle::State_On|QStyle::State_Enabled;
+    }
+    else
+    {
+        checkboxstyle.state = QStyle::State_Off|QStyle::State_Enabled;
+    }
+
+    QApplication::style()->drawControl(QStyle::CE_CheckBox, &checkboxstyle, &aPainter);
+
+    aPainter.end();
+
+    return QIcon(aBoolPixmap);
+}
+
+QIcon Property::iconForValue(const qint8 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint8 &/*aValue*/)
+QIcon Property::iconForValue(const quint8 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint8 &/*aValue*/)
+QIcon Property::iconForValue(const qint16 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint16 &/*aValue*/)
+QIcon Property::iconForValue(const quint16 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint16 &/*aValue*/)
+QIcon Property::iconForValue(const qint32 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint32 &/*aValue*/)
+QIcon Property::iconForValue(const quint32 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint32 &/*aValue*/)
+QIcon Property::iconForValue(const qint64 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint64 &/*aValue*/)
+QIcon Property::iconForValue(const quint64 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint64 &/*aValue*/)
+QIcon Property::iconForValue(const float &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const float &/*aValue*/)
+QIcon Property::iconForValue(const double &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const double &/*aValue*/)
+QIcon Property::iconForValue(const QChar &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QChar &/*aValue*/)
+QIcon Property::iconForValue(const QVariantMap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QVariantMap &/*aValue*/)
+QIcon Property::iconForValue(const QVariantList &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QVariantList &/*aValue*/)
+QIcon Property::iconForValue(const QStringList &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QStringList &/*aValue*/)
+QIcon Property::iconForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QByteArray &/*aValue*/)
+QIcon Property::iconForValue(const QBitArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QBitArray &/*aValue*/)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QDate &/*aValue*/)
+QIcon Property::iconForValue(const QDate &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Date.png");
 }
 
-QIcon Property::iconForValue(const QTime &/*aValue*/)
+QIcon Property::iconForValue(const QTime &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Time.png");
 }
 
-QIcon Property::iconForValue(const QDateTime &/*aValue*/)
+QIcon Property::iconForValue(const QDateTime &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/DateTime.png");
 }
 
-QIcon Property::iconForValue(const QUrl &/*aValue*/)
+QIcon Property::iconForValue(const QUrl &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QLocale &/*aValue*/)
+QIcon Property::iconForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QRect &/*aValue*/)
+QIcon Property::iconForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Rect.png");
 }
 
-QIcon Property::iconForValue(const QRectF &/*aValue*/)
+QIcon Property::iconForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Rect.png");
 }
 
-QIcon Property::iconForValue(const QSize &/*aValue*/)
+QIcon Property::iconForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QSizeF &/*aValue*/)
+QIcon Property::iconForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QLine &/*aValue*/)
+QIcon Property::iconForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Line.png");
 }
 
-QIcon Property::iconForValue(const QLineF &/*aValue*/)
+QIcon Property::iconForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Line.png");
 }
 
-QIcon Property::iconForValue(const QPoint &/*aValue*/)
+QIcon Property::iconForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Point.png");
 }
 
-QIcon Property::iconForValue(const QPointF &/*aValue*/)
+QIcon Property::iconForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Point.png");
 }
 
-QIcon Property::iconForValue(const QRegExp &/*aValue*/)
+QIcon Property::iconForValue(const QRegExp &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QVariantHash &/*aValue*/)
+QIcon Property::iconForValue(const QVariantHash &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QEasingCurve &/*aValue*/)
+QIcon Property::iconForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/EasingCurve.png");
 }
 
-QIcon Property::iconForValue(const QFont &aValue)
+QIcon Property::iconForValue(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QFontMetrics aMetrics(aValue);
 
@@ -1085,12 +1112,12 @@ QIcon Property::iconForValue(const QFont &aValue)
     }
 }
 
-QIcon Property::iconForValue(const QPixmap &aValue)
+QIcon Property::iconForValue(const QPixmap &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(aValue);
 }
 
-QIcon Property::iconForValue(const QBrush &aValue)
+QIcon Property::iconForValue(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QPixmap aBrushPixmap=QPixmap(32, 32);
     aBrushPixmap.fill(QColor(255, 255, 255, 0));
@@ -1102,7 +1129,7 @@ QIcon Property::iconForValue(const QBrush &aValue)
     return QIcon(aBrushPixmap);
 }
 
-QIcon Property::iconForValue(const QColor &aValue)
+QIcon Property::iconForValue(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QColor aSolidColor(aValue.red(), aValue.green(), aValue.blue());
 
@@ -1112,73 +1139,73 @@ QIcon Property::iconForValue(const QColor &aValue)
     QPainter aPainter(&aColorPixmap);
 
     aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), aValue);
-    aPainter.fillRect(aColorPixmap.width()/4, aColorPixmap.height()/4, aColorPixmap.width()*3/4, aColorPixmap.height()*3/4, aSolidColor);
+    aPainter.fillRect(aColorPixmap.width()>>2, aColorPixmap.height()>>2, aColorPixmap.width()>>1, aColorPixmap.height()>>1, aSolidColor);
 
     aPainter.end();
 
     return QIcon(aColorPixmap);
 }
 
-QIcon Property::iconForValue(const QPalette &/*aValue*/)
+QIcon Property::iconForValue(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Palette.png");
 }
 
-QIcon Property::iconForValue(const QIcon &aValue)
+QIcon Property::iconForValue(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue;
 }
 
-QIcon Property::iconForValue(const QImage &aValue)
+QIcon Property::iconForValue(const QImage &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(QPixmap::fromImage(aValue));
 }
 
-QIcon Property::iconForValue(const QPolygon &/*aValue*/)
+QIcon Property::iconForValue(const QPolygon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Polygon.png");
 }
 
-QIcon Property::iconForValue(const QRegion &/*aValue*/)
+QIcon Property::iconForValue(const QRegion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Region.png");
 }
 
-QIcon Property::iconForValue(const QBitmap &aValue)
+QIcon Property::iconForValue(const QBitmap &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(QPixmap::fromImage(aValue.toImage()));
 }
 
-QIcon Property::iconForValue(const QCursor &aValue)
+QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     const QBitmap *aBitmap=aValue.bitmap();
 
     if (aBitmap)
     {
-        return iconForValue(*aBitmap);
+        return iconForValue(*aBitmap, aParentItem);
     }
 
     QPixmap aPixmap=aValue.pixmap();
 
     if (!aPixmap.isNull())
     {
-        return iconForValue(aPixmap);
+        return iconForValue(aPixmap, aParentItem);
     }
 
-    return QIcon(":/objectcontroller/images/Cursor-"+valueToString(aValue)+".png");
+    return QIcon(":/objectcontroller/images/Cursor-"+valueToString(aValue, aParentItem)+".png");
 }
 
-QIcon Property::iconForValue(const QSizePolicy &/*aValue*/)
+QIcon Property::iconForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QKeySequence &/*aValue*/)
+QIcon Property::iconForValue(const QKeySequence &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QPen &aValue)
+QIcon Property::iconForValue(const QPen &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QPixmap aPenPixmap=QPixmap(16, 16);
     aPenPixmap.fill(QColor(255, 255, 255, 0));
@@ -1191,57 +1218,349 @@ QIcon Property::iconForValue(const QPen &aValue)
     return QIcon(aPenPixmap);
 }
 
-QIcon Property::iconForValue(const QTextLength &/*aValue*/)
+QIcon Property::iconForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QTextFormat &/*aValue*/)
+QIcon Property::iconForValue(const QTextFormat &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QMatrix &/*aValue*/)
+QIcon Property::iconForValue(const QMatrix &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Matrix.png");
 }
 
-QIcon Property::iconForValue(const QTransform &/*aValue*/)
+QIcon Property::iconForValue(const QTransform &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Transform.png");
 }
 
-QIcon Property::iconForValue(const QMatrix4x4 &/*aValue*/)
+QIcon Property::iconForValue(const QMatrix4x4 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Matrix4x4.png");
 }
 
-QIcon Property::iconForValue(const QVector2D &/*aValue*/)
+QIcon Property::iconForValue(const QVector2D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Vector2D.png");
 }
 
-QIcon Property::iconForValue(const QVector3D &/*aValue*/)
+QIcon Property::iconForValue(const QVector3D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Vector3D.png");
 }
 
-QIcon Property::iconForValue(const QVector4D &/*aValue*/)
+QIcon Property::iconForValue(const QVector4D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon(":/objectcontroller/images/Vector4D.png");
 }
 
-QIcon Property::iconForValue(const QQuaternion &/*aValue*/)
+QIcon Property::iconForValue(const QQuaternion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(void * /*aValue*/)
+QIcon Property::iconForValue(void * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(QObject * /*aValue*/)
+QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
+}
+
+// -------------------------------------------------------------------------------------
+
+int Property::subPropertiesForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const qint16 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const quint16 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const qint32 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const quint32 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const qint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const float &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const double &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QChar &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QDate &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QTime &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QDateTime &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QUrl &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QLocale &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QRect &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QRectF &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QSize &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QSizeF &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QLine &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QLineF &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QPoint &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QPointF &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QRegExp &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QEasingCurve &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QFont &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QBrush &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QPalette &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QIcon &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QPolygon &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QRegion &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QSizePolicy &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QKeySequence &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QTextLength &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QTextFormat &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QMatrix &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QTransform &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QMatrix4x4 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QVector2D &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QVector3D &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QVector4D &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(const QQuaternion &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(void *aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
+}
+
+int Property::subPropertiesForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return aParentItem->childCount();
 }
