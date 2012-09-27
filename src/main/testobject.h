@@ -50,6 +50,7 @@ public:
     Q_PROPERTY(QRectF         RectF         READ getRectF)
     Q_PROPERTY(QSize          Size          READ getSize)
     Q_PROPERTY(QSizeF         SizeF         READ getSizeF)
+    Q_PROPERTY(QLine          Line          READ getLine)
     Q_PROPERTY(QLineF         LineF         READ getLineF)
     Q_PROPERTY(QPoint         Point         READ getPoint)
     Q_PROPERTY(QPointF        PointF        READ getPointF)
@@ -114,6 +115,7 @@ public:
     QRectF                 mRectF;
     QSize                  mSize;
     QSizeF                 mSizeF;
+    QLine                  mLine;
     QLineF                 mLineF;
     QPoint                 mPoint;
     QPointF                mPointF;
@@ -174,6 +176,7 @@ public:
     QRectF                 getRectF();
     QSize                  getSize();
     QSizeF                 getSizeF();
+    QLine                  getLine();
     QLineF                 getLineF();
     QPoint                 getPoint();
     QPointF                getPointF();
