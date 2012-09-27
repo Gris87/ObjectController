@@ -4,6 +4,9 @@
 #
 #-------------------------------------------------
 
+INCLUDEPATH += $$PWD
+DEPENDPATH += $$PWD
+
 HEADERS += $$PWD/objectcontroller.h \
            $$PWD/handleobject.h \
            $$PWD/property.h \
@@ -19,3 +22,5 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/propertytreewidget.cpp \
            $$PWD/propertytreewidgetitem.cpp \
            $$PWD/propertyitemdelegate.cpp
+
+RESOURCES += $$PWD/property.qrc

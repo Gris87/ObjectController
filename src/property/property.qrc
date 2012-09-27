@@ -1,0 +1,28 @@
+<RCC>
+    <qresource prefix="/objectcontroller">
+        <file>images/Cursor-ArrowCursor.png</file>
+        <file>images/Cursor-BusyCursor.png</file>
+        <file>images/Cursor-ClosedHandCursor.png</file>
+        <file>images/Cursor-CrossCursor.png</file>
+        <file>images/Cursor-ForbiddenCursor.png</file>
+        <file>images/Cursor-IBeamCursor.png</file>
+        <file>images/Cursor-OpenHandCursor.png</file>
+        <file>images/Cursor-PointingHandCursor.png</file>
+        <file>images/Cursor-SizeAllCursor.png</file>
+        <file>images/Cursor-SizeBDiagCursor.png</file>
+        <file>images/Cursor-SizeFDiagCursor.png</file>
+        <file>images/Cursor-SizeHorCursor.png</file>
+        <file>images/Cursor-SizeVerCursor.png</file>
+        <file>images/Cursor-SplitHCursor.png</file>
+        <file>images/Cursor-SplitVCursor.png</file>
+        <file>images/Cursor-UpArrowCursor.png</file>
+        <file>images/Cursor-WaitCursor.png</file>
+        <file>images/Cursor-WhatsThisCursor.png</file>
+        <file>images/Date.png</file>
+        <file>images/DateTime.png</file>
+        <file>images/Line.png</file>
+        <file>images/Point.png</file>
+        <file>images/Rect.png</file>
+        <file>images/Time.png</file>
+    </qresource>
+</RCC>

@@ -66,8 +66,10 @@ TestObject::TestObject(QObject *parent) :
     mPixmap=QPixmap(64, 64);
     mPixmap.fill(QColor(255, 255, 255, 0));
     QPainter aPainter(&mPixmap);
-    aPainter.setPen(QColor(0, 0, 0));
-    aPainter.drawEllipse(0, 0, 63, 63);
+    aPainter.setPen(QPen(QBrush(QColor(0, 0, 0)), 3));
+    aPainter.drawEllipse(1, 1, 61, 61);
+    aPainter.setPen(QPen(QBrush(QColor(255, 255, 255)), 3));
+    aPainter.drawEllipse(4, 4, 55, 55);
     aPainter.end();
 
     QRadialGradient aGradient(16, 16, 16);

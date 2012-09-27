@@ -889,149 +889,149 @@ QIcon Property::iconForValue(const bool &aValue)
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint8 &aValue)
+QIcon Property::iconForValue(const qint8 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint8 &aValue)
+QIcon Property::iconForValue(const quint8 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint16 &aValue)
+QIcon Property::iconForValue(const qint16 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint16 &aValue)
+QIcon Property::iconForValue(const quint16 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint32 &aValue)
+QIcon Property::iconForValue(const qint32 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint32 &aValue)
+QIcon Property::iconForValue(const quint32 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const qint64 &aValue)
+QIcon Property::iconForValue(const qint64 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const quint64 &aValue)
+QIcon Property::iconForValue(const quint64 &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const float &aValue)
+QIcon Property::iconForValue(const float &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const double &aValue)
+QIcon Property::iconForValue(const double &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QChar &aValue)
+QIcon Property::iconForValue(const QChar &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QVariantMap &aValue)
+QIcon Property::iconForValue(const QVariantMap &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QVariantList &aValue)
+QIcon Property::iconForValue(const QVariantList &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QStringList &aValue)
+QIcon Property::iconForValue(const QStringList &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QByteArray &aValue)
+QIcon Property::iconForValue(const QByteArray &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QBitArray &aValue)
+QIcon Property::iconForValue(const QBitArray &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QDate &aValue)
+QIcon Property::iconForValue(const QDate &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Date.png");
+}
+
+QIcon Property::iconForValue(const QTime &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Time.png");
+}
+
+QIcon Property::iconForValue(const QDateTime &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/DateTime.png");
+}
+
+QIcon Property::iconForValue(const QUrl &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QTime &aValue)
+QIcon Property::iconForValue(const QLocale &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QDateTime &aValue)
+QIcon Property::iconForValue(const QRect &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Rect.png");
+}
+
+QIcon Property::iconForValue(const QRectF &/*aValue*/)
+{
+    return QIcon(":/objectcontroller/images/Rect.png");
+}
+
+QIcon Property::iconForValue(const QSize &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QUrl &aValue)
+QIcon Property::iconForValue(const QSizeF &/*aValue*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValue(const QLocale &aValue)
+QIcon Property::iconForValue(const QLine &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Line.png");
 }
 
-QIcon Property::iconForValue(const QRect &aValue)
+QIcon Property::iconForValue(const QLineF &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Line.png");
 }
 
-QIcon Property::iconForValue(const QRectF &aValue)
+QIcon Property::iconForValue(const QPoint &/*aValue*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Point.png");
 }
 
-QIcon Property::iconForValue(const QSize &aValue)
+QIcon Property::iconForValue(const QPointF &/*aValue*/)
 {
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QSizeF &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QLine &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QLineF &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QPoint &aValue)
-{
-    return QIcon();
-}
-
-QIcon Property::iconForValue(const QPointF &aValue)
-{
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Point.png");
 }
 
 QIcon Property::iconForValue(const QRegExp &aValue)
@@ -1120,7 +1120,21 @@ QIcon Property::iconForValue(const QBitmap &aValue)
 
 QIcon Property::iconForValue(const QCursor &aValue)
 {
-    return QIcon();
+    const QBitmap *aBitmap=aValue.bitmap();
+
+    if (aBitmap)
+    {
+        return iconForValue(*aBitmap);
+    }
+
+    QPixmap aPixmap=aValue.pixmap();
+
+    if (!aPixmap.isNull())
+    {
+        return iconForValue(aPixmap);
+    }
+
+    return QIcon(":/objectcontroller/images/cursor-"+valueToString(aValue)+".png");
 }
 
 QIcon Property::iconForValue(const QSizePolicy &aValue)
