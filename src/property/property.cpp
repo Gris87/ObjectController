@@ -1296,6 +1296,10 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
     aNewItem->setText(0, aName); \
     aNewItem->setText(1, aValue);
 
+#define GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aNewItem, aID, aName, aValue) \
+    GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, valueToString(aValue, aNewItem)) \
+    aNewItem->setIcon(1, iconForValue(aValue, aNewItem));
+
 int Property::subPropertiesForValue(const bool &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
@@ -1598,8 +1602,29 @@ int Property::subPropertiesForValue(const QEasingCurve &/*aValue*/, PropertyTree
 
 int Property::subPropertiesForValue(const QFont &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("StyleStrategy"));
+
+    PropertyTreeWidgetItem *aFamilyItem;
+    PropertyTreeWidgetItem *aSizeItem;
+    PropertyTreeWidgetItem *aBoldItem;
+    PropertyTreeWidgetItem *aItalicItem;
+    PropertyTreeWidgetItem *aUnderlineItem;
+    PropertyTreeWidgetItem *aStrikeOutItem;
+    PropertyTreeWidgetItem *aKerningItem;
+    PropertyTreeWidgetItem *aAntiAliasingItem;
+
+    GET_OR_CREATE_ITEM(          aParentItem, aFamilyItem,       0, qApp->translate("Property", "Family", "Font"),       aValue.family());
+    GET_OR_CREATE_ITEM(          aParentItem, aSizeItem,         1, qApp->translate("Property", "Size", "Font"),         valueToString(aValue.pointSize(), aSizeItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBoldItem,         2, qApp->translate("Property", "Bold", "Font"),         aValue.bold());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aItalicItem,       3, qApp->translate("Property", "Italic", "Font"),       aValue.italic());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aUnderlineItem,    4, qApp->translate("Property", "Underline", "Font"),    aValue.underline());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStrikeOutItem,    5, qApp->translate("Property", "Strike out", "Font"),   aValue.strikeOut());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aKerningItem,      6, qApp->translate("Property", "Kerning", "Font"),      aValue.kerning());
+    GET_OR_CREATE_ITEM(          aParentItem, aAntiAliasingItem, 7, qApp->translate("Property", "AntiAliasing", "Font"), aEnum.valueToKey(aValue.styleStrategy()));
+
+    // TODO: Editors
+
+    return 8;
 }
 
 int Property::subPropertiesForValue(const QPixmap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
