@@ -900,7 +900,7 @@ QString Property::valueToString(QObject *aValue, PropertyTreeWidgetItem * /*aPar
 
 // -------------------------------------------------------------------------------------
 
-QIcon Property::iconForValue(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QIcon Property::iconForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QPixmap aBoolPixmap=QPixmap(13, 13);
     aBoolPixmap.fill(QColor(255, 255, 255, 0));
@@ -919,7 +919,7 @@ QIcon Property::iconForValue(const bool &aValue, PropertyTreeWidgetItem * /*aPar
         checkboxstyle.state = QStyle::State_Off|QStyle::State_Enabled;
     }
 
-    QApplication::style()->drawControl(QStyle::CE_CheckBox, &checkboxstyle, &aPainter);
+    aParentItem->treeWidget()->style()->drawControl(QStyle::CE_CheckBox, &checkboxstyle, &aPainter);
 
     aPainter.end();
 
@@ -1680,7 +1680,7 @@ int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem
 
 #define INSERT_COLOR(aParentItem, aCount, aGroup, aRole, aValue) \
     PropertyTreeWidgetItem *aGroup##_##aRole##_Item; \
-    QColor                  aGroup##_##aRole##_Color=aValue.color(QPalette::##aGroup, QPalette::##aRole); \
+    QColor                  aGroup##_##aRole##_Color=aValue.color(QPalette::aGroup, QPalette::aRole); \
 \
     GET_OR_CREATE_ITEM(aParentItem, aGroup##_##aRole##_Item, aCount, #aRole" ("#aGroup")", valueToString(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item)); \
     setPropertiesForItem(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item);
