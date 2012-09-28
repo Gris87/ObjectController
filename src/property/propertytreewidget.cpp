@@ -32,7 +32,7 @@ void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
         case Qt::Key_Enter:
         case Qt::Key_Space:
         {
-            QTreeWidgetItem *aItem=currentItem();
+            PropertyTreeWidgetItem *aItem=(PropertyTreeWidgetItem *)currentItem();
 
             if (
                 aItem
@@ -65,7 +65,7 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
 {
     QStyleOptionViewItemV3 opt=option;
 
-    PropertyTreeWidgetItem* aItem=(PropertyTreeWidgetItem*)itemFromIndex(index);
+    PropertyTreeWidgetItem* aItem=(PropertyTreeWidgetItem *)itemFromIndex(index);
 
     if (aItem->parent())
     {
@@ -81,7 +81,7 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
                 break;
             }
 
-            aCurItem=(PropertyTreeWidgetItem*)aCurItem->parent();
+            aCurItem=(PropertyTreeWidgetItem *)aCurItem->parent();
 
 #ifndef QT_NO_DEBUG
             if (aCurItem==0)
@@ -169,7 +169,7 @@ void PropertyTreeWidget::update(const QObjectList &aObjects)
 {
     for (int i=0; i<topLevelItemCount(); ++i)
     {
-        QTreeWidgetItem *aItem=topLevelItem(i);
+        PropertyTreeWidgetItem *aItem=(PropertyTreeWidgetItem *)topLevelItem(i);
 
         for (int j=0; j<aItem->childCount(); ++j)
         {

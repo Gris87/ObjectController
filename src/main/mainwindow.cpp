@@ -202,13 +202,6 @@ void MainWindow::on_createButton_clicked()
     ui->timeLabel->setText("Time to set objects: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
 }
 
-void MainWindow::on_resetButton_clicked()
-{
-    qint64 aStartTime=QDateTime::currentMSecsSinceEpoch();
-    ui->objectController->reset();
-    ui->timeLabel->setText("Time to reset: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
-}
-
 void MainWindow::on_clearButton_clicked()
 {
     ui->controlledListWidget->clear();
@@ -221,6 +214,20 @@ void MainWindow::on_clearButton_clicked()
     }
 
     ui->objectController->clear();
+}
+
+void MainWindow::on_resetButton_clicked()
+{
+    qint64 aStartTime=QDateTime::currentMSecsSinceEpoch();
+    ui->objectController->reset();
+    ui->timeLabel->setText("Time to reset: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
+}
+
+void MainWindow::on_updateButton_clicked()
+{
+    qint64 aStartTime=QDateTime::currentMSecsSinceEpoch();
+    ui->objectController->update();
+    ui->timeLabel->setText("Time to update: "+QString::number(QDateTime::currentMSecsSinceEpoch()-aStartTime)+" ms");
 }
 
 void MainWindow::on_objectsComboBox_enterPressed()

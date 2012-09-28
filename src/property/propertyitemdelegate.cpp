@@ -32,7 +32,7 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
                 break;
             }
 
-            aCurItem=(PropertyTreeWidgetItem*)aCurItem->parent();
+            aCurItem=(PropertyTreeWidgetItem *)aCurItem->parent();
 
 #ifndef QT_NO_DEBUG
             if (aCurItem==0)
