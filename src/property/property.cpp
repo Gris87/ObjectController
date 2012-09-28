@@ -1293,6 +1293,8 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
         aNewItem=new PropertyTreeWidgetItem(aParentItem); \
     } \
 \
+    ++aID; \
+\
     aNewItem->setText(0, aName); \
     aNewItem->setText(1, aValue);
 
@@ -1362,50 +1364,52 @@ int Property::subPropertiesForValue(const QChar &/*aValue*/, PropertyTreeWidgetI
 
 int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    int cur=0;
+    int aCount=0;
 
     for (QVariantMap::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
 
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, cur, i.key(), "");
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
         setPropertiesForItem(i.value(), aEntryItem);
 
         // TODO: Editors
-
-        ++cur;
     }
 
-    return aValue.count();
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     for (int i=0; i<aValue.length(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
 
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, i, QString::number(i+1), "");
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
         setPropertiesForItem(aValue.at(i), aEntryItem);
 
         // TODO: Editors
     }
 
-    return aValue.length();
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     for (int i=0; i<aValue.length(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
 
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, i, QString::number(i+1), aValue.at(i));
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i));
 
         // TODO: Editors
     }
 
-    return aValue.length();
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1440,135 +1444,153 @@ int Property::subPropertiesForValue(const QUrl &/*aValue*/, PropertyTreeWidgetIt
 
 int Property::subPropertiesForValue(const QLocale &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aLanguageItem;
     PropertyTreeWidgetItem *aCountryItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aLanguageItem, 0, qApp->translate("Property", "Language"), aValue.languageToString(aValue.language()));
-    GET_OR_CREATE_ITEM(aParentItem, aCountryItem,  1, qApp->translate("Property", "Country"),  aValue.countryToString(aValue.country()));
+    GET_OR_CREATE_ITEM(aParentItem, aLanguageItem, aCount, qApp->translate("Property", "Language"), aValue.languageToString(aValue.language()));
+    GET_OR_CREATE_ITEM(aParentItem, aCountryItem,  aCount, qApp->translate("Property", "Country"),  aValue.countryToString(aValue.country()));
 
     // TODO: Editors
 
-    return 2;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QRect &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem,      0, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem,      1, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  2, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, 3, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
+    GET_OR_CREATE_ITEM(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
+    GET_OR_CREATE_ITEM(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
+    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
+    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
 
     // TODO: Editors
 
-    return 4;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QRectF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem,      0, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem,      1, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  2, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, 3, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
+    GET_OR_CREATE_ITEM(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
+    GET_OR_CREATE_ITEM(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
+    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
+    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
 
     // TODO: Editors
 
-    return 4;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QSize &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  0, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, 1, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
+    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
+    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
 
     // TODO: Editors
 
-    return 2;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QSizeF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  0, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, 1, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
+    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
+    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
 
     // TODO: Editors
 
-    return 2;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QLine &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aX1Item;
     PropertyTreeWidgetItem *aY1Item;
     PropertyTreeWidgetItem *aX2Item;
     PropertyTreeWidgetItem *aY2Item;
 
-    GET_OR_CREATE_ITEM(aParentItem, aX1Item, 0, qApp->translate("Property", "X1"), valueToString(aValue.x1(), aX1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY1Item, 1, qApp->translate("Property", "Y1"), valueToString(aValue.y1(), aY1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aX2Item, 2, qApp->translate("Property", "X2"), valueToString(aValue.x2(), aX2Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY2Item, 3, qApp->translate("Property", "Y2"), valueToString(aValue.y2(), aY2Item));
+    GET_OR_CREATE_ITEM(aParentItem, aX1Item, aCount, qApp->translate("Property", "X1"), valueToString(aValue.x1(), aX1Item));
+    GET_OR_CREATE_ITEM(aParentItem, aY1Item, aCount, qApp->translate("Property", "Y1"), valueToString(aValue.y1(), aY1Item));
+    GET_OR_CREATE_ITEM(aParentItem, aX2Item, aCount, qApp->translate("Property", "X2"), valueToString(aValue.x2(), aX2Item));
+    GET_OR_CREATE_ITEM(aParentItem, aY2Item, aCount, qApp->translate("Property", "Y2"), valueToString(aValue.y2(), aY2Item));
 
     // TODO: Editors
 
-    return 4;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QLineF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aX1Item;
     PropertyTreeWidgetItem *aY1Item;
     PropertyTreeWidgetItem *aX2Item;
     PropertyTreeWidgetItem *aY2Item;
 
-    GET_OR_CREATE_ITEM(aParentItem, aX1Item, 0, qApp->translate("Property", "X1"), valueToString(aValue.x1(), aX1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY1Item, 1, qApp->translate("Property", "Y1"), valueToString(aValue.y1(), aY1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aX2Item, 2, qApp->translate("Property", "X2"), valueToString(aValue.x2(), aX2Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY2Item, 3, qApp->translate("Property", "Y2"), valueToString(aValue.y2(), aY2Item));
+    GET_OR_CREATE_ITEM(aParentItem, aX1Item, aCount, qApp->translate("Property", "X1"), valueToString(aValue.x1(), aX1Item));
+    GET_OR_CREATE_ITEM(aParentItem, aY1Item, aCount, qApp->translate("Property", "Y1"), valueToString(aValue.y1(), aY1Item));
+    GET_OR_CREATE_ITEM(aParentItem, aX2Item, aCount, qApp->translate("Property", "X2"), valueToString(aValue.x2(), aX2Item));
+    GET_OR_CREATE_ITEM(aParentItem, aY2Item, aCount, qApp->translate("Property", "Y2"), valueToString(aValue.y2(), aY2Item));
 
     // TODO: Editors
 
-    return 4;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QPoint &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, 0, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, 1, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
+    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
+    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
 
     // TODO: Editors
 
-    return 2;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QPointF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, 0, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, 1, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
+    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
+    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
 
     // TODO: Editors
 
-    return 2;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QRegExp &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1578,21 +1600,19 @@ int Property::subPropertiesForValue(const QRegExp &/*aValue*/, PropertyTreeWidge
 
 int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    int cur=0;
+    int aCount=0;
 
     for (QVariantHash::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
 
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, cur, i.key(), "");
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
         setPropertiesForItem(i.value(), aEntryItem);
 
         // TODO: Editors
-
-        ++cur;
     }
 
-    return aValue.count();
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1602,6 +1622,8 @@ int Property::subPropertiesForValue(const QEasingCurve &/*aValue*/, PropertyTree
 
 int Property::subPropertiesForValue(const QFont &aValue, PropertyTreeWidgetItem *aParentItem)
 {
+    int aCount=0;
+
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("StyleStrategy"));
 
     PropertyTreeWidgetItem *aFamilyItem;
@@ -1613,18 +1635,18 @@ int Property::subPropertiesForValue(const QFont &aValue, PropertyTreeWidgetItem 
     PropertyTreeWidgetItem *aKerningItem;
     PropertyTreeWidgetItem *aAntiAliasingItem;
 
-    GET_OR_CREATE_ITEM(          aParentItem, aFamilyItem,       0, qApp->translate("Property", "Family", "Font"),       aValue.family());
-    GET_OR_CREATE_ITEM(          aParentItem, aSizeItem,         1, qApp->translate("Property", "Size", "Font"),         valueToString(aValue.pointSize(), aSizeItem));
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBoldItem,         2, qApp->translate("Property", "Bold", "Font"),         aValue.bold());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aItalicItem,       3, qApp->translate("Property", "Italic", "Font"),       aValue.italic());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aUnderlineItem,    4, qApp->translate("Property", "Underline", "Font"),    aValue.underline());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStrikeOutItem,    5, qApp->translate("Property", "Strike out", "Font"),   aValue.strikeOut());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aKerningItem,      6, qApp->translate("Property", "Kerning", "Font"),      aValue.kerning());
-    GET_OR_CREATE_ITEM(          aParentItem, aAntiAliasingItem, 7, qApp->translate("Property", "AntiAliasing", "Font"), aEnum.valueToKey(aValue.styleStrategy()));
+    GET_OR_CREATE_ITEM(          aParentItem, aFamilyItem,       aCount, qApp->translate("Property", "Family", "Font"),       aValue.family());
+    GET_OR_CREATE_ITEM(          aParentItem, aSizeItem,         aCount, qApp->translate("Property", "Size", "Font"),         valueToString(aValue.pointSize(), aSizeItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBoldItem,         aCount, qApp->translate("Property", "Bold", "Font"),         aValue.bold());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aItalicItem,       aCount, qApp->translate("Property", "Italic", "Font"),       aValue.italic());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aUnderlineItem,    aCount, qApp->translate("Property", "Underline", "Font"),    aValue.underline());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStrikeOutItem,    aCount, qApp->translate("Property", "Strike out", "Font"),   aValue.strikeOut());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aKerningItem,      aCount, qApp->translate("Property", "Kerning", "Font"),      aValue.kerning());
+    GET_OR_CREATE_ITEM(          aParentItem, aAntiAliasingItem, aCount, qApp->translate("Property", "AntiAliasing", "Font"), aEnum.valueToKey(aValue.styleStrategy()));
 
     // TODO: Editors
 
-    return 8;
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QPixmap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1639,14 +1661,61 @@ int Property::subPropertiesForValue(const QBrush &/*aValue*/, PropertyTreeWidget
 
 int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    int aCount=0;
+
+    PropertyTreeWidgetItem *aRedItem;
+    PropertyTreeWidgetItem *aGreenItem;
+    PropertyTreeWidgetItem *aBlueItem;
+    PropertyTreeWidgetItem *aAlphaItem;
+
+    GET_OR_CREATE_ITEM(aParentItem, aRedItem,   aCount, qApp->translate("Property", "Red"),   valueToString(aValue.red(),   aRedItem));
+    GET_OR_CREATE_ITEM(aParentItem, aGreenItem, aCount, qApp->translate("Property", "Green"), valueToString(aValue.green(), aGreenItem));
+    GET_OR_CREATE_ITEM(aParentItem, aBlueItem,  aCount, qApp->translate("Property", "Blue"),  valueToString(aValue.blue(),  aBlueItem));
+    GET_OR_CREATE_ITEM(aParentItem, aAlphaItem, aCount, qApp->translate("Property", "Alpha"), valueToString(aValue.alpha(), aAlphaItem));
+
+    // TODO: Editors
+
+    return aCount;
 }
+
+#define INSERT_COLOR(aParentItem, aCount, aGroup, aRole, aValue) \
+    PropertyTreeWidgetItem *aGroup##_##aRole##_Item; \
+    QColor                  aGroup##_##aRole##_Color=aValue.color(QPalette::##aGroup, QPalette::##aRole); \
+\
+    GET_OR_CREATE_ITEM(aParentItem, aGroup##_##aRole##_Item, aCount, #aRole" ("#aGroup")", valueToString(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item)); \
+    setPropertiesForItem(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item);
+
+#define INSERT_COLOR_ROLE(aParentItem, aCount, aRole, aValue) \
+    INSERT_COLOR(aParentItem, aCount, Active,   aRole, aValue); \
+    INSERT_COLOR(aParentItem, aCount, Inactive, aRole, aValue); \
+    INSERT_COLOR(aParentItem, aCount, Disabled, aRole, aValue);
 
 int Property::subPropertiesForValue(const QPalette &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    int aCount=0;
+
+    INSERT_COLOR_ROLE(aParentItem, aCount, WindowText, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Button, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Light, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Midlight, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Dark, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Mid, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Text, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, BrightText, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, ButtonText, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Base, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Window, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Shadow, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Highlight, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, HighlightedText, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, Link, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, LinkVisited, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, AlternateBase, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, NoRole, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, ToolTipBase, aValue);
+    INSERT_COLOR_ROLE(aParentItem, aCount, ToolTipText, aValue);
+
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QIcon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
