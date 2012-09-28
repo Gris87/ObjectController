@@ -1298,9 +1298,9 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
     aNewItem->setText(0, aName); \
     aNewItem->setText(1, aValue);
 
-#define GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aNewItem, aID, aName, aValue) \
-    GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, valueToString(aValue, aNewItem)) \
-    aNewItem->setIcon(1, iconForValue(aValue, aNewItem));
+#define GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aNewItem, aID, aName, aValue, aIcon) \
+    GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
+    aNewItem->setIcon(1, aIcon);
 
 int Property::subPropertiesForValue(const bool &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
@@ -1637,11 +1637,11 @@ int Property::subPropertiesForValue(const QFont &aValue, PropertyTreeWidgetItem 
 
     GET_OR_CREATE_ITEM(          aParentItem, aFamilyItem,       aCount, qApp->translate("Property", "Family", "Font"),       aValue.family());
     GET_OR_CREATE_ITEM(          aParentItem, aSizeItem,         aCount, qApp->translate("Property", "Size", "Font"),         valueToString(aValue.pointSize(), aSizeItem));
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBoldItem,         aCount, qApp->translate("Property", "Bold", "Font"),         aValue.bold());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aItalicItem,       aCount, qApp->translate("Property", "Italic", "Font"),       aValue.italic());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aUnderlineItem,    aCount, qApp->translate("Property", "Underline", "Font"),    aValue.underline());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStrikeOutItem,    aCount, qApp->translate("Property", "Strike out", "Font"),   aValue.strikeOut());
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aKerningItem,      aCount, qApp->translate("Property", "Kerning", "Font"),      aValue.kerning());
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBoldItem,         aCount, qApp->translate("Property", "Bold", "Font"),         valueToString(aValue.bold(),      aBoldItem),      iconForValue(aValue.bold(),      aBoldItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aItalicItem,       aCount, qApp->translate("Property", "Italic", "Font"),       valueToString(aValue.italic(),    aItalicItem),    iconForValue(aValue.italic(),    aItalicItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aUnderlineItem,    aCount, qApp->translate("Property", "Underline", "Font"),    valueToString(aValue.underline(), aUnderlineItem), iconForValue(aValue.underline(), aUnderlineItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStrikeOutItem,    aCount, qApp->translate("Property", "Strike out", "Font"),   valueToString(aValue.strikeOut(), aStrikeOutItem), iconForValue(aValue.strikeOut(), aStrikeOutItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aKerningItem,      aCount, qApp->translate("Property", "Kerning", "Font"),      valueToString(aValue.kerning(),   aKerningItem),   iconForValue(aValue.kerning(),   aKerningItem));
     GET_OR_CREATE_ITEM(          aParentItem, aAntiAliasingItem, aCount, qApp->translate("Property", "AntiAliasing", "Font"), aEnum.valueToKey(aValue.styleStrategy()));
 
     // TODO: Editors
@@ -1776,8 +1776,117 @@ int Property::subPropertiesForValue(const QKeySequence &/*aValue*/, PropertyTree
 
 int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    int aCount=0;
+
+    QString aStyle;
+
+    switch (aValue.style())
+    {
+        case Qt::NoPen:          aStyle="NoPen";           break;
+        case Qt::SolidLine:      aStyle="SolidLine";       break;
+        case Qt::DashLine:       aStyle="DashLine";        break;
+        case Qt::DotLine:        aStyle="DotLine";         break;
+        case Qt::DashDotLine:    aStyle="DashDotLine";     break;
+        case Qt::DashDotDotLine: aStyle="DashDotDotLine";  break;
+        case Qt::CustomDashLine: aStyle="CustomDashLine";  break;
+        default:                 aStyle="[Unknown style]"; break;
+    }
+
+    QString aCapStyle;
+
+    switch (aValue.capStyle())
+    {
+        case Qt::FlatCap:      aCapStyle="FlatCap";         break;
+        case Qt::SquareCap:    aCapStyle="SquareCap";       break;
+        case Qt::RoundCap:     aCapStyle="RoundCap";        break;
+        case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
+        default:               aCapStyle="[Unknown style]"; break;
+    }
+
+    QString aJoinStyle;
+
+    switch (aValue.joinStyle())
+    {
+        case Qt::MiterJoin:     aJoinStyle="MiterJoin";       break;
+        case Qt::BevelJoin:     aJoinStyle="BevelJoin";       break;
+        case Qt::RoundJoin:     aJoinStyle="RoundJoin";       break;
+        case Qt::SvgMiterJoin:  aJoinStyle="SvgMiterJoin";    break;
+        case Qt::MPenJoinStyle: aJoinStyle="MPenJoinStyle";   break;
+        default:                aJoinStyle="[Unknown style]"; break;
+    }
+
+    // -----------------------------------------------------------------
+
+    QPainter aPainter;
+
+    QPixmap aStylePixmap(32, 32);
+    QPixmap aCapStylePixmap(32, 32);
+    QPixmap aJoinStylePixmap(32, 32);
+
+    aStylePixmap.fill(QColor(255, 255, 255, 0));
+    aCapStylePixmap.fill(QColor(255, 255, 255, 0));
+    aJoinStylePixmap.fill(QColor(255, 255, 255, 0));
+
+    QPen aStylePen;
+    QPen aCapStylePen;
+    QPen aJoinStylePen;
+
+    aStylePen.setStyle(aValue.style());
+    aCapStylePen.setCapStyle(aValue.capStyle());
+    aJoinStylePen.setJoinStyle(aValue.joinStyle());
+
+    aStylePen.setWidth(3);
+    aCapStylePen.setWidth(24);
+    aJoinStylePen.setWidth(16);
+
+
+
+    aPainter.begin(&aStylePixmap);
+    aPainter.setPen(aStylePen);
+    aPainter.drawLine(0, aStylePixmap.height()>>1, aStylePixmap.width(), aStylePixmap.height()>>1);
+    aPainter.end();
+
+
+
+    aPainter.begin(&aCapStylePixmap);
+    aPainter.setPen(aCapStylePen);
+    aPainter.drawLine(aCapStylePen.width()>>1, aCapStylePixmap.height()>>1, aCapStylePixmap.width(), aCapStylePixmap.height()>>1);
+    aPainter.end();
+
+
+
+    aPainter.begin(&aJoinStylePixmap);
+        aPainter.setPen(aJoinStylePen);
+
+        QPainterPath aJoinStylePath;
+        aJoinStylePath.moveTo(aJoinStylePixmap.width(), 0);
+        aJoinStylePath.lineTo(aJoinStylePixmap.width()>>2, aJoinStylePixmap.height()>>1);
+        aJoinStylePath.lineTo(aJoinStylePixmap.width(), aJoinStylePixmap.height());
+
+        aPainter.drawPath(aJoinStylePath);
+    aPainter.end();
+
+    // -----------------------------------------------------------------
+
+    PropertyTreeWidgetItem *aBrushItem;
+    PropertyTreeWidgetItem *aWidthItem;
+    PropertyTreeWidgetItem *aStyleItem;
+    PropertyTreeWidgetItem *aCapStyleItem;
+    PropertyTreeWidgetItem *aJoinStyleItem;
+    PropertyTreeWidgetItem *aColorItem;
+
+    GET_OR_CREATE_ITEM(          aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      valueToString(aValue.brush(),     aBrushItem));
+    GET_OR_CREATE_ITEM(          aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      valueToString(aValue.width(),     aWidthItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyle,     QIcon(aStylePixmap));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyle,  QIcon(aCapStylePixmap));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyle, QIcon(aJoinStylePixmap));
+    GET_OR_CREATE_ITEM(          aParentItem, aColorItem,     aCount, qApp->translate("Property", "Color"),      valueToString(aValue.color(),     aColorItem));
+
+    setPropertiesForItem(aValue.color(), aColorItem);
+
+    // TODO: Editors
+
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
