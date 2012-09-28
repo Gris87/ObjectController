@@ -30,7 +30,7 @@ void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
     {
         case Qt::Key_Return:
         case Qt::Key_Enter:
-        case Qt::Key_Space:
+        case Qt::Key_Any:
         {
             PropertyTreeWidgetItem *aItem=(PropertyTreeWidgetItem *)currentItem();
 
