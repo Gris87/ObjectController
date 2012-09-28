@@ -33,6 +33,7 @@ protected:
     QColor        mBackgroundColor;
     bool          mModified;
 
+    void setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     int valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);

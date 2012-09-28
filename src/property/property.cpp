@@ -59,16 +59,19 @@ void Property::write(const QObjectList &aObjects, const QVariant &aValue)
 
 void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects)
 {
-    QVariant aValue=read(aObjects);
+    setPropertiesForItem(read(aObjects), aItem);
+}
 
-    aItem->setText(1, valueText(aValue, aItem));
-    aItem->setIcon(1, valueIcon(aValue, aItem));
+void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    aParentItem->setText(1, valueText(aValue, aParentItem));
+    aParentItem->setIcon(1, valueIcon(aValue, aParentItem));
 
-    int aChildCount=valueSubProperies(aValue, aItem);
+    int aChildCount=valueSubProperies(aValue, aParentItem);
 
-    while (aItem->childCount()>aChildCount)
+    while (aParentItem->childCount()>aChildCount)
     {
-        delete aItem->takeChild(aItem->childCount()-1);
+        delete aParentItem->takeChild(aParentItem->childCount()-1);
     }
 }
 
@@ -1355,20 +1358,50 @@ int Property::subPropertiesForValue(const QChar &/*aValue*/, PropertyTreeWidgetI
 
 int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    int cur=0;
+
+    for (QVariantMap::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
+    {
+        PropertyTreeWidgetItem *aEntryItem;
+
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, cur, i.key(), "");
+        setPropertiesForItem(i.value(), aEntryItem);
+
+        // TODO: Editors
+
+        ++cur;
+    }
+
+    return aValue.count();
 }
 
 int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    for (int i=0; i<aValue.length(); ++i)
+    {
+        PropertyTreeWidgetItem *aEntryItem;
+
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, i, QString::number(i+1), "");
+        setPropertiesForItem(aValue.at(i), aEntryItem);
+
+        // TODO: Editors
+    }
+
+    return aValue.length();
 }
 
 int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    for (int i=0; i<aValue.length(); ++i)
+    {
+        PropertyTreeWidgetItem *aEntryItem;
+
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, i, QString::number(i+1), aValue.at(i));
+
+        // TODO: Editors
+    }
+
+    return aValue.length();
 }
 
 int Property::subPropertiesForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1403,8 +1436,15 @@ int Property::subPropertiesForValue(const QUrl &/*aValue*/, PropertyTreeWidgetIt
 
 int Property::subPropertiesForValue(const QLocale &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    PropertyTreeWidgetItem *aLanguageItem;
+    PropertyTreeWidgetItem *aCountryItem;
+
+    GET_OR_CREATE_ITEM(aParentItem, aLanguageItem, 0, qApp->translate("Property", "Language"), aValue.languageToString(aValue.language()));
+    GET_OR_CREATE_ITEM(aParentItem, aCountryItem,  1, qApp->translate("Property", "Country"),  aValue.countryToString(aValue.country()));
+
+    // TODO: Editors
+
+    return 2;
 }
 
 int Property::subPropertiesForValue(const QRect &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -1534,8 +1574,21 @@ int Property::subPropertiesForValue(const QRegExp &/*aValue*/, PropertyTreeWidge
 
 int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    int cur=0;
+
+    for (QVariantHash::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
+    {
+        PropertyTreeWidgetItem *aEntryItem;
+
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, cur, i.key(), "");
+        setPropertiesForItem(i.value(), aEntryItem);
+
+        // TODO: Editors
+
+        ++cur;
+    }
+
+    return aValue.count();
 }
 
 int Property::subPropertiesForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
