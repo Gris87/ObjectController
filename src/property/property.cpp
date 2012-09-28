@@ -1875,7 +1875,7 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     PropertyTreeWidgetItem *aJoinStyleItem;
     PropertyTreeWidgetItem *aColorItem;
 
-    GET_OR_CREATE_ITEM(          aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      valueToString(aValue.brush(),     aBrushItem));
+    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      valueToString(aValue.brush(),     aBrushItem), iconForValue(aValue.brush(), aBrushItem));
     GET_OR_CREATE_ITEM(          aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      valueToString(aValue.width(),     aWidthItem));
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyle,     QIcon(aStylePixmap));
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyle,  QIcon(aCapStylePixmap));
