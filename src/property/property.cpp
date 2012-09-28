@@ -63,6 +63,13 @@ void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects
 
     aItem->setText(1, valueText(aValue, aItem));
     aItem->setIcon(1, valueIcon(aValue, aItem));
+
+    int aChildCount=valueSubProperies(aValue, aItem);
+
+    while (aItem->childCount()>aChildCount)
+    {
+        delete aItem->takeChild(aItem->childCount()-1);
+    }
 }
 
 #define FUNCTION_FOR_VARIANT(aValue, aParentItem, aFunction, aDefaultResult) \
@@ -1273,292 +1280,317 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
 
 // -------------------------------------------------------------------------------------
 
-int Property::subPropertiesForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const bool &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const qint8 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const quint8 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const qint16 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const qint16 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const quint16 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const quint16 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const qint32 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const qint32 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const quint32 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const quint32 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const qint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const qint64 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const quint64 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const float &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const float &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const double &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const double &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QChar &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QChar &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QBitArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QDate &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QDate &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QTime &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QTime &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QDateTime &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QDateTime &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QUrl &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QUrl &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QLocale &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QRect &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QRectF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QSize &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QSizeF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QLine &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QLineF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QPoint &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QPointF &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QRegExp &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QRegExp &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QEasingCurve &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QFont &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QPixmap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QBrush &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QBrush &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QPalette &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QIcon &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QIcon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QImage &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QPolygon &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QPolygon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QRegion &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QRegion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QBitmap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QCursor &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QSizePolicy &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QKeySequence &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QKeySequence &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QTextLength &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(const QTextFormat &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(const QTextFormat &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QMatrix &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QTransform &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QMatrix4x4 &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QVector2D &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QVector3D &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QVector4D &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QQuaternion &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return aParentItem->childCount();
+    // TODO: HERE
+    return 0;
 }
 
-int Property::subPropertiesForValue(void *aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(void * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
 
-int Property::subPropertiesForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aParentItem->childCount();
+    return 0;
 }
