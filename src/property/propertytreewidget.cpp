@@ -67,18 +67,47 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
 
     PropertyTreeWidgetItem* aItem=(PropertyTreeWidgetItem*)itemFromIndex(index);
 
-    if (aItem->property())
+    if (aItem->parent())
     {
-        QColor aColor=aItem->property()->backgroundColor();
+        Property *aProperty;
+        PropertyTreeWidgetItem* aCurItem=aItem;
 
-        if (aColor.isValid())
+        do
         {
-            if (opt.features & QStyleOptionViewItemV2::Alternate)
+            aProperty=aCurItem->property();
+
+            if (aProperty)
             {
-                aColor=aColor.lighter(112);
+                break;
             }
 
-            painter->fillRect(option.rect, aColor);
+            aCurItem=(PropertyTreeWidgetItem*)aCurItem->parent();
+
+#ifndef QT_NO_DEBUG
+            if (aCurItem==0)
+            {
+                Q_ASSERT(false);
+                break;
+            }
+#endif
+        } while (true);
+
+
+#ifndef QT_NO_DEBUG
+        if (aProperty)
+#endif
+        {
+            QColor aColor=aProperty->backgroundColor();
+
+            if (aColor.isValid())
+            {
+                if (opt.features & QStyleOptionViewItemV2::Alternate)
+                {
+                    aColor=aColor.lighter(112);
+                }
+
+                painter->fillRect(option.rect, aColor);
+            }
         }
     }
     else

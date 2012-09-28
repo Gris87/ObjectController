@@ -1408,8 +1408,15 @@ int Property::subPropertiesForValue(const QRectF &aValue, PropertyTreeWidgetItem
 
 int Property::subPropertiesForValue(const QSize &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    // TODO: HERE
-    return 0;
+    PropertyTreeWidgetItem *aWidthItem=new PropertyTreeWidgetItem(aParentItem);
+    aWidthItem->setText(0, qApp->translate("Property", "Width"));
+    aWidthItem->setText(1, QString::number(aValue.width()));
+
+    PropertyTreeWidgetItem *aHeightItem=new PropertyTreeWidgetItem(aParentItem);
+    aHeightItem->setText(0, qApp->translate("Property", "Height"));
+    aHeightItem->setText(1, QString::number(aValue.height()));
+
+    return 2;
 }
 
 int Property::subPropertiesForValue(const QSizeF &aValue, PropertyTreeWidgetItem *aParentItem)

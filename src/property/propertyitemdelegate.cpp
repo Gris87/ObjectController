@@ -15,28 +15,56 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
 {
     PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
     PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(index);
-    Property*               aProperty   = aItem->property();
 
     QStyleOptionViewItemV3 opt = option;
 
-    if (aProperty)
+    if (aItem->parent())
     {
-        QColor aColor=aProperty->backgroundColor();
+        Property *aProperty;
+        PropertyTreeWidgetItem* aCurItem=aItem;
 
-        if (aColor.isValid())
+        do
         {
-            if (opt.features & QStyleOptionViewItemV2::Alternate)
+            aProperty=aCurItem->property();
+
+            if (aProperty)
             {
-                aColor=aColor.lighter(112);
+                break;
             }
 
-            painter->fillRect(option.rect, aColor);
-        }
+            aCurItem=(PropertyTreeWidgetItem*)aCurItem->parent();
 
-        if (index.column()==0 && aProperty->isModified())
+#ifndef QT_NO_DEBUG
+            if (aCurItem==0)
+            {
+                Q_ASSERT(false);
+                break;
+            }
+#endif
+        } while (true);
+
+
+#ifndef QT_NO_DEBUG
+        if (aProperty)
+#endif
         {
-            opt.font.setBold(true);
-            opt.fontMetrics = QFontMetrics(opt.font);
+            QColor aColor=aProperty->backgroundColor();
+
+            if (aColor.isValid())
+            {
+                if (opt.features & QStyleOptionViewItemV2::Alternate)
+                {
+                    aColor=aColor.lighter(112);
+                }
+
+                painter->fillRect(option.rect, aColor);
+            }
+
+            if (index.column()==0 && aProperty->isModified())
+            {
+                opt.font.setBold(true);
+                opt.fontMetrics = QFontMetrics(opt.font);
+            }
         }
     }
     else
@@ -58,7 +86,7 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     painter->save();
     painter->setPen(QPen(color));
 
-    if (index.column()<1 && aProperty)
+    if (index.column()<1 && !aItem->isFirstColumnSpanned())
     {
         int right=(option.direction==Qt::LeftToRight) ? option.rect.right() : option.rect.left();
         painter->drawLine(right, option.rect.y(), right, option.rect.bottom());
