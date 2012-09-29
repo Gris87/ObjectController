@@ -1286,6 +1286,7 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
     else \
     { \
         aNewItem=new PropertyTreeWidgetItem(aParentItem); \
+        aNewItem->setFlags(aNewItem->flags() | Qt::ItemIsEditable); \
     } \
 \
     ++aID; \
