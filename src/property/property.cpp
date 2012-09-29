@@ -19,6 +19,7 @@ Property::Property(const QMetaProperty &aMetaProperty)
     mMetaProperty=aMetaProperty;
 
     mName=mMetaProperty.name();
+    mFirstValue=QVariant();
     mIsWritable=mMetaProperty.isWritable();
 }
 
@@ -27,8 +28,13 @@ bool Property::equals(const Property *aProperty)
     return mName==aProperty->mName;
 }
 
-QVariant Property::read(const QObjectList &aObjects)
+QVariant Property::read(const QObjectList &aObjects, QVariant *aFirstValue)
 {
+    if (aFirstValue)
+    {
+        *aFirstValue=QVariant();
+    }
+
     if (aObjects.length()==0)
     {
         return QVariant();
@@ -39,6 +45,11 @@ QVariant Property::read(const QObjectList &aObjects)
     for (int i=1; i<aObjects.length(); ++i)
     {
         QVariant aOneValue=mMetaProperty.read(aObjects.at(i));
+
+        if (aFirstValue && !aFirstValue->isValid())
+        {
+            *aFirstValue=aOneValue;
+        }
 
         if (res!=aOneValue)
         {
@@ -59,7 +70,7 @@ void Property::write(const QObjectList &aObjects, const QVariant &aValue)
 
 void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects)
 {
-    setPropertiesForItem(read(aObjects), aItem);
+    setPropertiesForItem(read(aObjects, &mFirstValue), aItem);
 }
 
 void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -209,7 +220,7 @@ bool Property::isNumber(const QVariant &aValue)
 
 QString Property::valueToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue ? "true" : "false";
+    return aValue ? qApp->translate("Property", "true") : qApp->translate("Property", "false");
 }
 
 QString Property::valueToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

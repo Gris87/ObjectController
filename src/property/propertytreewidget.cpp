@@ -30,7 +30,7 @@ void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
     {
         case Qt::Key_Return:
         case Qt::Key_Enter:
-        case Qt::Key_Any:
+        case Qt::Key_Space:
         {
             PropertyTreeWidgetItem *aItem=(PropertyTreeWidgetItem *)currentItem();
 
@@ -55,6 +55,22 @@ void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
 void PropertyTreeWidget::mousePressEvent(QMouseEvent *event)
 {
     QTreeWidget::mousePressEvent(event);
+
+    PropertyTreeWidgetItem* aItem=(PropertyTreeWidgetItem *)itemAt(event->pos());
+
+    if (aItem)
+    {
+        if (
+            event->button()==Qt::LeftButton
+            &&
+            header()->logicalIndexAt(event->pos().x())==1
+            &&
+            (aItem->flags() & Qt::ItemIsEditable)
+           )
+        {
+            editItem(aItem, 1);
+        }
+    }
 }
 
 // TODO: Maybe useless. Remove it

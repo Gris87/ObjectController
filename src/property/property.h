@@ -14,7 +14,7 @@ public:
 
     bool equals(const Property *aProperty);
 
-    QVariant read(const QObjectList &aObjects);
+    QVariant read(const QObjectList &aObjects, QVariant *aFirstValue=0);
     void write(const QObjectList &aObjects, const QVariant &aValue);
 
     void update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects);
@@ -28,6 +28,7 @@ public:
 protected:
     QMetaProperty mMetaProperty;
     QString       mName;
+    QVariant      mFirstValue;
     QColor        mBackgroundColor;
     bool          mIsWritable;
 
