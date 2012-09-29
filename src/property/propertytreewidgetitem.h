@@ -22,11 +22,17 @@ public:
 
     // -------------------------------------------------------------------------------------
 
+    bool    isModified() const;
+    void    setModified(const bool aModified);
+
     Property* property();
     void setProperty(Property* aProperty);
 
 protected:
     Property* mProperty;
+    bool      mModified;
+
+    void init();
 };
 
 #endif // PROPERTYTREEWIDGETITEM_H

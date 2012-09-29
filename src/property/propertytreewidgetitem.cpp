@@ -2,47 +2,53 @@
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(int type) : QTreeWidgetItem(type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(const QStringList &strings, int type) : QTreeWidgetItem(strings, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(QTreeWidget *parent, int type) : QTreeWidgetItem(parent, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(QTreeWidget *parent, const QStringList &strings, int type) : QTreeWidgetItem(parent, strings, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(QTreeWidget *parent, PropertyTreeWidgetItem *preceding, int type) : QTreeWidgetItem(parent, preceding, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(PropertyTreeWidgetItem *parent, int type) : QTreeWidgetItem(parent, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(PropertyTreeWidgetItem *parent, const QStringList &strings, int type) : QTreeWidgetItem(parent, strings, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(PropertyTreeWidgetItem *parent, PropertyTreeWidgetItem *preceding, int type) : QTreeWidgetItem(parent, preceding, type)
 {
-    mProperty=0;
+    init();
 }
 
 PropertyTreeWidgetItem::PropertyTreeWidgetItem(const PropertyTreeWidgetItem &other) : QTreeWidgetItem(other)
 {
+    init();
+}
+
+inline void PropertyTreeWidgetItem::init()
+{
     mProperty=0;
+    mModified=false;
 }
 
 void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
@@ -54,6 +60,16 @@ void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
 }
 
 // -------------------------------------------------------------------------------------
+
+bool PropertyTreeWidgetItem::isModified() const
+{
+    return mModified;
+}
+
+void PropertyTreeWidgetItem::setModified(const bool aModified)
+{
+    mModified=aModified;
+}
 
 Property* PropertyTreeWidgetItem::property()
 {

@@ -23,15 +23,13 @@ public:
 
     QString name() const;
     QColor  backgroundColor() const;
-
-    bool    isModified() const;
-    void    setModified(const bool aModified);
+    bool    isWriteable() const;
 
 protected:
     QMetaProperty mMetaProperty;
     QString       mName;
     QColor        mBackgroundColor;
-    bool          mModified;
+    bool          mIsWritable;
 
     void setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);

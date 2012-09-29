@@ -19,7 +19,7 @@ Property::Property(const QMetaProperty &aMetaProperty)
     mMetaProperty=aMetaProperty;
 
     mName=mMetaProperty.name();
-    mModified=false;
+    mIsWritable=mMetaProperty.isWritable();
 }
 
 bool Property::equals(const Property *aProperty)
@@ -169,14 +169,9 @@ QColor Property::backgroundColor() const
     return mBackgroundColor;
 }
 
-bool Property::isModified() const
+bool Property::isWriteable() const
 {
-    return mModified;
-}
-
-void Property::setModified(const bool aModified)
-{
-    mModified=aModified;
+    return mIsWritable;
 }
 
 // -------------------------------------------------------------------------------------

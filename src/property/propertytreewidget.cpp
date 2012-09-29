@@ -21,7 +21,7 @@ PropertyTreeWidget::PropertyTreeWidget(QWidget *parent) :
 
     header()->setMovable(false);
 
-    setEditTriggers(QAbstractItemView::EditKeyPressed);
+    setEditTriggers(QAbstractItemView::NoEditTriggers);
 }
 
 void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
@@ -37,9 +37,7 @@ void PropertyTreeWidget::keyPressEvent(QKeyEvent *event)
             if (
                 aItem
                 &&
-                (
-                 (aItem->flags() & (Qt::ItemIsEditable | Qt::ItemIsEnabled)) == (Qt::ItemIsEditable | Qt::ItemIsEnabled)
-                )
+                (aItem->flags() & Qt::ItemIsEditable)
                )
             {
                 event->accept();
@@ -149,6 +147,7 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
         {
             PropertyTreeWidgetItem* aItem=new PropertyTreeWidgetItem(aTopItem);
             aItem->setProperty(aProperties.at(j));
+            aItem->setFlags(aItem->flags() | Qt::ItemIsEditable);
         }
 
 

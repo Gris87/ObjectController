@@ -51,7 +51,11 @@ void HandleObject::reset()
         {
             QMetaProperty aProperty=aMetaObject->property(j);
 
-            if (!mController->filterProperty(aMetaObject, aProperty.name()))
+            if (
+                !aProperty.isReadable()
+                ||
+                !mController->filterProperty(aMetaObject, aProperty.name())
+               )
             {
                 continue;
             }
