@@ -9,9 +9,12 @@ class PropertyItemDelegate : public QItemDelegate
 public:
     explicit PropertyItemDelegate(QObject *parent = 0);
 
-    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
-
-    QSize sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const;
+    QWidget* createEditor(QWidget *aParent, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const;
+    void paint(QPainter *aPainter, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const;
+    void setEditorData(QWidget *aEditor, const QModelIndex &aIndex) const;
+    void setModelData(QWidget *aEditor, QAbstractItemModel *aModel, const QModelIndex &aIndex) const;
+    QSize sizeHint(const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const;
+    void updateEditorGeometry(QWidget *aEditor, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const;
 };
 
 #endif // PROPERTYITEMDELEGATE_H

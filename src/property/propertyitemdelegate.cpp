@@ -6,17 +6,36 @@
 #include "propertytreewidget.h"
 #include "propertytreewidgetitem.h"
 
+#include "editors/defaulteditor.h"
+
 PropertyItemDelegate::PropertyItemDelegate(QObject *parent) :
     QItemDelegate(parent)
 {
 }
 
-void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const
 {
     PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
-    PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(index);
+    PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
 
-    QStyleOptionViewItemV3 opt = option;
+    QWidget *editor=0;
+
+
+
+    DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
+    aDefaultEditor->setIcon(aItem->icon(1));
+    aDefaultEditor->setValue(aItem->text(1));
+    editor=aDefaultEditor;
+
+    return editor;
+}
+
+void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const
+{
+    PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
+    PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
+
+    QStyleOptionViewItemV3 opt = aOption;
 
     if (aItem->parent())
     {
@@ -57,10 +76,10 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
                     aColor=aColor.lighter(112);
                 }
 
-                painter->fillRect(option.rect, aColor);
+                aPainter->fillRect(aOption.rect, aColor);
             }
 
-            if (index.column()==0 && aItem->isModified())
+            if (aIndex.column()==0 && aItem->isModified())
             {
                 opt.font.setBold(true);
                 opt.fontMetrics = QFontMetrics(opt.font);
@@ -69,7 +88,7 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
     }
     else
     {
-        painter->fillRect(option.rect, option.palette.color(QPalette::Dark));
+        aPainter->fillRect(aOption.rect, aOption.palette.color(QPalette::Dark));
         opt.font.setPointSize(opt.font.pointSize()+2);
         opt.font.setBold(true);
         opt.fontMetrics = QFontMetrics(opt.font);
@@ -77,26 +96,39 @@ void PropertyItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &
 
     opt.state&=~QStyle::State_HasFocus;
 
-    QItemDelegate::paint(painter, opt, index);
+    QItemDelegate::paint(aPainter, opt, aIndex);
 
 
 
     opt.palette.setCurrentColorGroup(QPalette::Active);
     QColor color = static_cast<QRgb>(QApplication::style()->styleHint(QStyle::SH_Table_GridLineColor, &opt));
-    painter->save();
-    painter->setPen(QPen(color));
+    aPainter->save();
+    aPainter->setPen(QPen(color));
 
-    if (index.column()<1 && !aItem->isFirstColumnSpanned())
+    if (aIndex.column()<1 && !aItem->isFirstColumnSpanned())
     {
-        int right=(option.direction==Qt::LeftToRight) ? option.rect.right() : option.rect.left();
-        painter->drawLine(right, option.rect.y(), right, option.rect.bottom());
+        int right=(aOption.direction==Qt::LeftToRight) ? aOption.rect.right() : aOption.rect.left();
+        aPainter->drawLine(right, aOption.rect.y(), right, aOption.rect.bottom());
     }
 
-    painter->drawLine(0, option.rect.bottom(), option.rect.right(), option.rect.bottom());
-    painter->restore();
+    aPainter->drawLine(0, aOption.rect.bottom(), aOption.rect.right(), aOption.rect.bottom());
+    aPainter->restore();
 }
 
-QSize PropertyItemDelegate::sizeHint(const QStyleOptionViewItem &option, const QModelIndex &index) const
+void PropertyItemDelegate::setEditorData(QWidget *aEditor, const QModelIndex &aIndex) const
 {
-    return QItemDelegate::sizeHint(option, index) + QSize(6, 6);
+}
+
+void PropertyItemDelegate::setModelData(QWidget *aEditor, QAbstractItemModel *aModel, const QModelIndex &aIndex) const
+{
+}
+
+QSize PropertyItemDelegate::sizeHint(const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const
+{
+    return QItemDelegate::sizeHint(aOption, aIndex) + QSize(6, 6);
+}
+
+void PropertyItemDelegate::updateEditorGeometry(QWidget *aEditor, const QStyleOptionViewItem &aOption, const QModelIndex &/*aIndex*/) const
+{
+    aEditor->setGeometry(aOption.rect);
 }
