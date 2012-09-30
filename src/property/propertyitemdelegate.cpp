@@ -84,6 +84,19 @@ void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem 
                 opt.font.setBold(true);
                 opt.fontMetrics = QFontMetrics(opt.font);
             }
+
+            if (!aProperty->isWriteable())
+            {
+                QColor aTextColor=aOption.palette.color(QPalette::Text);
+
+                int r=qMin(aTextColor.red()+((255-aTextColor.red())>>1), 255);
+                int g=qMin(aTextColor.green()+((255-aTextColor.green())>>1), 255);
+                int b=qMin(aTextColor.blue()+((255-aTextColor.blue())>>1), 255);
+
+                aTextColor.setRgb(r, g, b);
+
+                opt.palette.setColor(QPalette::Text, aTextColor);
+            }
         }
     }
     else
