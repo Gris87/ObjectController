@@ -423,3 +423,324 @@ QObject*               TestObject::getObject() const
 {
     return mObject;
 }
+
+void TestObject::setBool(const bool &aBool)
+{
+    mBool=aBool;
+}
+
+void TestObject::setInt8(const qint8 &aInt8)
+{
+    mInt8=aInt8;
+}
+
+void TestObject::setUInt8(const quint8 &aUInt8)
+{
+    mUInt8=aUInt8;
+}
+
+void TestObject::setInt16(const qint16 &aInt16)
+{
+    mInt16=aInt16;
+}
+
+void TestObject::setUInt16(const quint16 &aUInt16)
+{
+    mUInt16=aUInt16;
+}
+
+void TestObject::setInt32(const qint32 &aInt32)
+{
+    mInt32=aInt32;
+}
+
+void TestObject::setUInt32(const quint32 &aUInt32)
+{
+    mUInt32=aUInt32;
+}
+
+void TestObject::setInt64(const qint64 &aInt64)
+{
+    mInt64=aInt64;
+}
+
+void TestObject::setUInt64(const quint64 &aUInt64)
+{
+    mUInt64=aUInt64;
+}
+
+void TestObject::setFloat(const float &aFloat)
+{
+    mFloat=aFloat;
+}
+
+void TestObject::setDouble(const double &aDouble)
+{
+    mDouble=aDouble;
+}
+
+void TestObject::setChar(const QChar &aChar)
+{
+    mChar=aChar;
+}
+
+void TestObject::setMap(const QVariantMap &aMap)
+{
+    mMap.clear();
+
+    for (QVariantMap::const_iterator i=aMap.constBegin(); i!=aMap.constEnd(); ++i)
+    {
+        bool ok;
+
+        quint32 aValue=i.value().toUInt(&ok);
+
+        if (ok)
+        {
+            mMap[i.key()]=aValue;
+        }
+    }
+}
+
+void TestObject::setList(const QVariantList &aList)
+{
+    mList.clear();
+
+    for (int i=0; i<aList.length(); ++i)
+    {
+        bool ok;
+
+        quint8 aValue=aList.at(i).toUInt(&ok);
+
+        if (ok)
+        {
+            mList.append(aValue);
+        }
+    }
+}
+
+void TestObject::setStringList(const QStringList &aStringList)
+{
+    mStringList=aStringList;
+}
+
+void TestObject::setString(const QString &aString)
+{
+    mString=aString;
+}
+
+void TestObject::setByteArray(const QByteArray &aByteArray)
+{
+    mByteArray=aByteArray;
+}
+
+void TestObject::setBitArray(const QBitArray &aBitArray)
+{
+    mBitArray=aBitArray;
+}
+
+void TestObject::setDate(const QDate &aDate)
+{
+    mDate=aDate;
+}
+
+void TestObject::setTime(const QTime &aTime)
+{
+    mTime=aTime;
+}
+
+void TestObject::setDateTime(const QDateTime &aDateTime)
+{
+    mDateTime=aDateTime;
+}
+
+void TestObject::setUrl(const QUrl &aUrl)
+{
+    mUrl=aUrl;
+}
+
+void TestObject::setLocale(const QLocale &aLocale)
+{
+    mLocale=aLocale;
+}
+
+void TestObject::setRect(const QRect &aRect)
+{
+    mRect=aRect;
+}
+
+void TestObject::setRectF(const QRectF &aRectF)
+{
+    mRectF=aRectF;
+}
+
+void TestObject::setSize(const QSize &aSize)
+{
+    mSize=aSize;
+}
+
+void TestObject::setSizeF(const QSizeF &aSizeF)
+{
+    mSizeF=aSizeF;
+}
+
+void TestObject::setLine(const QLine &aLine)
+{
+    mLine=aLine;
+}
+
+void TestObject::setLineF(const QLineF &aLineF)
+{
+    mLineF=aLineF;
+}
+
+void TestObject::setPoint(const QPoint &aPoint)
+{
+    mPoint=aPoint;
+}
+
+void TestObject::setPointF(const QPointF &aPointF)
+{
+    mPointF=aPointF;
+}
+
+void TestObject::setRegExp(const QRegExp &aRegExp)
+{
+    mRegExp=aRegExp;
+}
+
+void TestObject::setHash(const QVariantHash &aHash)
+{
+    mHash.clear();
+
+    for (QVariantHash::const_iterator i=aHash.constBegin(); i!=aHash.constEnd(); ++i)
+    {
+        bool ok;
+
+        qint16 aValue=i.value().toInt(&ok);
+
+        if (ok)
+        {
+            mHash[i.key()]=aValue;
+        }
+    }
+}
+
+void TestObject::setEasingCurve(const QEasingCurve &aEasingCurve)
+{
+    mEasingCurve=aEasingCurve;
+}
+
+void TestObject::setFont(const QFont &aFont)
+{
+    mFont=aFont;
+}
+
+void TestObject::setPixmap(const QPixmap &aPixmap)
+{
+    mPixmap=aPixmap;
+}
+
+void TestObject::setBrush(const QBrush &aBrush)
+{
+    mBrush=aBrush;
+}
+
+void TestObject::setColor(const QColor &aColor)
+{
+    mColor=aColor;
+}
+
+void TestObject::setPalette(const QPalette &aPalette)
+{
+    mPalette=aPalette;
+}
+
+void TestObject::setIcon(const QIcon &aIcon)
+{
+    mIcon=aIcon;
+}
+
+void TestObject::setImage(const QImage &aImage)
+{
+    mImage=aImage;
+}
+
+void TestObject::setPolygon(const QPolygon &aPolygon)
+{
+    mPolygon=aPolygon;
+}
+
+void TestObject::setRegion(const QRegion &aRegion)
+{
+    mRegion=aRegion;
+}
+
+void TestObject::setBitmap(const QBitmap &aBitmap)
+{
+    mBitmap=aBitmap;
+}
+
+void TestObject::setCursor(const QCursor &aCursor)
+{
+    mCursor=aCursor;
+}
+
+void TestObject::setSizePolicy(const QSizePolicy &aSizePolicy)
+{
+    mSizePolicy=aSizePolicy;
+}
+
+void TestObject::setKeySequence(const QKeySequence &aKeySequence)
+{
+    mKeySequence=aKeySequence;
+}
+
+void TestObject::setPen(const QPen &aPen)
+{
+    mPen=aPen;
+}
+
+void TestObject::setTextLength(const QTextLength &aTextLength)
+{
+    mTextLength=aTextLength;
+}
+
+void TestObject::setTextFormat(const QTextFormat &aTextFormat)
+{
+    mTextFormat=aTextFormat;
+}
+
+void TestObject::setMatrix(const QMatrix &aMatrix)
+{
+    mMatrix=aMatrix;
+}
+
+void TestObject::setTransform(const QTransform &aTransform)
+{
+    mTransform=aTransform;
+}
+
+void TestObject::setMatrix4x4(const QMatrix4x4 &aMatrix4x4)
+{
+    mMatrix4x4=aMatrix4x4;
+}
+
+void TestObject::setVector2D(const QVector2D &aVector2D)
+{
+    mVector2D=aVector2D;
+}
+
+void TestObject::setVector3D(const QVector3D &aVector3D)
+{
+    mVector3D=aVector3D;
+}
+
+void TestObject::setVector4D(const QVector4D &aVector4D)
+{
+    mVector4D=aVector4D;
+}
+
+void TestObject::setQuaternion(const QQuaternion &aQuaternion)
+{
+    mQuaternion=aQuaternion;
+}
