@@ -18,16 +18,19 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
     PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
     PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
 
-    QWidget *editor=0;
+    CustomEditor *aEditor=0;
 
 
 
     DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
-    aDefaultEditor->setIcon(aItem->icon(1));
     aDefaultEditor->setValue(aItem->text(1));
-    editor=aDefaultEditor;
+    aEditor=aDefaultEditor;
 
-    return editor;
+
+
+    aEditor->setIcon(aItem->icon(1));
+
+    return aEditor;
 }
 
 void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const
