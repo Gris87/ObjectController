@@ -2,7 +2,6 @@
 #include "ui_defaulteditor.h"
 
 #include <QTimer>
-#include <QKeyEvent>
 
 DefaultEditor::DefaultEditor(QWidget *parent) :
     QWidget(parent),
@@ -21,6 +20,12 @@ DefaultEditor::~DefaultEditor()
 
 void DefaultEditor::keyPressEvent(QKeyEvent * /*event*/)
 {
+    // Nothing
+}
+
+void DefaultEditor::mousePressEvent(QMouseEvent * /*event*/)
+{
+    ui->valueEdit->setFocus();
 }
 
 void DefaultEditor::setIcon(const QIcon &aIcon)

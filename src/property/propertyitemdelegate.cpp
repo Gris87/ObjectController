@@ -13,7 +13,7 @@ PropertyItemDelegate::PropertyItemDelegate(QObject *parent) :
 {
 }
 
-QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const
+QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOptionViewItem &/*aOption*/, const QModelIndex &aIndex) const
 {
     PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
     PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
@@ -128,11 +128,11 @@ void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem 
     aPainter->restore();
 }
 
-void PropertyItemDelegate::setEditorData(QWidget *aEditor, const QModelIndex &aIndex) const
+void PropertyItemDelegate::setEditorData(QWidget * /*aEditor*/, const QModelIndex &/*aIndex*/) const
 {
 }
 
-void PropertyItemDelegate::setModelData(QWidget *aEditor, QAbstractItemModel *aModel, const QModelIndex &aIndex) const
+void PropertyItemDelegate::setModelData(QWidget * /*aEditor*/, QAbstractItemModel * /*aModel*/, const QModelIndex &/*aIndex*/) const
 {
 }
 

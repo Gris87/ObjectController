@@ -10,7 +10,7 @@ class DefaultEditor;
 class DefaultEditor : public QWidget
 {
     Q_OBJECT
-    
+
 public:
     explicit DefaultEditor(QWidget *parent = 0);
     ~DefaultEditor();
@@ -20,7 +20,8 @@ public:
 
 protected:
     void keyPressEvent(QKeyEvent *event);
-    
+    void mousePressEvent(QMouseEvent *event);
+
 private:
     Ui::DefaultEditor *ui;
 
