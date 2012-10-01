@@ -1,13 +1,13 @@
 #ifndef DEFAULTEDITOR_H
 #define DEFAULTEDITOR_H
 
-#include <QWidget>
+#include "customeditor.h"
 
 namespace Ui {
 class DefaultEditor;
 }
 
-class DefaultEditor : public QWidget
+class DefaultEditor : public CustomEditor
 {
     Q_OBJECT
 
@@ -19,14 +19,11 @@ public:
     void setValue(const QString &aValue);
 
 protected:
-    void keyPressEvent(QKeyEvent *event);
-    void mousePressEvent(QMouseEvent *event);
+    void putFocus();
+    void selectText();
 
 private:
     Ui::DefaultEditor *ui;
-
-private slots:
-    void select();
 };
 
 #endif // DEFAULTEDITOR_H

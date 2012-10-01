@@ -14,7 +14,11 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/propertytreewidget.h \
            $$PWD/propertytreewidgetitem.h \
            $$PWD/propertyitemdelegate.h \
-           $$PWD/editors/defaulteditor.h
+           $$PWD/editors/defaulteditor.h \
+           $$PWD/editors/customeditor.h \
+           $$PWD/delegates/integerdelegate.h \
+           $$PWD/delegates/customdelegate.h \
+           $$PWD/editors/integereditor.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
@@ -23,9 +27,14 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/propertytreewidget.cpp \
            $$PWD/propertytreewidgetitem.cpp \
            $$PWD/propertyitemdelegate.cpp \
-           $$PWD/editors/defaulteditor.cpp
+           $$PWD/editors/defaulteditor.cpp \
+           $$PWD/editors/customeditor.cpp \
+           $$PWD/delegates/integerdelegate.cpp \
+           $$PWD/delegates/customdelegate.cpp \
+           $$PWD/editors/integereditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
 FORMS += \
-           $$PWD/editors/defaulteditor.ui
+           $$PWD/editors/defaulteditor.ui \
+           $$PWD/editors/integereditor.ui

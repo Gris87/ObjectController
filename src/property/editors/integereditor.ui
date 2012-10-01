@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DefaultEditor</class>
- <widget class="QWidget" name="DefaultEditor">
+ <class>IntegerEditor</class>
+ <widget class="QWidget" name="IntegerEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,7 +34,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="valueEdit"/>
+    <widget class="QSpinBox" name="valueSpinBox">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

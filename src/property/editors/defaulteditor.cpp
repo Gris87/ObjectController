@@ -4,13 +4,11 @@
 #include <QTimer>
 
 DefaultEditor::DefaultEditor(QWidget *parent) :
-    QWidget(parent),
+    CustomEditor(parent),
     ui(new Ui::DefaultEditor)
 {
     ui->setupUi(this);
     ui->valueEdit->setReadOnly(true);
-
-    QTimer::singleShot(0, this, SLOT(select()));
 }
 
 DefaultEditor::~DefaultEditor()
@@ -18,36 +16,23 @@ DefaultEditor::~DefaultEditor()
     delete ui;
 }
 
-void DefaultEditor::keyPressEvent(QKeyEvent * /*event*/)
-{
-    // Nothing
-}
-
-void DefaultEditor::mousePressEvent(QMouseEvent * /*event*/)
+void DefaultEditor::putFocus()
 {
     ui->valueEdit->setFocus();
+}
+
+void DefaultEditor::selectText()
+{
+    ui->valueEdit->selectAll();
 }
 
 void DefaultEditor::setIcon(const QIcon &aIcon)
 {
-    if (aIcon.isNull())
-    {
-        ui->iconLabel->setVisible(false);
-        ui->dataLayout->setContentsMargins(0, 0, 0, 0);
-    }
-    else
-    {
-        ui->iconLabel->setPixmap(aIcon.pixmap(18));
-    }
+    SET_ICON(aIcon);
 }
+
 
 void DefaultEditor::setValue(const QString &aValue)
 {
     ui->valueEdit->setText(aValue);
-}
-
-void DefaultEditor::select()
-{
-    ui->valueEdit->setFocus();
-    ui->valueEdit->selectAll();
 }
