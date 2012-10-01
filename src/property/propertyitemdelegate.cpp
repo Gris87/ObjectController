@@ -20,13 +20,16 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
 
     CustomEditor *aEditor=0;
 
-
-
-    DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
-    aDefaultEditor->setValue(aItem->text(1));
-    aEditor=aDefaultEditor;
-
-
+    if (aItem->delegate())
+    {
+        aEditor=aItem->delegate()->createEditor(aParent, aItem);
+    }
+    else
+    {
+        DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
+        aDefaultEditor->setValue(aItem->text(1));
+        aEditor=aDefaultEditor;
+    }
 
     aEditor->setIcon(aItem->icon(1));
 

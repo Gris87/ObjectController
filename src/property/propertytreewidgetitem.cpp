@@ -48,6 +48,8 @@ PropertyTreeWidgetItem::PropertyTreeWidgetItem(const PropertyTreeWidgetItem &oth
 inline void PropertyTreeWidgetItem::init()
 {
     mProperty=0;
+    mFirstValue=QVariant();
+    mDelegate=0;
     mModified=false;
 }
 
@@ -61,16 +63,6 @@ void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
 
 // -------------------------------------------------------------------------------------
 
-bool PropertyTreeWidgetItem::isModified() const
-{
-    return mModified;
-}
-
-void PropertyTreeWidgetItem::setModified(const bool aModified)
-{
-    mModified=aModified;
-}
-
 Property* PropertyTreeWidgetItem::property()
 {
     return mProperty;
@@ -82,3 +74,34 @@ void PropertyTreeWidgetItem::setProperty(Property* aProperty)
 
     setText(0, mProperty->name());
 }
+
+QVariant PropertyTreeWidgetItem::firstValue() const
+{
+    return mFirstValue;
+}
+
+void PropertyTreeWidgetItem::setFirstValue(const QVariant &aFirstValue)
+{
+    mFirstValue=aFirstValue;
+}
+
+CustomDelegate* PropertyTreeWidgetItem::delegate() const
+{
+    return mDelegate;
+}
+
+void PropertyTreeWidgetItem::setDelegate(CustomDelegate *aDelegate)
+{
+    mDelegate=aDelegate;
+}
+
+bool PropertyTreeWidgetItem::isModified() const
+{
+    return mModified;
+}
+
+void PropertyTreeWidgetItem::setModified(const bool &aModified)
+{
+    mModified=aModified;
+}
+

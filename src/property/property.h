@@ -27,8 +27,7 @@ public:
 
 protected:
     QMetaProperty mMetaProperty;
-    QString       mName;
-    QVariant      mFirstValue;
+    QString       mName;    
     QColor        mBackgroundColor;
     bool          mIsWritable;
 

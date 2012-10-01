@@ -5,6 +5,8 @@
 
 #include "property.h"
 
+#include "delegates/customdelegate.h"
+
 class PropertyTreeWidgetItem : public QTreeWidgetItem
 {
 public:
@@ -22,15 +24,23 @@ public:
 
     // -------------------------------------------------------------------------------------
 
-    bool    isModified() const;
-    void    setModified(const bool aModified);
+    Property*       property();
+    void            setProperty(Property* aProperty);
 
-    Property* property();
-    void setProperty(Property* aProperty);
+    QVariant        firstValue() const;
+    void            setFirstValue(const QVariant &aFirstValue);
+
+    CustomDelegate* delegate() const;
+    void            setDelegate(CustomDelegate *aDelegate);
+
+    bool            isModified() const;
+    void            setModified(const bool &aModified);
 
 protected:
-    Property* mProperty;
-    bool      mModified;
+    Property*       mProperty;
+    QVariant        mFirstValue;
+    CustomDelegate* mDelegate;
+    bool            mModified;
 
     void init();
 };

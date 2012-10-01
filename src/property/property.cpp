@@ -19,7 +19,6 @@ Property::Property(const QMetaProperty &aMetaProperty)
     mMetaProperty=aMetaProperty;
 
     mName=mMetaProperty.name();
-    mFirstValue=QVariant();
     mIsWritable=mMetaProperty.isWritable();
 }
 
@@ -70,7 +69,9 @@ void Property::write(const QObjectList &aObjects, const QVariant &aValue)
 
 void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects)
 {
-    setPropertiesForItem(read(aObjects, &mFirstValue), aItem);
+    QVariant aFirstValue;
+    setPropertiesForItem(read(aObjects, &aFirstValue), aItem);
+    aItem->setFirstValue(aFirstValue);
 }
 
 void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)

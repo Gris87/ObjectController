@@ -7,7 +7,7 @@ IntegerDelegate::IntegerDelegate(QObject *parent) :
 {
 }
 
-QWidget* IntegerDelegate::createEditor(QWidget *aParent, const QStyleOptionViewItem &/*aOption*/, const QModelIndex &aIndex) const
+CustomEditor* IntegerDelegate::createEditor(QWidget *aParent, PropertyTreeWidgetItem * /*aItem*/) const
 {
     IntegerEditor *editor=new IntegerEditor(aParent);
 
