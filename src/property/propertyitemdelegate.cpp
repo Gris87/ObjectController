@@ -18,22 +18,18 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
     PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
     PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
 
-    CustomEditor *aEditor=0;
+    CustomEditor *aCustomEditor=0;
 
     if (aItem->delegate())
     {
-        aEditor=aItem->delegate()->createEditor(aParent, aItem);
+        aCustomEditor=aItem->delegate()->createEditor(aParent);
     }
     else
     {
-        DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
-        aDefaultEditor->setValue(aItem->text(1));
-        aEditor=aDefaultEditor;
+        aCustomEditor=new DefaultEditor(aParent);
     }
 
-    aEditor->setIcon(aItem->icon(1));
-
-    return aEditor;
+    return aCustomEditor;
 }
 
 void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem &aOption, const QModelIndex &aIndex) const
@@ -134,8 +130,23 @@ void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem 
     aPainter->restore();
 }
 
-void PropertyItemDelegate::setEditorData(QWidget * /*aEditor*/, const QModelIndex &/*aIndex*/) const
+void PropertyItemDelegate::setEditorData(QWidget *aEditor, const QModelIndex &aIndex) const
 {
+    PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
+    PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
+
+    CustomEditor *aCustomEditor=(CustomEditor *)aEditor;
+
+    if (aItem->delegate())
+    {
+        aItem->delegate()->setEditorData(aEditor, aItem);
+    }
+    else
+    {
+        ((DefaultEditor *)aCustomEditor)->setValue(aItem->text(1));
+    }
+
+    aCustomEditor->setIcon(aItem->icon(1));
 }
 
 void PropertyItemDelegate::setModelData(QWidget * /*aEditor*/, QAbstractItemModel * /*aModel*/, const QModelIndex &/*aIndex*/) const

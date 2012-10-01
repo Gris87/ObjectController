@@ -13,7 +13,8 @@ class CustomDelegate : public QItemDelegate
 public:
     explicit CustomDelegate(QObject *parent = 0);
 
-    virtual CustomEditor* createEditor(QWidget *aParent, PropertyTreeWidgetItem *aItem) const;
+    virtual CustomEditor* createEditor(QWidget *aParent) const;
+    virtual void setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aItem) const;
 };
 
 #endif // CUSTOMDELEGATE_H

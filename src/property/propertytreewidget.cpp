@@ -13,6 +13,12 @@ PropertyTreeWidget::PropertyTreeWidget(QWidget *parent) :
     mItemDelegate=new PropertyItemDelegate(this);
     setItemDelegate(mItemDelegate);
 
+    //----------------------------------------------------------------------
+
+    mIntegerDelegate=new IntegerDelegate();
+
+    //----------------------------------------------------------------------
+
     setIconSize(QSize(18, 18));
 
     setColumnCount(2);
@@ -192,3 +198,9 @@ void PropertyTreeWidget::update(const QObjectList &aObjects)
         }
     }
 }
+
+IntegerDelegate* PropertyTreeWidget::integerDelegate()
+{
+    return mIntegerDelegate;
+}
+

@@ -9,7 +9,8 @@ class IntegerDelegate : public CustomDelegate
 public:
     explicit IntegerDelegate(QObject *parent = 0);
 
-    CustomEditor* createEditor(QWidget *aParent, PropertyTreeWidgetItem *aItem) const;
+    CustomEditor* createEditor(QWidget *aParent) const;
+    void setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aItem) const;
 };
 
 #endif // INTEGERDELEGATE_H

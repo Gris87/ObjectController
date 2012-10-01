@@ -6,6 +6,8 @@
 #include "propertygroup.h"
 #include "propertyitemdelegate.h"
 
+#include "delegates/integerdelegate.h"
+
 class PropertyTreeWidget : public QTreeWidget
 {
     Q_OBJECT
@@ -18,8 +20,11 @@ public:
     void fillByPropertyGroups(QList<PropertyGroup *> aGroups);
     void update(const QObjectList &aObjects);
 
+    IntegerDelegate* integerDelegate();
+
 protected:
     PropertyItemDelegate *mItemDelegate;
+    IntegerDelegate      *mIntegerDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
