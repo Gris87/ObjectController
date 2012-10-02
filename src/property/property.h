@@ -5,6 +5,8 @@
 
 #include <QColor>
 
+#include "delegates/customdelegate.h"
+
 class PropertyTreeWidgetItem;
 
 class Property
@@ -27,13 +29,14 @@ public:
 
 protected:
     QMetaProperty mMetaProperty;
-    QString       mName;    
+    QString       mName;
     QColor        mBackgroundColor;
     bool          mIsWritable;
 
-    void setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
+    void setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem);
     QIcon valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* valueDelegate(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     int valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
 
     // -------------------------------------------------------------------------------------
@@ -159,6 +162,67 @@ protected:
     QIcon iconForValue(const QQuaternion &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(void *aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem);
+
+    // -------------------------------------------------------------------------------------
+
+    CustomDelegate* delegateForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const qint16 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const quint16 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const qint32 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const quint32 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const qint64 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const float &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const double &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QChar &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QDate &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QTime &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QDateTime &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QUrl &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QLocale &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QRect &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QRectF &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QSize &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QSizeF &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QLine &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QLineF &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QPoint &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QPointF &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QRegExp &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QEasingCurve &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QFont &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QBrush &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QColor &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QPalette &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QIcon &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QImage &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QPolygon &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QRegion &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QSizePolicy &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QKeySequence &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QPen &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QTextLength &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QTextFormat &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QMatrix &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QTransform &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QMatrix4x4 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QVector2D &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QVector3D &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QVector4D &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QQuaternion &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(void *aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem);
 
     // -------------------------------------------------------------------------------------
 

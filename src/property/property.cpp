@@ -12,6 +12,7 @@
 #include <QPainter>
 #include <QApplication>
 
+#include "propertytreewidget.h"
 #include "propertytreewidgetitem.h"
 
 Property::Property(const QMetaProperty &aMetaProperty)
@@ -29,17 +30,22 @@ bool Property::equals(const Property *aProperty)
 
 QVariant Property::read(const QObjectList &aObjects, QVariant *aFirstValue)
 {
-    if (aFirstValue)
-    {
-        *aFirstValue=QVariant();
-    }
-
     if (aObjects.length()==0)
     {
+        if (aFirstValue)
+        {
+            *aFirstValue=QVariant();
+        }
+
         return QVariant();
     }
 
     QVariant res=mMetaProperty.read(aObjects.at(0));
+
+    if (aFirstValue)
+    {
+        *aFirstValue=res;
+    }
 
     for (int i=1; i<aObjects.length(); ++i)
     {
@@ -70,14 +76,18 @@ void Property::write(const QObjectList &aObjects, const QVariant &aValue)
 void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects)
 {
     QVariant aFirstValue;
-    setPropertiesForItem(read(aObjects, &aFirstValue), aItem);
-    aItem->setFirstValue(aFirstValue);
+    QVariant aValue=read(aObjects, &aFirstValue);
+
+    setPropertiesForItem(aValue, aFirstValue, aItem);
 }
 
-void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
+void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem)
 {
     aParentItem->setText(1, valueText(aValue, aParentItem));
     aParentItem->setIcon(1, valueIcon(aValue, aParentItem));
+
+    aParentItem->setFirstValue(aFirstValue);
+    aParentItem->setDelegate(valueDelegate(aValue, aParentItem));
 
     int aChildCount=valueSubProperies(aValue, aParentItem);
 
@@ -162,6 +172,11 @@ QString Property::valueText(const QVariant &aValue, PropertyTreeWidgetItem *aPar
 QIcon Property::valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     FUNCTION_FOR_VARIANT(aValue, aParentItem, iconForValue, QIcon());
+}
+
+CustomDelegate* Property::valueDelegate(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    FUNCTION_FOR_VARIANT(aValue, aParentItem, delegateForValue, 0);
 }
 
 int Property::valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -1290,6 +1305,588 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
 
 // -------------------------------------------------------------------------------------
 
+CustomDelegate* Property::delegateForValue(const bool &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const qint8 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const quint8 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const qint16 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const quint16 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const qint32 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const quint32 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const qint64 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const quint64 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->integerDelegate();
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const float &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const double &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QChar &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QVariantMap &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QVariantList &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QStringList &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QBitArray &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QDate &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QTime &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QDateTime &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QUrl &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QRegExp &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QVariantHash &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QFont &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QPixmap &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QBrush &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QColor &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QPalette &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QIcon &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QImage &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QPolygon &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QRegion &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QBitmap &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QCursor &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QKeySequence &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QPen &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QTextFormat &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QMatrix &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QTransform &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QMatrix4x4 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QVector2D &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QVector3D &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QVector4D &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QQuaternion &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(void *aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+// -------------------------------------------------------------------------------------
+
 #define GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
     if (aParentItem->childCount()>aID) \
     { \
@@ -1379,7 +1976,7 @@ int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidge
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
-        setPropertiesForItem(i.value(), aEntryItem);
+        setPropertiesForItem(i.value(), i.value(), aEntryItem);
 
         // TODO: Editors
     }
@@ -1396,7 +1993,7 @@ int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidg
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
-        setPropertiesForItem(aValue.at(i), aEntryItem);
+        setPropertiesForItem(aValue.at(i), aValue.at(i), aEntryItem);
 
         // TODO: Editors
     }
@@ -1615,7 +2212,7 @@ int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidg
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
-        setPropertiesForItem(i.value(), aEntryItem);
+        setPropertiesForItem(i.value(), i.value(), aEntryItem);
 
         // TODO: Editors
     }
@@ -1691,7 +2288,7 @@ int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem
     QColor                  aGroup##_##aRole##_Color=aValue.color(QPalette::aGroup, QPalette::aRole); \
 \
     GET_OR_CREATE_ITEM(aParentItem, aGroup##_##aRole##_Item, aCount, #aRole" ("#aGroup")", valueToString(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item)); \
-    setPropertiesForItem(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item);
+    setPropertiesForItem(aGroup##_##aRole##_Color, aGroup##_##aRole##_Color, aGroup##_##aRole##_Item);
 
 #define INSERT_COLOR_ROLE(aParentItem, aCount, aRole, aValue) \
     INSERT_COLOR(aParentItem, aCount, Active,   aRole, aValue); \
@@ -1890,7 +2487,7 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyle, QIcon(aJoinStylePixmap));
     GET_OR_CREATE_ITEM(          aParentItem, aColorItem,     aCount, qApp->translate("Property", "Color"),      valueToString(aValue.color(),     aColorItem));
 
-    setPropertiesForItem(aValue.color(), aColorItem);
+    setPropertiesForItem(aValue.color(), aValue.color(), aColorItem);
 
     // TODO: Editors
 
