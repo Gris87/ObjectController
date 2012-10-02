@@ -6,16 +6,19 @@
 #include <QHeaderView>
 
 #include "propertytreewidgetitem.h"
+#include "objectcontroller.h"
 
-PropertyTreeWidget::PropertyTreeWidget(QWidget *parent) :
-    QTreeWidget(parent)
+PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
+    QTreeWidget(aController)
 {
+    mController=aController;
+
     mItemDelegate=new PropertyItemDelegate(this);
     setItemDelegate(mItemDelegate);
 
     //----------------------------------------------------------------------
 
-    mIntegerDelegate=new IntegerDelegate();
+    mIntegerDelegate=mController->createIntegerDelegate();
 
     //----------------------------------------------------------------------
 
@@ -199,7 +202,14 @@ void PropertyTreeWidget::update(const QObjectList &aObjects)
     }
 }
 
-IntegerDelegate* PropertyTreeWidget::integerDelegate()
+// -------------------------------------------------------------------------------------
+
+ObjectController* PropertyTreeWidget::controller() const
+{
+    return mController;
+}
+
+CustomDelegate* PropertyTreeWidget::integerDelegate()
 {
     return mIntegerDelegate;
 }

@@ -6,7 +6,9 @@
 #include "propertygroup.h"
 #include "propertyitemdelegate.h"
 
-#include "delegates/integerdelegate.h"
+#include "delegates/customdelegate.h"
+
+class ObjectController;
 
 class PropertyTreeWidget : public QTreeWidget
 {
@@ -15,16 +17,18 @@ class PropertyTreeWidget : public QTreeWidget
     friend class PropertyItemDelegate;
 
 public:
-    explicit PropertyTreeWidget(QWidget *parent = 0);
+    explicit PropertyTreeWidget(ObjectController *aController);
 
     void fillByPropertyGroups(QList<PropertyGroup *> aGroups);
     void update(const QObjectList &aObjects);
 
-    IntegerDelegate* integerDelegate();
+    ObjectController*     controller() const;
+    CustomDelegate*       integerDelegate();
 
 protected:
+    ObjectController     *mController;
     PropertyItemDelegate *mItemDelegate;
-    IntegerDelegate      *mIntegerDelegate;
+    CustomDelegate       *mIntegerDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

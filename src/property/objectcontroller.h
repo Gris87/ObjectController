@@ -5,12 +5,14 @@
 
 #include "handleobject.h"
 #include "propertytreewidget.h"
+#include "delegates/customdelegate.h"
 
 class ObjectController : public QWidget
 {
     Q_OBJECT
 
     friend class HandleObject;
+    friend class PropertyTreeWidget;
 
 public:
     explicit ObjectController(QWidget *parent = 0);
@@ -34,6 +36,7 @@ protected:
     virtual bool filterClass(QString &aClassName);
     virtual bool filterProperty(const QMetaObject *aMetaObject, QString aMetaPropertyName);
     virtual void propertyAdded(const QMetaObject *aMetaObject, Property *aProperty);
+    virtual CustomDelegate* createIntegerDelegate();
 };
 
 #endif // OBJECTCONTROLLER_H

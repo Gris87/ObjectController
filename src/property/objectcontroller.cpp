@@ -2,6 +2,8 @@
 
 #include <QVBoxLayout>
 
+#include "delegates/integerdelegate.h"
+
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
 {
@@ -100,6 +102,8 @@ void ObjectController::clear()
     }
 }
 
+// -------------------------------------------------------------------------------------
+
 void ObjectController::setObject(QObject *aObject)
 {
     QObjectList aTempList;
@@ -148,6 +152,8 @@ QObjectList ObjectController::objects() const
     return mObjects;
 }
 
+// -------------------------------------------------------------------------------------
+
 bool ObjectController::filterClass(QString &/*aClassName*/)
 {
     return true;
@@ -161,4 +167,9 @@ bool ObjectController::filterProperty(const QMetaObject * /*aMetaObject*/, QStri
 void ObjectController::propertyAdded(const QMetaObject * /*aMetaObject*/, Property * /*aProperty*/)
 {
     // Nothing
+}
+
+CustomDelegate* ObjectController::createIntegerDelegate()
+{
+    return new IntegerDelegate(this);
 }
