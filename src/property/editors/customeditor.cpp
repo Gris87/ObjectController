@@ -46,7 +46,7 @@ void CustomEditor::modificationDone(const QVariant &aNewValue)
         mNewValue=aNewValue;
 
         mModificationTimer.stop();
-        mModificationTimer.start(500);
+        mModificationTimer.start(100);
     }
 }
 
