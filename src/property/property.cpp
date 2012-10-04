@@ -185,6 +185,11 @@ int Property::valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *
     FUNCTION_FOR_VARIANT(aValue, aParentItem, subPropertiesForValue, 0);
 }
 
+void Property::valueChangedSlot(const QVariant &aNewValue)
+{
+    emit valueChanged(aNewValue);
+}
+
 // -------------------------------------------------------------------------------------
 
 QString Property::name() const
@@ -2681,9 +2686,4 @@ int Property::subPropertiesForValue(void * /*aValue*/, PropertyTreeWidgetItem * 
 int Property::subPropertiesForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
-}
-
-void Property::valueChangedSlot(const QVariant &aNewValue)
-{
-    emit valueChanged(aNewValue);
 }

@@ -39,6 +39,9 @@ protected:
     virtual CustomDelegate* createBoolDelegate();
     virtual CustomDelegate* createIntegerDelegate();
     virtual CustomDelegate* createDoubleDelegate();
+
+private slots:
+    void valueChangedSlot(const QVariant &aNewValue);
 };
 
 #endif // OBJECTCONTROLLER_H

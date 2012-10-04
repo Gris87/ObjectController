@@ -104,6 +104,12 @@ void ObjectController::clear()
     }
 }
 
+void ObjectController::valueChangedSlot(const QVariant &aNewValue)
+{
+    ((Property *)sender())->write(mObjects, aNewValue);
+    update();
+}
+
 // -------------------------------------------------------------------------------------
 
 void ObjectController::setObject(QObject *aObject)
