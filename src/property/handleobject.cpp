@@ -60,7 +60,7 @@ void HandleObject::reset()
                 continue;
             }
 
-            aPropertyGroup->addProperty(new Property(aProperty));
+            aPropertyGroup->addProperty(new Property(aProperty, mController));
         }
     }
 }

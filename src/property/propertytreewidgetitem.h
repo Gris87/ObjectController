@@ -43,12 +43,6 @@ protected:
     bool            mModified;
 
     void init();
-
-public slots:
-    void valueChangedSlot(const QVariant &aNewValue);
-
-signals:
-    void valueChanged(const QVariant &aNewValue);
 };
 
 #endif // PROPERTYTREEWIDGETITEM_H

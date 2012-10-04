@@ -1,18 +1,20 @@
 #ifndef PROPERTY_H
 #define PROPERTY_H
 
-#include <QMetaProperty>
+#include <QObject>
 
+#include <QMetaProperty>
 #include <QColor>
 
 #include "delegates/customdelegate.h"
 
 class PropertyTreeWidgetItem;
 
-class Property
+class Property : public QObject
 {
+    Q_OBJECT
 public:
-    Property(const QMetaProperty &aMetaProperty);
+    explicit Property(const QMetaProperty &aMetaProperty, QObject *parent = 0);
 
     bool equals(const Property *aProperty);
 
@@ -284,6 +286,12 @@ protected:
     int subPropertiesForValue(const QQuaternion &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(void *aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem);
+
+private slots:
+    void valueChangedSlot(const QVariant &aNewValue);
+
+signals:
+    void valueChanged(const QVariant &aNewValue);
 };
 
 #endif // PROPERTY_H

@@ -15,7 +15,8 @@
 #include "propertytreewidget.h"
 #include "propertytreewidgetitem.h"
 
-Property::Property(const QMetaProperty &aMetaProperty)
+Property::Property(const QMetaProperty &aMetaProperty, QObject *parent) :
+    QObject(parent)
 {
     mMetaProperty=aMetaProperty;
 
@@ -2680,4 +2681,9 @@ int Property::subPropertiesForValue(void * /*aValue*/, PropertyTreeWidgetItem * 
 int Property::subPropertiesForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
+}
+
+void Property::valueChangedSlot(const QVariant &aNewValue)
+{
+    emit valueChanged(aNewValue);
 }

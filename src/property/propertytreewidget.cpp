@@ -174,6 +174,7 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
         {
             PropertyTreeWidgetItem* aItem=new PropertyTreeWidgetItem(aTopItem);
             aItem->setProperty(aProperties.at(j));
+            aItem->setText(0, aProperties.at(j)->name());
             aItem->setFlags(aItem->flags() | Qt::ItemIsEditable);
         }
 
