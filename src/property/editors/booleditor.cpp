@@ -34,8 +34,5 @@ void BoolEditor::on_valueCheckBox_toggled(bool checked)
         ui->valueCheckBox->setText(tr("false"));
     }
 
-    if (mCanEmitValueChangedSignal)
-    {
-        emit valueChanged(checked);
-    }
+    modificationDone(checked);
 }

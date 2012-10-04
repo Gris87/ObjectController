@@ -40,8 +40,5 @@ void DoubleEditor::setValue(const float &aValue)
 
 void DoubleEditor::on_valueSpinBox_valueChanged(double aValue)
 {
-    if (mCanEmitValueChangedSignal)
-    {
-        emit valueChanged(aValue);
-    }
+    modificationDone(aValue);
 }

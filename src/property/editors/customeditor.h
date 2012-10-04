@@ -3,6 +3,9 @@
 
 #include <QWidget>
 
+#include <QVariant>
+#include <QTimer>
+
 #define SET_ICON(aIcon) \
     if (aIcon.isNull()) \
     { \
@@ -20,19 +23,24 @@ class CustomEditor : public QWidget
 
 public:
     explicit CustomEditor(QWidget *parent = 0);
+    ~CustomEditor();
 
     virtual void setIcon(const QIcon &aIcon);
 
 protected:
     bool mCanEmitValueChangedSignal;
+    QTimer mModificationTimer;
+    QVariant mNewValue;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
 
     virtual void putFocus();
     virtual void selectText();
+    void modificationDone(const QVariant &aNewValue);
 
 private slots:
+    void modificationSlot();
     void afterCreatingSlot();
 
 signals:

@@ -70,8 +70,5 @@ void IntegerEditor::setValue(const quint64 &aValue)
 
 void IntegerEditor::on_valueSpinBox_valueChanged(int aValue)
 {
-    if (mCanEmitValueChangedSignal)
-    {
-        emit valueChanged(aValue);
-    }
+    modificationDone(aValue);
 }

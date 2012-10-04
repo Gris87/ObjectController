@@ -1,7 +1,5 @@
 #include "customeditor.h"
 
-#include <QTimer>
-
 CustomEditor::CustomEditor(QWidget *parent) :
     QWidget(parent)
 {
@@ -9,7 +7,16 @@ CustomEditor::CustomEditor(QWidget *parent) :
 
     setAutoFillBackground(true);
 
+    connect(&mModificationTimer, SIGNAL(timeout()), this, SLOT(modificationSlot()));
     QTimer::singleShot(0, this, SLOT(afterCreatingSlot()));
+}
+
+CustomEditor::~CustomEditor()
+{
+    if (mModificationTimer.isActive())
+    {
+        modificationSlot();
+    }
 }
 
 void CustomEditor::keyPressEvent(QKeyEvent * /*event*/)
@@ -30,6 +37,23 @@ void CustomEditor::putFocus()
 void CustomEditor::selectText()
 {
     // Nothing
+}
+
+void CustomEditor::modificationDone(const QVariant &aNewValue)
+{
+    if (mCanEmitValueChangedSignal)
+    {
+        mNewValue=aNewValue;
+
+        mModificationTimer.stop();
+        mModificationTimer.start(500);
+    }
+}
+
+void CustomEditor::modificationSlot()
+{
+    mModificationTimer.stop();
+    emit valueChanged(mNewValue);
 }
 
 void CustomEditor::afterCreatingSlot()
