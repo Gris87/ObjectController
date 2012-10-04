@@ -27,6 +27,7 @@ public:
     CustomDelegate*       boolDelegate();
     CustomDelegate*       integerDelegate();
     CustomDelegate*       doubleDelegate();
+    CustomDelegate*       stringDelegate();
 
 protected:
     ObjectController     *mController;
@@ -35,6 +36,7 @@ protected:
     CustomDelegate       *mBoolDelegate;
     CustomDelegate       *mIntegerDelegate;
     CustomDelegate       *mDoubleDelegate;
+    CustomDelegate       *mStringDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

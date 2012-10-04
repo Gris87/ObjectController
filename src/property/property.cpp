@@ -111,6 +111,7 @@ void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFir
         case QVariant::Map:          return aFunction(aValue.value<QVariantMap>(), aParentItem); \
         case QVariant::List:         return aFunction(aValue.value<QVariantList>(), aParentItem); \
         case QVariant::StringList:   return aFunction(aValue.value<QStringList>(), aParentItem); \
+        case QVariant::String:       return aFunction(aValue.value<QString>(), aParentItem); \
         case QVariant::ByteArray:    return aFunction(aValue.value<QByteArray>(), aParentItem); \
         case QVariant::BitArray:     return aFunction(aValue.value<QBitArray>(), aParentItem); \
         case QVariant::Date:         return aFunction(aValue.value<QDate>(), aParentItem); \
@@ -385,6 +386,11 @@ QString Property::valueToString(const QStringList &aValue, PropertyTreeWidgetIte
     res.append("]");
 
     return res;
+}
+
+QString Property::valueToString(const QString &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return aValue;
 }
 
 QString Property::valueToString(const QByteArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1024,6 +1030,11 @@ QIcon Property::iconForValue(const QStringList &/*aValue*/, PropertyTreeWidgetIt
     return QIcon();
 }
 
+QIcon Property::iconForValue(const QString &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return QIcon();
+}
+
 QIcon Property::iconForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
@@ -1431,31 +1442,26 @@ CustomDelegate* Property::delegateForValue(const QChar &/*aValue*/, PropertyTree
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QVariantMap &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QVariantMap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QVariantList &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QVariantList &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QStringList &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QStringList &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValue(const QString &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->stringDelegate();
     }
 
     return 0;
@@ -2021,6 +2027,11 @@ int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidge
     }
 
     return aCount;
+}
+
+int Property::subPropertiesForValue(const QString &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return 0;
 }
 
 int Property::subPropertiesForValue(const QByteArray &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)

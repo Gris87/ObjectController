@@ -60,6 +60,7 @@ protected:
     QString valueToString(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem);
+    QString valueToString(const QString &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const QDate &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -121,6 +122,7 @@ protected:
     QIcon iconForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem);
+    QIcon iconForValue(const QString &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const QDate &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -182,6 +184,7 @@ protected:
     CustomDelegate* delegateForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValue(const QString &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const QDate &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -243,6 +246,7 @@ protected:
     int subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem);
+    int subPropertiesForValue(const QString &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const QByteArray &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const QBitArray &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const QDate &aValue, PropertyTreeWidgetItem *aParentItem);

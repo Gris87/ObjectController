@@ -5,6 +5,7 @@
 #include "delegates/booldelegate.h"
 #include "delegates/integerdelegate.h"
 #include "delegates/doubledelegate.h"
+#include "delegates/stringdelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -190,4 +191,9 @@ CustomDelegate* ObjectController::createIntegerDelegate()
 CustomDelegate* ObjectController::createDoubleDelegate()
 {
     return new DoubleDelegate(this);
+}
+
+CustomDelegate* ObjectController::createStringDelegate()
+{
+    return new StringDelegate(this);
 }

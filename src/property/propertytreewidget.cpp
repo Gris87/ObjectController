@@ -21,6 +21,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mBoolDelegate    = mController->createBoolDelegate();
     mIntegerDelegate = mController->createIntegerDelegate();
     mDoubleDelegate  = mController->createDoubleDelegate();
+    mStringDelegate  = mController->createStringDelegate();
 
     //----------------------------------------------------------------------
 
@@ -225,5 +226,10 @@ CustomDelegate* PropertyTreeWidget::integerDelegate()
 CustomDelegate* PropertyTreeWidget::doubleDelegate()
 {
     return mDoubleDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::stringDelegate()
+{
+    return mStringDelegate;
 }
 

@@ -39,6 +39,7 @@ protected:
     virtual CustomDelegate* createBoolDelegate();
     virtual CustomDelegate* createIntegerDelegate();
     virtual CustomDelegate* createDoubleDelegate();
+    virtual CustomDelegate* createStringDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);
