@@ -36,7 +36,9 @@ protected:
     virtual bool filterClass(QString &aClassName);
     virtual bool filterProperty(const QMetaObject *aMetaObject, QString aMetaPropertyName);
     virtual void propertyAdded(const QMetaObject *aMetaObject, Property *aProperty);
+    virtual CustomDelegate* createBoolDelegate();
     virtual CustomDelegate* createIntegerDelegate();
+    virtual CustomDelegate* createDoubleDelegate();
 };
 
 #endif // OBJECTCONTROLLER_H

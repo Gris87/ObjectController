@@ -67,3 +67,11 @@ void IntegerEditor::setValue(const quint64 &aValue)
 {
     ui->valueSpinBox->setValue(aValue);
 }
+
+void IntegerEditor::on_valueSpinBox_valueChanged(int aValue)
+{
+    if (mCanEmitValueChangedSignal)
+    {
+        emit valueChanged(aValue);
+    }
+}

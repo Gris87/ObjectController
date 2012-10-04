@@ -24,6 +24,8 @@ public:
     virtual void setIcon(const QIcon &aIcon);
 
 protected:
+    bool mCanEmitValueChangedSignal;
+
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
 
@@ -31,7 +33,10 @@ protected:
     virtual void selectText();
 
 private slots:
-    void selectSlot();
+    void afterCreatingSlot();
+
+signals:
+    void valueChanged(const QVariant &aNewValue);
 };
 
 #endif // CUSTOMEDITOR_H

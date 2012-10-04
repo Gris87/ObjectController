@@ -18,7 +18,11 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/editors/customeditor.h \
            $$PWD/delegates/integerdelegate.h \
            $$PWD/delegates/customdelegate.h \
-           $$PWD/editors/integereditor.h
+           $$PWD/editors/integereditor.h \
+           $$PWD/delegates/doubledelegate.h \
+           $$PWD/editors/doubleeditor.h \
+           $$PWD/editors/booleditor.h \
+           $$PWD/delegates/booldelegate.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
@@ -31,10 +35,16 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/editors/customeditor.cpp \
            $$PWD/delegates/integerdelegate.cpp \
            $$PWD/delegates/customdelegate.cpp \
-           $$PWD/editors/integereditor.cpp
+           $$PWD/editors/integereditor.cpp \
+           $$PWD/delegates/doubledelegate.cpp \
+           $$PWD/editors/doubleeditor.cpp \
+           $$PWD/editors/booleditor.cpp \
+           $$PWD/delegates/booldelegate.cpp
 
 RESOURCES += $$PWD/property.qrc
 
 FORMS += \
            $$PWD/editors/defaulteditor.ui \
-           $$PWD/editors/integereditor.ui
+           $$PWD/editors/integereditor.ui \
+           $$PWD/editors/doubleeditor.ui \
+           $$PWD/editors/booleditor.ui

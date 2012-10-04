@@ -23,12 +23,18 @@ public:
     void update(const QObjectList &aObjects);
 
     ObjectController*     controller() const;
+
+    CustomDelegate*       boolDelegate();
     CustomDelegate*       integerDelegate();
+    CustomDelegate*       doubleDelegate();
 
 protected:
     ObjectController     *mController;
     PropertyItemDelegate *mItemDelegate;
+
+    CustomDelegate       *mBoolDelegate;
     CustomDelegate       *mIntegerDelegate;
+    CustomDelegate       *mDoubleDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

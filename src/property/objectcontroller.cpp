@@ -2,7 +2,9 @@
 
 #include <QVBoxLayout>
 
+#include "delegates/booldelegate.h"
 #include "delegates/integerdelegate.h"
+#include "delegates/doubledelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -169,7 +171,17 @@ void ObjectController::propertyAdded(const QMetaObject * /*aMetaObject*/, Proper
     // Nothing
 }
 
+CustomDelegate* ObjectController::createBoolDelegate()
+{
+    return new BoolDelegate(this);
+}
+
 CustomDelegate* ObjectController::createIntegerDelegate()
 {
     return new IntegerDelegate(this);
+}
+
+CustomDelegate* ObjectController::createDoubleDelegate()
+{
+    return new DoubleDelegate(this);
 }

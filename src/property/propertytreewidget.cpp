@@ -18,7 +18,9 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
 
     //----------------------------------------------------------------------
 
-    mIntegerDelegate=mController->createIntegerDelegate();
+    mBoolDelegate    = mController->createBoolDelegate();
+    mIntegerDelegate = mController->createIntegerDelegate();
+    mDoubleDelegate  = mController->createDoubleDelegate();
 
     //----------------------------------------------------------------------
 
@@ -209,8 +211,18 @@ ObjectController* PropertyTreeWidget::controller() const
     return mController;
 }
 
+CustomDelegate* PropertyTreeWidget::boolDelegate()
+{
+    return mBoolDelegate;
+}
+
 CustomDelegate* PropertyTreeWidget::integerDelegate()
 {
     return mIntegerDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::doubleDelegate()
+{
+    return mDoubleDelegate;
 }
 

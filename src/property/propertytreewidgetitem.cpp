@@ -61,6 +61,11 @@ void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
     }
 }
 
+void PropertyTreeWidgetItem::valueChangedSlot(const QVariant &aNewValue)
+{
+    emit valueChanged(aNewValue);
+}
+
 // -------------------------------------------------------------------------------------
 
 Property* PropertyTreeWidgetItem::property()

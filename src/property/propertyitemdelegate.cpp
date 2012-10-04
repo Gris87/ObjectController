@@ -29,6 +29,8 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
         aCustomEditor=new DefaultEditor(aParent);
     }
 
+    connect(aCustomEditor, SIGNAL(valueChanged(QVariant)), aItem, SLOT(valueChangedSlot(QVariant)));
+
     return aCustomEditor;
 }
 

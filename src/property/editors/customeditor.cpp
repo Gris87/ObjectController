@@ -5,9 +5,11 @@
 CustomEditor::CustomEditor(QWidget *parent) :
     QWidget(parent)
 {
+    mCanEmitValueChangedSignal=false;
+
     setAutoFillBackground(true);
 
-    QTimer::singleShot(0, this, SLOT(selectSlot()));
+    QTimer::singleShot(0, this, SLOT(afterCreatingSlot()));
 }
 
 void CustomEditor::keyPressEvent(QKeyEvent * /*event*/)
@@ -30,8 +32,10 @@ void CustomEditor::selectText()
     // Nothing
 }
 
-void CustomEditor::selectSlot()
+void CustomEditor::afterCreatingSlot()
 {
+    mCanEmitValueChangedSignal=true;
+
     putFocus();
     selectText();
 }

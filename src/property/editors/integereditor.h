@@ -10,7 +10,7 @@ class IntegerEditor;
 class IntegerEditor : public CustomEditor
 {
     Q_OBJECT
-    
+
 public:
     explicit IntegerEditor(QWidget *parent = 0);
     ~IntegerEditor();
@@ -31,6 +31,9 @@ protected:
 
 private:
     Ui::IntegerEditor *ui;
+
+private slots:
+    void on_valueSpinBox_valueChanged(int aValue);
 };
 
 #endif // INTEGEREDITOR_H

@@ -1309,7 +1309,7 @@ CustomDelegate* Property::delegateForValue(const bool &/*aValue*/, PropertyTreeW
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->boolDelegate();
     }
 
     return 0;
@@ -1399,7 +1399,7 @@ CustomDelegate* Property::delegateForValue(const float &/*aValue*/, PropertyTree
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->doubleDelegate();
     }
 
     return 0;
@@ -1409,7 +1409,7 @@ CustomDelegate* Property::delegateForValue(const double &/*aValue*/, PropertyTre
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->doubleDelegate();
     }
 
     return 0;
