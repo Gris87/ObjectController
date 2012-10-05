@@ -24,7 +24,9 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/editors/booleditor.h \
            $$PWD/delegates/booldelegate.h \
            $$PWD/delegates/stringdelegate.h \
-           $$PWD/editors/stringeditor.h
+           $$PWD/editors/stringeditor.h \
+           $$PWD/delegates/chardelegate.h \
+           $$PWD/editors/chareditor.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
@@ -43,7 +45,9 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/editors/booleditor.cpp \
            $$PWD/delegates/booldelegate.cpp \
            $$PWD/delegates/stringdelegate.cpp \
-           $$PWD/editors/stringeditor.cpp
+           $$PWD/editors/stringeditor.cpp \
+           $$PWD/delegates/chardelegate.cpp \
+           $$PWD/editors/chareditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -52,4 +56,5 @@ FORMS += \
            $$PWD/editors/integereditor.ui \
            $$PWD/editors/doubleeditor.ui \
            $$PWD/editors/booleditor.ui \
-           $$PWD/editors/stringeditor.ui
+           $$PWD/editors/stringeditor.ui \
+           $$PWD/editors/chareditor.ui

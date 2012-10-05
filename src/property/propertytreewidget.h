@@ -25,6 +25,7 @@ public:
     ObjectController*     controller() const;
 
     CustomDelegate*       boolDelegate();
+    CustomDelegate*       charDelegate();
     CustomDelegate*       integerDelegate();
     CustomDelegate*       doubleDelegate();
     CustomDelegate*       stringDelegate();
@@ -34,6 +35,7 @@ protected:
     PropertyItemDelegate *mItemDelegate;
 
     CustomDelegate       *mBoolDelegate;
+    CustomDelegate       *mCharDelegate;
     CustomDelegate       *mIntegerDelegate;
     CustomDelegate       *mDoubleDelegate;
     CustomDelegate       *mStringDelegate;

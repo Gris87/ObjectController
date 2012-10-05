@@ -1436,7 +1436,7 @@ CustomDelegate* Property::delegateForValue(const QChar &/*aValue*/, PropertyTree
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->charDelegate();
     }
 
     return 0;

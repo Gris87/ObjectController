@@ -6,6 +6,7 @@
 #include "delegates/integerdelegate.h"
 #include "delegates/doubledelegate.h"
 #include "delegates/stringdelegate.h"
+#include "delegates/chardelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -181,6 +182,11 @@ void ObjectController::propertyAdded(const QMetaObject * /*aMetaObject*/, Proper
 CustomDelegate* ObjectController::createBoolDelegate()
 {
     return new BoolDelegate(this);
+}
+
+CustomDelegate* ObjectController::createCharDelegate()
+{
+    return new CharDelegate(this);
 }
 
 CustomDelegate* ObjectController::createIntegerDelegate()
