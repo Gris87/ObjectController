@@ -1,6 +1,6 @@
 <ui version="4.0">
- <class>BitArrayDialog</class>
- <widget class="QDialog" name="BitArrayDialog">
+ <class>BitArrayEditDialog</class>
+ <widget class="QDialog" name="BitArrayEditDialog">
   <property name="geometry">
    <rect>
     <x>0</x>

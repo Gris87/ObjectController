@@ -1,6 +1,8 @@
 #include "bitarrayeditor.h"
 #include "ui_bitarrayeditor.h"
 
+#include "../dialogs/bitarrayeditdialog.h"
+
 BitArrayEditor::BitArrayEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::BitArrayEditor)
@@ -30,12 +32,25 @@ void BitArrayEditor::setIcon(const QIcon &aIcon)
 
 void BitArrayEditor::setValue(const QBitArray &aValue)
 {
+    mValue=aValue;
+
     QString res;
 
-    for (int i=0; i<aValue.count(); ++i)
+    for (int i=0; i<mValue.count(); ++i)
     {
-        res.append(aValue.at(i) ? "1" : "0");
+        res.append(mValue.at(i) ? "1" : "0");
     }
 
     ui->valueEdit->setText(res);
+}
+
+void BitArrayEditor::on_editButton_clicked()
+{
+    BitArrayEditDialog dialog(mValue, this);
+
+    if (dialog.exec())
+    {
+        setValue(dialog.resultValue());
+        emit valueChanged(mValue);
+    }
 }

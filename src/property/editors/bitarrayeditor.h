@@ -26,6 +26,10 @@ protected:
 
 private:
     Ui::BitArrayEditor *ui;
+    QBitArray mValue;
+
+private slots:
+    void on_editButton_clicked();
 };
 
 #endif // BITARRAYEDITOR_H

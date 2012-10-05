@@ -3,6 +3,8 @@
 
 #include "customeditor.h"
 
+#include <QByteArray>
+
 namespace Ui {
 class ByteArrayEditor;
 }
@@ -24,6 +26,10 @@ protected:
 
 private:
     Ui::ByteArrayEditor *ui;
+    QByteArray mValue;
+
+private slots:
+    void on_editButton_clicked();
 };
 
 #endif // BYTEARRAYEDITOR_H

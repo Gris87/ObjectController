@@ -1,7 +1,7 @@
 #include "bytearrayeditdialog.h"
 #include "ui_bytearrayeditdialog.h"
 
-ByteArrayEditDialog::ByteArrayEditDialog(QWidget *parent) :
+ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ByteArrayEditDialog)
 {
@@ -13,7 +13,7 @@ ByteArrayEditDialog::~ByteArrayEditDialog()
     delete ui;
 }
 
-QByteArray ByteArrayDialog::resultValue() const
+QByteArray ByteArrayEditDialog::resultValue() const
 {
     QByteArray res;
 

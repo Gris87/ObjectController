@@ -14,7 +14,7 @@ class ByteArrayEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ByteArrayEditDialog(QWidget *parent = 0);
+    explicit ByteArrayEditDialog(QByteArray aValue, QWidget *parent = 0);
     ~ByteArrayEditDialog();
 
     QByteArray resultValue() const;

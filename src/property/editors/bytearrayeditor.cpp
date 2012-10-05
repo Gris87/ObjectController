@@ -1,6 +1,8 @@
 #include "bytearrayeditor.h"
 #include "ui_bytearrayeditor.h"
 
+#include "../dialogs/bytearrayeditdialog.h"
+
 ByteArrayEditor::ByteArrayEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::ByteArrayEditor)
@@ -30,5 +32,18 @@ void ByteArrayEditor::setIcon(const QIcon &aIcon)
 
 void ByteArrayEditor::setValue(const QByteArray &aValue)
 {
-    ui->valueEdit->setText(aValue.toHex().toUpper());
+    mValue=aValue;
+
+    ui->valueEdit->setText(mValue.toHex().toUpper());
+}
+
+void ByteArrayEditor::on_editButton_clicked()
+{
+    ByteArrayEditDialog dialog(mValue, this);
+
+    if (dialog.exec())
+    {
+        setValue(dialog.resultValue());
+        emit valueChanged(mValue);
+    }
 }
