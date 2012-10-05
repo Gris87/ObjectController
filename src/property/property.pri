@@ -30,7 +30,9 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/delegates/bytearraydelegate.h \
            $$PWD/delegates/bitarraydelegate.h \
            $$PWD/editors/bytearrayeditor.h \
-           $$PWD/editors/bitarrayeditor.h
+           $$PWD/editors/bitarrayeditor.h \
+           $$PWD/bytearrayeditdialog.h \
+           $$PWD/dialogs/bitarraydialog.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
@@ -55,7 +57,9 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/delegates/bytearraydelegate.cpp \
            $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/editors/bytearrayeditor.cpp \
-           $$PWD/editors/bitarrayeditor.cpp
+           $$PWD/editors/bitarrayeditor.cpp \
+           $$PWD/bytearrayeditdialog.cpp \
+           $$PWD/dialogs/bitarraydialog.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -67,4 +71,6 @@ FORMS += \
            $$PWD/editors/stringeditor.ui \
            $$PWD/editors/chareditor.ui \
            $$PWD/editors/bytearrayeditor.ui \
-           $$PWD/editors/bitarrayeditor.ui
+           $$PWD/editors/bitarrayeditor.ui \
+           $$PWD/bytearrayeditdialog.ui \
+           $$PWD/dialogs/bitarraydialog.ui
