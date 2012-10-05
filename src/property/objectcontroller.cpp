@@ -5,8 +5,10 @@
 #include "delegates/booldelegate.h"
 #include "delegates/integerdelegate.h"
 #include "delegates/doubledelegate.h"
-#include "delegates/stringdelegate.h"
 #include "delegates/chardelegate.h"
+#include "delegates/stringdelegate.h"
+#include "delegates/bytearraydelegate.h"
+#include "delegates/bitarraydelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -184,11 +186,6 @@ CustomDelegate* ObjectController::createBoolDelegate()
     return new BoolDelegate(this);
 }
 
-CustomDelegate* ObjectController::createCharDelegate()
-{
-    return new CharDelegate(this);
-}
-
 CustomDelegate* ObjectController::createIntegerDelegate()
 {
     return new IntegerDelegate(this);
@@ -199,7 +196,22 @@ CustomDelegate* ObjectController::createDoubleDelegate()
     return new DoubleDelegate(this);
 }
 
+CustomDelegate* ObjectController::createCharDelegate()
+{
+    return new CharDelegate(this);
+}
+
 CustomDelegate* ObjectController::createStringDelegate()
 {
     return new StringDelegate(this);
+}
+
+CustomDelegate* ObjectController::createByteArrayDelegate()
+{
+    return new ByteArrayDelegate(this);
+}
+
+CustomDelegate* ObjectController::createBitArrayDelegate()
+{
+    return new BitArrayDelegate(this);
 }

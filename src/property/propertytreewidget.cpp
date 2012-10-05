@@ -18,11 +18,13 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
 
     //----------------------------------------------------------------------
 
-    mBoolDelegate    = mController->createBoolDelegate();
-    mCharDelegate    = mController->createCharDelegate();
-    mIntegerDelegate = mController->createIntegerDelegate();
-    mDoubleDelegate  = mController->createDoubleDelegate();
-    mStringDelegate  = mController->createStringDelegate();
+    mBoolDelegate      = mController->createBoolDelegate();
+    mIntegerDelegate   = mController->createIntegerDelegate();
+    mDoubleDelegate    = mController->createDoubleDelegate();
+    mCharDelegate      = mController->createCharDelegate();
+    mStringDelegate    = mController->createStringDelegate();
+    mByteArrayDelegate = mController->createByteArrayDelegate();
+    mBitArrayDelegate  = mController->createBitArrayDelegate();
 
     //----------------------------------------------------------------------
 
@@ -219,11 +221,6 @@ CustomDelegate* PropertyTreeWidget::boolDelegate()
     return mBoolDelegate;
 }
 
-CustomDelegate* PropertyTreeWidget::charDelegate()
-{
-    return mCharDelegate;
-}
-
 CustomDelegate* PropertyTreeWidget::integerDelegate()
 {
     return mIntegerDelegate;
@@ -234,8 +231,22 @@ CustomDelegate* PropertyTreeWidget::doubleDelegate()
     return mDoubleDelegate;
 }
 
+CustomDelegate* PropertyTreeWidget::charDelegate()
+{
+    return mCharDelegate;
+}
+
 CustomDelegate* PropertyTreeWidget::stringDelegate()
 {
     return mStringDelegate;
 }
 
+CustomDelegate* PropertyTreeWidget::byteArrayDelegate()
+{
+    return mByteArrayDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::bitArrayDelegate()
+{
+    return mBitArrayDelegate;
+}

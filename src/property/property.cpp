@@ -1471,7 +1471,7 @@ CustomDelegate* Property::delegateForValue(const QByteArray &/*aValue*/, Propert
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->byteArrayDelegate();
     }
 
     return 0;
@@ -1481,7 +1481,7 @@ CustomDelegate* Property::delegateForValue(const QBitArray &/*aValue*/, Property
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->bitArrayDelegate();
     }
 
     return 0;

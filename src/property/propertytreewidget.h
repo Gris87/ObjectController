@@ -25,20 +25,24 @@ public:
     ObjectController*     controller() const;
 
     CustomDelegate*       boolDelegate();
-    CustomDelegate*       charDelegate();
     CustomDelegate*       integerDelegate();
     CustomDelegate*       doubleDelegate();
+    CustomDelegate*       charDelegate();
     CustomDelegate*       stringDelegate();
+    CustomDelegate*       byteArrayDelegate();
+    CustomDelegate*       bitArrayDelegate();
 
 protected:
     ObjectController     *mController;
     PropertyItemDelegate *mItemDelegate;
 
     CustomDelegate       *mBoolDelegate;
-    CustomDelegate       *mCharDelegate;
     CustomDelegate       *mIntegerDelegate;
     CustomDelegate       *mDoubleDelegate;
+    CustomDelegate       *mCharDelegate;
     CustomDelegate       *mStringDelegate;
+    CustomDelegate       *mByteArrayDelegate;
+    CustomDelegate       *mBitArrayDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

@@ -37,10 +37,12 @@ protected:
     virtual bool filterProperty(const QMetaObject *aMetaObject, QString aMetaPropertyName);
     virtual void propertyAdded(const QMetaObject *aMetaObject, Property *aProperty);
     virtual CustomDelegate* createBoolDelegate();
-    virtual CustomDelegate* createCharDelegate();
     virtual CustomDelegate* createIntegerDelegate();
     virtual CustomDelegate* createDoubleDelegate();
+    virtual CustomDelegate* createCharDelegate();
     virtual CustomDelegate* createStringDelegate();
+    virtual CustomDelegate* createByteArrayDelegate();
+    virtual CustomDelegate* createBitArrayDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

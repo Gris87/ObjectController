@@ -26,7 +26,11 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/delegates/stringdelegate.h \
            $$PWD/editors/stringeditor.h \
            $$PWD/delegates/chardelegate.h \
-           $$PWD/editors/chareditor.h
+           $$PWD/editors/chareditor.h \
+           $$PWD/delegates/bytearraydelegate.h \
+           $$PWD/delegates/bitarraydelegate.h \
+           $$PWD/editors/bytearrayeditor.h \
+           $$PWD/editors/bitarrayeditor.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
@@ -47,7 +51,11 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/delegates/stringdelegate.cpp \
            $$PWD/editors/stringeditor.cpp \
            $$PWD/delegates/chardelegate.cpp \
-           $$PWD/editors/chareditor.cpp
+           $$PWD/editors/chareditor.cpp \
+           $$PWD/delegates/bytearraydelegate.cpp \
+           $$PWD/delegates/bitarraydelegate.cpp \
+           $$PWD/editors/bytearrayeditor.cpp \
+           $$PWD/editors/bitarrayeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -57,4 +65,6 @@ FORMS += \
            $$PWD/editors/doubleeditor.ui \
            $$PWD/editors/booleditor.ui \
            $$PWD/editors/stringeditor.ui \
-           $$PWD/editors/chareditor.ui
+           $$PWD/editors/chareditor.ui \
+           $$PWD/editors/bytearrayeditor.ui \
+           $$PWD/editors/bitarrayeditor.ui
