@@ -5,6 +5,8 @@
 
 #include <QByteArray>
 
+#include "../widgets/hexeditor.h"
+
 namespace Ui {
 class ByteArrayEditDialog;
 }
@@ -21,6 +23,7 @@ public:
 
 private:
     Ui::ByteArrayEditDialog *ui;
+    HexEditor               *mHexEditor;
 
 private slots:
     void on_okButton_clicked();

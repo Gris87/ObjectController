@@ -1,15 +1,20 @@
 #include "bytearrayeditdialog.h"
 #include "ui_bytearrayeditdialog.h"
 
-#include "../widgets/hexeditor.h"
-
 ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ByteArrayEditDialog)
 {
     ui->setupUi(this);
 
-    ui->hexWidget->setData(aValue);
+    mHexEditor=new HexEditor(this);
+    mHexEditor->setData(aValue);
+
+    QPalette aPalette=mHexEditor->palette();
+    aPalette.setColor(QPalette::AlternateBase, QColor(10, 200, 90));
+    mHexEditor->setPalette(aPalette);
+
+    ui->mainLayout->insertWidget(0, mHexEditor);
 }
 
 ByteArrayEditDialog::~ByteArrayEditDialog()
@@ -19,7 +24,7 @@ ByteArrayEditDialog::~ByteArrayEditDialog()
 
 QByteArray ByteArrayEditDialog::resultValue() const
 {
-    return ui->hexWidget->data();
+    return mHexEditor->data();
 }
 
 void ByteArrayEditDialog::on_okButton_clicked()
