@@ -32,7 +32,8 @@ HEADERS += $$PWD/objectcontroller.h \
            $$PWD/editors/bytearrayeditor.h \
            $$PWD/editors/bitarrayeditor.h \
            $$PWD/dialogs/bytearrayeditdialog.h \
-           $$PWD/dialogs/bitarrayeditdialog.h
+           $$PWD/dialogs/bitarrayeditdialog.h \
+           $$PWD/widgets/hexeditor.h
 
 SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/handleobject.cpp \
@@ -59,7 +60,8 @@ SOURCES += $$PWD/objectcontroller.cpp \
            $$PWD/editors/bytearrayeditor.cpp \
            $$PWD/editors/bitarrayeditor.cpp \
            $$PWD/dialogs/bytearrayeditdialog.cpp \
-           $$PWD/dialogs/bitarrayeditdialog.cpp
+           $$PWD/dialogs/bitarrayeditdialog.cpp \
+           $$PWD/widgets/hexeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 

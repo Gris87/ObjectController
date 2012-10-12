@@ -21,6 +21,10 @@ public:
 
 private:
     Ui::ByteArrayEditDialog *ui;
+
+private slots:
+    void on_okButton_clicked();
+    void on_cancelButton_clicked();
 };
 
 #endif // BYTEARRAYEDITDIALOG_H
