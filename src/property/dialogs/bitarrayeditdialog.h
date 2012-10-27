@@ -5,6 +5,8 @@
 
 #include <QBitArray>
 
+#include "../widgets/biteditor.h"
+
 namespace Ui {
 class BitArrayEditDialog;
 }
@@ -21,6 +23,11 @@ public:
 
 private:
     Ui::BitArrayEditDialog *ui;
+    BitEditor              *mBitEditor;
+
+private slots:
+    void on_okButton_clicked();
+    void on_cancelButton_clicked();
 };
 
 #endif // BITARRAYEDITDIALOG_H
