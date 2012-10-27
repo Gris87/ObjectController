@@ -93,6 +93,9 @@ protected:
     bool       mCursorAtTheLeft;
     QTimer     mCursorTimer;
 
+    bool       mLeftButtonPressed;
+    bool       mOneMoreSelection;
+
     QUndoStack mUndoStack;
 
     void updateScrollBars();

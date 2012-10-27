@@ -32,15 +32,18 @@ TestObject::TestObject(QObject *parent) :
 
     mByteArray=QString("Maxim").toUtf8();
 
-    mBitArray.resize(8);
-    mBitArray.setBit(0, true);
-    mBitArray.setBit(1, false);
-    mBitArray.setBit(2, true);
-    mBitArray.setBit(3, false);
-    mBitArray.setBit(4, false);
-    mBitArray.setBit(5, true);
-    mBitArray.setBit(6, true);
-    mBitArray.setBit(7, false);
+    mBitArray.resize(mByteArray.length()*8);
+
+    for (int i=0; i<mByteArray.length(); ++i)
+    {
+        char aChar=mByteArray.at(i);
+
+        for (int j=0; j<8; ++j)
+        {
+            mBitArray.setBit(i*8+7-j, aChar % 2==1);
+            aChar>>=1;
+        }
+    }
 
     mDate=QDate::currentDate();
     mTime=QTime::currentTime();

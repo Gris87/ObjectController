@@ -47,7 +47,7 @@ public:
     Q_PROPERTY(QDateTime      DateTime      READ getDateTime      WRITE setDateTime)
     Q_PROPERTY(QUrl           Url           READ getUrl           WRITE setUrl)
     Q_PROPERTY(QLocale        Locale        READ getLocale        WRITE setLocale)
-    Q_PROPERTY(QRect          RectF         READ getRect          WRITE setRect)
+    Q_PROPERTY(QRect          Rect          READ getRect          WRITE setRect)
     Q_PROPERTY(QRectF         RectF         READ getRectF         WRITE setRectF)
     Q_PROPERTY(QSize          Size          READ getSize          WRITE setSize)
     Q_PROPERTY(QSizeF         SizeF         READ getSizeF         WRITE setSizeF)

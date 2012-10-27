@@ -47,6 +47,9 @@ BitEditor::BitEditor(QWidget *parent) :
     mCursorAtTheLeft=true;
     connect(&mCursorTimer, SIGNAL(timeout()), this, SLOT(cursorBlicking()));
     mCursorTimer.start(500);
+
+    mLeftButtonPressed=false;
+    mOneMoreSelection=false;
 }
 
 void BitEditor::undo()
@@ -112,7 +115,7 @@ void BitEditor::updateScrollBars()
 
 
 
-    int aTotalWidth=(mAddressWidth+13)*mCharWidth; // mAddressWidth + 1+8+1 + 1
+    int aTotalWidth=(mAddressWidth+11)*mCharWidth; // mAddressWidth + 1+8+1 + 1
     int aTotalHeight=mLinesCount*mCharHeight;
 
     if (mLinesCount>0)
@@ -172,7 +175,81 @@ void BitEditor::resizeEvent(QResizeEvent *event)
 
 void BitEditor::paintEvent(QPaintEvent */*event*/)
 {
+    QPainter painter(viewport());
+    QPalette aPalette=palette();
 
+    QColor aTextColor=aPalette.color(QPalette::Text);
+    QColor aHighlightColor=aPalette.color(QPalette::Highlight);
+    QColor aHighlightedTextColor=aPalette.color(QPalette::HighlightedText);
+    QColor aAlternateBaseColor=aPalette.color(QPalette::AlternateBase);
+
+    int aOffsetX=-horizontalScrollBar()->value();
+    int aOffsetY=-verticalScrollBar()->value();
+    int aViewWidth=viewport()->width();
+    int aViewHeight=viewport()->height();
+
+    painter.setFont(mFont);
+
+    // Line delimeters
+    {
+        painter.setPen(QColor(0, 0, 0));
+
+        int aLineX;
+
+        aLineX=mAddressWidth*mCharWidth;
+        painter.drawLine(aLineX, 0, aLineX, aViewHeight);
+
+        aLineX=(mAddressWidth+11)*mCharWidth+aOffsetX; // mAddressWidth + 1+8+1 +1
+        painter.drawLine(aLineX, 0, aLineX, aViewHeight);
+    }
+
+    // Address field at the left side
+    {
+        painter.setPen(aTextColor);
+        painter.fillRect(0, 0, mAddressWidth*mCharWidth, aViewHeight, aAlternateBaseColor);
+
+        for (int i=0; i<mLinesCount; ++i)
+        {
+            int aCharY=i*(mCharHeight+LINE_INTERVAL)+aOffsetY;
+
+            if (aCharY+mCharHeight<0)
+            {
+                continue;
+            }
+            else
+            if (aCharY>aViewHeight)
+            {
+                break;
+            }
+
+
+
+            QString aBitAddress=QString::number(i*8);
+
+            for (int j=0; j<mAddressWidth; ++j)
+            {
+                int aCharX=j*mCharWidth;
+
+                if (aCharX>aViewWidth)
+                {
+                    break;
+                }
+
+                QChar aBitChar;
+
+                if (mAddressWidth-j-1<aBitAddress.length())
+                {
+                    aBitChar=aBitAddress.at(aBitAddress.length()-mAddressWidth+j);
+                }
+                else
+                {
+                    aBitChar='0';
+                }
+
+                painter.drawText(aCharX, aCharY, mCharWidth, mCharHeight, Qt::AlignCenter, aBitChar);
+            }
+        }
+    }
 }
 
 void BitEditor::keyPressEvent(QKeyEvent *event)
