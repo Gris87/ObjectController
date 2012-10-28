@@ -30,7 +30,7 @@ TestObject::TestObject(QObject *parent) :
 
     mString="It is a string";
 
-    mByteArray=QString("Maxim").toUtf8();
+    mByteArray=QString("It is a test object. Try to edit it...").toUtf8();
 
     mBitArray.resize(mByteArray.length()*8);
 
