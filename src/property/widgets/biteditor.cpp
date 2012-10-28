@@ -190,6 +190,126 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
 
     painter.setFont(mFont);
 
+    // Draw background for chars (Selection and cursor)
+    {
+        // Check for selection
+        if (mSelectionStart!=mSelectionEnd)
+        {
+            // Draw selection
+            /*
+            int aStartRow=floor(mSelectionStart/16.0f);
+            int aStartCol=mSelectionStart % 16;
+
+            int aEndRow=floor((mSelectionEnd-1)/16.0f);
+            int aEndCol=(mSelectionEnd-1) % 16;
+
+            int aStartLeftX=(mAddressWidth+1+aStartCol*3)*mCharWidth+aOffsetX; // mAddressWidth + 1+aStartCol*3
+            int aStartRightX=(mAddressWidth+50+aStartCol)*mCharWidth+aOffsetX; // mAddressWidth + 1+16*2+15+1 + 1+aStartCol
+            int aStartY=aStartRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
+
+            int aEndLeftX=(mAddressWidth+1+aEndCol*3)*mCharWidth+aOffsetX; // mAddressWidth + 1+aEndCol*3
+            int aEndRightX=(mAddressWidth+50+aEndCol)*mCharWidth+aOffsetX; // mAddressWidth + 1+16*2+15+1 + 1+aEndCol
+            int aEndY=aEndRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
+
+            if (aStartRow==aEndRow)
+            {
+                painter.fillRect(aStartLeftX, aStartY, aEndLeftX-aStartLeftX+mCharWidth*2, mCharHeight, aHighlightColor);
+                painter.fillRect(aStartRightX, aStartY, aEndRightX-aStartRightX+mCharWidth, mCharHeight, aHighlightColor);
+            }
+            else
+            {
+                QRect aHexRect(
+                               mAddressWidth*mCharWidth+aOffsetX,
+                               (aStartRow+1)*(mCharHeight+LINE_INTERVAL)-LINE_INTERVAL+aOffsetY,
+                               49*mCharWidth,
+                               (aEndRow-aStartRow-1)*(mCharHeight+LINE_INTERVAL)+LINE_INTERVAL
+                              );
+
+                QRect aTextRect(
+                                (mAddressWidth+50)*mCharWidth+aOffsetX,
+                                (aStartRow+1)*(mCharHeight+LINE_INTERVAL)-LINE_INTERVAL+aOffsetY,
+                                16*mCharWidth,
+                                (aEndRow-aStartRow-1)*(mCharHeight+LINE_INTERVAL)+LINE_INTERVAL
+                               );
+
+                if (aEndRow>aStartRow+1)
+                {
+                    painter.fillRect(aHexRect,  aHighlightColor);
+                    painter.fillRect(aTextRect, aHighlightColor);
+                }
+
+                painter.fillRect(aStartLeftX, aStartY, aHexRect.right()-aStartLeftX+1, mCharHeight, aHighlightColor);
+                painter.fillRect(aHexRect.left(), aEndY-LINE_INTERVAL, aEndLeftX-aHexRect.left()+mCharWidth*2, mCharHeight+LINE_INTERVAL, aHighlightColor);
+
+                painter.fillRect(aStartRightX, aStartY, aTextRect.right()-aStartRightX+1, mCharHeight, aHighlightColor);
+                painter.fillRect(aTextRect.left(), aEndY-LINE_INTERVAL, aEndRightX-aTextRect.left()+mCharWidth, mCharHeight+LINE_INTERVAL, aHighlightColor);
+            }
+            */
+        }
+        else
+        {
+            // Draw cursor
+            int aCurRow=floor(mCursorPosition/8.0f);
+            int aCursorY=aCurRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
+
+            if (aCursorY+mCharHeight>=0 && aCursorY<=aViewHeight)
+            {
+                int aCurCol=mCursorPosition % 8;
+                int aCursorX=(mAddressWidth+1+aCurCol)*mCharWidth+aOffsetX; // mAddressWidth +1+aCurCol
+
+                if (
+                    (
+                     !mCursorAtTheLeft
+                     ||
+                     mCursorVisible
+                    )
+                    &&
+                    (
+                     aCursorX>=(mAddressWidth-1)*mCharWidth
+                     &&
+                     aCursorX<=aViewWidth
+                    )
+                   )
+                {
+                    if (mMode==INSERT)
+                    {
+                        painter.fillRect(aCursorX, aCursorY+mCharHeight, mCharWidth, LINE_INTERVAL, aHighlightColor);
+                    }
+                    else
+                    {
+                        painter.fillRect(aCursorX, aCursorY, mCharWidth, mCharHeight, aHighlightColor);
+                    }
+                }
+
+                aCursorX=(mAddressWidth+11)*mCharWidth+aOffsetX; // mAddressWidth +1+8+1 +1
+
+                if (
+                    (
+                     mCursorAtTheLeft
+                     ||
+                     mCursorVisible
+                    )
+                    &&
+                    (
+                     aCursorX>=(mAddressWidth-1)*mCharWidth
+                     &&
+                     aCursorX<=aViewWidth
+                    )
+                   )
+                {
+                    if (mMode==INSERT)
+                    {
+                        painter.fillRect(aCursorX, aCursorY+mCharHeight, mCharWidth, LINE_INTERVAL, aHighlightColor);
+                    }
+                    else
+                    {
+                        painter.fillRect(aCursorX, aCursorY, mCharWidth, mCharHeight, aHighlightColor);
+                    }
+                }
+            }
+        }
+    }
+
     // Bit data and ASCII characters
     {
         int aDataSize=mData.size();
@@ -371,7 +491,84 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
 
 void BitEditor::keyPressEvent(QKeyEvent *event)
 {
+    // =======================================================================================
+    //                                     Movements
+    // =======================================================================================
+    if (event->matches(QKeySequence::MoveToPreviousChar))
+    {
+        if (mCursorAtTheLeft)
+        {
+            setCursorPosition(mCursorPosition-1);
+        }
+        else
+        {
+            setPosition(position()-1);
+        }
 
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToNextChar))
+    {
+        if (mCursorAtTheLeft)
+        {
+            setCursorPosition(mCursorPosition+1);
+        }
+        else
+        {
+            setPosition(position()+1);
+        }
+
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToPreviousLine))
+    {
+        setCursorPosition(mCursorPosition-8);
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToNextLine))
+    {
+        setCursorPosition(mCursorPosition+8);
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToStartOfLine))
+    {
+        setCursorPosition(mCursorPosition-(mCursorPosition % 8));
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToEndOfLine))
+    {
+        setCursorPosition(mCursorPosition | 7);
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToPreviousPage))
+    {
+        setCursorPosition(mCursorPosition-viewport()->height()/(mCharHeight+LINE_INTERVAL)*8);
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToNextPage))
+    {
+        setCursorPosition(mCursorPosition+viewport()->height()/(mCharHeight+LINE_INTERVAL)*8);
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToStartOfDocument))
+    {
+        setCursorPosition(0);
+        cursorMoved(false);
+    }
+    else
+    if (event->matches(QKeySequence::MoveToEndOfDocument))
+    {
+        setCursorPosition(mData.size());
+        cursorMoved(false);
+    }
 }
 
 void BitEditor::mousePressEvent(QMouseEvent *event)
@@ -500,14 +697,14 @@ void BitEditor::setReadOnly(const bool &aReadOnly)
 
 int BitEditor::position() const
 {
-    return mCursorPosition>>1;
+    return mCursorPosition>>3;
 }
 
 void BitEditor::setPosition(int aPosition)
 {
-    if ((mCursorPosition>>1)!=aPosition)
+    if ((mCursorPosition>>3)!=aPosition)
     {
-        setCursorPosition(aPosition<<1);
+        setCursorPosition(aPosition<<3);
     }
 }
 
@@ -523,22 +720,17 @@ void BitEditor::setCursorPosition(qint64 aCursorPos)
         aCursorPos=0;
     }
     else
-    if (aCursorPos>mData.size()<<1)
+    if (aCursorPos>mData.size())
     {
-        aCursorPos=mData.size()<<1;
+        aCursorPos=mData.size();
     }
 
     if (mCursorPosition!=aCursorPos)
     {
-        bool aSamePos=((mCursorPosition>>1)==(aCursorPos>>1));
-
         mCursorPosition=aCursorPos;
         viewport()->update();
 
-        if (!aSamePos)
-        {
-            emit positionChanged(mCursorPosition>>1);
-        }
+         emit positionChanged(mCursorPosition);
     }
 }
 
