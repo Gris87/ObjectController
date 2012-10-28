@@ -100,12 +100,12 @@ void HexEditor::scrollToCursor()
 
     if (mCursorAtTheLeft)
     {
-        aCursorX=(mAddressWidth+2+aCurCol*3)*mCharWidth; // (mAddressWidth+1+aCurCol*3)*mCharWidth+mCharWidth
+        aCursorX=(mAddressWidth+1+aCurCol*3)*mCharWidth; // mAddressWidth + 1+aCurCol*3
         aCursorWidth=2*mCharWidth;
     }
     else
     {
-        aCursorX=(mAddressWidth+50+aCurCol)*mCharWidth;
+        aCursorX=(mAddressWidth+50+aCurCol)*mCharWidth; // mAddressWidth + 1+16*2+15+1 + 1+aCurCol
         aCursorWidth=mCharWidth;
     }
 
@@ -126,9 +126,9 @@ void HexEditor::scrollToCursor()
         verticalScrollBar()->setValue(aCursorY);
     }
     else
-    if (aCursorY+mCharHeight>aOffsetY+aViewHeight)
+    if (aCursorY+mCharHeight+LINE_INTERVAL>aOffsetY+aViewHeight)
     {
-        verticalScrollBar()->setValue(aCursorY+mCharHeight-aViewHeight);
+        verticalScrollBar()->setValue(aCursorY+mCharHeight+LINE_INTERVAL-aViewHeight);
     }
 }
 
@@ -599,12 +599,12 @@ void HexEditor::paintEvent(QPaintEvent * /*event*/)
             int aEndRow=floor((mSelectionEnd-1)/16.0f);
             int aEndCol=(mSelectionEnd-1) % 16;
 
-            int aStartLeftX=(mAddressWidth+1+aStartCol*3)*mCharWidth+aOffsetX;
-            int aStartRightX=(mAddressWidth+50+aStartCol)*mCharWidth+aOffsetX;
+            int aStartLeftX=(mAddressWidth+1+aStartCol*3)*mCharWidth+aOffsetX; // mAddressWidth + 1+aStartCol*3
+            int aStartRightX=(mAddressWidth+50+aStartCol)*mCharWidth+aOffsetX; // mAddressWidth + 1+16*2+15+1 + 1+aStartCol
             int aStartY=aStartRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
 
-            int aEndLeftX=(mAddressWidth+1+aEndCol*3)*mCharWidth+aOffsetX;
-            int aEndRightX=(mAddressWidth+50+aEndCol)*mCharWidth+aOffsetX;
+            int aEndLeftX=(mAddressWidth+1+aEndCol*3)*mCharWidth+aOffsetX; // mAddressWidth + 1+aEndCol*3
+            int aEndRightX=(mAddressWidth+50+aEndCol)*mCharWidth+aOffsetX; // mAddressWidth + 1+16*2+15+1 + 1+aEndCol
             int aEndY=aEndRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
 
             if (aStartRow==aEndRow)

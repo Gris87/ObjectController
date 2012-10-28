@@ -115,7 +115,7 @@ void BitEditor::updateScrollBars()
 
 
 
-    int aTotalWidth=(mAddressWidth+11)*mCharWidth; // mAddressWidth + 1+8+1 + 1
+    int aTotalWidth=(mAddressWidth+12)*mCharWidth; // mAddressWidth + 1+8+1 + 1+1
     int aTotalHeight=mLinesCount*mCharHeight;
 
     if (mLinesCount>0)
@@ -190,6 +190,123 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
 
     painter.setFont(mFont);
 
+    // Bit data and ASCII characters
+    {
+        int aDataSize=mData.size();
+        int aCurRow=0;
+        int aCurCol=0;
+
+        for (int i=0; i<aDataSize; ++i)
+        {
+            int aCharY=aCurRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
+
+            if (aCharY+mCharHeight<0)
+            {
+                i+=7;
+                ++aCurRow;
+                continue;
+            }
+            else
+            if (aCharY>aViewHeight)
+            {
+                break;
+            }
+
+            // -----------------------------------------------------------------------------------------------------------------
+
+            int aCharX=(mAddressWidth+1+aCurCol)*mCharWidth+aOffsetX; // mAddressWidth + 1+aCurCol
+
+            if (aCharX>=(mAddressWidth-1)*mCharWidth && aCharX<=aViewWidth)
+            {
+                if (i>=mSelectionStart && i<mSelectionEnd)
+                {
+                    painter.setPen(aHighlightedTextColor);
+                }
+                else
+                {
+                    painter.setPen(aTextColor);
+                }
+
+                if (i==mSelectionStart && i==mSelectionEnd && mMode==OVERWRITE)
+                {
+                    if (mCursorAtTheLeft && !mCursorVisible)
+                    {
+                        painter.setPen(aTextColor);
+                    }
+                    else
+                    {
+                        painter.setPen(aHighlightedTextColor);
+                    }
+                }
+
+                painter.drawText(aCharX, aCharY, mCharWidth, mCharHeight, Qt::AlignCenter, mData.at(i) ? "1" : "0");
+            }
+
+            // -----------------------------------------------------------------------------------------------------------------
+
+            if (aCurCol==7 || i==aDataSize-1)
+            {
+                aCharX=(mAddressWidth+11)*mCharWidth+aOffsetX; // mAddressWidth + 1+8+1 + 1
+
+                if (aCharX>=(mAddressWidth-1)*mCharWidth && aCharX<=aViewWidth)
+                {
+                    if (
+                        (
+                         i==mSelectionStart
+                         &&
+                         i==mSelectionEnd
+                         &&
+                         mMode==OVERWRITE
+                         &&
+                         (
+                          mCursorAtTheLeft
+                          ||
+                          mCursorVisible
+                         )
+                        )
+                        ||
+                        (
+                         i>=mSelectionStart
+                         &&
+                         i<mSelectionEnd
+                        )
+                       )
+                    {
+                        painter.setPen(aHighlightedTextColor);
+                    }
+                    else
+                    {
+                        painter.setPen(aTextColor);
+                    }
+
+                    quint8 aAsciiChar=0;
+
+                    for (int j=0; j<=aCurCol; ++j)
+                    {
+                        aAsciiChar<<=1;
+
+                        if (mData.at(i-aCurCol+j))
+                        {
+                            aAsciiChar|=1;
+                        }
+                    }
+
+                    painter.drawText(aCharX, aCharY, mCharWidth, mCharHeight, Qt::AlignCenter, mAsciiChars.at(aAsciiChar));
+                }
+            }
+
+            // -----------------------------------------------------------------------------------------------------------------
+
+            ++aCurCol;
+
+            if (aCurCol==8)
+            {
+                ++aCurRow;
+                aCurCol=0;
+            }
+        }
+    }
+
     // Line delimeters
     {
         painter.setPen(QColor(0, 0, 0));
@@ -199,7 +316,7 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
         aLineX=mAddressWidth*mCharWidth;
         painter.drawLine(aLineX, 0, aLineX, aViewHeight);
 
-        aLineX=(mAddressWidth+11)*mCharWidth+aOffsetX; // mAddressWidth + 1+8+1 +1
+        aLineX=(mAddressWidth+10)*mCharWidth+aOffsetX; // mAddressWidth + 1+8+1
         painter.drawLine(aLineX, 0, aLineX, aViewHeight);
     }
 
