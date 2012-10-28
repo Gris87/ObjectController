@@ -43,6 +43,7 @@ public:
 
 
     void scrollToCursor();
+    int charAt(QPoint aPos, bool *aAtLeftPart=0);
     void copy();
 
     // ------------------------------------------------------------------

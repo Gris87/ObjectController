@@ -84,12 +84,18 @@ void BitEditor::cursorBlicking()
 
 void BitEditor::scrollToCursor()
 {
+    // TODO: Implement scrollToCursor
+}
 
+int BitEditor::charAt(QPoint aPos, bool *aAtLeftPart)
+{
+    // TODO: Implement charAt
+    return 0;
 }
 
 void BitEditor::copy()
 {
-
+    // TODO: Implement copy
 }
 
 // ------------------------------------------------------------------
@@ -729,7 +735,6 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
 
 void BitEditor::mousePressEvent(QMouseEvent *event)
 {
-    /*
     mLeftButtonPressed=(event->button()==Qt::LeftButton);
 
     if (mLeftButtonPressed)
@@ -739,9 +744,9 @@ void BitEditor::mousePressEvent(QMouseEvent *event)
 
         if (aShift)
         {
-            if ((aPosition>>1)>=mSelectionInit)
+            if (aPosition>=mSelectionInit)
             {
-                aPosition+=2;
+                ++aPosition;
             }
             else
             {
@@ -752,21 +757,19 @@ void BitEditor::mousePressEvent(QMouseEvent *event)
         setCursorPosition(aPosition);
         cursorMoved(aShift);
     }
-    */
 
     QAbstractScrollArea::mousePressEvent(event);
 }
 
 void BitEditor::mouseMoveEvent(QMouseEvent *event)
 {
-    /*
     if (mLeftButtonPressed)
     {
         int aPosition=charAt(event->pos(), &mCursorAtTheLeft);
 
-        if ((aPosition>>1)>=mSelectionInit)
+        if (aPosition>=mSelectionInit)
         {
-            aPosition+=2;
+            ++aPosition;
         }
         else
         {
@@ -776,7 +779,6 @@ void BitEditor::mouseMoveEvent(QMouseEvent *event)
         setCursorPosition(aPosition);
         cursorMoved(true);
     }
-    */
 
     QAbstractScrollArea::mouseMoveEvent(event);
 }
