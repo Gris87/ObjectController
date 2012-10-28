@@ -36,7 +36,7 @@ HexEditor::HexEditor(QWidget *parent) :
     mReadOnly=false;
     mCursorPosition=0;
 
-    mFont=QFont("Courier new", 1);     //Special action to calculate mCharWidth and mCharHeight at the next step
+    mFont=QFont("Courier new", 1);     // Special action to calculate mCharWidth and mCharHeight at the next step
     setFont(QFont("Courier new", 10));
 
     mSelectionStart=0;
@@ -455,7 +455,7 @@ void HexEditor::updateScrollBars()
 
     if (mAddressWidth==0)
     {
-        ++mAddressWidth;
+        mAddressWidth=1;
     }
 
     mLinesCount=floor(aDataSize/16.0f);
