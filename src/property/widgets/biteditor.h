@@ -44,7 +44,19 @@ public:
 
     void scrollToCursor();
     int charAt(QPoint aPos, bool *aAtLeftPart=0);
+    int indexOf(const QBitArray &aArray, int aFrom=0) const;
+    int lastIndexOf(const QBitArray &aArray, int aFrom=0) const;
+    void insert(int aIndex, bool aBool);
+    void insert(int aIndex, const QBitArray &aArray);
+    void remove(int aPos, int aLength=1);
+    void replace(int aPos, bool aBool);
+    void replace(int aPos, const QBitArray &aArray);
+    void replace(int aPos, int aLength, const QBitArray &aArray);
+    void setSelection(int aPos, int aCount);
+    void cut();
     void copy();
+    void paste();
+    QString toString();
 
     // ------------------------------------------------------------------
 

@@ -84,18 +84,237 @@ void BitEditor::cursorBlicking()
 
 void BitEditor::scrollToCursor()
 {
-    // TODO: Implement scrollToCursor
+    int aOffsetX=horizontalScrollBar()->value();
+    int aOffsetY=verticalScrollBar()->value();
+    int aViewWidth=viewport()->width();
+    int aViewHeight=viewport()->height();
+
+
+
+    int aCurCol=(mCursorPosition % 8);
+    int aCurRow=floor(mCursorPosition/8.0f);
+
+    int aCursorX;
+    int aCursorY=aCurRow*(mCharHeight+LINE_INTERVAL);
+
+    if (mCursorAtTheLeft)
+    {
+        aCursorX=(mAddressWidth+1+aCurCol)*mCharWidth; // mAddressWidth + 1+aCurCol
+    }
+    else
+    {
+        aCursorX=(mAddressWidth+11)*mCharWidth;        // mAddressWidth +1+8+1 +1
+    }
+
+
+
+    if (aCursorX-mAddressWidth*mCharWidth<aOffsetX)
+    {
+        horizontalScrollBar()->setValue(aCursorX-mAddressWidth*mCharWidth);
+    }
+    else
+    if (aCursorX+mCharWidth>aOffsetX+aViewWidth)
+    {
+        horizontalScrollBar()->setValue(aCursorX+mCharWidth-aViewWidth);
+    }
+
+    if (aCursorY<aOffsetY)
+    {
+        verticalScrollBar()->setValue(aCursorY);
+    }
+    else
+    if (aCursorY+mCharHeight+LINE_INTERVAL>aOffsetY+aViewHeight)
+    {
+        verticalScrollBar()->setValue(aCursorY+mCharHeight+LINE_INTERVAL-aViewHeight);
+    }
 }
 
 int BitEditor::charAt(QPoint aPos, bool *aAtLeftPart)
 {
-    // TODO: Implement charAt
-    return 0;
+    int aOffsetX=horizontalScrollBar()->value();
+    int aOffsetY=verticalScrollBar()->value();
+
+    int aRow         = floor((aPos.y()+aOffsetY)/((double)(mCharHeight+LINE_INTERVAL)));
+    int aLeftColumn  = (int)floor((aPos.x()+aOffsetX-(mAddressWidth+1)*mCharWidth)/((double)mCharWidth));
+    int aRightColumn = floor((aPos.x()+aOffsetX-(mAddressWidth+11)*mCharWidth)/((double)mCharWidth));
+
+    if (aAtLeftPart)
+    {
+        *aAtLeftPart=true;
+    }
+
+    if (aLeftColumn<0)
+    {
+        return aRow*8;
+    }
+    else
+    if (aLeftColumn>=8)
+    {
+        if (aAtLeftPart)
+        {
+            *aAtLeftPart=false;
+        }
+
+        if (aRightColumn<0)
+        {
+            return aRow*8;
+        }
+        else
+        if (aRightColumn>=1)
+        {
+            return aRow*8+7;
+        }
+
+        return aRow*8;
+    }
+    else
+    {
+        return aRow*8+aLeftColumn;
+    }
+}
+
+int BitEditor::indexOf(const QBitArray &aArray, int aFrom) const
+{
+    return -1;
+}
+
+int BitEditor::lastIndexOf(const QBitArray &aArray, int aFrom) const
+{
+    return -1;
+}
+
+void BitEditor::insert(int aIndex, bool aBool)
+{
+
+}
+
+void BitEditor::insert(int aIndex, const QBitArray &aArray)
+{
+
+}
+
+void BitEditor::remove(int aPos, int aLength)
+{
+
+}
+
+void BitEditor::replace(int aPos, bool aBool)
+{
+
+}
+
+void BitEditor::replace(int aPos, const QBitArray &aArray)
+{
+
+}
+
+void BitEditor::replace(int aPos, int aLength, const QBitArray &aArray)
+{
+
+}
+
+void BitEditor::setSelection(int aPos, int aCount)
+{
+
+}
+
+void BitEditor::cut()
+{
+    copy();
+
+    if (mSelectionStart==mSelectionEnd)
+    {
+        remove(mSelectionStart, 1);
+    }
+    else
+    {
+        remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+    }
+
+    setPosition(mSelectionStart);
+    cursorMoved(false);
 }
 
 void BitEditor::copy()
 {
-    // TODO: Implement copy
+    QString aToClipboard;
+
+    if (mCursorAtTheLeft)
+    {
+        if (mSelectionStart==mSelectionEnd)
+        {
+            if (mSelectionStart<mData.size())
+            {
+                bool aBool=mData.at(mSelectionStart);
+                aToClipboard=aBool? "1" : "0";
+            }
+        }
+        else
+        {
+            for (int i=mSelectionStart; i<mSelectionEnd && i<mData.size(); ++i)
+            {
+                bool aBool=mData.at(i);
+                QString aBitChar=aBool? "1" : "0";
+
+                aToClipboard.append(aBitChar);
+            }
+        }
+    }
+    else
+    {
+        if (mSelectionStart==mSelectionEnd)
+        {
+            if (mSelectionStart<mData.size())
+            {
+                int aRow=floor(mSelectionStart/8.0f);
+                int aCurChar=aRow<<3;
+                int aCurCol=mSelectionStart-aRow<<3;
+
+                if (aCurCol>7)
+                {
+                    aCurCol=7;
+                }
+
+                char aChar=0;
+
+                for (int i=0; i<=aCurCol; ++i)
+                {
+                    aChar<<=1;
+
+                    if (mData.at(aCurChar-aCurCol+i))
+                    {
+                        aChar|=1;
+                    }
+                }
+
+                aToClipboard=QString::fromLatin1(&aChar, 1);
+            }
+        }
+        else
+        {
+            for (int i=mSelectionStart; i<mSelectionEnd && i<mData.size(); ++i)
+            {
+                char aChar=mData.at(i);
+
+                if (aChar)
+                {
+                    aToClipboard.append(QString::fromLatin1(&aChar, 1));
+                }
+            }
+        }
+    }
+
+    QApplication::clipboard()->setText(aToClipboard);
+}
+
+void BitEditor::paste()
+{
+
+}
+
+QString BitEditor::toString()
+{
+    return "";
 }
 
 // ------------------------------------------------------------------
@@ -117,12 +336,7 @@ void BitEditor::updateScrollBars()
         mAddressWidth=1;
     }
 
-    mLinesCount=floor(aDataSize/8.0f);
-
-    if (aDataSize % 8!=0)
-    {
-        ++mLinesCount;
-    }
+    mLinesCount=floor(aDataSize/8.0f)+1;
 
 
 

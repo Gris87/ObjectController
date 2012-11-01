@@ -447,7 +447,7 @@ void HexEditor::updateScrollBars()
     int aDataSize=mData.size();
     int aCurSize=1;
 
-    while (aCurSize<aDataSize)
+    while (aCurSize<=aDataSize)
     {
         ++mAddressWidth;
         aCurSize<<=4;
@@ -458,12 +458,7 @@ void HexEditor::updateScrollBars()
         mAddressWidth=1;
     }
 
-    mLinesCount=floor(aDataSize/16.0f);
-
-    if (aDataSize % 16!=0)
-    {
-        ++mLinesCount;
-    }
+    mLinesCount=floor(aDataSize/16.0f)+1;
 
 
 
