@@ -175,47 +175,108 @@ int BitEditor::charAt(QPoint aPos, bool *aAtLeftPart)
 
 int BitEditor::indexOf(const QBitArray &aArray, int aFrom) const
 {
+    if (aFrom<0)
+    {
+        aFrom=0;
+    }
+
+    for (int i=aFrom; i<=mData.size()-aArray.size(); ++i)
+    {
+        bool good=true;
+
+        for (int j=0; j<aArray.size(); ++j)
+        {
+            if (mData.at(i+j)!=aArray.at(j))
+            {
+                good=false;
+                break;
+            }
+        }
+
+        if (good)
+        {
+            return i;
+        }
+    }
+
     return -1;
 }
 
 int BitEditor::lastIndexOf(const QBitArray &aArray, int aFrom) const
 {
+    if (aFrom<=0 || aFrom>mData.size()-aArray.size())
+    {
+        aFrom=mData.size()-aArray.size();
+    }
+
+    for (int i=aFrom; i>=0; --i)
+    {
+        bool good=true;
+
+        for (int j=0; j<aArray.size(); ++j)
+        {
+            if (mData.at(i+j)!=aArray.at(j))
+            {
+                good=false;
+                break;
+            }
+        }
+
+        if (good)
+        {
+            return i;
+        }
+    }
+
     return -1;
 }
 
 void BitEditor::insert(int aIndex, bool aBool)
 {
-
+    // TODO: Implement insert
 }
 
 void BitEditor::insert(int aIndex, const QBitArray &aArray)
 {
-
+    // TODO: Implement insert
 }
 
 void BitEditor::remove(int aPos, int aLength)
 {
-
+    // TODO: Implement remove
 }
 
 void BitEditor::replace(int aPos, bool aBool)
 {
-
+    // TODO: Implement replace
 }
 
 void BitEditor::replace(int aPos, const QBitArray &aArray)
 {
-
+    // TODO: Implement replace
 }
 
 void BitEditor::replace(int aPos, int aLength, const QBitArray &aArray)
 {
-
+    // TODO: Implement replace
 }
 
 void BitEditor::setSelection(int aPos, int aCount)
 {
+    if (aCount<0)
+    {
+        aCount=0;
+    }
 
+    qint64 aPrevPos=mCursorPosition;
+
+    mCursorPosition=aPos;
+    resetSelection();
+
+    mCursorPosition+=(aCount+1);
+    updateSelection();
+
+    mCursorPosition=aPrevPos;
 }
 
 void BitEditor::cut()
@@ -309,11 +370,12 @@ void BitEditor::copy()
 
 void BitEditor::paste()
 {
-
+    // TODO: Implement paste
 }
 
 QString BitEditor::toString()
 {
+    // TODO: Implement toString
     return "";
 }
 
