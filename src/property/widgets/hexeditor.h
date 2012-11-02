@@ -10,8 +10,8 @@ class HexEditor : public QAbstractScrollArea
 {
     Q_OBJECT
 
-    friend class SingleUndoCommand;
-    friend class MultipleUndoCommand;
+    friend class SingleHexUndoCommand;
+    friend class MultipleHexUndoCommand;
 
 public:
     Q_PROPERTY(QByteArray   Data                     READ data                     WRITE setData)
@@ -145,7 +145,7 @@ signals:
 
 // *********************************************************************************
 
-class SingleUndoCommand : public QUndoCommand
+class SingleHexUndoCommand : public QUndoCommand
 {
 public:
     enum Type
@@ -155,7 +155,7 @@ public:
         Replace
     };
 
-    SingleUndoCommand(HexEditor *aEditor, Type aType, int aPos, char aNewChar=0, QUndoCommand *parent=0);
+    SingleHexUndoCommand(HexEditor *aEditor, Type aType, int aPos, char aNewChar=0, QUndoCommand *parent=0);
 
     void undo();
     void redo();
@@ -173,7 +173,7 @@ private:
 
 // *********************************************************************************
 
-class MultipleUndoCommand : public QUndoCommand
+class MultipleHexUndoCommand : public QUndoCommand
 {
 public:
     enum Type
@@ -183,7 +183,7 @@ public:
         Replace
     };
 
-    MultipleUndoCommand(HexEditor *aEditor, Type aType, int aPos, int aLength, QByteArray aNewArray=QByteArray(), QUndoCommand *parent=0);
+    MultipleHexUndoCommand(HexEditor *aEditor, Type aType, int aPos, int aLength, QByteArray aNewArray=QByteArray(), QUndoCommand *parent=0);
 
     void undo();
     void redo();

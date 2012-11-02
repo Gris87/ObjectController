@@ -207,7 +207,7 @@ int HexEditor::lastIndexOf(const char &aChar, int aFrom) const
 
 void HexEditor::insert(int aIndex, char aChar)
 {
-    SingleUndoCommand *aCommand=new SingleUndoCommand(this, SingleUndoCommand::Insert, aIndex, aChar);
+    SingleHexUndoCommand *aCommand=new SingleHexUndoCommand(this, SingleHexUndoCommand::Insert, aIndex, aChar);
     mUndoStack.push(aCommand);
     emit dataChanged();
 
@@ -225,15 +225,15 @@ void HexEditor::insert(int aIndex, const QByteArray &aArray)
         return;
     }
 
-    MultipleUndoCommand *aCommand;
+    MultipleHexUndoCommand *aCommand;
 
     if (mMode==INSERT)
     {
-        aCommand=new MultipleUndoCommand(this, MultipleUndoCommand::Insert, aIndex, aArray.length(), aArray);
+        aCommand=new MultipleHexUndoCommand(this, MultipleHexUndoCommand::Insert, aIndex, aArray.length(), aArray);
     }
     else
     {
-        aCommand=new MultipleUndoCommand(this, MultipleUndoCommand::Replace, aIndex, aArray.length(), aArray);
+        aCommand=new MultipleHexUndoCommand(this, MultipleHexUndoCommand::Replace, aIndex, aArray.length(), aArray);
     }
 
     mUndoStack.push(aCommand);
@@ -259,23 +259,23 @@ void HexEditor::remove(int aPos, int aLength)
     {
         if (mMode==INSERT)
         {
-            aCommand=new SingleUndoCommand(this, SingleUndoCommand::Remove, aPos);
+            aCommand=new SingleHexUndoCommand(this, SingleHexUndoCommand::Remove, aPos);
         }
         else
         {
-            aCommand=new SingleUndoCommand(this, SingleUndoCommand::Replace, aPos, 0);
+            aCommand=new SingleHexUndoCommand(this, SingleHexUndoCommand::Replace, aPos, 0);
         }
     }
     else
     {
         if (mMode==INSERT)
         {
-            aCommand=new MultipleUndoCommand(this, MultipleUndoCommand::Remove, aPos, aLength);
+            aCommand=new MultipleHexUndoCommand(this, MultipleHexUndoCommand::Remove, aPos, aLength);
         }
         else
         {
             QByteArray aArray=QByteArray(aLength, 0);
-            aCommand=new MultipleUndoCommand(this, MultipleUndoCommand::Replace, aPos, aLength, aArray);
+            aCommand=new MultipleHexUndoCommand(this, MultipleHexUndoCommand::Replace, aPos, aLength, aArray);
         }
     }
 
@@ -291,7 +291,7 @@ void HexEditor::remove(int aPos, int aLength)
 
 void HexEditor::replace(int aPos, char aChar)
 {
-    SingleUndoCommand *aCommand=new SingleUndoCommand(this, SingleUndoCommand::Replace, aPos, aChar);
+    SingleHexUndoCommand *aCommand=new SingleHexUndoCommand(this, SingleHexUndoCommand::Replace, aPos, aChar);
     mUndoStack.push(aCommand);
     emit dataChanged();
 
@@ -304,7 +304,7 @@ void HexEditor::replace(int aPos, char aChar)
 
 void HexEditor::replace(int aPos, const QByteArray &aArray)
 {
-    MultipleUndoCommand *aCommand=new MultipleUndoCommand(this, MultipleUndoCommand::Replace, aPos, aArray.length(), aArray);
+    MultipleHexUndoCommand *aCommand=new MultipleHexUndoCommand(this, MultipleHexUndoCommand::Replace, aPos, aArray.length(), aArray);
     mUndoStack.push(aCommand);
     emit dataChanged();
 
@@ -317,7 +317,7 @@ void HexEditor::replace(int aPos, const QByteArray &aArray)
 
 void HexEditor::replace(int aPos, int aLength, const QByteArray &aArray)
 {
-    MultipleUndoCommand *aCommand=new MultipleUndoCommand(this, MultipleUndoCommand::Replace, aPos, aLength, aArray);
+    MultipleHexUndoCommand *aCommand=new MultipleHexUndoCommand(this, MultipleHexUndoCommand::Replace, aPos, aLength, aArray);
     mUndoStack.push(aCommand);
     emit dataChanged();
 
@@ -1503,10 +1503,10 @@ bool HexEditor::isCursorAtTheLeft()
 }
 
 // *********************************************************************************
-//                                 SingleUndoCommand
+//                                 SingleHexUndoCommand
 // *********************************************************************************
 
-SingleUndoCommand::SingleUndoCommand(HexEditor *aEditor, Type aType, int aPos, char aNewChar, QUndoCommand *parent) :
+SingleHexUndoCommand::SingleHexUndoCommand(HexEditor *aEditor, Type aType, int aPos, char aNewChar, QUndoCommand *parent) :
     QUndoCommand(parent)
 {
     mEditor=aEditor;
@@ -1515,7 +1515,7 @@ SingleUndoCommand::SingleUndoCommand(HexEditor *aEditor, Type aType, int aPos, c
     mNewChar=aNewChar;
 }
 
-void SingleUndoCommand::undo()
+void SingleHexUndoCommand::undo()
 {
     switch (mType)
     {
@@ -1541,7 +1541,7 @@ void SingleUndoCommand::undo()
     mEditor->setCursorPosition(mPrevPosition);
 }
 
-void SingleUndoCommand::redo()
+void SingleHexUndoCommand::redo()
 {
     mPrevPosition=mEditor->mCursorPosition;
 
@@ -1569,9 +1569,9 @@ void SingleUndoCommand::redo()
     }
 }
 
-bool SingleUndoCommand::mergeWith(const QUndoCommand *command)
+bool SingleHexUndoCommand::mergeWith(const QUndoCommand *command)
 {
-    SingleUndoCommand *aAnotherCommand=(SingleUndoCommand *)command;
+    SingleHexUndoCommand *aAnotherCommand=(SingleHexUndoCommand *)command;
 
     if (
         mType!=Remove
@@ -1588,16 +1588,16 @@ bool SingleUndoCommand::mergeWith(const QUndoCommand *command)
     return false;
 }
 
-int SingleUndoCommand::id() const
+int SingleHexUndoCommand::id() const
 {
     return 1;
 }
 
 // *********************************************************************************
-//                                MultipleUndoCommand
+//                                MultipleHexUndoCommand
 // *********************************************************************************
 
-MultipleUndoCommand::MultipleUndoCommand(HexEditor *aEditor, Type aType, int aPos, int aLength, QByteArray aNewArray, QUndoCommand *parent) :
+MultipleHexUndoCommand::MultipleHexUndoCommand(HexEditor *aEditor, Type aType, int aPos, int aLength, QByteArray aNewArray, QUndoCommand *parent) :
     QUndoCommand(parent)
 {
     mEditor=aEditor;
@@ -1607,7 +1607,7 @@ MultipleUndoCommand::MultipleUndoCommand(HexEditor *aEditor, Type aType, int aPo
     mNewArray=aNewArray;
 }
 
-void MultipleUndoCommand::undo()
+void MultipleHexUndoCommand::undo()
 {
     switch (mType)
     {
@@ -1631,7 +1631,7 @@ void MultipleUndoCommand::undo()
     mEditor->setCursorPosition(mPrevPosition);
 }
 
-void MultipleUndoCommand::redo()
+void MultipleHexUndoCommand::redo()
 {
     mPrevPosition=mEditor->mCursorPosition;
 

@@ -1040,7 +1040,55 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
     else
     if (!mReadOnly)
     {
+        if (event->matches(QKeySequence::Undo))
+        {
+            undo();
+        }
+        else
+        if (event->matches(QKeySequence::Redo))
+        {
+            redo();
+        }
+        else
+        if (event->matches(QKeySequence::Delete))
+        {
+            // TODO: Implement Delete handling
+        }
+        else
+        if ((event->key() == Qt::Key_Backspace) && (event->modifiers() == Qt::NoModifier))
+        {
+            // TODO: Implement Backspace handling
+        }
+        else
+        if (event->matches(QKeySequence::Cut))
+        {
+            cut();
+        }
+        else
+        if (event->matches(QKeySequence::Paste))
+        {
+            paste();
+        }
+        else
+        {
+            QString aKeyText=event->text();
 
+            if (aKeyText.length()>0)
+            {
+                char aKey=aKeyText.at(0).toLatin1();
+
+                // TODO: Handle pressing edit buttons
+
+                if (mCursorAtTheLeft)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+        }
     }
 }
 
@@ -1267,4 +1315,68 @@ int BitEditor::selectionEnd()
 bool BitEditor::isCursorAtTheLeft()
 {
     return mCursorAtTheLeft;
+}
+
+// *********************************************************************************
+//                                MultipleBitUndoCommand
+// *********************************************************************************
+
+MultipleBitUndoCommand::MultipleBitUndoCommand(BitEditor *aEditor, Type aType, int aPos, int aLength, QBitArray aNewArray, QUndoCommand *parent) :
+    QUndoCommand(parent)
+{
+    mEditor=aEditor;
+    mType=aType;
+    mPos=aPos;
+    mLength=aLength;
+    mNewArray=aNewArray;
+}
+
+void MultipleBitUndoCommand::undo()
+{
+    switch (mType)
+    {
+        case Insert:
+        {
+            mEditor->mData.remove(mPos, mNewArray.length());
+        }
+        break;
+        case Replace:
+        {
+            mEditor->mData.replace(mPos, mNewArray.length(), mOldArray);
+        }
+        break;
+        case Remove:
+        {
+            mEditor->mData.insert(mPos, mOldArray);
+        }
+        break;
+    }
+
+    mEditor->setCursorPosition(mPrevPosition);
+}
+
+void MultipleBitUndoCommand::redo()
+{
+    mPrevPosition=mEditor->mCursorPosition;
+
+    switch (mType)
+    {
+        case Insert:
+        {
+            mEditor->mData.insert(mPos, mNewArray);
+        }
+        break;
+        case Replace:
+        {
+            mOldArray=mEditor->mData.mid(mPos, mLength);
+            mEditor->mData.replace(mPos, mLength, mNewArray);
+        }
+        break;
+        case Remove:
+        {
+            mOldArray=mEditor->mData.mid(mPos, mLength);
+            mEditor->mData.remove(mPos, mLength);
+        }
+        break;
+    }
 }

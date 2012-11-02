@@ -11,6 +11,8 @@ class BitEditor : public QAbstractScrollArea
 {
     Q_OBJECT
 
+    friend class MultipleBitUndoCommand;
+
 public:
     Q_PROPERTY(QBitArray    Data                     READ data                     WRITE setData)
     Q_PROPERTY(Mode         Mode                     READ mode                     WRITE setMode)
@@ -139,6 +141,33 @@ signals:
     void selectionChanged(int aStart, int aEnd);
     void modeChanged(Mode aMode);
     void positionChanged(int aPosition);
+};
+
+// *********************************************************************************
+
+class MultipleBitUndoCommand : public QUndoCommand
+{
+public:
+    enum Type
+    {
+        Insert,
+        Remove,
+        Replace
+    };
+
+    MultipleBitUndoCommand(BitEditor *aEditor, Type aType, int aPos, int aLength, QBitArray aNewArray=QBitArray(), QUndoCommand *parent=0);
+
+    void undo();
+    void redo();
+
+private:
+    BitEditor *mEditor;
+    Type       mType;
+    int        mPos;
+    int        mLength;
+    QBitArray  mNewArray;
+    QBitArray  mOldArray;
+    qint64     mPrevPosition;
 };
 
 #endif // BITEDITOR_H
