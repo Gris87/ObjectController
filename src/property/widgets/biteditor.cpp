@@ -315,7 +315,7 @@ void BitEditor::cut()
         int aStartRow=mSelectionStart>>3;
         mSelectionStart=aStartRow<<3;
 
-        if (mSelectionEnd % 8!=0)
+        if ((mSelectionEnd & 7)!=0)
         {
             int aEndRow=mSelectionEnd>>3;
             mSelectionEnd=(aEndRow<<3)+7;
@@ -364,7 +364,7 @@ void BitEditor::copy()
         int aSelectionStart=aStartRow<<3;
         int aSelectionEnd=mSelectionEnd;
 
-        if (aSelectionEnd % 8!=0)
+        if ((aSelectionEnd & 7)!=0)
         {
             int aEndRow=aSelectionEnd>>3;
             aSelectionEnd=(aEndRow<<3)+7;
@@ -889,7 +889,7 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
     else
     if (event->matches(QKeySequence::MoveToStartOfLine))
     {
-        setCursorPosition(mCursorPosition-(mCursorPosition % 8));
+        setCursorPosition(mCursorPosition-(mCursorPosition & 7));
         cursorMoved(false);
     }
     else
@@ -975,7 +975,7 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
     else
     if (event->matches(QKeySequence::SelectStartOfLine))
     {
-        setCursorPosition(mCursorPosition-(mCursorPosition % 8));
+        setCursorPosition(mCursorPosition-(mCursorPosition & 7));
         cursorMoved(true);
     }
     else

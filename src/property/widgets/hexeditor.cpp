@@ -91,8 +91,8 @@ void HexEditor::scrollToCursor()
 
 
 
-    int aCurCol=(mCursorPosition % 32) >> 1;
-    int aCurRow=floor(mCursorPosition/32.0f);
+    int aCurCol=(mCursorPosition & 31) >> 1;
+    int aCurRow=mCursorPosition>>5;
 
     int aCursorWidth;
     int aCursorX;
@@ -472,7 +472,7 @@ void HexEditor::updateScrollBars()
         mAddressWidth=1;
     }
 
-    mLinesCount=floor(aDataSize/16.0f)+1;
+    mLinesCount=(aDataSize>>4)+1;
 
 
 
@@ -602,11 +602,11 @@ void HexEditor::paintEvent(QPaintEvent * /*event*/)
         if (mSelectionStart!=mSelectionEnd)
         {
             // Draw selection
-            int aStartRow=floor(mSelectionStart/16.0f);
-            int aStartCol=mSelectionStart % 16;
+            int aStartRow=mSelectionStart>>4;
+            int aStartCol=mSelectionStart & 15;
 
-            int aEndRow=floor((mSelectionEnd-1)/16.0f);
-            int aEndCol=(mSelectionEnd-1) % 16;
+            int aEndRow=(mSelectionEnd-1)>>4;
+            int aEndCol=(mSelectionEnd-1) & 15;
 
             int aStartLeftX=(mAddressWidth+1+aStartCol*3)*mCharWidth+aOffsetX; // mAddressWidth + 1+aStartCol*3
             int aStartRightX=(mAddressWidth+50+aStartCol)*mCharWidth+aOffsetX; // mAddressWidth + 1+16*2+15+1 + 1+aStartCol
@@ -653,12 +653,12 @@ void HexEditor::paintEvent(QPaintEvent * /*event*/)
         else
         {
             // Draw cursor
-            int aCurRow=floor(mCursorPosition/32.0f);
+            int aCurRow=mCursorPosition>>5;
             int aCursorY=aCurRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
 
             if (aCursorY+mCharHeight>=0 && aCursorY<=aViewHeight)
             {
-                int aCurCol=mCursorPosition % 32;
+                int aCurCol=mCursorPosition & 31;
                 bool aIsSecondChar=(aCurCol & 1);
                 aCurCol>>=1;
 
@@ -955,7 +955,7 @@ void HexEditor::keyPressEvent(QKeyEvent *event)
     else
     if (event->matches(QKeySequence::MoveToStartOfLine))
     {
-        setCursorPosition(mCursorPosition-(mCursorPosition % 32));
+        setCursorPosition(mCursorPosition-(mCursorPosition & 31));
         cursorMoved(false);
     }
     else
@@ -1025,7 +1025,7 @@ void HexEditor::keyPressEvent(QKeyEvent *event)
     else
     if (event->matches(QKeySequence::SelectStartOfLine))
     {
-        setCursorPosition(mCursorPosition-(mCursorPosition % 32));
+        setCursorPosition(mCursorPosition-(mCursorPosition & 31));
         cursorMoved(true);
     }
     else
