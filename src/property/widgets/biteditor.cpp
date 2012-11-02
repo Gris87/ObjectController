@@ -466,7 +466,69 @@ void BitEditor::copy()
 
 void BitEditor::paste()
 {
-    // TODO: Implement paste
+    int aSelStart=mSelectionStart;
+
+    if (mSelectionStart!=mSelectionEnd)
+    {
+        if (mCursorAtTheLeft)
+        {
+            remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+        }
+        else
+        {
+            int aStartRow=mSelectionStart>>3;
+            mSelectionStart=aStartRow<<3;
+
+            if ((mSelectionEnd & 7)!=0)
+            {
+                int aEndRow=mSelectionEnd>>3;
+                mSelectionEnd=(aEndRow<<3)+8;
+            }
+
+            if (mSelectionStart==mSelectionEnd)
+            {
+                mSelectionEnd+=8;
+            }
+
+            remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+        }
+    }
+
+    QString aText=QApplication::clipboard()->text();
+    QBitArray aArray;
+
+    if (mCursorAtTheLeft)
+    {
+        for (int i=0; i<aText.length(); ++i)
+        {
+            if (aText.at(i)=='0' || aText.at(i)=='1')
+            {
+                aArray.resize(aArray.size()+1);
+                aArray.setBit(aArray.size()-1, aText.at(i)=='1');
+            }
+        }
+    }
+    else
+    {
+        QByteArray aByteArray=aText.toUtf8();
+
+        aArray.resize(aByteArray.length()*8);
+
+        for (int i=0; i<aByteArray.length(); ++i)
+        {
+            char aChar=aByteArray.at(i);
+
+            for (int j=0; j<8; ++j)
+            {
+                aArray.setBit(i*8+7-j, (aChar & 1)==1);
+                aChar>>=1;
+            }
+        }
+    }
+
+    insert(aSelStart, aArray);
+    setCursorPosition(aSelStart+aArray.size());
+    cursorMoved(false);
 }
 
 QString BitEditor::toString()

@@ -431,7 +431,10 @@ void HexEditor::paste()
 {
     int aSelStart=mSelectionStart;
 
-    remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+    if (mSelectionStart!=mSelectionEnd)
+    {
+        remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+    }
 
     QString aText=QApplication::clipboard()->text();
     QByteArray aArray;
