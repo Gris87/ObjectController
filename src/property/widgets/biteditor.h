@@ -157,6 +157,11 @@ public:
 
     MultipleBitUndoCommand(BitEditor *aEditor, Type aType, int aPos, int aLength, QBitArray aNewArray=QBitArray(), QUndoCommand *parent=0);
 
+    void insert(int aIndex, const QBitArray &aArray);
+    void replace(int aPos, int aLength, const QBitArray &aArray);
+    void remove(int aPos, int aLength=1);
+    QBitArray mid(int aPos, int aLength=-1);
+
     void undo();
     void redo();
 

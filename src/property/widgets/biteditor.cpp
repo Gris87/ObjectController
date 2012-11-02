@@ -249,32 +249,93 @@ int BitEditor::lastIndexOf(const bool &aBool, int aFrom) const
 
 void BitEditor::insert(int aIndex, bool aBool)
 {
-    // TODO: Implement insert
+    QBitArray aArray;
+    aArray.resize(1);
+    aArray.setBit(0, aBool);
+    insert(aIndex, aArray);
 }
 
 void BitEditor::insert(int aIndex, const QBitArray &aArray)
 {
-    // TODO: Implement insert
+    if (aArray.size()==0)
+    {
+        return;
+    }
+
+    MultipleBitUndoCommand *aCommand;
+
+    if (mMode==INSERT)
+    {
+        aCommand=new MultipleBitUndoCommand(this, MultipleBitUndoCommand::Insert, aIndex, aArray.size(), aArray);
+    }
+    else
+    {
+        aCommand=new MultipleBitUndoCommand(this, MultipleBitUndoCommand::Replace, aIndex, aArray.size(), aArray);
+    }
+
+    mUndoStack.push(aCommand);
+    emit dataChanged();
+
+    setCursorPosition(mCursorPosition);
+    resetSelection();
+
+    updateScrollBars();
+    viewport()->update();
 }
 
 void BitEditor::remove(int aPos, int aLength)
 {
-    // TODO: Implement remove
+    if (aLength<=0)
+    {
+        return;
+    }
+
+    QUndoCommand *aCommand;
+
+    if (mMode==INSERT)
+    {
+        aCommand=new MultipleBitUndoCommand(this, MultipleBitUndoCommand::Remove, aPos, aLength);
+    }
+    else
+    {
+        QBitArray aArray=QBitArray(aLength, 0);
+        aCommand=new MultipleBitUndoCommand(this, MultipleBitUndoCommand::Replace, aPos, aLength, aArray);
+    }
+
+    mUndoStack.push(aCommand);
+    emit dataChanged();
+
+    setCursorPosition(mCursorPosition);
+    resetSelection();
+
+    updateScrollBars();
+    viewport()->update();
 }
 
 void BitEditor::replace(int aPos, bool aBool)
 {
-    // TODO: Implement replace
+    QBitArray aArray;
+    aArray.resize(1);
+    aArray.setBit(0, aBool);
+    replace(aPos, aArray);
 }
 
 void BitEditor::replace(int aPos, const QBitArray &aArray)
 {
-    // TODO: Implement replace
+    replace(aPos, aArray.size(), aArray);
 }
 
 void BitEditor::replace(int aPos, int aLength, const QBitArray &aArray)
 {
-    // TODO: Implement replace
+    MultipleBitUndoCommand *aCommand=new MultipleBitUndoCommand(this, MultipleBitUndoCommand::Replace, aPos, aLength, aArray);
+    mUndoStack.push(aCommand);
+    emit dataChanged();
+
+    setCursorPosition(mCursorPosition);
+    resetSelection();
+
+    updateScrollBars();
+    viewport()->update();
 }
 
 void BitEditor::setSelection(int aPos, int aCount)
@@ -318,7 +379,7 @@ void BitEditor::cut()
         if ((mSelectionEnd & 7)!=0)
         {
             int aEndRow=mSelectionEnd>>3;
-            mSelectionEnd=(aEndRow<<3)+7;
+            mSelectionEnd=(aEndRow<<3)+8;
         }
 
         if (mSelectionStart==mSelectionEnd)
@@ -329,7 +390,7 @@ void BitEditor::cut()
         remove(mSelectionStart, mSelectionEnd-mSelectionStart);
     }
 
-    setPosition(mSelectionStart);
+    setCursorPosition(mSelectionStart);
     cursorMoved(false);
 }
 
@@ -367,7 +428,7 @@ void BitEditor::copy()
         if ((aSelectionEnd & 7)!=0)
         {
             int aEndRow=aSelectionEnd>>3;
-            aSelectionEnd=(aEndRow<<3)+7;
+            aSelectionEnd=(aEndRow<<3)+8;
         }
 
         if (aSelectionStart==aSelectionEnd)
@@ -377,17 +438,15 @@ void BitEditor::copy()
 
         for (int i=aSelectionStart; i<aSelectionEnd && i<mData.size(); i+=8)
         {
-            int aCurCol=aSelectionEnd-i;
-
-            if (aCurCol>7)
-            {
-                aCurCol=7;
-            }
-
             char aChar=0;
 
-            for (int j=0; j<=aCurCol; ++j)
+            for (int j=0; j<=7; ++j)
             {
+                if (i+j>=mData.size())
+                {
+                    break;
+                }
+
                 aChar<<=1;
 
                 if (mData.at(i+j))
@@ -410,8 +469,31 @@ void BitEditor::paste()
 
 QString BitEditor::toString()
 {
-    // TODO: Implement toString
-    return "";
+    QString res="";
+
+    for (int i=0; i<mData.size(); i+=8)
+    {
+        char aChar=0;
+
+        for (int j=0; j<=7; ++j)
+        {
+            if (i+j>=mData.size())
+            {
+                break;
+            }
+
+            aChar<<=1;
+
+            if (mData.at(i+j))
+            {
+                aChar|=1;
+            }
+        }
+
+        res.append(QString::fromLatin1(&aChar, 1));
+    }
+
+    return res;
 }
 
 // ------------------------------------------------------------------
@@ -1052,12 +1134,122 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
         else
         if (event->matches(QKeySequence::Delete))
         {
-            // TODO: Implement Delete handling
+            int aSelStart=mSelectionStart;
+
+            if (mCursorAtTheLeft)
+            {
+                if (mSelectionStart==mSelectionEnd)
+                {
+                    if (mSelectionStart<mData.size())
+                    {
+                        if (mMode==INSERT)
+                        {
+                            remove(mSelectionStart, 1);
+                        }
+                        else
+                        {
+                            replace(mSelectionStart, 0);
+                            ++aSelStart;
+                        }
+                    }
+                }
+                else
+                {
+                    remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+                }
+            }
+            else
+            {
+                bool good=true;
+
+                if (mSelectionStart==mSelectionEnd)
+                {
+                    good=(mSelectionStart<mData.size());
+                }
+
+                if (good)
+                {
+                    int aStartRow=mSelectionStart>>3;
+                    mSelectionStart=aStartRow<<3;
+
+                    if ((mSelectionEnd & 7)!=0)
+                    {
+                        int aEndRow=mSelectionEnd>>3;
+                        mSelectionEnd=(aEndRow<<3)+8;
+                    }
+
+                    if (mSelectionStart==mSelectionEnd)
+                    {
+                        mSelectionEnd+=8;
+                    }
+
+                    remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+                }
+            }
+
+            setCursorPosition(aSelStart);
+            cursorMoved(false);
         }
         else
         if ((event->key() == Qt::Key_Backspace) && (event->modifiers() == Qt::NoModifier))
         {
-            // TODO: Implement Backspace handling
+            int aSelStart=mSelectionStart;
+
+            if (mCursorAtTheLeft)
+            {
+                if (mSelectionStart==mSelectionEnd)
+                {
+                    if (mSelectionStart>0)
+                    {
+                        if (mMode==INSERT)
+                        {
+                            remove(mSelectionStart-1, 1);
+                        }
+                        else
+                        {
+                            replace(mSelectionStart-1, 0);
+                        }
+
+                        --aSelStart;
+                    }
+                }
+                else
+                {
+                    remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+                }
+            }
+            else
+            {
+                int aStartRow=mSelectionStart>>3;
+                int aEndRow=mSelectionEnd>>3;
+
+                bool good=true;
+
+                if (mSelectionStart==mSelectionEnd)
+                {
+                    good=(mSelectionStart>0);
+
+                    --aStartRow;
+                    --aEndRow;
+                    aSelStart=aStartRow<<3;
+                    mSelectionEnd=(aEndRow<<3)+8;
+                }
+
+                if (good)
+                {
+                    mSelectionStart=aStartRow<<3;
+
+                    if ((mSelectionEnd & 7)!=0)
+                    {
+                        mSelectionEnd=(aEndRow<<3)+8;
+                    }
+
+                    remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+                }
+            }
+
+            setCursorPosition(aSelStart);
+            cursorMoved(false);
         }
         else
         if (event->matches(QKeySequence::Cut))
@@ -1331,23 +1523,113 @@ MultipleBitUndoCommand::MultipleBitUndoCommand(BitEditor *aEditor, Type aType, i
     mNewArray=aNewArray;
 }
 
+void MultipleBitUndoCommand::insert(int aIndex, const QBitArray &aArray)
+{
+    if (aArray.size()==0)
+    {
+        return;
+    }
+
+    if (aIndex<0)
+    {
+        aIndex=0;
+    }
+    else
+    if (aIndex>mEditor->mData.size())
+    {
+        aIndex=mEditor->mData.size();
+    }
+
+    mEditor->mData.resize(mEditor->mData.size()+aArray.size());
+
+    for (int i=mEditor->mData.size()-1; i>=aIndex+aArray.size(); --i)
+    {
+        mEditor->mData.setBit(i, mEditor->mData.at(i-aArray.size()));
+    }
+
+    for (int i=0; i<aArray.size(); ++i)
+    {
+        mEditor->mData.setBit(aIndex+i, aArray.at(i));
+    }
+}
+
+void MultipleBitUndoCommand::replace(int aPos, int aLength, const QBitArray &aArray)
+{
+    remove(aPos, aLength);
+    insert(aPos, aArray);
+}
+
+void MultipleBitUndoCommand::remove(int aPos, int aLength)
+{
+    if (aPos<0)
+    {
+        return;
+    }
+
+    if (aLength>mEditor->mData.size()-aPos)
+    {
+        aLength=mEditor->mData.size()-aPos;
+    }
+
+    if (aLength<=0)
+    {
+        return;
+    }
+
+    for (int i=aPos; i<mEditor->mData.size()-aLength; ++i)
+    {
+        mEditor->mData.setBit(i, mEditor->mData.at(i+aLength));
+    }
+
+    mEditor->mData.resize(mEditor->mData.size()-aLength);
+}
+
+QBitArray MultipleBitUndoCommand::mid(int aPos, int aLength)
+{
+    QBitArray aResArray;
+
+    if (aPos<0)
+    {
+        return aResArray;
+    }
+
+    if (aLength<0 || aLength>mEditor->mData.size()-aPos)
+    {
+        aLength=mEditor->mData.size()-aPos;
+    }
+
+    if (aLength<=0)
+    {
+        return aResArray;
+    }
+
+    aResArray.resize(aLength);
+
+    for (int i=0; i<aLength; ++i)
+    {
+        aResArray.setBit(i, mEditor->mData.at(aPos+i));
+    }
+
+    return aResArray;
+}
+
 void MultipleBitUndoCommand::undo()
 {
     switch (mType)
     {
         case Insert:
         {
-            mEditor->mData.remove(mPos, mNewArray.length());
+            remove(mPos, mNewArray.size());
         }
         break;
         case Replace:
         {
-            mEditor->mData.replace(mPos, mNewArray.length(), mOldArray);
+            replace(mPos, mNewArray.size(), mOldArray);
         }
         break;
         case Remove:
         {
-            mEditor->mData.insert(mPos, mOldArray);
+            insert(mPos, mOldArray);
         }
         break;
     }
@@ -1363,19 +1645,19 @@ void MultipleBitUndoCommand::redo()
     {
         case Insert:
         {
-            mEditor->mData.insert(mPos, mNewArray);
+            insert(mPos, mNewArray);
         }
         break;
         case Replace:
         {
-            mOldArray=mEditor->mData.mid(mPos, mLength);
-            mEditor->mData.replace(mPos, mLength, mNewArray);
+            mOldArray=mid(mPos, mLength);
+            replace(mPos, mLength, mNewArray);
         }
         break;
         case Remove:
         {
-            mOldArray=mEditor->mData.mid(mPos, mLength);
-            mEditor->mData.remove(mPos, mLength);
+            mOldArray=mid(mPos, mLength);
+            remove(mPos, mLength);
         }
         break;
     }
