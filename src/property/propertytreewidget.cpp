@@ -25,6 +25,9 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mStringDelegate    = mController->createStringDelegate();
     mByteArrayDelegate = mController->createByteArrayDelegate();
     mBitArrayDelegate  = mController->createBitArrayDelegate();
+    mDateDelegate      = mController->createDateDelegate();
+    mTimeDelegate      = mController->createTimeDelegate();
+    mDateTimeDelegate  = mController->createDateTimeDelegate();
 
     //----------------------------------------------------------------------
 
@@ -249,4 +252,19 @@ CustomDelegate* PropertyTreeWidget::byteArrayDelegate()
 CustomDelegate* PropertyTreeWidget::bitArrayDelegate()
 {
     return mBitArrayDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::dateDelegate()
+{
+    return mDateDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::timeDelegate()
+{
+    return mTimeDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::dateTimeDelegate()
+{
+    return mDateTimeDelegate;
 }

@@ -43,6 +43,9 @@ protected:
     virtual CustomDelegate* createStringDelegate();
     virtual CustomDelegate* createByteArrayDelegate();
     virtual CustomDelegate* createBitArrayDelegate();
+    virtual CustomDelegate* createDateDelegate();
+    virtual CustomDelegate* createTimeDelegate();
+    virtual CustomDelegate* createDateTimeDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

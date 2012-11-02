@@ -1,5 +1,8 @@
 #include "stringdelegate.h"
 
+#include <QUrl>
+#include <QRegExp>
+
 #include "../editors/stringeditor.h"
 #include "../propertytreewidgetitem.h"
 
@@ -21,6 +24,12 @@ void StringDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
     {
         case QVariant::String:
             aStringEditor->setValue(aItem->firstValue().toString());
+        break;
+        case QVariant::Url:
+            aStringEditor->setValue(aItem->firstValue().toUrl());
+        break;
+        case QVariant::RegExp:
+            aStringEditor->setValue(aItem->firstValue().toRegExp());
         break;
         default:
             Q_ASSERT(false); // Impossible

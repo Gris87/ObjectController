@@ -31,6 +31,9 @@ public:
     CustomDelegate*       stringDelegate();
     CustomDelegate*       byteArrayDelegate();
     CustomDelegate*       bitArrayDelegate();
+    CustomDelegate*       dateDelegate();
+    CustomDelegate*       timeDelegate();
+    CustomDelegate*       dateTimeDelegate();
 
 protected:
     ObjectController     *mController;
@@ -43,6 +46,9 @@ protected:
     CustomDelegate       *mStringDelegate;
     CustomDelegate       *mByteArrayDelegate;
     CustomDelegate       *mBitArrayDelegate;
+    CustomDelegate       *mDateDelegate;
+    CustomDelegate       *mTimeDelegate;
+    CustomDelegate       *mDateTimeDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

@@ -34,7 +34,13 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/propertytreewidget.h \
            $$PWD/propertytreewidgetitem.h \
            $$PWD/widgets/biteditor.h \
-           $$PWD/widgets/hexeditor.h
+           $$PWD/widgets/hexeditor.h \
+           $$PWD/editors/timeeditor.h \
+           $$PWD/editors/datetimeeditor.h \
+           $$PWD/editors/dateeditor.h \
+           $$PWD/delegates/timedelegate.h \
+           $$PWD/delegates/datetimedelegate.h \
+           $$PWD/delegates/datedelegate.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -63,7 +69,13 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/propertytreewidget.cpp \
            $$PWD/propertytreewidgetitem.cpp \
            $$PWD/widgets/biteditor.cpp \
-           $$PWD/widgets/hexeditor.cpp
+           $$PWD/widgets/hexeditor.cpp \
+           $$PWD/editors/timeeditor.cpp \
+           $$PWD/editors/datetimeeditor.cpp \
+           $$PWD/editors/dateeditor.cpp \
+           $$PWD/delegates/timedelegate.cpp \
+           $$PWD/delegates/datetimedelegate.cpp \
+           $$PWD/delegates/datedelegate.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -77,4 +89,7 @@ FORMS += \
            $$PWD/editors/defaulteditor.ui \
            $$PWD/editors/doubleeditor.ui \
            $$PWD/editors/integereditor.ui \
-           $$PWD/editors/stringeditor.ui
+           $$PWD/editors/stringeditor.ui \
+           $$PWD/editors/timeeditor.ui \
+           $$PWD/editors/datetimeeditor.ui \
+           $$PWD/editors/dateeditor.ui

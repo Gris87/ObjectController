@@ -1491,7 +1491,7 @@ CustomDelegate* Property::delegateForValue(const QDate &/*aValue*/, PropertyTree
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->dateDelegate();
     }
 
     return 0;
@@ -1501,7 +1501,7 @@ CustomDelegate* Property::delegateForValue(const QTime &/*aValue*/, PropertyTree
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->timeDelegate();
     }
 
     return 0;
@@ -1511,7 +1511,7 @@ CustomDelegate* Property::delegateForValue(const QDateTime &/*aValue*/, Property
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->dateTimeDelegate();
     }
 
     return 0;
@@ -1521,99 +1521,54 @@ CustomDelegate* Property::delegateForValue(const QUrl &/*aValue*/, PropertyTreeW
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->stringDelegate();
     }
 
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
@@ -1621,19 +1576,14 @@ CustomDelegate* Property::delegateForValue(const QRegExp &/*aValue*/, PropertyTr
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->stringDelegate();
     }
 
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QVariantHash &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(const QVariantHash &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
@@ -1877,7 +1827,7 @@ CustomDelegate* Property::delegateForValue(const QQuaternion &/*aValue*/, Proper
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(void *aValue, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(void * /*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
     if (mIsWritable)
     {
@@ -1887,7 +1837,7 @@ CustomDelegate* Property::delegateForValue(void *aValue, PropertyTreeWidgetItem 
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
     if (mIsWritable)
     {

@@ -9,6 +9,9 @@
 #include "delegates/stringdelegate.h"
 #include "delegates/bytearraydelegate.h"
 #include "delegates/bitarraydelegate.h"
+#include "delegates/datedelegate.h"
+#include "delegates/timedelegate.h"
+#include "delegates/datetimedelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -214,4 +217,19 @@ CustomDelegate* ObjectController::createByteArrayDelegate()
 CustomDelegate* ObjectController::createBitArrayDelegate()
 {
     return new BitArrayDelegate(this);
+}
+
+CustomDelegate* ObjectController::createDateDelegate()
+{
+    return new DateDelegate(this);
+}
+
+CustomDelegate* ObjectController::createTimeDelegate()
+{
+    return new TimeDelegate(this);
+}
+
+CustomDelegate* ObjectController::createDateTimeDelegate()
+{
+    return new DateTimeDelegate(this);
 }
