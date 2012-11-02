@@ -40,7 +40,7 @@ TestObject::TestObject(QObject *parent) :
 
         for (int j=0; j<8; ++j)
         {
-            mBitArray.setBit(i*8+7-j, aChar % 2==1);
+            mBitArray.setBit(i*8+7-j, (aChar & 1)==1);
             aChar>>=1;
         }
     }

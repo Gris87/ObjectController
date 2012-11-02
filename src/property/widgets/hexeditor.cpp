@@ -350,6 +350,8 @@ void HexEditor::cut()
 {
     copy();
 
+    int aSelStart=mSelectionStart;
+
     if (mSelectionStart==mSelectionEnd)
     {
         remove(mSelectionStart, 1);
@@ -359,7 +361,7 @@ void HexEditor::cut()
         remove(mSelectionStart, mSelectionEnd-mSelectionStart);
     }
 
-    setPosition(mSelectionStart);
+    setPosition(aSelStart);
     cursorMoved(false);
 }
 
@@ -1198,8 +1200,9 @@ void HexEditor::keyPressEvent(QKeyEvent *event)
                     {
                         if (mSelectionStart!=mSelectionEnd)
                         {
+                            int aSelStart=mSelectionStart;
                             remove(mSelectionStart, mSelectionEnd-mSelectionStart);
-                            setPosition(mSelectionStart);
+                            setPosition(aSelStart);
                             cursorMoved(false);
                         }
 
@@ -1245,8 +1248,9 @@ void HexEditor::keyPressEvent(QKeyEvent *event)
                 {
                     if (mSelectionStart!=mSelectionEnd)
                     {
+                        int aSelStart=mSelectionStart;
                         remove(mSelectionStart, mSelectionEnd-mSelectionStart);
-                        setPosition(mSelectionStart);
+                        setPosition(aSelStart);
                         cursorMoved(false);
                     }
 

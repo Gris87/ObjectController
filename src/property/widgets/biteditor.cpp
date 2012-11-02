@@ -360,6 +360,8 @@ void BitEditor::cut()
 {
     copy();
 
+    int aSelStart=mSelectionStart;
+
     if (mCursorAtTheLeft)
     {
         if (mSelectionStart==mSelectionEnd)
@@ -390,7 +392,7 @@ void BitEditor::cut()
         remove(mSelectionStart, mSelectionEnd-mSelectionStart);
     }
 
-    setCursorPosition(mSelectionStart);
+    setCursorPosition(aSelStart);
     cursorMoved(false);
 }
 
@@ -1273,11 +1275,88 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
 
                 if (mCursorAtTheLeft)
                 {
+                    if (
+                        aKey=='0'
+                        ||
+                        aKey=='1'
+                       )
+                    {
+                        if (mSelectionStart!=mSelectionEnd)
+                        {
+                            int aSelStart=mSelectionStart;
+                            remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+                            setCursorPosition(aSelStart);
+                            cursorMoved(false);
+                        }
 
+                        if (
+                            mSelectionStart==mData.size()
+                            ||
+                            mMode==INSERT
+                           )
+                        {
+                            insert(mSelectionStart, aKey=='1');
+                        }
+                        else
+                        {
+                            replace(mSelectionStart, aKey=='1');
+                        }
+
+                        setCursorPosition(mCursorPosition+1);
+                        cursorMoved(false);
+                    }
                 }
                 else
                 {
+                    if (mSelectionStart!=mSelectionEnd)
+                    {
+                        int aSelStart=mSelectionStart;
 
+                        int aStartRow=mSelectionStart>>3;
+                        mSelectionStart=aStartRow<<3;
+
+                        if ((mSelectionEnd & 7)!=0)
+                        {
+                            int aEndRow=mSelectionEnd>>3;
+                            mSelectionEnd=(aEndRow<<3)+8;
+                        }
+
+                        if (mSelectionStart==mSelectionEnd)
+                        {
+                            mSelectionEnd+=8;
+                        }
+
+                        remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+
+                        setCursorPosition(aSelStart);
+                        cursorMoved(false);
+                    }
+
+                    QBitArray aArray;
+                    aArray.resize(8);
+
+                    for (int j=0; j<8; ++j)
+                    {
+                        aArray.setBit(7-j, (aKey & 1)==1);
+                        aKey>>=1;
+                    }
+
+                    if (
+                        mSelectionStart==mData.size()
+                        ||
+                        mMode==INSERT
+                       )
+                    {
+                        insert(mSelectionStart, aArray);
+                    }
+
+                    if (mSelectionStart<mData.size())
+                    {
+                        replace(mSelectionStart, aArray);
+
+                        setPosition(position()+1);
+                        cursorMoved(false);
+                    }
                 }
             }
         }
