@@ -45,7 +45,9 @@ public:
     void scrollToCursor();
     int charAt(QPoint aPos, bool *aAtLeftPart=0);
     int indexOf(const QBitArray &aArray, int aFrom=0) const;
+    int indexOf(const bool &aBool, int aFrom=0) const;
     int lastIndexOf(const QBitArray &aArray, int aFrom=0) const;
+    int lastIndexOf(const bool &aBool, int aFrom=0) const;
     void insert(int aIndex, bool aBool);
     void insert(int aIndex, const QBitArray &aArray);
     void remove(int aPos, int aLength=1);

@@ -186,9 +186,23 @@ int HexEditor::indexOf(const QByteArray &aArray, int aFrom) const
     return mData.indexOf(aArray, aFrom);
 }
 
+int HexEditor::indexOf(const char &aChar, int aFrom) const
+{
+    QByteArray aArray;
+    aArray.append(aChar);
+    return indexOf(aArray, aFrom);
+}
+
 int HexEditor::lastIndexOf(const QByteArray &aArray, int aFrom) const
 {
     return mData.lastIndexOf(aArray, aFrom);
+}
+
+int HexEditor::lastIndexOf(const char &aChar, int aFrom) const
+{
+    QByteArray aArray;
+    aArray.append(aChar);
+    return lastIndexOf(aArray, aFrom);
 }
 
 void HexEditor::insert(int aIndex, char aChar)
@@ -326,7 +340,7 @@ void HexEditor::setSelection(int aPos, int aCount)
     mCursorPosition=aPos<<1;
     resetSelection();
 
-    mCursorPosition+=(aCount+1)<<1;
+    mCursorPosition+=aCount<<1;
     updateSelection();
 
     mCursorPosition=aPrevPos;

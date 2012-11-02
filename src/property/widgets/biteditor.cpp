@@ -91,8 +91,8 @@ void BitEditor::scrollToCursor()
 
 
 
-    int aCurCol=(mCursorPosition % 8);
-    int aCurRow=floor(mCursorPosition/8.0f);
+    int aCurCol=mCursorPosition & 7;
+    int aCurRow=mCursorPosition>>3;
 
     int aCursorX;
     int aCursorY=aCurRow*(mCharHeight+LINE_INTERVAL);
@@ -202,6 +202,14 @@ int BitEditor::indexOf(const QBitArray &aArray, int aFrom) const
     return -1;
 }
 
+int BitEditor::indexOf(const bool &aBool, int aFrom) const
+{
+    QBitArray aArray;
+    aArray.resize(1);
+    aArray.setBit(0, aBool);
+    return indexOf(aArray, aFrom);
+}
+
 int BitEditor::lastIndexOf(const QBitArray &aArray, int aFrom) const
 {
     if (aFrom<=0 || aFrom>mData.size()-aArray.size())
@@ -229,6 +237,14 @@ int BitEditor::lastIndexOf(const QBitArray &aArray, int aFrom) const
     }
 
     return -1;
+}
+
+int BitEditor::lastIndexOf(const bool &aBool, int aFrom) const
+{
+    QBitArray aArray;
+    aArray.resize(1);
+    aArray.setBit(0, aBool);
+    return indexOf(aArray, aFrom);
 }
 
 void BitEditor::insert(int aIndex, bool aBool)
@@ -273,7 +289,7 @@ void BitEditor::setSelection(int aPos, int aCount)
     mCursorPosition=aPos;
     resetSelection();
 
-    mCursorPosition+=(aCount+1);
+    mCursorPosition+=aCount;
     updateSelection();
 
     mCursorPosition=aPrevPos;
@@ -283,12 +299,33 @@ void BitEditor::cut()
 {
     copy();
 
-    if (mSelectionStart==mSelectionEnd)
+    if (mCursorAtTheLeft)
     {
-        remove(mSelectionStart, 1);
+        if (mSelectionStart==mSelectionEnd)
+        {
+            remove(mSelectionStart, 1);
+        }
+        else
+        {
+            remove(mSelectionStart, mSelectionEnd-mSelectionStart);
+        }
     }
     else
     {
+        int aStartRow=mSelectionStart>>3;
+        mSelectionStart=aStartRow<<3;
+
+        if (mSelectionEnd % 8!=0)
+        {
+            int aEndRow=mSelectionEnd>>3;
+            mSelectionEnd=(aEndRow<<3)+7;
+        }
+
+        if (mSelectionStart==mSelectionEnd)
+        {
+            mSelectionEnd+=8;
+        }
+
         remove(mSelectionStart, mSelectionEnd-mSelectionStart);
     }
 
@@ -323,45 +360,43 @@ void BitEditor::copy()
     }
     else
     {
-        if (mSelectionStart==mSelectionEnd)
+        int aStartRow=mSelectionStart>>3;
+        int aSelectionStart=aStartRow<<3;
+        int aSelectionEnd=mSelectionEnd;
+
+        if (aSelectionEnd % 8!=0)
         {
-            if (mSelectionStart<mData.size())
-            {
-                int aRow=floor(mSelectionStart/8.0f);
-                int aCurChar=aRow<<3;
-                int aCurCol=mSelectionStart-aRow<<3;
-
-                if (aCurCol>7)
-                {
-                    aCurCol=7;
-                }
-
-                char aChar=0;
-
-                for (int i=0; i<=aCurCol; ++i)
-                {
-                    aChar<<=1;
-
-                    if (mData.at(aCurChar-aCurCol+i))
-                    {
-                        aChar|=1;
-                    }
-                }
-
-                aToClipboard=QString::fromLatin1(&aChar, 1);
-            }
+            int aEndRow=aSelectionEnd>>3;
+            aSelectionEnd=(aEndRow<<3)+7;
         }
-        else
-        {
-            for (int i=mSelectionStart; i<mSelectionEnd && i<mData.size(); ++i)
-            {
-                char aChar=mData.at(i);
 
-                if (aChar)
+        if (aSelectionStart==aSelectionEnd)
+        {
+            aSelectionEnd+=8;
+        }
+
+        for (int i=aSelectionStart; i<aSelectionEnd && i<mData.size(); i+=8)
+        {
+            int aCurCol=aSelectionEnd-i;
+
+            if (aCurCol>7)
+            {
+                aCurCol=7;
+            }
+
+            char aChar=0;
+
+            for (int j=0; j<=aCurCol; ++j)
+            {
+                aChar<<=1;
+
+                if (mData.at(i+j))
                 {
-                    aToClipboard.append(QString::fromLatin1(&aChar, 1));
+                    aChar|=1;
                 }
             }
+
+            aToClipboard.append(QString::fromLatin1(&aChar, 1));
         }
     }
 
@@ -387,7 +422,7 @@ void BitEditor::updateScrollBars()
     int aDataSize=mData.size();
     int aCurSize=1;
 
-    while (aCurSize<aDataSize)
+    while (aCurSize<=aDataSize)
     {
         ++mAddressWidth;
         aCurSize*=10;
@@ -398,7 +433,7 @@ void BitEditor::updateScrollBars()
         mAddressWidth=1;
     }
 
-    mLinesCount=floor(aDataSize/8.0f)+1;
+    mLinesCount=(aDataSize>>3)+1;
 
 
 
@@ -501,7 +536,7 @@ void BitEditor::resizeEvent(QResizeEvent *event)
     updateScrollBars();
 }
 
-void BitEditor::paintEvent(QPaintEvent */*event*/)
+void BitEditor::paintEvent(QPaintEvent * /*event*/)
 {
     QPainter painter(viewport());
     QPalette aPalette=palette();
@@ -524,11 +559,11 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
         if (mSelectionStart!=mSelectionEnd)
         {
             // Draw selection
-            int aStartRow=floor(mSelectionStart/8.0f);
-            int aStartCol=mSelectionStart % 8;
+            int aStartRow=mSelectionStart>>3;
+            int aStartCol=mSelectionStart & 7;
 
-            int aEndRow=floor((mSelectionEnd-1)/8.0f);
-            int aEndCol=(mSelectionEnd-1) % 8;
+            int aEndRow=(mSelectionEnd-1)>>3;
+            int aEndCol=(mSelectionEnd-1) & 7;
 
             int aRightX=(mAddressWidth+11)*mCharWidth+aOffsetX;              // mAddressWidth + 1+8+1 + 1
 
@@ -566,12 +601,12 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
         else
         {
             // Draw cursor
-            int aCurRow=floor(mCursorPosition/8.0f);
+            int aCurRow=mCursorPosition>>3;
             int aCursorY=aCurRow*(mCharHeight+LINE_INTERVAL)+aOffsetY;
 
             if (aCursorY+mCharHeight>=0 && aCursorY<=aViewHeight)
             {
-                int aCurCol=mCursorPosition % 8;
+                int aCurCol=mCursorPosition & 7;
                 int aCursorX=(mAddressWidth+1+aCurCol)*mCharWidth+aOffsetX; // mAddressWidth +1+aCurCol
 
                 if (
@@ -687,8 +722,8 @@ void BitEditor::paintEvent(QPaintEvent */*event*/)
 
                 if (aCharX>=(mAddressWidth-1)*mCharWidth && aCharX<=aViewWidth)
                 {
-                    int aStartRow=floor(mSelectionStart/8.0f);
-                    int aEndRow=floor((mSelectionEnd-(mSelectionStart==mSelectionEnd? 0 : 1))/8.0f);
+                    int aStartRow=mSelectionStart>>3;
+                    int aEndRow=(mSelectionEnd-(mSelectionStart==mSelectionEnd? 0 : 1))>>3;
 
                     if (
                         aCurRow>=aStartRow
