@@ -33,6 +33,12 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="minimumSize">
+        <size>
+         <width>1</width>
+         <height>1</height>
+        </size>
+       </property>
        <property name="scaledContents">
         <bool>true</bool>
        </property>
@@ -302,7 +308,7 @@
           <number>2</number>
          </property>
          <property name="minimum">
-          <double>-1000.000000000000000</double>
+          <double>0.000000000000000</double>
          </property>
          <property name="maximum">
           <double>1000.000000000000000</double>
@@ -325,7 +331,7 @@
           <number>2</number>
          </property>
          <property name="minimum">
-          <double>-1000.000000000000000</double>
+          <double>0.000000000000000</double>
          </property>
          <property name="maximum">
           <double>1000.000000000000000</double>
@@ -348,7 +354,7 @@
           <number>2</number>
          </property>
          <property name="minimum">
-          <double>-1000.000000000000000</double>
+          <double>0.000000000000000</double>
          </property>
          <property name="maximum">
           <double>1000.000000000000000</double>

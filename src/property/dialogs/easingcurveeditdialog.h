@@ -19,6 +19,9 @@ public:
 
     QEasingCurve resultValue() const;
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
 private:
     Ui::EasingCurveEditDialog *ui;
     QEasingCurve               mEasingCurve;

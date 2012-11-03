@@ -38,17 +38,36 @@ QEasingCurve EasingCurveEditDialog::resultValue() const
     return mEasingCurve;
 }
 
+void EasingCurveEditDialog::resizeEvent(QResizeEvent *event)
+{
+    QDialog::resizeEvent(event);
+    drawCurve();
+}
+
 void EasingCurveEditDialog::drawCurve()
 {
-    QPixmap aPixmap(100, 100);
+    int aWidth=ui->resultLabel->width();
+    int aHeight=ui->resultLabel->width();
+
+    if (aWidth<1)
+    {
+        aWidth=166;
+    }
+
+    if (aHeight<1)
+    {
+        aHeight=166;
+    }
+
+    QPixmap aPixmap(aWidth, aHeight);
     aPixmap.fill(QColor(255, 255, 255));
 
     QPainter aPainter(&aPixmap);
     aPainter.setPen(QColor(0, 0, 255));
 
-    for (int i=0; i<100; ++i)
+    for (int i=0; i<aWidth; ++i)
     {
-        aPainter.drawLine(i, 100-mEasingCurve.valueForProgress(i*0.01f)*100, i+1, 100-mEasingCurve.valueForProgress((i+1)*0.01f)*100);
+        aPainter.drawLine(i, aHeight-mEasingCurve.valueForProgress(i/((double)aWidth))*aHeight, i+1, aHeight-mEasingCurve.valueForProgress((i+1)/((double)aWidth))*aHeight);
     }
 
     aPainter.end();
