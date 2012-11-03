@@ -12,8 +12,8 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget 
 
     mEasingCurve=aEasingCurve;
 
-    QMetaEnum aEnum=aEasingCurve.staticMetaObject.enumerator(aEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
-    int index=ui->typeComboBox->findText(aEnum.valueToKey(aEasingCurve.type()));
+    QMetaEnum aEnum=mEasingCurve.staticMetaObject.enumerator(mEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
+    int index=ui->typeComboBox->findText(aEnum.valueToKey(mEasingCurve.type()));
 
     if (index<0)
     {
@@ -41,7 +41,10 @@ QEasingCurve EasingCurveEditDialog::resultValue() const
 void EasingCurveEditDialog::drawCurve()
 {
     QPixmap aPixmap(100, 100);
+    aPixmap.fill(QColor(255, 255, 255));
+
     QPainter aPainter(&aPixmap);
+    aPainter.setPen(QColor(0, 0, 255));
 
     for (int i=0; i<100; ++i)
     {
@@ -55,7 +58,10 @@ void EasingCurveEditDialog::drawCurve()
 
 void EasingCurveEditDialog::on_typeComboBox_currentIndexChanged(QString aValue)
 {
+    QMetaEnum aEnum=mEasingCurve.staticMetaObject.enumerator(mEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
+    mEasingCurve.setType((QEasingCurve::Type)aEnum.keyToValue(aValue.toLatin1()));
 
+    drawCurve();
 }
 
 void EasingCurveEditDialog::on_amplitudeSpinBox_valueChanged(double aValue)
