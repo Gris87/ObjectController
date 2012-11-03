@@ -2,6 +2,7 @@
 #include "ui_easingcurveeditdialog.h"
 
 #include <QPainter>
+#include <QMetaEnum>
 
 EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget *parent) :
     QDialog(parent),
