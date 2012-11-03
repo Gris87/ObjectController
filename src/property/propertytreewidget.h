@@ -34,6 +34,7 @@ public:
     CustomDelegate*       dateDelegate();
     CustomDelegate*       timeDelegate();
     CustomDelegate*       dateTimeDelegate();
+    CustomDelegate*       easingCurveDelegate();
 
 protected:
     ObjectController     *mController;
@@ -49,6 +50,7 @@ protected:
     CustomDelegate       *mDateDelegate;
     CustomDelegate       *mTimeDelegate;
     CustomDelegate       *mDateTimeDelegate;
+    CustomDelegate       *mEasingCurveDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

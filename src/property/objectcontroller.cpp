@@ -12,6 +12,7 @@
 #include "delegates/datedelegate.h"
 #include "delegates/timedelegate.h"
 #include "delegates/datetimedelegate.h"
+#include "delegates/easingcurvedelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -232,4 +233,9 @@ CustomDelegate* ObjectController::createTimeDelegate()
 CustomDelegate* ObjectController::createDateTimeDelegate()
 {
     return new DateTimeDelegate(this);
+}
+
+CustomDelegate* ObjectController::createEasingCurveDelegate()
+{
+    return new EasingCurveDelegate(this);
 }

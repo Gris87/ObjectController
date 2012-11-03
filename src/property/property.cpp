@@ -1591,7 +1591,7 @@ CustomDelegate* Property::delegateForValue(const QEasingCurve &/*aValue*/, Prope
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->easingCurveDelegate();
     }
 
     return 0;

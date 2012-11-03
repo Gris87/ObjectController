@@ -18,16 +18,17 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
 
     //----------------------------------------------------------------------
 
-    mBoolDelegate      = mController->createBoolDelegate();
-    mIntegerDelegate   = mController->createIntegerDelegate();
-    mDoubleDelegate    = mController->createDoubleDelegate();
-    mCharDelegate      = mController->createCharDelegate();
-    mStringDelegate    = mController->createStringDelegate();
-    mByteArrayDelegate = mController->createByteArrayDelegate();
-    mBitArrayDelegate  = mController->createBitArrayDelegate();
-    mDateDelegate      = mController->createDateDelegate();
-    mTimeDelegate      = mController->createTimeDelegate();
-    mDateTimeDelegate  = mController->createDateTimeDelegate();
+    mBoolDelegate        = mController->createBoolDelegate();
+    mIntegerDelegate     = mController->createIntegerDelegate();
+    mDoubleDelegate      = mController->createDoubleDelegate();
+    mCharDelegate        = mController->createCharDelegate();
+    mStringDelegate      = mController->createStringDelegate();
+    mByteArrayDelegate   = mController->createByteArrayDelegate();
+    mBitArrayDelegate    = mController->createBitArrayDelegate();
+    mDateDelegate        = mController->createDateDelegate();
+    mTimeDelegate        = mController->createTimeDelegate();
+    mDateTimeDelegate    = mController->createDateTimeDelegate();
+    mEasingCurveDelegate = mController->createEasingCurveDelegate();
 
     //----------------------------------------------------------------------
 
@@ -267,4 +268,9 @@ CustomDelegate* PropertyTreeWidget::timeDelegate()
 CustomDelegate* PropertyTreeWidget::dateTimeDelegate()
 {
     return mDateTimeDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::easingCurveDelegate()
+{
+    return mEasingCurveDelegate;
 }
