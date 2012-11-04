@@ -24,6 +24,7 @@ protected:
 
 private:
     Ui::EasingCurveEditDialog *ui;
+    QEasingCurve               mOriginalEasingCurve;
     QEasingCurve               mEasingCurve;
 
     void drawCurve();

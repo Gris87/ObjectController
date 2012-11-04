@@ -10,7 +10,12 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget 
 {
     ui->setupUi(this);
 
+    mOriginalEasingCurve=aEasingCurve;
     mEasingCurve=aEasingCurve;
+
+    ui->amplitudeSpinBox->setValue(mEasingCurve.amplitude());
+    ui->overshootSpinBox->setValue(mEasingCurve.overshoot());
+    ui->periodSpinBox->setValue(mEasingCurve.period());
 
     QMetaEnum aEnum=mEasingCurve.staticMetaObject.enumerator(mEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
     int index=ui->typeComboBox->findText(aEnum.valueToKey(mEasingCurve.type()));
@@ -21,9 +26,6 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget 
     }
 
     ui->typeComboBox->setCurrentIndex(index);
-    ui->amplitudeSpinBox->setValue(mEasingCurve.amplitude());
-    ui->overshootSpinBox->setValue(mEasingCurve.overshoot());
-    ui->periodSpinBox->setValue(mEasingCurve.period());
 
     drawCurve();
 }
@@ -78,7 +80,20 @@ void EasingCurveEditDialog::drawCurve()
 void EasingCurveEditDialog::on_typeComboBox_currentIndexChanged(QString aValue)
 {
     QMetaEnum aEnum=mEasingCurve.staticMetaObject.enumerator(mEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
-    mEasingCurve.setType((QEasingCurve::Type)aEnum.keyToValue(aValue.toLatin1()));
+    QEasingCurve::Type aType=(QEasingCurve::Type)aEnum.keyToValue(aValue.toLatin1());
+
+    if (mOriginalEasingCurve.type()==aType)
+    {
+        mEasingCurve=mOriginalEasingCurve;
+    }
+    else
+    {
+        mEasingCurve=QEasingCurve(aType);
+    }
+
+    mEasingCurve.setAmplitude(ui->amplitudeSpinBox->value());
+    mEasingCurve.setOvershoot(ui->overshootSpinBox->value());
+    mEasingCurve.setPeriod(ui->periodSpinBox->value());
 
     drawCurve();
 }
