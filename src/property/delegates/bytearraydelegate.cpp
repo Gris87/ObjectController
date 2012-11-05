@@ -20,7 +20,7 @@ void ByteArrayDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *
     switch (aItem->firstValue().type())
     {
         case QVariant::ByteArray:
-            aByteArrayEditor->setValue(aItem->firstValue().toByteArray());
+            aByteArrayEditor->setValue(aItem->firstValue().value<QByteArray>());
         break;
         default:
             Q_ASSERT(false); // Impossible

@@ -20,34 +20,34 @@ void IntegerDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aI
     switch (aItem->firstValue().type())
     {
         case QVariant::Int:
-            aIntegerEditor->setValue(aItem->firstValue().toInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<qint32>());
         break;
         case QVariant::UInt:
-            aIntegerEditor->setValue(aItem->firstValue().toUInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<quint32>());
         break;
         case QVariant::LongLong:
-            aIntegerEditor->setValue(aItem->firstValue().toLongLong());
+            aIntegerEditor->setValue(aItem->firstValue().value<qint64>());
         break;
         case QVariant::ULongLong:
-            aIntegerEditor->setValue(aItem->firstValue().toULongLong());
+            aIntegerEditor->setValue(aItem->firstValue().value<quint64>());
         break;
         case QMetaType::Char:
-            aIntegerEditor->setValue((qint8)aItem->firstValue().toInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<qint8>());
         break;
         case QMetaType::UChar:
-            aIntegerEditor->setValue((quint8)aItem->firstValue().toUInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<quint8>());
         break;
         case QMetaType::Short:
-            aIntegerEditor->setValue((qint16)aItem->firstValue().toInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<qint16>());
         break;
         case QMetaType::UShort:
-            aIntegerEditor->setValue((quint16)aItem->firstValue().toUInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<quint16>());
         break;
         case QMetaType::Long:
-            aIntegerEditor->setValue((qint32)aItem->firstValue().toInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<qint32>());
         break;
         case QMetaType::ULong:
-            aIntegerEditor->setValue((quint32)aItem->firstValue().toUInt());
+            aIntegerEditor->setValue(aItem->firstValue().value<quint32>());
         break;
         default:
             Q_ASSERT(false); // Impossible

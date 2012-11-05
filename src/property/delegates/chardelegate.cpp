@@ -20,7 +20,7 @@ void CharDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aItem
     switch (aItem->firstValue().type())
     {
         case QVariant::Char:
-            aCharEditor->setValue(aItem->firstValue().toChar());
+            aCharEditor->setValue(aItem->firstValue().value<QChar>());
         break;
         default:
             Q_ASSERT(false); // Impossible

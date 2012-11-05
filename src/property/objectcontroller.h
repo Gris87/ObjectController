@@ -47,6 +47,7 @@ protected:
     virtual CustomDelegate* createTimeDelegate();
     virtual CustomDelegate* createDateTimeDelegate();
     virtual CustomDelegate* createEasingCurveDelegate();
+    virtual CustomDelegate* createFontDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

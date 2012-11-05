@@ -22,7 +22,7 @@ void DateDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aItem
     switch (aItem->firstValue().type())
     {
         case QVariant::Date:
-            aDateEditor->setValue(aItem->firstValue().toDate());
+            aDateEditor->setValue(aItem->firstValue().value<QDate>());
         break;
         default:
             Q_ASSERT(false); // Impossible

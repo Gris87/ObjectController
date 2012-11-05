@@ -1601,7 +1601,7 @@ CustomDelegate* Property::delegateForValue(const QFont &/*aValue*/, PropertyTree
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->fontDelegate();
     }
 
     return 0;

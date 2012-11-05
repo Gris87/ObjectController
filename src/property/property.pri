@@ -43,7 +43,9 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/datedelegate.h \
            $$PWD/dialogs/easingcurveeditdialog.h \
            $$PWD/editors/easingcurveeditor.h \
-           $$PWD/delegates/easingcurvedelegate.h
+           $$PWD/delegates/easingcurvedelegate.h \
+           $$PWD/delegates/fontdelegate.h \
+           $$PWD/editors/fonteditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -81,7 +83,9 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/datedelegate.cpp \
            $$PWD/dialogs/easingcurveeditdialog.cpp \
            $$PWD/editors/easingcurveeditor.cpp \
-           $$PWD/delegates/easingcurvedelegate.cpp
+           $$PWD/delegates/easingcurvedelegate.cpp \
+           $$PWD/delegates/fontdelegate.cpp \
+           $$PWD/editors/fonteditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -100,4 +104,5 @@ FORMS += \
            $$PWD/editors/datetimeeditor.ui \
            $$PWD/editors/dateeditor.ui \
            $$PWD/dialogs/easingcurveeditdialog.ui \
-           $$PWD/editors/easingcurveeditor.ui
+           $$PWD/editors/easingcurveeditor.ui \
+           $$PWD/editors/fonteditor.ui

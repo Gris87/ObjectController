@@ -20,7 +20,7 @@ void BoolDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aItem
     switch (aItem->firstValue().type())
     {
         case QVariant::Bool:
-            aBoolEditor->setValue(aItem->firstValue().toBool());
+            aBoolEditor->setValue(aItem->firstValue().value<bool>());
         break;
         default:
             Q_ASSERT(false); // Impossible

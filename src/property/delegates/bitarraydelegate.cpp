@@ -20,7 +20,7 @@ void BitArrayDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *a
     switch (aItem->firstValue().type())
     {
         case QVariant::BitArray:
-            aBitArrayEditor->setValue(aItem->firstValue().toBitArray());
+            aBitArrayEditor->setValue(aItem->firstValue().value<QBitArray>());
         break;
         default:
             Q_ASSERT(false); // Impossible

@@ -29,6 +29,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mTimeDelegate        = mController->createTimeDelegate();
     mDateTimeDelegate    = mController->createDateTimeDelegate();
     mEasingCurveDelegate = mController->createEasingCurveDelegate();
+    mFontDelegate        = mController->createFontDelegate();
 
     //----------------------------------------------------------------------
 
@@ -273,4 +274,9 @@ CustomDelegate* PropertyTreeWidget::dateTimeDelegate()
 CustomDelegate* PropertyTreeWidget::easingCurveDelegate()
 {
     return mEasingCurveDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::fontDelegate()
+{
+    return mFontDelegate;
 }

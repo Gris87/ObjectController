@@ -23,13 +23,13 @@ void StringDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
     switch (aItem->firstValue().type())
     {
         case QVariant::String:
-            aStringEditor->setValue(aItem->firstValue().toString());
+            aStringEditor->setValue(aItem->firstValue().value<QString>());
         break;
         case QVariant::Url:
-            aStringEditor->setValue(aItem->firstValue().toUrl());
+            aStringEditor->setValue(aItem->firstValue().value<QUrl>());
         break;
         case QVariant::RegExp:
-            aStringEditor->setValue(aItem->firstValue().toRegExp());
+            aStringEditor->setValue(aItem->firstValue().value<QRegExp>());
         break;
         default:
             Q_ASSERT(false); // Impossible

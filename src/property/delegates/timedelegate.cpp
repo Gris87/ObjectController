@@ -22,7 +22,7 @@ void TimeDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aItem
     switch (aItem->firstValue().type())
     {
         case QVariant::Time:
-            aTimeEditor->setValue(aItem->firstValue().toTime());
+            aTimeEditor->setValue(aItem->firstValue().value<QTime>());
         break;
         default:
             Q_ASSERT(false); // Impossible

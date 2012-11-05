@@ -22,7 +22,7 @@ void EasingCurveDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem
     switch (aItem->firstValue().type())
     {
         case QVariant::EasingCurve:
-            aEasingCurveEditor->setValue(aItem->firstValue().toEasingCurve());
+            aEasingCurveEditor->setValue(aItem->firstValue().value<QEasingCurve>());
         break;
         default:
             Q_ASSERT(false); // Impossible

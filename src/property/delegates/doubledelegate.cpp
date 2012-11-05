@@ -20,10 +20,10 @@ void DoubleDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
     switch (aItem->firstValue().type())
     {
         case QVariant::Double:
-            aDoubleEditor->setValue(aItem->firstValue().toDouble());
+            aDoubleEditor->setValue(aItem->firstValue().value<double>());
         break;
         case QMetaType::Float:
-            aDoubleEditor->setValue((float)aItem->firstValue().toDouble());
+            aDoubleEditor->setValue(aItem->firstValue().value<float>());
         break;
         default:
             Q_ASSERT(false); // Impossible
