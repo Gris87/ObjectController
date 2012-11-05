@@ -41,10 +41,27 @@
           <height>10</height>
          </size>
         </property>
+        <layout class="QGridLayout" name="standardGridLayout">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>4</number>
+         </property>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="additionalPaletteWidget" native="true"/>
+       <widget class="QWidget" name="additionalPaletteWidget" native="true">
+        <layout class="QGridLayout" name="additionalGridLayout">
+         <property name="margin">
+          <number>0</number>
+         </property>
+         <property name="spacing">
+          <number>4</number>
+         </property>
+        </layout>
+       </widget>
       </item>
       <item>
        <spacer name="horizontalSpacer">

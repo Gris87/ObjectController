@@ -50,7 +50,8 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/paintdialog.h \
            $$PWD/delegates/pixmapdelegate.h \
            $$PWD/editors/pixmapeditor.h \
-           $$PWD/widgets/paintview.h
+           $$PWD/widgets/paintview.h \
+           $$PWD/widgets/colorarea.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -95,7 +96,8 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/paintdialog.cpp \
            $$PWD/delegates/pixmapdelegate.cpp \
            $$PWD/editors/pixmapeditor.cpp \
-           $$PWD/widgets/paintview.cpp
+           $$PWD/widgets/paintview.cpp \
+           $$PWD/widgets/colorarea.cpp
 
 RESOURCES += $$PWD/property.qrc
 
