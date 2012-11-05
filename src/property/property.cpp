@@ -1611,7 +1611,7 @@ CustomDelegate* Property::delegateForValue(const QPixmap &/*aValue*/, PropertyTr
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->pixmapDelegate();
     }
 
     return 0;

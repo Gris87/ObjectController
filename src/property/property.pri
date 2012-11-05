@@ -45,7 +45,11 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/editors/easingcurveeditor.h \
            $$PWD/delegates/easingcurvedelegate.h \
            $$PWD/delegates/fontdelegate.h \
-           $$PWD/editors/fonteditor.h
+           $$PWD/editors/fonteditor.h \
+           $$PWD/widgets/paintframe.h \
+           $$PWD/dialogs/paintdialog.h \
+           $$PWD/delegates/pixmapdelegate.h \
+           $$PWD/editors/pixmapeditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -85,7 +89,11 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/editors/easingcurveeditor.cpp \
            $$PWD/delegates/easingcurvedelegate.cpp \
            $$PWD/delegates/fontdelegate.cpp \
-           $$PWD/editors/fonteditor.cpp
+           $$PWD/editors/fonteditor.cpp \
+           $$PWD/widgets/paintframe.cpp \
+           $$PWD/dialogs/paintdialog.cpp \
+           $$PWD/delegates/pixmapdelegate.cpp \
+           $$PWD/editors/pixmapeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -105,4 +113,7 @@ FORMS += \
            $$PWD/editors/dateeditor.ui \
            $$PWD/dialogs/easingcurveeditdialog.ui \
            $$PWD/editors/easingcurveeditor.ui \
-           $$PWD/editors/fonteditor.ui
+           $$PWD/editors/fonteditor.ui \
+           $$PWD/widgets/paintframe.ui \
+           $$PWD/dialogs/paintdialog.ui \
+           $$PWD/editors/pixmapeditor.ui

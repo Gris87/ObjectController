@@ -36,6 +36,7 @@ public:
     CustomDelegate*       dateTimeDelegate();
     CustomDelegate*       easingCurveDelegate();
     CustomDelegate*       fontDelegate();
+    CustomDelegate*       pixmapDelegate();
 
 protected:
     ObjectController     *mController;
@@ -53,6 +54,7 @@ protected:
     CustomDelegate       *mDateTimeDelegate;
     CustomDelegate       *mEasingCurveDelegate;
     CustomDelegate       *mFontDelegate;
+    CustomDelegate       *mPixmapDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);
