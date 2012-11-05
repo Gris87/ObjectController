@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "../widgets/paintview.h"
+
 namespace Ui {
 class PaintFrame;
 }
@@ -12,14 +14,14 @@ class PaintFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit PaintFrame(QWidget *parent = 0);
+    explicit PaintFrame(QPixmap aValue, QWidget *parent = 0);
     ~PaintFrame();
 
     QPixmap image() const;
-    void setImage(const QPixmap &aImage);
 
 private:
     Ui::PaintFrame *ui;
+    PaintView      *mImageView;
 };
 
 #endif // PAINTFRAME_H

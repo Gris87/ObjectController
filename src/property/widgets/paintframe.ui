@@ -10,16 +10,13 @@
     <height>300</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <layout class="QVBoxLayout" name="mainLayout">
    <property name="spacing">
     <number>4</number>
    </property>
    <property name="margin">
     <number>4</number>
    </property>
-   <item>
-    <widget class="QGraphicsView" name="imageView"/>
-   </item>
    <item>
     <widget class="Line" name="line">
      <property name="orientation">
