@@ -45,7 +45,7 @@ void PixmapEditor::setValue(const QPixmap &aValue)
 
 void PixmapEditor::on_editButton_clicked()
 {
-    PaintDialog dialog(mValue, this);
+    PaintDialog dialog(mValue, false, this);
 
     if (dialog.exec())
     {

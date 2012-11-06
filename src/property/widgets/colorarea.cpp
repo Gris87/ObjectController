@@ -20,8 +20,13 @@ void ColorArea::setColor(QColor aColor)
 {
     QPalette aPalette;
 
-    aPalette.setColor(QPalette::Window, aColor);
-    setPalette(aPalette);
+    if (aPalette.color(QPalette::Window)!=aColor)
+    {
+        aPalette.setColor(QPalette::Window, aColor);
+        setPalette(aPalette);
+
+        emit colorChanged(aColor);
+    }
 }
 
 QColor ColorArea::color()

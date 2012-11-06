@@ -35,18 +35,12 @@
       </property>
       <item>
        <widget class="QWidget" name="standardPaletteWidget" native="true">
-        <property name="minimumSize">
-         <size>
-          <width>10</width>
-          <height>10</height>
-         </size>
-        </property>
         <layout class="QGridLayout" name="standardGridLayout">
          <property name="margin">
           <number>0</number>
          </property>
          <property name="spacing">
-          <number>4</number>
+          <number>2</number>
          </property>
         </layout>
        </widget>
@@ -58,7 +52,7 @@
           <number>0</number>
          </property>
          <property name="spacing">
-          <number>4</number>
+          <number>2</number>
          </property>
         </layout>
        </widget>

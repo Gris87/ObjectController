@@ -1,14 +1,13 @@
 #include "paintdialog.h"
 #include "ui_paintdialog.h"
 
-PaintDialog::PaintDialog(QPixmap aValue, QWidget *parent) :
+PaintDialog::PaintDialog(QPixmap aValue, bool aMono, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PaintDialog)
 {
     ui->setupUi(this);
 
-    mPaintFrame=new PaintFrame(aValue, this);
-
+    mPaintFrame=new PaintFrame(aValue, aMono, this);
     ui->mainLayout->insertWidget(0, mPaintFrame);
 }
 

@@ -14,7 +14,7 @@ class PaintDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PaintDialog(QPixmap aValue, QWidget *parent = 0);
+    explicit PaintDialog(QPixmap aValue, bool aMono, QWidget *parent = 0);
     ~PaintDialog();
 
     QPixmap resultValue() const;
