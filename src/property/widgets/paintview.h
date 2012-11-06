@@ -15,7 +15,10 @@ class PaintView : public QGraphicsView
 public:
     explicit PaintView(QPixmap aPixmap, QWidget *parent = 0);
 
+    void resizeImage(QSize aNewSize);
+
     QPixmap image() const;
+    void setImage(const QPixmap &aImage);
 
     QColor firstColor() const;
     void setFirstColor(const QColor &aColor);
@@ -28,6 +31,7 @@ protected:
     int                  mStartX;
     int                  mStartY;
     Qt::MouseButton      mMouseButton;
+    int                  mLineWidth;
     QColor               mFirstColor;
     QColor               mSecondColor;
     QUndoStack           mUndoStack;

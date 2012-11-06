@@ -31,6 +31,9 @@ private slots:
     void colorRightSelected(ColorArea *aArea);
     void leftColorChanged(QColor aColor);
     void rightColorChanged(QColor aColor);
+
+    void on_openButton_clicked();
+    void on_resizeButton_clicked();
 };
 
 #endif // PAINTFRAME_H

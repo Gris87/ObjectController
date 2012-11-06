@@ -7,6 +7,8 @@ PaintDialog::PaintDialog(QPixmap aValue, bool aMono, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowFlags(Qt::Window);
+
     mPaintFrame=new PaintFrame(aValue, aMono, this);
     ui->mainLayout->insertWidget(0, mPaintFrame);
 }

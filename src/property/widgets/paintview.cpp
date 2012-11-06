@@ -13,6 +13,7 @@ PaintView::PaintView(QPixmap aPixmap, QWidget *parent) :
     mStartY=0;
     mMouseButton=Qt::NoButton;
 
+    mLineWidth=1;
     mFirstColor.setRgb(0, 0, 0);
     mSecondColor.setRgb(255, 255, 255);
 }
@@ -27,6 +28,35 @@ void PaintView::keyPressEvent(QKeyEvent *event)
     if (event->matches(QKeySequence::Redo))
     {
         redo();
+    }
+    else
+    if (
+        event->key()==Qt::Key_Plus
+        &&
+        (
+         event->modifiers()==Qt::NoModifier
+         ||
+         event->modifiers()==Qt::KeypadModifier
+        )
+       )
+    {
+        ++mLineWidth;
+    }
+    else
+    if (
+        event->key()==Qt::Key_Minus
+        &&
+        (
+         event->modifiers()==Qt::NoModifier
+         ||
+         event->modifiers()==Qt::KeypadModifier
+        )
+       )
+    {
+        if (mLineWidth>1)
+        {
+            --mLineWidth;
+        }
     }
     else
     {
@@ -90,14 +120,36 @@ void PaintView::drawLine(int x1, int y1, int x2, int y2, const QColor &aColor, b
     QPointF aFirstPointF=mapToScene(x1, y1);
     QPointF aSecondPointF=mapToScene(x2, y2);
 
-    QPointF aFirstPoint=mPixmapItem->mapFromScene(aFirstPointF);
-    QPointF aSecondPoint=mPixmapItem->mapFromScene(aSecondPointF);
+    QPoint aFirstPoint=mPixmapItem->mapFromScene(aFirstPointF).toPoint();
+    QPoint aSecondPoint=mPixmapItem->mapFromScene(aSecondPointF).toPoint();
+
+
 
     QPixmap aPixmap=mPixmapItem->pixmap();
 
     QPainter aPainter(&aPixmap);
-    aPainter.setPen(aColor);
-    aPainter.drawLine(aFirstPoint, aSecondPoint);
+
+    if (aFirstPoint==aSecondPoint)
+    {
+        aPainter.setPen(aColor);
+        aPainter.setBrush(QBrush(aColor));
+
+        if (mLineWidth>1)
+        {
+            aPainter.drawEllipse(aFirstPoint, mLineWidth >> 1, mLineWidth >> 1);
+        }
+        else
+        {
+            aPainter.drawPoint(aFirstPoint);
+        }
+    }
+    else
+    {
+        aPainter.setPen(QPen(QBrush(aColor), mLineWidth, Qt::SolidLine, Qt::RoundCap));
+        aPainter.drawLine(aFirstPoint, aSecondPoint);
+    }
+
+
     aPainter.end();
 
     DrawUndoCommand *aCommand=new DrawUndoCommand(this, aNewLine, aPixmap);
@@ -114,9 +166,23 @@ void PaintView::redo()
     mUndoStack.redo();
 }
 
+void PaintView::resizeImage(QSize aNewSize)
+{
+    QPixmap aPixmap=mPixmapItem->pixmap().scaled(aNewSize);
+
+    DrawUndoCommand *aCommand=new DrawUndoCommand(this, true, aPixmap);
+    mUndoStack.push(aCommand);
+}
+
 QPixmap PaintView::image() const
 {
     return mPixmapItem->pixmap();
+}
+
+void PaintView::setImage(const QPixmap &aImage)
+{
+    mPixmapItem->setPixmap(aImage);
+    mUndoStack.clear();
 }
 
 QColor PaintView::firstColor() const

@@ -1,6 +1,10 @@
 #include "paintframe.h"
 #include "ui_paintframe.h"
 
+#include <QFileDialog>
+
+#include "../dialogs/resizedialog.h"
+
 PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PaintFrame)
@@ -8,7 +12,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     ui->setupUi(this);
 
     mImageView=new PaintView(aValue, this);
-    ui->mainLayout->insertWidget(0, mImageView);
+    ui->mainLayout->insertWidget(1, mImageView);
 
     mLeftArea=new ColorArea(this);
     mLeftArea->setColor(QColor(0, 0, 0));
@@ -119,6 +123,30 @@ void PaintFrame::leftColorChanged(QColor aColor)
 void PaintFrame::rightColorChanged(QColor aColor)
 {
     mImageView->setSecondColor(aColor);
+}
+
+void PaintFrame::on_openButton_clicked()
+{
+    QFileDialog dialog(this);
+
+    dialog.setAcceptMode(QFileDialog::AcceptOpen);
+    dialog.setFileMode(QFileDialog::ExistingFile);
+
+    if (dialog.exec())
+    {
+        QPixmap aPixmap(dialog.selectedFiles().at(0));
+        mImageView->setImage(aPixmap);
+    }
+}
+
+void PaintFrame::on_resizeButton_clicked()
+{
+    ResizeDialog dialog(mImageView->image().size(), this);
+
+    if (dialog.exec())
+    {
+        mImageView->resizeImage(dialog.newSize());
+    }
 }
 
 QPixmap PaintFrame::image() const
