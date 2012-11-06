@@ -47,6 +47,8 @@ protected:
 public slots:
     void undo();
     void redo();
+    void increaseLineWidth();
+    void decreaseLineWidth();
 };
 
 // *********************************************************************************

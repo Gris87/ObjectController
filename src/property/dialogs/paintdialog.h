@@ -26,6 +26,12 @@ private:
 private slots:
     void on_okButton_clicked();
     void on_cancelButton_clicked();
+    void on_actionOpen_triggered();
+    void on_actionResize_triggered();
+    void on_actionPlus_triggered();
+    void on_actionMinus_triggered();
+    void on_actionUndo_triggered();
+    void on_actionRedo_triggered();
 };
 
 #endif // PAINTDIALOG_H

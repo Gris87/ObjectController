@@ -11,6 +11,13 @@ PaintDialog::PaintDialog(QPixmap aValue, bool aMono, QWidget *parent) :
 
     mPaintFrame=new PaintFrame(aValue, aMono, this);
     ui->mainLayout->insertWidget(0, mPaintFrame);
+
+    addAction(ui->actionOpen);
+    addAction(ui->actionResize);
+    addAction(ui->actionPlus);
+    addAction(ui->actionMinus);
+    addAction(ui->actionUndo);
+    addAction(ui->actionRedo);
 }
 
 PaintDialog::~PaintDialog()
@@ -31,4 +38,34 @@ void PaintDialog::on_okButton_clicked()
 void PaintDialog::on_cancelButton_clicked()
 {
     reject();
+}
+
+void PaintDialog::on_actionOpen_triggered()
+{
+    mPaintFrame->on_openButton_clicked();
+}
+
+void PaintDialog::on_actionResize_triggered()
+{
+    mPaintFrame->on_resizeButton_clicked();
+}
+
+void PaintDialog::on_actionPlus_triggered()
+{
+    mPaintFrame->getImageView()->increaseLineWidth();
+}
+
+void PaintDialog::on_actionMinus_triggered()
+{
+    mPaintFrame->getImageView()->decreaseLineWidth();
+}
+
+void PaintDialog::on_actionUndo_triggered()
+{
+    mPaintFrame->getImageView()->undo();
+}
+
+void PaintDialog::on_actionRedo_triggered()
+{
+    mPaintFrame->getImageView()->redo();
 }

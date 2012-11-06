@@ -20,6 +20,8 @@ public:
 
     QPixmap image() const;
 
+    PaintView* getImageView();
+
 private:
     Ui::PaintFrame *ui;
     PaintView      *mImageView;
@@ -32,6 +34,7 @@ private slots:
     void leftColorChanged(QColor aColor);
     void rightColorChanged(QColor aColor);
 
+public slots:
     void on_openButton_clicked();
     void on_resizeButton_clicked();
 };

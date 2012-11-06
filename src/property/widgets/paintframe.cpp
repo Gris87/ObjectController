@@ -136,6 +136,9 @@ void PaintFrame::on_openButton_clicked()
     {
         QPixmap aPixmap(dialog.selectedFiles().at(0));
         mImageView->setImage(aPixmap);
+
+        mLeftArea->setColor(QColor(0, 0, 0));
+        mRightArea->setColor(QColor(255, 255, 255));
     }
 }
 
@@ -152,4 +155,9 @@ void PaintFrame::on_resizeButton_clicked()
 QPixmap PaintFrame::image() const
 {
     return mImageView->image();
+}
+
+PaintView* PaintFrame::getImageView()
+{
+    return mImageView;
 }

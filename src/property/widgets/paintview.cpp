@@ -1,6 +1,7 @@
 #include "paintview.h"
 
 #include <QMouseEvent>
+#include <QScrollBar>
 
 PaintView::PaintView(QPixmap aPixmap, QWidget *parent) :
     QGraphicsView(parent)
@@ -40,7 +41,7 @@ void PaintView::keyPressEvent(QKeyEvent *event)
         )
        )
     {
-        ++mLineWidth;
+        increaseLineWidth();
     }
     else
     if (
@@ -53,10 +54,7 @@ void PaintView::keyPressEvent(QKeyEvent *event)
         )
        )
     {
-        if (mLineWidth>1)
-        {
-            --mLineWidth;
-        }
+        decreaseLineWidth();
     }
     else
     {
@@ -166,6 +164,22 @@ void PaintView::redo()
     mUndoStack.redo();
 }
 
+void PaintView::increaseLineWidth()
+{
+    if (mLineWidth<1000)
+    {
+        ++mLineWidth;
+    }
+}
+
+void PaintView::decreaseLineWidth()
+{
+    if (mLineWidth>1)
+    {
+        --mLineWidth;
+    }
+}
+
 void PaintView::resizeImage(QSize aNewSize)
 {
     QPixmap aPixmap=mPixmapItem->pixmap().scaled(aNewSize);
@@ -181,8 +195,21 @@ QPixmap PaintView::image() const
 
 void PaintView::setImage(const QPixmap &aImage)
 {
+    bool aSizeChanged=(mPixmapItem->pixmap().size()!=aImage.size());
+
     mPixmapItem->setPixmap(aImage);
     mUndoStack.clear();
+
+    if (aSizeChanged)
+    {
+        setSceneRect(0, 0, aImage.width(), aImage.height());
+    }
+
+    resetTransform();
+    horizontalScrollBar()->setValue(0);
+    verticalScrollBar()->setValue(0);
+
+    mLineWidth=1;
 }
 
 QColor PaintView::firstColor() const
@@ -221,11 +248,21 @@ DrawUndoCommand::DrawUndoCommand(PaintView *aEditor, bool aDrawStart, QPixmap aN
 void DrawUndoCommand::undo()
 {
     mEditor->mPixmapItem->setPixmap(mOldPixmap);
+
+    if (mOldPixmap.size()!=mNewPixmap.size())
+    {
+        mEditor->setSceneRect(0, 0, mOldPixmap.width(), mOldPixmap.height());
+    }
 }
 
 void DrawUndoCommand::redo()
 {
     mEditor->mPixmapItem->setPixmap(mNewPixmap);
+
+    if (mOldPixmap.size()!=mNewPixmap.size())
+    {
+        mEditor->setSceneRect(0, 0, mNewPixmap.width(), mNewPixmap.height());
+    }
 }
 
 bool DrawUndoCommand::mergeWith(const QUndoCommand *command)
