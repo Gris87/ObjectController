@@ -16,6 +16,7 @@
 #include "delegates/fontdelegate.h"
 #include "delegates/pixmapdelegate.h"
 #include "delegates/brushdelegate.h"
+#include "delegates/palettedelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -256,4 +257,9 @@ CustomDelegate* ObjectController::createPixmapDelegate()
 CustomDelegate* ObjectController::createBrushDelegate()
 {
     return new BrushDelegate(this);
+}
+
+CustomDelegate* ObjectController::createPaletteDelegate()
+{
+    return new PaletteDelegate(this);
 }

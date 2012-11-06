@@ -38,6 +38,7 @@ public:
     CustomDelegate*       fontDelegate();
     CustomDelegate*       pixmapDelegate();
     CustomDelegate*       brushDelegate();
+    CustomDelegate*       paletteDelegate();
 
 protected:
     ObjectController     *mController;
@@ -57,6 +58,7 @@ protected:
     CustomDelegate       *mFontDelegate;
     CustomDelegate       *mPixmapDelegate;
     CustomDelegate       *mBrushDelegate;
+    CustomDelegate       *mPaletteDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

@@ -1641,7 +1641,7 @@ CustomDelegate* Property::delegateForValue(const QPalette &/*aValue*/, PropertyT
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->paletteDelegate();
     }
 
     return 0;

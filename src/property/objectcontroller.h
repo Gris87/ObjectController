@@ -50,6 +50,7 @@ protected:
     virtual CustomDelegate* createFontDelegate();
     virtual CustomDelegate* createPixmapDelegate();
     virtual CustomDelegate* createBrushDelegate();
+    virtual CustomDelegate* createPaletteDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

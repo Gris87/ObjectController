@@ -55,7 +55,10 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/colorarea.h \
            $$PWD/widgets/hexeditor.h \
            $$PWD/widgets/paintframe.h \
-           $$PWD/widgets/paintview.h
+           $$PWD/widgets/paintview.h \
+           $$PWD/dialogs/paletteeditdialog.h \
+           $$PWD/delegates/palettedelegate.h \
+           $$PWD/editors/paletteeditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -105,7 +108,10 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/colorarea.cpp \
            $$PWD/widgets/hexeditor.cpp \
            $$PWD/widgets/paintframe.cpp \
-           $$PWD/widgets/paintview.cpp
+           $$PWD/widgets/paintview.cpp \
+           $$PWD/dialogs/paletteeditdialog.cpp \
+           $$PWD/delegates/palettedelegate.cpp \
+           $$PWD/editors/paletteeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -131,4 +137,6 @@ FORMS += \
            $$PWD/editors/pixmapeditor.ui \
            $$PWD/editors/stringeditor.ui \
            $$PWD/editors/timeeditor.ui \
-           $$PWD/widgets/paintframe.ui
+           $$PWD/widgets/paintframe.ui \
+           $$PWD/dialogs/paletteeditdialog.ui \
+           $$PWD/editors/paletteeditor.ui
