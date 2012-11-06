@@ -38,6 +38,7 @@ public:
     CustomDelegate*       fontDelegate();
     CustomDelegate*       pixmapDelegate();
     CustomDelegate*       brushDelegate();
+    CustomDelegate*       colorDelegate();
     CustomDelegate*       paletteDelegate();
 
 protected:
@@ -58,6 +59,7 @@ protected:
     CustomDelegate       *mFontDelegate;
     CustomDelegate       *mPixmapDelegate;
     CustomDelegate       *mBrushDelegate;
+    CustomDelegate       *mColorDelegate;
     CustomDelegate       *mPaletteDelegate;
 
     void keyPressEvent(QKeyEvent *event);

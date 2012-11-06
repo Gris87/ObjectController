@@ -32,6 +32,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mFontDelegate        = mController->createFontDelegate();
     mPixmapDelegate      = mController->createPixmapDelegate();
     mBrushDelegate       = mController->createBrushDelegate();
+    mColorDelegate       = mController->createColorDelegate();
     mPaletteDelegate     = mController->createPaletteDelegate();
 
     //----------------------------------------------------------------------
@@ -292,6 +293,11 @@ CustomDelegate* PropertyTreeWidget::pixmapDelegate()
 CustomDelegate* PropertyTreeWidget::brushDelegate()
 {
     return mBrushDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::colorDelegate()
+{
+    return mColorDelegate;
 }
 
 CustomDelegate* PropertyTreeWidget::paletteDelegate()

@@ -1631,7 +1631,7 @@ CustomDelegate* Property::delegateForValue(const QColor &/*aValue*/, PropertyTre
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->colorDelegate();
     }
 
     return 0;
