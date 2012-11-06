@@ -39,9 +39,6 @@
          <height>1</height>
         </size>
        </property>
-       <property name="scaledContents">
-        <bool>true</bool>
-       </property>
       </widget>
      </item>
      <item>

@@ -1621,7 +1621,7 @@ CustomDelegate* Property::delegateForValue(const QBrush &/*aValue*/, PropertyTre
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->brushDelegate();
     }
 
     return 0;

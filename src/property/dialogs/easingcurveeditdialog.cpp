@@ -49,7 +49,7 @@ void EasingCurveEditDialog::resizeEvent(QResizeEvent *event)
 void EasingCurveEditDialog::drawCurve()
 {
     int aWidth=ui->resultLabel->width();
-    int aHeight=ui->resultLabel->width();
+    int aHeight=ui->resultLabel->height();
 
     if (aWidth<1)
     {

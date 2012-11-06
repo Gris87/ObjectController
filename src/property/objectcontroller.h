@@ -49,6 +49,7 @@ protected:
     virtual CustomDelegate* createEasingCurveDelegate();
     virtual CustomDelegate* createFontDelegate();
     virtual CustomDelegate* createPixmapDelegate();
+    virtual CustomDelegate* createBrushDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

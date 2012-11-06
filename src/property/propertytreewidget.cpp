@@ -31,6 +31,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mEasingCurveDelegate = mController->createEasingCurveDelegate();
     mFontDelegate        = mController->createFontDelegate();
     mPixmapDelegate      = mController->createPixmapDelegate();
+    mBrushDelegate       = mController->createBrushDelegate();
 
     //----------------------------------------------------------------------
 
@@ -286,3 +287,9 @@ CustomDelegate* PropertyTreeWidget::pixmapDelegate()
 {
     return mPixmapDelegate;
 }
+
+CustomDelegate* PropertyTreeWidget::brushDelegate()
+{
+    return mBrushDelegate;
+}
+

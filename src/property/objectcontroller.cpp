@@ -15,6 +15,7 @@
 #include "delegates/easingcurvedelegate.h"
 #include "delegates/fontdelegate.h"
 #include "delegates/pixmapdelegate.h"
+#include "delegates/brushdelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -250,4 +251,9 @@ CustomDelegate* ObjectController::createFontDelegate()
 CustomDelegate* ObjectController::createPixmapDelegate()
 {
     return new PixmapDelegate(this);
+}
+
+CustomDelegate* ObjectController::createBrushDelegate()
+{
+    return new BrushDelegate(this);
 }
