@@ -6,6 +6,8 @@
 #include <QColor>
 
 #include "../widgets/colorarea.h"
+#include "../widgets/colorspectrum.h"
+#include "../widgets/colorbar.h"
 
 namespace Ui {
 class ColorEditDialog;
@@ -24,10 +26,15 @@ public:
 private:
     Ui::ColorEditDialog *ui;
     ColorArea           *mMainColorArea;
+    ColorSpectrum       *mColorSpectrum;
+    ColorBar            *mValueColorBar;
+    ColorBar            *mTransparencyColorBar;
 
     void setColor(QColor aColor);
 
 private slots:
+    void spectrumColorChanged(QColor aColor);
+
     void on_okButton_clicked();
     void on_cancelButton_clicked();
     void on_hueSpinBox_valueChanged(int aValue);
@@ -36,6 +43,7 @@ private slots:
     void on_redSpinBox_valueChanged(int aValue);
     void on_greenSpinBox_valueChanged(int aValue);
     void on_blueSpinBox_valueChanged(int aValue);
+    void on_alphaSpinBox_valueChanged(int aValue);
 };
 
 #endif // COLOREDITDIALOG_H

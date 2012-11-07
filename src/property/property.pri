@@ -61,7 +61,9 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/editors/paletteeditor.h \
            $$PWD/dialogs/coloreditdialog.h \
            $$PWD/delegates/colordelegate.h \
-           $$PWD/editors/coloreditor.h
+           $$PWD/editors/coloreditor.h \
+           $$PWD/widgets/colorspectrum.h \
+           $$PWD/widgets/colorbar.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -117,7 +119,9 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/editors/paletteeditor.cpp \
            $$PWD/dialogs/coloreditdialog.cpp \
            $$PWD/delegates/colordelegate.cpp \
-           $$PWD/editors/coloreditor.cpp
+           $$PWD/editors/coloreditor.cpp \
+           $$PWD/widgets/colorspectrum.cpp \
+           $$PWD/widgets/colorbar.cpp
 
 RESOURCES += $$PWD/property.qrc
 

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>400</height>
+    <width>350</width>
+    <height>200</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,30 +39,17 @@
           <property name="spacing">
            <number>4</number>
           </property>
+          <item row="1" column="3">
+           <widget class="QSpinBox" name="greenSpinBox">
+            <property name="maximum">
+             <number>255</number>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="2">
            <widget class="QLabel" name="redLabel">
             <property name="text">
              <string>Red:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="2">
-           <widget class="QLabel" name="blueLabel">
-            <property name="text">
-             <string>Blue:</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="hueLabel">
-            <property name="text">
-             <string>Hue:</string>
             </property>
             <property name="alignment">
              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -79,8 +66,35 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <widget class="QSpinBox" name="valSpinBox">
+          <item row="0" column="0">
+           <widget class="QLabel" name="hueLabel">
+            <property name="text">
+             <string>Hue:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QLabel" name="blueLabel">
+            <property name="text">
+             <string>Blue:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QSpinBox" name="redSpinBox">
+            <property name="maximum">
+             <number>255</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="satSpinBox">
             <property name="maximum">
              <number>255</number>
             </property>
@@ -96,10 +110,10 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <widget class="QSpinBox" name="hueSpinBox">
+          <item row="2" column="1">
+           <widget class="QSpinBox" name="valSpinBox">
             <property name="maximum">
-             <number>360</number>
+             <number>255</number>
             </property>
            </widget>
           </item>
@@ -113,29 +127,32 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <widget class="QSpinBox" name="satSpinBox">
+          <item row="0" column="1">
+           <widget class="QSpinBox" name="hueSpinBox">
             <property name="maximum">
-             <number>255</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QSpinBox" name="redSpinBox">
-            <property name="maximum">
-             <number>255</number>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QSpinBox" name="greenSpinBox">
-            <property name="maximum">
-             <number>255</number>
+             <number>359</number>
             </property>
            </widget>
           </item>
           <item row="2" column="3">
            <widget class="QSpinBox" name="blueSpinBox">
+            <property name="maximum">
+             <number>255</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QLabel" name="alphaLabel">
+            <property name="text">
+             <string>Alpha:</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QSpinBox" name="alphaSpinBox">
             <property name="maximum">
              <number>255</number>
             </property>

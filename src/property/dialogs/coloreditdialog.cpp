@@ -121,6 +121,36 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 
     // --------------------------------------------------------------------------------------------
 
+    mColorSpectrum = new ColorSpectrum(this);
+
+    mColorSpectrum->setMinimumSize(222, 202);
+    mColorSpectrum->setMaximumSize(222, 202);
+    mColorSpectrum->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    ui->colorSelectionLayout->addWidget(mColorSpectrum);
+
+    connect(mColorSpectrum, SIGNAL(colorChanged(QColor)), this, SLOT(spectrumColorChanged(QColor)));
+
+
+
+    mValueColorBar = new ColorBar(this);
+
+    mValueColorBar->setMinimumSize(20, 208);
+    mValueColorBar->setMaximumSize(20, 208);
+    mValueColorBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    ui->colorSelectionLayout->addWidget(mValueColorBar);
+
+
+
+    mTransparencyColorBar = new ColorBar(this);
+
+    mTransparencyColorBar->setMinimumSize(20, 208);
+    mTransparencyColorBar->setMaximumSize(20, 208);
+    mTransparencyColorBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+
+    ui->colorSelectionLayout->addWidget(mTransparencyColorBar);
+
     // --------------------------------------------------------------------------------------------
 
     mMainColorArea=new ColorArea(this);
@@ -158,14 +188,23 @@ void ColorEditDialog::on_cancelButton_clicked()
 
 void ColorEditDialog::setColor(QColor aColor)
 {
+    mColorSpectrum->blockSignals(true);
+    mValueColorBar->blockSignals(true);
+    mTransparencyColorBar->blockSignals(true);
     ui->hueSpinBox->blockSignals(true);
     ui->satSpinBox->blockSignals(true);
     ui->valSpinBox->blockSignals(true);
     ui->redSpinBox->blockSignals(true);
     ui->greenSpinBox->blockSignals(true);
     ui->blueSpinBox->blockSignals(true);
+    ui->alphaSpinBox->blockSignals(true);
 
 
+
+    mColorSpectrum->setColor(aColor);
+    mValueColorBar->setColor(aColor);
+    mValueColorBar->setValue(aColor.value());
+    mTransparencyColorBar->setValue(aColor.alpha());
 
     mMainColorArea->setColor(aColor);
 
@@ -176,43 +215,58 @@ void ColorEditDialog::setColor(QColor aColor)
     ui->redSpinBox->setValue(aColor.red());
     ui->greenSpinBox->setValue(aColor.green());
     ui->blueSpinBox->setValue(aColor.blue());
+    ui->alphaSpinBox->setValue(aColor.alpha());
 
 
 
+    mColorSpectrum->blockSignals(false);
+    mValueColorBar->blockSignals(false);
+    mTransparencyColorBar->blockSignals(false);
     ui->hueSpinBox->blockSignals(false);
     ui->satSpinBox->blockSignals(false);
     ui->valSpinBox->blockSignals(false);
     ui->redSpinBox->blockSignals(false);
     ui->greenSpinBox->blockSignals(false);
     ui->blueSpinBox->blockSignals(false);
+    ui->alphaSpinBox->blockSignals(false);
+}
+
+void ColorEditDialog::spectrumColorChanged(QColor aColor)
+{
+    setColor(QColor::fromHsv(aColor.hue(),            aColor.saturation(),     ui->valSpinBox->value(), ui->alphaSpinBox->value()));
 }
 
 void ColorEditDialog::on_hueSpinBox_valueChanged(int aValue)
 {
-    setColor(QColor::fromHsv(aValue,                  ui->satSpinBox->value(), ui->valSpinBox->value()));
+    setColor(QColor::fromHsv(aValue,                  ui->satSpinBox->value(), ui->valSpinBox->value(), ui->alphaSpinBox->value()));
 }
 
 void ColorEditDialog::on_satSpinBox_valueChanged(int aValue)
 {
-    setColor(QColor::fromHsv(ui->hueSpinBox->value(), aValue,                  ui->valSpinBox->value()));
+    setColor(QColor::fromHsv(ui->hueSpinBox->value(), aValue,                  ui->valSpinBox->value(), ui->alphaSpinBox->value()));
 }
 
 void ColorEditDialog::on_valSpinBox_valueChanged(int aValue)
 {
-    setColor(QColor::fromHsv(ui->hueSpinBox->value(), ui->satSpinBox->value(), aValue));
+    setColor(QColor::fromHsv(ui->hueSpinBox->value(), ui->satSpinBox->value(), aValue,                  ui->alphaSpinBox->value()));
 }
 
 void ColorEditDialog::on_redSpinBox_valueChanged(int aValue)
 {
-    setColor(QColor(aValue,                  ui->greenSpinBox->value(), ui->blueSpinBox->value()));
+    setColor(QColor(aValue,                  ui->greenSpinBox->value(), ui->blueSpinBox->value(), ui->alphaSpinBox->value()));
 }
 
 void ColorEditDialog::on_greenSpinBox_valueChanged(int aValue)
 {
-    setColor(QColor(ui->redSpinBox->value(), aValue,                    ui->blueSpinBox->value()));
+    setColor(QColor(ui->redSpinBox->value(), aValue,                    ui->blueSpinBox->value(), ui->alphaSpinBox->value()));
 }
 
 void ColorEditDialog::on_blueSpinBox_valueChanged(int aValue)
 {
-    setColor(QColor(ui->redSpinBox->value(), ui->greenSpinBox->value(), aValue));
+    setColor(QColor(ui->redSpinBox->value(), ui->greenSpinBox->value(), aValue,                   ui->alphaSpinBox->value()));
+}
+
+void ColorEditDialog::on_alphaSpinBox_valueChanged(int aValue)
+{
+    setColor(QColor(ui->redSpinBox->value(), ui->greenSpinBox->value(), ui->blueSpinBox->value(), aValue));
 }
