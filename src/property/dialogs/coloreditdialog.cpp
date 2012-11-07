@@ -11,23 +11,23 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 
     QList<QColor> aColors;
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    aColors.append(QColor(255, 128, 128));
+    aColors.append(QColor(255, 255, 128));
+    aColors.append(QColor(128, 255, 128));
+    aColors.append(QColor(0,   255, 128));
+    aColors.append(QColor(128, 255, 255));
+    aColors.append(QColor(0,   128, 255));
+    aColors.append(QColor(255, 128, 192));
+    aColors.append(QColor(255, 128, 255));
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    aColors.append(QColor(255, 0,   0));
+    aColors.append(QColor(255, 255, 0));
+    aColors.append(QColor(128, 255, 0));
+    aColors.append(QColor(0,   255, 64));
+    aColors.append(QColor(0,   255, 255));
+    aColors.append(QColor(0,   128, 192));
+    aColors.append(QColor(128, 128, 192));
+    aColors.append(QColor(255, 0,   255));
 
     aColors.append(QColor(255, 255, 255));
     aColors.append(QColor(255, 255, 255));

@@ -112,8 +112,7 @@ void ColorArea::mousePressEvent(QMouseEvent *event)
 
 void ColorArea::paintEvent(QPaintEvent * /*event*/)
 {
-    int aWidth=width();
-    int aHeight=height();
+    QRect aFrameRect=frameRect();
 
     QPainter paint(this);
 
@@ -121,19 +120,19 @@ void ColorArea::paintEvent(QPaintEvent * /*event*/)
     {
         int aCurRow=0;
 
-        while ((aCurRow<<3)<aHeight)
+        while ((aCurRow<<3)<aFrameRect.height())
         {
             int aCurCol=0;
 
-            while ((aCurCol<<3)<aWidth)
+            while ((aCurCol<<3)<aFrameRect.width())
             {
                 if ((aCurRow + aCurCol) & 1)
                 {
-                    paint.fillRect(aCurCol<<3, aCurRow<<3, 8, 8, QBrush(QColor(255, 255, 255)));
+                    paint.fillRect(aFrameRect.left()+(aCurCol<<3), aFrameRect.top()+(aCurRow<<3), 8, 8, QBrush(QColor(255, 255, 255)));
                 }
                 else
                 {
-                    paint.fillRect(aCurCol<<3, aCurRow<<3, 8, 8, QBrush(QColor(0, 0, 0)));
+                    paint.fillRect(aFrameRect.left()+(aCurCol<<3), aFrameRect.top()+(aCurRow<<3), 8, 8, QBrush(QColor(0, 0, 0)));
                 }
 
                 ++aCurCol;
@@ -143,11 +142,17 @@ void ColorArea::paintEvent(QPaintEvent * /*event*/)
         }
     }
 
-    paint.fillRect(0, 0, aWidth, aHeight, QBrush(mColor));
+    paint.fillRect(aFrameRect, QBrush(mColor));
 
     if (mNeedDrawFrame)
     {
         drawFrame(&paint);
+    }
+
+    if (mSelected)
+    {
+        paint.setPen(QPen(QBrush(QColor(0, 0, 0)), 1, Qt::DotLine));
+        paint.drawRect(0, 0, width(), height());
     }
 }
 
