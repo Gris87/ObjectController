@@ -7,6 +7,8 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
     QList<QColor> aColors;
 
     aColors.append(QColor(255, 255, 255));
@@ -141,6 +143,8 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 
     ui->colorSelectionLayout->addWidget(mValueColorBar);
 
+    connect(mValueColorBar, SIGNAL(valueChanged(int)), this, SLOT(on_valSpinBox_valueChanged(int)));
+
 
 
     mTransparencyColorBar = new ColorBar(this);
@@ -150,6 +154,8 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
     mTransparencyColorBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     ui->colorSelectionLayout->addWidget(mTransparencyColorBar);
+
+    connect(mTransparencyColorBar, SIGNAL(valueChanged(int)), this, SLOT(on_alphaSpinBox_valueChanged(int)));
 
     // --------------------------------------------------------------------------------------------
 
@@ -173,7 +179,7 @@ ColorEditDialog::~ColorEditDialog()
 
 QColor ColorEditDialog::resultValue() const
 {
-    return QColor();
+    return mMainColorArea->color();
 }
 
 void ColorEditDialog::on_okButton_clicked()

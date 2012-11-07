@@ -1,7 +1,7 @@
 #include "colorbar.h"
 
-#include <QPainter>
 #include <QMouseEvent>
+#include <QStyleOptionFrameV3>
 
 ColorBar::ColorBar(QWidget *parent) :
     QWidget(parent)
@@ -45,7 +45,7 @@ void ColorBar::setValue(int aValue)
 
 void ColorBar::setValueAt(int y)
 {
-    double aValue=(y-4)/(double)height();
+    double aValue=(y-4)/((double)height()-8);
 
     setValue(255-aValue*255);
 }
@@ -81,7 +81,10 @@ void ColorBar::paintEvent(QPaintEvent * /*event*/)
     aGradient.setColorAt(1, QColor(0, 0, 0));
 
     paint.setBrush(QBrush(aGradient));
-    paint.drawRect(0, 4, width()-5, height()-8);
+
+    QRect aBarRect(0, 4, width()-5, height()-8);
+    paint.drawRect(aBarRect);
+    drawFrame(&paint, aBarRect);
 
     int cursorY=4+((255-mValue)/255.0f)*(height()-8);
 
@@ -92,4 +95,22 @@ void ColorBar::paintEvent(QPaintEvent * /*event*/)
 
     paint.setBrush(QBrush(QColor(0, 0, 0)));
     paint.drawPolygon(aPolygon);
+}
+
+void ColorBar::drawFrame(QPainter *p, QRect aRect)
+{
+    QStyleOptionFrameV3 opt;
+
+    aRect.setRight(aRect.right()+1);
+    aRect.setBottom(aRect.bottom()+1);
+
+    opt.init(this);
+
+    opt.rect          = aRect;
+    opt.lineWidth     = 1;
+    opt.midLineWidth  = 0;
+    opt.state        |= QStyle::State_Sunken;
+    opt.frameShape    = QFrame::Panel;
+
+    style()->drawControl(QStyle::CE_ShapedFrame, &opt, p, this);
 }

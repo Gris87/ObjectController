@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include <QPainter>
+
 class ColorBar : public QWidget
 {
     Q_OBJECT
@@ -26,6 +28,8 @@ protected:
     void mouseMoveEvent(QMouseEvent *event);
     void mouseReleaseEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
+
+    void drawFrame(QPainter *p, QRect aRect);
 
 signals:
     void valueChanged(int aValue);
