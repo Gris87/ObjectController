@@ -2,14 +2,6 @@
 #define COLORAREA_H
 
 #include <QFrame>
-#include <QPalette>
-#include <QPainter>
-#include <QScreen>
-#include <QColorDialog>
-#include <QMouseEvent>
-#include <QDesktopWidget>
-#include <QGridLayout>
-#include <QApplication>
 
 class ColorArea : public QFrame
 {
@@ -17,27 +9,46 @@ class ColorArea : public QFrame
 public:
     explicit ColorArea(QWidget *parent = 0);
 
-    void setColor(QColor aColor);
-    QColor color();
+    QColor color() const;
+    void setColor(const QColor &aColor);
 
-    bool needDrawFrame;
-    bool popupAllowed;
-    bool selectAllowed;
-    quint8 popupCount;
-    quint8 popupCellSize;
+    bool isNeedDrawFrame() const;
+    void setNeedDrawFrame(const bool &aNeedDrawFrame);
+
+    bool isSelected() const;
+    void setSelected(const bool &aSelected);
+
+    bool isSelectAllowed() const;
+    void setSelectAllowed(const bool &aSelectAllowed);
+
+    bool isPopupAllowed() const;
+    void setPopupAllowed(const bool &aPopupAllowed);
+
+    quint8 popupCount() const;
+    void setPopupCount(const quint8 &aPopupCount);
+
+    quint8 popupCellSize() const;
+    void setPopupCellSize(const quint8 &aPopupCellSize);
 
 protected:
+    QWidget *mPopupWidget;
+    QColor   mColor;
+    bool     mNeedDrawFrame;
+    bool     mSelected;
+    bool     mSelectAllowed;
+    bool     mPopupAllowed;
+    quint8   mPopupCount;
+    quint8   mPopupCellSize;
+
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
 
-    QWidget *aPopupWidget;
-
 private slots:
-    void cellClicked(ColorArea *aArea);
+    void cellClicked();
 
 signals:
-    void clicked(ColorArea *aArea);
-    void rightClicked(ColorArea *aArea);
+    void clicked();
+    void rightClicked();
     void colorChanged(const QColor &aColor);
 };
 

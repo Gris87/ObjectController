@@ -1,5 +1,12 @@
 #include "colorarea.h"
 
+#include <QColorDialog>
+#include <QMouseEvent>
+#include <QDesktopWidget>
+#include <QApplication>
+#include <QGridLayout>
+#include <QPainter>
+
 ColorArea::ColorArea(QWidget *parent) :
     QFrame(parent)
 {
@@ -9,59 +16,44 @@ ColorArea::ColorArea(QWidget *parent) :
     setFrameShadow(QFrame::Sunken);
     setFrameShape(QFrame::StyledPanel);
 
-    needDrawFrame=true;
-    popupAllowed=true;
-    selectAllowed=true;
-    popupCount=9;
-    popupCellSize=9;
-}
+    mColor.setRgb(0, 0, 0);
 
-void ColorArea::setColor(QColor aColor)
-{
-    QPalette aPalette;
+    mNeedDrawFrame=true;
+    mSelected=false;
+    mSelectAllowed=true;
+    mPopupAllowed=true;
 
-    if (aPalette.color(QPalette::Window)!=aColor)
-    {
-        aPalette.setColor(QPalette::Window, aColor);
-        setPalette(aPalette);
-
-        emit colorChanged(aColor);
-    }
-}
-
-QColor ColorArea::color()
-{
-    return palette().window().color();
+    mPopupCount=9;
+    mPopupCellSize=9;
 }
 
 void ColorArea::mousePressEvent(QMouseEvent *event)
 {
     if (event->button()==Qt::LeftButton)
     {
-        if (selectAllowed)
+        if (mSelectAllowed)
         {
             QColorDialog dialog(color(), this);
 
             if (dialog.exec())
             {
                 setColor(dialog.selectedColor());
-                emit colorChanged(dialog.selectedColor());
             }
         }
         else
         {
-            emit clicked(this);
+            emit clicked();
         }
     }
     else
     if (event->button()==Qt::RightButton)
     {
-        if (popupAllowed)
+        if (mPopupAllowed)
         {
-            aPopupWidget=new QWidget(this, Qt::Popup);
+            mPopupWidget=new QWidget(this, Qt::Popup);
 
-            int aWidthSize=popupCellSize*popupCount*popupCount+4;
-            int aHeightSize=popupCellSize*popupCount+4;
+            int aWidthSize=mPopupCellSize*mPopupCount*mPopupCount+4;
+            int aHeightSize=mPopupCellSize*mPopupCount+4;
 
             int aX=cursor().pos().x();
             int aY=cursor().pos().y();
@@ -81,59 +73,176 @@ void ColorArea::mousePressEvent(QMouseEvent *event)
                 aY=aHeight-aHeightSize;
             }
 
-            aPopupWidget->setGeometry(aX, aY, aWidthSize, aHeightSize);
+            mPopupWidget->setGeometry(aX, aY, aWidthSize, aHeightSize);
 
-            QGridLayout *aLayout=new QGridLayout(aPopupWidget);
+            QGridLayout *aLayout=new QGridLayout(mPopupWidget);
             aLayout->setHorizontalSpacing(0);
             aLayout->setVerticalSpacing(0);
             aLayout->setContentsMargins(2, 2, 2, 2);
 
-            quint16 aDiffY=255/(popupCount-1);
-            quint32 aDiffX=65535/(popupCount*popupCount-1);
+            quint16 aDiffY=255/(mPopupCount-1);
+            quint32 aDiffX=65535/(mPopupCount*mPopupCount-1);
 
-            for (int i=0; i<popupCount; i++)
+            for (int i=0; i<mPopupCount; i++)
             {
-                for (int j=0; j<popupCount*popupCount; j++)
+                for (int j=0; j<mPopupCount*mPopupCount; j++)
                 {
                     ColorArea *aArea=new ColorArea(this);
 
-                    aArea->popupAllowed=false;
-                    aArea->selectAllowed=false;
-                    aArea->needDrawFrame=false;
+                    aArea->mPopupAllowed=false;
+                    aArea->mSelectAllowed=false;
+                    aArea->mNeedDrawFrame=false;
 
                     aArea->setColor(QColor(aDiffY*i, aDiffX*j>>8, aDiffX*j & 0xFF));
 
-                    connect(aArea, SIGNAL(clicked(ColorArea*)), this, SLOT(cellClicked(ColorArea*)));
+                    connect(aArea, SIGNAL(clicked()), this, SLOT(cellClicked()));
 
                     aLayout->addWidget(aArea, i, j);
                 }
             }
 
-            aPopupWidget->show();
+            mPopupWidget->show();
         }
         else
         {
-            emit rightClicked(this);
+            emit rightClicked();
         }
     }
 }
 
 void ColorArea::paintEvent(QPaintEvent * /*event*/)
 {
-    QPainter paint(this);
-    paint.setBrush(QBrush(color()));
-    paint.drawRect(0,0,width(), height());
+    int aWidth=width();
+    int aHeight=height();
 
-    if (needDrawFrame)
+    QPainter paint(this);
+
+    if (mColor.alpha()<255)
+    {
+        int aCurRow=0;
+
+        while ((aCurRow<<3)<aHeight)
+        {
+            int aCurCol=0;
+
+            while ((aCurCol<<3)<aWidth)
+            {
+                if ((aCurRow + aCurCol) & 1)
+                {
+                    paint.fillRect(aCurCol<<3, aCurRow<<3, 8, 8, QBrush(QColor(255, 255, 255)));
+                }
+                else
+                {
+                    paint.fillRect(aCurCol<<3, aCurRow<<3, 8, 8, QBrush(QColor(0, 0, 0)));
+                }
+
+                ++aCurCol;
+            }
+
+            ++aCurRow;
+        }
+    }
+
+    paint.fillRect(0, 0, aWidth, aHeight, QBrush(mColor));
+
+    if (mNeedDrawFrame)
     {
         drawFrame(&paint);
     }
 }
 
-void ColorArea::cellClicked(ColorArea *aArea)
+void ColorArea::cellClicked()
 {
-    setColor(aArea->color());
-    emit colorChanged(aArea->color());
+    ColorArea *aArea=(ColorArea *)sender();
 
-    delete aPopupWidget;
+    setColor(aArea->color());
+
+    delete mPopupWidget;
+    mPopupWidget=0;
+}
+
+// ********************************************************************************************
+
+QColor ColorArea::color() const
+{
+    return mColor;
+}
+
+void ColorArea::setColor(const QColor &aColor)
+{
+    if (mColor!=aColor)
+    {
+        mColor=aColor;
+        update();
+
+        emit colorChanged(aColor);
+    }
+}
+
+bool ColorArea::isNeedDrawFrame() const
+{
+    return mNeedDrawFrame;
+}
+
+void ColorArea::setNeedDrawFrame(const bool &aNeedDrawFrame)
+{
+    if (mNeedDrawFrame!=aNeedDrawFrame)
+    {
+        mNeedDrawFrame=aNeedDrawFrame;
+        update();
+    }
+}
+
+bool ColorArea::isSelected() const
+{
+    return mSelected;
+}
+
+void ColorArea::setSelected(const bool &aSelected)
+{
+    if (mSelected!=aSelected)
+    {
+        mSelected=aSelected;
+        update();
+    }
+}
+
+bool ColorArea::isSelectAllowed() const
+{
+    return mSelectAllowed;
+}
+
+void ColorArea::setSelectAllowed(const bool &aSelectAllowed)
+{
+    mSelectAllowed=aSelectAllowed;
+}
+
+bool ColorArea::isPopupAllowed() const
+{
+    return mPopupAllowed;
+}
+
+void ColorArea::setPopupAllowed(const bool &aPopupAllowed)
+{
+    mPopupAllowed=aPopupAllowed;
+}
+
+quint8 ColorArea::popupCount() const
+{
+    return mPopupCount;
+}
+
+void ColorArea::setPopupCount(const quint8 &aPopupCount)
+{
+    mPopupCount=aPopupCount;
+}
+
+quint8 ColorArea::popupCellSize() const
+{
+    return mPopupCellSize;
+}
+
+void ColorArea::setPopupCellSize(const quint8 &aPopupCellSize)
+{
+    mPopupCellSize=aPopupCellSize;
 }

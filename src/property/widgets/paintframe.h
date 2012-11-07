@@ -29,8 +29,8 @@ private:
     ColorArea      *mRightArea;
 
 private slots:
-    void colorLeftSelected(ColorArea *aArea);
-    void colorRightSelected(ColorArea *aArea);
+    void colorLeftSelected();
+    void colorRightSelected();
     void leftColorChanged(QColor aColor);
     void rightColorChanged(QColor aColor);
 

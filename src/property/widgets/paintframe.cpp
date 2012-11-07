@@ -20,8 +20,8 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     mLeftArea->setMaximumSize(16, 16);
     mLeftArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    mLeftArea->selectAllowed=!aMono;
-    mLeftArea->popupAllowed=!aMono;
+    mLeftArea->setSelectAllowed(!aMono);
+    mLeftArea->setPopupAllowed(!aMono);
 
     ui->standardGridLayout->addWidget(mLeftArea, 0, 0, 1, 1);
 
@@ -35,8 +35,8 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     mRightArea->setMaximumSize(16, 16);
     mRightArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    mRightArea->selectAllowed=!aMono;
-    mRightArea->popupAllowed=!aMono;
+    mRightArea->setSelectAllowed(!aMono);
+    mRightArea->setPopupAllowed(!aMono);
 
     ui->standardGridLayout->addWidget(mRightArea, 1, 1, 1, 1);
 
@@ -88,13 +88,13 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
                 aArea->setMaximumSize(16, 16);
                 aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-                aArea->selectAllowed=false;
-                aArea->popupAllowed=false;
+                aArea->setSelectAllowed(false);
+                aArea->setPopupAllowed(false);
 
                 ui->additionalGridLayout->addWidget(aArea, i, j, 1, 1);
 
-                connect(aArea, SIGNAL(clicked(ColorArea*)),      this, SLOT(colorLeftSelected(ColorArea*)));
-                connect(aArea, SIGNAL(rightClicked(ColorArea*)), this, SLOT(colorRightSelected(ColorArea*)));
+                connect(aArea, SIGNAL(clicked()),      this, SLOT(colorLeftSelected()));
+                connect(aArea, SIGNAL(rightClicked()), this, SLOT(colorRightSelected()));
             }
         }
     }
@@ -105,14 +105,14 @@ PaintFrame::~PaintFrame()
     delete ui;
 }
 
-void PaintFrame::colorLeftSelected(ColorArea *aArea)
+void PaintFrame::colorLeftSelected()
 {
-    mLeftArea->setColor(aArea->color());
+    mLeftArea->setColor(((ColorArea *)sender())->color());
 }
 
-void PaintFrame::colorRightSelected(ColorArea *aArea)
+void PaintFrame::colorRightSelected()
 {
-    mRightArea->setColor(aArea->color());
+    mRightArea->setColor(((ColorArea *)sender())->color());
 }
 
 void PaintFrame::leftColorChanged(QColor aColor)

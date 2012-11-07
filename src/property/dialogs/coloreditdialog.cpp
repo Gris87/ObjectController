@@ -75,8 +75,8 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
             aArea->setMaximumSize(22, 18);
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-            aArea->selectAllowed=false;
-            aArea->popupAllowed=false;
+            aArea->setSelectAllowed(false);
+            aArea->setPopupAllowed(false);
 
             ui->basicGridLayout->addWidget(aArea, i, j, 1, 1);
         }
@@ -114,8 +114,8 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
             aArea->setMaximumSize(22, 18);
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-            aArea->selectAllowed=false;
-            aArea->popupAllowed=false;
+            aArea->setSelectAllowed(false);
+            aArea->setPopupAllowed(false);
 
             ui->customGridLayout->addWidget(aArea, i, j, 1, 1);
         }
@@ -164,8 +164,8 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
     mMainColorArea->setMaximumSize(60, 78);
     mMainColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
-    mMainColorArea->selectAllowed=false;
-    mMainColorArea->popupAllowed=false;
+    mMainColorArea->setSelectAllowed(false);
+    mMainColorArea->setPopupAllowed(false);
 
     ui->propertiesLayout->insertWidget(0, mMainColorArea);
 
