@@ -1582,23 +1582,43 @@ CustomDelegate* Property::delegateForValue(const QSizeF &/*aValue*/, PropertyTre
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->lineDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->lineFDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->pointDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->pointFDelegate();
+    }
+
     return 0;
 }
 

@@ -40,6 +40,10 @@ public:
     CustomDelegate*       rectFDelegate();
     CustomDelegate*       sizeDelegate();
     CustomDelegate*       sizeFDelegate();
+    CustomDelegate*       lineDelegate();
+    CustomDelegate*       lineFDelegate();
+    CustomDelegate*       pointDelegate();
+    CustomDelegate*       pointFDelegate();
     CustomDelegate*       easingCurveDelegate();
     CustomDelegate*       fontDelegate();
     CustomDelegate*       pixmapDelegate();
@@ -67,6 +71,10 @@ protected:
     CustomDelegate       *mRectFDelegate;
     CustomDelegate       *mSizeDelegate;
     CustomDelegate       *mSizeFDelegate;
+    CustomDelegate       *mLineDelegate;
+    CustomDelegate       *mLineFDelegate;
+    CustomDelegate       *mPointDelegate;
+    CustomDelegate       *mPointFDelegate;
     CustomDelegate       *mEasingCurveDelegate;
     CustomDelegate       *mFontDelegate;
     CustomDelegate       *mPixmapDelegate;

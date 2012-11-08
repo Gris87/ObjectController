@@ -34,6 +34,10 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mRectFDelegate       = mController->createRectFDelegate();
     mSizeDelegate        = mController->createSizeDelegate();
     mSizeFDelegate       = mController->createSizeFDelegate();
+    mLineDelegate        = mController->createLineDelegate();
+    mLineFDelegate       = mController->createLineFDelegate();
+    mPointDelegate       = mController->createPointDelegate();
+    mPointFDelegate      = mController->createPointFDelegate();
     mEasingCurveDelegate = mController->createEasingCurveDelegate();
     mFontDelegate        = mController->createFontDelegate();
     mPixmapDelegate      = mController->createPixmapDelegate();
@@ -309,6 +313,26 @@ CustomDelegate* PropertyTreeWidget::sizeDelegate()
 CustomDelegate* PropertyTreeWidget::sizeFDelegate()
 {
     return mSizeFDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::lineDelegate()
+{
+    return mLineDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::lineFDelegate()
+{
+    return mLineFDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::pointDelegate()
+{
+    return mPointDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::pointFDelegate()
+{
+    return mPointFDelegate;
 }
 
 CustomDelegate* PropertyTreeWidget::easingCurveDelegate()

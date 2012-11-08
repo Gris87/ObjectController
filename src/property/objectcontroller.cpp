@@ -18,6 +18,10 @@
 #include "delegates/rectfdelegate.h"
 #include "delegates/sizedelegate.h"
 #include "delegates/sizefdelegate.h"
+#include "delegates/linedelegate.h"
+#include "delegates/linefdelegate.h"
+#include "delegates/pointdelegate.h"
+#include "delegates/pointfdelegate.h"
 #include "delegates/easingcurvedelegate.h"
 #include "delegates/fontdelegate.h"
 #include "delegates/pixmapdelegate.h"
@@ -274,6 +278,26 @@ CustomDelegate* ObjectController::createSizeDelegate()
 CustomDelegate* ObjectController::createSizeFDelegate()
 {
     return new SizeFDelegate(this);
+}
+
+CustomDelegate* ObjectController::createLineDelegate()
+{
+    return new LineDelegate(this);
+}
+
+CustomDelegate* ObjectController::createLineFDelegate()
+{
+    return new LineFDelegate(this);
+}
+
+CustomDelegate* ObjectController::createPointDelegate()
+{
+    return new PointDelegate(this);
+}
+
+CustomDelegate* ObjectController::createPointFDelegate()
+{
+    return new PointFDelegate(this);
 }
 
 CustomDelegate* ObjectController::createEasingCurveDelegate()

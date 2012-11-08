@@ -52,6 +52,10 @@ protected:
     virtual CustomDelegate* createRectFDelegate();
     virtual CustomDelegate* createSizeDelegate();
     virtual CustomDelegate* createSizeFDelegate();
+    virtual CustomDelegate* createLineDelegate();
+    virtual CustomDelegate* createLineFDelegate();
+    virtual CustomDelegate* createPointDelegate();
+    virtual CustomDelegate* createPointFDelegate();
     virtual CustomDelegate* createEasingCurveDelegate();
     virtual CustomDelegate* createFontDelegate();
     virtual CustomDelegate* createPixmapDelegate();

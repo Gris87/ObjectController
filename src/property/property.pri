@@ -81,7 +81,19 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/rectfdelegate.h \
            $$PWD/delegates/rectdelegate.h \
            $$PWD/editors/rectfeditor.h \
-           $$PWD/editors/recteditor.h
+           $$PWD/editors/recteditor.h \
+           $$PWD/dialogs/pointeditdialog.h \
+           $$PWD/dialogs/lineeditdialog.h \
+           $$PWD/delegates/linedelegate.h \
+           $$PWD/delegates/pointfdelegate.h \
+           $$PWD/delegates/pointdelegate.h \
+           $$PWD/delegates/linefdelegate.h \
+           $$PWD/editors/linefeditor.h \
+           $$PWD/editors/lineeditor.h \
+           $$PWD/editors/pointfeditor.h \
+           $$PWD/editors/pointeditor.h \
+           $$PWD/dialogs/pointfeditdialog.h \
+           $$PWD/dialogs/linefeditdialog.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -157,7 +169,19 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/rectfdelegate.cpp \
            $$PWD/delegates/rectdelegate.cpp \
            $$PWD/editors/rectfeditor.cpp \
-           $$PWD/editors/recteditor.cpp
+           $$PWD/editors/recteditor.cpp \
+           $$PWD/dialogs/pointeditdialog.cpp \
+           $$PWD/dialogs/lineeditdialog.cpp \
+           $$PWD/delegates/linefdelegate.cpp \
+           $$PWD/delegates/linedelegate.cpp \
+           $$PWD/delegates/pointfdelegate.cpp \
+           $$PWD/delegates/pointdelegate.cpp \
+           $$PWD/editors/linefeditor.cpp \
+           $$PWD/editors/lineeditor.cpp \
+           $$PWD/editors/pointfeditor.cpp \
+           $$PWD/editors/pointeditor.cpp \
+           $$PWD/dialogs/pointfeditdialog.cpp \
+           $$PWD/dialogs/linefeditdialog.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -199,4 +223,12 @@ FORMS += \
            $$PWD/dialogs/recteditdialog.ui \
            $$PWD/dialogs/rectfeditdialog.ui \
            $$PWD/editors/rectfeditor.ui \
-           $$PWD/editors/recteditor.ui
+           $$PWD/editors/recteditor.ui \
+           $$PWD/dialogs/pointeditdialog.ui \
+           $$PWD/dialogs/lineeditdialog.ui \
+           $$PWD/editors/lineeditor.ui \
+           $$PWD/editors/pointfeditor.ui \
+           $$PWD/editors/pointeditor.ui \
+           $$PWD/editors/linefeditor.ui \
+           $$PWD/dialogs/pointfeditdialog.ui \
+           $$PWD/dialogs/linefeditdialog.ui
