@@ -146,6 +146,8 @@ void PaintFrame::on_resizeButton_clicked()
 {
     SizeEditDialog dialog(mImageView->image().size(), this);
 
+    dialog.setWindowTitle("Resize");
+
     if (dialog.exec())
     {
         mImageView->resizeImage(dialog.resultValue());
