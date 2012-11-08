@@ -30,6 +30,8 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mTimeDelegate        = mController->createTimeDelegate();
     mDateTimeDelegate    = mController->createDateTimeDelegate();
     mLocaleDelegate      = mController->createLocaleDelegate();
+    mSizeDelegate        = mController->createSizeDelegate();
+    mSizeFDelegate       = mController->createSizeFDelegate();
     mEasingCurveDelegate = mController->createEasingCurveDelegate();
     mFontDelegate        = mController->createFontDelegate();
     mPixmapDelegate      = mController->createPixmapDelegate();
@@ -285,6 +287,16 @@ CustomDelegate* PropertyTreeWidget::dateTimeDelegate()
 CustomDelegate* PropertyTreeWidget::localeDelegate()
 {
     return mLocaleDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::sizeDelegate()
+{
+    return mSizeDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::sizeFDelegate()
+{
+    return mSizeFDelegate;
 }
 
 CustomDelegate* PropertyTreeWidget::easingCurveDelegate()

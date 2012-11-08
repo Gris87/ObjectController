@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ResizeDialog</class>
- <widget class="QDialog" name="ResizeDialog">
+ <class>SizeFEditDialog</class>
+ <widget class="QDialog" name="SizeFEditDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,9 +34,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="widthSpinBox">
+    <widget class="QDoubleSpinBox" name="widthSpinBox">
      <property name="maximum">
-      <number>100000</number>
+      <double>2147483647.000000000000000</double>
      </property>
     </widget>
    </item>
@@ -54,9 +54,9 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="heightSpinBox">
+    <widget class="QDoubleSpinBox" name="heightSpinBox">
      <property name="maximum">
-      <number>100000</number>
+      <double>2147483647.000000000000000</double>
      </property>
     </widget>
    </item>

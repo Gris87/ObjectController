@@ -3,7 +3,7 @@
 
 #include <QFileDialog>
 
-#include "../dialogs/resizedialog.h"
+#include "../dialogs/sizeeditdialog.h"
 
 PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     QWidget(parent),
@@ -144,11 +144,11 @@ void PaintFrame::on_openButton_clicked()
 
 void PaintFrame::on_resizeButton_clicked()
 {
-    ResizeDialog dialog(mImageView->image().size(), this);
+    SizeEditDialog dialog(mImageView->image().size(), this);
 
     if (dialog.exec())
     {
-        mImageView->resizeImage(dialog.newSize());
+        mImageView->resizeImage(dialog.resultValue());
     }
 }
 

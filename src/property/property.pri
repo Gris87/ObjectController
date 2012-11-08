@@ -27,7 +27,7 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/bytearrayeditdialog.h \
            $$PWD/dialogs/easingcurveeditdialog.h \
            $$PWD/dialogs/paintdialog.h \
-           $$PWD/dialogs/resizedialog.h \
+           $$PWD/dialogs/sizeeditdialog.h \
            $$PWD/editors/bitarrayeditor.h \
            $$PWD/editors/booleditor.h \
            $$PWD/editors/brusheditor.h \
@@ -70,7 +70,12 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/stringframe.h \
            $$PWD/dialogs/localeeditdialog.h \
            $$PWD/delegates/localedelegate.h \
-           $$PWD/editors/localeeditor.h
+           $$PWD/editors/localeeditor.h \
+           $$PWD/dialogs/sizefeditdialog.h \
+           $$PWD/delegates/sizedelegate.h \
+           $$PWD/editors/sizeeditor.h \
+           $$PWD/delegates/sizefdelegate.h \
+           $$PWD/editors/sizefeditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -92,7 +97,7 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/bytearrayeditdialog.cpp \
            $$PWD/dialogs/easingcurveeditdialog.cpp \
            $$PWD/dialogs/paintdialog.cpp \
-           $$PWD/dialogs/resizedialog.cpp \
+           $$PWD/dialogs/sizeeditdialog.cpp \
            $$PWD/editors/bitarrayeditor.cpp \
            $$PWD/editors/booleditor.cpp \
            $$PWD/editors/brusheditor.cpp \
@@ -135,7 +140,12 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/stringframe.cpp \
            $$PWD/dialogs/localeeditdialog.cpp \
            $$PWD/delegates/localedelegate.cpp \
-           $$PWD/editors/localeeditor.cpp
+           $$PWD/editors/localeeditor.cpp \
+           $$PWD/dialogs/sizefeditdialog.cpp \
+           $$PWD/delegates/sizedelegate.cpp \
+           $$PWD/editors/sizeeditor.cpp \
+           $$PWD/delegates/sizefdelegate.cpp \
+           $$PWD/editors/sizefeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -145,7 +155,7 @@ FORMS += \
            $$PWD/dialogs/bytearrayeditdialog.ui \
            $$PWD/dialogs/easingcurveeditdialog.ui \
            $$PWD/dialogs/paintdialog.ui \
-           $$PWD/dialogs/resizedialog.ui \
+           $$PWD/dialogs/sizeeditdialog.ui \
            $$PWD/editors/bitarrayeditor.ui \
            $$PWD/editors/booleditor.ui \
            $$PWD/editors/brusheditor.ui \
@@ -170,4 +180,7 @@ FORMS += \
            $$PWD/editors/stringlisteditor.ui \
            $$PWD/widgets/stringframe.ui \
            $$PWD/dialogs/localeeditdialog.ui \
-           $$PWD/editors/localeeditor.ui
+           $$PWD/editors/localeeditor.ui \
+           $$PWD/dialogs/sizefeditdialog.ui \
+           $$PWD/editors/sizeeditor.ui \
+           $$PWD/editors/sizefeditor.ui

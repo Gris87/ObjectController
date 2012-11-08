@@ -1,9 +1,9 @@
-#include "resizedialog.h"
-#include "ui_resizedialog.h"
+#include "sizeeditdialog.h"
+#include "ui_sizeeditdialog.h"
 
-ResizeDialog::ResizeDialog(QSize aSize, QWidget *parent) :
+SizeEditDialog::SizeEditDialog(QSize aSize, QWidget *parent) :
     QDialog(parent),
-    ui(new Ui::ResizeDialog)
+    ui(new Ui::SizeEditDialog)
 {
     ui->setupUi(this);
 
@@ -13,22 +13,22 @@ ResizeDialog::ResizeDialog(QSize aSize, QWidget *parent) :
     ui->heightSpinBox->setValue(aSize.height());
 }
 
-ResizeDialog::~ResizeDialog()
+SizeEditDialog::~SizeEditDialog()
 {
     delete ui;
 }
 
-QSize ResizeDialog::newSize()
+QSize SizeEditDialog::resultValue()
 {
     return QSize(ui->widthSpinBox->value(), ui->heightSpinBox->value());
 }
 
-void ResizeDialog::on_okButton_clicked()
+void SizeEditDialog::on_okButton_clicked()
 {
     accept();
 }
 
-void ResizeDialog::on_cancelButton_clicked()
+void SizeEditDialog::on_cancelButton_clicked()
 {
     reject();
 }

@@ -36,6 +36,8 @@ public:
     CustomDelegate*       timeDelegate();
     CustomDelegate*       dateTimeDelegate();
     CustomDelegate*       localeDelegate();
+    CustomDelegate*       sizeDelegate();
+    CustomDelegate*       sizeFDelegate();
     CustomDelegate*       easingCurveDelegate();
     CustomDelegate*       fontDelegate();
     CustomDelegate*       pixmapDelegate();
@@ -59,6 +61,8 @@ protected:
     CustomDelegate       *mTimeDelegate;
     CustomDelegate       *mDateTimeDelegate;
     CustomDelegate       *mLocaleDelegate;
+    CustomDelegate       *mSizeDelegate;
+    CustomDelegate       *mSizeFDelegate;
     CustomDelegate       *mEasingCurveDelegate;
     CustomDelegate       *mFontDelegate;
     CustomDelegate       *mPixmapDelegate;

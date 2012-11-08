@@ -48,6 +48,8 @@ protected:
     virtual CustomDelegate* createTimeDelegate();
     virtual CustomDelegate* createDateTimeDelegate();
     virtual CustomDelegate* createLocaleDelegate();
+    virtual CustomDelegate* createSizeDelegate();
+    virtual CustomDelegate* createSizeFDelegate();
     virtual CustomDelegate* createEasingCurveDelegate();
     virtual CustomDelegate* createFontDelegate();
     virtual CustomDelegate* createPixmapDelegate();

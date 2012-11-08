@@ -1082,12 +1082,12 @@ QIcon Property::iconForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem * 
 
 QIcon Property::iconForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Size.png");
 }
 
 QIcon Property::iconForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon();
+    return QIcon(":/objectcontroller/images/Size.png");
 }
 
 QIcon Property::iconForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1552,13 +1552,23 @@ CustomDelegate* Property::delegateForValue(const QRectF &/*aValue*/, PropertyTre
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->sizeDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->sizeFDelegate();
+    }
+
     return 0;
 }
 
