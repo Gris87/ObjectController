@@ -14,7 +14,12 @@ ColorSpectrum::ColorSpectrum(QWidget *parent) :
     updateSpectrum();
 }
 
-void ColorSpectrum::setColor(QColor aColor)
+QColor ColorSpectrum::color() const
+{
+    return mColor;
+}
+
+void ColorSpectrum::setColor(const QColor &aColor)
 {
     if (mColor!=aColor)
     {
@@ -23,11 +28,6 @@ void ColorSpectrum::setColor(QColor aColor)
 
         emit colorChanged(mColor);
     }
-}
-
-QColor ColorSpectrum::color()
-{
-    return mColor;
 }
 
 void ColorSpectrum::setColorAt(int x, int y)

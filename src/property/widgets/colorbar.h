@@ -11,10 +11,10 @@ class ColorBar : public QWidget
 public:
     explicit ColorBar(QWidget *parent = 0);
 
-    QColor color();
-    void setColor(QColor aColor);
+    QColor color() const;
+    void setColor(const QColor &aColor);
 
-    int value();
+    int value() const;
     void setValue(int aValue);
 
     void setValueAt(int y);

@@ -93,16 +93,16 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 
     aColors.clear();
 
-    QSettings aSettings(QSettings::UserScope, QLatin1String("Gris"));
+    QSettings aSettings(QSettings::UserScope, QLatin1String("Trolltech"));
 
     for (int i=0; i<2*8; ++i)
     {
-        QVariant v=aSettings.value("customColors/A"+QString::number(i));
+        QVariant v=aSettings.value(QLatin1String("Qt/customColors/A")+QString::number(i));
 
         if (v.isValid())
         {
             QRgb rgb=v.toUInt();
-            aColors.append(QColor(rgb));
+            aColors.append(QColor::fromRgba(rgb));
         }
         else
         {
@@ -186,35 +186,25 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 
 ColorEditDialog::~ColorEditDialog()
 {
-    QSettings aSettings(QSettings::UserScope, "Gris");
+    QSettings aSettings(QSettings::UserScope, QLatin1String("Trolltech"));
 
     for (int i=0; i<2; ++i)
     {
         for (int j=0; j<8; ++j)
         {
-            aSettings.setValue("customColors/A"+QString::number(i), ((ColorArea *) ui->customGridLayout->itemAtPosition(i, j)->widget())->color().rgba());
+            aSettings.setValue(QLatin1String("Qt/customColors/A")+QString::number(i*8+j), ((ColorArea *) ui->customGridLayout->itemAtPosition(i, j)->widget())->color().rgba());
         }
     }
 
     delete ui;
 }
 
-QColor ColorEditDialog::resultValue() const
+QColor ColorEditDialog::selectedColor() const
 {
     return mMainColorArea->color();
 }
 
-void ColorEditDialog::on_okButton_clicked()
-{
-    accept();
-}
-
-void ColorEditDialog::on_cancelButton_clicked()
-{
-    reject();
-}
-
-void ColorEditDialog::setColor(QColor aColor)
+void ColorEditDialog::setColor(const QColor &aColor)
 {
     mColorSpectrum->blockSignals(true);
     mValueColorBar->blockSignals(true);
@@ -341,4 +331,14 @@ void ColorEditDialog::on_alphaSpinBox_valueChanged(int aValue)
 void ColorEditDialog::on_addToCustomButton_clicked()
 {
     mSelectedCustomColorArea->setColor(mMainColorArea->color());
+}
+
+void ColorEditDialog::on_okButton_clicked()
+{
+    accept();
+}
+
+void ColorEditDialog::on_cancelButton_clicked()
+{
+    reject();
 }

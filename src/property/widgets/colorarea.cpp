@@ -1,11 +1,12 @@
 #include "colorarea.h"
 
-#include <QColorDialog>
 #include <QMouseEvent>
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QGridLayout>
 #include <QPainter>
+
+#include "../dialogs/coloreditdialog.h"
 
 ColorArea::ColorArea(QWidget *parent) :
     QFrame(parent)
@@ -33,7 +34,7 @@ void ColorArea::mousePressEvent(QMouseEvent *event)
     {
         if (mSelectAllowed)
         {
-            QColorDialog dialog(color(), this);
+            ColorEditDialog dialog(color(), this);
 
             if (dialog.exec())
             {

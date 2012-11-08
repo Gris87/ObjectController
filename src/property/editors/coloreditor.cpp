@@ -73,7 +73,7 @@ void ColorEditor::on_editButton_clicked()
 
     if (dialog.exec())
     {
-        setValue(dialog.resultValue());
+        setValue(dialog.selectedColor());
         emit valueChanged(mValue);
     }
 }

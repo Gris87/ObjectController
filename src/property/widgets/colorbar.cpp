@@ -11,12 +11,12 @@ ColorBar::ColorBar(QWidget *parent) :
     mValue=255;
 }
 
-QColor ColorBar::color()
+QColor ColorBar::color() const
 {
     return mColor;
 }
 
-void ColorBar::setColor(QColor aColor)
+void ColorBar::setColor(const QColor &aColor)
 {
     if (mColor!=aColor)
     {
@@ -25,7 +25,7 @@ void ColorBar::setColor(QColor aColor)
     }
 }
 
-int ColorBar::value()
+int ColorBar::value() const
 {
     return mValue;
 }

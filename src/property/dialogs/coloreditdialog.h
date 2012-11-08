@@ -21,7 +21,8 @@ public:
     explicit ColorEditDialog(QColor aColor=QColor(0, 0, 0), QWidget *parent = 0);
     ~ColorEditDialog();
 
-    QColor resultValue() const;
+    QColor selectedColor() const;
+    void setColor(const QColor &aColor);
 
 private:
     Ui::ColorEditDialog *ui;
@@ -32,15 +33,11 @@ private:
     ColorArea           *mSelectedBasicColorArea;
     ColorArea           *mSelectedCustomColorArea;
 
-    void setColor(QColor aColor);
-
 private slots:
     void basicColorClicked();
     void customColorClicked();
     void spectrumColorChanged(QColor aColor);
 
-    void on_okButton_clicked();
-    void on_cancelButton_clicked();
     void on_hueSpinBox_valueChanged(int aValue);
     void on_satSpinBox_valueChanged(int aValue);
     void on_valSpinBox_valueChanged(int aValue);
@@ -49,6 +46,8 @@ private slots:
     void on_blueSpinBox_valueChanged(int aValue);
     void on_alphaSpinBox_valueChanged(int aValue);
     void on_addToCustomButton_clicked();
+    void on_okButton_clicked();
+    void on_cancelButton_clicked();
 };
 
 #endif // COLOREDITDIALOG_H
