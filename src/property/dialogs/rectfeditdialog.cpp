@@ -7,7 +7,7 @@ RectFEditDialog::RectFEditDialog(QRectF aRectF, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedRectFDialogHint);
+    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
     ui->xSpinBox->setValue(aRectF.x());
     ui->ySpinBox->setValue(aRectF.y());
