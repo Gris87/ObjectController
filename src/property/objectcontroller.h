@@ -47,6 +47,7 @@ protected:
     virtual CustomDelegate* createDateDelegate();
     virtual CustomDelegate* createTimeDelegate();
     virtual CustomDelegate* createDateTimeDelegate();
+    virtual CustomDelegate* createLocaleDelegate();
     virtual CustomDelegate* createEasingCurveDelegate();
     virtual CustomDelegate* createFontDelegate();
     virtual CustomDelegate* createPixmapDelegate();

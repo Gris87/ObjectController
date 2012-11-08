@@ -7,6 +7,8 @@ ResizeDialog::ResizeDialog(QSize aSize, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
     ui->widthSpinBox->setValue(aSize.width());
     ui->heightSpinBox->setValue(aSize.height());
 }

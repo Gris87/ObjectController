@@ -1532,8 +1532,13 @@ CustomDelegate* Property::delegateForValue(const QUrl &/*aValue*/, PropertyTreeW
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->localeDelegate();
+    }
+
     return 0;
 }
 

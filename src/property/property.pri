@@ -67,7 +67,10 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/stringlisteditdialog.h \
            $$PWD/delegates/stringlistdelegate.h \
            $$PWD/editors/stringlisteditor.h \
-           $$PWD/widgets/stringframe.h
+           $$PWD/widgets/stringframe.h \
+           $$PWD/dialogs/localeeditdialog.h \
+           $$PWD/delegates/localedelegate.h \
+           $$PWD/editors/localeeditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -129,7 +132,10 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/stringlisteditdialog.cpp \
            $$PWD/delegates/stringlistdelegate.cpp \
            $$PWD/editors/stringlisteditor.cpp \
-           $$PWD/widgets/stringframe.cpp
+           $$PWD/widgets/stringframe.cpp \
+           $$PWD/dialogs/localeeditdialog.cpp \
+           $$PWD/delegates/localedelegate.cpp \
+           $$PWD/editors/localeeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -162,4 +168,6 @@ FORMS += \
            $$PWD/editors/coloreditor.ui \
            $$PWD/dialogs/stringlisteditdialog.ui \
            $$PWD/editors/stringlisteditor.ui \
-           $$PWD/widgets/stringframe.ui
+           $$PWD/widgets/stringframe.ui \
+           $$PWD/dialogs/localeeditdialog.ui \
+           $$PWD/editors/localeeditor.ui
