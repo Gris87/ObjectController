@@ -6,6 +6,7 @@
 #include "delegates/integerdelegate.h"
 #include "delegates/doubledelegate.h"
 #include "delegates/chardelegate.h"
+#include "delegates/stringlistdelegate.h"
 #include "delegates/stringdelegate.h"
 #include "delegates/bytearraydelegate.h"
 #include "delegates/bitarraydelegate.h"
@@ -208,6 +209,11 @@ CustomDelegate* ObjectController::createDoubleDelegate()
 CustomDelegate* ObjectController::createCharDelegate()
 {
     return new CharDelegate(this);
+}
+
+CustomDelegate* ObjectController::createStringListDelegate()
+{
+    return new StringListDelegate(this);
 }
 
 CustomDelegate* ObjectController::createStringDelegate()

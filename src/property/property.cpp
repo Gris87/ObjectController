@@ -1452,8 +1452,13 @@ CustomDelegate* Property::delegateForValue(const QVariantList &/*aValue*/, Prope
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QStringList &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QStringList &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->stringListDelegate();
+    }
+
     return 0;
 }
 

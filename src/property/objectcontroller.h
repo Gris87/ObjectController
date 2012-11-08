@@ -40,6 +40,7 @@ protected:
     virtual CustomDelegate* createIntegerDelegate();
     virtual CustomDelegate* createDoubleDelegate();
     virtual CustomDelegate* createCharDelegate();
+    virtual CustomDelegate* createStringListDelegate();
     virtual CustomDelegate* createStringDelegate();
     virtual CustomDelegate* createByteArrayDelegate();
     virtual CustomDelegate* createBitArrayDelegate();

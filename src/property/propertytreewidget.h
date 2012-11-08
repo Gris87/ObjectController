@@ -28,6 +28,7 @@ public:
     CustomDelegate*       integerDelegate();
     CustomDelegate*       doubleDelegate();
     CustomDelegate*       charDelegate();
+    CustomDelegate*       stringListDelegate();
     CustomDelegate*       stringDelegate();
     CustomDelegate*       byteArrayDelegate();
     CustomDelegate*       bitArrayDelegate();
@@ -49,6 +50,7 @@ protected:
     CustomDelegate       *mIntegerDelegate;
     CustomDelegate       *mDoubleDelegate;
     CustomDelegate       *mCharDelegate;
+    CustomDelegate       *mStringListDelegate;
     CustomDelegate       *mStringDelegate;
     CustomDelegate       *mByteArrayDelegate;
     CustomDelegate       *mBitArrayDelegate;

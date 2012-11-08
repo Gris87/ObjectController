@@ -34,5 +34,8 @@
         <file>images/Vector2D.png</file>
         <file>images/Vector3D.png</file>
         <file>images/Vector4D.png</file>
+        <file>images/Remove.png</file>
+        <file>images/Up.png</file>
+        <file>images/Down.png</file>
     </qresource>
 </RCC>

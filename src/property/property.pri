@@ -63,7 +63,11 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/colordelegate.h \
            $$PWD/editors/coloreditor.h \
            $$PWD/widgets/colorspectrum.h \
-           $$PWD/widgets/colorbar.h
+           $$PWD/widgets/colorbar.h \
+           $$PWD/dialogs/stringlisteditdialog.h \
+           $$PWD/delegates/stringlistdelegate.h \
+           $$PWD/editors/stringlisteditor.h \
+           $$PWD/widgets/stringframe.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -121,7 +125,11 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/colordelegate.cpp \
            $$PWD/editors/coloreditor.cpp \
            $$PWD/widgets/colorspectrum.cpp \
-           $$PWD/widgets/colorbar.cpp
+           $$PWD/widgets/colorbar.cpp \
+           $$PWD/dialogs/stringlisteditdialog.cpp \
+           $$PWD/delegates/stringlistdelegate.cpp \
+           $$PWD/editors/stringlisteditor.cpp \
+           $$PWD/widgets/stringframe.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -151,4 +159,7 @@ FORMS += \
            $$PWD/dialogs/paletteeditdialog.ui \
            $$PWD/editors/paletteeditor.ui \
            $$PWD/dialogs/coloreditdialog.ui \
-           $$PWD/editors/coloreditor.ui
+           $$PWD/editors/coloreditor.ui \
+           $$PWD/dialogs/stringlisteditdialog.ui \
+           $$PWD/editors/stringlisteditor.ui \
+           $$PWD/widgets/stringframe.ui
