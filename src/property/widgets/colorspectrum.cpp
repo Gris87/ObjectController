@@ -76,14 +76,14 @@ void ColorSpectrum::paintEvent(QPaintEvent * /*event*/)
 
     paint.drawPixmap(0, 0, mSpectrumPixmap);
 
+    drawFrame(&paint);
+
     int cursorX=mColor.hueF()*width();
     int cursorY=(1-mColor.saturationF())*height();
 
-    paint.setPen(QPen(QBrush(QColor(0, 0, 0)), 4));
+    paint.setPen(QPen(QBrush(QColor(0, 0, 0)), 2));
     paint.drawLine(cursorX,    cursorY-10, cursorX,    cursorY+10);
     paint.drawLine(cursorX-10, cursorY,    cursorX+10, cursorY);
-
-    drawFrame(&paint);
 }
 
 void ColorSpectrum::updateSpectrum()

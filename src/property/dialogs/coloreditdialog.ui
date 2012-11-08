@@ -194,7 +194,7 @@
         <item>
          <layout class="QGridLayout" name="customGridLayout">
           <property name="spacing">
-           <number>4</number>
+           <number>0</number>
           </property>
          </layout>
         </item>
@@ -240,7 +240,7 @@
         <item>
          <layout class="QGridLayout" name="basicGridLayout">
           <property name="spacing">
-           <number>4</number>
+           <number>0</number>
           </property>
          </layout>
         </item>

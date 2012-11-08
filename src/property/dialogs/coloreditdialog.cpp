@@ -1,6 +1,8 @@
 #include "coloreditdialog.h"
 #include "ui_coloreditdialog.h"
 
+#include <QSettings>
+
 ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ColorEditDialog)
@@ -29,40 +31,40 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
     aColors.append(QColor(128, 128, 192));
     aColors.append(QColor(255, 0,   255));
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    aColors.append(QColor(128, 64,  64));
+    aColors.append(QColor(255, 128, 64));
+    aColors.append(QColor(0,   255, 0));
+    aColors.append(QColor(0,   128, 128));
+    aColors.append(QColor(0,   64,  128));
+    aColors.append(QColor(128, 128, 255));
+    aColors.append(QColor(128, 0,   64));
+    aColors.append(QColor(255, 0,   128));
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    aColors.append(QColor(128, 0,   0));
+    aColors.append(QColor(255, 128, 0));
+    aColors.append(QColor(0,   128, 0));
+    aColors.append(QColor(0,   128, 64));
+    aColors.append(QColor(0,   0,   255));
+    aColors.append(QColor(0,   0,   160));
+    aColors.append(QColor(128, 0,   128));
+    aColors.append(QColor(128, 0,   255));
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    aColors.append(QColor(64,  0,   0));
+    aColors.append(QColor(128, 64,  0));
+    aColors.append(QColor(0,   64,  0));
+    aColors.append(QColor(0,   64,  64));
+    aColors.append(QColor(0,   0,   128));
+    aColors.append(QColor(0,   0,   64));
+    aColors.append(QColor(64,  0,   64));
+    aColors.append(QColor(64,  0,   128));
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    aColors.append(QColor(0,   0,   0));
+    aColors.append(QColor(128, 128, 0));
+    aColors.append(QColor(128, 128, 64));
+    aColors.append(QColor(128, 128, 128));
+    aColors.append(QColor(64,  128, 128));
+    aColors.append(QColor(192, 192, 192));
+    aColors.append(QColor(64,  0,   64));
     aColors.append(QColor(255, 255, 255));
 
     for (int i=0; i<6; ++i)
@@ -71,38 +73,42 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
         {
             ColorArea *aArea=new ColorArea(this);
             aArea->setColor(aColors.at(i*8+j));
-            aArea->setMinimumSize(22, 18);
-            aArea->setMaximumSize(22, 18);
+            aArea->setMinimumSize(26, 22);
+            aArea->setMaximumSize(26, 22);
+            aArea->setFrameRect(QRect(2, 2, 22, 18));
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
             aArea->setSelectAllowed(false);
             aArea->setPopupAllowed(false);
 
             ui->basicGridLayout->addWidget(aArea, i, j, 1, 1);
+
+            connect(aArea, SIGNAL(clicked()), this, SLOT(basicColorClicked()));
         }
     }
+
+    mSelectedBasicColorArea=0;
 
     // --------------------------------------------------------------------------------------------
 
     aColors.clear();
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    QSettings aSettings(QSettings::UserScope, QLatin1String("Gris"));
 
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
-    aColors.append(QColor(255, 255, 255));
+    for (int i=0; i<2*8; ++i)
+    {
+        QVariant v=aSettings.value("customColors/A"+QString::number(i));
+
+        if (v.isValid())
+        {
+            QRgb rgb=v.toUInt();
+            aColors.append(QColor(rgb));
+        }
+        else
+        {
+            aColors.append(QColor(255, 255, 255));
+        }
+    }
 
     for (int i=0; i<2; ++i)
     {
@@ -110,16 +116,22 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
         {
             ColorArea *aArea=new ColorArea(this);
             aArea->setColor(aColors.at(i*8+j));
-            aArea->setMinimumSize(22, 18);
-            aArea->setMaximumSize(22, 18);
+            aArea->setMinimumSize(26, 22);
+            aArea->setMaximumSize(26, 22);
+            aArea->setFrameRect(QRect(2, 2, 22, 18));
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
             aArea->setSelectAllowed(false);
             aArea->setPopupAllowed(false);
 
             ui->customGridLayout->addWidget(aArea, i, j, 1, 1);
+
+            connect(aArea, SIGNAL(clicked()), this, SLOT(customColorClicked()));
         }
     }
+
+    mSelectedCustomColorArea=(ColorArea *)ui->customGridLayout->itemAtPosition(0, 0)->widget();
+    mSelectedCustomColorArea->setSelected(true);
 
     // --------------------------------------------------------------------------------------------
 
@@ -174,6 +186,16 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
 
 ColorEditDialog::~ColorEditDialog()
 {
+    QSettings aSettings(QSettings::UserScope, "Gris");
+
+    for (int i=0; i<2; ++i)
+    {
+        for (int j=0; j<8; ++j)
+        {
+            aSettings.setValue("customColors/A"+QString::number(i), ((ColorArea *) ui->customGridLayout->itemAtPosition(i, j)->widget())->color().rgba());
+        }
+    }
+
     delete ui;
 }
 
@@ -237,6 +259,45 @@ void ColorEditDialog::setColor(QColor aColor)
     ui->alphaSpinBox->blockSignals(false);
 }
 
+void ColorEditDialog::basicColorClicked()
+{
+    ColorArea* aArea=(ColorArea *)sender();
+
+    setColor(aArea->color());
+
+
+
+    mSelectedCustomColorArea->setSelected(false);
+
+    if (mSelectedBasicColorArea)
+    {
+        mSelectedBasicColorArea->setSelected(false);
+    }
+
+    mSelectedBasicColorArea=aArea;
+    mSelectedBasicColorArea->setSelected(true);
+}
+
+void ColorEditDialog::customColorClicked()
+{
+    ColorArea* aArea=(ColorArea *)sender();
+
+    setColor(aArea->color());
+
+
+
+    mSelectedCustomColorArea->setSelected(false);
+
+    if (mSelectedBasicColorArea)
+    {
+        mSelectedBasicColorArea->setSelected(false);
+        mSelectedBasicColorArea=0;
+    }
+
+    mSelectedCustomColorArea=aArea;
+    mSelectedCustomColorArea->setSelected(true);
+}
+
 void ColorEditDialog::spectrumColorChanged(QColor aColor)
 {
     setColor(QColor::fromHsv(aColor.hue(),            aColor.saturation(),     ui->valSpinBox->value(), ui->alphaSpinBox->value()));
@@ -275,4 +336,9 @@ void ColorEditDialog::on_blueSpinBox_valueChanged(int aValue)
 void ColorEditDialog::on_alphaSpinBox_valueChanged(int aValue)
 {
     setColor(QColor(ui->redSpinBox->value(), ui->greenSpinBox->value(), ui->blueSpinBox->value(), aValue));
+}
+
+void ColorEditDialog::on_addToCustomButton_clicked()
+{
+    mSelectedCustomColorArea->setColor(mMainColorArea->color());
 }
