@@ -1542,13 +1542,23 @@ CustomDelegate* Property::delegateForValue(const QLocale &/*aValue*/, PropertyTr
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->rectDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->rectFDelegate();
+    }
+
     return 0;
 }
 

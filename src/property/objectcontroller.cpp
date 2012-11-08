@@ -14,6 +14,8 @@
 #include "delegates/timedelegate.h"
 #include "delegates/datetimedelegate.h"
 #include "delegates/localedelegate.h"
+#include "delegates/rectdelegate.h"
+#include "delegates/rectfdelegate.h"
 #include "delegates/sizedelegate.h"
 #include "delegates/sizefdelegate.h"
 #include "delegates/easingcurvedelegate.h"
@@ -252,6 +254,16 @@ CustomDelegate* ObjectController::createDateTimeDelegate()
 CustomDelegate* ObjectController::createLocaleDelegate()
 {
     return new LocaleDelegate(this);
+}
+
+CustomDelegate* ObjectController::createRectDelegate()
+{
+    return new RectDelegate(this);
+}
+
+CustomDelegate* ObjectController::createRectFDelegate()
+{
+    return new RectFDelegate(this);
 }
 
 CustomDelegate* ObjectController::createSizeDelegate()

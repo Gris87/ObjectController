@@ -75,7 +75,13 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/sizedelegate.h \
            $$PWD/editors/sizeeditor.h \
            $$PWD/delegates/sizefdelegate.h \
-           $$PWD/editors/sizefeditor.h
+           $$PWD/editors/sizefeditor.h \
+           $$PWD/dialogs/recteditdialog.h \
+           $$PWD/dialogs/rectfeditdialog.h \
+           $$PWD/delegates/rectfdelegate.h \
+           $$PWD/delegates/rectdelegate.h \
+           $$PWD/editors/rectfeditor.h \
+           $$PWD/editors/recteditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -145,7 +151,13 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/sizedelegate.cpp \
            $$PWD/editors/sizeeditor.cpp \
            $$PWD/delegates/sizefdelegate.cpp \
-           $$PWD/editors/sizefeditor.cpp
+           $$PWD/editors/sizefeditor.cpp \
+           $$PWD/dialogs/recteditdialog.cpp \
+           $$PWD/dialogs/rectfeditdialog.cpp \
+           $$PWD/delegates/rectfdelegate.cpp \
+           $$PWD/delegates/rectdelegate.cpp \
+           $$PWD/editors/rectfeditor.cpp \
+           $$PWD/editors/recteditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -183,4 +195,8 @@ FORMS += \
            $$PWD/editors/localeeditor.ui \
            $$PWD/dialogs/sizefeditdialog.ui \
            $$PWD/editors/sizeeditor.ui \
-           $$PWD/editors/sizefeditor.ui
+           $$PWD/editors/sizefeditor.ui \
+           $$PWD/dialogs/recteditdialog.ui \
+           $$PWD/dialogs/rectfeditdialog.ui \
+           $$PWD/editors/rectfeditor.ui \
+           $$PWD/editors/recteditor.ui
