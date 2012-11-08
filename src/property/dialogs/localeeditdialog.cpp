@@ -92,13 +92,13 @@ void LocaleEditDialog::updateLanguages()
 
         for (int i=0; i<aLanguages.length(); ++i)
         {
-            aItems.append(QLocale::languageToString(aLanguages.at(i)));
+            aItems.append(aLanguageEnum.valueToKey(aLanguages.at(i)));
         }
 
         aItems.sort();
         ui->languageComboBox->addItems(aItems);
 
-        int index=aItems.indexOf(QLocale::languageToString(mLocale.language()));
+        int index=aItems.indexOf(aLanguageEnum.valueToKey(mLocale.language()));
 
         if (index>=0)
         {
@@ -120,7 +120,18 @@ void LocaleEditDialog::updateCountries()
 
     ui->countryComboBox->clear();
 
+    QMetaEnum aCountryEnum=mLocale.staticMetaObject.enumerator(mLocale.staticMetaObject.indexOfEnumerator("Country"));
+
     QList<QLocale::Country> aCountries=QLocale::countriesForLanguage(mLocale.language());
+
+    for (int i=0; i<aCountries.length(); ++i)
+    {
+        if (aCountries.indexOf(aCountries.at(i))<i)
+        {
+            aCountries.removeAt(i);
+            --i;
+        }
+    }
 
 
 
@@ -130,13 +141,13 @@ void LocaleEditDialog::updateCountries()
 
         for (int i=0; i<aCountries.length(); ++i)
         {
-            aItems.append(QLocale::countryToString(aCountries.at(i)));
+            aItems.append(aCountryEnum.valueToKey(aCountries.at(i)));
         }
 
         aItems.sort();
         ui->countryComboBox->addItems(aItems);
 
-        int index=aItems.indexOf(QLocale::countryToString(mLocale.country()));
+        int index=aItems.indexOf(aCountryEnum.valueToKey(mLocale.country()));
 
         if (index>=0)
         {
