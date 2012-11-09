@@ -40,26 +40,26 @@ void ColorEditor::setValue(const QColor &aValue)
 
     ui->valueEdit->setText(
                            "("+
-                           QString::number(aValue.red())+
+                           QString::number(mValue.red())+
                            ", "+
-                           QString::number(aValue.green())+
+                           QString::number(mValue.green())+
                            ", "+
-                           QString::number(aValue.blue())+
+                           QString::number(mValue.blue())+
                            ") ["+
-                           QString::number(aValue.alpha())+
+                           QString::number(mValue.alpha())+
                            "]"
                           );
 
 
 
-    QColor aSolidColor(aValue.red(), aValue.green(), aValue.blue());
+    QColor aSolidColor(mValue.red(), mValue.green(), mValue.blue());
 
     QPixmap aColorPixmap=QPixmap(16, 16);
     aColorPixmap.fill(QColor(255, 255, 255, 0));
 
     QPainter aPainter(&aColorPixmap);
 
-    aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), aValue);
+    aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), mValue);
     aPainter.fillRect(aColorPixmap.width()>>2, aColorPixmap.height()>>2, aColorPixmap.width()>>1, aColorPixmap.height()>>1, aSolidColor);
 
     aPainter.end();

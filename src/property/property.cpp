@@ -1721,7 +1721,7 @@ CustomDelegate* Property::delegateForValue(const QPolygon &/*aValue*/, PropertyT
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->polygonDelegate();
     }
 
     return 0;
@@ -2310,14 +2310,40 @@ int Property::subPropertiesForValue(const QImage &/*aValue*/, PropertyTreeWidget
     return 0;
 }
 
-int Property::subPropertiesForValue(const QPolygon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+int Property::subPropertiesForValue(const QPolygon &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return 0;
+    int aCount=0;
+
+    for (int i=0; i<aValue.count(); ++i)
+    {
+        PropertyTreeWidgetItem *aEntryItem;
+
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
+        setPropertiesForItem(aValue.at(i), aValue.at(i), aEntryItem);
+
+        // TODO: Editors
+    }
+
+    return aCount;
 }
 
-int Property::subPropertiesForValue(const QRegion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+int Property::subPropertiesForValue(const QRegion &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return 0;
+    int aCount=0;
+
+    QVector<QRect> aRects=aValue.rects();
+
+    for (int i=0; i<aRects.count(); ++i)
+    {
+        PropertyTreeWidgetItem *aEntryItem;
+
+        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
+        setPropertiesForItem(aRects.at(i), aRects.at(i), aEntryItem);
+
+        // TODO: Editors
+    }
+
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QBitmap &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)

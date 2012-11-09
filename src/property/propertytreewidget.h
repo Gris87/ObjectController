@@ -51,6 +51,7 @@ public:
     CustomDelegate*       colorDelegate();
     CustomDelegate*       paletteDelegate();
     CustomDelegate*       iconDelegate();
+    CustomDelegate*       polygonDelegate();
 
 protected:
     ObjectController     *mController;
@@ -83,6 +84,7 @@ protected:
     CustomDelegate       *mColorDelegate;
     CustomDelegate       *mPaletteDelegate;
     CustomDelegate       *mIconDelegate;
+    CustomDelegate       *mPolygonDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

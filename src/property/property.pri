@@ -96,7 +96,11 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/linefeditdialog.h \
            $$PWD/dialogs/iconeditdialog.h \
            $$PWD/delegates/icondelegate.h \
-           $$PWD/editors/iconeditor.h
+           $$PWD/editors/iconeditor.h \
+           $$PWD/dialogs/polygoneditdialog.h \
+           $$PWD/widgets/pointframe.h \
+           $$PWD/delegates/polygondelegate.h \
+           $$PWD/editors/polygoneditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -187,7 +191,11 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/linefeditdialog.cpp \
            $$PWD/dialogs/iconeditdialog.cpp \
            $$PWD/delegates/icondelegate.cpp \
-           $$PWD/editors/iconeditor.cpp
+           $$PWD/editors/iconeditor.cpp \
+           $$PWD/dialogs/polygoneditdialog.cpp \
+           $$PWD/widgets/pointframe.cpp \
+           $$PWD/delegates/polygondelegate.cpp \
+           $$PWD/editors/polygoneditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -239,4 +247,7 @@ FORMS += \
            $$PWD/dialogs/pointfeditdialog.ui \
            $$PWD/dialogs/linefeditdialog.ui \
            $$PWD/dialogs/iconeditdialog.ui \
-           $$PWD/editors/iconeditor.ui
+           $$PWD/editors/iconeditor.ui \
+           $$PWD/dialogs/polygoneditdialog.ui \
+           $$PWD/widgets/pointframe.ui \
+           $$PWD/editors/polygoneditor.ui

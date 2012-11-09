@@ -35,15 +35,19 @@ void FontEditor::setValue(const QFont &aValue)
 {
     mValue=aValue;
 
+
+
     ui->valueEdit->setText(
                            "["+
-                           aValue.family()+
+                           mValue.family()+
                            ", "+
-                           QString::number(aValue.pointSize())+
+                           QString::number(mValue.pointSize())+
                            "]"
                           );
 
-    QFont aFont=aValue;
+
+
+    QFont aFont=mValue;
     aFont.setPixelSize(32);
 
     QFontMetrics aMetrics(aFont);

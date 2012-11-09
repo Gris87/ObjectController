@@ -29,6 +29,7 @@
 #include "delegates/colordelegate.h"
 #include "delegates/palettedelegate.h"
 #include "delegates/icondelegate.h"
+#include "delegates/polygondelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -334,4 +335,9 @@ CustomDelegate* ObjectController::createPaletteDelegate()
 CustomDelegate* ObjectController::createIconDelegate()
 {
     return new IconDelegate(this);
+}
+
+CustomDelegate* ObjectController::createPolygonDelegate()
+{
+    return new PolygonDelegate(this);
 }

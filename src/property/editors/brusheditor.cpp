@@ -40,7 +40,7 @@ void BrushEditor::setValue(const QBrush &aValue)
 
     QString res="[Unknown brush style]";
 
-    switch (aValue.style())
+    switch (mValue.style())
     {
         case Qt::NoBrush:                res="NoBrush";                break;
         case Qt::SolidPattern:           res="SolidPattern";           break;
@@ -71,7 +71,7 @@ void BrushEditor::setValue(const QBrush &aValue)
     aBrushPixmap.fill(QColor(255, 255, 255, 0));
 
     QPainter aPainter(&aBrushPixmap);
-    aPainter.fillRect(0, 0, aBrushPixmap.width(), aBrushPixmap.height(), aValue);
+    aPainter.fillRect(0, 0, aBrushPixmap.width(), aBrushPixmap.height(), mValue);
     aPainter.end();
 
     setIcon(QIcon(aBrushPixmap));
