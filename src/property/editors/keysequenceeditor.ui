@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>IntegerEditor</class>
- <widget class="QWidget" name="IntegerEditor">
+ <class>KeySequenceEditor</class>
+ <widget class="QWidget" name="KeySequenceEditor">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -34,18 +34,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QSpinBox" name="valueSpinBox">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
+    <widget class="QLineEdit" name="valueEdit">
+     <property name="readOnly">
+      <bool>true</bool>
      </property>
-     <property name="minimum">
-      <number>-2147483647</number>
-     </property>
-     <property name="maximum">
-      <number>2147483647</number>
+    </widget>
+   </item>
+   <item>
+    <widget class="QToolButton" name="editButton">
+     <property name="text">
+      <string>...</string>
      </property>
     </widget>
    </item>

@@ -55,6 +55,7 @@ public:
     CustomDelegate*       regionDelegate();
     CustomDelegate*       cursorDelegate();
     CustomDelegate*       sizePolicyDelegate();
+    CustomDelegate*       keySequenceDelegate();
 
 protected:
     ObjectController     *mController;
@@ -91,6 +92,7 @@ protected:
     CustomDelegate       *mRegionDelegate;
     CustomDelegate       *mCursorDelegate;
     CustomDelegate       *mSizePolicyDelegate;
+    CustomDelegate       *mKeySequenceDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

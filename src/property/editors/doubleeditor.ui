@@ -41,6 +41,15 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="decimals">
+      <number>6</number>
+     </property>
+     <property name="minimum">
+      <double>-2147483647.000000000000000</double>
+     </property>
+     <property name="maximum">
+      <double>2147483647.000000000000000</double>
+     </property>
     </widget>
    </item>
   </layout>

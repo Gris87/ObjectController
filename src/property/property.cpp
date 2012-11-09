@@ -1792,7 +1792,7 @@ CustomDelegate* Property::delegateForValue(const QKeySequence &/*aValue*/, Prope
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->keySequenceDelegate();
     }
 
     return 0;

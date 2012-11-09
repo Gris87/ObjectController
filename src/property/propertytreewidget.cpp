@@ -49,6 +49,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mRegionDelegate      = mController->createRegionDelegate();
     mCursorDelegate      = mController->createCursorDelegate();
     mSizePolicyDelegate  = mController->createSizePolicyDelegate();
+    mKeySequenceDelegate = mController->createKeySequenceDelegate();
 
     //----------------------------------------------------------------------
 
@@ -393,4 +394,9 @@ CustomDelegate* PropertyTreeWidget::cursorDelegate()
 CustomDelegate* PropertyTreeWidget::sizePolicyDelegate()
 {
     return mSizePolicyDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::keySequenceDelegate()
+{
+    return mKeySequenceDelegate;
 }

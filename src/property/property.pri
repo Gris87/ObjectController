@@ -109,7 +109,11 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/cursordelegate.h \
            $$PWD/dialogs/sizepolicyeditdialog.h \
            $$PWD/editors/sizepolicyeditor.h \
-           $$PWD/delegates/sizepolicydelegate.h
+           $$PWD/delegates/sizepolicydelegate.h \
+           $$PWD/dialogs/keysequenceeditdialog.h \
+           $$PWD/delegates/keysequencedelegate.h \
+           $$PWD/editors/keysequenceeditor.h \
+           $$PWD/widgets/shortcutedit.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -213,7 +217,11 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/cursordelegate.cpp \
            $$PWD/dialogs/sizepolicyeditdialog.cpp \
            $$PWD/editors/sizepolicyeditor.cpp \
-           $$PWD/delegates/sizepolicydelegate.cpp
+           $$PWD/delegates/sizepolicydelegate.cpp \
+           $$PWD/dialogs/keysequenceeditdialog.cpp \
+           $$PWD/delegates/keysequencedelegate.cpp \
+           $$PWD/editors/keysequenceeditor.cpp \
+           $$PWD/widgets/shortcutedit.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -274,4 +282,6 @@ FORMS += \
            $$PWD/editors/regioneditor.ui \
            $$PWD/editors/cursoreditor.ui \
            $$PWD/dialogs/sizepolicyeditdialog.ui \
-           $$PWD/editors/sizepolicyeditor.ui
+           $$PWD/editors/sizepolicyeditor.ui \
+           $$PWD/dialogs/keysequenceeditdialog.ui \
+           $$PWD/editors/keysequenceeditor.ui
