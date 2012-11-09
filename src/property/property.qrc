@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/objectcontroller">
+        <file>images/Add.png</file>
         <file>images/Cursor-ArrowCursor.png</file>
         <file>images/Cursor-BusyCursor.png</file>
         <file>images/Cursor-ClosedHandCursor.png</file>
