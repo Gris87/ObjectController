@@ -3,6 +3,8 @@
 
 #include <QBitmap>
 
+#include "../dialogs/paintdialog.h"
+
 CursorEditor::CursorEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::CursorEditor)
@@ -29,11 +31,16 @@ void CursorEditor::setValue(const QCursor &aValue)
 {
     mCursor=aValue;
 
+    if (mCursor.shape()==Qt::BitmapCursor)
+    {
+        mBitmapCursor=mCursor;
+    }
+
 
 
     QString res="[Unknown cursor]";
 
-    switch (aValue.shape())
+    switch (mCursor.shape())
     {
         case Qt::ArrowCursor:        res="ArrowCursor";        break;
         case Qt::UpArrowCursor:      res="UpArrowCursor";      break;
@@ -232,21 +239,14 @@ void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
     else
     if (aValue=="BitmapCursor")
     {
-        if (mCursor.bitmap())
+        if (mBitmapCursor.shape()==Qt::BitmapCursor)
         {
-            mCursor.setShape(Qt::BitmapCursor);
-        }
-        else
-        if (!mCursor.pixmap().isNull())
-        {
-            mCursor.setShape(Qt::BitmapCursor);
+            mCursor=mBitmapCursor;
         }
         else
         {
             mCursor=QCursor(QPixmap(32, 32));
         }
-
-        ui->bitmapWidget->setVisible(true);
     }
     else
     {
@@ -259,25 +259,79 @@ void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
 
 void CursorEditor::on_xSpinBox_valueChanged(int aValue)
 {
+    QPixmap aPixmap=mCursor.pixmap();
 
+    if (!aPixmap.isNull())
+    {
+        mCursor=QCursor(aPixmap, aValue, ui->ySpinBox->value());
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
+    else
+    {
+        mCursor=QCursor(*mCursor.bitmap(), *mCursor.mask(), aValue, ui->ySpinBox->value());
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
 }
 
 void CursorEditor::on_ySpinBox_valueChanged(int aValue)
 {
+    QPixmap aPixmap=mCursor.pixmap();
 
+    if (!aPixmap.isNull())
+    {
+        mCursor=QCursor(aPixmap, ui->xSpinBox->value(), aValue);
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
+    else
+    {
+        mCursor=QCursor(*mCursor.bitmap(), *mCursor.mask(), ui->xSpinBox->value(), aValue);
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
 }
 
 void CursorEditor::on_bitmapButton_clicked()
 {
+    PaintDialog dialog(QPixmap::fromImage(mCursor.bitmap()->toImage()), true, this);
 
+    if (dialog.exec())
+    {
+        mCursor=QCursor(QBitmap::fromImage(dialog.resultValue().toImage()), *mCursor.mask(), ui->xSpinBox->value(), ui->ySpinBox->value());
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
 }
 
 void CursorEditor::on_maskButton_clicked()
 {
+    PaintDialog dialog(QPixmap::fromImage(mCursor.mask()->toImage()), true, this);
 
+    if (dialog.exec())
+    {
+        mCursor=QCursor(*mCursor.bitmap(), QBitmap::fromImage(dialog.resultValue().toImage()), ui->xSpinBox->value(), ui->ySpinBox->value());
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
 }
 
 void CursorEditor::on_pixmapButton_clicked()
 {
+    PaintDialog dialog(mCursor.pixmap(), false, this);
 
+    if (dialog.exec())
+    {
+        mCursor=QCursor(dialog.resultValue(), ui->xSpinBox->value(), ui->ySpinBox->value());
+
+        setValue(mCursor);
+        emit valueChanged(mCursor);
+    }
 }

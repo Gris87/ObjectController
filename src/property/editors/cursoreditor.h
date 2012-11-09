@@ -24,6 +24,7 @@ protected:
 private:
     Ui::CursorEditor *ui;
     QCursor           mCursor;
+    QCursor           mBitmapCursor;
 
 private slots:
     void on_valueComboBox_currentIndexChanged(const QString &aValue);
