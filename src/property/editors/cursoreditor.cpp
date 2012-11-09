@@ -8,8 +8,6 @@ CursorEditor::CursorEditor(QWidget *parent) :
     ui(new Ui::CursorEditor)
 {
     ui->setupUi(this);
-
-    ui->bitmapWidget->setVisible(false);
 }
 
 CursorEditor::~CursorEditor()
@@ -67,34 +65,61 @@ void CursorEditor::setValue(const QCursor &aValue)
 
 
 
-    const QBitmap *aBitmap=mCursor.bitmap();
-
-    if (aBitmap)
-    {
-        setIcon(QIcon(QPixmap::fromImage(aBitmap->toImage())));
-    }
-    else
-    {
-        QPixmap aPixmap=mCursor.pixmap();
-
-        if (!aPixmap.isNull())
-        {
-            setIcon(QIcon(aPixmap));
-        }
-        else
-        {
-            setIcon(QIcon(":/objectcontroller/images/Cursor-"+res+".png"));
-        }
-    }
-}
-
-void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
-{
     ui->bitmapWidget->setVisible(false);
     ui->bitmapButton->setVisible(false);
     ui->maskButton->setVisible(false);
     ui->pixmapButton->setVisible(false);
 
+    ui->xSpinBox->blockSignals(true);
+    ui->ySpinBox->blockSignals(true);
+
+
+
+    QIcon aIcon;
+
+    QPixmap aPixmap=mCursor.pixmap();
+
+    if (!aPixmap.isNull())
+    {
+        aIcon=QIcon(aPixmap);
+
+        ui->xSpinBox->setValue(mCursor.hotSpot().x());
+        ui->ySpinBox->setValue(mCursor.hotSpot().y());
+
+        ui->pixmapButton->setVisible(true);
+        ui->bitmapWidget->setVisible(true);
+    }
+    else
+    {
+        const QBitmap *aBitmap=mCursor.bitmap();
+
+        if (aBitmap)
+        {
+            aIcon=QIcon(QPixmap::fromImage(aBitmap->toImage()));
+
+            ui->xSpinBox->setValue(mCursor.hotSpot().x());
+            ui->ySpinBox->setValue(mCursor.hotSpot().y());
+
+            ui->bitmapButton->setVisible(true);
+            ui->maskButton->setVisible(true);
+            ui->bitmapWidget->setVisible(true);
+        }
+        else
+        {
+            aIcon=QIcon(":/objectcontroller/images/Cursor-"+res+".png");
+        }
+    }
+
+    setIcon(aIcon);
+
+
+
+    ui->xSpinBox->blockSignals(false);
+    ui->ySpinBox->blockSignals(false);
+}
+
+void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
+{
     if (aValue=="ArrowCursor")
     {
         mCursor.setShape(Qt::ArrowCursor);
@@ -210,22 +235,15 @@ void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
         if (mCursor.bitmap())
         {
             mCursor.setShape(Qt::BitmapCursor);
-
-            ui->bitmapButton->setVisible(true);
-            ui->maskButton->setVisible(true);
         }
         else
         if (!mCursor.pixmap().isNull())
         {
             mCursor.setShape(Qt::BitmapCursor);
-
-            ui->pixmapButton->setVisible(true);
         }
         else
         {
             mCursor=QCursor(QPixmap(32, 32));
-
-            ui->pixmapButton->setVisible(true);
         }
 
         ui->bitmapWidget->setVisible(true);
@@ -248,7 +266,6 @@ void CursorEditor::on_ySpinBox_valueChanged(int aValue)
 {
 
 }
-
 
 void CursorEditor::on_bitmapButton_clicked()
 {

@@ -175,7 +175,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="xSpinBox"/>
+       <widget class="QSpinBox" name="xSpinBox">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QLabel" name="yLabel">
@@ -185,7 +192,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="ySpinBox"/>
+       <widget class="QSpinBox" name="ySpinBox">
+        <property name="minimum">
+         <number>-100</number>
+        </property>
+        <property name="maximum">
+         <number>100</number>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QToolButton" name="bitmapButton">

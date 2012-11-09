@@ -1235,21 +1235,29 @@ QIcon Property::iconForValue(const QBitmap &aValue, PropertyTreeWidgetItem * /*a
 
 QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    const QBitmap *aBitmap=aValue.bitmap();
-
-    if (aBitmap)
-    {
-        return iconForValue(*aBitmap, aParentItem);
-    }
+    QIcon aIcon;
 
     QPixmap aPixmap=aValue.pixmap();
 
     if (!aPixmap.isNull())
     {
-        return iconForValue(aPixmap, aParentItem);
+        aIcon=iconForValue(aPixmap, aParentItem);
+    }
+    else
+    {
+        const QBitmap *aBitmap=aValue.bitmap();
+
+        if (aBitmap)
+        {
+            aIcon=iconForValue(*aBitmap, aParentItem);
+        }
+        else
+        {
+            aIcon=QIcon(":/objectcontroller/images/Cursor-"+valueToString(aValue, aParentItem)+".png");
+        }
     }
 
-    return QIcon(":/objectcontroller/images/Cursor-"+valueToString(aValue, aParentItem)+".png");
+    return aIcon;
 }
 
 QIcon Property::iconForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
