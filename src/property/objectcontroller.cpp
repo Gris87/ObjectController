@@ -30,6 +30,7 @@
 #include "delegates/palettedelegate.h"
 #include "delegates/icondelegate.h"
 #include "delegates/polygondelegate.h"
+#include "delegates/regiondelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -340,4 +341,9 @@ CustomDelegate* ObjectController::createIconDelegate()
 CustomDelegate* ObjectController::createPolygonDelegate()
 {
     return new PolygonDelegate(this);
+}
+
+CustomDelegate* ObjectController::createRegionDelegate()
+{
+    return new RegionDelegate(this);
 }

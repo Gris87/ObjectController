@@ -100,7 +100,11 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/polygoneditdialog.h \
            $$PWD/widgets/pointframe.h \
            $$PWD/delegates/polygondelegate.h \
-           $$PWD/editors/polygoneditor.h
+           $$PWD/editors/polygoneditor.h \
+           $$PWD/widgets/rectframe.h \
+           $$PWD/dialogs/regioneditdialog.h \
+           $$PWD/editors/regioneditor.h \
+           $$PWD/delegates/regiondelegate.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -195,7 +199,11 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/polygoneditdialog.cpp \
            $$PWD/widgets/pointframe.cpp \
            $$PWD/delegates/polygondelegate.cpp \
-           $$PWD/editors/polygoneditor.cpp
+           $$PWD/editors/polygoneditor.cpp \
+           $$PWD/widgets/rectframe.cpp \
+           $$PWD/dialogs/regioneditdialog.cpp \
+           $$PWD/editors/regioneditor.cpp \
+           $$PWD/delegates/regiondelegate.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -250,4 +258,7 @@ FORMS += \
            $$PWD/editors/iconeditor.ui \
            $$PWD/dialogs/polygoneditdialog.ui \
            $$PWD/widgets/pointframe.ui \
-           $$PWD/editors/polygoneditor.ui
+           $$PWD/editors/polygoneditor.ui \
+           $$PWD/widgets/rectframe.ui \
+           $$PWD/dialogs/regioneditdialog.ui \
+           $$PWD/editors/regioneditor.ui

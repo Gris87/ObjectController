@@ -675,7 +675,7 @@ QString Property::valueToString(const QPolygon &aValue, PropertyTreeWidgetItem *
     return res;
 }
 
-QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QVector<QRect> aRects=aValue.rects();
 
@@ -683,7 +683,17 @@ QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem *a
 
     for (int i=0; i<aRects.count(); ++i)
     {
-        res.append(valueToString(aRects.at(i), aParentItem));
+        res.append(
+                   "[("+
+                   QString::number(aRects.at(i).x())+
+                   ", "+
+                   QString::number(aRects.at(i).y())+
+                   "), "+
+                   QString::number(aRects.at(i).width())+
+                   " x "+
+                   QString::number(aRects.at(i).height())+
+                   "]"
+                  );
 
         if (i<aRects.count()-1)
         {
@@ -1731,7 +1741,7 @@ CustomDelegate* Property::delegateForValue(const QRegion &/*aValue*/, PropertyTr
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->regionDelegate();
     }
 
     return 0;

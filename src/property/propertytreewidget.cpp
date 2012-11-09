@@ -46,6 +46,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mPaletteDelegate     = mController->createPaletteDelegate();
     mIconDelegate        = mController->createIconDelegate();
     mPolygonDelegate     = mController->createPolygonDelegate();
+    mRegionDelegate      = mController->createRegionDelegate();
 
     //----------------------------------------------------------------------
 
@@ -375,4 +376,9 @@ CustomDelegate* PropertyTreeWidget::iconDelegate()
 CustomDelegate* PropertyTreeWidget::polygonDelegate()
 {
     return mPolygonDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::regionDelegate()
+{
+    return mRegionDelegate;
 }
