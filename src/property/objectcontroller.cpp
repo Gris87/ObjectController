@@ -34,6 +34,7 @@
 #include "delegates/cursordelegate.h"
 #include "delegates/sizepolicydelegate.h"
 #include "delegates/keysequencedelegate.h"
+#include "delegates/pendelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -364,4 +365,9 @@ CustomDelegate* ObjectController::createSizePolicyDelegate()
 CustomDelegate* ObjectController::createKeySequenceDelegate()
 {
     return new KeySequenceDelegate(this);
+}
+
+CustomDelegate* ObjectController::createPenDelegate()
+{
+    return new PenDelegate(this);
 }

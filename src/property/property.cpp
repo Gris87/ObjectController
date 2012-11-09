@@ -1802,7 +1802,7 @@ CustomDelegate* Property::delegateForValue(const QPen &/*aValue*/, PropertyTreeW
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->penDelegate();
     }
 
     return 0;
@@ -2412,7 +2412,7 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
 {
     int aCount=0;
 
-    QString aStyle;
+    QString aStyle="[Unknown style]";
 
     switch (aValue.style())
     {
@@ -2423,10 +2423,10 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
         case Qt::DashDotLine:    aStyle="DashDotLine";     break;
         case Qt::DashDotDotLine: aStyle="DashDotDotLine";  break;
         case Qt::CustomDashLine: aStyle="CustomDashLine";  break;
-        default:                 aStyle="[Unknown style]"; break;
+        case Qt::MPenStyle:      aStyle="MPenStyle";       break;
     }
 
-    QString aCapStyle;
+    QString aCapStyle="[Unknown style]";
 
     switch (aValue.capStyle())
     {
@@ -2434,10 +2434,9 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
         case Qt::SquareCap:    aCapStyle="SquareCap";       break;
         case Qt::RoundCap:     aCapStyle="RoundCap";        break;
         case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
-        default:               aCapStyle="[Unknown style]"; break;
     }
 
-    QString aJoinStyle;
+    QString aJoinStyle="[Unknown style]";;
 
     switch (aValue.joinStyle())
     {
@@ -2446,7 +2445,6 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
         case Qt::RoundJoin:     aJoinStyle="RoundJoin";       break;
         case Qt::SvgMiterJoin:  aJoinStyle="SvgMiterJoin";    break;
         case Qt::MPenJoinStyle: aJoinStyle="MPenJoinStyle";   break;
-        default:                aJoinStyle="[Unknown style]"; break;
     }
 
     // -----------------------------------------------------------------
@@ -2510,7 +2508,7 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     PropertyTreeWidgetItem *aColorItem;
 
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      valueToString(aValue.brush(),     aBrushItem), iconForValue(aValue.brush(), aBrushItem));
-    GET_OR_CREATE_ITEM(          aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      valueToString(aValue.width(),     aWidthItem));
+    GET_OR_CREATE_ITEM(          aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      valueToString(aValue.widthF(),    aWidthItem));
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyle,     QIcon(aStylePixmap));
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyle,  QIcon(aCapStylePixmap));
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyle, QIcon(aJoinStylePixmap));

@@ -50,6 +50,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mCursorDelegate      = mController->createCursorDelegate();
     mSizePolicyDelegate  = mController->createSizePolicyDelegate();
     mKeySequenceDelegate = mController->createKeySequenceDelegate();
+    mPenDelegate         = mController->createPenDelegate();
 
     //----------------------------------------------------------------------
 
@@ -399,4 +400,9 @@ CustomDelegate* PropertyTreeWidget::sizePolicyDelegate()
 CustomDelegate* PropertyTreeWidget::keySequenceDelegate()
 {
     return mKeySequenceDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::penDelegate()
+{
+    return mPenDelegate;
 }

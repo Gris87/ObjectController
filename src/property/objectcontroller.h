@@ -68,6 +68,7 @@ protected:
     virtual CustomDelegate* createCursorDelegate();
     virtual CustomDelegate* createSizePolicyDelegate();
     virtual CustomDelegate* createKeySequenceDelegate();
+    virtual CustomDelegate* createPenDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

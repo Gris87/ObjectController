@@ -9,6 +9,8 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
 {
     ui->setupUi(this);
 
+    setWindowFlags(Qt::Window);
+
     mBrush=aBrush;
 
     // TODO: Implement Brush Edit Dialog

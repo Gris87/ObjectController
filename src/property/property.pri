@@ -113,7 +113,10 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/keysequenceeditdialog.h \
            $$PWD/delegates/keysequencedelegate.h \
            $$PWD/editors/keysequenceeditor.h \
-           $$PWD/widgets/shortcutedit.h
+           $$PWD/widgets/shortcutedit.h \
+           $$PWD/dialogs/peneditdialog.h \
+           $$PWD/delegates/pendelegate.h \
+           $$PWD/editors/peneditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -221,7 +224,10 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/keysequenceeditdialog.cpp \
            $$PWD/delegates/keysequencedelegate.cpp \
            $$PWD/editors/keysequenceeditor.cpp \
-           $$PWD/widgets/shortcutedit.cpp
+           $$PWD/widgets/shortcutedit.cpp \
+           $$PWD/dialogs/peneditdialog.cpp \
+           $$PWD/delegates/pendelegate.cpp \
+           $$PWD/editors/peneditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -284,4 +290,6 @@ FORMS += \
            $$PWD/dialogs/sizepolicyeditdialog.ui \
            $$PWD/editors/sizepolicyeditor.ui \
            $$PWD/dialogs/keysequenceeditdialog.ui \
-           $$PWD/editors/keysequenceeditor.ui
+           $$PWD/editors/keysequenceeditor.ui \
+           $$PWD/dialogs/peneditdialog.ui \
+           $$PWD/editors/peneditor.ui

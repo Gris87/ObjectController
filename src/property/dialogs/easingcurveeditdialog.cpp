@@ -10,6 +10,8 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget 
 {
     ui->setupUi(this);
 
+    setWindowFlags(Qt::Window);
+
     mOriginalEasingCurve=aEasingCurve;
     mEasingCurve=aEasingCurve;
 
