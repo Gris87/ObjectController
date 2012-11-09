@@ -167,7 +167,7 @@ void LocaleEditDialog::updateValues()
 {
     ui->numberEdit->setText(mLocale.toString(123456789.0f, 'f', 2));
     ui->currencyEdit->setText(mLocale.toCurrencyString(123456789.0f));
-    ui->timeEdit->setText(mLocale.toString(QTime::currentTime()));
+    ui->timeEdit->setText(mLocale.toString(QTime::currentTime(), QLocale::ShortFormat));
     ui->shortDateEdit->setText(mLocale.toString(QDate::currentDate(), QLocale::ShortFormat));
     ui->longDateEdit->setText(mLocale.toString(QDate::currentDate(), QLocale::LongFormat));
 }

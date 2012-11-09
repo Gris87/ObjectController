@@ -44,6 +44,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mBrushDelegate       = mController->createBrushDelegate();
     mColorDelegate       = mController->createColorDelegate();
     mPaletteDelegate     = mController->createPaletteDelegate();
+    mIconDelegate        = mController->createIconDelegate();
 
     //----------------------------------------------------------------------
 
@@ -363,4 +364,9 @@ CustomDelegate* PropertyTreeWidget::colorDelegate()
 CustomDelegate* PropertyTreeWidget::paletteDelegate()
 {
     return mPaletteDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::iconDelegate()
+{
+    return mIconDelegate;
 }

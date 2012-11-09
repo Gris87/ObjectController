@@ -62,6 +62,7 @@ protected:
     virtual CustomDelegate* createBrushDelegate();
     virtual CustomDelegate* createColorDelegate();
     virtual CustomDelegate* createPaletteDelegate();
+    virtual CustomDelegate* createIconDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

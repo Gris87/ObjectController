@@ -28,6 +28,7 @@
 #include "delegates/brushdelegate.h"
 #include "delegates/colordelegate.h"
 #include "delegates/palettedelegate.h"
+#include "delegates/icondelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -328,4 +329,9 @@ CustomDelegate* ObjectController::createColorDelegate()
 CustomDelegate* ObjectController::createPaletteDelegate()
 {
     return new PaletteDelegate(this);
+}
+
+CustomDelegate* ObjectController::createIconDelegate()
+{
+    return new IconDelegate(this);
 }

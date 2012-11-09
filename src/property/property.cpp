@@ -1701,7 +1701,7 @@ CustomDelegate* Property::delegateForValue(const QIcon &/*aValue*/, PropertyTree
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->iconDelegate();
     }
 
     return 0;

@@ -8,6 +8,8 @@ PaletteEditor::PaletteEditor(QWidget *parent) :
     ui(new Ui::PaletteEditor)
 {
     ui->setupUi(this);
+
+    ui->valueEdit->setText("Palette");
 }
 
 PaletteEditor::~PaletteEditor()
@@ -33,8 +35,6 @@ void PaletteEditor::setIcon(const QIcon &aIcon)
 void PaletteEditor::setValue(const QPalette &aValue)
 {
     mValue=aValue;
-
-    ui->valueEdit->setText("Palette");
 }
 
 void PaletteEditor::on_editButton_clicked()
