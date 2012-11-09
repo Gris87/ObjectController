@@ -66,6 +66,7 @@ protected:
     virtual CustomDelegate* createPolygonDelegate();
     virtual CustomDelegate* createRegionDelegate();
     virtual CustomDelegate* createCursorDelegate();
+    virtual CustomDelegate* createSizePolicyDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

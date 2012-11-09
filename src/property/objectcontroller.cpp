@@ -32,6 +32,7 @@
 #include "delegates/polygondelegate.h"
 #include "delegates/regiondelegate.h"
 #include "delegates/cursordelegate.h"
+#include "delegates/sizepolicydelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -352,4 +353,9 @@ CustomDelegate* ObjectController::createRegionDelegate()
 CustomDelegate* ObjectController::createCursorDelegate()
 {
     return new CursorDelegate(this);
+}
+
+CustomDelegate* ObjectController::createSizePolicyDelegate()
+{
+    return new SizePolicyDelegate(this);
 }

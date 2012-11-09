@@ -749,9 +749,9 @@ QString Property::valueToString(const QSizePolicy &aValue, PropertyTreeWidgetIte
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
 
     return "["+
-           QString::fromUtf8(aEnum.valueToKey(aValue.horizontalPolicy()))+
+           QString::fromLatin1(aEnum.valueToKey(aValue.horizontalPolicy()))+
            ", "+
-           QString::fromUtf8(aEnum.valueToKey(aValue.verticalPolicy()))+
+           QString::fromLatin1(aEnum.valueToKey(aValue.verticalPolicy()))+
            ", "+
            QString::number(aValue.horizontalStretch())+
            ", "+
@@ -1778,8 +1778,13 @@ CustomDelegate* Property::delegateForValue(const QCursor &/*aValue*/, PropertyTr
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->sizePolicyDelegate();
+    }
+
     return 0;
 }
 

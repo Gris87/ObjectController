@@ -48,6 +48,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mPolygonDelegate     = mController->createPolygonDelegate();
     mRegionDelegate      = mController->createRegionDelegate();
     mCursorDelegate      = mController->createCursorDelegate();
+    mSizePolicyDelegate  = mController->createSizePolicyDelegate();
 
     //----------------------------------------------------------------------
 
@@ -387,4 +388,9 @@ CustomDelegate* PropertyTreeWidget::regionDelegate()
 CustomDelegate* PropertyTreeWidget::cursorDelegate()
 {
     return mCursorDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::sizePolicyDelegate()
+{
+    return mSizePolicyDelegate;
 }
