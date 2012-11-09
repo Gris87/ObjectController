@@ -53,6 +53,7 @@ public:
     CustomDelegate*       iconDelegate();
     CustomDelegate*       polygonDelegate();
     CustomDelegate*       regionDelegate();
+    CustomDelegate*       cursorDelegate();
 
 protected:
     ObjectController     *mController;
@@ -87,6 +88,7 @@ protected:
     CustomDelegate       *mIconDelegate;
     CustomDelegate       *mPolygonDelegate;
     CustomDelegate       *mRegionDelegate;
+    CustomDelegate       *mCursorDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

@@ -31,6 +31,7 @@
 #include "delegates/icondelegate.h"
 #include "delegates/polygondelegate.h"
 #include "delegates/regiondelegate.h"
+#include "delegates/cursordelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -346,4 +347,9 @@ CustomDelegate* ObjectController::createPolygonDelegate()
 CustomDelegate* ObjectController::createRegionDelegate()
 {
     return new RegionDelegate(this);
+}
+
+CustomDelegate* ObjectController::createCursorDelegate()
+{
+    return new CursorDelegate(this);
 }

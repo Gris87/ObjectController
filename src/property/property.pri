@@ -104,7 +104,9 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/rectframe.h \
            $$PWD/dialogs/regioneditdialog.h \
            $$PWD/editors/regioneditor.h \
-           $$PWD/delegates/regiondelegate.h
+           $$PWD/delegates/regiondelegate.h \
+           $$PWD/editors/cursoreditor.h \
+           $$PWD/delegates/cursordelegate.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -203,7 +205,9 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/rectframe.cpp \
            $$PWD/dialogs/regioneditdialog.cpp \
            $$PWD/editors/regioneditor.cpp \
-           $$PWD/delegates/regiondelegate.cpp
+           $$PWD/delegates/regiondelegate.cpp \
+           $$PWD/editors/cursoreditor.cpp \
+           $$PWD/delegates/cursordelegate.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -261,4 +265,5 @@ FORMS += \
            $$PWD/editors/polygoneditor.ui \
            $$PWD/widgets/rectframe.ui \
            $$PWD/dialogs/regioneditdialog.ui \
-           $$PWD/editors/regioneditor.ui
+           $$PWD/editors/regioneditor.ui \
+           $$PWD/editors/cursoreditor.ui

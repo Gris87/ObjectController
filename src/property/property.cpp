@@ -1761,7 +1761,7 @@ CustomDelegate* Property::delegateForValue(const QCursor &/*aValue*/, PropertyTr
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->cursorDelegate();
     }
 
     return 0;
