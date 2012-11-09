@@ -4,6 +4,9 @@
 #include <QDialog>
 
 #include <QIcon>
+#include <QCheckBox>
+
+#include "../widgets/paintframe.h"
 
 namespace Ui {
 class IconEditDialog;
@@ -20,7 +23,19 @@ public:
     QIcon resultValue() const;
 
 private:
+    struct PageEntry
+    {
+        QCheckBox    *checkbox;
+        PaintFrame   *paintframe;
+        QIcon::Mode   mode;
+        QIcon::State  state;
+    };
+
     Ui::IconEditDialog *ui;
+    QList<PageEntry>    mPages;
+
+    QString modeToString(const QIcon::Mode &aMode) const;
+    QString stateToString(const QIcon::State &aState) const;
 
 private slots:
     void on_okButton_clicked();
