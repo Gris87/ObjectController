@@ -14,13 +14,24 @@ class PixmapEditor : public CustomEditor
     Q_OBJECT
 
 public:
+    enum DataType
+    {
+        PIXMAP,
+        IMAGE,
+        BITMAP
+    };
+
     explicit PixmapEditor(QWidget *parent = 0);
     ~PixmapEditor();
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QPixmap &aValue);
+    void setValue(const QImage &aValue);
+    void setValue(const QBitmap &aValue);
 
 protected:
+    DataType mDataType;
+
     void putFocus();
     void selectText();
 

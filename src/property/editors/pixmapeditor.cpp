@@ -1,6 +1,9 @@
 #include "pixmapeditor.h"
 #include "ui_pixmapeditor.h"
 
+#include <QImage>
+#include <QBitmap>
+
 #include "../dialogs/paintdialog.h"
 
 PixmapEditor::PixmapEditor(QWidget *parent) :
@@ -8,6 +11,8 @@ PixmapEditor::PixmapEditor(QWidget *parent) :
     ui(new Ui::PixmapEditor)
 {
     ui->setupUi(this);
+
+    mDataType=PIXMAP;
 }
 
 PixmapEditor::~PixmapEditor()
@@ -35,21 +40,81 @@ void PixmapEditor::setValue(const QPixmap &aValue)
     mValue=aValue;
 
     ui->valueEdit->setText(
-                           QString::number(aValue.width())+
+                           QString::number(mValue.width())+
                            " x "+
-                           QString::number(aValue.height())
+                           QString::number(mValue.height())
                           );
 
-    setIcon(QIcon(aValue));
+    setIcon(QIcon(mValue));
+
+    mDataType=PIXMAP;
+}
+
+void PixmapEditor::setValue(const QImage &aValue)
+{
+    mValue=QPixmap::fromImage(aValue);
+
+    ui->valueEdit->setText(
+                           QString::number(mValue.width())+
+                           " x "+
+                           QString::number(mValue.height())
+                          );
+
+    setIcon(QIcon(mValue));
+
+    mDataType=IMAGE;
+}
+
+void PixmapEditor::setValue(const QBitmap &aValue)
+{
+    mValue=QPixmap::fromImage(aValue.toImage());
+
+    ui->valueEdit->setText(
+                           QString::number(mValue.width())+
+                           " x "+
+                           QString::number(mValue.height())
+                          );
+
+    setIcon(QIcon(mValue));
+
+    mDataType=BITMAP;
 }
 
 void PixmapEditor::on_editButton_clicked()
 {
-    PaintDialog dialog(mValue, false, this);
+    PaintDialog *dialog=0;
 
-    if (dialog.exec())
+    switch (mDataType)
     {
-        setValue(dialog.resultValue());
-        emit valueChanged(mValue);
+        case PIXMAP:
+            dialog=new PaintDialog(mValue, false, this);
+        break;
+        case IMAGE:
+            dialog=new PaintDialog(mValue, false, this);
+        break;
+        case BITMAP:
+            dialog=new PaintDialog(mValue, true, this);
+        break;
     }
+
+    if (dialog->exec())
+    {
+        switch (mDataType)
+        {
+            case PIXMAP:
+                setValue(dialog->resultValue());
+                emit valueChanged(mValue);
+            break;
+            case IMAGE:
+                setValue(dialog->resultValue().toImage());
+                emit valueChanged(mValue.toImage());
+            break;
+            case BITMAP:
+                setValue(QBitmap::fromImage(dialog->resultValue().toImage()));
+                emit valueChanged(QBitmap::fromImage(mValue.toImage()));
+            break;
+        }
+    }
+
+    delete dialog;
 }

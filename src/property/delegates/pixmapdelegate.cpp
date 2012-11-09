@@ -1,5 +1,9 @@
 #include "pixmapdelegate.h"
 
+#include <QPixmap>
+#include <QImage>
+#include <QBitmap>
+
 #include "../editors/pixmapeditor.h"
 #include "../propertytreewidgetitem.h"
 
@@ -21,6 +25,12 @@ void PixmapDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
     {
         case QVariant::Pixmap:
             aPixmapEditor->setValue(aItem->firstValue().value<QPixmap>());
+        break;
+        case QVariant::Image:
+            aPixmapEditor->setValue(aItem->firstValue().value<QImage>());
+        break;
+        case QVariant::Bitmap:
+            aPixmapEditor->setValue(aItem->firstValue().value<QBitmap>());
         break;
         default:
             Q_ASSERT(false); // Impossible
