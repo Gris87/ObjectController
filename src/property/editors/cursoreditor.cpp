@@ -10,10 +10,17 @@ CursorEditor::CursorEditor(QWidget *parent) :
     ui(new Ui::CursorEditor)
 {
     ui->setupUi(this);
+
+    connect(&mHotSpotTimer, SIGNAL(timeout()), this, SLOT(hotSpotChanged()));
 }
 
 CursorEditor::~CursorEditor()
 {
+    if (mHotSpotTimer.isActive())
+    {
+        hotSpotChanged();
+    }
+
     delete ui;
 }
 
@@ -72,16 +79,6 @@ void CursorEditor::setValue(const QCursor &aValue)
 
 
 
-    ui->bitmapWidget->setVisible(false);
-    ui->bitmapButton->setVisible(false);
-    ui->maskButton->setVisible(false);
-    ui->pixmapButton->setVisible(false);
-
-    ui->xSpinBox->blockSignals(true);
-    ui->ySpinBox->blockSignals(true);
-
-
-
     QIcon aIcon;
 
     QPixmap aPixmap=mCursor.pixmap();
@@ -89,7 +86,40 @@ void CursorEditor::setValue(const QCursor &aValue)
     if (!aPixmap.isNull())
     {
         aIcon=QIcon(aPixmap);
+    }
+    else
+    {
+        const QBitmap *aBitmap=mCursor.bitmap();
 
+        if (aBitmap)
+        {
+            aPixmap=QPixmap::fromImage(aBitmap->toImage());
+            aPixmap.setMask(*mCursor.mask());
+
+            aIcon=QIcon(aPixmap);
+        }
+        else
+        {
+            aIcon=QIcon(":/objectcontroller/images/Cursor-"+res+".png");
+        }
+    }
+
+    setIcon(aIcon);
+
+
+
+    ui->xSpinBox->blockSignals(true);
+    ui->ySpinBox->blockSignals(true);
+
+    ui->bitmapWidget->setVisible(false);
+    ui->bitmapButton->setVisible(false);
+    ui->maskButton->setVisible(false);
+    ui->pixmapButton->setVisible(false);
+
+    aPixmap=mCursor.pixmap();
+
+    if (!aPixmap.isNull())
+    {
         ui->xSpinBox->setValue(mCursor.hotSpot().x());
         ui->ySpinBox->setValue(mCursor.hotSpot().y());
 
@@ -102,8 +132,6 @@ void CursorEditor::setValue(const QCursor &aValue)
 
         if (aBitmap)
         {
-            aIcon=QIcon(QPixmap::fromImage(aBitmap->toImage()));
-
             ui->xSpinBox->setValue(mCursor.hotSpot().x());
             ui->ySpinBox->setValue(mCursor.hotSpot().y());
 
@@ -111,15 +139,7 @@ void CursorEditor::setValue(const QCursor &aValue)
             ui->maskButton->setVisible(true);
             ui->bitmapWidget->setVisible(true);
         }
-        else
-        {
-            aIcon=QIcon(":/objectcontroller/images/Cursor-"+res+".png");
-        }
     }
-
-    setIcon(aIcon);
-
-
 
     ui->xSpinBox->blockSignals(false);
     ui->ySpinBox->blockSignals(false);
@@ -245,7 +265,10 @@ void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
         }
         else
         {
-            mCursor=QCursor(QPixmap(32, 32));
+            QPixmap aPixmap(32, 32);
+            aPixmap.fill(QColor(0, 0, 0));
+
+            mCursor=QCursor(aPixmap);
         }
     }
     else
@@ -257,44 +280,36 @@ void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
     emit valueChanged(mCursor);
 }
 
-void CursorEditor::on_xSpinBox_valueChanged(int aValue)
+void CursorEditor::hotSpotChanged()
 {
     QPixmap aPixmap=mCursor.pixmap();
 
     if (!aPixmap.isNull())
     {
-        mCursor=QCursor(aPixmap, aValue, ui->ySpinBox->value());
+        mCursor=QCursor(aPixmap, ui->xSpinBox->value(), ui->ySpinBox->value());
 
         setValue(mCursor);
         emit valueChanged(mCursor);
     }
     else
     {
-        mCursor=QCursor(*mCursor.bitmap(), *mCursor.mask(), aValue, ui->ySpinBox->value());
+        mCursor=QCursor(*mCursor.bitmap(), *mCursor.mask(), ui->xSpinBox->value(), ui->ySpinBox->value());
 
         setValue(mCursor);
         emit valueChanged(mCursor);
     }
 }
 
-void CursorEditor::on_ySpinBox_valueChanged(int aValue)
+void CursorEditor::on_xSpinBox_valueChanged(int /*aValue*/)
 {
-    QPixmap aPixmap=mCursor.pixmap();
+    mHotSpotTimer.stop();
+    mHotSpotTimer.start(2000);
+}
 
-    if (!aPixmap.isNull())
-    {
-        mCursor=QCursor(aPixmap, ui->xSpinBox->value(), aValue);
-
-        setValue(mCursor);
-        emit valueChanged(mCursor);
-    }
-    else
-    {
-        mCursor=QCursor(*mCursor.bitmap(), *mCursor.mask(), ui->xSpinBox->value(), aValue);
-
-        setValue(mCursor);
-        emit valueChanged(mCursor);
-    }
+void CursorEditor::on_ySpinBox_valueChanged(int /*aValue*/)
+{
+    mHotSpotTimer.stop();
+    mHotSpotTimer.start(2000);
 }
 
 void CursorEditor::on_bitmapButton_clicked()

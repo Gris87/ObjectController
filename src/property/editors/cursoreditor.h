@@ -25,8 +25,11 @@ private:
     Ui::CursorEditor *ui;
     QCursor           mCursor;
     QCursor           mBitmapCursor;
+    QTimer            mHotSpotTimer;
 
 private slots:
+    void hotSpotChanged();
+
     void on_valueComboBox_currentIndexChanged(const QString &aValue);
     void on_xSpinBox_valueChanged(int aValue);
     void on_ySpinBox_valueChanged(int aValue);

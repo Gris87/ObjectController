@@ -1241,7 +1241,7 @@ QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aPar
 
     if (!aPixmap.isNull())
     {
-        aIcon=iconForValue(aPixmap, aParentItem);
+        aIcon=QIcon(aPixmap);
     }
     else
     {
@@ -1249,7 +1249,10 @@ QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aPar
 
         if (aBitmap)
         {
-            aIcon=iconForValue(*aBitmap, aParentItem);
+            aPixmap=QPixmap::fromImage(aBitmap->toImage());
+            aPixmap.setMask(*aValue.mask());
+
+            aIcon=QIcon(aPixmap);
         }
         else
         {
