@@ -111,67 +111,67 @@ TestObject::TestObject(QObject *parent) :
 
 // ----------------------------------------------------------------------------------------------------
 
-bool                   TestObject::getBool() const
+bool TestObject::getBool() const
 {
     return mBool;
 }
 
-qint8                  TestObject::getInt8() const
+qint8 TestObject::getInt8() const
 {
     return mInt8;
 }
 
-quint8                 TestObject::getUInt8() const
+quint8 TestObject::getUInt8() const
 {
     return mUInt8;
 }
 
-qint16                 TestObject::getInt16() const
+qint16 TestObject::getInt16() const
 {
     return mInt16;
 }
 
-quint16                TestObject::getUInt16() const
+quint16 TestObject::getUInt16() const
 {
     return mUInt16;
 }
 
-qint32                 TestObject::getInt32() const
+qint32 TestObject::getInt32() const
 {
     return mInt32;
 }
 
-quint32                TestObject::getUInt32() const
+quint32 TestObject::getUInt32() const
 {
     return mUInt32;
 }
 
-qint64                 TestObject::getInt64() const
+qint64 TestObject::getInt64() const
 {
     return mInt64;
 }
 
-quint64                TestObject::getUInt64() const
+quint64 TestObject::getUInt64() const
 {
     return mUInt64;
 }
 
-float                  TestObject::getFloat() const
+float TestObject::getFloat() const
 {
     return mFloat;
 }
 
-double                 TestObject::getDouble() const
+double TestObject::getDouble() const
 {
     return mDouble;
 }
 
-QChar                  TestObject::getChar() const
+QChar TestObject::getChar() const
 {
     return mChar;
 }
 
-QVariantMap            TestObject::getMap() const
+QVariantMap TestObject::getMap() const
 {
     QVariantMap res;
 
@@ -183,7 +183,7 @@ QVariantMap            TestObject::getMap() const
     return res;
 }
 
-QVariantList           TestObject::getList() const
+QVariantList TestObject::getList() const
 {
     QVariantList res;
 
@@ -195,97 +195,97 @@ QVariantList           TestObject::getList() const
     return res;
 }
 
-QStringList            TestObject::getStringList() const
+QStringList TestObject::getStringList() const
 {
     return mStringList;
 }
 
-QString                TestObject::getString() const
+QString TestObject::getString() const
 {
     return mString;
 }
 
-QByteArray             TestObject::getByteArray() const
+QByteArray TestObject::getByteArray() const
 {
     return mByteArray;
 }
 
-QBitArray              TestObject::getBitArray() const
+QBitArray TestObject::getBitArray() const
 {
     return mBitArray;
 }
 
-QDate                  TestObject::getDate() const
+QDate TestObject::getDate() const
 {
     return mDate;
 }
 
-QTime                  TestObject::getTime() const
+QTime TestObject::getTime() const
 {
     return mTime;
 }
 
-QDateTime              TestObject::getDateTime() const
+QDateTime TestObject::getDateTime() const
 {
     return mDateTime;
 }
 
-QUrl                   TestObject::getUrl() const
+QUrl TestObject::getUrl() const
 {
     return mUrl;
 }
 
-QLocale                TestObject::getLocale() const
+QLocale TestObject::getLocale() const
 {
     return mLocale;
 }
 
-QRect                  TestObject::getRect() const
+QRect TestObject::getRect() const
 {
     return mRect;
 }
 
-QRectF                 TestObject::getRectF() const
+QRectF TestObject::getRectF() const
 {
     return mRectF;
 }
 
-QSize                  TestObject::getSize() const
+QSize TestObject::getSize() const
 {
     return mSize;
 }
 
-QSizeF                 TestObject::getSizeF() const
+QSizeF TestObject::getSizeF() const
 {
     return mSizeF;
 }
 
-QLine                  TestObject::getLine() const
+QLine TestObject::getLine() const
 {
     return mLine;
 }
 
-QLineF                 TestObject::getLineF() const
+QLineF TestObject::getLineF() const
 {
     return mLineF;
 }
 
-QPoint                 TestObject::getPoint() const
+QPoint TestObject::getPoint() const
 {
     return mPoint;
 }
 
-QPointF                TestObject::getPointF() const
+QPointF TestObject::getPointF() const
 {
     return mPointF;
 }
 
-QRegExp                TestObject::getRegExp() const
+QRegExp TestObject::getRegExp() const
 {
     return mRegExp;
 }
 
-QVariantHash           TestObject::getHash() const
+QVariantHash TestObject::getHash() const
 {
     QVariantHash res;
 
@@ -297,132 +297,132 @@ QVariantHash           TestObject::getHash() const
     return res;
 }
 
-QEasingCurve           TestObject::getEasingCurve() const
+QEasingCurve TestObject::getEasingCurve() const
 {
     return mEasingCurve;
 }
 
-QFont                  TestObject::getFont() const
+QFont TestObject::getFont() const
 {
     return mFont;
 }
 
-QPixmap                TestObject::getPixmap() const
+QPixmap TestObject::getPixmap() const
 {
     return mPixmap;
 }
 
-QBrush                 TestObject::getBrush() const
+QBrush TestObject::getBrush() const
 {
     return mBrush;
 }
 
-QColor                 TestObject::getColor() const
+QColor TestObject::getColor() const
 {
     return mColor;
 }
 
-QPalette               TestObject::getPalette() const
+QPalette TestObject::getPalette() const
 {
     return mPalette;
 }
 
-QIcon                  TestObject::getIcon() const
+QIcon TestObject::getIcon() const
 {
     return mIcon;
 }
 
-QImage                 TestObject::getImage() const
+QImage TestObject::getImage() const
 {
     return mImage;
 }
 
-QPolygon               TestObject::getPolygon() const
+QPolygon TestObject::getPolygon() const
 {
     return mPolygon;
 }
 
-QRegion                TestObject::getRegion() const
+QRegion TestObject::getRegion() const
 {
     return mRegion;
 }
 
-QBitmap                TestObject::getBitmap() const
+QBitmap TestObject::getBitmap() const
 {
     return mBitmap;
 }
 
-QCursor                TestObject::getCursor() const
+QCursor TestObject::getCursor() const
 {
     return mCursor;
 }
 
-QSizePolicy            TestObject::getSizePolicy() const
+QSizePolicy TestObject::getSizePolicy() const
 {
     return mSizePolicy;
 }
 
-QKeySequence           TestObject::getKeySequence() const
+QKeySequence TestObject::getKeySequence() const
 {
     return mKeySequence;
 }
 
-QPen                   TestObject::getPen() const
+QPen TestObject::getPen() const
 {
     return mPen;
 }
 
-QTextLength            TestObject::getTextLength() const
+QTextLength TestObject::getTextLength() const
 {
     return mTextLength;
 }
 
-QTextFormat            TestObject::getTextFormat() const
+QTextFormat TestObject::getTextFormat() const
 {
     return mTextFormat;
 }
 
-QMatrix                TestObject::getMatrix() const
+QMatrix TestObject::getMatrix() const
 {
     return mMatrix;
 }
 
-QTransform             TestObject::getTransform() const
+QTransform TestObject::getTransform() const
 {
     return mTransform;
 }
 
-QMatrix4x4             TestObject::getMatrix4x4() const
+QMatrix4x4 TestObject::getMatrix4x4() const
 {
     return mMatrix4x4;
 }
 
-QVector2D              TestObject::getVector2D() const
+QVector2D TestObject::getVector2D() const
 {
     return mVector2D;
 }
 
-QVector3D              TestObject::getVector3D() const
+QVector3D TestObject::getVector3D() const
 {
     return mVector3D;
 }
 
-QVector4D              TestObject::getVector4D() const
+QVector4D TestObject::getVector4D() const
 {
     return mVector4D;
 }
 
-QQuaternion            TestObject::getQuaternion() const
+QQuaternion TestObject::getQuaternion() const
 {
     return mQuaternion;
 }
 
-void*                  TestObject::getVoid() const
+void* TestObject::getVoid() const
 {
     return mVoid;
 }
 
-QObject*               TestObject::getObject() const
+QObject* TestObject::getObject() const
 {
     return mObject;
 }

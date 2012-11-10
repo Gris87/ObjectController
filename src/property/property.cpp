@@ -1812,7 +1812,7 @@ CustomDelegate* Property::delegateForValue(const QTextLength &/*aValue*/, Proper
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->textLengthDelegate();
     }
 
     return 0;
