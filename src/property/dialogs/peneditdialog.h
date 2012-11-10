@@ -29,11 +29,18 @@ private:
     QPen               mPen;
     ColorArea         *mColorArea;
 
+    void updateProperties(const bool &aNeedToUpdatePattern=true);
+    void updatePattern();
+    void addPattern();
     void drawBrush();
     void drawPen();
 
 private slots:
     void colorChanged(QColor aColor);
+    void patternUp();
+    void patternDown();
+    void patternDelete();
+    void patternValueChanged(double aValue);
 
     void on_okButton_clicked();
     void on_cancelButton_clicked();
@@ -45,6 +52,7 @@ private slots:
     void on_cosmeticCheckBox_toggled(bool aChecked);
     void on_milerLimitSpinBox_valueChanged(double aValue);
     void on_dashOffsetSpinBox_valueChanged(double aValue);
+    void on_addButton_clicked();
 };
 
 #endif // PENEDITDIALOG_H

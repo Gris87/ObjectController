@@ -116,7 +116,8 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/shortcutedit.h \
            $$PWD/dialogs/peneditdialog.h \
            $$PWD/delegates/pendelegate.h \
-           $$PWD/editors/peneditor.h
+           $$PWD/editors/peneditor.h \
+           $$PWD/widgets/doubleframe.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -227,7 +228,8 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/shortcutedit.cpp \
            $$PWD/dialogs/peneditdialog.cpp \
            $$PWD/delegates/pendelegate.cpp \
-           $$PWD/editors/peneditor.cpp
+           $$PWD/editors/peneditor.cpp \
+           $$PWD/widgets/doubleframe.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -292,4 +294,5 @@ FORMS += \
            $$PWD/dialogs/keysequenceeditdialog.ui \
            $$PWD/editors/keysequenceeditor.ui \
            $$PWD/dialogs/peneditdialog.ui \
-           $$PWD/editors/peneditor.ui
+           $$PWD/editors/peneditor.ui \
+           $$PWD/widgets/doubleframe.ui

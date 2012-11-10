@@ -1,6 +1,8 @@
 #include "peneditor.h"
 #include "ui_peneditor.h"
 
+#include <QPainter>
+
 #include "../dialogs/peneditdialog.h"
 
 PenEditor::PenEditor(QWidget *parent) :
@@ -37,6 +39,16 @@ void PenEditor::setValue(const QPen &aValue)
     mValue=aValue;
 
 
+
+    QPixmap aPenPixmap=QPixmap(16, 16);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setPen(mValue);
+    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
+    aPainter.end();
+
+    setIcon(QIcon(aPenPixmap));
 }
 
 void PenEditor::on_editButton_clicked()
