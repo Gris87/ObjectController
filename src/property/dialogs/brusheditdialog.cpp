@@ -50,28 +50,18 @@ void BrushEditDialog::resizeEvent(QResizeEvent *event)
 
 void BrushEditDialog::drawTexture()
 {
-
+    ui->textureIconLabel->setPixmap(QIcon(mBrush.texture()).pixmap(18));
 }
 
 void BrushEditDialog::drawTextureImage()
 {
-
+    ui->textureImageIconLabel->setPixmap(QIcon(QPixmap::fromImage(mBrush.textureImage())).pixmap(18));
 }
 
 void BrushEditDialog::drawBrush()
 {
     int aWidth=ui->resultLabel->width();
     int aHeight=ui->resultLabel->height();
-
-    if (aWidth<1)
-    {
-        aWidth=166;
-    }
-
-    if (aHeight<1)
-    {
-        aHeight=166;
-    }
 
     QPixmap aPixmap(aWidth, aHeight);
     aPixmap.fill(QColor(255, 255, 255));
@@ -268,35 +258,36 @@ void BrushEditDialog::updateProperties()
 
 
 
-    QString aStyle="[Unknown brush style]";
+    Qt::BrushStyle aStyle=mBrush.style();
+    QString aStyleStr="[Unknown brush style]";
 
-    switch (mBrush.style())
+    switch (aStyle)
     {
-        case Qt::NoBrush:                aStyle="NoBrush";                break;
-        case Qt::SolidPattern:           aStyle="SolidPattern";           break;
-        case Qt::Dense1Pattern:          aStyle="Dense1Pattern";          break;
-        case Qt::Dense2Pattern:          aStyle="Dense2Pattern";          break;
-        case Qt::Dense3Pattern:          aStyle="Dense3Pattern";          break;
-        case Qt::Dense4Pattern:          aStyle="Dense4Pattern";          break;
-        case Qt::Dense5Pattern:          aStyle="Dense5Pattern";          break;
-        case Qt::Dense6Pattern:          aStyle="Dense6Pattern";          break;
-        case Qt::Dense7Pattern:          aStyle="Dense7Pattern";          break;
-        case Qt::HorPattern:             aStyle="HorPattern";             break;
-        case Qt::VerPattern:             aStyle="VerPattern";             break;
-        case Qt::CrossPattern:           aStyle="CrossPattern";           break;
-        case Qt::BDiagPattern:           aStyle="BDiagPattern";           break;
-        case Qt::FDiagPattern:           aStyle="FDiagPattern";           break;
-        case Qt::DiagCrossPattern:       aStyle="DiagCrossPattern";       break;
-        case Qt::LinearGradientPattern:  aStyle="LinearGradientPattern";  break;
-        case Qt::RadialGradientPattern:  aStyle="RadialGradientPattern";  break;
-        case Qt::ConicalGradientPattern: aStyle="ConicalGradientPattern"; break;
-        case Qt::TexturePattern:         aStyle="TexturePattern";         break;
+        case Qt::NoBrush:                aStyleStr="NoBrush";                break;
+        case Qt::SolidPattern:           aStyleStr="SolidPattern";           break;
+        case Qt::Dense1Pattern:          aStyleStr="Dense1Pattern";          break;
+        case Qt::Dense2Pattern:          aStyleStr="Dense2Pattern";          break;
+        case Qt::Dense3Pattern:          aStyleStr="Dense3Pattern";          break;
+        case Qt::Dense4Pattern:          aStyleStr="Dense4Pattern";          break;
+        case Qt::Dense5Pattern:          aStyleStr="Dense5Pattern";          break;
+        case Qt::Dense6Pattern:          aStyleStr="Dense6Pattern";          break;
+        case Qt::Dense7Pattern:          aStyleStr="Dense7Pattern";          break;
+        case Qt::HorPattern:             aStyleStr="HorPattern";             break;
+        case Qt::VerPattern:             aStyleStr="VerPattern";             break;
+        case Qt::CrossPattern:           aStyleStr="CrossPattern";           break;
+        case Qt::BDiagPattern:           aStyleStr="BDiagPattern";           break;
+        case Qt::FDiagPattern:           aStyleStr="FDiagPattern";           break;
+        case Qt::DiagCrossPattern:       aStyleStr="DiagCrossPattern";       break;
+        case Qt::LinearGradientPattern:  aStyleStr="LinearGradientPattern";  break;
+        case Qt::RadialGradientPattern:  aStyleStr="RadialGradientPattern";  break;
+        case Qt::ConicalGradientPattern: aStyleStr="ConicalGradientPattern"; break;
+        case Qt::TexturePattern:         aStyleStr="TexturePattern";         break;
     }
 
     QMatrix aMatrix=mBrush.matrix();
     QTransform aTransform=mBrush.transform();
 
-    ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyle));
+    ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyleStr));
     mColorArea->setColor(mBrush.color());
 
     ui->matrixEdit->setText(
@@ -338,6 +329,39 @@ void BrushEditDialog::updateProperties()
                               );
 
 
+
+    ui->colorWidget->setVisible(
+                                aStyle==Qt::SolidPattern
+                                ||
+                                aStyle==Qt::Dense1Pattern
+                                ||
+                                aStyle==Qt::Dense2Pattern
+                                ||
+                                aStyle==Qt::Dense3Pattern
+                                ||
+                                aStyle==Qt::Dense4Pattern
+                                ||
+                                aStyle==Qt::Dense5Pattern
+                                ||
+                                aStyle==Qt::Dense6Pattern
+                                ||
+                                aStyle==Qt::Dense7Pattern
+                                ||
+                                aStyle==Qt::HorPattern
+                                ||
+                                aStyle==Qt::VerPattern
+                                ||
+                                aStyle==Qt::CrossPattern
+                                ||
+                                aStyle==Qt::BDiagPattern
+                                ||
+                                aStyle==Qt::FDiagPattern
+                                ||
+                                aStyle==Qt::DiagCrossPattern
+                               );
+
+    ui->textureWidget->setVisible(aStyle==Qt::TexturePattern);
+    ui->matrixWidget->setVisible(aStyle!=Qt::NoBrush);
 
     ui->styleComboBox->blockSignals(false);
     mColorArea->blockSignals(false);
