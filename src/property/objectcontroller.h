@@ -71,6 +71,9 @@ protected:
     virtual CustomDelegate* createPenDelegate();
     virtual CustomDelegate* createTextLengthDelegate();
     virtual CustomDelegate* createTextFormatDelegate();
+    virtual CustomDelegate* createMatrixDelegate();
+    virtual CustomDelegate* createTransformDelegate();
+    virtual CustomDelegate* createMatrix4x4Delegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

@@ -59,6 +59,9 @@ public:
     CustomDelegate*       penDelegate();
     CustomDelegate*       textLengthDelegate();
     CustomDelegate*       textFormatDelegate();
+    CustomDelegate*       matrixDelegate();
+    CustomDelegate*       transformDelegate();
+    CustomDelegate*       matrix4x4Delegate();
 
 protected:
     ObjectController     *mController;
@@ -99,6 +102,9 @@ protected:
     CustomDelegate       *mPenDelegate;
     CustomDelegate       *mTextLengthDelegate;
     CustomDelegate       *mTextFormatDelegate;
+    CustomDelegate       *mMatrixDelegate;
+    CustomDelegate       *mTransformDelegate;
+    CustomDelegate       *mMatrix4x4Delegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

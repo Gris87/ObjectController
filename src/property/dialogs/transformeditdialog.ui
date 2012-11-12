@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TransformEditDialog</class>
+ <widget class="QDialog" name="TransformEditDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>128</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Transform editor</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>4</number>
+   </property>
+   <property name="margin">
+    <number>4</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="matrixLabel">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Matrix:</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QGridLayout" name="gridLayout">
+     <item row="2" column="1">
+      <widget class="QDoubleSpinBox" name="m32SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QDoubleSpinBox" name="m31SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QDoubleSpinBox" name="m12SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="0">
+      <widget class="QDoubleSpinBox" name="m11SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QDoubleSpinBox" name="m22SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QDoubleSpinBox" name="m33SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QDoubleSpinBox" name="m21SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="2">
+      <widget class="QDoubleSpinBox" name="m23SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="2">
+      <widget class="QDoubleSpinBox" name="m13SpinBox">
+       <property name="decimals">
+        <number>6</number>
+       </property>
+       <property name="minimum">
+        <double>-2147483647.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>2147483647.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>4</number>
+     </property>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="okButton">
+       <property name="text">
+        <string>OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="text">
+        <string>Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>m11SpinBox</tabstop>
+  <tabstop>m12SpinBox</tabstop>
+  <tabstop>m13SpinBox</tabstop>
+  <tabstop>m21SpinBox</tabstop>
+  <tabstop>m22SpinBox</tabstop>
+  <tabstop>m23SpinBox</tabstop>
+  <tabstop>m31SpinBox</tabstop>
+  <tabstop>m32SpinBox</tabstop>
+  <tabstop>m33SpinBox</tabstop>
+  <tabstop>okButton</tabstop>
+  <tabstop>cancelButton</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

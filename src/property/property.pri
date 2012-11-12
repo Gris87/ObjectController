@@ -123,7 +123,16 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/editors/textlengtheditor.h \
            $$PWD/delegates/textformatdelegate.h \
            $$PWD/dialogs/textformateditdialog.h \
-           $$PWD/editors/textformateditor.h
+           $$PWD/editors/textformateditor.h \
+           $$PWD/dialogs/matrixeditdialog.h \
+           $$PWD/dialogs/matrix4x4editdialog.h \
+           $$PWD/dialogs/transformeditdialog.h \
+           $$PWD/editors/matrixeditor.h \
+           $$PWD/editors/matrix4x4editor.h \
+           $$PWD/editors/transformeditor.h \
+           $$PWD/delegates/matrix4x4delegate.h \
+           $$PWD/delegates/transformdelegate.h \
+           $$PWD/delegates/matrixdelegate.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -241,7 +250,16 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/editors/textlengtheditor.cpp \
            $$PWD/delegates/textformatdelegate.cpp \
            $$PWD/dialogs/textformateditdialog.cpp \
-           $$PWD/editors/textformateditor.cpp
+           $$PWD/editors/textformateditor.cpp \
+           $$PWD/dialogs/matrixeditdialog.cpp \
+           $$PWD/dialogs/matrix4x4editdialog.cpp \
+           $$PWD/dialogs/transformeditdialog.cpp \
+           $$PWD/editors/matrixeditor.cpp \
+           $$PWD/editors/matrix4x4editor.cpp \
+           $$PWD/editors/transformeditor.cpp \
+           $$PWD/delegates/matrixdelegate.cpp \
+           $$PWD/delegates/matrix4x4delegate.cpp \
+           $$PWD/delegates/transformdelegate.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -311,4 +329,10 @@ FORMS += \
            $$PWD/dialogs/textlengtheditdialog.ui \
            $$PWD/editors/textlengtheditor.ui \
            $$PWD/dialogs/textformateditdialog.ui \
-           $$PWD/editors/textformateditor.ui
+           $$PWD/editors/textformateditor.ui \
+           $$PWD/dialogs/matrix4x4editdialog.ui \
+           $$PWD/dialogs/transformeditdialog.ui \
+           $$PWD/dialogs/matrixeditdialog.ui \
+           $$PWD/editors/matrix4x4editor.ui \
+           $$PWD/editors/transformeditor.ui \
+           $$PWD/editors/matrixeditor.ui

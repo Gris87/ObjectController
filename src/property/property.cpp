@@ -835,9 +835,9 @@ QString Property::valueToString(const QTransform &aValue, PropertyTreeWidgetItem
 
 QString Property::valueToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    qreal matrix[16];
+    qreal aMatrix[16];
 
-    aValue.copyDataTo(matrix);
+    aValue.copyDataTo(aMatrix);
 
     QString res="[";
 
@@ -857,7 +857,7 @@ QString Property::valueToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem
                 res.append(", ");
             }
 
-            res.append(QString::number(matrix[i*4+j]));
+            res.append(QString::number(aMatrix[i*4+j]));
         }
 
         res.append(")");
@@ -1828,18 +1828,33 @@ CustomDelegate* Property::delegateForValue(const QTextFormat &/*aValue*/, Proper
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QMatrix &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QMatrix &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->matrixDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QTransform &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QTransform &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->transformDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QMatrix4x4 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QMatrix4x4 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->matrix4x4Delegate();
+    }
+
     return 0;
 }
 
@@ -1863,23 +1878,13 @@ CustomDelegate* Property::delegateForValue(const QQuaternion &/*aValue*/, Proper
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(void * /*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(void * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mIsWritable)
-    {
-
-    }
-
     return 0;
 }
 

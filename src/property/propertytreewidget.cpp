@@ -53,6 +53,9 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mPenDelegate         = mController->createPenDelegate();
     mTextLengthDelegate  = mController->createTextLengthDelegate();
     mTextFormatDelegate  = mController->createTextFormatDelegate();
+    mMatrixDelegate      = mController->createMatrixDelegate();
+    mTransformDelegate   = mController->createTransformDelegate();
+    mMatrix4x4Delegate   = mController->createMatrix4x4Delegate();
 
     //----------------------------------------------------------------------
 
@@ -417,4 +420,19 @@ CustomDelegate* PropertyTreeWidget::textLengthDelegate()
 CustomDelegate* PropertyTreeWidget::textFormatDelegate()
 {
     return mTextFormatDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::matrixDelegate()
+{
+    return mMatrixDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::transformDelegate()
+{
+    return mTransformDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::matrix4x4Delegate()
+{
+    return mMatrix4x4Delegate;
 }

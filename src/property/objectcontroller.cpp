@@ -37,6 +37,9 @@
 #include "delegates/pendelegate.h"
 #include "delegates/textlengthdelegate.h"
 #include "delegates/textformatdelegate.h"
+#include "delegates/matrixdelegate.h"
+#include "delegates/transformdelegate.h"
+#include "delegates/matrix4x4delegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -382,4 +385,19 @@ CustomDelegate* ObjectController::createTextLengthDelegate()
 CustomDelegate* ObjectController::createTextFormatDelegate()
 {
     return new TextFormatDelegate(this);
+}
+
+CustomDelegate* ObjectController::createMatrixDelegate()
+{
+    return new MatrixDelegate(this);
+}
+
+CustomDelegate* ObjectController::createTransformDelegate()
+{
+    return new TransformDelegate(this);
+}
+
+CustomDelegate* ObjectController::createMatrix4x4Delegate()
+{
+    return new Matrix4x4Delegate(this);
 }
