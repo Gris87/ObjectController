@@ -1333,8 +1333,6 @@ void BitEditor::keyPressEvent(QKeyEvent *event)
             {
                 char aKey=aKeyText.at(0).toLatin1();
 
-                // TODO: Handle pressing edit buttons
-
                 if (mCursorAtTheLeft)
                 {
                     if (

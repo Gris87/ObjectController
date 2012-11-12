@@ -1822,7 +1822,7 @@ CustomDelegate* Property::delegateForValue(const QTextFormat &/*aValue*/, Proper
 {
     if (mIsWritable)
     {
-
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->textFormatDelegate();
     }
 
     return 0;

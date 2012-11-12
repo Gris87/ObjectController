@@ -36,6 +36,7 @@
 #include "delegates/keysequencedelegate.h"
 #include "delegates/pendelegate.h"
 #include "delegates/textlengthdelegate.h"
+#include "delegates/textformatdelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -376,4 +377,9 @@ CustomDelegate* ObjectController::createPenDelegate()
 CustomDelegate* ObjectController::createTextLengthDelegate()
 {
     return new TextLengthDelegate(this);
+}
+
+CustomDelegate* ObjectController::createTextFormatDelegate()
+{
+    return new TextFormatDelegate(this);
 }

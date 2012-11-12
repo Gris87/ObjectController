@@ -120,7 +120,10 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/doubleframe.h \
            $$PWD/dialogs/textlengtheditdialog.h \
            $$PWD/delegates/textlengthdelegate.h \
-           $$PWD/editors/textlengtheditor.h
+           $$PWD/editors/textlengtheditor.h \
+           $$PWD/delegates/textformatdelegate.h \
+           $$PWD/dialogs/textformateditdialog.h \
+           $$PWD/editors/textformateditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -235,7 +238,10 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/doubleframe.cpp \
            $$PWD/dialogs/textlengtheditdialog.cpp \
            $$PWD/delegates/textlengthdelegate.cpp \
-           $$PWD/editors/textlengtheditor.cpp
+           $$PWD/editors/textlengtheditor.cpp \
+           $$PWD/delegates/textformatdelegate.cpp \
+           $$PWD/dialogs/textformateditdialog.cpp \
+           $$PWD/editors/textformateditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -303,4 +309,6 @@ FORMS += \
            $$PWD/editors/peneditor.ui \
            $$PWD/widgets/doubleframe.ui \
            $$PWD/dialogs/textlengtheditdialog.ui \
-           $$PWD/editors/textlengtheditor.ui
+           $$PWD/editors/textlengtheditor.ui \
+           $$PWD/dialogs/textformateditdialog.ui \
+           $$PWD/editors/textformateditor.ui

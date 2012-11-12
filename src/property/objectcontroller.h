@@ -70,6 +70,7 @@ protected:
     virtual CustomDelegate* createKeySequenceDelegate();
     virtual CustomDelegate* createPenDelegate();
     virtual CustomDelegate* createTextLengthDelegate();
+    virtual CustomDelegate* createTextFormatDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

@@ -58,6 +58,7 @@ public:
     CustomDelegate*       keySequenceDelegate();
     CustomDelegate*       penDelegate();
     CustomDelegate*       textLengthDelegate();
+    CustomDelegate*       textFormatDelegate();
 
 protected:
     ObjectController     *mController;
@@ -97,6 +98,7 @@ protected:
     CustomDelegate       *mKeySequenceDelegate;
     CustomDelegate       *mPenDelegate;
     CustomDelegate       *mTextLengthDelegate;
+    CustomDelegate       *mTextFormatDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

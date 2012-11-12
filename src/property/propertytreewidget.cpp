@@ -52,6 +52,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mKeySequenceDelegate = mController->createKeySequenceDelegate();
     mPenDelegate         = mController->createPenDelegate();
     mTextLengthDelegate  = mController->createTextLengthDelegate();
+    mTextFormatDelegate  = mController->createTextFormatDelegate();
 
     //----------------------------------------------------------------------
 
@@ -411,4 +412,9 @@ CustomDelegate* PropertyTreeWidget::penDelegate()
 CustomDelegate* PropertyTreeWidget::textLengthDelegate()
 {
     return mTextLengthDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::textFormatDelegate()
+{
+    return mTextFormatDelegate;
 }
