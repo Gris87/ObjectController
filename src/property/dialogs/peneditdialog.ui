@@ -83,7 +83,7 @@
           <item>
            <widget class="QLabel" name="brushLabel">
             <property name="text">
-             <string>Brush:</string>
+             <string>Brush</string>
             </property>
            </widget>
           </item>

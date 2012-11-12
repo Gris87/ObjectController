@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>271</width>
-    <height>205</height>
+    <width>640</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,31 +42,269 @@
       </widget>
      </item>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_2">
-       <property name="spacing">
-        <number>4</number>
+      <widget class="QWidget" name="propertiesWidget" native="true">
+       <property name="minimumSize">
+        <size>
+         <width>230</width>
+         <height>0</height>
+        </size>
        </property>
-       <item>
-        <widget class="QLabel" name="typeLabel">
-         <property name="text">
-          <string>Type:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>40</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
+       <property name="maximumSize">
+        <size>
+         <width>230</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="styleLabel">
+          <property name="text">
+           <string>Type:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="styleComboBox">
+          <item>
+           <property name="text">
+            <string>NoBrush</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>SolidPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense1Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense2Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense3Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense4Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense5Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense6Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Dense7Pattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>HorPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>VerPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>CrossPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>BDiagPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>FDiagPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>DiagCrossPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>LinearGradientPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>RadialGradientPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>ConicalGradientPattern</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>TexturePattern</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="colorLayout">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="colorLabel">
+            <property name="text">
+             <string>Color</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="2">
+           <widget class="QToolButton" name="textureButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="textureIconLabel">
+            <property name="text">
+             <string>icon</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="textureLabel">
+            <property name="text">
+             <string>Texture</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="textureImageIconLabel">
+            <property name="text">
+             <string>icon</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="textureImageLabel">
+            <property name="text">
+             <string>TextureImage</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QToolButton" name="textureImageButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QLabel" name="matrixLabel">
+            <property name="text">
+             <string>Matrix</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QToolButton" name="matrixButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="matrixEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="transformLabel">
+            <property name="text">
+             <string>Transform</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="transformEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QToolButton" name="transformButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
      </item>
     </layout>
    </item>
