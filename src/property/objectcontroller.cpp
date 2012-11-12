@@ -40,6 +40,10 @@
 #include "delegates/matrixdelegate.h"
 #include "delegates/transformdelegate.h"
 #include "delegates/matrix4x4delegate.h"
+#include "delegates/vector2ddelegate.h"
+#include "delegates/vector3ddelegate.h"
+#include "delegates/vector4ddelegate.h"
+#include "delegates/quaterniondelegate.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
@@ -401,3 +405,24 @@ CustomDelegate* ObjectController::createMatrix4x4Delegate()
 {
     return new Matrix4x4Delegate(this);
 }
+
+CustomDelegate* ObjectController::createVector2DDelegate()
+{
+    return new Vector2DDelegate(this);
+}
+
+CustomDelegate* ObjectController::createVector3DDelegate()
+{
+    return new Vector3DDelegate(this);
+}
+
+CustomDelegate* ObjectController::createVector4DDelegate()
+{
+    return new Vector4DDelegate(this);
+}
+
+CustomDelegate* ObjectController::createQuaternionDelegate()
+{
+    return new QuaternionDelegate(this);
+}
+

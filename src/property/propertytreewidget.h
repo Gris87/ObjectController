@@ -62,6 +62,10 @@ public:
     CustomDelegate*       matrixDelegate();
     CustomDelegate*       transformDelegate();
     CustomDelegate*       matrix4x4Delegate();
+    CustomDelegate*       vector2DDelegate();
+    CustomDelegate*       vector3DDelegate();
+    CustomDelegate*       vector4DDelegate();
+    CustomDelegate*       quaternionDelegate();
 
 protected:
     ObjectController     *mController;
@@ -105,6 +109,10 @@ protected:
     CustomDelegate       *mMatrixDelegate;
     CustomDelegate       *mTransformDelegate;
     CustomDelegate       *mMatrix4x4Delegate;
+    CustomDelegate       *mVector2DDelegate;
+    CustomDelegate       *mVector3DDelegate;
+    CustomDelegate       *mVector4DDelegate;
+    CustomDelegate       *mQuaternionDelegate;
 
     void keyPressEvent(QKeyEvent *event);
     void mousePressEvent(QMouseEvent *event);

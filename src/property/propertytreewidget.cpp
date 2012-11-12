@@ -56,6 +56,10 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
     mMatrixDelegate      = mController->createMatrixDelegate();
     mTransformDelegate   = mController->createTransformDelegate();
     mMatrix4x4Delegate   = mController->createMatrix4x4Delegate();
+    mVector2DDelegate    = mController->createVector2DDelegate();
+    mVector3DDelegate    = mController->createVector3DDelegate();
+    mVector4DDelegate    = mController->createVector4DDelegate();
+    mQuaternionDelegate  = mController->createQuaternionDelegate();
 
     //----------------------------------------------------------------------
 
@@ -435,4 +439,24 @@ CustomDelegate* PropertyTreeWidget::transformDelegate()
 CustomDelegate* PropertyTreeWidget::matrix4x4Delegate()
 {
     return mMatrix4x4Delegate;
+}
+
+CustomDelegate* PropertyTreeWidget::vector2DDelegate()
+{
+    return mVector2DDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::vector3DDelegate()
+{
+    return mVector3DDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::vector4DDelegate()
+{
+    return mVector4DDelegate;
+}
+
+CustomDelegate* PropertyTreeWidget::quaternionDelegate()
+{
+    return mQuaternionDelegate;
 }

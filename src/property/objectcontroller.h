@@ -74,6 +74,10 @@ protected:
     virtual CustomDelegate* createMatrixDelegate();
     virtual CustomDelegate* createTransformDelegate();
     virtual CustomDelegate* createMatrix4x4Delegate();
+    virtual CustomDelegate* createVector2DDelegate();
+    virtual CustomDelegate* createVector3DDelegate();
+    virtual CustomDelegate* createVector4DDelegate();
+    virtual CustomDelegate* createQuaternionDelegate();
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);

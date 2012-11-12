@@ -1858,23 +1858,43 @@ CustomDelegate* Property::delegateForValue(const QMatrix4x4 &/*aValue*/, Propert
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QVector2D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QVector2D &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->vector2DDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QVector3D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QVector3D &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->vector3DDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QVector4D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QVector4D &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->vector4DDelegate();
+    }
+
     return 0;
 }
 
-CustomDelegate* Property::delegateForValue(const QQuaternion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValue(const QQuaternion &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
+    if (mIsWritable)
+    {
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->quaternionDelegate();
+    }
+
     return 0;
 }
 

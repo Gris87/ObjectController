@@ -132,7 +132,19 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/editors/transformeditor.h \
            $$PWD/delegates/matrix4x4delegate.h \
            $$PWD/delegates/transformdelegate.h \
-           $$PWD/delegates/matrixdelegate.h
+           $$PWD/delegates/matrixdelegate.h \
+           $$PWD/dialogs/vector4deditdialog.h \
+           $$PWD/dialogs/vector3deditdialog.h \
+           $$PWD/dialogs/vector2deditdialog.h \
+           $$PWD/dialogs/quaternioneditdialog.h \
+           $$PWD/editors/vector4deditor.h \
+           $$PWD/editors/vector3deditor.h \
+           $$PWD/editors/vector2deditor.h \
+           $$PWD/editors/quaternioneditor.h \
+           $$PWD/delegates/vector4ddelegate.h \
+           $$PWD/delegates/vector3ddelegate.h \
+           $$PWD/delegates/vector2ddelegate.h \
+           $$PWD/delegates/quaterniondelegate.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -259,7 +271,19 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/editors/transformeditor.cpp \
            $$PWD/delegates/matrixdelegate.cpp \
            $$PWD/delegates/matrix4x4delegate.cpp \
-           $$PWD/delegates/transformdelegate.cpp
+           $$PWD/delegates/transformdelegate.cpp \
+           $$PWD/dialogs/vector4deditdialog.cpp \
+           $$PWD/dialogs/vector3deditdialog.cpp \
+           $$PWD/dialogs/vector2deditdialog.cpp \
+           $$PWD/dialogs/quaternioneditdialog.cpp \
+           $$PWD/editors/vector4deditor.cpp \
+           $$PWD/editors/vector3deditor.cpp \
+           $$PWD/editors/vector2deditor.cpp \
+           $$PWD/editors/quaternioneditor.cpp \
+           $$PWD/delegates/quaterniondelegate.cpp \
+           $$PWD/delegates/vector4ddelegate.cpp \
+           $$PWD/delegates/vector3ddelegate.cpp \
+           $$PWD/delegates/vector2ddelegate.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -335,4 +359,12 @@ FORMS += \
            $$PWD/dialogs/matrixeditdialog.ui \
            $$PWD/editors/matrix4x4editor.ui \
            $$PWD/editors/transformeditor.ui \
-           $$PWD/editors/matrixeditor.ui
+           $$PWD/editors/matrixeditor.ui \
+           $$PWD/dialogs/vector4deditdialog.ui \
+           $$PWD/dialogs/vector3deditdialog.ui \
+           $$PWD/dialogs/vector2deditdialog.ui \
+           $$PWD/dialogs/quaternioneditdialog.ui \
+           $$PWD/editors/vector4deditor.ui \
+           $$PWD/editors/vector3deditor.ui \
+           $$PWD/editors/vector2deditor.ui \
+           $$PWD/editors/quaternioneditor.ui
