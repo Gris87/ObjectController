@@ -39,6 +39,9 @@ IconEditDialog::IconEditDialog(QIcon aIcon, QWidget *parent) :
             aEntry.paintframe    = new PaintFrame(aIcon.pixmap(128, 128, aEntry.mode, aEntry.state), false, aWidget);
 
             aEntry.checkbox->setChecked(aIcon.availableSizes(aEntry.mode, aEntry.state).length()>0);
+            aEntry.paintframe->setEnabled(aEntry.checkbox->isChecked());
+
+            connect(aEntry.checkbox, SIGNAL(toggled(bool)), this, SLOT(useCheckBoxToggled(bool)));
 
             aLayout->setContentsMargins(4, 4, 4, 4);
             aLayout->addWidget(aEntry.checkbox);
@@ -80,6 +83,11 @@ void IconEditDialog::on_okButton_clicked()
 void IconEditDialog::on_cancelButton_clicked()
 {
     reject();
+}
+
+void IconEditDialog::useCheckBoxToggled(bool aChecked)
+{
+    ((PaintFrame *)sender()->parent()->children()[2])->setEnabled(aChecked);
 }
 
 QString IconEditDialog::modeToString(const QIcon::Mode &aMode) const

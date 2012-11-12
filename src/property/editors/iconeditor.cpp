@@ -35,6 +35,8 @@ void IconEditor::setIcon(const QIcon &aIcon)
 void IconEditor::setValue(const QIcon &aValue)
 {
     mValue=aValue;
+
+    setIcon(mValue);
 }
 
 void IconEditor::on_editButton_clicked()

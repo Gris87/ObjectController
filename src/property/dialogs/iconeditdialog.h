@@ -38,6 +38,8 @@ private:
     QString stateToString(const QIcon::State &aState) const;
 
 private slots:
+    void useCheckBoxToggled(bool aChecked);
+
     void on_okButton_clicked();
     void on_cancelButton_clicked();
 };

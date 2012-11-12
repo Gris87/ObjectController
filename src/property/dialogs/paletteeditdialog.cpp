@@ -37,6 +37,8 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
             ui->colorsTableWidget->setCellWidget(i, j, aArea);
         }
     }
+
+    // TODO: Demonstrate palette
 }
 
 PaletteEditDialog::~PaletteEditDialog()
