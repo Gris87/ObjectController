@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include <QPalette>
+#include <QMdiSubWindow>
 
 namespace Ui {
 class PaletteEditDialog;
@@ -19,12 +20,28 @@ public:
 
     QPalette resultValue() const;
 
+protected:
+    void resizeEvent(QResizeEvent *event);
+
 private:
     Ui::PaletteEditDialog *ui;
+    QMdiSubWindow         *mDemoWidget;
+
+    void calculateColor(int aRow, QColor aColor);
 
 private slots:
+    void fastColorChanged(QColor aColor);
+    void colorChanged(QColor aColor);
+    void updateColumns();
+    void updateDemo();
+
     void on_okButton_clicked();
     void on_cancelButton_clicked();
+    void on_calculateDetailsRadioButton_toggled(bool checked);
+    void on_showDetailsRadioButton_toggled(bool checked);
+    void on_enabledRadioButton_toggled(bool checked);
+    void on_disabledRadioButton_toggled(bool checked);
+    void on_inactiveRadioButton_toggled(bool checked);
 };
 
 #endif // PALETTEEDITDIALOG_H

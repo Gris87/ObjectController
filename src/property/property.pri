@@ -144,7 +144,8 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/vector4ddelegate.h \
            $$PWD/delegates/vector3ddelegate.h \
            $$PWD/delegates/vector2ddelegate.h \
-           $$PWD/delegates/quaterniondelegate.h
+           $$PWD/delegates/quaterniondelegate.h \
+           $$PWD/widgets/palettedemowidget.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -283,7 +284,8 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/quaterniondelegate.cpp \
            $$PWD/delegates/vector4ddelegate.cpp \
            $$PWD/delegates/vector3ddelegate.cpp \
-           $$PWD/delegates/vector2ddelegate.cpp
+           $$PWD/delegates/vector2ddelegate.cpp \
+           $$PWD/widgets/palettedemowidget.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -367,4 +369,5 @@ FORMS += \
            $$PWD/editors/vector4deditor.ui \
            $$PWD/editors/vector3deditor.ui \
            $$PWD/editors/vector2deditor.ui \
-           $$PWD/editors/quaternioneditor.ui
+           $$PWD/editors/quaternioneditor.ui \
+           $$PWD/widgets/palettedemowidget.ui

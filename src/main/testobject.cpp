@@ -83,7 +83,7 @@ TestObject::TestObject(QObject *parent) :
     mBrush=QBrush(aGradient);
 
     mColor.setRgb(128, 0, 255, 128);
-    mPalette.setColor(QPalette::Base, QColor(1, 2, 3));
+    mPalette.setColor(QPalette::Light, QColor(1, 2, 3));
     mIcon=QIcon(mPixmap);
     mImage=mPixmap.toImage();
     mPolygon.setPoints(3, 10, 40, 30, 97, 43, 16);
