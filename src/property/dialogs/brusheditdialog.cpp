@@ -25,10 +25,40 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
 
     connect(mColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
 
+
+
+    Qt::BrushStyle aStyle=mBrush.style();
+
+    if (aStyle==Qt::LinearGradientPattern)
+    {
+        mLinearGradient=*(QLinearGradient *)mBrush.gradient();
+    }
+    else
+    if (aStyle==Qt::RadialGradientPattern)
+    {
+        mRadialGradient=*(QRadialGradient *)mBrush.gradient();
+    }
+    else
+    if (aStyle==Qt::ConicalGradientPattern)
+    {
+        mConicalGradient=*(QConicalGradient *)mBrush.gradient();
+    }
+
+    if (aStyle==Qt::TexturePattern)
+    {
+        mTexture=mBrush.texture();
+    }
+    else
+    {
+        mTexture=QPixmap(32, 32);
+        mTexture.fill(QColor(255, 255, 255));
+    }
+
+
+
     updateProperties();
 
     drawTexture();
-    drawTextureImage();
     drawBrush();
 }
 
@@ -50,12 +80,7 @@ void BrushEditDialog::resizeEvent(QResizeEvent *event)
 
 void BrushEditDialog::drawTexture()
 {
-    ui->textureIconLabel->setPixmap(QIcon(mBrush.texture()).pixmap(18));
-}
-
-void BrushEditDialog::drawTextureImage()
-{
-    ui->textureImageIconLabel->setPixmap(QIcon(QPixmap::fromImage(mBrush.textureImage())).pixmap(18));
+    ui->textureIconLabel->setPixmap(QIcon(mTexture).pixmap(18));
 }
 
 void BrushEditDialog::drawBrush()
@@ -162,22 +187,22 @@ void BrushEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue
     else
     if (aValue=="LinearGradientPattern")
     {
-        mBrush.setStyle(Qt::LinearGradientPattern);
+        copyFromBrush(QBrush(mLinearGradient));
     }
     else
     if (aValue=="RadialGradientPattern")
     {
-        mBrush.setStyle(Qt::RadialGradientPattern);
+        copyFromBrush(QBrush(mRadialGradient));
     }
     else
     if (aValue=="ConicalGradientPattern")
     {
-        mBrush.setStyle(Qt::ConicalGradientPattern);
+        copyFromBrush(QBrush(mConicalGradient));
     }
     else
     if (aValue=="TexturePattern")
     {
-        mBrush.setStyle(Qt::TexturePattern);
+        copyFromBrush(QBrush(mTexture));
     }
     else
     {
@@ -201,38 +226,10 @@ void BrushEditDialog::on_textureButton_clicked()
 
     if (dialog.exec())
     {
-        mBrush.setTexture(dialog.resultValue());
+        mTexture=dialog.resultValue();
+        mBrush.setTexture(mTexture);
 
         drawTexture();
-        drawTextureImage();
-        drawBrush();
-    }
-}
-
-void BrushEditDialog::on_textureImageButton_clicked()
-{
-    PaintDialog dialog(QPixmap::fromImage(mBrush.textureImage()), false, this);
-
-    if (dialog.exec())
-    {
-        mBrush.setTextureImage(dialog.resultValue().toImage());
-
-        drawTexture();
-        drawTextureImage();
-        drawBrush();
-    }
-}
-
-void BrushEditDialog::on_matrixButton_clicked()
-{
-    MatrixEditDialog dialog(mBrush.matrix(), this);
-
-    if (dialog.exec())
-    {
-        mBrush.setMatrix(dialog.resultValue());
-
-        updateProperties();
-
         drawBrush();
     }
 }
@@ -249,6 +246,14 @@ void BrushEditDialog::on_transformButton_clicked()
 
         drawBrush();
     }
+}
+
+void BrushEditDialog::copyFromBrush(QBrush aBrush)
+{
+    aBrush.setColor(mBrush.color());
+    aBrush.setTransform(mBrush.transform());
+
+    mBrush=aBrush;
 }
 
 void BrushEditDialog::updateProperties()
@@ -290,22 +295,6 @@ void BrushEditDialog::updateProperties()
     ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyleStr));
     mColorArea->setColor(mBrush.color());
 
-    ui->matrixEdit->setText(
-                            "[("+
-                            QString::number(aMatrix.m11())+
-                            ", "+
-                            QString::number(aMatrix.m12())+
-                            "), ("+
-                            QString::number(aMatrix.m21())+
-                            ", "+
-                            QString::number(aMatrix.m22())+
-                            "); ("+
-                            QString::number(aMatrix.dx())+
-                            ", "+
-                            QString::number(aMatrix.dy())+
-                            ")]"
-                           );
-
     ui->transformEdit->setText(
                                "[("+
                                QString::number(aTransform.m11())+
@@ -327,8 +316,6 @@ void BrushEditDialog::updateProperties()
                                QString::number(aTransform.m33())+
                                ")]"
                               );
-
-
 
     ui->colorWidget->setVisible(
                                 aStyle==Qt::SolidPattern
@@ -361,7 +348,7 @@ void BrushEditDialog::updateProperties()
                                );
 
     ui->textureWidget->setVisible(aStyle==Qt::TexturePattern);
-    ui->matrixWidget->setVisible(aStyle!=Qt::NoBrush);
+    ui->transformWidget->setVisible(aStyle!=Qt::NoBrush);
 
     ui->styleComboBox->blockSignals(false);
     mColorArea->blockSignals(false);

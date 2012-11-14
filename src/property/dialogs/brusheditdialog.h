@@ -28,10 +28,14 @@ private:
     Ui::BrushEditDialog *ui;
     QBrush               mBrush;
     ColorArea           *mColorArea;
+    QLinearGradient      mLinearGradient;
+    QRadialGradient      mRadialGradient;
+    QConicalGradient     mConicalGradient;
+    QPixmap              mTexture;
 
+    void copyFromBrush(QBrush aBrush);
     void updateProperties();
     void drawTexture();
-    void drawTextureImage();
     void drawBrush();
 
 private slots:
@@ -41,8 +45,6 @@ private slots:
     void on_cancelButton_clicked();
     void on_styleComboBox_currentIndexChanged(const QString &aValue);
     void on_textureButton_clicked();
-    void on_textureImageButton_clicked();
-    void on_matrixButton_clicked();
     void on_transformButton_clicked();
 };
 
