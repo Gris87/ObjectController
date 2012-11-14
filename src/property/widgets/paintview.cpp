@@ -7,7 +7,8 @@ PaintView::PaintView(QPixmap aPixmap, QWidget *parent) :
     QGraphicsView(parent)
 {
     QGraphicsScene *aScene=new QGraphicsScene(0, 0, aPixmap.width(), aPixmap.height());
-    mPixmapItem=aScene->addPixmap(aPixmap);
+    mPixmapItem=aScene->addPixmap(QPixmap());
+    putImage(aPixmap);
     setScene(aScene);
 
     mStartX=0;
@@ -118,12 +119,12 @@ void PaintView::drawLine(int x1, int y1, int x2, int y2, const QColor &aColor, b
     QPointF aFirstPointF=mapToScene(x1, y1);
     QPointF aSecondPointF=mapToScene(x2, y2);
 
-    QPoint aFirstPoint=mPixmapItem->mapFromScene(aFirstPointF).toPoint();
-    QPoint aSecondPoint=mPixmapItem->mapFromScene(aSecondPointF).toPoint();
+    QPoint aFirstPoint=mPixmapItem->mapFromScene(aFirstPointF).toPoint()-QPoint(1, 1);
+    QPoint aSecondPoint=mPixmapItem->mapFromScene(aSecondPointF).toPoint()-QPoint(1, 1);
 
 
 
-    QPixmap aPixmap=mPixmapItem->pixmap();
+    QPixmap aPixmap=image();
 
     QPainter aPainter(&aPixmap);
 
@@ -182,7 +183,7 @@ void PaintView::decreaseLineWidth()
 
 void PaintView::resizeImage(QSize aNewSize)
 {
-    QPixmap aPixmap=mPixmapItem->pixmap().scaled(aNewSize);
+    QPixmap aPixmap=image().scaled(aNewSize);
 
     DrawUndoCommand *aCommand=new DrawUndoCommand(this, true, aPixmap);
     mUndoStack.push(aCommand);
@@ -190,19 +191,20 @@ void PaintView::resizeImage(QSize aNewSize)
 
 QPixmap PaintView::image() const
 {
-    return mPixmapItem->pixmap();
+    QPixmap aPixmap=mPixmapItem->pixmap();
+    return aPixmap.copy(1, 1, aPixmap.width()-2, aPixmap.height()-2);
 }
 
 void PaintView::setImage(const QPixmap &aImage)
 {
-    bool aSizeChanged=(mPixmapItem->pixmap().size()!=aImage.size());
+    bool aSizeChanged=(image().size()!=aImage.size());
 
-    mPixmapItem->setPixmap(aImage);
+    putImage(aImage);
     mUndoStack.clear();
 
     if (aSizeChanged)
     {
-        setSceneRect(0, 0, aImage.width(), aImage.height());
+        setSceneRect(0, 0, aImage.width()+2, aImage.height()+2);
     }
 
     resetTransform();
@@ -210,6 +212,21 @@ void PaintView::setImage(const QPixmap &aImage)
     verticalScrollBar()->setValue(0);
 
     mLineWidth=1;
+}
+
+void PaintView::putImage(const QPixmap &aImage)
+{
+    QPixmap aNewPixmap(aImage.width()+2, aImage.height()+2);
+    aNewPixmap.fill(QColor(255, 255, 255));
+
+    QPainter aPainter(&aNewPixmap);
+    aPainter.setPen(QPen(QBrush(QColor(128, 128, 128)), 1, Qt::DotLine));
+    aPainter.setBrush(Qt::NoBrush);
+    aPainter.drawRect(0, 0, aNewPixmap.width()-1, aNewPixmap.height()-1);
+    aPainter.drawPixmap(1, 1, aImage);
+    aPainter.end();
+
+    mPixmapItem->setPixmap(aNewPixmap);
 }
 
 QColor PaintView::firstColor() const
@@ -242,26 +259,26 @@ DrawUndoCommand::DrawUndoCommand(PaintView *aEditor, bool aDrawStart, QPixmap aN
     mEditor=aEditor;
     mDrawStart=aDrawStart;
     mNewPixmap=aNewPixmap;
-    mOldPixmap=aEditor->mPixmapItem->pixmap();
+    mOldPixmap=aEditor->image();
 }
 
 void DrawUndoCommand::undo()
 {
-    mEditor->mPixmapItem->setPixmap(mOldPixmap);
+    mEditor->putImage(mOldPixmap);
 
     if (mOldPixmap.size()!=mNewPixmap.size())
     {
-        mEditor->setSceneRect(0, 0, mOldPixmap.width(), mOldPixmap.height());
+        mEditor->setSceneRect(0, 0, mOldPixmap.width()+2, mOldPixmap.height()+2);
     }
 }
 
 void DrawUndoCommand::redo()
 {
-    mEditor->mPixmapItem->setPixmap(mNewPixmap);
+    mEditor->putImage(mNewPixmap);
 
     if (mOldPixmap.size()!=mNewPixmap.size())
     {
-        mEditor->setSceneRect(0, 0, mNewPixmap.width(), mNewPixmap.height());
+        mEditor->setSceneRect(0, 0, mNewPixmap.width()+2, mNewPixmap.height()+2);
     }
 }
 

@@ -19,6 +19,7 @@ public:
 
     QPixmap image() const;
     void setImage(const QPixmap &aImage);
+    void putImage(const QPixmap &aImage);
 
     QColor firstColor() const;
     void setFirstColor(const QColor &aColor);
