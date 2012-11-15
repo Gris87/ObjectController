@@ -425,6 +425,62 @@ void BrushEditDialog::on_linearY2SpinBox_valueChanged(double aValue)
     drawBrush();
 }
 
+void BrushEditDialog::on_radialCenterXSpinBox_valueChanged(double aValue)
+{
+    mRadialGradient.setCenter(aValue, ui->radialCenterYSpinBox->value());
+    copyFromBrush(QBrush(mRadialGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_radialCenterYSpinBox_valueChanged(double aValue)
+{
+    mRadialGradient.setCenter(ui->radialCenterXSpinBox->value(), aValue);
+    copyFromBrush(QBrush(mRadialGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_radialRadiusSpinBox_valueChanged(double aValue)
+{
+    mRadialGradient.setRadius(aValue);
+    copyFromBrush(QBrush(mRadialGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_radialFocalXSpinBox_valueChanged(double aValue)
+{
+    mRadialGradient.setFocalPoint(aValue, ui->radialFocalYSpinBox->value());
+    copyFromBrush(QBrush(mRadialGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_radialFocalYSpinBox_valueChanged(double aValue)
+{
+    mRadialGradient.setFocalPoint(ui->radialFocalXSpinBox->value(), aValue);
+    copyFromBrush(QBrush(mRadialGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_conicalCenterXSpinBox_valueChanged(double aValue)
+{
+    mConicalGradient.setCenter(aValue, ui->conicalCenterYSpinBox->value());
+    copyFromBrush(QBrush(mConicalGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_conicalCenterYSpinBox_valueChanged(double aValue)
+{
+    mConicalGradient.setCenter(ui->conicalCenterXSpinBox->value(), aValue);
+    copyFromBrush(QBrush(mConicalGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_conicalAngleSpinBox_valueChanged(double aValue)
+{
+    mConicalGradient.setAngle(aValue);
+    copyFromBrush(QBrush(mConicalGradient));
+    drawBrush();
+}
+
 void BrushEditDialog::on_textureButton_clicked()
 {
     PaintDialog dialog(mBrush.texture(), false, this);
@@ -496,7 +552,15 @@ void BrushEditDialog::updateGradient()
     ui->linearX1SpinBox->blockSignals(aLock); \
     ui->linearY1SpinBox->blockSignals(aLock); \
     ui->linearX2SpinBox->blockSignals(aLock); \
-    ui->linearY2SpinBox->blockSignals(aLock);
+    ui->linearY2SpinBox->blockSignals(aLock); \
+    ui->radialCenterXSpinBox->blockSignals(aLock); \
+    ui->radialCenterYSpinBox->blockSignals(aLock); \
+    ui->radialRadiusSpinBox->blockSignals(aLock); \
+    ui->radialFocalXSpinBox->blockSignals(aLock); \
+    ui->radialFocalYSpinBox->blockSignals(aLock); \
+    ui->conicalCenterXSpinBox->blockSignals(aLock); \
+    ui->conicalCenterYSpinBox->blockSignals(aLock); \
+    ui->conicalAngleSpinBox->blockSignals(aLock);
 
 void BrushEditDialog::updateProperties()
 {
@@ -550,6 +614,16 @@ void BrushEditDialog::updateProperties()
     ui->linearY1SpinBox->setValue(mLinearGradient.start().y());
     ui->linearX2SpinBox->setValue(mLinearGradient.finalStop().x());
     ui->linearY2SpinBox->setValue(mLinearGradient.finalStop().y());
+
+    ui->radialCenterXSpinBox->setValue(mRadialGradient.center().x());
+    ui->radialCenterYSpinBox->setValue(mRadialGradient.center().y());
+    ui->radialRadiusSpinBox->setValue(mRadialGradient.radius());
+    ui->radialFocalXSpinBox->setValue(mRadialGradient.focalPoint().x());
+    ui->radialFocalYSpinBox->setValue(mRadialGradient.focalPoint().y());
+
+    ui->conicalCenterXSpinBox->setValue(mConicalGradient.center().x());
+    ui->conicalCenterYSpinBox->setValue(mConicalGradient.center().y());
+    ui->conicalAngleSpinBox->setValue(mConicalGradient.angle());
 
 
 

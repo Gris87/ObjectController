@@ -55,6 +55,14 @@ private slots:
     void on_linearY1SpinBox_valueChanged(double aValue);
     void on_linearX2SpinBox_valueChanged(double aValue);
     void on_linearY2SpinBox_valueChanged(double aValue);
+    void on_radialCenterXSpinBox_valueChanged(double aValue);
+    void on_radialCenterYSpinBox_valueChanged(double aValue);
+    void on_radialRadiusSpinBox_valueChanged(double aValue);
+    void on_radialFocalXSpinBox_valueChanged(double aValue);
+    void on_radialFocalYSpinBox_valueChanged(double aValue);
+    void on_conicalCenterXSpinBox_valueChanged(double aValue);
+    void on_conicalCenterYSpinBox_valueChanged(double aValue);
+    void on_conicalAngleSpinBox_valueChanged(double aValue);
     void on_textureButton_clicked();
     void on_transformButton_clicked();
 };
