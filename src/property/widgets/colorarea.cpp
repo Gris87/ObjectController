@@ -6,7 +6,11 @@
 #include <QGridLayout>
 #include <QPainter>
 
+#ifdef OBJECT_CONTROLLER
 #include "../dialogs/coloreditdialog.h"
+#else
+#include "coloreditdialog.h"
+#endif
 
 ColorArea::ColorArea(QWidget *parent) :
     QFrame(parent)

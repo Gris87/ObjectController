@@ -7,6 +7,8 @@
 INCLUDEPATH += $$PWD
 DEPENDPATH += $$PWD
 
+DEFINES += OBJECT_CONTROLLER
+
 HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/booldelegate.h \
            $$PWD/delegates/brushdelegate.h \

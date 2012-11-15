@@ -19,6 +19,10 @@ public:
 
 protected:
     bool           mLeftPressed;
+    int            mStartX;
+    int            mStartY;
+    int            mSelectedIndex;
+    bool           mDragging;
     QGradientStops mGradientStops;
 
     void mousePressEvent(QMouseEvent *event);

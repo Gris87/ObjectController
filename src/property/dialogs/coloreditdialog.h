@@ -5,9 +5,15 @@
 
 #include <QColor>
 
+#ifdef OBJECT_CONTROLLER
 #include "../widgets/colorarea.h"
 #include "../widgets/colorspectrum.h"
 #include "../widgets/colorbar.h"
+#else
+#include "colorarea.h"
+#include "colorspectrum.h"
+#include "colorbar.h"
+#endif
 
 namespace Ui {
 class ColorEditDialog;
