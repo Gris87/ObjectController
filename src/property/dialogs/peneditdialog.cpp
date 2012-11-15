@@ -21,6 +21,7 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
     mColorArea->setMinimumSize(20, 20);
     mColorArea->setMaximumSize(20, 20);
     mColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mColorArea->setTransparentBlockSize(5);
     ui->colorLayout->insertWidget(0, mColorArea);
 
     connect(mColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));

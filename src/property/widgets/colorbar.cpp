@@ -82,16 +82,18 @@ void ColorBar::paintEvent(QPaintEvent * /*event*/)
 
     paint.setBrush(QBrush(aGradient));
 
-    QRect aBarRect(0, 4, width()-5, height()-8);
+    QRect aBarRect(0, 3, width()-6, height()-7);
     paint.drawRect(aBarRect);
     drawFrame(&paint, aBarRect);
 
-    int cursorY=4+((255-mValue)/255.0f)*(height()-8);
+
+
+    int cursorY=4+((255-mValue)/255.0f)*(height()-9);
 
     QPolygon aPolygon;
-    aPolygon.append(QPoint(width()-4, cursorY));
-    aPolygon.append(QPoint(width(), cursorY-4));
-    aPolygon.append(QPoint(width(), cursorY+4));
+    aPolygon.append(QPoint(width()-5, cursorY));
+    aPolygon.append(QPoint(width(),   cursorY-5));
+    aPolygon.append(QPoint(width(),   cursorY+5));
 
     paint.setBrush(QBrush(QColor(0, 0, 0)));
     paint.drawPolygon(aPolygon);

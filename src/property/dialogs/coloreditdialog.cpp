@@ -78,6 +78,7 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
             aArea->setFrameRect(QRect(2, 2, 22, 18));
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+            aArea->setTransparentBlockSize(4);
             aArea->setSelectAllowed(false);
             aArea->setPopupAllowed(false);
 
@@ -121,6 +122,7 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
             aArea->setFrameRect(QRect(2, 2, 22, 18));
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+            aArea->setTransparentBlockSize(4);
             aArea->setSelectAllowed(false);
             aArea->setPopupAllowed(false);
 

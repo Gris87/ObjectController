@@ -12,6 +12,9 @@ public:
     QColor color() const;
     void setColor(const QColor &aColor);
 
+    int transparentBlockSize() const;
+    void setTransparentBlockSize(const int &aTransparentBlockSize);
+
     bool isNeedDrawFrame() const;
     void setNeedDrawFrame(const bool &aNeedDrawFrame);
 
@@ -33,6 +36,7 @@ public:
 protected:
     QWidget *mPopupWidget;
     QColor   mColor;
+    int      mTransparentBlockSize;
     bool     mNeedDrawFrame;
     bool     mSelected;
     bool     mSelectAllowed;
@@ -42,6 +46,7 @@ protected:
 
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);
+    void drawTransparentArea(QPainter *aPainter, QRect aRect, int aBoxSize=8);
 
 private slots:
     void cellClicked();

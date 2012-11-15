@@ -20,6 +20,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     mLeftArea->setMaximumSize(16, 16);
     mLeftArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+    mLeftArea->setTransparentBlockSize(4);
     mLeftArea->setSelectAllowed(!aMono);
     mLeftArea->setPopupAllowed(!aMono);
 
@@ -35,6 +36,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
     mRightArea->setMaximumSize(16, 16);
     mRightArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+    mRightArea->setTransparentBlockSize(4);
     mRightArea->setSelectAllowed(!aMono);
     mRightArea->setPopupAllowed(!aMono);
 
@@ -88,6 +90,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
                 aArea->setMaximumSize(16, 16);
                 aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
+                aArea->setTransparentBlockSize(4);
                 aArea->setSelectAllowed(false);
                 aArea->setPopupAllowed(false);
 

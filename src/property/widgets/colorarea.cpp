@@ -19,6 +19,8 @@ ColorArea::ColorArea(QWidget *parent) :
 
     mColor.setRgb(0, 0, 0);
 
+    mTransparentBlockSize=8;
+
     mNeedDrawFrame=true;
     mSelected=false;
     mSelectAllowed=true;
@@ -119,45 +121,8 @@ void ColorArea::paintEvent(QPaintEvent * /*event*/)
 
     if (mColor.alpha()<255)
     {
-        int aCurRow=0;
-
-        while ((aCurRow<<3)<aFrameRect.height())
-        {
-            int aCurCol=0;
-
-            while ((aCurCol<<3)<aFrameRect.width())
-            {
-                int aRectWidth=aFrameRect.width()-(aCurCol<<3);
-                int aRectHeight=aFrameRect.height()-(aCurRow<<3);
-
-                if (aRectWidth>8)
-                {
-                    aRectWidth=8;
-                }
-
-                if (aRectHeight>8)
-                {
-                    aRectHeight=8;
-                }
-
-
-
-                if ((aCurRow + aCurCol) & 1)
-                {
-                    paint.fillRect(aFrameRect.left()+(aCurCol<<3), aFrameRect.top()+(aCurRow<<3), aRectWidth, aRectHeight, QBrush(QColor(255, 255, 255)));
-                }
-                else
-                {
-                    paint.fillRect(aFrameRect.left()+(aCurCol<<3), aFrameRect.top()+(aCurRow<<3), aRectWidth, aRectHeight, QBrush(QColor(0, 0, 0)));
-                }
-
-
-
-                ++aCurCol;
-            }
-
-            ++aCurRow;
-        }
+        QRect aTransparentRect(aFrameRect.left()+2, aFrameRect.top()+2, aFrameRect.width()-4, aFrameRect.height()-4);
+        drawTransparentArea(&paint, aTransparentRect, mTransparentBlockSize);
     }
 
     paint.fillRect(aFrameRect, QBrush(mColor));
@@ -171,6 +136,49 @@ void ColorArea::paintEvent(QPaintEvent * /*event*/)
     {
         paint.setPen(QPen(QBrush(QColor(0, 0, 0)), 1, Qt::DotLine));
         paint.drawRect(0, 0, width()-1, height()-1);
+    }
+}
+
+void ColorArea::drawTransparentArea(QPainter *aPainter, QRect aRect, int aBoxSize)
+{
+    int aCurRow=0;
+
+    while ((aCurRow*aBoxSize)<aRect.height())
+    {
+        int aCurCol=0;
+
+        while ((aCurCol*aBoxSize)<aRect.width())
+        {
+            int aRectWidth=aRect.width()-(aCurCol*aBoxSize);
+            int aRectHeight=aRect.height()-(aCurRow*aBoxSize);
+
+            if (aRectWidth>aBoxSize)
+            {
+                aRectWidth=aBoxSize;
+            }
+
+            if (aRectHeight>aBoxSize)
+            {
+                aRectHeight=aBoxSize;
+            }
+
+
+
+            if ((aCurRow + aCurCol) & 1)
+            {
+                aPainter->fillRect(aRect.left()+(aCurCol*aBoxSize), aRect.top()+(aCurRow*aBoxSize), aRectWidth, aRectHeight, QBrush(QColor(255, 255, 255)));
+            }
+            else
+            {
+                aPainter->fillRect(aRect.left()+(aCurCol*aBoxSize), aRect.top()+(aCurRow*aBoxSize), aRectWidth, aRectHeight, QBrush(QColor(0, 0, 0)));
+            }
+
+
+
+            ++aCurCol;
+        }
+
+        ++aCurRow;
     }
 }
 
@@ -199,6 +207,20 @@ void ColorArea::setColor(const QColor &aColor)
         update();
 
         emit colorChanged(aColor);
+    }
+}
+
+int ColorArea::transparentBlockSize() const
+{
+    return mTransparentBlockSize;
+}
+
+void ColorArea::setTransparentBlockSize(const int &aTransparentBlockSize)
+{
+    if (mTransparentBlockSize!=aTransparentBlockSize)
+    {
+        mTransparentBlockSize=aTransparentBlockSize;
+        update();
     }
 }
 

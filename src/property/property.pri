@@ -145,7 +145,8 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/vector3ddelegate.h \
            $$PWD/delegates/vector2ddelegate.h \
            $$PWD/delegates/quaterniondelegate.h \
-           $$PWD/widgets/palettedemowidget.h
+           $$PWD/widgets/palettedemowidget.h \
+           $$PWD/widgets/gradientwidget.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -285,7 +286,8 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/vector4ddelegate.cpp \
            $$PWD/delegates/vector3ddelegate.cpp \
            $$PWD/delegates/vector2ddelegate.cpp \
-           $$PWD/widgets/palettedemowidget.cpp
+           $$PWD/widgets/palettedemowidget.cpp \
+           $$PWD/widgets/gradientwidget.cpp
 
 RESOURCES += $$PWD/property.qrc
 

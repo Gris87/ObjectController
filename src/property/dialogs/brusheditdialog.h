@@ -6,6 +6,7 @@
 #include <QBrush>
 
 #include "../widgets/colorarea.h"
+#include "../widgets/gradientwidget.h"
 
 namespace Ui {
 class BrushEditDialog;
@@ -28,6 +29,7 @@ private:
     Ui::BrushEditDialog *ui;
     QBrush               mBrush;
     ColorArea           *mColorArea;
+    GradientWidget      *mGradientWidget;
     QLinearGradient      mLinearGradient;
     QRadialGradient      mRadialGradient;
     QConicalGradient     mConicalGradient;
@@ -37,6 +39,7 @@ private:
     void updateProperties();
     void drawTexture();
     void drawBrush();
+    void drawTransparentArea(QPainter *aPainter, QRect aRect, int aBoxSize=8);
 
 private slots:
     void colorChanged(QColor aColor);

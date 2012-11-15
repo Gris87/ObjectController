@@ -17,14 +17,29 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
 
     mBrush=aBrush;
 
+
+
     mColorArea=new ColorArea(this);
     mColorArea->setMinimumSize(20, 20);
     mColorArea->setMaximumSize(20, 20);
     mColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mColorArea->setTransparentBlockSize(5);
     ui->colorLayout->insertWidget(0, mColorArea);
 
     connect(mColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
 
+
+
+    mGradientWidget=new GradientWidget(this);
+    mGradientWidget->setMinimumSize(0, 20);
+    /*
+    mGradientWidget->setMinimumSize(20, 20);
+    mGradientWidget->setMaximumSize(20, 20);
+    mGradientWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    */
+    ui->gradientLayout->insertWidget(1, mGradientWidget);
+
+    //connect(mGradientWidget, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
 
 
     Qt::BrushStyle aStyle=mBrush.style();
@@ -85,17 +100,82 @@ void BrushEditDialog::drawTexture()
 
 void BrushEditDialog::drawBrush()
 {
+    Qt::BrushStyle aStyle=mBrush.style();
+
     int aWidth=ui->resultLabel->width();
     int aHeight=ui->resultLabel->height();
 
     QPixmap aPixmap(aWidth, aHeight);
     aPixmap.fill(QColor(255, 255, 255));
 
+
+
     QPainter aPainter(&aPixmap);
+
+    if (
+        aStyle==Qt::NoBrush
+        ||
+        aStyle==Qt::SolidPattern
+        ||
+        aStyle==Qt::LinearGradientPattern
+        ||
+        aStyle==Qt::RadialGradientPattern
+        ||
+        aStyle==Qt::ConicalGradientPattern
+        ||
+        aStyle==Qt::TexturePattern
+       )
+    {
+        drawTransparentArea(&aPainter, QRect(0, 0, aWidth, aHeight));
+    }
+
     aPainter.fillRect(0, 0, aWidth, aHeight, mBrush);
     aPainter.end();
 
     ui->resultLabel->setPixmap(aPixmap);
+}
+
+void BrushEditDialog::drawTransparentArea(QPainter *aPainter, QRect aRect, int aBoxSize)
+{
+    int aCurRow=0;
+
+    while ((aCurRow*aBoxSize)<aRect.height())
+    {
+        int aCurCol=0;
+
+        while ((aCurCol*aBoxSize)<aRect.width())
+        {
+            int aRectWidth=aRect.width()-(aCurCol*aBoxSize);
+            int aRectHeight=aRect.height()-(aCurRow*aBoxSize);
+
+            if (aRectWidth>aBoxSize)
+            {
+                aRectWidth=aBoxSize;
+            }
+
+            if (aRectHeight>aBoxSize)
+            {
+                aRectHeight=aBoxSize;
+            }
+
+
+
+            if ((aCurRow + aCurCol) & 1)
+            {
+                aPainter->fillRect(aRect.left()+(aCurCol*aBoxSize), aRect.top()+(aCurRow*aBoxSize), aRectWidth, aRectHeight, QBrush(QColor(255, 255, 255)));
+            }
+            else
+            {
+                aPainter->fillRect(aRect.left()+(aCurCol*aBoxSize), aRect.top()+(aCurRow*aBoxSize), aRectWidth, aRectHeight, QBrush(QColor(0, 0, 0)));
+            }
+
+
+
+            ++aCurCol;
+        }
+
+        ++aCurRow;
+    }
 }
 
 void BrushEditDialog::on_okButton_clicked()
@@ -260,6 +340,7 @@ void BrushEditDialog::updateProperties()
 {
     ui->styleComboBox->blockSignals(true);
     mColorArea->blockSignals(true);
+    mGradientWidget->blockSignals(true);
 
 
 
@@ -289,7 +370,6 @@ void BrushEditDialog::updateProperties()
         case Qt::TexturePattern:         aStyleStr="TexturePattern";         break;
     }
 
-    QMatrix aMatrix=mBrush.matrix();
     QTransform aTransform=mBrush.transform();
 
     ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyleStr));
@@ -347,9 +427,18 @@ void BrushEditDialog::updateProperties()
                                 aStyle==Qt::DiagCrossPattern
                                );
 
+    ui->gradientWidget->setVisible(
+                                   aStyle==Qt::LinearGradientPattern
+                                   ||
+                                   aStyle==Qt::RadialGradientPattern
+                                   ||
+                                   aStyle==Qt::ConicalGradientPattern
+                                  );
+
     ui->textureWidget->setVisible(aStyle==Qt::TexturePattern);
     ui->transformWidget->setVisible(aStyle!=Qt::NoBrush);
 
     ui->styleComboBox->blockSignals(false);
     mColorArea->blockSignals(false);
+    mGradientWidget->blockSignals(false);
 }
