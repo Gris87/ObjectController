@@ -2,6 +2,7 @@
 #include "ui_brusheditdialog.h"
 
 #include <QPainter>
+#include <QMetaEnum>
 
 #include "paintdialog.h"
 #include "matrixeditdialog.h"
@@ -34,6 +35,33 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
     ui->gradientLayout->insertWidget(1, mGradientWidget);
 
     connect(mGradientWidget, SIGNAL(gradientChanged(QGradientStops)), this, SLOT(gradientChanged(QGradientStops)));
+
+
+
+    QMetaEnum aCoordinateModeEnum=QGradient::staticMetaObject.enumerator(QGradient::staticMetaObject.indexOfEnumerator("CoordinateMode"));
+    QMetaEnum aSpreadEnum=QGradient::staticMetaObject.enumerator(QGradient::staticMetaObject.indexOfEnumerator("Spread"));
+    QStringList aCoordinateModeItems;
+    QStringList aSpreadItems;
+
+    for (int i=0; i<aCoordinateModeEnum.keyCount(); ++i)
+    {
+        aCoordinateModeItems.append(QString::fromLatin1(aCoordinateModeEnum.key(i)));
+    }
+
+    for (int i=0; i<aSpreadEnum.keyCount(); ++i)
+    {
+        aSpreadItems.append(QString::fromLatin1(aSpreadEnum.key(i)));
+    }
+
+    ui->coordinateModeComboBox->blockSignals(true);
+    ui->spreadComboBox->blockSignals(true);
+
+    ui->coordinateModeComboBox->addItems(aCoordinateModeItems);
+    ui->spreadComboBox->addItems(aSpreadItems);
+
+    ui->coordinateModeComboBox->blockSignals(false);
+    ui->spreadComboBox->blockSignals(false);
+
 
 
     Qt::BrushStyle aStyle=mBrush.style();
@@ -306,27 +334,94 @@ void BrushEditDialog::gradientChanged(const QGradientStops &aGradientStops)
     mRadialGradient.setStops(aGradientStops);
     mConicalGradient.setStops(aGradientStops);
 
-    Qt::BrushStyle aStyle=mBrush.style();
+    updateGradient();
+}
 
-    if (aStyle==Qt::LinearGradientPattern)
+void BrushEditDialog::on_coordinateModeComboBox_currentIndexChanged(const QString &aValue)
+{
+    QGradient::CoordinateMode aMode;
+
+    if (aValue=="LogicalMode")
     {
-        copyFromBrush(QBrush(mLinearGradient));
+        aMode=QGradient::LogicalMode;
     }
     else
-    if (aStyle==Qt::RadialGradientPattern)
+    if (aValue=="StretchToDeviceMode")
     {
-        copyFromBrush(QBrush(mRadialGradient));
+        aMode=QGradient::StretchToDeviceMode;
     }
     else
-    if (aStyle==Qt::ConicalGradientPattern)
+    if (aValue=="ObjectBoundingMode")
     {
-        copyFromBrush(QBrush(mConicalGradient));
+        aMode=QGradient::ObjectBoundingMode;
     }
     else
     {
         Q_ASSERT(false);
     }
 
+    mLinearGradient.setCoordinateMode(aMode);
+    mRadialGradient.setCoordinateMode(aMode);
+    mConicalGradient.setCoordinateMode(aMode);
+
+    updateGradient();
+}
+
+void BrushEditDialog::on_spreadComboBox_currentIndexChanged(const QString &aValue)
+{
+    QGradient::Spread aSpread;
+
+    if (aValue=="PadSpread")
+    {
+        aSpread=QGradient::PadSpread;
+    }
+    else
+    if (aValue=="ReflectSpread")
+    {
+        aSpread=QGradient::ReflectSpread;
+    }
+    else
+    if (aValue=="RepeatSpread")
+    {
+        aSpread=QGradient::RepeatSpread;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    mLinearGradient.setSpread(aSpread);
+    mRadialGradient.setSpread(aSpread);
+    mConicalGradient.setSpread(aSpread);
+
+    updateGradient();
+}
+
+void BrushEditDialog::on_linearX1SpinBox_valueChanged(double aValue)
+{
+    mLinearGradient.setStart(aValue, ui->linearY1SpinBox->value());
+    copyFromBrush(QBrush(mLinearGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_linearY1SpinBox_valueChanged(double aValue)
+{
+    mLinearGradient.setStart(ui->linearX1SpinBox->value(), aValue);
+    copyFromBrush(QBrush(mLinearGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_linearX2SpinBox_valueChanged(double aValue)
+{
+    mLinearGradient.setFinalStop(aValue, ui->linearY2SpinBox->value());
+    copyFromBrush(QBrush(mLinearGradient));
+    drawBrush();
+}
+
+void BrushEditDialog::on_linearY2SpinBox_valueChanged(double aValue)
+{
+    mLinearGradient.setFinalStop(ui->linearX2SpinBox->value(), aValue);
+    copyFromBrush(QBrush(mLinearGradient));
     drawBrush();
 }
 
@@ -366,13 +461,46 @@ void BrushEditDialog::copyFromBrush(QBrush aBrush)
     mBrush=aBrush;
 }
 
+void BrushEditDialog::updateGradient()
+{
+    Qt::BrushStyle aStyle=mBrush.style();
+
+    if (aStyle==Qt::LinearGradientPattern)
+    {
+        copyFromBrush(QBrush(mLinearGradient));
+    }
+    else
+    if (aStyle==Qt::RadialGradientPattern)
+    {
+        copyFromBrush(QBrush(mRadialGradient));
+    }
+    else
+    if (aStyle==Qt::ConicalGradientPattern)
+    {
+        copyFromBrush(QBrush(mConicalGradient));
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    drawBrush();
+}
+
+#define BLOCK_SIGNALS(aLock) \
+    ui->styleComboBox->blockSignals(aLock); \
+    mColorArea->blockSignals(aLock); \
+    mGradientWidget->blockSignals(aLock); \
+    ui->coordinateModeComboBox->blockSignals(aLock); \
+    ui->spreadComboBox->blockSignals(aLock); \
+    ui->linearX1SpinBox->blockSignals(aLock); \
+    ui->linearY1SpinBox->blockSignals(aLock); \
+    ui->linearX2SpinBox->blockSignals(aLock); \
+    ui->linearY2SpinBox->blockSignals(aLock);
+
 void BrushEditDialog::updateProperties()
 {
-    ui->styleComboBox->blockSignals(true);
-    mColorArea->blockSignals(true);
-    mGradientWidget->blockSignals(true);
-
-
+    BLOCK_SIGNALS(true);
 
     Qt::BrushStyle aStyle=mBrush.style();
     QString aStyleStr="[Unknown brush style]";
@@ -410,7 +538,18 @@ void BrushEditDialog::updateProperties()
     if (aGradient)
     {
         mGradientWidget->setGradientStops(aGradient->stops());
+
+        QMetaEnum aCoordinateModeEnum=QGradient::staticMetaObject.enumerator(QGradient::staticMetaObject.indexOfEnumerator("CoordinateMode"));
+        QMetaEnum aSpreadEnum=QGradient::staticMetaObject.enumerator(QGradient::staticMetaObject.indexOfEnumerator("Spread"));
+
+        ui->coordinateModeComboBox->setCurrentIndex(ui->coordinateModeComboBox->findText(aCoordinateModeEnum.valueToKey(aGradient->coordinateMode())));
+        ui->spreadComboBox->setCurrentIndex(ui->spreadComboBox->findText(aSpreadEnum.valueToKey(aGradient->spread())));
     }
+
+    ui->linearX1SpinBox->setValue(mLinearGradient.start().x());
+    ui->linearY1SpinBox->setValue(mLinearGradient.start().y());
+    ui->linearX2SpinBox->setValue(mLinearGradient.finalStop().x());
+    ui->linearY2SpinBox->setValue(mLinearGradient.finalStop().y());
 
 
 
@@ -474,10 +613,12 @@ void BrushEditDialog::updateProperties()
                                    aStyle==Qt::ConicalGradientPattern
                                   );
 
+    ui->linearGroupBox->setVisible(aStyle==Qt::LinearGradientPattern);
+    ui->radialGroupBox->setVisible(aStyle==Qt::RadialGradientPattern);
+    ui->conicalGroupBox->setVisible(aStyle==Qt::ConicalGradientPattern);
+
     ui->textureWidget->setVisible(aStyle==Qt::TexturePattern);
     ui->transformWidget->setVisible(aStyle!=Qt::NoBrush);
 
-    ui->styleComboBox->blockSignals(false);
-    mColorArea->blockSignals(false);
-    mGradientWidget->blockSignals(false);
+    BLOCK_SIGNALS(false);
 }

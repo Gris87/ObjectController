@@ -36,6 +36,7 @@ private:
     QPixmap              mTexture;
 
     void copyFromBrush(QBrush aBrush);
+    void updateGradient();
     void updateProperties();
     void drawTexture();
     void drawBrush();
@@ -48,6 +49,12 @@ private slots:
     void on_okButton_clicked();
     void on_cancelButton_clicked();
     void on_styleComboBox_currentIndexChanged(const QString &aValue);
+    void on_coordinateModeComboBox_currentIndexChanged(const QString &aValue);
+    void on_spreadComboBox_currentIndexChanged(const QString &aValue);
+    void on_linearX1SpinBox_valueChanged(double aValue);
+    void on_linearY1SpinBox_valueChanged(double aValue);
+    void on_linearX2SpinBox_valueChanged(double aValue);
+    void on_linearY2SpinBox_valueChanged(double aValue);
     void on_textureButton_clicked();
     void on_transformButton_clicked();
 };

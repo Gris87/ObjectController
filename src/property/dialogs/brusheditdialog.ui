@@ -42,7 +42,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QWidget" name="propertiesWidget" native="true">
+      <widget class="QScrollArea" name="propertiesScrollArea">
        <property name="minimumSize">
         <size>
          <width>230</width>
@@ -55,250 +55,416 @@
          <height>16777215</height>
         </size>
        </property>
-       <layout class="QVBoxLayout" name="verticalLayout_2">
-        <property name="spacing">
-         <number>4</number>
+       <property name="widgetResizable">
+        <bool>true</bool>
+       </property>
+       <widget class="QWidget" name="scrollAreaWidgetContents">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>228</width>
+          <height>439</height>
+         </rect>
         </property>
-        <property name="margin">
-         <number>0</number>
-        </property>
-        <item>
-         <widget class="QLabel" name="styleLabel">
-          <property name="text">
-           <string>Type:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QComboBox" name="styleComboBox">
-          <item>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <property name="spacing">
+          <number>4</number>
+         </property>
+         <property name="margin">
+          <number>4</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="styleLabel">
            <property name="text">
-            <string>NoBrush</string>
+            <string>Type:</string>
            </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>SolidPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense1Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense2Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense3Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense4Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense5Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense6Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>Dense7Pattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>HorPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>VerPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>CrossPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>BDiagPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>FDiagPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DiagCrossPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>LinearGradientPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>RadialGradientPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>ConicalGradientPattern</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>TexturePattern</string>
-           </property>
-          </item>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="colorWidget" native="true">
-          <layout class="QHBoxLayout" name="colorLayout">
-           <property name="spacing">
-            <number>4</number>
-           </property>
-           <property name="margin">
-            <number>0</number>
-           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QComboBox" name="styleComboBox">
            <item>
-            <widget class="QLabel" name="colorLabel">
-             <property name="text">
-              <string>Color</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="gradientWidget" native="true">
-          <layout class="QVBoxLayout" name="gradientLayout">
-           <property name="spacing">
-            <number>4</number>
-           </property>
-           <property name="margin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="gradientLabel">
-             <property name="text">
-              <string>Gradient:</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="textureWidget" native="true">
-          <layout class="QHBoxLayout" name="horizontalLayout_4">
-           <property name="spacing">
-            <number>4</number>
-           </property>
-           <property name="margin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QLabel" name="textureIconLabel">
-             <property name="text">
-              <string>icon</string>
-             </property>
-            </widget>
+            <property name="text">
+             <string>NoBrush</string>
+            </property>
            </item>
            <item>
-            <widget class="QLabel" name="textureLabel">
-             <property name="text">
-              <string>Texture</string>
-             </property>
-            </widget>
+            <property name="text">
+             <string>SolidPattern</string>
+            </property>
            </item>
            <item>
-            <widget class="QToolButton" name="textureButton">
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
+            <property name="text">
+             <string>Dense1Pattern</string>
+            </property>
            </item>
            <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
+            <property name="text">
+             <string>Dense2Pattern</string>
+            </property>
            </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <widget class="QWidget" name="transformWidget" native="true">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <property name="spacing">
-            <number>4</number>
+           <item>
+            <property name="text">
+             <string>Dense3Pattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Dense4Pattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Dense5Pattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Dense6Pattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Dense7Pattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>HorPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>VerPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>CrossPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>BDiagPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>FDiagPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>DiagCrossPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>LinearGradientPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>RadialGradientPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>ConicalGradientPattern</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>TexturePattern</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="colorWidget" native="true">
+           <layout class="QHBoxLayout" name="colorLayout">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="colorLabel">
+              <property name="text">
+               <string>Color</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="gradientWidget" native="true">
+           <layout class="QVBoxLayout" name="gradientLayout">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="gradientLabel">
+              <property name="text">
+               <string>Gradient:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="coordinateModeLabel">
+              <property name="text">
+               <string>Coordinate mode:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="coordinateModeComboBox"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="spreadLabel">
+              <property name="text">
+               <string>Spread:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="spreadComboBox"/>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="linearGroupBox">
+              <property name="title">
+               <string>Linear gradient oprions</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout">
+               <property name="margin">
+                <number>4</number>
+               </property>
+               <property name="spacing">
+                <number>4</number>
+               </property>
+               <item row="6" column="1">
+                <widget class="QDoubleSpinBox" name="linearY2SpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="decimals">
+                  <number>6</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-2147483647.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>2147483647.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="1">
+                <widget class="QDoubleSpinBox" name="linearX1SpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="decimals">
+                  <number>6</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-2147483647.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>2147483647.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QLabel" name="linearX1Label">
+                 <property name="text">
+                  <string>X1:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="0">
+                <widget class="QLabel" name="linearX2Label">
+                 <property name="text">
+                  <string>X2:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="4" column="1">
+                <widget class="QDoubleSpinBox" name="linearX2SpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="decimals">
+                  <number>6</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-2147483647.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>2147483647.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0">
+                <widget class="QLabel" name="linearY1Label">
+                 <property name="text">
+                  <string>Y1:</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="QDoubleSpinBox" name="linearY1SpinBox">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="decimals">
+                  <number>6</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-2147483647.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>2147483647.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item row="6" column="0">
+                <widget class="QLabel" name="linearY2Label">
+                 <property name="text">
+                  <string>Y2:</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="radialGroupBox">
+              <property name="title">
+               <string>Radial gradient options</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="conicalGroupBox">
+              <property name="title">
+               <string>Conical gradient options</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="textureWidget" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="textureIconLabel">
+              <property name="text">
+               <string>icon</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="textureLabel">
+              <property name="text">
+               <string>Texture</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="textureButton">
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QWidget" name="transformWidget" native="true">
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <property name="margin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="transformLabel">
+              <property name="text">
+               <string>Transform</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="transformEdit">
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="transformButton">
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <spacer name="verticalSpacer">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
            </property>
-           <property name="margin">
-            <number>0</number>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
            </property>
-           <item>
-            <widget class="QLabel" name="transformLabel">
-             <property name="text">
-              <string>Transform</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLineEdit" name="transformEdit">
-             <property name="readOnly">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QToolButton" name="transformButton">
-             <property name="text">
-              <string>...</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
       </widget>
      </item>
     </layout>
