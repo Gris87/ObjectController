@@ -34,6 +34,7 @@ private:
     QRadialGradient      mRadialGradient;
     QConicalGradient     mConicalGradient;
     QPixmap              mTexture;
+    QPixmap              mTransparentArea;
 
     void copyFromBrush(QBrush aBrush);
     void updateGradient();

@@ -118,6 +118,16 @@ QBrush BrushEditDialog::resultValue() const
 void BrushEditDialog::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
+
+    int aWidth=ui->resultLabel->width();
+    int aHeight=ui->resultLabel->height();
+
+    mTransparentArea=QPixmap(aWidth, aHeight);
+
+    QPainter aPainter(&mTransparentArea);
+    drawTransparentArea(&aPainter, QRect(0, 0, aWidth, aHeight));
+    aPainter.end();
+
     drawBrush();
 }
 
@@ -154,7 +164,7 @@ void BrushEditDialog::drawBrush()
         aStyle==Qt::TexturePattern
        )
     {
-        drawTransparentArea(&aPainter, QRect(0, 0, aWidth, aHeight));
+        aPainter.drawPixmap(0, 0, mTransparentArea);
     }
 
     aPainter.fillRect(0, 0, aWidth, aHeight, mBrush);
