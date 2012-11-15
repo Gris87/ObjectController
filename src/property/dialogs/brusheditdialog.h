@@ -43,6 +43,7 @@ private:
 
 private slots:
     void colorChanged(QColor aColor);
+    void gradientChanged(const QGradientStops &aGradientStops);
 
     void on_okButton_clicked();
     void on_cancelButton_clicked();

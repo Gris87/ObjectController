@@ -120,7 +120,7 @@ void ColorArea::paintEvent(QPaintEvent * /*event*/)
 
     if (mColor.alpha()<255)
     {
-        QRect aTransparentRect(aFrameRect.left()+2, aFrameRect.top()+2, aFrameRect.width()-4, aFrameRect.height()-4);
+        QRect aTransparentRect(aFrameRect.left()+1, aFrameRect.top()+1, aFrameRect.width()-2, aFrameRect.height()-2);
         drawTransparentArea(&paint, aTransparentRect, mTransparentBlockSize);
     }
 

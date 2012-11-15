@@ -69,7 +69,7 @@ void GradientWidget::paintEvent(QPaintEvent * /*event*/)
 
     paint.setBrush(QBrush(aGradient));
 
-    QRect aBarRect(4, 13, width()-9, height()-14);
+    QRect aBarRect(3, 14, width()-7, height()-15);
     paint.drawRect(aBarRect);
     drawFrame(&paint, aBarRect);
 
@@ -92,7 +92,7 @@ void GradientWidget::paintEvent(QPaintEvent * /*event*/)
 
         if (aColor.alpha()<255)
         {
-            QRect aTransparentRect(aColorRect.left()+2, aColorRect.top()+2, aColorRect.width()-4, aColorRect.height()-4);
+            QRect aTransparentRect(aColorRect.left()+1, aColorRect.top()+1, aColorRect.width()-2, aColorRect.height()-2);
             drawTransparentArea(&paint, aTransparentRect, 3);
         }
 

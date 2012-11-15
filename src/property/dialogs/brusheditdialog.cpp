@@ -33,7 +33,7 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
     mGradientWidget=new GradientWidget(this);
     ui->gradientLayout->insertWidget(1, mGradientWidget);
 
-    //connect(mGradientWidget, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
+    connect(mGradientWidget, SIGNAL(gradientChanged(QGradientStops)), this, SLOT(gradientChanged(QGradientStops)));
 
 
     Qt::BrushStyle aStyle=mBrush.style();
@@ -41,16 +41,22 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
     if (aStyle==Qt::LinearGradientPattern)
     {
         mLinearGradient=*(QLinearGradient *)mBrush.gradient();
+        mRadialGradient.setStops(mLinearGradient.stops());
+        mConicalGradient.setStops(mLinearGradient.stops());
     }
     else
     if (aStyle==Qt::RadialGradientPattern)
     {
         mRadialGradient=*(QRadialGradient *)mBrush.gradient();
+        mLinearGradient.setStops(mRadialGradient.stops());
+        mConicalGradient.setStops(mRadialGradient.stops());
     }
     else
     if (aStyle==Qt::ConicalGradientPattern)
     {
         mConicalGradient=*(QConicalGradient *)mBrush.gradient();
+        mLinearGradient.setStops(mConicalGradient.stops());
+        mRadialGradient.setStops(mConicalGradient.stops());
     }
 
     if (aStyle==Qt::TexturePattern)
@@ -294,6 +300,36 @@ void BrushEditDialog::colorChanged(QColor aColor)
     drawBrush();
 }
 
+void BrushEditDialog::gradientChanged(const QGradientStops &aGradientStops)
+{
+    mLinearGradient.setStops(aGradientStops);
+    mRadialGradient.setStops(aGradientStops);
+    mConicalGradient.setStops(aGradientStops);
+
+    Qt::BrushStyle aStyle=mBrush.style();
+
+    if (aStyle==Qt::LinearGradientPattern)
+    {
+        copyFromBrush(QBrush(mLinearGradient));
+    }
+    else
+    if (aStyle==Qt::RadialGradientPattern)
+    {
+        copyFromBrush(QBrush(mRadialGradient));
+    }
+    else
+    if (aStyle==Qt::ConicalGradientPattern)
+    {
+        copyFromBrush(QBrush(mConicalGradient));
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    drawBrush();
+}
+
 void BrushEditDialog::on_textureButton_clicked()
 {
     PaintDialog dialog(mBrush.texture(), false, this);
@@ -368,6 +404,15 @@ void BrushEditDialog::updateProperties()
 
     ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyleStr));
     mColorArea->setColor(mBrush.color());
+
+    const QGradient *aGradient=mBrush.gradient();
+
+    if (aGradient)
+    {
+        mGradientWidget->setGradientStops(aGradient->stops());
+    }
+
+
 
     ui->transformEdit->setText(
                                "[("+
