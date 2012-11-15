@@ -9,6 +9,9 @@ class ColorArea : public QFrame
 public:
     explicit ColorArea(QWidget *parent = 0);
 
+    QSize minimumSizeHint() const;
+    QSize sizeHint() const;
+
     QColor color() const;
     void setColor(const QColor &aColor);
 

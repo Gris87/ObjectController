@@ -31,12 +31,6 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
 
 
     mGradientWidget=new GradientWidget(this);
-    mGradientWidget->setMinimumSize(0, 20);
-    /*
-    mGradientWidget->setMinimumSize(20, 20);
-    mGradientWidget->setMaximumSize(20, 20);
-    mGradientWidget->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    */
     ui->gradientLayout->insertWidget(1, mGradientWidget);
 
     //connect(mGradientWidget, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));

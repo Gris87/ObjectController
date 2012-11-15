@@ -14,6 +14,16 @@ ColorSpectrum::ColorSpectrum(QWidget *parent) :
     updateSpectrum();
 }
 
+QSize ColorSpectrum::minimumSizeHint() const
+{
+    return QSize(32, 32);
+}
+
+QSize ColorSpectrum::sizeHint() const
+{
+    return QSize(222, 202);
+}
+
 QColor ColorSpectrum::color() const
 {
     return mColor;

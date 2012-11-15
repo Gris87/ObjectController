@@ -11,6 +11,9 @@ class ColorBar : public QWidget
 public:
     explicit ColorBar(QWidget *parent = 0);
 
+    QSize minimumSizeHint() const;
+    QSize sizeHint() const;
+
     QColor color() const;
     void setColor(const QColor &aColor);
 

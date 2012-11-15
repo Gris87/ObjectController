@@ -9,6 +9,9 @@ class ColorSpectrum : public QFrame
 public:
     explicit ColorSpectrum(QWidget *parent = 0);
 
+    QSize minimumSizeHint() const;
+    QSize sizeHint() const;
+
     QColor color() const;
     void setColor(const QColor &aColor);
 

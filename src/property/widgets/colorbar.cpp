@@ -11,6 +11,16 @@ ColorBar::ColorBar(QWidget *parent) :
     mValue=255;
 }
 
+QSize ColorBar::minimumSizeHint() const
+{
+    return QSize(20, 100);
+}
+
+QSize ColorBar::sizeHint() const
+{
+    return QSize(20, 208);
+}
+
 QColor ColorBar::color() const
 {
     return mColor;

@@ -11,8 +11,7 @@
 ColorArea::ColorArea(QWidget *parent) :
     QFrame(parent)
 {
-    QSizePolicy aPolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    setSizePolicy(aPolicy);
+    setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     setFrameShadow(QFrame::Sunken);
     setFrameShape(QFrame::StyledPanel);
@@ -190,6 +189,16 @@ void ColorArea::cellClicked()
 
     delete mPopupWidget;
     mPopupWidget=0;
+}
+
+QSize ColorArea::minimumSizeHint() const
+{
+    return QSize(8, 8);
+}
+
+QSize ColorArea::sizeHint() const
+{
+    return QSize(20, 20);
 }
 
 // ********************************************************************************************

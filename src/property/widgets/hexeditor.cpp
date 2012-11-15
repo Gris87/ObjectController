@@ -458,6 +458,16 @@ QString HexEditor::toString()
     return QString::fromLatin1(mData);
 }
 
+QSize HexEditor::minimumSizeHint() const
+{
+    return QSize(280, 60);
+}
+
+QSize HexEditor::sizeHint() const
+{
+    return QSize(400, 300);
+}
+
 // ------------------------------------------------------------------
 
 void HexEditor::updateScrollBars()

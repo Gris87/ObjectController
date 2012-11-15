@@ -11,6 +11,9 @@ class GradientWidget : public QWidget
 public:
     explicit GradientWidget(QWidget *parent = 0);
 
+    QSize minimumSizeHint() const;
+    QSize sizeHint() const;
+
     QGradientStops gradientStops() const;
     void setGradientStops(const QGradientStops &aGradientStops);
 

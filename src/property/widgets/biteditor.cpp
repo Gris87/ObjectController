@@ -560,6 +560,16 @@ QString BitEditor::toString()
     return res;
 }
 
+QSize BitEditor::minimumSizeHint() const
+{
+    return QSize(180, 40);
+}
+
+QSize BitEditor::sizeHint() const
+{
+    return QSize(180, 100);
+}
+
 // ------------------------------------------------------------------
 
 void BitEditor::updateScrollBars()

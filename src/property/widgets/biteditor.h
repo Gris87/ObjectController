@@ -62,6 +62,9 @@ public:
     void paste();
     QString toString();
 
+    QSize minimumSizeHint() const;
+    QSize sizeHint() const;
+
     // ------------------------------------------------------------------
 
     QBitArray data() const;

@@ -11,6 +11,16 @@ GradientWidget::GradientWidget(QWidget *parent) :
     mGradientStops.append(QGradientStop(1, QColor(0, 0, 0)));
 }
 
+QSize GradientWidget::minimumSizeHint() const
+{
+    return QSize(100, 20);
+}
+
+QSize GradientWidget::sizeHint() const
+{
+    return QSize(208, 20);
+}
+
 QGradientStops GradientWidget::gradientStops() const
 {
     return mGradientStops;
