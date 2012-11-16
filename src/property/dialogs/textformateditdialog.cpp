@@ -283,6 +283,7 @@ void TextFormatEditDialog::updateProperties()
     ui->typeComboBox->setCurrentIndex(ui->typeComboBox->findText(aTypeStr));
     ui->layoutDirectionComboBox->setCurrentIndex(ui->layoutDirectionComboBox->findText(aLayoutDirectionStr));
     ui->objectIndexSpinBox->setValue(mTextFormat.objectIndex());
+    ui->typeStackedWidget->setCurrentIndex(ui->typeComboBox->currentIndex());
 
     BLOCK_SIGNALS(false);
 }
