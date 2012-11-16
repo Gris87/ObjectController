@@ -97,7 +97,7 @@ TestObject::TestObject(QObject *parent) :
     mPen.setWidth(2);
 
     mTextLength=QTextLength(QTextLength::PercentageLength, 90);
-    mTextFormat=QTextFormat(QTextFormat::TableFormat);
+    mTextFormat=QTextTableFormat();
     mMatrix.setMatrix(6, 9, 12, 5, 7, 6);
     mTransform.setMatrix(1, 2, 3, 4, 5, 6, 7, 8, 9);
     mMatrix4x4=QMatrix4x4(16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1);

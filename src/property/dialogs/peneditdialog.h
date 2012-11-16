@@ -33,9 +33,9 @@ private:
     void updatePattern();
     void addPattern();
     void drawBrush();
-    void drawPen();
 
 private slots:
+    void drawPen();
     void colorChanged(QColor aColor);
     void patternUp();
     void patternDown();

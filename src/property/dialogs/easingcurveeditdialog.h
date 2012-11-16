@@ -27,9 +27,9 @@ private:
     QEasingCurve               mOriginalEasingCurve;
     QEasingCurve               mEasingCurve;
 
+private slots:
     void drawCurve();
 
-private slots:
     void on_typeComboBox_currentIndexChanged(QString aValue);
     void on_amplitudeSpinBox_valueChanged(double aValue);
     void on_overshootSpinBox_valueChanged(double aValue);

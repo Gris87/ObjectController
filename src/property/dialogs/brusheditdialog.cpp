@@ -3,6 +3,7 @@
 
 #include <QPainter>
 #include <QMetaEnum>
+#include <QTimer>
 
 #include "paintdialog.h"
 #include "matrixeditdialog.h"
@@ -102,7 +103,7 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
     updateProperties();
 
     drawTexture();
-    drawBrush();
+    QTimer::singleShot(0, this, SLOT(updateTransparentArea()));
 }
 
 BrushEditDialog::~BrushEditDialog()
@@ -118,7 +119,16 @@ QBrush BrushEditDialog::resultValue() const
 void BrushEditDialog::resizeEvent(QResizeEvent *event)
 {
     QDialog::resizeEvent(event);
+    updateTransparentArea();
+}
 
+void BrushEditDialog::drawTexture()
+{
+    ui->textureIconLabel->setPixmap(QIcon(mTexture).pixmap(18));
+}
+
+void BrushEditDialog::updateTransparentArea()
+{
     int aWidth=ui->resultLabel->width();
     int aHeight=ui->resultLabel->height();
 
@@ -129,11 +139,6 @@ void BrushEditDialog::resizeEvent(QResizeEvent *event)
     aPainter.end();
 
     drawBrush();
-}
-
-void BrushEditDialog::drawTexture()
-{
-    ui->textureIconLabel->setPixmap(QIcon(mTexture).pixmap(18));
 }
 
 void BrushEditDialog::drawBrush()

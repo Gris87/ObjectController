@@ -26,19 +26,37 @@
       <number>4</number>
      </property>
      <item>
-      <widget class="QLabel" name="resultLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
+      <widget class="QFrame" name="resultFrame">
+       <property name="frameShape">
+        <enum>QFrame::WinPanel</enum>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>1</width>
-         <height>1</height>
-        </size>
+       <property name="frameShadow">
+        <enum>QFrame::Sunken</enum>
        </property>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="margin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="resultLabel">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>1</width>
+            <height>1</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -54,243 +72,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="typeComboBox">
-         <item>
-          <property name="text">
-           <string>Linear</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InQuad</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutQuad</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutQuad</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInQuad</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InCubic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutCubic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutCubic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInCubic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InQuart</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutQuart</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutQuart</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInQuart</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InQuint</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutQuint</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutQuint</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInQuint</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InSine</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutSine</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutSine</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInSine</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InExpo</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutExpo</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutExpo</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInExpo</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InCirc</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutCirc</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutCirc</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInCirc</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InElastic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutElastic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutElastic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInElastic</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InBack</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutBack</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutBack</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInBack</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InBounce</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutBounce</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InOutBounce</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutInBounce</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>InCurve</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>OutCurve</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>SineCurve</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>CosineCurve</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Custom</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>NCurveTypes</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="typeComboBox"/>
        </item>
        <item>
         <widget class="QLabel" name="amplitudeLabel">

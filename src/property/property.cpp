@@ -789,8 +789,44 @@ QString Property::valueToString(const QTextLength &aValue, PropertyTreeWidgetIte
 
 QString Property::valueToString(const QTextFormat &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("FormatType"));
-    return aEnum.valueToKey(aValue.type());
+    QString res="[Unknown type]";
+
+    if (aValue.isImageFormat())
+    {
+        res="ImageFormat";
+    }
+    else
+    if (aValue.isTableCellFormat())
+    {
+        res="TableCellFormat";
+    }
+    else
+    if (aValue.isTableFormat())
+    {
+        res="TableFormat";
+    }
+    else
+    if (aValue.isBlockFormat())
+    {
+        res="BlockFormat";
+    }
+    else
+    if (aValue.isCharFormat())
+    {
+        res="CharFormat";
+    }
+    else
+    if (aValue.isFrameFormat())
+    {
+        res="FrameFormat";
+    }
+    else
+    if (aValue.isListFormat())
+    {
+        res="ListFormat";
+    }
+
+    return res;
 }
 
 QString Property::valueToString(const QMatrix &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

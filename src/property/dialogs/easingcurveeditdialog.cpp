@@ -3,6 +3,7 @@
 
 #include <QPainter>
 #include <QMetaEnum>
+#include <QTimer>
 
 EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget *parent) :
     QDialog(parent),
@@ -15,21 +16,40 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget 
     mOriginalEasingCurve=aEasingCurve;
     mEasingCurve=aEasingCurve;
 
+
+
+    ui->typeComboBox->blockSignals(true);
+    ui->amplitudeSpinBox->blockSignals(true);
+    ui->overshootSpinBox->blockSignals(true);
+    ui->periodSpinBox->blockSignals(true);
+
+
+
+    QMetaEnum aEnum=mEasingCurve.staticMetaObject.enumerator(mEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
+    QStringList aItems;
+
+    for (int i=0; i<(mEasingCurve.type()==QEasingCurve::Custom? QEasingCurve::NCurveTypes : QEasingCurve::Custom); ++i)
+    {
+        aItems.append(QString::fromLatin1(aEnum.key(i)));
+    }
+
+    ui->typeComboBox->addItems(aItems);
+    ui->typeComboBox->setCurrentIndex(ui->typeComboBox->findText(aEnum.valueToKey(mEasingCurve.type())));
+
     ui->amplitudeSpinBox->setValue(mEasingCurve.amplitude());
     ui->overshootSpinBox->setValue(mEasingCurve.overshoot());
     ui->periodSpinBox->setValue(mEasingCurve.period());
 
-    QMetaEnum aEnum=mEasingCurve.staticMetaObject.enumerator(mEasingCurve.staticMetaObject.indexOfEnumerator("Type"));
-    int index=ui->typeComboBox->findText(aEnum.valueToKey(mEasingCurve.type()));
 
-    if (index<0)
-    {
-        index=0;
-    }
 
-    ui->typeComboBox->setCurrentIndex(index);
+    ui->typeComboBox->blockSignals(false);
+    ui->amplitudeSpinBox->blockSignals(false);
+    ui->overshootSpinBox->blockSignals(false);
+    ui->periodSpinBox->blockSignals(false);
 
-    drawCurve();
+
+
+    QTimer::singleShot(0, this, SLOT(drawCurve()));
 }
 
 EasingCurveEditDialog::~EasingCurveEditDialog()

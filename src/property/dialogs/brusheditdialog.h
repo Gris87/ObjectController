@@ -44,6 +44,7 @@ private:
     void drawTransparentArea(QPainter *aPainter, QRect aRect, int aBoxSize=8);
 
 private slots:
+    void updateTransparentArea();
     void colorChanged(QColor aColor);
     void gradientChanged(const QGradientStops &aGradientStops);
 

@@ -3,6 +3,7 @@
 
 #include <QPainter>
 #include <QScrollBar>
+#include <QTimer>
 
 #include "brusheditdialog.h"
 #include "../widgets/doubleframe.h"
@@ -29,7 +30,7 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
     updateProperties(true);
 
     drawBrush();
-    drawPen();
+    QTimer::singleShot(0, this, SLOT(drawPen()));
 }
 
 PenEditDialog::~PenEditDialog()
@@ -60,7 +61,7 @@ void PenEditDialog::drawBrush()
     aPainter.fillRect(0, 0, aWidth, aHeight, mPen.brush());
     aPainter.end();
 
-    ui->brushIconLabel->setPixmap(aPixmap);
+    ui->brushIconLabel->setPixmap(QIcon(aPixmap).pixmap(18, 18));
 }
 
 void PenEditDialog::drawPen()
