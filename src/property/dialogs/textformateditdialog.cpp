@@ -109,37 +109,37 @@ void TextFormatEditDialog::on_typeComboBox_currentIndexChanged(const QString &aV
 {
     if (aValue=="BlockFormat")
     {
-        mTextFormat=mTextBlockFormat;
+        copyFromTextFormat(mTextBlockFormat);
     }
     else
     if (aValue=="CharFormat")
     {
-        mTextFormat=mTextCharFormat;
+        copyFromTextFormat(mTextCharFormat);
     }
     else
     if (aValue=="FrameFormat")
     {
-        mTextFormat=mTextFrameFormat;
+        copyFromTextFormat(mTextFrameFormat);
     }
     else
     if (aValue=="ImageFormat")
     {
-        mTextFormat=mTextImageFormat;
+        copyFromTextFormat(mTextImageFormat);
     }
     else
     if (aValue=="ListFormat")
     {
-        mTextFormat=mTextListFormat;
+        copyFromTextFormat(mTextListFormat);
     }
     else
     if (aValue=="TableCellFormat")
     {
-        mTextFormat=mTextTableCellFormat;
+        copyFromTextFormat(mTextTableCellFormat);
     }
     else
     if (aValue=="TableFormat")
     {
-        mTextFormat=mTextTableFormat;
+        copyFromTextFormat(mTextTableFormat);
     }
     else
     {
@@ -171,8 +171,47 @@ void TextFormatEditDialog::on_foregroundButton_clicked()
     }
 }
 
+void TextFormatEditDialog::on_layoutDirectionComboBox_currentIndexChanged(const QString &aValue)
+{
+    if (aValue=="LeftToRight")
+    {
+        mTextFormat.setLayoutDirection(Qt::LeftToRight);
+    }
+    else
+    if (aValue=="RightToLeft")
+    {
+        mTextFormat.setLayoutDirection(Qt::RightToLeft);
+    }
+    else
+    if (aValue=="LayoutDirectionAuto")
+    {
+        mTextFormat.setLayoutDirection(Qt::LayoutDirectionAuto);
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+}
+
+void TextFormatEditDialog::on_objectIndexSpinBox_valueChanged(int aValue)
+{
+    mTextFormat.setObjectIndex(aValue);
+}
+
+void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
+{
+    aTextFormat.setBackground(mTextFormat.background());
+    aTextFormat.setForeground(mTextFormat.foreground());
+    aTextFormat.setLayoutDirection(mTextFormat.layoutDirection());
+    aTextFormat.setObjectIndex(mTextFormat.objectIndex());
+
+    mTextFormat=aTextFormat;
+}
+
 #define BLOCK_SIGNALS(aLock) \
-    ui->typeComboBox->blockSignals(aLock);
+    ui->typeComboBox->blockSignals(aLock); \
+    ui->layoutDirectionComboBox->blockSignals(aLock); \
+    ui->objectIndexSpinBox->blockSignals(aLock);
 
 void TextFormatEditDialog::updateProperties()
 {
@@ -219,7 +258,31 @@ void TextFormatEditDialog::updateProperties()
         Q_ASSERT(false);
     }
 
+    Qt::LayoutDirection aDirection=mTextFormat.layoutDirection();
+    QString aLayoutDirectionStr;
+
+    if (aDirection==Qt::LeftToRight)
+    {
+        aLayoutDirectionStr="LeftToRight";
+    }
+    else
+    if (aDirection==Qt::RightToLeft)
+    {
+        aLayoutDirectionStr="RightToLeft";
+    }
+    else
+    if (aDirection==Qt::LayoutDirectionAuto)
+    {
+        aLayoutDirectionStr="LayoutDirectionAuto";
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
     ui->typeComboBox->setCurrentIndex(ui->typeComboBox->findText(aTypeStr));
+    ui->layoutDirectionComboBox->setCurrentIndex(ui->layoutDirectionComboBox->findText(aLayoutDirectionStr));
+    ui->objectIndexSpinBox->setValue(mTextFormat.objectIndex());
 
     BLOCK_SIGNALS(false);
 }

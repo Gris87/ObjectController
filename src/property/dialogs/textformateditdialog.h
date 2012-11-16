@@ -31,6 +31,7 @@ private:
     QTextTableCellFormat      mTextTableCellFormat;
     QTextTableFormat          mTextTableFormat;
 
+    void copyFromTextFormat(QTextFormat aTextFormat);
     void updateProperties();
     void drawBackgroundBrush();
     void drawForegroundBrush();
@@ -39,9 +40,11 @@ private:
 private slots:
     void on_okButton_clicked();
     void on_cancelButton_clicked();
-    void on_typeComboBox_currentIndexChanged(const QString &arg1);
+    void on_typeComboBox_currentIndexChanged(const QString &aValue);
     void on_backgroundButton_clicked();
     void on_foregroundButton_clicked();
+    void on_layoutDirectionComboBox_currentIndexChanged(const QString &aValue);
+    void on_objectIndexSpinBox_valueChanged(int aValue);
 };
 
 #endif // TEXTFORMATEDITDIALOG_H
