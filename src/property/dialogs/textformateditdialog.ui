@@ -285,6 +285,124 @@
                  <number>4</number>
                 </property>
                 <item>
+                 <widget class="QWidget" name="blockWidget" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout_26">
+                   <property name="spacing">
+                    <number>4</number>
+                   </property>
+                   <property name="margin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QLabel" name="blockHorizontalAlignmentLabel">
+                     <property name="text">
+                      <string>Horizontal alignment:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="blockHorizontalAlignmentComboBox">
+                     <item>
+                      <property name="text">
+                       <string>AlignLeft</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>AlignHCenter</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>AlignRight</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>AlignJustify</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>AlignAbsolute</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockVerticalAlignmentLabel">
+                     <property name="text">
+                      <string>Vertical alignment:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="blockVerticalAlignmentComboBox">
+                     <item>
+                      <property name="text">
+                       <string>AlignTop</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>AlignVCenter</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>AlignBottom</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockBottomMarginLabel">
+                     <property name="text">
+                      <string>Bottom margin:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockBottomMarginSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockIndentLabel">
+                     <property name="text">
+                      <string>Indent:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QSpinBox" name="blockIndentSpinBox"/>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockLeftMarginLabel">
+                     <property name="text">
+                      <string>Left margin:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockLeftMarginSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
+                <item>
                  <spacer name="verticalSpacer_3">
                   <property name="orientation">
                    <enum>Qt::Vertical</enum>
@@ -336,8 +454,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -399,8 +517,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -462,8 +580,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -525,8 +643,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -588,8 +706,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -651,8 +769,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_20">
