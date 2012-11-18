@@ -239,6 +239,13 @@
       </layout>
      </item>
      <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QStackedWidget" name="typeStackedWidget">
        <property name="currentIndex">
         <number>0</number>
@@ -272,9 +279,9 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <y>-115</y>
+                 <width>263</width>
+                 <height>497</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout">
@@ -293,6 +300,92 @@
                    <property name="margin">
                     <number>0</number>
                    </property>
+                   <item>
+                    <widget class="QCheckBox" name="blockNonBreakableLinesCheckBox">
+                     <property name="text">
+                      <string>Non breakable lines</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockPageBreakPolicyLabel">
+                     <property name="text">
+                      <string>Page break policy:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="blockPageBreakPolicyComboBox">
+                     <item>
+                      <property name="text">
+                       <string>PageBreak_Auto</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>PageBreak_AlwaysBefore</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>PageBreak_AlwaysAfter</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockLineHeightLabel">
+                     <property name="text">
+                      <string>Line height:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockLineHeightSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockLineHeightTypeLabel">
+                     <property name="text">
+                      <string>Line height type:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="blockLineHeightTypeComboBox">
+                     <item>
+                      <property name="text">
+                       <string>SingleHeight</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>ProportionalHeight</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>FixedHeight</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>MinimumHeight</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>LineDistanceHeight</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
                    <item>
                     <widget class="QLabel" name="blockHorizontalAlignmentLabel">
                      <property name="text">
@@ -356,6 +449,84 @@
                     </widget>
                    </item>
                    <item>
+                    <widget class="QLabel" name="blockIndentLabel">
+                     <property name="text">
+                      <string>Indent:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QSpinBox" name="blockIndentSpinBox"/>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockTextIndentLabel">
+                     <property name="text">
+                      <string>Text indent:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockTextIndentSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockLeftMarginLabel">
+                     <property name="text">
+                      <string>Left margin:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockLeftMarginSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockTopMarginLabel">
+                     <property name="text">
+                      <string>Top margin:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockTopMarginSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="blockRightMarginLabel">
+                     <property name="text">
+                      <string>Right margin:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QDoubleSpinBox" name="blockRightMarginSpinBox">
+                     <property name="decimals">
+                      <number>6</number>
+                     </property>
+                     <property name="maximum">
+                      <double>2147483647.000000000000000</double>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
                     <widget class="QLabel" name="blockBottomMarginLabel">
                      <property name="text">
                       <string>Bottom margin:</string>
@@ -373,29 +544,9 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="blockIndentLabel">
+                    <widget class="QLabel" name="blockTabPositionsLabel">
                      <property name="text">
-                      <string>Indent:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QSpinBox" name="blockIndentSpinBox"/>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="blockLeftMarginLabel">
-                     <property name="text">
-                      <string>Left margin:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QDoubleSpinBox" name="blockLeftMarginSpinBox">
-                     <property name="decimals">
-                      <number>6</number>
-                     </property>
-                     <property name="maximum">
-                      <double>2147483647.000000000000000</double>
+                      <string>Tab positions:</string>
                      </property>
                     </widget>
                    </item>
