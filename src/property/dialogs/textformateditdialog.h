@@ -93,6 +93,12 @@ private slots:
     void on_blockBottomMarginSpinBox_valueChanged(double aValue);
     void on_blockTabPositionsAddButton_clicked();
 
+    // CHAR
+    void on_charFontCategoryButton_clicked();
+    void on_charSpacingButton_clicked();
+    void on_charStyleButton_clicked();
+    void on_charAnchorButton_clicked();
+    void on_charOthersButton_clicked();
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

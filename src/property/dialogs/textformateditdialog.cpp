@@ -244,6 +244,14 @@ void TextFormatEditDialog::hideCategories()
     on_blockPageBreakButton_clicked();
     on_blockTabPositionsButton_clicked();
 
+    // CHAR
+    ui->typeStackedWidget->setCurrentIndex(1);
+    on_charFontCategoryButton_clicked();
+    on_charSpacingButton_clicked();
+    on_charStyleButton_clicked();
+    on_charAnchorButton_clicked();
+    on_charOthersButton_clicked();
+
     ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
 }
 
@@ -613,6 +621,31 @@ void TextFormatEditDialog::blockTabPositionDelete()
 void TextFormatEditDialog::blockTabPositionChanged()
 {
     blockUpdateTabPositions();
+}
+
+void TextFormatEditDialog::on_charFontCategoryButton_clicked()
+{
+    showOrHideCategory(ui->charFontFrame, ui->charFontCategoryButton);
+}
+
+void TextFormatEditDialog::on_charSpacingButton_clicked()
+{
+    showOrHideCategory(ui->charSpacingFrame, ui->charSpacingButton);
+}
+
+void TextFormatEditDialog::on_charStyleButton_clicked()
+{
+    showOrHideCategory(ui->charStyleFrame, ui->charStyleButton);
+}
+
+void TextFormatEditDialog::on_charAnchorButton_clicked()
+{
+    showOrHideCategory(ui->charAnchorFrame, ui->charAnchorButton);
+}
+
+void TextFormatEditDialog::on_charOthersButton_clicked()
+{
+    showOrHideCategory(ui->charOthersFrame, ui->charOthersButton);
 }
 
 void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)

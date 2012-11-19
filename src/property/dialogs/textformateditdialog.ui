@@ -225,7 +225,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="objectIndexSpinBox"/>
+         <widget class="QSpinBox" name="objectIndexSpinBox">
+          <property name="maximum">
+           <number>2147483647</number>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="verticalSpacer">
@@ -252,7 +256,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="blockPage">
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -283,7 +287,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-510</y>
+                 <y>-639</y>
                  <width>266</width>
                  <height>1021</height>
                 </rect>
@@ -568,7 +572,11 @@
                        </widget>
                       </item>
                       <item>
-                       <widget class="QSpinBox" name="blockIndentSpinBox"/>
+                       <widget class="QSpinBox" name="blockIndentSpinBox">
+                        <property name="maximum">
+                         <number>2147483647</number>
+                        </property>
+                       </widget>
                       </item>
                       <item>
                        <widget class="QLabel" name="blockTextIndentLabel">
@@ -940,9 +948,9 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-601</y>
                  <width>266</width>
-                 <height>824</height>
+                 <height>989</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -962,483 +970,306 @@
                     <number>0</number>
                    </property>
                    <item>
-                    <widget class="QCheckBox" name="charAnchorCheckBox">
+                    <widget class="QToolButton" name="charFontCategoryButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
-                      <string>Anchor</string>
+                      <string>Font</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="charAnchorHrefLabel">
-                     <property name="text">
-                      <string>Anchor Href:</string>
+                    <widget class="QFrame" name="charFontFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
                      </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="charAnchorHrefLineEdit"/>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_2">
-                     <property name="spacing">
-                      <number>4</number>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
                      </property>
-                     <item>
-                      <widget class="QLabel" name="charAnchorNamesLabel">
-                       <property name="text">
-                        <string>Anchor names:</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLineEdit" name="charAnchorNamesEdit">
-                       <property name="readOnly">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QToolButton" name="charAnchorNamesButton">
-                       <property name="text">
-                        <string>...</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_3">
-                     <property name="spacing">
-                      <number>4</number>
-                     </property>
-                     <item>
-                      <widget class="QLabel" name="charFontLabel">
-                       <property name="text">
-                        <string>Font:</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLineEdit" name="charFontEdit">
-                       <property name="readOnly">
-                        <bool>true</bool>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QToolButton" name="charFontButton">
-                       <property name="text">
-                        <string>...</string>
-                       </property>
-                      </widget>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontCapitalizationLabel">
-                     <property name="text">
-                      <string>Font capitalization:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QComboBox" name="charFontCapitalizationComboBox">
-                     <item>
-                      <property name="text">
-                       <string>MixedCase</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AllUppercase</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AllLowercase</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>SmallCaps</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Capitalize</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontFamilyLabel">
-                     <property name="text">
-                      <string>Font family:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="charFontFamilyEdit"/>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="charFontFixedPitchCheckBox">
-                     <property name="text">
-                      <string>Font fixed pitch</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontHintingPreferenceLabel">
-                     <property name="text">
-                      <string>Font hinting preference:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QComboBox" name="charFontHintingPreferenceComboBox">
-                     <item>
-                      <property name="text">
-                       <string>PreferDefaultHinting</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferNoHinting</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferVerticalHinting</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferFullHinting</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="charFontItalicCheckBox">
-                     <property name="text">
-                      <string>Font italic</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="charFontKerningCheckBox">
-                     <property name="text">
-                      <string>Font kerning</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontLetterSpacingLabel">
-                     <property name="text">
-                      <string>Font letter spacing:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QDoubleSpinBox" name="charFontLetterSpacingSpinBox">
-                     <property name="decimals">
-                      <number>6</number>
-                     </property>
-                     <property name="maximum">
-                      <double>2147483647.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="charFontOverlineCheckBox">
-                     <property name="text">
-                      <string>Font overline</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontPointSizeLabel">
-                     <property name="text">
-                      <string>Font point size:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QDoubleSpinBox" name="charFontPointSizeSpinBox">
-                     <property name="decimals">
-                      <number>6</number>
-                     </property>
-                     <property name="maximum">
-                      <double>2147483647.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="charFontStrikeOutCheckBox">
-                     <property name="text">
-                      <string>Font strike out</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontStyleHintLabel">
-                     <property name="text">
-                      <string>Font style hint:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QComboBox" name="charFontStyleHintComboBox">
-                     <item>
-                      <property name="text">
-                       <string>AnyStyle</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Helvetica</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Times</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Courier</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>OldEnglish</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Monospace</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Fantasy</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>Cursive</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>System</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontStyleStrategyLabel">
-                     <property name="text">
-                      <string>Font style strategy:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QComboBox" name="charFontStyleStrategyComboBox">
-                     <item>
-                      <property name="text">
-                       <string>PreferDefault</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferBitmap</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferDevice</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferOutline</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>ForceOutline</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>NoAntialias</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferAntialias</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>OpenGLCompatible</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>NoFontMerging</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontStyleStrategyFlagLabel">
-                     <property name="text">
-                      <string>Font style strategy (flag):</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QComboBox" name="charFontStyleStrategyFlagComboBox">
-                     <item>
-                      <property name="text">
-                       <string>No flag</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferMatch</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PreferQuality</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>ForceIntegerMetrics</string>
-                      </property>
-                     </item>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QCheckBox" name="charFontUnderlineCheckBox">
-                     <property name="text">
-                      <string>Font underline</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontWeightLabel">
-                     <property name="text">
-                      <string>Font weight:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QSpinBox" name="charFontWeightSpinBox"/>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontWordSpacingLabel">
-                     <property name="text">
-                      <string>Font word spacing:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QDoubleSpinBox" name="charFontWordSpacingSpinBox">
-                     <property name="decimals">
-                      <number>6</number>
-                     </property>
-                     <property name="maximum">
-                      <double>2147483647.000000000000000</double>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_4">
-                     <property name="spacing">
-                      <number>4</number>
-                     </property>
-                     <item>
-                      <widget class="QFrame" name="charTextOutlineFrame">
-                       <property name="frameShape">
-                        <enum>QFrame::WinPanel</enum>
-                       </property>
-                       <property name="frameShadow">
-                        <enum>QFrame::Sunken</enum>
-                       </property>
-                       <layout class="QVBoxLayout" name="verticalLayout_30">
-                        <property name="spacing">
-                         <number>0</number>
-                        </property>
-                        <property name="margin">
-                         <number>0</number>
-                        </property>
-                        <item>
-                         <widget class="QLabel" name="charTextOutlineIconLabel">
-                          <property name="text">
-                           <string>icon</string>
-                          </property>
-                         </widget>
-                        </item>
-                       </layout>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QLabel" name="charTextOutlineLabel">
-                       <property name="text">
-                        <string>Text outline</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <widget class="QToolButton" name="charTextOutlineButton">
-                       <property name="text">
-                        <string>...</string>
-                       </property>
-                      </widget>
-                     </item>
-                     <item>
-                      <spacer name="horizontalSpacer_7">
-                       <property name="orientation">
-                        <enum>Qt::Horizontal</enum>
-                       </property>
-                       <property name="sizeHint" stdset="0">
-                        <size>
-                         <width>40</width>
-                         <height>20</height>
-                        </size>
-                       </property>
-                      </spacer>
-                     </item>
-                    </layout>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="charFontWordSpacingLabel_2">
-                     <property name="text">
-                      <string>Tooltip:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="charTooltipEdit"/>
-                   </item>
-                   <item>
-                    <widget class="QWidget" name="charUnderlineColorWidget" native="true">
-                     <layout class="QHBoxLayout" name="charUnderlineColorLayout">
+                     <layout class="QVBoxLayout" name="verticalLayout_36">
                       <property name="spacing">
                        <number>4</number>
                       </property>
                       <property name="margin">
-                       <number>0</number>
+                       <number>4</number>
                       </property>
                       <item>
-                       <widget class="QLabel" name="charUnderlineColorLabel">
+                       <layout class="QHBoxLayout" name="horizontalLayout_3">
+                        <property name="spacing">
+                         <number>4</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="charFontLabel">
+                          <property name="text">
+                           <string>Font:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QToolButton" name="charFontButton">
+                          <property name="text">
+                           <string>...</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_8">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontFamilyLabel">
                         <property name="text">
-                         <string>Underline color</string>
+                         <string>Font family:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="charFontFamilyEdit"/>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontPointSizeLabel">
+                        <property name="text">
+                         <string>Font point size:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="charFontPointSizeSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontWeightLabel">
+                        <property name="text">
+                         <string>Font weight:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QSpinBox" name="charFontWeightSpinBox">
+                        <property name="maximum">
+                         <number>2147483647</number>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="charFontItalicCheckBox">
+                        <property name="text">
+                         <string>Font italic</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="charFontFixedPitchCheckBox">
+                        <property name="text">
+                         <string>Font fixed pitch</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="charFontStrikeOutCheckBox">
+                        <property name="text">
+                         <string>Font strike out</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="charFontKerningCheckBox">
+                        <property name="text">
+                         <string>Font kerning</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="charFontOverlineCheckBox">
+                        <property name="text">
+                         <string>Font overline</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="charFontUnderlineCheckBox">
+                        <property name="text">
+                         <string>Font underline</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charUnderlineStyleLabel">
+                        <property name="text">
+                         <string>Underline style:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charUnderlineStyleComboBox">
+                        <item>
+                         <property name="text">
+                          <string>NoUnderline</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>SingleUnderline</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>DashUnderline</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>DotLine</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>DashDotLine</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>DashDotDotLine</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>WaveUnderline</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>SpellCheckUnderline</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QWidget" name="charUnderlineColorWidget" native="true">
+                        <layout class="QHBoxLayout" name="charUnderlineColorLayout">
+                         <property name="spacing">
+                          <number>4</number>
+                         </property>
+                         <property name="margin">
+                          <number>0</number>
+                         </property>
+                         <item>
+                          <widget class="QLabel" name="charUnderlineColorLabel">
+                           <property name="text">
+                            <string>Underline color</string>
+                           </property>
+                          </widget>
+                         </item>
+                        </layout>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="charSpacingButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Spacing</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="charSpacingFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_38">
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <property name="margin">
+                       <number>4</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="charFontLetterSpacingLabel">
+                        <property name="text">
+                         <string>Font letter spacing:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="charFontLetterSpacingSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontWordSpacingLabel">
+                        <property name="text">
+                         <string>Font word spacing:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="charFontWordSpacingSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
                         </property>
                        </widget>
                       </item>
@@ -1446,100 +1277,502 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="charUnderlineStyleLabel">
+                    <widget class="QToolButton" name="charStyleButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
-                      <string>Underline style:</string>
+                      <string>Style</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="charUnderlineStyleComboBox">
-                     <item>
-                      <property name="text">
-                       <string>NoUnderline</string>
+                    <widget class="QFrame" name="charStyleFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_37">
+                      <property name="spacing">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>SingleUnderline</string>
+                      <property name="margin">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>DashUnderline</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>DotLine</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>DashDotLine</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>DashDotDotLine</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>WaveUnderline</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>SpellCheckUnderline</string>
-                      </property>
-                     </item>
+                      <item>
+                       <widget class="QLabel" name="charFontStyleHintLabel">
+                        <property name="text">
+                         <string>Font style hint:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charFontStyleHintComboBox">
+                        <item>
+                         <property name="text">
+                          <string>AnyStyle</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Helvetica</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Times</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Courier</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>OldEnglish</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Monospace</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Fantasy</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Cursive</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>System</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontStyleStrategyLabel">
+                        <property name="text">
+                         <string>Font style strategy:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charFontStyleStrategyComboBox">
+                        <item>
+                         <property name="text">
+                          <string>PreferDefault</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferBitmap</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferDevice</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferOutline</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>ForceOutline</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>NoAntialias</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferAntialias</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>OpenGLCompatible</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>NoFontMerging</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontStyleStrategyFlagLabel">
+                        <property name="text">
+                         <string>Font style strategy (flag):</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charFontStyleStrategyFlagComboBox">
+                        <item>
+                         <property name="text">
+                          <string>No flag</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferMatch</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferQuality</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>ForceIntegerMetrics</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="charFontStyleHintLabel_3">
+                    <widget class="QToolButton" name="charAnchorButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
                      <property name="text">
-                      <string>Vertical alignment:</string>
+                      <string>Anchor</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="charVerticalAlignmentComboBox">
-                     <item>
-                      <property name="text">
-                       <string>AlignNormal</string>
+                    <widget class="QFrame" name="charAnchorFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_39">
+                      <property name="spacing">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AlignSuperScript</string>
+                      <property name="margin">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AlignSubScript</string>
+                      <item>
+                       <widget class="QCheckBox" name="charAnchorCheckBox">
+                        <property name="text">
+                         <string>Anchor</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charAnchorHrefLabel">
+                        <property name="text">
+                         <string>Anchor Href:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="charAnchorHrefLineEdit"/>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_2">
+                        <property name="spacing">
+                         <number>4</number>
+                        </property>
+                        <item>
+                         <widget class="QLabel" name="charAnchorNamesLabel">
+                          <property name="text">
+                           <string>Anchor names:</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLineEdit" name="charAnchorNamesEdit">
+                          <property name="readOnly">
+                           <bool>true</bool>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QToolButton" name="charAnchorNamesButton">
+                          <property name="text">
+                           <string>...</string>
+                          </property>
+                         </widget>
+                        </item>
+                       </layout>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="charOthersButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Others</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="charOthersFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_40">
+                      <property name="spacing">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AlignMiddle</string>
+                      <property name="margin">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AlignBottom</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AlignTop</string>
-                      </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>AlignBaseline</string>
-                      </property>
-                     </item>
+                      <item>
+                       <widget class="QLabel" name="charFontCapitalizationLabel">
+                        <property name="text">
+                         <string>Font capitalization:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charFontCapitalizationComboBox">
+                        <item>
+                         <property name="text">
+                          <string>MixedCase</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AllUppercase</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AllLowercase</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>SmallCaps</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>Capitalize</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charFontHintingPreferenceLabel">
+                        <property name="text">
+                         <string>Font hinting preference:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charFontHintingPreferenceComboBox">
+                        <item>
+                         <property name="text">
+                          <string>PreferDefaultHinting</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferNoHinting</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferVerticalHinting</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>PreferFullHinting</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charVerticalAlignmentLabel">
+                        <property name="text">
+                         <string>Vertical alignment:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="charVerticalAlignmentComboBox">
+                        <item>
+                         <property name="text">
+                          <string>AlignNormal</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AlignSuperScript</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AlignSubScript</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AlignMiddle</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AlignBottom</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AlignTop</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>AlignBaseline</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_4">
+                        <property name="spacing">
+                         <number>4</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="charTextOutlineFrame">
+                          <property name="frameShape">
+                           <enum>QFrame::WinPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Sunken</enum>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_30">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <property name="margin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="charTextOutlineIconLabel">
+                             <property name="text">
+                              <string>icon</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="charTextOutlineLabel">
+                          <property name="text">
+                           <string>Text outline</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QToolButton" name="charTextOutlineButton">
+                          <property name="text">
+                           <string>...</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_7">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="charTooltipLabel">
+                        <property name="text">
+                         <string>Tooltip:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="charTooltipEdit"/>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                   </layout>
