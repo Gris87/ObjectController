@@ -6,6 +6,9 @@
 #include <QTextFormat>
 #include <QLabel>
 #include <QSplitter>
+#include <QToolButton>
+
+#include "../widgets/colorarea.h"
 
 namespace Ui {
 class TextFormatEditDialog;
@@ -33,11 +36,15 @@ private:
     QTextTableCellFormat      mTextTableCellFormat;
     QTextTableFormat          mTextTableFormat;
 
+    ColorArea                *mCharUnderlineColorArea;
+
     void copyFromTextFormat(QTextFormat aTextFormat);
     void updateProperties();
     void drawBackgroundBrush();
     void drawForegroundBrush();
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
+
+    inline void showOrHideCategory(QWidget *aCategory, QToolButton *aButton);
 
     void blockSetLineHeight(const double &aHeight, const QString &aType);
     void blockSetAlignment(const QString &aHorizontal, const QString &aVertical);
@@ -45,6 +52,8 @@ private:
     void blockAddTabPosition();
 
 private slots:
+    void hideCategories();
+
     void blockTabPositionUp();
     void blockTabPositionDown();
     void blockTabPositionDelete();
@@ -52,11 +61,22 @@ private slots:
 
     void on_okButton_clicked();
     void on_cancelButton_clicked();
+
+    // GENERAL
     void on_typeComboBox_currentIndexChanged(const QString &aValue);
     void on_backgroundButton_clicked();
     void on_foregroundButton_clicked();
     void on_layoutDirectionComboBox_currentIndexChanged(const QString &aValue);
     void on_objectIndexSpinBox_valueChanged(int aValue);
+
+    // BLOCK
+    void on_blockAlignmentButton_clicked();
+    void on_blockMarginsButton_clicked();
+    void on_blockIndentationButton_clicked();
+    void on_blockLineHeightButton_clicked();
+    void on_blockPageBreakButton_clicked();
+    void on_blockTabPositionsButton_clicked();
+
     void on_blockNonBreakableLinesCheckBox_toggled(bool checked);
     void on_blockPageBreakPolicyAutoCheckBox_toggled(bool checked);
     void on_blockPageBreakPolicyBeforeCheckBox_toggled(bool checked);
@@ -72,6 +92,7 @@ private slots:
     void on_blockRightMarginSpinBox_valueChanged(double aValue);
     void on_blockBottomMarginSpinBox_valueChanged(double aValue);
     void on_blockTabPositionsAddButton_clicked();
+
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

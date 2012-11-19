@@ -2,6 +2,7 @@
 #include "ui_textformateditdialog.h"
 
 #include <QScrollBar>
+#include <QTimer>
 
 #include "brusheditdialog.h"
 #include "../widgets/tabframe.h"
@@ -14,6 +15,19 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
 
     setWindowFlags(Qt::Window);
 
+
+
+    mCharUnderlineColorArea=new ColorArea(this);
+    mCharUnderlineColorArea->setMinimumSize(20, 20);
+    mCharUnderlineColorArea->setMaximumSize(20, 20);
+    mCharUnderlineColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+    mCharUnderlineColorArea->setTransparentBlockSize(5);
+    ui->charUnderlineColorLayout->insertWidget(0, mCharUnderlineColorArea);
+
+    connect(mCharUnderlineColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(charUnderlineColorChanged(QColor)));
+
+
+
     mDividerSplitter = new QSplitter(Qt::Horizontal, this);
     ui->dividerLayout->removeWidget(ui->generalWidget);
     ui->dividerLayout->removeWidget(ui->typeStackedWidget);
@@ -23,6 +37,12 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
     mDividerSplitter->setChildrenCollapsible(false);
 
     ui->dividerLayout->addWidget(mDividerSplitter);
+
+
+
+    QTimer::singleShot(0, this, SLOT(hideCategories()));
+
+
 
     mTextFormat=aTextFormat;
 
@@ -209,6 +229,58 @@ void TextFormatEditDialog::on_layoutDirectionComboBox_currentIndexChanged(const 
 void TextFormatEditDialog::on_objectIndexSpinBox_valueChanged(int aValue)
 {
     mTextFormat.setObjectIndex(aValue);
+}
+
+void TextFormatEditDialog::hideCategories()
+{
+    int aOriginalIndex=ui->typeStackedWidget->currentIndex();
+
+    // BLOCK
+    ui->typeStackedWidget->setCurrentIndex(0);
+    on_blockAlignmentButton_clicked();
+    on_blockMarginsButton_clicked();
+    on_blockIndentationButton_clicked();
+    on_blockLineHeightButton_clicked();
+    on_blockPageBreakButton_clicked();
+    on_blockTabPositionsButton_clicked();
+
+    ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
+}
+
+inline void TextFormatEditDialog::showOrHideCategory(QWidget *aCategory, QToolButton *aButton)
+{
+    aCategory->setVisible(!aCategory->isVisible());
+    aButton->setArrowType(aCategory->isVisible()? Qt::UpArrow : Qt::DownArrow);
+}
+
+void TextFormatEditDialog::on_blockAlignmentButton_clicked()
+{
+    showOrHideCategory(ui->blockAlignmentFrame, ui->blockAlignmentButton);
+}
+
+void TextFormatEditDialog::on_blockMarginsButton_clicked()
+{
+    showOrHideCategory(ui->blockMarginsFrame, ui->blockMarginsButton);
+}
+
+void TextFormatEditDialog::on_blockIndentationButton_clicked()
+{
+    showOrHideCategory(ui->blockIndentationFrame, ui->blockIndentationButton);
+}
+
+void TextFormatEditDialog::on_blockLineHeightButton_clicked()
+{
+    showOrHideCategory(ui->blockLineHeightFrame, ui->blockLineHeightButton);
+}
+
+void TextFormatEditDialog::on_blockPageBreakButton_clicked()
+{
+    showOrHideCategory(ui->blockPageBreakFrame, ui->blockPageBreakButton);
+}
+
+void TextFormatEditDialog::on_blockTabPositionsButton_clicked()
+{
+    showOrHideCategory(ui->blockTabPositionsScrollArea, ui->blockTabPositionsButton);
 }
 
 void TextFormatEditDialog::on_blockNonBreakableLinesCheckBox_toggled(bool checked)
