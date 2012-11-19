@@ -41,8 +41,15 @@ private:
 
     void blockSetLineHeight(const double &aHeight, const QString &aType);
     void blockSetAlignment(const QString &aHorizontal, const QString &aVertical);
+    void blockUpdateTabPositions();
+    void blockAddTabPosition();
 
 private slots:
+    void blockTabPositionUp();
+    void blockTabPositionDown();
+    void blockTabPositionDelete();
+    void blockTabPositionChanged();
+
     void on_okButton_clicked();
     void on_cancelButton_clicked();
     void on_typeComboBox_currentIndexChanged(const QString &aValue);
@@ -64,6 +71,7 @@ private slots:
     void on_blockTopMarginSpinBox_valueChanged(double aValue);
     void on_blockRightMarginSpinBox_valueChanged(double aValue);
     void on_blockBottomMarginSpinBox_valueChanged(double aValue);
+    void on_blockTabPositionsAddButton_clicked();
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

@@ -281,94 +281,6 @@ void PenEditDialog::on_addButton_clicked()
     updatePattern();
 }
 
-void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
-{
-    mColorArea->blockSignals(true);
-    ui->widthSpinBox->blockSignals(true);
-    ui->styleComboBox->blockSignals(true);
-    ui->capStyleComboBox->blockSignals(true);
-    ui->joinStyleComboBox->blockSignals(true);
-    ui->cosmeticCheckBox->blockSignals(true);
-    ui->milerLimitSpinBox->blockSignals(true);
-    ui->dashOffsetSpinBox->blockSignals(true);
-
-
-
-    QString aStyle="[Unknown style]";
-
-    switch (mPen.style())
-    {
-        case Qt::NoPen:          aStyle="NoPen";           break;
-        case Qt::SolidLine:      aStyle="SolidLine";       break;
-        case Qt::DashLine:       aStyle="DashLine";        break;
-        case Qt::DotLine:        aStyle="DotLine";         break;
-        case Qt::DashDotLine:    aStyle="DashDotLine";     break;
-        case Qt::DashDotDotLine: aStyle="DashDotDotLine";  break;
-        case Qt::CustomDashLine: aStyle="CustomDashLine";  break;
-        case Qt::MPenStyle:      aStyle="MPenStyle";       break;
-    }
-
-    QString aCapStyle="[Unknown style]";
-
-    switch (mPen.capStyle())
-    {
-        case Qt::FlatCap:      aCapStyle="FlatCap";         break;
-        case Qt::SquareCap:    aCapStyle="SquareCap";       break;
-        case Qt::RoundCap:     aCapStyle="RoundCap";        break;
-        case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
-    }
-
-    QString aJoinStyle="[Unknown style]";
-
-    switch (mPen.joinStyle())
-    {
-        case Qt::MiterJoin:     aJoinStyle="MiterJoin";       break;
-        case Qt::BevelJoin:     aJoinStyle="BevelJoin";       break;
-        case Qt::RoundJoin:     aJoinStyle="RoundJoin";       break;
-        case Qt::SvgMiterJoin:  aJoinStyle="SvgMiterJoin";    break;
-        case Qt::MPenJoinStyle: aJoinStyle="MPenJoinStyle";   break;
-    }
-
-    mColorArea->setColor(mPen.color());
-    ui->widthSpinBox->setValue(mPen.widthF());
-    ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyle));
-    ui->capStyleComboBox->setCurrentIndex(ui->capStyleComboBox->findText(aCapStyle));
-    ui->joinStyleComboBox->setCurrentIndex(ui->joinStyleComboBox->findText(aJoinStyle));
-    ui->cosmeticCheckBox->setChecked(mPen.isCosmetic());
-    ui->milerLimitSpinBox->setValue(mPen.miterLimit());
-    ui->dashOffsetSpinBox->setValue(mPen.dashOffset());
-
-    if (aNeedToUpdatePattern)
-    {
-        while (ui->patternLayout->count()>0)
-        {
-            delete ui->patternLayout->takeAt(0)->widget();
-        }
-
-        QVector<qreal> aPattern=mPen.dashPattern();
-
-        for (int i=0; i<aPattern.count(); ++i)
-        {
-            addPattern();
-
-            ((DoubleFrame *)ui->patternLayout->itemAt(i)->widget())->blockSignals(true);
-            ((DoubleFrame *)ui->patternLayout->itemAt(i)->widget())->setValue(aPattern.at(i));
-            ((DoubleFrame *)ui->patternLayout->itemAt(i)->widget())->blockSignals(false);
-        }
-    }
-
-
-
-    mColorArea->blockSignals(false);
-    ui->widthSpinBox->blockSignals(false);
-    ui->styleComboBox->blockSignals(false);
-    ui->capStyleComboBox->blockSignals(false);
-    ui->joinStyleComboBox->blockSignals(false);
-    ui->cosmeticCheckBox->blockSignals(false);
-    ui->milerLimitSpinBox->blockSignals(false);
-    ui->dashOffsetSpinBox->blockSignals(false);
-}
-
 void PenEditDialog::updatePattern()
 {
     QVector<qreal> aPattern;
@@ -489,4 +401,84 @@ void PenEditDialog::patternDelete()
 void PenEditDialog::patternValueChanged(double /*aValue*/)
 {
     updatePattern();
+}
+
+#define BLOCK_SIGNALS(aLock) \
+    mColorArea->blockSignals(aLock); \
+    ui->widthSpinBox->blockSignals(aLock); \
+    ui->styleComboBox->blockSignals(aLock); \
+    ui->capStyleComboBox->blockSignals(aLock); \
+    ui->joinStyleComboBox->blockSignals(aLock); \
+    ui->cosmeticCheckBox->blockSignals(aLock); \
+    ui->milerLimitSpinBox->blockSignals(aLock); \
+    ui->dashOffsetSpinBox->blockSignals(aLock);
+
+void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
+{
+    BLOCK_SIGNALS(true);
+
+    QString aStyle="[Unknown style]";
+
+    switch (mPen.style())
+    {
+        case Qt::NoPen:          aStyle="NoPen";           break;
+        case Qt::SolidLine:      aStyle="SolidLine";       break;
+        case Qt::DashLine:       aStyle="DashLine";        break;
+        case Qt::DotLine:        aStyle="DotLine";         break;
+        case Qt::DashDotLine:    aStyle="DashDotLine";     break;
+        case Qt::DashDotDotLine: aStyle="DashDotDotLine";  break;
+        case Qt::CustomDashLine: aStyle="CustomDashLine";  break;
+        case Qt::MPenStyle:      aStyle="MPenStyle";       break;
+    }
+
+    QString aCapStyle="[Unknown style]";
+
+    switch (mPen.capStyle())
+    {
+        case Qt::FlatCap:      aCapStyle="FlatCap";         break;
+        case Qt::SquareCap:    aCapStyle="SquareCap";       break;
+        case Qt::RoundCap:     aCapStyle="RoundCap";        break;
+        case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
+    }
+
+    QString aJoinStyle="[Unknown style]";
+
+    switch (mPen.joinStyle())
+    {
+        case Qt::MiterJoin:     aJoinStyle="MiterJoin";       break;
+        case Qt::BevelJoin:     aJoinStyle="BevelJoin";       break;
+        case Qt::RoundJoin:     aJoinStyle="RoundJoin";       break;
+        case Qt::SvgMiterJoin:  aJoinStyle="SvgMiterJoin";    break;
+        case Qt::MPenJoinStyle: aJoinStyle="MPenJoinStyle";   break;
+    }
+
+    mColorArea->setColor(mPen.color());
+    ui->widthSpinBox->setValue(mPen.widthF());
+    ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyle));
+    ui->capStyleComboBox->setCurrentIndex(ui->capStyleComboBox->findText(aCapStyle));
+    ui->joinStyleComboBox->setCurrentIndex(ui->joinStyleComboBox->findText(aJoinStyle));
+    ui->cosmeticCheckBox->setChecked(mPen.isCosmetic());
+    ui->milerLimitSpinBox->setValue(mPen.miterLimit());
+    ui->dashOffsetSpinBox->setValue(mPen.dashOffset());
+
+    if (aNeedToUpdatePattern)
+    {
+        while (ui->patternLayout->count()>0)
+        {
+            delete ui->patternLayout->takeAt(0)->widget();
+        }
+
+        QVector<qreal> aPattern=mPen.dashPattern();
+
+        for (int i=0; i<aPattern.count(); ++i)
+        {
+            addPattern();
+
+            ((DoubleFrame *)ui->patternLayout->itemAt(i)->widget())->blockSignals(true);
+            ((DoubleFrame *)ui->patternLayout->itemAt(i)->widget())->setValue(aPattern.at(i));
+            ((DoubleFrame *)ui->patternLayout->itemAt(i)->widget())->blockSignals(false);
+        }
+    }
+
+    BLOCK_SIGNALS(false);
 }

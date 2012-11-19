@@ -1,7 +1,10 @@
 #include "textformateditdialog.h"
 #include "ui_textformateditdialog.h"
 
+#include <QScrollBar>
+
 #include "brusheditdialog.h"
+#include "../widgets/tabframe.h"
 
 TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent) :
     QDialog(parent),
@@ -420,6 +423,126 @@ void TextFormatEditDialog::on_blockBottomMarginSpinBox_valueChanged(double aValu
     ((QTextBlockFormat *)&mTextFormat)->setBottomMargin(aValue);
 }
 
+void TextFormatEditDialog::on_blockTabPositionsAddButton_clicked()
+{
+    blockAddTabPosition();
+    blockUpdateTabPositions();
+}
+
+void TextFormatEditDialog::blockUpdateTabPositions()
+{
+    QList<QTextOption::Tab> aTabs;
+
+    for (int i=0; i<ui->blockTabPositionsLayout->count(); ++i)
+    {
+        aTabs.append(((TabFrame *)ui->blockTabPositionsLayout->itemAt(i)->widget())->tab());
+    }
+
+    mTextBlockFormat.setTabPositions(aTabs);
+    ((QTextBlockFormat *)&mTextFormat)->setTabPositions(aTabs);
+}
+
+void TextFormatEditDialog::blockAddTabPosition()
+{
+    TabFrame *aFrame=new TabFrame(this);
+
+    if (ui->blockTabPositionsLayout->count()==0)
+    {
+        aFrame->setUpEnabled(false);
+    }
+    else
+    {
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(ui->blockTabPositionsLayout->count()-1)->widget())->setDownEnabled(true);
+    }
+
+    aFrame->setDownEnabled(false);
+
+    connect(aFrame, SIGNAL(upPressed()),     this, SLOT(blockTabPositionUp()));
+    connect(aFrame, SIGNAL(downPressed()),   this, SLOT(blockTabPositionDown()));
+    connect(aFrame, SIGNAL(deletePressed()), this, SLOT(blockTabPositionDelete()));
+    connect(aFrame, SIGNAL(tabChanged()),    this, SLOT(blockTabPositionChanged()));
+
+    ui->blockTabPositionsLayout->addWidget(aFrame);
+    ui->blockTabPositionsScrollArea->verticalScrollBar()->setValue(ui->blockTabPositionsScrollArea->verticalScrollBar()->maximum());
+}
+
+void TextFormatEditDialog::blockTabPositionUp()
+{
+    QWidget *aWidget=(QWidget *)sender();
+
+    int index=ui->blockTabPositionsLayout->indexOf(aWidget);
+
+    if (index==1)
+    {
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(0)->widget())->setUpEnabled(true);
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(1)->widget())->setUpEnabled(false);
+    }
+
+    if (index==ui->blockTabPositionsLayout->count()-1)
+    {
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(index-1)->widget())->setDownEnabled(false);
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(index)->widget())->setDownEnabled(true);
+    }
+
+    ui->blockTabPositionsLayout->removeWidget(aWidget);
+    ui->blockTabPositionsLayout->insertWidget(index-1, aWidget);
+
+    blockUpdateTabPositions();
+}
+
+void TextFormatEditDialog::blockTabPositionDown()
+{
+    QWidget *aWidget=(QWidget *)sender();
+
+    int index=ui->blockTabPositionsLayout->indexOf(aWidget);
+
+    if (index==0)
+    {
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(0)->widget())->setUpEnabled(true);
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(1)->widget())->setUpEnabled(false);
+    }
+
+    if (index==ui->blockTabPositionsLayout->count()-2)
+    {
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(index)->widget())->setDownEnabled(false);
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(index+1)->widget())->setDownEnabled(true);
+    }
+
+    ui->blockTabPositionsLayout->removeWidget(aWidget);
+    ui->blockTabPositionsLayout->insertWidget(index+1, aWidget);
+
+    blockUpdateTabPositions();
+}
+
+void TextFormatEditDialog::blockTabPositionDelete()
+{
+    QWidget *aWidget=(QWidget *)sender();
+
+    if (ui->blockTabPositionsLayout->count()>1)
+    {
+        int index=ui->blockTabPositionsLayout->indexOf(aWidget);
+
+        if (index==0)
+        {
+            ((TabFrame *)ui->blockTabPositionsLayout->itemAt(1)->widget())->setUpEnabled(false);
+        }
+
+        if (index==ui->blockTabPositionsLayout->count()-1)
+        {
+            ((TabFrame *)ui->blockTabPositionsLayout->itemAt(index-1)->widget())->setDownEnabled(false);
+        }
+    }
+
+    delete aWidget;
+
+    blockUpdateTabPositions();
+}
+
+void TextFormatEditDialog::blockTabPositionChanged()
+{
+    blockUpdateTabPositions();
+}
+
 void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
 {
     aTextFormat.setBackground(mTextFormat.background());
@@ -609,6 +732,22 @@ void TextFormatEditDialog::updateProperties()
     ui->blockTopMarginSpinBox->setValue(mTextBlockFormat.topMargin());
     ui->blockRightMarginSpinBox->setValue(mTextBlockFormat.rightMargin());
     ui->blockBottomMarginSpinBox->setValue(mTextBlockFormat.bottomMargin());
+
+    while (ui->blockTabPositionsLayout->count()>0)
+    {
+        delete ui->blockTabPositionsLayout->takeAt(0)->widget();
+    }
+
+    QList<QTextOption::Tab> aBlockTabs=mTextBlockFormat.tabPositions();
+
+    for (int i=0; i<aBlockTabs.count(); ++i)
+    {
+        blockAddTabPosition();
+
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(i)->widget())->blockSignals(true);
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(i)->widget())->setTab(aBlockTabs.at(i));
+        ((TabFrame *)ui->blockTabPositionsLayout->itemAt(i)->widget())->blockSignals(false);
+    }
 
 
     BLOCK_SIGNALS(false);
