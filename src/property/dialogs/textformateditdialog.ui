@@ -21,228 +21,223 @@
     <number>4</number>
    </property>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="dividerLayout">
      <property name="spacing">
       <number>4</number>
      </property>
      <item>
-      <layout class="QVBoxLayout" name="verticalLayout_5">
-       <property name="spacing">
-        <number>4</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="typeLabel">
-         <property name="text">
-          <string>Type:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="typeComboBox">
-         <item>
+      <widget class="QWidget" name="generalWidget" native="true">
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="spacing">
+         <number>4</number>
+        </property>
+        <item>
+         <widget class="QLabel" name="typeLabel">
           <property name="text">
-           <string>BlockFormat</string>
+           <string>Type:</string>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>CharFormat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>FrameFormat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ImageFormat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>ListFormat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>TableCellFormat</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>TableFormat</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <layout class="QGridLayout" name="gridLayout">
-         <property name="spacing">
-          <number>4</number>
-         </property>
-         <item row="1" column="0">
-          <widget class="QFrame" name="foregroundFrame">
-           <property name="frameShape">
-            <enum>QFrame::WinPanel</enum>
-           </property>
-           <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <property name="spacing">
-             <number>0</number>
-            </property>
-            <property name="margin">
-             <number>0</number>
-            </property>
-            <item>
-             <widget class="QLabel" name="foregroundIconLabel">
-              <property name="text">
-               <string>icon</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QToolButton" name="backgroundButton">
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="typeComboBox">
+          <item>
            <property name="text">
-            <string>...</string>
+            <string>BlockFormat</string>
            </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLabel" name="backgroundLabel">
+          </item>
+          <item>
            <property name="text">
-            <string>Background brush</string>
+            <string>CharFormat</string>
            </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          </item>
+          <item>
+           <property name="text">
+            <string>FrameFormat</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+          </item>
+          <item>
+           <property name="text">
+            <string>ImageFormat</string>
            </property>
-          </spacer>
-         </item>
-         <item row="1" column="3">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
+          </item>
+          <item>
+           <property name="text">
+            <string>ListFormat</string>
            </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
+          </item>
+          <item>
+           <property name="text">
+            <string>TableCellFormat</string>
            </property>
-          </spacer>
-         </item>
-         <item row="0" column="0">
-          <widget class="QFrame" name="backgroundFrame">
-           <property name="frameShape">
-            <enum>QFrame::WinPanel</enum>
+          </item>
+          <item>
+           <property name="text">
+            <string>TableFormat</string>
            </property>
-           <property name="frameShadow">
-            <enum>QFrame::Sunken</enum>
-           </property>
-           <layout class="QVBoxLayout" name="verticalLayout_2">
-            <property name="spacing">
-             <number>0</number>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <property name="spacing">
+           <number>4</number>
+          </property>
+          <item row="1" column="0">
+           <widget class="QFrame" name="foregroundFrame">
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
             </property>
-            <property name="margin">
-             <number>0</number>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
             </property>
-            <item>
-             <widget class="QLabel" name="backgroundIconLabel">
-              <property name="text">
-               <string>icon</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLabel" name="foregroundLabel">
+            <layout class="QVBoxLayout" name="verticalLayout_4">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="foregroundIconLabel">
+               <property name="text">
+                <string>icon</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QToolButton" name="backgroundButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLabel" name="backgroundLabel">
+            <property name="text">
+             <string>Background brush</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="3">
+           <spacer name="horizontalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="0">
+           <widget class="QFrame" name="backgroundFrame">
+            <property name="frameShape">
+             <enum>QFrame::WinPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Sunken</enum>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_2">
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="backgroundIconLabel">
+               <property name="text">
+                <string>icon</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLabel" name="foregroundLabel">
+            <property name="text">
+             <string>Foreground brush</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <widget class="QToolButton" name="foregroundButton">
+            <property name="text">
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="layoutDirectionLabel">
+          <property name="text">
+           <string>Layout direction:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="layoutDirectionComboBox">
+          <item>
            <property name="text">
-            <string>Foreground brush</string>
+            <string>LeftToRight</string>
            </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QToolButton" name="foregroundButton">
+          </item>
+          <item>
            <property name="text">
-            <string>...</string>
+            <string>RightToLeft</string>
            </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <widget class="QLabel" name="layoutDirectionLabel">
-         <property name="text">
-          <string>Layout direction:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="layoutDirectionComboBox">
-         <item>
+          </item>
+          <item>
+           <property name="text">
+            <string>LayoutDirectionAuto</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="objectIndexLabel">
           <property name="text">
-           <string>LeftToRight</string>
+           <string>Object index:</string>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>RightToLeft</string>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="objectIndexSpinBox"/>
+        </item>
+        <item>
+         <spacer name="verticalSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
           </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>LayoutDirectionAuto</string>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>114</height>
+           </size>
           </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="objectIndexLabel">
-         <property name="text">
-          <string>Object index:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QSpinBox" name="objectIndexSpinBox"/>
-       </item>
-       <item>
-        <spacer name="verticalSpacer">
-         <property name="orientation">
-          <enum>Qt::Vertical</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>20</width>
-           <height>114</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-      </layout>
-     </item>
-     <item>
-      <widget class="Line" name="line">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
+         </spacer>
+        </item>
+       </layout>
       </widget>
      </item>
      <item>
@@ -279,9 +274,9 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-115</y>
-                 <width>263</width>
-                 <height>497</height>
+                 <y>0</y>
+                 <width>266</width>
+                 <height>546</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout">
@@ -315,22 +310,42 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QComboBox" name="blockPageBreakPolicyComboBox">
-                     <item>
-                      <property name="text">
-                       <string>PageBreak_Auto</string>
+                    <widget class="QFrame" name="frame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_27">
+                      <property name="spacing">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PageBreak_AlwaysBefore</string>
+                      <property name="margin">
+                       <number>4</number>
                       </property>
-                     </item>
-                     <item>
-                      <property name="text">
-                       <string>PageBreak_AlwaysAfter</string>
-                      </property>
-                     </item>
+                      <item>
+                       <widget class="QCheckBox" name="blockPageBreakPolicyAutoCheckBox">
+                        <property name="text">
+                         <string>PageBreak_Auto</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="blockPageBreakPolicyBeforeCheckBox">
+                        <property name="text">
+                         <string>PageBreak_AlwaysBefore</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="blockPageBreakPolicyAfterCheckBox">
+                        <property name="text">
+                         <string>PageBreak_AlwaysAfter</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
                     </widget>
                    </item>
                    <item>
@@ -605,8 +620,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>16</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -668,8 +683,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>16</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_12">
@@ -731,8 +746,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>16</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -794,8 +809,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>16</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_16">
@@ -857,8 +872,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>16</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_18">
@@ -920,8 +935,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>71</width>
-                 <height>16</height>
+                 <width>98</width>
+                 <height>28</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="verticalLayout_20">
