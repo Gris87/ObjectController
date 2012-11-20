@@ -7,6 +7,7 @@
 #include <QLabel>
 #include <QSplitter>
 #include <QToolButton>
+#include <QBoxLayout>
 
 #include "../widgets/colorarea.h"
 
@@ -39,6 +40,8 @@ private:
     ColorArea                *mCharUnderlineColorArea;
 
     void copyFromTextFormat(QTextFormat aTextFormat);
+    void putWidgetToLayout(QWidget *aWidget, QBoxLayout *aLayout);
+
     void blockUpdateProperties();
     void charUpdateProperties();
     void frameUpdateProperties();

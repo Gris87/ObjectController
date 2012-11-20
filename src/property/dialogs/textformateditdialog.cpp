@@ -195,6 +195,21 @@ void TextFormatEditDialog::on_cancelButton_clicked()
     reject();
 }
 
+void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
+{
+    aTextFormat.setBackground(mTextFormat.background());
+    aTextFormat.setForeground(mTextFormat.foreground());
+    aTextFormat.setLayoutDirection(mTextFormat.layoutDirection());
+    aTextFormat.setObjectIndex(mTextFormat.objectIndex());
+
+    mTextFormat=aTextFormat;
+}
+
+void TextFormatEditDialog::putWidgetToLayout(QWidget *aWidget, QBoxLayout *aLayout)
+{
+    aLayout->insertWidget(0, aWidget);
+}
+
 void TextFormatEditDialog::on_typeComboBox_currentIndexChanged(const QString &aValue)
 {
     if (aValue=="BlockFormat")
@@ -205,16 +220,19 @@ void TextFormatEditDialog::on_typeComboBox_currentIndexChanged(const QString &aV
     if (aValue=="CharFormat")
     {
         copyFromTextFormat(mTextCharFormat);
+        putWidgetToLayout(ui->charWidget, ui->charLayout);
     }
     else
     if (aValue=="FrameFormat")
     {
         copyFromTextFormat(mTextFrameFormat);
+        putWidgetToLayout(ui->frameWidget, ui->frameLayout);
     }
     else
     if (aValue=="ImageFormat")
     {
         copyFromTextFormat(mTextImageFormat);
+        putWidgetToLayout(ui->charWidget, ui->imageLayout);
     }
     else
     if (aValue=="ListFormat")
@@ -225,11 +243,13 @@ void TextFormatEditDialog::on_typeComboBox_currentIndexChanged(const QString &aV
     if (aValue=="TableCellFormat")
     {
         copyFromTextFormat(mTextTableCellFormat);
+        putWidgetToLayout(ui->charWidget, ui->tableCellLayout);
     }
     else
     if (aValue=="TableFormat")
     {
         copyFromTextFormat(mTextTableFormat);
+        putWidgetToLayout(ui->frameWidget, ui->tableLayout);
     }
     else
     {
@@ -318,6 +338,17 @@ void TextFormatEditDialog::hideCategories()
     on_framePageBreakButton_clicked();
 
     ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
+
+
+
+    switch (aOriginalIndex)
+    {
+        case 1: putWidgetToLayout(ui->charWidget,  ui->charLayout);      break;
+        case 2: putWidgetToLayout(ui->frameWidget, ui->frameLayout);     break;
+        case 3: putWidgetToLayout(ui->charWidget,  ui->imageLayout);     break;
+        case 5: putWidgetToLayout(ui->charWidget,  ui->tableCellLayout); break;
+        case 6: putWidgetToLayout(ui->frameWidget, ui->tableLayout);     break;
+    }
 }
 
 inline void TextFormatEditDialog::showOrHideCategory(QWidget *aCategory, QToolButton *aButton)
@@ -1412,16 +1443,6 @@ void TextFormatEditDialog::on_framePageBreakPolicyAfterCheckBox_toggled(bool che
         QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter;
         FRAME_MODIFICATION(setPageBreakPolicy(aPolicy));
     }
-}
-
-void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
-{
-    aTextFormat.setBackground(mTextFormat.background());
-    aTextFormat.setForeground(mTextFormat.foreground());
-    aTextFormat.setLayoutDirection(mTextFormat.layoutDirection());
-    aTextFormat.setObjectIndex(mTextFormat.objectIndex());
-
-    mTextFormat=aTextFormat;
 }
 
 #define BLOCK_BLOCK_SIGNALS(aLock) \
