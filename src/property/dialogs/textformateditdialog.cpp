@@ -3,8 +3,11 @@
 
 #include <QScrollBar>
 #include <QTimer>
+#include <QFontDialog>
 
 #include "brusheditdialog.h"
+#include "stringlisteditdialog.h"
+#include "peneditdialog.h"
 #include "../widgets/tabframe.h"
 
 TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent) :
@@ -91,6 +94,7 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
 
     drawBackgroundBrush();
     drawForegroundBrush();
+    charDrawFont();
     charDrawTextOutlinePen();
 }
 
@@ -129,13 +133,47 @@ void TextFormatEditDialog::drawForegroundBrush()
     drawBrush(mTextFormat.foreground(), ui->foregroundIconLabel);
 }
 
+void TextFormatEditDialog::charDrawFont()
+{
+    QFont aFont=((QTextCharFormat *)&mTextFormat)->font();
+    aFont.setPixelSize(32);
+
+    QFontMetrics aMetrics(aFont);
+
+    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-6;
+
+    if (aSize<1)
+    {
+        aSize=1;
+    }
+
+    QRect aBoundingRect(0, 0, aSize, aSize);
+
+    QPixmap aPenPixmap=QPixmap(aSize, aSize);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setFont(aFont);
+    aPainter.drawText(aBoundingRect, Qt::AlignCenter, "A", &aBoundingRect);
+    aPainter.end();
+
+    if (aSize<32)
+    {
+        ui->charFontIconLabel->setPixmap(QIcon(aPenPixmap.scaled(32, 32)).pixmap(18, 18));
+    }
+    else
+    {
+        ui->charFontIconLabel->setPixmap(QIcon(aPenPixmap).pixmap(18, 18));
+    }
+}
+
 void TextFormatEditDialog::charDrawTextOutlinePen()
 {
     QPixmap aPenPixmap=QPixmap(16, 16);
     aPenPixmap.fill(QColor(255, 255, 255, 0));
 
     QPainter aPainter(&aPenPixmap);
-    aPainter.setPen(mTextCharFormat.textOutline());
+    aPainter.setPen(((QTextCharFormat *)&mTextFormat)->textOutline());
     aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
     aPainter.end();
 
@@ -305,6 +343,10 @@ void TextFormatEditDialog::on_blockTabPositionsButton_clicked()
     showOrHideCategory(ui->blockTabPositionsScrollArea, ui->blockTabPositionsButton);
 }
 
+#define BLOCK_MODIFICATION(action) \
+    mTextBlockFormat.##action##; \
+    ((QTextBlockFormat *)&mTextFormat)->##action##;
+
 void TextFormatEditDialog::blockSetAlignment(const QString &aHorizontal, const QString &aVertical)
 {
     Qt::Alignment aHorizontalAlignment=Qt::AlignLeft;
@@ -340,8 +382,7 @@ void TextFormatEditDialog::blockSetAlignment(const QString &aHorizontal, const Q
         aVerticalAlignment=Qt::AlignBottom;
     }
 
-    mTextBlockFormat.setAlignment(aHorizontalAlignment | aVerticalAlignment);
-    ((QTextBlockFormat *)&mTextFormat)->setAlignment(aHorizontalAlignment | aVerticalAlignment);
+    BLOCK_MODIFICATION(setAlignment(aHorizontalAlignment | aVerticalAlignment));
 }
 
 void TextFormatEditDialog::on_blockHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue)
@@ -356,38 +397,32 @@ void TextFormatEditDialog::on_blockVerticalAlignmentComboBox_currentIndexChanged
 
 void TextFormatEditDialog::on_blockTopMarginSpinBox_valueChanged(double aValue)
 {
-    mTextBlockFormat.setTopMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setTopMargin(aValue);
+    BLOCK_MODIFICATION(setTopMargin(aValue));
 }
 
 void TextFormatEditDialog::on_blockBottomMarginSpinBox_valueChanged(double aValue)
 {
-    mTextBlockFormat.setBottomMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setBottomMargin(aValue);
+    BLOCK_MODIFICATION(setBottomMargin(aValue));
 }
 
 void TextFormatEditDialog::on_blockLeftMarginSpinBox_valueChanged(double aValue)
 {
-    mTextBlockFormat.setLeftMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setLeftMargin(aValue);
+    BLOCK_MODIFICATION(setLeftMargin(aValue));
 }
 
 void TextFormatEditDialog::on_blockRightMarginSpinBox_valueChanged(double aValue)
 {
-    mTextBlockFormat.setRightMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setRightMargin(aValue);
+    BLOCK_MODIFICATION(setRightMargin(aValue));
 }
 
 void TextFormatEditDialog::on_blockTextIndentSpinBox_valueChanged(double aValue)
 {
-    mTextBlockFormat.setTextIndent(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setTextIndent(aValue);
+    BLOCK_MODIFICATION(setTextIndent(aValue));
 }
 
 void TextFormatEditDialog::on_blockIndentSpinBox_valueChanged(int aValue)
 {
-    mTextBlockFormat.setIndent(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setIndent(aValue);
+    BLOCK_MODIFICATION(setIndent(aValue));
 }
 
 void TextFormatEditDialog::blockSetLineHeight(const double &aHeight, const QString &aType)
@@ -423,8 +458,7 @@ void TextFormatEditDialog::blockSetLineHeight(const double &aHeight, const QStri
         Q_ASSERT(false);
     }
 
-    mTextBlockFormat.setLineHeight(aHeight, aHeightType);
-    ((QTextBlockFormat *)&mTextFormat)->setLineHeight(aHeight, aHeightType);
+    BLOCK_MODIFICATION(setLineHeight(aHeight, aHeightType));
 }
 
 void TextFormatEditDialog::on_blockLineHeightSpinBox_valueChanged(double aValue)
@@ -439,8 +473,7 @@ void TextFormatEditDialog::on_blockLineHeightTypeComboBox_currentIndexChanged(co
 
 void TextFormatEditDialog::on_blockNonBreakableLinesCheckBox_toggled(bool checked)
 {
-    mTextBlockFormat.setNonBreakableLines(checked);
-    ((QTextBlockFormat *)&mTextFormat)->setNonBreakableLines(checked);
+    BLOCK_MODIFICATION(setNonBreakableLines(checked));
 }
 
 void TextFormatEditDialog::on_blockPageBreakPolicyAutoCheckBox_toggled(bool checked)
@@ -456,8 +489,7 @@ void TextFormatEditDialog::on_blockPageBreakPolicyAutoCheckBox_toggled(bool chec
         ui->blockPageBreakPolicyBeforeCheckBox->blockSignals(false);
         ui->blockPageBreakPolicyAfterCheckBox->blockSignals(false);
 
-        mTextBlockFormat.setPageBreakPolicy(QTextFormat::PageBreak_Auto);
-        ((QTextBlockFormat *)&mTextFormat)->setPageBreakPolicy(QTextFormat::PageBreak_Auto);
+        BLOCK_MODIFICATION(setPageBreakPolicy(QTextFormat::PageBreak_Auto));
     }
     else
     {
@@ -475,8 +507,8 @@ void TextFormatEditDialog::on_blockPageBreakPolicyBeforeCheckBox_toggled(bool ch
         ui->blockPageBreakPolicyAutoCheckBox->setChecked(false);
         ui->blockPageBreakPolicyAutoCheckBox->blockSignals(false);
 
-        mTextBlockFormat.setPageBreakPolicy(mTextBlockFormat.pageBreakPolicy() | QTextFormat::PageBreak_AlwaysBefore);
-        ((QTextBlockFormat *)&mTextFormat)->setPageBreakPolicy(((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() | QTextFormat::PageBreak_AlwaysBefore);
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() | QTextFormat::PageBreak_AlwaysBefore;
+        BLOCK_MODIFICATION(setPageBreakPolicy(aPolicy));
     }
     else
     {
@@ -487,8 +519,8 @@ void TextFormatEditDialog::on_blockPageBreakPolicyBeforeCheckBox_toggled(bool ch
             ui->blockPageBreakPolicyAutoCheckBox->blockSignals(false);
         }
 
-        mTextBlockFormat.setPageBreakPolicy(mTextBlockFormat.pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysBefore);
-        ((QTextBlockFormat *)&mTextFormat)->setPageBreakPolicy(((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysBefore);
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysBefore;
+        BLOCK_MODIFICATION(setPageBreakPolicy(aPolicy));
     }
 }
 
@@ -500,8 +532,8 @@ void TextFormatEditDialog::on_blockPageBreakPolicyAfterCheckBox_toggled(bool che
         ui->blockPageBreakPolicyAutoCheckBox->setChecked(false);
         ui->blockPageBreakPolicyAutoCheckBox->blockSignals(false);
 
-        mTextBlockFormat.setPageBreakPolicy(mTextBlockFormat.pageBreakPolicy() | QTextFormat::PageBreak_AlwaysAfter);
-        ((QTextBlockFormat *)&mTextFormat)->setPageBreakPolicy(((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() | QTextFormat::PageBreak_AlwaysAfter);
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() | QTextFormat::PageBreak_AlwaysAfter;
+        BLOCK_MODIFICATION(setPageBreakPolicy(aPolicy));
     }
     else
     {
@@ -512,8 +544,8 @@ void TextFormatEditDialog::on_blockPageBreakPolicyAfterCheckBox_toggled(bool che
             ui->blockPageBreakPolicyAutoCheckBox->blockSignals(false);
         }
 
-        mTextBlockFormat.setPageBreakPolicy(mTextBlockFormat.pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter);
-        ((QTextBlockFormat *)&mTextFormat)->setPageBreakPolicy(((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter);
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter;
+        BLOCK_MODIFICATION(setPageBreakPolicy(aPolicy));
     }
 }
 
@@ -532,8 +564,7 @@ void TextFormatEditDialog::blockUpdateTabPositions()
         aTabs.append(((TabFrame *)ui->blockTabPositionsLayout->itemAt(i)->widget())->tab());
     }
 
-    mTextBlockFormat.setTabPositions(aTabs);
-    ((QTextBlockFormat *)&mTextFormat)->setTabPositions(aTabs);
+    BLOCK_MODIFICATION(setTabPositions(aTabs));
 }
 
 void TextFormatEditDialog::blockAddTabPosition()
@@ -639,7 +670,7 @@ void TextFormatEditDialog::blockTabPositionChanged()
 
 void TextFormatEditDialog::on_charFontCategoryButton_clicked()
 {
-    showOrHideCategory(ui->charFontFrame, ui->charFontCategoryButton);
+    showOrHideCategory(ui->charFontCategoryFrame, ui->charFontCategoryButton);
 }
 
 void TextFormatEditDialog::on_charSpacingButton_clicked()
@@ -662,129 +693,448 @@ void TextFormatEditDialog::on_charOthersButton_clicked()
     showOrHideCategory(ui->charOthersFrame, ui->charOthersButton);
 }
 
+#define CHAR_MODIFICATION(action) \
+    mTextCharFormat.##action##; \
+    mTextImageFormat.##action##; \
+    mTextTableCellFormat.##action##; \
+    ((QTextCharFormat *)&mTextFormat)->##action##;
+
 void TextFormatEditDialog::on_charFontButton_clicked()
 {
+    QFontDialog dialog(((QTextCharFormat *)&mTextFormat)->font(), this);
 
+    if (dialog.exec())
+    {
+        CHAR_MODIFICATION(setFont(dialog.selectedFont()));
+        charUpdateProperties();
+        charDrawFont();
+    }
 }
 
 void TextFormatEditDialog::on_charFontFamilyEdit_textEdited(const QString &aValue)
 {
-
+    CHAR_MODIFICATION(setFontFamily(aValue));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontPointSizeSpinBox_valueChanged(double aValue)
 {
-
+    CHAR_MODIFICATION(setFontPointSize(aValue));
+    charUpdateProperties();
 }
 
 void TextFormatEditDialog::on_charFontWeightSpinBox_valueChanged(int aValue)
 {
-
+    CHAR_MODIFICATION(setFontWeight(aValue));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontItalicCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setFontItalic(checked));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontFixedPitchCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setFontFixedPitch(checked));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontStrikeOutCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setFontStrikeOut(checked));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontKerningCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setFontKerning(checked));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontOverlineCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setFontOverline(checked));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charFontUnderlineCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setFontUnderline(checked));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::on_charUnderlineStyleComboBox_currentIndexChanged(const QString &aValue)
 {
+    QTextCharFormat::UnderlineStyle aStyle=QTextCharFormat::NoUnderline;
 
+    if (aValue=="NoUnderline")
+    {
+        aStyle=QTextCharFormat::NoUnderline;
+    }
+    else
+    if (aValue=="SingleUnderline")
+    {
+        aStyle=QTextCharFormat::SingleUnderline;
+    }
+    else
+    if (aValue=="DashUnderline")
+    {
+        aStyle=QTextCharFormat::DashUnderline;
+    }
+    else
+    if (aValue=="DotLine")
+    {
+        aStyle=QTextCharFormat::DotLine;
+    }
+    else
+    if (aValue=="DashDotLine")
+    {
+        aStyle=QTextCharFormat::DashDotLine;
+    }
+    else
+    if (aValue=="DashDotDotLine")
+    {
+        aStyle=QTextCharFormat::DashDotDotLine;
+    }
+    else
+    if (aValue=="WaveUnderline")
+    {
+        aStyle=QTextCharFormat::WaveUnderline;
+    }
+    else
+    if (aValue=="SpellCheckUnderline")
+    {
+        aStyle=QTextCharFormat::SpellCheckUnderline;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    CHAR_MODIFICATION(setUnderlineStyle(aStyle));
+    charUpdateProperties();
+    charDrawFont();
 }
 
 void TextFormatEditDialog::charUnderlineColorChanged(QColor aValue)
 {
-
+    CHAR_MODIFICATION(setUnderlineColor(aValue));
 }
 
 void TextFormatEditDialog::on_charFontLetterSpacingSpinBox_valueChanged(double aValue)
 {
-
+    CHAR_MODIFICATION(setFontLetterSpacing(aValue));
 }
 
 void TextFormatEditDialog::on_charFontWordSpacingSpinBox_valueChanged(double aValue)
 {
-
+    CHAR_MODIFICATION(setFontWordSpacing(aValue));
 }
 
 void TextFormatEditDialog::on_charFontStyleHintComboBox_currentIndexChanged(const QString &aValue)
 {
+    QFont::StyleHint aStyleHint=QFont::AnyStyle;
 
+    if (aValue=="AnyStyle")
+    {
+        aStyleHint=QFont::AnyStyle;
+    }
+    else
+    if (aValue=="Helvetica")
+    {
+        aStyleHint=QFont::Helvetica;
+    }
+    else
+    if (aValue=="Times")
+    {
+        aStyleHint=QFont::Times;
+    }
+    else
+    if (aValue=="Courier")
+    {
+        aStyleHint=QFont::Courier;
+    }
+    else
+    if (aValue=="OldEnglish")
+    {
+        aStyleHint=QFont::OldEnglish;
+    }
+    else
+    if (aValue=="Monospace")
+    {
+        aStyleHint=QFont::Monospace;
+    }
+    else
+    if (aValue=="Fantasy")
+    {
+        aStyleHint=QFont::Fantasy;
+    }
+    else
+    if (aValue=="Cursive")
+    {
+        aStyleHint=QFont::Cursive;
+    }
+    else
+    if (aValue=="System")
+    {
+        aStyleHint=QFont::System;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    CHAR_MODIFICATION(setFontStyleHint(aStyleHint));
+}
+
+void TextFormatEditDialog::charSetStyleStrategy(const QString &aStrategy, const QString &aFlag)
+{
+    QFont::StyleStrategy aStyleStrategy=QFont::PreferDefault;
+
+    if (aStrategy=="PreferDefault")
+    {
+        aStyleStrategy=QFont::PreferDefault;
+    }
+    else
+    if (aStrategy=="PreferBitmap")
+    {
+        aStyleStrategy=QFont::PreferBitmap;
+    }
+    else
+    if (aStrategy=="PreferDevice")
+    {
+        aStyleStrategy=QFont::PreferDevice;
+    }
+    else
+    if (aStrategy=="PreferOutline")
+    {
+        aStyleStrategy=QFont::PreferOutline;
+    }
+    else
+    if (aStrategy=="ForceOutline")
+    {
+        aStyleStrategy=QFont::ForceOutline;
+    }
+    else
+    if (aStrategy=="NoAntialias")
+    {
+        aStyleStrategy=QFont::NoAntialias;
+    }
+    else
+    if (aStrategy=="PreferAntialias")
+    {
+        aStyleStrategy=QFont::PreferAntialias;
+    }
+    else
+    if (aStrategy=="OpenGLCompatible")
+    {
+        aStyleStrategy=QFont::OpenGLCompatible;
+    }
+    else
+    if (aStrategy=="NoFontMerging")
+    {
+        aStyleStrategy=QFont::NoFontMerging;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    if (aFlag=="No flag")
+    {
+        // Nothing
+    }
+    else
+    if (aFlag=="PreferMatch")
+    {
+        aStyleStrategy=(QFont::StyleStrategy)(aStyleStrategy | QFont::PreferMatch);
+    }
+    else
+    if (aFlag=="PreferQuality")
+    {
+        aStyleStrategy=(QFont::StyleStrategy)(aStyleStrategy | QFont::PreferQuality);
+    }
+    else
+    if (aFlag=="ForceIntegerMetrics")
+    {
+        aStyleStrategy=(QFont::StyleStrategy)(aStyleStrategy | QFont::ForceIntegerMetrics);
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    CHAR_MODIFICATION(setFontStyleStrategy(aStyleStrategy));
 }
 
 void TextFormatEditDialog::on_charFontStyleStrategyComboBox_currentIndexChanged(const QString &aValue)
 {
-
+    charSetStyleStrategy(aValue, ui->charFontStyleStrategyFlagComboBox->currentText());
 }
 
 void TextFormatEditDialog::on_charFontStyleStrategyFlagComboBox_currentIndexChanged(const QString &aValue)
 {
-
+    charSetStyleStrategy(ui->charFontStyleStrategyComboBox->currentText(), aValue);
 }
 
 void TextFormatEditDialog::on_charAnchorCheckBox_toggled(bool checked)
 {
-
+    CHAR_MODIFICATION(setAnchor(checked));
 }
 
 void TextFormatEditDialog::on_charAnchorHrefLineEdit_textEdited(const QString &aValue)
 {
-
+    CHAR_MODIFICATION(setAnchorHref(aValue));
 }
 
 void TextFormatEditDialog::on_charAnchorNamesButton_clicked()
 {
+    StringListEditDialog dialog(((QTextCharFormat *)&mTextFormat)->anchorNames(), this);
 
+    if (dialog.exec())
+    {
+        CHAR_MODIFICATION(setAnchorNames(dialog.resultValue()));
+        charUpdateProperties();
+    }
 }
 
 void TextFormatEditDialog::on_charFontCapitalizationComboBox_currentIndexChanged(const QString &aValue)
 {
+    QFont::Capitalization aCapitalization=QFont::MixedCase;
 
+    if (aValue=="MixedCase")
+    {
+        aCapitalization=QFont::MixedCase;
+    }
+    else
+    if (aValue=="AllUppercase")
+    {
+        aCapitalization=QFont::AllUppercase;
+    }
+    else
+    if (aValue=="AllLowercase")
+    {
+        aCapitalization=QFont::AllLowercase;
+    }
+    else
+    if (aValue=="SmallCaps")
+    {
+        aCapitalization=QFont::SmallCaps;
+    }
+    else
+    if (aValue=="Capitalize")
+    {
+        aCapitalization=QFont::Capitalize;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    CHAR_MODIFICATION(setFontCapitalization(aCapitalization));
 }
 
 void TextFormatEditDialog::on_charFontHintingPreferenceComboBox_currentIndexChanged(const QString &aValue)
 {
+    QFont::HintingPreference aHintingPreference=QFont::PreferDefaultHinting;
 
+    if (aValue=="PreferDefaultHinting")
+    {
+        aHintingPreference=QFont::PreferDefaultHinting;
+    }
+    else
+    if (aValue=="PreferNoHinting")
+    {
+        aHintingPreference=QFont::PreferNoHinting;
+    }
+    else
+    if (aValue=="PreferVerticalHinting")
+    {
+        aHintingPreference=QFont::PreferVerticalHinting;
+    }
+    else
+    if (aValue=="PreferFullHinting")
+    {
+        aHintingPreference=QFont::PreferFullHinting;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    CHAR_MODIFICATION(setFontHintingPreference(aHintingPreference));
 }
 
 void TextFormatEditDialog::on_charVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue)
 {
+    QTextCharFormat::VerticalAlignment aVerticalAlignment=QTextCharFormat::AlignNormal;
 
+    if (aValue=="AlignNormal")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignNormal;
+    }
+    else
+    if (aValue=="AlignSuperScript")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignSuperScript;
+    }
+    else
+    if (aValue=="AlignSubScript")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignSubScript;
+    }
+    else
+    if (aValue=="AlignMiddle")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignMiddle;
+    }
+    else
+    if (aValue=="AlignBottom")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignBottom;
+    }
+    else
+    if (aValue=="AlignTop")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignTop;
+    }
+    else
+    if (aValue=="AlignBaseline")
+    {
+        aVerticalAlignment=QTextCharFormat::AlignBaseline;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    CHAR_MODIFICATION(setVerticalAlignment(aVerticalAlignment));
 }
 
 void TextFormatEditDialog::on_charTextOutlineButton_clicked()
 {
+    PenEditDialog dialog(((QTextCharFormat *)&mTextFormat)->textOutline(), this);
 
+    if (dialog.exec())
+    {
+        CHAR_MODIFICATION(setTextOutline(dialog.resultValue()));
+        charDrawTextOutlinePen();
+    }
 }
 
 void TextFormatEditDialog::on_charTooltipEdit_textEdited(const QString &aValue)
 {
-
+    CHAR_MODIFICATION(setToolTip(aValue));
 }
 
 void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
@@ -950,6 +1300,8 @@ void TextFormatEditDialog::charUpdateProperties()
 {
     CHAR_BLOCK_SIGNALS(true);
 
+    QFont aFont=((QTextCharFormat *)&mTextFormat)->font();
+
     QTextCharFormat::UnderlineStyle aUnderlineStyle=((QTextCharFormat *)&mTextFormat)->underlineStyle();
     QString aUnderlineStyleStr;
 
@@ -1050,7 +1402,7 @@ void TextFormatEditDialog::charUpdateProperties()
     }
 
     QFont::StyleStrategy aFontStyleStrategy=((QTextCharFormat *)&mTextFormat)->fontStyleStrategy();
-    QString aFontStyleStrategyStr="No strategy";
+    QString aFontStyleStrategyStr="PreferDefault";
     QString aFontStyleStrategyFlagStr="No flag";
 
     if (aFontStyleStrategy & QFont::PreferDefault)
@@ -1112,6 +1464,23 @@ void TextFormatEditDialog::charUpdateProperties()
     {
         aFontStyleStrategyFlagStr="ForceIntegerMetrics";
     }
+
+    QStringList aAnchors=((QTextCharFormat *)&mTextFormat)->anchorNames();
+    QString anchorNames="[";
+
+    for (int i=0; i<aAnchors.length(); ++i)
+    {
+        anchorNames.append("\"");
+        anchorNames.append(aAnchors.at(i));
+        anchorNames.append("\"");
+
+        if (i<aAnchors.length()-1)
+        {
+            anchorNames.append("; ");
+        }
+    }
+
+    anchorNames.append("]");
 
     QFont::Capitalization aFontCapitalization=((QTextCharFormat *)&mTextFormat)->fontCapitalization();
     QString aFontCapitalizationStr;
@@ -1216,6 +1585,7 @@ void TextFormatEditDialog::charUpdateProperties()
 
 
 
+    ui->charFontEdit->setText("["+aFont.family()+", "+QString::number(aFont.pointSize())+"]");
     ui->charFontFamilyEdit->setText(((QTextCharFormat *)&mTextFormat)->fontFamily());
     ui->charFontPointSizeSpinBox->setValue(((QTextCharFormat *)&mTextFormat)->fontPointSize());
     ui->charFontWeightSpinBox->setValue(((QTextCharFormat *)&mTextFormat)->fontWeight());
@@ -1229,30 +1599,11 @@ void TextFormatEditDialog::charUpdateProperties()
     mCharUnderlineColorArea->setColor(((QTextCharFormat *)&mTextFormat)->underlineColor());
     ui->charFontLetterSpacingSpinBox->setValue(((QTextCharFormat *)&mTextFormat)->fontLetterSpacing());
     ui->charFontWordSpacingSpinBox->setValue(((QTextCharFormat *)&mTextFormat)->fontWordSpacing());
-    ui->charFontStyleHintComboBox->setCurrentIndex(ui->charFontStyleHintComboBox->findText(aFontCapitalizationStr));
+    ui->charFontStyleHintComboBox->setCurrentIndex(ui->charFontStyleHintComboBox->findText(aFontStyleHintStr));
     ui->charFontStyleStrategyComboBox->setCurrentIndex(ui->charFontStyleStrategyComboBox->findText(aFontStyleStrategyStr));
     ui->charFontStyleStrategyFlagComboBox->setCurrentIndex(ui->charFontStyleStrategyFlagComboBox->findText(aFontStyleStrategyFlagStr));
     ui->charAnchorCheckBox->setChecked(((QTextCharFormat *)&mTextFormat)->isAnchor());
     ui->charAnchorHrefLineEdit->setText(((QTextCharFormat *)&mTextFormat)->anchorHref());
-
-    QStringList aList=((QTextCharFormat *)&mTextFormat)->anchorNames();
-
-    QString anchorNames="[";
-
-    for (int i=0; i<aList.length(); ++i)
-    {
-        anchorNames.append("\"");
-        anchorNames.append(aList.at(i));
-        anchorNames.append("\"");
-
-        if (i<aList.length()-1)
-        {
-            anchorNames.append("; ");
-        }
-    }
-
-    anchorNames.append("]");
-
     ui->charAnchorNamesEdit->setText(anchorNames);
     ui->charFontCapitalizationComboBox->setCurrentIndex(ui->charFontCapitalizationComboBox->findText(aFontCapitalizationStr));
     ui->charFontHintingPreferenceComboBox->setCurrentIndex(ui->charFontHintingPreferenceComboBox->findText(aFontHintingPreferenceStr));

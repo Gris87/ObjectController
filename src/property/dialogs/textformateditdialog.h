@@ -46,6 +46,7 @@ private:
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
     void drawBackgroundBrush();
     void drawForegroundBrush();
+    void charDrawFont();
     void charDrawTextOutlinePen();
 
     inline void showOrHideCategory(QWidget *aCategory, QToolButton *aButton);
@@ -54,6 +55,8 @@ private:
     void blockSetAlignment(const QString &aHorizontal, const QString &aVertical);
     void blockUpdateTabPositions();
     void blockAddTabPosition();
+
+    void charSetStyleStrategy(const QString &aStrategy, const QString &aFlag);
 
 private slots:
     void hideCategories();
