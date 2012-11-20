@@ -1601,7 +1601,7 @@ void TextFormatEditDialog::charUpdateProperties()
     QFont aFont=((QTextCharFormat *)&mTextFormat)->font();
 
     QTextCharFormat::UnderlineStyle aUnderlineStyle=((QTextCharFormat *)&mTextFormat)->underlineStyle();
-    QString aUnderlineStyleStr;
+    QString aUnderlineStyleStr="NoUnderline";
 
     if (aUnderlineStyle==QTextCharFormat::NoUnderline)
     {
@@ -1648,7 +1648,7 @@ void TextFormatEditDialog::charUpdateProperties()
     }
 
     QFont::StyleHint aFontStyleHint=((QTextCharFormat *)&mTextFormat)->fontStyleHint();
-    QString aFontStyleHintStr;
+    QString aFontStyleHintStr="AnyStyle";
 
     if (aFontStyleHint==QFont::AnyStyle)
     {
@@ -1781,7 +1781,7 @@ void TextFormatEditDialog::charUpdateProperties()
     anchorNames.append("]");
 
     QFont::Capitalization aFontCapitalization=((QTextCharFormat *)&mTextFormat)->fontCapitalization();
-    QString aFontCapitalizationStr;
+    QString aFontCapitalizationStr="MixedCase";
 
     if (aFontCapitalization==QFont::MixedCase)
     {
@@ -1813,7 +1813,7 @@ void TextFormatEditDialog::charUpdateProperties()
     }
 
     QFont::HintingPreference aFontHintingPreference=((QTextCharFormat *)&mTextFormat)->fontHintingPreference();
-    QString aFontHintingPreferenceStr;
+    QString aFontHintingPreferenceStr="PreferDefaultHinting";
 
     if (aFontHintingPreference==QFont::PreferDefaultHinting)
     {
@@ -1840,7 +1840,7 @@ void TextFormatEditDialog::charUpdateProperties()
     }
 
     QTextCharFormat::VerticalAlignment aVerticalAlignment=((QTextCharFormat *)&mTextFormat)->verticalAlignment();
-    QString aVerticalAlignmentStr;
+    QString aVerticalAlignmentStr="AlignNormal";
 
     if (aVerticalAlignment==QTextCharFormat::AlignNormal)
     {
@@ -1931,7 +1931,7 @@ void TextFormatEditDialog::frameUpdateProperties()
     FRAME_BLOCK_SIGNALS(true);
 
     QTextFrameFormat::Position aPosition=((QTextFrameFormat *)&mTextFormat)->position();
-    QString aPositionStr;
+    QString aPositionStr="InFlow";
 
     if (aPosition==QTextFrameFormat::InFlow)
     {
@@ -1953,7 +1953,7 @@ void TextFormatEditDialog::frameUpdateProperties()
     }
 
     QTextFrameFormat::BorderStyle aBorderStyle=((QTextFrameFormat *)&mTextFormat)->borderStyle();
-    QString aBorderStyleStr;
+    QString aBorderStyleStr="BorderStyle_None";
 
     if (aBorderStyle==QTextFrameFormat::BorderStyle_None)
     {
@@ -2115,7 +2115,7 @@ void TextFormatEditDialog::updateProperties()
     }
 
     Qt::LayoutDirection aDirection=mTextFormat.layoutDirection();
-    QString aLayoutDirectionStr;
+    QString aLayoutDirectionStr="LayoutDirectionAuto";
 
     if (aDirection==Qt::LeftToRight)
     {

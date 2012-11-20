@@ -354,7 +354,7 @@ void BrushEditDialog::gradientChanged(const QGradientStops &aGradientStops)
 
 void BrushEditDialog::on_coordinateModeComboBox_currentIndexChanged(const QString &aValue)
 {
-    QGradient::CoordinateMode aMode;
+    QGradient::CoordinateMode aMode=QGradient::LogicalMode;
 
     if (aValue=="LogicalMode")
     {
@@ -384,7 +384,7 @@ void BrushEditDialog::on_coordinateModeComboBox_currentIndexChanged(const QStrin
 
 void BrushEditDialog::on_spreadComboBox_currentIndexChanged(const QString &aValue)
 {
-    QGradient::Spread aSpread;
+    QGradient::Spread aSpread=QGradient::PadSpread;
 
     if (aValue=="PadSpread")
     {

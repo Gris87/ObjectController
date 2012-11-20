@@ -37,7 +37,7 @@ QTextLength TextLengthEditDialog::resultValue()
 {
     QString aTypeStr=ui->typeComboBox->currentText();
 
-    QTextLength::Type aType;
+    QTextLength::Type aType=QTextLength::VariableLength;
 
     if (aTypeStr=="VariableLength")
     {
