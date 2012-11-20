@@ -39,6 +39,8 @@ private:
     ColorArea                *mCharUnderlineColorArea;
 
     void copyFromTextFormat(QTextFormat aTextFormat);
+    void blockUpdateProperties();
+    void charUpdateProperties();
     void updateProperties();
 
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
