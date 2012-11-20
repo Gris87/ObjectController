@@ -41,6 +41,7 @@ private:
     void copyFromTextFormat(QTextFormat aTextFormat);
     void blockUpdateProperties();
     void charUpdateProperties();
+    void frameUpdateProperties();
     void updateProperties();
 
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
@@ -48,6 +49,7 @@ private:
     void drawForegroundBrush();
     void charDrawFont();
     void charDrawTextOutlinePen();
+    void frameDrawBorderBrush();
 
     inline void showOrHideCategory(QWidget *aCategory, QToolButton *aButton);
 
@@ -107,6 +109,7 @@ private slots:
     void on_charAnchorButton_clicked();
     void on_charOthersButton_clicked();
     void on_charFontButton_clicked();
+
     void on_charFontFamilyEdit_textEdited(const QString &aValue);
     void on_charFontPointSizeSpinBox_valueChanged(double aValue);
     void on_charFontWeightSpinBox_valueChanged(int aValue);
@@ -131,6 +134,29 @@ private slots:
     void on_charVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue);
     void on_charTextOutlineButton_clicked();
     void on_charTooltipEdit_textEdited(const QString &aValue);
+
+    // FRAME
+    void on_framePositionButton_clicked();
+    void on_frameBorderButton_clicked();
+    void on_frameMarginsButton_clicked();
+    void on_frameSizeButton_clicked();
+    void on_framePageBreakButton_clicked();
+
+    void on_framePositionComboBox_currentIndexChanged(const QString &aValue);
+    void on_frameBorderSpinBox_valueChanged(double aValue);
+    void on_frameBorderBrushButton_clicked();
+    void on_frameBorderStyleComboBox_currentIndexChanged(const QString &aValue);
+    void on_frameMarginSpinBox_valueChanged(double aValue);
+    void on_frameTopMarginSpinBox_valueChanged(double aValue);
+    void on_frameBottomMarginSpinBox_valueChanged(double aValue);
+    void on_frameLeftMarginSpinBox_valueChanged(double aValue);
+    void on_frameRightMarginSpinBox_valueChanged(double aValue);
+    void on_framePaddingSpinBox_valueChanged(double aValue);
+    void on_frameWidthButton_clicked();
+    void on_frameHeightButton_clicked();
+    void on_framePageBreakPolicyAutoCheckBox_toggled(bool checked);
+    void on_framePageBreakPolicyBeforeCheckBox_toggled(bool checked);
+    void on_framePageBreakPolicyAfterCheckBox_toggled(bool checked);
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

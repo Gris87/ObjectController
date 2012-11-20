@@ -256,7 +256,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>1</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="blockPage">
         <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -288,7 +288,7 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>174</width>
+                 <width>266</width>
                  <height>1021</height>
                 </rect>
                </property>
@@ -831,7 +831,7 @@
                        <rect>
                         <x>0</x>
                         <y>0</y>
-                        <width>98</width>
+                        <width>256</width>
                         <height>298</height>
                        </rect>
                       </property>
@@ -1865,8 +1865,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>98</width>
-                 <height>28</height>
+                 <width>266</width>
+                 <height>679</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="frameLayout">
@@ -1876,6 +1876,566 @@
                 <property name="margin">
                  <number>4</number>
                 </property>
+                <item>
+                 <widget class="QWidget" name="frameWidget" native="true">
+                  <layout class="QVBoxLayout" name="verticalLayout">
+                   <property name="spacing">
+                    <number>4</number>
+                   </property>
+                   <property name="margin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <widget class="QToolButton" name="framePositionButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Position</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="framePositionFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_16">
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <property name="margin">
+                       <number>4</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="framePositionLabel">
+                        <property name="text">
+                         <string>Position:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="framePositionComboBox">
+                        <item>
+                         <property name="text">
+                          <string>InFlow</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>FloatLeft</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>FloatRight</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="frameBorderButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Border</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frameBorderFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_14">
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <property name="margin">
+                       <number>4</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="frameBorderLabel">
+                        <property name="text">
+                         <string>Border:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="frameBorderSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <layout class="QHBoxLayout" name="horizontalLayout_6">
+                        <property name="spacing">
+                         <number>4</number>
+                        </property>
+                        <item>
+                         <widget class="QFrame" name="frameBorderBrushFrame">
+                          <property name="frameShape">
+                           <enum>QFrame::WinPanel</enum>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Sunken</enum>
+                          </property>
+                          <layout class="QVBoxLayout" name="verticalLayout_18">
+                           <property name="spacing">
+                            <number>0</number>
+                           </property>
+                           <property name="margin">
+                            <number>0</number>
+                           </property>
+                           <item>
+                            <widget class="QLabel" name="frameBorderBrushIconLabel">
+                             <property name="text">
+                              <string>icon</string>
+                             </property>
+                            </widget>
+                           </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QLabel" name="frameBorderBrushLabel">
+                          <property name="text">
+                           <string>Border brush</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <widget class="QToolButton" name="frameBorderBrushButton">
+                          <property name="text">
+                           <string>...</string>
+                          </property>
+                         </widget>
+                        </item>
+                        <item>
+                         <spacer name="horizontalSpacer_9">
+                          <property name="orientation">
+                           <enum>Qt::Horizontal</enum>
+                          </property>
+                          <property name="sizeHint" stdset="0">
+                           <size>
+                            <width>40</width>
+                            <height>20</height>
+                           </size>
+                          </property>
+                         </spacer>
+                        </item>
+                       </layout>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="frameBorderStyleLabel">
+                        <property name="text">
+                         <string>Border style:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QComboBox" name="frameBorderStyleComboBox">
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_None</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Dotted</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Dashed</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Solid</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Double</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_DotDash</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_DotDotDash</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Groove</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Ridge</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Inset</string>
+                         </property>
+                        </item>
+                        <item>
+                         <property name="text">
+                          <string>BorderStyle_Outset</string>
+                         </property>
+                        </item>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="frameMarginsButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Margins and padding</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frameMarginsFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_43">
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <property name="margin">
+                       <number>4</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="frameMarginLabel">
+                        <property name="text">
+                         <string>Margin:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="frameMarginSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="frameTopMarginLabel">
+                        <property name="text">
+                         <string>Top margin:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="frameTopMarginSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="frameBottomMarginLabel">
+                        <property name="text">
+                         <string>Bottom margin:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="frameBottomMarginSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="frameLeftMarginLabel">
+                        <property name="text">
+                         <string>Left margin:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="frameLeftMarginSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="frameRightMarginLabel">
+                        <property name="text">
+                         <string>Right margin:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="frameRightMarginSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="framePaddingLabel">
+                        <property name="text">
+                         <string>Padding:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QDoubleSpinBox" name="framePaddingSpinBox">
+                        <property name="decimals">
+                         <number>6</number>
+                        </property>
+                        <property name="maximum">
+                         <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="frameSizeButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Size</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="frameSizeFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QGridLayout" name="gridLayout_2">
+                      <property name="margin">
+                       <number>4</number>
+                      </property>
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <item row="1" column="1">
+                       <widget class="QLineEdit" name="frameHeightEdit">
+                        <property name="readOnly">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="0">
+                       <widget class="QLabel" name="frameWidthLabel">
+                        <property name="text">
+                         <string>Width:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="1">
+                       <widget class="QLineEdit" name="frameWidthEdit">
+                        <property name="readOnly">
+                         <bool>true</bool>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="0">
+                       <widget class="QLabel" name="frameHeightLabel">
+                        <property name="text">
+                         <string>Height:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="0" column="2">
+                       <widget class="QToolButton" name="frameWidthButton">
+                        <property name="text">
+                         <string>...</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item row="1" column="2">
+                       <widget class="QToolButton" name="frameHeightButton">
+                        <property name="text">
+                         <string>...</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QToolButton" name="framePageBreakButton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Page break policy</string>
+                     </property>
+                     <property name="iconSize">
+                      <size>
+                       <width>13</width>
+                       <height>13</height>
+                      </size>
+                     </property>
+                     <property name="toolButtonStyle">
+                      <enum>Qt::ToolButtonTextBesideIcon</enum>
+                     </property>
+                     <property name="arrowType">
+                      <enum>Qt::DownArrow</enum>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QFrame" name="framePageBreakFrame">
+                     <property name="frameShape">
+                      <enum>QFrame::StyledPanel</enum>
+                     </property>
+                     <property name="frameShadow">
+                      <enum>QFrame::Sunken</enum>
+                     </property>
+                     <layout class="QVBoxLayout" name="verticalLayout_42">
+                      <property name="spacing">
+                       <number>4</number>
+                      </property>
+                      <property name="margin">
+                       <number>4</number>
+                      </property>
+                      <item>
+                       <widget class="QCheckBox" name="framePageBreakPolicyAutoCheckBox">
+                        <property name="text">
+                         <string>PageBreak_Auto</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="framePageBreakPolicyBeforeCheckBox">
+                        <property name="text">
+                         <string>PageBreak_AlwaysBefore</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QCheckBox" name="framePageBreakPolicyAfterCheckBox">
+                        <property name="text">
+                         <string>PageBreak_AlwaysAfter</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </widget>
+                   </item>
+                  </layout>
+                 </widget>
+                </item>
                 <item>
                  <spacer name="verticalSpacer_4">
                   <property name="orientation">
@@ -1928,8 +2488,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>98</width>
-                 <height>28</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="imageLayout">
@@ -1991,8 +2551,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>98</width>
-                 <height>28</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="listLayout">
@@ -2054,8 +2614,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>98</width>
-                 <height>28</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="tableCellLayout">
@@ -2117,8 +2677,8 @@
                 <rect>
                  <x>0</x>
                  <y>0</y>
-                 <width>98</width>
-                 <height>28</height>
+                 <width>71</width>
+                 <height>16</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="tableLayout">

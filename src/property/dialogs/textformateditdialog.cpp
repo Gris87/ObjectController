@@ -88,14 +88,13 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
         Q_ASSERT(false);
     }
 
-    // TODO: Create ideal editor that allow to modify any property according to it's type
-
     updateProperties();
 
     drawBackgroundBrush();
     drawForegroundBrush();
     charDrawFont();
     charDrawTextOutlinePen();
+    frameDrawBorderBrush();
 }
 
 TextFormatEditDialog::~TextFormatEditDialog()
@@ -178,6 +177,11 @@ void TextFormatEditDialog::charDrawTextOutlinePen()
     aPainter.end();
 
     ui->charTextOutlineIconLabel->setPixmap(QIcon(aPenPixmap).pixmap(18, 18));
+}
+
+void TextFormatEditDialog::frameDrawBorderBrush()
+{
+    drawBrush(((QTextFrameFormat *)&mTextFormat)->borderBrush(), ui->frameBorderBrushIconLabel);
 }
 
 void TextFormatEditDialog::on_okButton_clicked()
@@ -303,6 +307,14 @@ void TextFormatEditDialog::hideCategories()
     on_charStyleButton_clicked();
     on_charAnchorButton_clicked();
     on_charOthersButton_clicked();
+
+    // FRAME
+    ui->typeStackedWidget->setCurrentIndex(2);
+    on_framePositionButton_clicked();
+    on_frameBorderButton_clicked();
+    on_frameMarginsButton_clicked();
+    on_frameSizeButton_clicked();
+    on_framePageBreakButton_clicked();
 
     ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
 }
@@ -1137,6 +1149,110 @@ void TextFormatEditDialog::on_charTooltipEdit_textEdited(const QString &aValue)
     CHAR_MODIFICATION(setToolTip(aValue));
 }
 
+void TextFormatEditDialog::on_framePositionButton_clicked()
+{
+    showOrHideCategory(ui->framePositionFrame, ui->framePositionButton);
+}
+
+void TextFormatEditDialog::on_frameBorderButton_clicked()
+{
+    showOrHideCategory(ui->frameBorderFrame, ui->frameBorderButton);
+}
+
+void TextFormatEditDialog::on_frameMarginsButton_clicked()
+{
+    showOrHideCategory(ui->frameMarginsFrame, ui->frameMarginsButton);
+}
+
+void TextFormatEditDialog::on_frameSizeButton_clicked()
+{
+    showOrHideCategory(ui->frameSizeFrame, ui->frameSizeButton);
+}
+
+void TextFormatEditDialog::on_framePageBreakButton_clicked()
+{
+    showOrHideCategory(ui->framePageBreakFrame, ui->framePageBreakButton);
+}
+
+#define FRAME_MODIFICATION(action) \
+    mTextFrameFormat.##action##; \
+    ((QTextFrameFormat *)&mTextFormat)->##action##;
+
+void TextFormatEditDialog::on_framePositionComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameBorderSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameBorderBrushButton_clicked()
+{
+
+}
+
+void TextFormatEditDialog::on_frameBorderStyleComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameMarginSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameTopMarginSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameBottomMarginSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameLeftMarginSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameRightMarginSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_framePaddingSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_frameWidthButton_clicked()
+{
+
+}
+
+void TextFormatEditDialog::on_frameHeightButton_clicked()
+{
+
+}
+
+void TextFormatEditDialog::on_framePageBreakPolicyAutoCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_framePageBreakPolicyBeforeCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_framePageBreakPolicyAfterCheckBox_toggled(bool checked)
+{
+
+}
+
 void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
 {
     aTextFormat.setBackground(mTextFormat.background());
@@ -1613,6 +1729,16 @@ void TextFormatEditDialog::charUpdateProperties()
     CHAR_BLOCK_SIGNALS(false);
 }
 
+#define FRAME_SIGNALS(aLock) \
+    ui->framePositionComboBox->blockSignals(aLock);
+
+void TextFormatEditDialog::frameUpdateProperties()
+{
+    FRAME_SIGNALS(true);
+
+    FRAME_SIGNALS(false);
+}
+
 #define BLOCK_SIGNALS(aLock) \
     ui->typeComboBox->blockSignals(aLock); \
     ui->layoutDirectionComboBox->blockSignals(aLock); \
@@ -1694,6 +1820,7 @@ void TextFormatEditDialog::updateProperties()
     {
         case 0: blockUpdateProperties(); break;
         case 1: charUpdateProperties();  break;
+        case 2: frameUpdateProperties(); break;
     }
 
     BLOCK_SIGNALS(false);
