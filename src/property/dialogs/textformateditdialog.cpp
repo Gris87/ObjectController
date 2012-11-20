@@ -91,6 +91,7 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
 
     drawBackgroundBrush();
     drawForegroundBrush();
+    charDrawTextOutlinePen();
 }
 
 TextFormatEditDialog::~TextFormatEditDialog()
@@ -101,16 +102,6 @@ TextFormatEditDialog::~TextFormatEditDialog()
 QTextFormat TextFormatEditDialog::resultValue() const
 {
     return mTextFormat;
-}
-
-void TextFormatEditDialog::drawBackgroundBrush()
-{
-    drawBrush(mTextFormat.background(), ui->backgroundIconLabel);
-}
-
-void TextFormatEditDialog::drawForegroundBrush()
-{
-    drawBrush(mTextFormat.foreground(), ui->foregroundIconLabel);
 }
 
 void TextFormatEditDialog::drawBrush(const QBrush &aBrush, QLabel *aIconLabel)
@@ -126,6 +117,29 @@ void TextFormatEditDialog::drawBrush(const QBrush &aBrush, QLabel *aIconLabel)
     aPainter.end();
 
     aIconLabel->setPixmap(QIcon(aPixmap).pixmap(18, 18));
+}
+
+void TextFormatEditDialog::drawBackgroundBrush()
+{
+    drawBrush(mTextFormat.background(), ui->backgroundIconLabel);
+}
+
+void TextFormatEditDialog::drawForegroundBrush()
+{
+    drawBrush(mTextFormat.foreground(), ui->foregroundIconLabel);
+}
+
+void TextFormatEditDialog::charDrawTextOutlinePen()
+{
+    QPixmap aPenPixmap=QPixmap(16, 16);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setPen(mTextCharFormat.textOutline());
+    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
+    aPainter.end();
+
+    ui->charTextOutlineIconLabel->setPixmap(QIcon(aPenPixmap).pixmap(18, 18));
 }
 
 void TextFormatEditDialog::on_okButton_clicked()
@@ -291,6 +305,138 @@ void TextFormatEditDialog::on_blockTabPositionsButton_clicked()
     showOrHideCategory(ui->blockTabPositionsScrollArea, ui->blockTabPositionsButton);
 }
 
+void TextFormatEditDialog::blockSetAlignment(const QString &aHorizontal, const QString &aVertical)
+{
+    Qt::Alignment aHorizontalAlignment=Qt::AlignLeft;
+    Qt::Alignment aVerticalAlignment=Qt::AlignTop;
+
+    if (aHorizontal=="AlignHCenter")
+    {
+        aHorizontalAlignment=Qt::AlignHCenter;
+    }
+    else
+    if (aHorizontal=="AlignRight")
+    {
+        aHorizontalAlignment=Qt::AlignRight;
+    }
+    else
+    if (aHorizontal=="AlignJustify")
+    {
+        aHorizontalAlignment=Qt::AlignJustify;
+    }
+    else
+    if (aHorizontal=="AlignAbsolute")
+    {
+        aHorizontalAlignment=Qt::AlignAbsolute;
+    }
+
+    if (aVertical=="AlignVCenter")
+    {
+        aVerticalAlignment=Qt::AlignVCenter;
+    }
+    else
+    if (aVertical=="AlignBottom")
+    {
+        aVerticalAlignment=Qt::AlignBottom;
+    }
+
+    mTextBlockFormat.setAlignment(aHorizontalAlignment | aVerticalAlignment);
+    ((QTextBlockFormat *)&mTextFormat)->setAlignment(aHorizontalAlignment | aVerticalAlignment);
+}
+
+void TextFormatEditDialog::on_blockHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue)
+{
+    blockSetAlignment(aValue, ui->blockVerticalAlignmentComboBox->currentText());
+}
+
+void TextFormatEditDialog::on_blockVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue)
+{
+    blockSetAlignment(ui->blockHorizontalAlignmentComboBox->currentText(), aValue);
+}
+
+void TextFormatEditDialog::on_blockTopMarginSpinBox_valueChanged(double aValue)
+{
+    mTextBlockFormat.setTopMargin(aValue);
+    ((QTextBlockFormat *)&mTextFormat)->setTopMargin(aValue);
+}
+
+void TextFormatEditDialog::on_blockBottomMarginSpinBox_valueChanged(double aValue)
+{
+    mTextBlockFormat.setBottomMargin(aValue);
+    ((QTextBlockFormat *)&mTextFormat)->setBottomMargin(aValue);
+}
+
+void TextFormatEditDialog::on_blockLeftMarginSpinBox_valueChanged(double aValue)
+{
+    mTextBlockFormat.setLeftMargin(aValue);
+    ((QTextBlockFormat *)&mTextFormat)->setLeftMargin(aValue);
+}
+
+void TextFormatEditDialog::on_blockRightMarginSpinBox_valueChanged(double aValue)
+{
+    mTextBlockFormat.setRightMargin(aValue);
+    ((QTextBlockFormat *)&mTextFormat)->setRightMargin(aValue);
+}
+
+void TextFormatEditDialog::on_blockTextIndentSpinBox_valueChanged(double aValue)
+{
+    mTextBlockFormat.setTextIndent(aValue);
+    ((QTextBlockFormat *)&mTextFormat)->setTextIndent(aValue);
+}
+
+void TextFormatEditDialog::on_blockIndentSpinBox_valueChanged(int aValue)
+{
+    mTextBlockFormat.setIndent(aValue);
+    ((QTextBlockFormat *)&mTextFormat)->setIndent(aValue);
+}
+
+void TextFormatEditDialog::blockSetLineHeight(const double &aHeight, const QString &aType)
+{
+    QTextBlockFormat::LineHeightTypes aHeightType=QTextBlockFormat::SingleHeight;
+
+    if (aType=="SingleHeight")
+    {
+        aHeightType=QTextBlockFormat::SingleHeight;
+    }
+    else
+    if (aType=="ProportionalHeight")
+    {
+        aHeightType=QTextBlockFormat::ProportionalHeight;
+    }
+    else
+    if (aType=="FixedHeight")
+    {
+        aHeightType=QTextBlockFormat::FixedHeight;
+    }
+    else
+    if (aType=="MinimumHeight")
+    {
+        aHeightType=QTextBlockFormat::MinimumHeight;
+    }
+    else
+    if (aType=="LineDistanceHeight")
+    {
+        aHeightType=QTextBlockFormat::LineDistanceHeight;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    mTextBlockFormat.setLineHeight(aHeight, aHeightType);
+    ((QTextBlockFormat *)&mTextFormat)->setLineHeight(aHeight, aHeightType);
+}
+
+void TextFormatEditDialog::on_blockLineHeightSpinBox_valueChanged(double aValue)
+{
+    blockSetLineHeight(aValue, ui->blockLineHeightTypeComboBox->currentText());
+}
+
+void TextFormatEditDialog::on_blockLineHeightTypeComboBox_currentIndexChanged(const QString &aValue)
+{
+    blockSetLineHeight(ui->blockLineHeightSpinBox->value(), aValue);
+}
+
 void TextFormatEditDialog::on_blockNonBreakableLinesCheckBox_toggled(bool checked)
 {
     mTextBlockFormat.setNonBreakableLines(checked);
@@ -369,138 +515,6 @@ void TextFormatEditDialog::on_blockPageBreakPolicyAfterCheckBox_toggled(bool che
         mTextBlockFormat.setPageBreakPolicy(mTextBlockFormat.pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter);
         ((QTextBlockFormat *)&mTextFormat)->setPageBreakPolicy(((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter);
     }
-}
-
-void TextFormatEditDialog::blockSetLineHeight(const double &aHeight, const QString &aType)
-{
-    QTextBlockFormat::LineHeightTypes aHeightType=QTextBlockFormat::SingleHeight;
-
-    if (aType=="SingleHeight")
-    {
-        aHeightType=QTextBlockFormat::SingleHeight;
-    }
-    else
-    if (aType=="ProportionalHeight")
-    {
-        aHeightType=QTextBlockFormat::ProportionalHeight;
-    }
-    else
-    if (aType=="FixedHeight")
-    {
-        aHeightType=QTextBlockFormat::FixedHeight;
-    }
-    else
-    if (aType=="MinimumHeight")
-    {
-        aHeightType=QTextBlockFormat::MinimumHeight;
-    }
-    else
-    if (aType=="LineDistanceHeight")
-    {
-        aHeightType=QTextBlockFormat::LineDistanceHeight;
-    }
-    else
-    {
-        Q_ASSERT(false);
-    }
-
-    mTextBlockFormat.setLineHeight(aHeight, aHeightType);
-    ((QTextBlockFormat *)&mTextFormat)->setLineHeight(aHeight, aHeightType);
-}
-
-void TextFormatEditDialog::on_blockLineHeightSpinBox_valueChanged(double aValue)
-{
-    blockSetLineHeight(aValue, ui->blockLineHeightTypeComboBox->currentText());
-}
-
-void TextFormatEditDialog::on_blockLineHeightTypeComboBox_currentIndexChanged(const QString &aValue)
-{
-    blockSetLineHeight(ui->blockLineHeightSpinBox->value(), aValue);
-}
-
-void TextFormatEditDialog::blockSetAlignment(const QString &aHorizontal, const QString &aVertical)
-{
-    Qt::Alignment aHorizontalAlignment=Qt::AlignLeft;
-    Qt::Alignment aVerticalAlignment=Qt::AlignTop;
-
-    if (aHorizontal=="AlignHCenter")
-    {
-        aHorizontalAlignment=Qt::AlignHCenter;
-    }
-    else
-    if (aHorizontal=="AlignRight")
-    {
-        aHorizontalAlignment=Qt::AlignRight;
-    }
-    else
-    if (aHorizontal=="AlignJustify")
-    {
-        aHorizontalAlignment=Qt::AlignJustify;
-    }
-    else
-    if (aHorizontal=="AlignAbsolute")
-    {
-        aHorizontalAlignment=Qt::AlignAbsolute;
-    }
-
-    if (aVertical=="AlignVCenter")
-    {
-        aVerticalAlignment=Qt::AlignVCenter;
-    }
-    else
-    if (aVertical=="AlignBottom")
-    {
-        aVerticalAlignment=Qt::AlignBottom;
-    }
-
-    mTextBlockFormat.setAlignment(aHorizontalAlignment | aVerticalAlignment);
-    ((QTextBlockFormat *)&mTextFormat)->setAlignment(aHorizontalAlignment | aVerticalAlignment);
-}
-
-void TextFormatEditDialog::on_blockHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue)
-{
-    blockSetAlignment(aValue, ui->blockVerticalAlignmentComboBox->currentText());
-}
-
-void TextFormatEditDialog::on_blockVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue)
-{
-    blockSetAlignment(ui->blockHorizontalAlignmentComboBox->currentText(), aValue);
-}
-
-void TextFormatEditDialog::on_blockIndentSpinBox_valueChanged(int aValue)
-{
-    mTextBlockFormat.setIndent(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setIndent(aValue);
-}
-
-void TextFormatEditDialog::on_blockTextIndentSpinBox_valueChanged(double aValue)
-{
-    mTextBlockFormat.setTextIndent(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setTextIndent(aValue);
-}
-
-void TextFormatEditDialog::on_blockLeftMarginSpinBox_valueChanged(double aValue)
-{
-    mTextBlockFormat.setLeftMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setLeftMargin(aValue);
-}
-
-void TextFormatEditDialog::on_blockTopMarginSpinBox_valueChanged(double aValue)
-{
-    mTextBlockFormat.setTopMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setTopMargin(aValue);
-}
-
-void TextFormatEditDialog::on_blockRightMarginSpinBox_valueChanged(double aValue)
-{
-    mTextBlockFormat.setRightMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setRightMargin(aValue);
-}
-
-void TextFormatEditDialog::on_blockBottomMarginSpinBox_valueChanged(double aValue)
-{
-    mTextBlockFormat.setBottomMargin(aValue);
-    ((QTextBlockFormat *)&mTextFormat)->setBottomMargin(aValue);
 }
 
 void TextFormatEditDialog::on_blockTabPositionsAddButton_clicked()
@@ -648,6 +662,131 @@ void TextFormatEditDialog::on_charOthersButton_clicked()
     showOrHideCategory(ui->charOthersFrame, ui->charOthersButton);
 }
 
+void TextFormatEditDialog::on_charFontButton_clicked()
+{
+
+}
+
+void TextFormatEditDialog::on_charFontFamilyEdit_textEdited(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontPointSizeSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontWeightSpinBox_valueChanged(int aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontItalicCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontFixedPitchCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontStrikeOutCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontKerningCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontOverlineCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontUnderlineCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charUnderlineStyleComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::charUnderlineColorChanged(QColor aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontLetterSpacingSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontWordSpacingSpinBox_valueChanged(double aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontStyleHintComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontStyleStrategyComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontStyleStrategyFlagComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charAnchorCheckBox_toggled(bool checked)
+{
+
+}
+
+void TextFormatEditDialog::on_charAnchorHrefLineEdit_textEdited(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charAnchorNamesButton_clicked()
+{
+
+}
+
+void TextFormatEditDialog::on_charFontCapitalizationComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charFontHintingPreferenceComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue)
+{
+
+}
+
+void TextFormatEditDialog::on_charTextOutlineButton_clicked()
+{
+
+}
+
+void TextFormatEditDialog::on_charTooltipEdit_textEdited(const QString &aValue)
+{
+
+}
+
 void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
 {
     aTextFormat.setBackground(mTextFormat.background());
@@ -662,20 +801,20 @@ void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
     ui->typeComboBox->blockSignals(aLock); \
     ui->layoutDirectionComboBox->blockSignals(aLock); \
     ui->objectIndexSpinBox->blockSignals(aLock); \
+    ui->blockHorizontalAlignmentComboBox->blockSignals(aLock); \
+    ui->blockVerticalAlignmentComboBox->blockSignals(aLock); \
+    ui->blockTopMarginSpinBox->blockSignals(aLock); \
+    ui->blockBottomMarginSpinBox->blockSignals(aLock); \
+    ui->blockLeftMarginSpinBox->blockSignals(aLock); \
+    ui->blockRightMarginSpinBox->blockSignals(aLock); \
+    ui->blockTextIndentSpinBox->blockSignals(aLock); \
+    ui->blockIndentSpinBox->blockSignals(aLock); \
+    ui->blockLineHeightSpinBox->blockSignals(aLock); \
+    ui->blockLineHeightTypeComboBox->blockSignals(aLock); \
     ui->blockNonBreakableLinesCheckBox->blockSignals(aLock); \
     ui->blockPageBreakPolicyAutoCheckBox->blockSignals(aLock); \
     ui->blockPageBreakPolicyBeforeCheckBox->blockSignals(aLock); \
-    ui->blockPageBreakPolicyAfterCheckBox->blockSignals(aLock); \
-    ui->blockLineHeightSpinBox->blockSignals(aLock); \
-    ui->blockLineHeightTypeComboBox->blockSignals(aLock); \
-    ui->blockHorizontalAlignmentComboBox->blockSignals(aLock); \
-    ui->blockVerticalAlignmentComboBox->blockSignals(aLock); \
-    ui->blockIndentSpinBox->blockSignals(aLock); \
-    ui->blockTextIndentSpinBox->blockSignals(aLock); \
-    ui->blockLeftMarginSpinBox->blockSignals(aLock); \
-    ui->blockTopMarginSpinBox->blockSignals(aLock); \
-    ui->blockRightMarginSpinBox->blockSignals(aLock); \
-    ui->blockBottomMarginSpinBox->blockSignals(aLock);
+    ui->blockPageBreakPolicyAfterCheckBox->blockSignals(aLock);
 
 void TextFormatEditDialog::updateProperties()
 {
@@ -744,8 +883,8 @@ void TextFormatEditDialog::updateProperties()
         Q_ASSERT(false);
     }
 
-    QTextFormat::PageBreakFlags aBlockPageBreaks=mTextBlockFormat.pageBreakPolicy();
 
+    // BLOCK
     Qt::Alignment aBlockAlignment=mTextBlockFormat.alignment();
     QString aBlockHorizontalAlignment="AlignLeft";
     QString aBlockVerticalAlignment="AlignTop";
@@ -812,6 +951,8 @@ void TextFormatEditDialog::updateProperties()
         Q_ASSERT(false);
     }
 
+    QTextFormat::PageBreakFlags aBlockPageBreaks=mTextBlockFormat.pageBreakPolicy();
+
 
 
     // GENERAL
@@ -823,20 +964,21 @@ void TextFormatEditDialog::updateProperties()
 
 
     // BLOCK
+    ui->blockHorizontalAlignmentComboBox->setCurrentIndex(ui->blockHorizontalAlignmentComboBox->findText(aBlockHorizontalAlignment));
+    ui->blockVerticalAlignmentComboBox->setCurrentIndex(ui->blockVerticalAlignmentComboBox->findText(aBlockVerticalAlignment));
+    ui->blockTopMarginSpinBox->setValue(mTextBlockFormat.topMargin());
+    ui->blockBottomMarginSpinBox->setValue(mTextBlockFormat.bottomMargin());
+    ui->blockLeftMarginSpinBox->setValue(mTextBlockFormat.leftMargin());
+    ui->blockRightMarginSpinBox->setValue(mTextBlockFormat.rightMargin());
+    ui->blockTextIndentSpinBox->setValue(mTextBlockFormat.textIndent());
+    ui->blockIndentSpinBox->setValue(mTextBlockFormat.indent());
+    ui->blockLineHeightSpinBox->setValue(mTextBlockFormat.lineHeight());
+    ui->blockLineHeightTypeComboBox->setCurrentIndex(ui->blockLineHeightTypeComboBox->findText(aBlockLineHeightTypeStr));
     ui->blockNonBreakableLinesCheckBox->setChecked(mTextBlockFormat.nonBreakableLines());
     ui->blockPageBreakPolicyAutoCheckBox->setChecked(aBlockPageBreaks==QTextFormat::PageBreak_Auto);
     ui->blockPageBreakPolicyBeforeCheckBox->setChecked(aBlockPageBreaks & QTextFormat::PageBreak_AlwaysBefore);
     ui->blockPageBreakPolicyAfterCheckBox->setChecked(aBlockPageBreaks & QTextFormat::PageBreak_AlwaysAfter);
-    ui->blockLineHeightSpinBox->setValue(mTextBlockFormat.lineHeight());
-    ui->blockLineHeightTypeComboBox->setCurrentIndex(ui->blockLineHeightTypeComboBox->findText(aBlockLineHeightTypeStr));
-    ui->blockHorizontalAlignmentComboBox->setCurrentIndex(ui->blockHorizontalAlignmentComboBox->findText(aBlockHorizontalAlignment));
-    ui->blockVerticalAlignmentComboBox->setCurrentIndex(ui->blockVerticalAlignmentComboBox->findText(aBlockVerticalAlignment));
-    ui->blockIndentSpinBox->setValue(mTextBlockFormat.indent());
-    ui->blockTextIndentSpinBox->setValue(mTextBlockFormat.textIndent());
-    ui->blockLeftMarginSpinBox->setValue(mTextBlockFormat.leftMargin());
-    ui->blockTopMarginSpinBox->setValue(mTextBlockFormat.topMargin());
-    ui->blockRightMarginSpinBox->setValue(mTextBlockFormat.rightMargin());
-    ui->blockBottomMarginSpinBox->setValue(mTextBlockFormat.bottomMargin());
+
 
     while (ui->blockTabPositionsLayout->count()>0)
     {

@@ -287,7 +287,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-639</y>
+                 <y>0</y>
                  <width>266</width>
                  <height>1021</height>
                 </rect>
@@ -565,20 +565,6 @@
                        <number>4</number>
                       </property>
                       <item>
-                       <widget class="QLabel" name="blockIndentLabel">
-                        <property name="text">
-                         <string>Indent:</string>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
-                       <widget class="QSpinBox" name="blockIndentSpinBox">
-                        <property name="maximum">
-                         <number>2147483647</number>
-                        </property>
-                       </widget>
-                      </item>
-                      <item>
                        <widget class="QLabel" name="blockTextIndentLabel">
                         <property name="text">
                          <string>Text indent:</string>
@@ -592,6 +578,20 @@
                         </property>
                         <property name="maximum">
                          <double>2147483647.000000000000000</double>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLabel" name="blockIndentLabel">
+                        <property name="text">
+                         <string>Indent:</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QSpinBox" name="blockIndentSpinBox">
+                        <property name="maximum">
+                         <number>2147483647</number>
                         </property>
                        </widget>
                       </item>
@@ -948,7 +948,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>-601</y>
+                 <y>0</y>
                  <width>266</width>
                  <height>989</height>
                 </rect>

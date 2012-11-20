@@ -40,9 +40,11 @@ private:
 
     void copyFromTextFormat(QTextFormat aTextFormat);
     void updateProperties();
+
+    void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
     void drawBackgroundBrush();
     void drawForegroundBrush();
-    void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
+    void charDrawTextOutlinePen();
 
     inline void showOrHideCategory(QWidget *aCategory, QToolButton *aButton);
 
@@ -77,20 +79,20 @@ private slots:
     void on_blockPageBreakButton_clicked();
     void on_blockTabPositionsButton_clicked();
 
+    void on_blockHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue);
+    void on_blockVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue);
+    void on_blockTopMarginSpinBox_valueChanged(double aValue);
+    void on_blockBottomMarginSpinBox_valueChanged(double aValue);
+    void on_blockLeftMarginSpinBox_valueChanged(double aValue);
+    void on_blockRightMarginSpinBox_valueChanged(double aValue);
+    void on_blockTextIndentSpinBox_valueChanged(double aValue);
+    void on_blockIndentSpinBox_valueChanged(int aValue);
+    void on_blockLineHeightSpinBox_valueChanged(double aValue);
+    void on_blockLineHeightTypeComboBox_currentIndexChanged(const QString &aValue);
     void on_blockNonBreakableLinesCheckBox_toggled(bool checked);
     void on_blockPageBreakPolicyAutoCheckBox_toggled(bool checked);
     void on_blockPageBreakPolicyBeforeCheckBox_toggled(bool checked);
     void on_blockPageBreakPolicyAfterCheckBox_toggled(bool checked);
-    void on_blockLineHeightSpinBox_valueChanged(double aValue);
-    void on_blockLineHeightTypeComboBox_currentIndexChanged(const QString &aValue);
-    void on_blockHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue);
-    void on_blockVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue);
-    void on_blockIndentSpinBox_valueChanged(int aValue);
-    void on_blockTextIndentSpinBox_valueChanged(double aValue);
-    void on_blockLeftMarginSpinBox_valueChanged(double aValue);
-    void on_blockTopMarginSpinBox_valueChanged(double aValue);
-    void on_blockRightMarginSpinBox_valueChanged(double aValue);
-    void on_blockBottomMarginSpinBox_valueChanged(double aValue);
     void on_blockTabPositionsAddButton_clicked();
 
     // CHAR
@@ -99,6 +101,31 @@ private slots:
     void on_charStyleButton_clicked();
     void on_charAnchorButton_clicked();
     void on_charOthersButton_clicked();
+    void on_charFontButton_clicked();
+    void on_charFontFamilyEdit_textEdited(const QString &aValue);
+    void on_charFontPointSizeSpinBox_valueChanged(double aValue);
+    void on_charFontWeightSpinBox_valueChanged(int aValue);
+    void on_charFontItalicCheckBox_toggled(bool checked);
+    void on_charFontFixedPitchCheckBox_toggled(bool checked);
+    void on_charFontStrikeOutCheckBox_toggled(bool checked);
+    void on_charFontKerningCheckBox_toggled(bool checked);
+    void on_charFontOverlineCheckBox_toggled(bool checked);
+    void on_charFontUnderlineCheckBox_toggled(bool checked);
+    void on_charUnderlineStyleComboBox_currentIndexChanged(const QString &aValue);
+    void charUnderlineColorChanged(QColor aValue);
+    void on_charFontLetterSpacingSpinBox_valueChanged(double aValue);
+    void on_charFontWordSpacingSpinBox_valueChanged(double aValue);
+    void on_charFontStyleHintComboBox_currentIndexChanged(const QString &aValue);
+    void on_charFontStyleStrategyComboBox_currentIndexChanged(const QString &aValue);
+    void on_charFontStyleStrategyFlagComboBox_currentIndexChanged(const QString &aValue);
+    void on_charAnchorCheckBox_toggled(bool checked);
+    void on_charAnchorHrefLineEdit_textEdited(const QString &aValue);
+    void on_charAnchorNamesButton_clicked();
+    void on_charFontCapitalizationComboBox_currentIndexChanged(const QString &aValue);
+    void on_charFontHintingPreferenceComboBox_currentIndexChanged(const QString &aValue);
+    void on_charVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue);
+    void on_charTextOutlineButton_clicked();
+    void on_charTooltipEdit_textEdited(const QString &aValue);
 };
 
 #endif // TEXTFORMATEDITDIALOG_H
