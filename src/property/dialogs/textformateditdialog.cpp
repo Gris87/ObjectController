@@ -8,6 +8,7 @@
 #include "brusheditdialog.h"
 #include "stringlisteditdialog.h"
 #include "peneditdialog.h"
+#include "textlengtheditdialog.h"
 #include "../widgets/tabframe.h"
 
 TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent) :
@@ -1176,81 +1177,241 @@ void TextFormatEditDialog::on_framePageBreakButton_clicked()
 
 #define FRAME_MODIFICATION(action) \
     mTextFrameFormat.##action##; \
+    mTextTableFormat.##action##; \
     ((QTextFrameFormat *)&mTextFormat)->##action##;
 
 void TextFormatEditDialog::on_framePositionComboBox_currentIndexChanged(const QString &aValue)
 {
+    QTextFrameFormat::Position aPosition=QTextFrameFormat::InFlow;
 
+    if (aValue=="InFlow")
+    {
+        aPosition=QTextFrameFormat::InFlow;
+    }
+    else
+    if (aValue=="FloatLeft")
+    {
+        aPosition=QTextFrameFormat::FloatLeft;
+    }
+    else
+    if (aValue=="FloatRight")
+    {
+        aPosition=QTextFrameFormat::FloatRight;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    FRAME_MODIFICATION(setPosition(aPosition));
 }
 
 void TextFormatEditDialog::on_frameBorderSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setBorder(aValue));
 }
 
 void TextFormatEditDialog::on_frameBorderBrushButton_clicked()
 {
+    BrushEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->borderBrush(), this);
 
+    if (dialog.exec())
+    {
+        FRAME_MODIFICATION(setBorderBrush(dialog.resultValue()));
+        frameDrawBorderBrush();
+    }
 }
 
 void TextFormatEditDialog::on_frameBorderStyleComboBox_currentIndexChanged(const QString &aValue)
 {
+    QTextFrameFormat::BorderStyle aBorderStyle=QTextFrameFormat::BorderStyle_None;
 
+    if (aValue=="BorderStyle_None")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_None;
+    }
+    else
+    if (aValue=="BorderStyle_Dotted")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Dotted;
+    }
+    else
+    if (aValue=="BorderStyle_Dashed")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Dashed;
+    }
+    else
+    if (aValue=="BorderStyle_Solid")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Solid;
+    }
+    else
+    if (aValue=="BorderStyle_Double")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Double;
+    }
+    else
+    if (aValue=="BorderStyle_DotDash")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_DotDash;
+    }
+    else
+    if (aValue=="BorderStyle_DotDotDash")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_DotDotDash;
+    }
+    else
+    if (aValue=="BorderStyle_Groove")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Groove;
+    }
+    else
+    if (aValue=="BorderStyle_Ridge")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Ridge;
+    }
+    else
+    if (aValue=="BorderStyle_Inset")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Inset;
+    }
+    else
+    if (aValue=="BorderStyle_Outset")
+    {
+        aBorderStyle=QTextFrameFormat::BorderStyle_Outset;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    FRAME_MODIFICATION(setBorderStyle(aBorderStyle));
 }
 
 void TextFormatEditDialog::on_frameMarginSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setMargin(aValue));
+    frameUpdateProperties();
 }
 
 void TextFormatEditDialog::on_frameTopMarginSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setTopMargin(aValue));
 }
 
 void TextFormatEditDialog::on_frameBottomMarginSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setBottomMargin(aValue));
 }
 
 void TextFormatEditDialog::on_frameLeftMarginSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setLeftMargin(aValue));
 }
 
 void TextFormatEditDialog::on_frameRightMarginSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setRightMargin(aValue));
 }
 
 void TextFormatEditDialog::on_framePaddingSpinBox_valueChanged(double aValue)
 {
-
+    FRAME_MODIFICATION(setPadding(aValue));
 }
 
 void TextFormatEditDialog::on_frameWidthButton_clicked()
 {
+    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->width(), this);
 
+    if (dialog.exec())
+    {
+        FRAME_MODIFICATION(setWidth(dialog.resultValue()));
+        frameUpdateProperties();
+    }
 }
 
 void TextFormatEditDialog::on_frameHeightButton_clicked()
 {
+    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->height(), this);
 
+    if (dialog.exec())
+    {
+        FRAME_MODIFICATION(setHeight(dialog.resultValue()));
+        frameUpdateProperties();
+    }
 }
 
 void TextFormatEditDialog::on_framePageBreakPolicyAutoCheckBox_toggled(bool checked)
 {
+    if (checked)
+    {
+        ui->framePageBreakPolicyBeforeCheckBox->blockSignals(true);
+        ui->framePageBreakPolicyAfterCheckBox->blockSignals(true);
 
+        ui->framePageBreakPolicyBeforeCheckBox->setChecked(false);
+        ui->framePageBreakPolicyAfterCheckBox->setChecked(false);
+
+        ui->framePageBreakPolicyBeforeCheckBox->blockSignals(false);
+        ui->framePageBreakPolicyAfterCheckBox->blockSignals(false);
+
+        FRAME_MODIFICATION(setPageBreakPolicy(QTextFormat::PageBreak_Auto));
+    }
+    else
+    {
+        ui->framePageBreakPolicyAutoCheckBox->blockSignals(true);
+        ui->framePageBreakPolicyAutoCheckBox->setChecked(true);
+        ui->framePageBreakPolicyAutoCheckBox->blockSignals(false);
+    }
 }
 
 void TextFormatEditDialog::on_framePageBreakPolicyBeforeCheckBox_toggled(bool checked)
 {
+    if (checked)
+    {
+        ui->framePageBreakPolicyAutoCheckBox->blockSignals(true);
+        ui->framePageBreakPolicyAutoCheckBox->setChecked(false);
+        ui->framePageBreakPolicyAutoCheckBox->blockSignals(false);
 
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() | QTextFormat::PageBreak_AlwaysBefore;
+        FRAME_MODIFICATION(setPageBreakPolicy(aPolicy));
+    }
+    else
+    {
+        if (!ui->framePageBreakPolicyAfterCheckBox->isChecked())
+        {
+            ui->framePageBreakPolicyAutoCheckBox->blockSignals(true);
+            ui->framePageBreakPolicyAutoCheckBox->setChecked(true);
+            ui->framePageBreakPolicyAutoCheckBox->blockSignals(false);
+        }
+
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysBefore;
+        FRAME_MODIFICATION(setPageBreakPolicy(aPolicy));
+    }
 }
 
 void TextFormatEditDialog::on_framePageBreakPolicyAfterCheckBox_toggled(bool checked)
 {
+    if (checked)
+    {
+        ui->framePageBreakPolicyAutoCheckBox->blockSignals(true);
+        ui->framePageBreakPolicyAutoCheckBox->setChecked(false);
+        ui->framePageBreakPolicyAutoCheckBox->blockSignals(false);
 
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() | QTextFormat::PageBreak_AlwaysAfter;
+        FRAME_MODIFICATION(setPageBreakPolicy(aPolicy));
+    }
+    else
+    {
+        if (!ui->framePageBreakPolicyBeforeCheckBox->isChecked())
+        {
+            ui->framePageBreakPolicyAutoCheckBox->blockSignals(true);
+            ui->framePageBreakPolicyAutoCheckBox->setChecked(true);
+            ui->framePageBreakPolicyAutoCheckBox->blockSignals(false);
+        }
+
+        QTextFormat::PageBreakFlags aPolicy=((QTextBlockFormat *)&mTextFormat)->pageBreakPolicy() & ~QTextFormat::PageBreak_AlwaysAfter;
+        FRAME_MODIFICATION(setPageBreakPolicy(aPolicy));
+    }
 }
 
 void TextFormatEditDialog::copyFromTextFormat(QTextFormat aTextFormat)
@@ -1729,14 +1890,157 @@ void TextFormatEditDialog::charUpdateProperties()
     CHAR_BLOCK_SIGNALS(false);
 }
 
-#define FRAME_SIGNALS(aLock) \
-    ui->framePositionComboBox->blockSignals(aLock);
+#define FRAME_BLOCK_SIGNALS(aLock) \
+    ui->framePositionComboBox->blockSignals(aLock); \
+    ui->framePositionComboBox->blockSignals(aLock); \
+    ui->frameBorderSpinBox->blockSignals(aLock); \
+    ui->frameBorderStyleComboBox->blockSignals(aLock); \
+    ui->frameMarginSpinBox->blockSignals(aLock); \
+    ui->frameTopMarginSpinBox->blockSignals(aLock); \
+    ui->frameBottomMarginSpinBox->blockSignals(aLock); \
+    ui->frameLeftMarginSpinBox->blockSignals(aLock); \
+    ui->frameRightMarginSpinBox->blockSignals(aLock); \
+    ui->framePaddingSpinBox->blockSignals(aLock); \
+    ui->framePageBreakPolicyAutoCheckBox->blockSignals(aLock); \
+    ui->framePageBreakPolicyBeforeCheckBox->blockSignals(aLock); \
+    ui->framePageBreakPolicyAfterCheckBox->blockSignals(aLock);
 
 void TextFormatEditDialog::frameUpdateProperties()
 {
-    FRAME_SIGNALS(true);
+    FRAME_BLOCK_SIGNALS(true);
 
-    FRAME_SIGNALS(false);
+    QTextFrameFormat::Position aPosition=((QTextFrameFormat *)&mTextFormat)->position();
+    QString aPositionStr;
+
+    if (aPosition==QTextFrameFormat::InFlow)
+    {
+        aPositionStr="InFlow";
+    }
+    else
+    if (aPosition==QTextFrameFormat::FloatLeft)
+    {
+        aPositionStr="FloatLeft";
+    }
+    else
+    if (aPosition==QTextFrameFormat::FloatRight)
+    {
+        aPositionStr="FloatRight";
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    QTextFrameFormat::BorderStyle aBorderStyle=((QTextFrameFormat *)&mTextFormat)->borderStyle();
+    QString aBorderStyleStr;
+
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_None)
+    {
+        aBorderStyleStr="BorderStyle_None";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Dotted)
+    {
+        aBorderStyleStr="BorderStyle_Dotted";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Dashed)
+    {
+        aBorderStyleStr="BorderStyle_Dashed";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Solid)
+    {
+        aBorderStyleStr="BorderStyle_Solid";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Double)
+    {
+        aBorderStyleStr="BorderStyle_Double";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_DotDash)
+    {
+        aBorderStyleStr="BorderStyle_DotDash";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_DotDotDash)
+    {
+        aBorderStyleStr="BorderStyle_DotDotDash";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Groove)
+    {
+        aBorderStyleStr="BorderStyle_Groove";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Ridge)
+    {
+        aBorderStyleStr="BorderStyle_Ridge";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Inset)
+    {
+        aBorderStyleStr="BorderStyle_Inset";
+    }
+    else
+    if (aBorderStyle==QTextFrameFormat::BorderStyle_Outset)
+    {
+        aBorderStyleStr="BorderStyle_Outset";
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    QTextLength aWidth=((QTextFrameFormat *)&mTextFormat)->width();
+    QString aWidthStr="[";
+
+    switch (aWidth.type())
+    {
+        case QTextLength::VariableLength:   aWidthStr.append("VariableLength");   break;
+        case QTextLength::FixedLength:      aWidthStr.append("FixedLength");      break;
+        case QTextLength::PercentageLength: aWidthStr.append("PercentageLength"); break;
+    }
+
+    aWidthStr.append(", ");
+    aWidthStr.append(QString::number(aWidth.rawValue()));
+    aWidthStr.append("]");
+
+    QTextLength aHeight=((QTextFrameFormat *)&mTextFormat)->height();
+    QString aHeightStr="[";
+
+    switch (aHeight.type())
+    {
+        case QTextLength::VariableLength:   aHeightStr.append("VariableLength");   break;
+        case QTextLength::FixedLength:      aHeightStr.append("FixedLength");      break;
+        case QTextLength::PercentageLength: aHeightStr.append("PercentageLength"); break;
+    }
+
+    aHeightStr.append(", ");
+    aHeightStr.append(QString::number(aHeight.rawValue()));
+    aHeightStr.append("]");
+
+    QTextFormat::PageBreakFlags aPageBreaks=((QTextFrameFormat *)&mTextFormat)->pageBreakPolicy();
+
+
+
+    ui->framePositionComboBox->setCurrentIndex(ui->framePositionComboBox->findText(aPositionStr));
+    ui->frameBorderSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->border());
+    ui->frameBorderStyleComboBox->setCurrentIndex(ui->frameBorderStyleComboBox->findText(aBorderStyleStr));
+    ui->frameMarginSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->margin());
+    ui->frameTopMarginSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->topMargin());
+    ui->frameBottomMarginSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->bottomMargin());
+    ui->frameLeftMarginSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->leftMargin());
+    ui->frameRightMarginSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->rightMargin());
+    ui->framePaddingSpinBox->setValue(((QTextFrameFormat *)&mTextFormat)->padding());
+    ui->frameWidthEdit->setText(aWidthStr);
+    ui->frameHeightEdit->setText(aHeightStr);
+    ui->framePageBreakPolicyAutoCheckBox->setChecked(aPageBreaks==QTextFormat::PageBreak_Auto);
+    ui->framePageBreakPolicyBeforeCheckBox->setChecked(aPageBreaks & QTextFormat::PageBreak_AlwaysBefore);
+    ui->framePageBreakPolicyAfterCheckBox->setChecked(aPageBreaks & QTextFormat::PageBreak_AlwaysAfter);
+
+    FRAME_BLOCK_SIGNALS(false);
 }
 
 #define BLOCK_SIGNALS(aLock) \
