@@ -388,8 +388,8 @@ void TextFormatEditDialog::on_blockTabPositionsButton_clicked()
 }
 
 #define BLOCK_MODIFICATION(action) \
-    mTextBlockFormat.##action##; \
-    ((QTextBlockFormat *)&mTextFormat)->##action##;
+    mTextBlockFormat.action; \
+    ((QTextBlockFormat *)&mTextFormat)->action;
 
 void TextFormatEditDialog::blockSetAlignment(const QString &aHorizontal, const QString &aVertical)
 {
@@ -738,10 +738,10 @@ void TextFormatEditDialog::on_charOthersButton_clicked()
 }
 
 #define CHAR_MODIFICATION(action) \
-    mTextCharFormat.##action##; \
-    mTextImageFormat.##action##; \
-    mTextTableCellFormat.##action##; \
-    ((QTextCharFormat *)&mTextFormat)->##action##;
+    mTextCharFormat.action; \
+    mTextImageFormat.action; \
+    mTextTableCellFormat.action; \
+    ((QTextCharFormat *)&mTextFormat)->action;
 
 void TextFormatEditDialog::on_charFontButton_clicked()
 {
@@ -1207,9 +1207,9 @@ void TextFormatEditDialog::on_framePageBreakButton_clicked()
 }
 
 #define FRAME_MODIFICATION(action) \
-    mTextFrameFormat.##action##; \
-    mTextTableFormat.##action##; \
-    ((QTextFrameFormat *)&mTextFormat)->##action##;
+    mTextFrameFormat.action; \
+    mTextTableFormat.action; \
+    ((QTextFrameFormat *)&mTextFormat)->action;
 
 void TextFormatEditDialog::on_framePositionComboBox_currentIndexChanged(const QString &aValue)
 {

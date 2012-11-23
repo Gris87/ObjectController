@@ -5,6 +5,9 @@
 TestObject::TestObject(QObject *parent) :
     QObject(parent)
 {
+    mEnumeration=ENUM_TWO;
+    mFlags=TestFlags(FLAG_1 | FLAG_3);
+
     mBool=true;
     mInt8=1;
     mUInt8=2;
@@ -110,6 +113,16 @@ TestObject::TestObject(QObject *parent) :
 }
 
 // ----------------------------------------------------------------------------------------------------
+
+TestObject::TestEnumeration TestObject::getEnumeration() const
+{
+    return mEnumeration;
+}
+
+TestObject::TestFlags TestObject::getFlags() const
+{
+    return mFlags;
+}
 
 bool TestObject::getBool() const
 {
@@ -425,6 +438,18 @@ void* TestObject::getVoid() const
 QObject* TestObject::getObject() const
 {
     return mObject;
+}
+
+// ----------------------------------------------------------------------------------------------------
+
+void TestObject::setEnumeration(const TestEnumeration &aEnumeration)
+{
+    mEnumeration=aEnumeration;
+}
+
+void TestObject::setFlags(const TestFlags &aFlags)
+{
+    mFlags=aFlags;
 }
 
 void TestObject::setBool(const bool &aBool)

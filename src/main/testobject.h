@@ -24,72 +24,95 @@ class TestObject : public QObject
 {
     Q_OBJECT
 public:
-    Q_PROPERTY(bool           Bool          READ getBool          WRITE setBool)
-    Q_PROPERTY(qint8          Int8          READ getInt8          WRITE setInt8)
-    Q_PROPERTY(quint8         UInt8         READ getUInt8         WRITE setUInt8)
-    Q_PROPERTY(qint16         Int16         READ getInt16         WRITE setInt16)
-    Q_PROPERTY(quint16        UInt16        READ getUInt16        WRITE setUInt16)
-    Q_PROPERTY(qint32         Int32         READ getInt32         WRITE setInt32)
-    Q_PROPERTY(quint32        UInt32        READ getUInt32        WRITE setUInt32)
-    Q_PROPERTY(qint64         Int64         READ getInt64         WRITE setInt64)
-    Q_PROPERTY(quint64        UInt64        READ getUInt64        WRITE setUInt64)
-    Q_PROPERTY(float          Float         READ getFloat         WRITE setFloat)
-    Q_PROPERTY(double         Double        READ getDouble        WRITE setDouble)
-    Q_PROPERTY(QChar          Char          READ getChar          WRITE setChar)
-    Q_PROPERTY(QVariantMap    Map           READ getMap           WRITE setMap)
-    Q_PROPERTY(QVariantList   List          READ getList          WRITE setList)
-    Q_PROPERTY(QStringList    StringList    READ getStringList    WRITE setStringList)
-    Q_PROPERTY(QString        String        READ getString        WRITE setString)
-    Q_PROPERTY(QByteArray     ByteArray     READ getByteArray     WRITE setByteArray)
-    Q_PROPERTY(QBitArray      BitArray      READ getBitArray      WRITE setBitArray)
-    Q_PROPERTY(QDate          Date          READ getDate          WRITE setDate)
-    Q_PROPERTY(QTime          Time          READ getTime          WRITE setTime)
-    Q_PROPERTY(QDateTime      DateTime      READ getDateTime      WRITE setDateTime)
-    Q_PROPERTY(QUrl           Url           READ getUrl           WRITE setUrl)
-    Q_PROPERTY(QLocale        Locale        READ getLocale        WRITE setLocale)
-    Q_PROPERTY(QRect          Rect          READ getRect          WRITE setRect)
-    Q_PROPERTY(QRectF         RectF         READ getRectF         WRITE setRectF)
-    Q_PROPERTY(QSize          Size          READ getSize          WRITE setSize)
-    Q_PROPERTY(QSizeF         SizeF         READ getSizeF         WRITE setSizeF)
-    Q_PROPERTY(QLine          Line          READ getLine          WRITE setLine)
-    Q_PROPERTY(QLineF         LineF         READ getLineF         WRITE setLineF)
-    Q_PROPERTY(QPoint         Point         READ getPoint         WRITE setPoint)
-    Q_PROPERTY(QPointF        PointF        READ getPointF        WRITE setPointF)
-    Q_PROPERTY(QRegExp        RegExp        READ getRegExp        WRITE setRegExp)
-    Q_PROPERTY(QVariantHash   Hash          READ getHash          WRITE setHash)
-    Q_PROPERTY(QEasingCurve   EasingCurve   READ getEasingCurve   WRITE setEasingCurve)
-    Q_PROPERTY(QFont          Font          READ getFont          WRITE setFont)
-    Q_PROPERTY(QPixmap        Pixmap        READ getPixmap        WRITE setPixmap)
-    Q_PROPERTY(QBrush         Brush         READ getBrush         WRITE setBrush)
-    Q_PROPERTY(QColor         Color         READ getColor         WRITE setColor)
-    Q_PROPERTY(QPalette       Palette       READ getPalette       WRITE setPalette)
-    Q_PROPERTY(QIcon          Icon          READ getIcon          WRITE setIcon)
-    Q_PROPERTY(QImage         Image         READ getImage         WRITE setImage)
-    Q_PROPERTY(QPolygon       Polygon       READ getPolygon       WRITE setPolygon)
-    Q_PROPERTY(QRegion        Region        READ getRegion        WRITE setRegion)
-    Q_PROPERTY(QBitmap        Bitmap        READ getBitmap        WRITE setBitmap)
-    Q_PROPERTY(QCursor        Cursor        READ getCursor        WRITE setCursor)
-    Q_PROPERTY(QSizePolicy    SizePolicy    READ getSizePolicy    WRITE setSizePolicy)
-    Q_PROPERTY(QKeySequence   KeySequence   READ getKeySequence   WRITE setKeySequence)
-    Q_PROPERTY(QPen           Pen           READ getPen           WRITE setPen)
-    Q_PROPERTY(QTextLength    TextLength    READ getTextLength    WRITE setTextLength)
-    Q_PROPERTY(QTextFormat    TextFormat    READ getTextFormat    WRITE setTextFormat)
-    Q_PROPERTY(QMatrix        Matrix        READ getMatrix        WRITE setMatrix)
-    Q_PROPERTY(QTransform     Transform     READ getTransform     WRITE setTransform)
-    Q_PROPERTY(QMatrix4x4     Matrix4x4     READ getMatrix4x4     WRITE setMatrix4x4)
-    Q_PROPERTY(QVector2D      Vector2D      READ getVector2D      WRITE setVector2D)
-    Q_PROPERTY(QVector3D      Vector3D      READ getVector3D      WRITE setVector3D)
-    Q_PROPERTY(QVector4D      Vector4D      READ getVector4D      WRITE setVector4D)
-    Q_PROPERTY(QQuaternion    Quaternion    READ getQuaternion    WRITE setQuaternion)
-    Q_PROPERTY(void*          Void          READ getVoid)
-    Q_PROPERTY(QObject*       Object        READ getObject)
+    Q_PROPERTY(TestEnumeration   Enumeration   READ getEnumeration   WRITE setEnumeration)
+    Q_PROPERTY(TestFlags         Flags         READ getFlags         WRITE setFlags)
+    Q_PROPERTY(bool              Bool          READ getBool          WRITE setBool)
+    Q_PROPERTY(qint8             Int8          READ getInt8          WRITE setInt8)
+    Q_PROPERTY(quint8            UInt8         READ getUInt8         WRITE setUInt8)
+    Q_PROPERTY(qint16            Int16         READ getInt16         WRITE setInt16)
+    Q_PROPERTY(quint16           UInt16        READ getUInt16        WRITE setUInt16)
+    Q_PROPERTY(qint32            Int32         READ getInt32         WRITE setInt32)
+    Q_PROPERTY(quint32           UInt32        READ getUInt32        WRITE setUInt32)
+    Q_PROPERTY(qint64            Int64         READ getInt64         WRITE setInt64)
+    Q_PROPERTY(quint64           UInt64        READ getUInt64        WRITE setUInt64)
+    Q_PROPERTY(float             Float         READ getFloat         WRITE setFloat)
+    Q_PROPERTY(double            Double        READ getDouble        WRITE setDouble)
+    Q_PROPERTY(QChar             Char          READ getChar          WRITE setChar)
+    Q_PROPERTY(QVariantMap       Map           READ getMap           WRITE setMap)
+    Q_PROPERTY(QVariantList      List          READ getList          WRITE setList)
+    Q_PROPERTY(QStringList       StringList    READ getStringList    WRITE setStringList)
+    Q_PROPERTY(QString           String        READ getString        WRITE setString)
+    Q_PROPERTY(QByteArray        ByteArray     READ getByteArray     WRITE setByteArray)
+    Q_PROPERTY(QBitArray         BitArray      READ getBitArray      WRITE setBitArray)
+    Q_PROPERTY(QDate             Date          READ getDate          WRITE setDate)
+    Q_PROPERTY(QTime             Time          READ getTime          WRITE setTime)
+    Q_PROPERTY(QDateTime         DateTime      READ getDateTime      WRITE setDateTime)
+    Q_PROPERTY(QUrl              Url           READ getUrl           WRITE setUrl)
+    Q_PROPERTY(QLocale           Locale        READ getLocale        WRITE setLocale)
+    Q_PROPERTY(QRect             Rect          READ getRect          WRITE setRect)
+    Q_PROPERTY(QRectF            RectF         READ getRectF         WRITE setRectF)
+    Q_PROPERTY(QSize             Size          READ getSize          WRITE setSize)
+    Q_PROPERTY(QSizeF            SizeF         READ getSizeF         WRITE setSizeF)
+    Q_PROPERTY(QLine             Line          READ getLine          WRITE setLine)
+    Q_PROPERTY(QLineF            LineF         READ getLineF         WRITE setLineF)
+    Q_PROPERTY(QPoint            Point         READ getPoint         WRITE setPoint)
+    Q_PROPERTY(QPointF           PointF        READ getPointF        WRITE setPointF)
+    Q_PROPERTY(QRegExp           RegExp        READ getRegExp        WRITE setRegExp)
+    Q_PROPERTY(QVariantHash      Hash          READ getHash          WRITE setHash)
+    Q_PROPERTY(QEasingCurve      EasingCurve   READ getEasingCurve   WRITE setEasingCurve)
+    Q_PROPERTY(QFont             Font          READ getFont          WRITE setFont)
+    Q_PROPERTY(QPixmap           Pixmap        READ getPixmap        WRITE setPixmap)
+    Q_PROPERTY(QBrush            Brush         READ getBrush         WRITE setBrush)
+    Q_PROPERTY(QColor            Color         READ getColor         WRITE setColor)
+    Q_PROPERTY(QPalette          Palette       READ getPalette       WRITE setPalette)
+    Q_PROPERTY(QIcon             Icon          READ getIcon          WRITE setIcon)
+    Q_PROPERTY(QImage            Image         READ getImage         WRITE setImage)
+    Q_PROPERTY(QPolygon          Polygon       READ getPolygon       WRITE setPolygon)
+    Q_PROPERTY(QRegion           Region        READ getRegion        WRITE setRegion)
+    Q_PROPERTY(QBitmap           Bitmap        READ getBitmap        WRITE setBitmap)
+    Q_PROPERTY(QCursor           Cursor        READ getCursor        WRITE setCursor)
+    Q_PROPERTY(QSizePolicy       SizePolicy    READ getSizePolicy    WRITE setSizePolicy)
+    Q_PROPERTY(QKeySequence      KeySequence   READ getKeySequence   WRITE setKeySequence)
+    Q_PROPERTY(QPen              Pen           READ getPen           WRITE setPen)
+    Q_PROPERTY(QTextLength       TextLength    READ getTextLength    WRITE setTextLength)
+    Q_PROPERTY(QTextFormat       TextFormat    READ getTextFormat    WRITE setTextFormat)
+    Q_PROPERTY(QMatrix           Matrix        READ getMatrix        WRITE setMatrix)
+    Q_PROPERTY(QTransform        Transform     READ getTransform     WRITE setTransform)
+    Q_PROPERTY(QMatrix4x4        Matrix4x4     READ getMatrix4x4     WRITE setMatrix4x4)
+    Q_PROPERTY(QVector2D         Vector2D      READ getVector2D      WRITE setVector2D)
+    Q_PROPERTY(QVector3D         Vector3D      READ getVector3D      WRITE setVector3D)
+    Q_PROPERTY(QVector4D         Vector4D      READ getVector4D      WRITE setVector4D)
+    Q_PROPERTY(QQuaternion       Quaternion    READ getQuaternion    WRITE setQuaternion)
+    Q_PROPERTY(void*             Void          READ getVoid)
+    Q_PROPERTY(QObject*          Object        READ getObject)
 
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);
 
+    Q_ENUMS(TestEnumeration)
+    enum TestEnumeration
+    {
+        ENUM_ONE,
+        ENUM_TWO,
+        ENUM_THREE
+    };
+
+    Q_FLAGS(TestFlags)
+    enum TestFlag
+    {
+        ALL_FLAGS = 0x0,
+        FLAG_1    = 0x1,
+        FLAG_2    = 0x2,
+        FLAG_3    = 0x4
+    };
+
+    Q_DECLARE_FLAGS(TestFlags, TestFlag)
+
     // ----------------------------------------------------------------------------------------------------
 
+    TestEnumeration        mEnumeration;
+    TestFlags              mFlags;
     bool                   mBool;
     qint8                  mInt8;
     quint8                 mUInt8;
@@ -152,6 +175,8 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
+    TestEnumeration        getEnumeration() const;
+    TestFlags              getFlags() const;
     bool                   getBool() const;
     qint8                  getInt8() const;
     quint8                 getUInt8() const;
@@ -214,6 +239,8 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
+    void setEnumeration(const TestEnumeration &aEnumeration);
+    void setFlags(const TestFlags &aFlags);
     void setBool(const bool &aBool);
     void setInt8(const qint8 &aInt8);
     void setUInt8(const quint8 &aUInt8);
@@ -272,5 +299,7 @@ public:
     void setVector4D(const QVector4D &aVector4D);
     void setQuaternion(const QQuaternion &aQuaternion);
 };
+
+Q_DECLARE_OPERATORS_FOR_FLAGS(TestObject::TestFlags)
 
 #endif // TESTOBJECT_H
