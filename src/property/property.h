@@ -307,6 +307,9 @@ protected:
 
 private slots:
     void flagChanged(const QVariant &aNewValue);
+    void mapItemChanged(const QVariant &aNewValue);
+    void listItemChanged(const QVariant &aNewValue);
+    void stringListItemChanged(const QVariant &aNewValue);
 
 signals:
     void valueChanged(const QVariant &aNewValue);

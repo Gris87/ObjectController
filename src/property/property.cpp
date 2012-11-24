@@ -2092,6 +2092,7 @@ PropertyTreeWidgetItem* Property::senderItem()
 
 #define GET_OR_CREATE_ITEM_CONNECT(aParentItem, aNewItem, aID, aName, aValue, aSlot) \
     GET_OR_CREATE_ITEM_SETUP(aParentItem, aNewItem, aID, aName, aValue); \
+    aNewItem->itemConnector()->disconnect(); \
     connect(aNewItem->itemConnector(), SIGNAL(valueChanged(QVariant)), this, SLOT(aSlot(QVariant)));
 
 int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -2206,6 +2207,20 @@ int Property::subPropertiesForValue(const QChar &/*aValue*/, PropertyTreeWidgetI
     return 0;
 }
 
+void Property::mapItemChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVariantMap aMap=aParentItem->firstValue().value<QVariantMap>();
+    QString aKey=aItem->text(0);
+
+    aMap[aKey]=aNewValue;
+
+    aParentItem->setFirstValue(aMap);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
@@ -2213,14 +2228,24 @@ int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidge
     for (QVariantMap::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
-        setPropertiesForItem(i.value(), aEntryItem);
-
-        // TODO: Editors
+        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aEntryItem, aCount, i.key(), i.value(), mapItemChanged);
     }
 
     return aCount;
+}
+
+void Property::listItemChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVariantList aList=aParentItem->firstValue().value<QVariantList>();
+    int aIndex=aItem->text(0).toInt()-1;
+
+    aList[aIndex]=aNewValue;
+
+    aParentItem->setFirstValue(aList);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2230,14 +2255,24 @@ int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidg
     for (int i=0; i<aValue.length(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
-        setPropertiesForItem(aValue.at(i), aEntryItem);
-
-        // TODO: Editors
+        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i), listItemChanged);
     }
 
     return aCount;
+}
+
+void Property::stringListItemChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QStringList aList=aParentItem->firstValue().value<QStringList>();
+    int aIndex=aItem->text(0).toInt()-1;
+
+    aList[aIndex]=aNewValue.value<QString>();
+
+    aParentItem->setFirstValue(aList);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2247,10 +2282,7 @@ int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidge
     for (int i=0; i<aValue.length(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i));
-
-        // TODO: Editors
+        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i), stringListItemChanged);
     }
 
     return aCount;
