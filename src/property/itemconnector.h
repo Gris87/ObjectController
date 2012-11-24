@@ -3,11 +3,18 @@
 
 #include <QObject>
 
+class PropertyTreeWidgetItem;
+
 class ItemConnector : public QObject
 {
     Q_OBJECT
 public:
-    explicit ItemConnector(QObject *parent=0);
+    explicit ItemConnector(PropertyTreeWidgetItem *aItem, QObject *parent=0);
+
+    PropertyTreeWidgetItem *item();
+
+protected:
+    PropertyTreeWidgetItem *mItem;
 
 signals:
     void valueChanged(const QVariant &aNewValue);

@@ -57,7 +57,7 @@ PropertyTreeWidgetItem::~PropertyTreeWidgetItem()
 
 inline void PropertyTreeWidgetItem::init()
 {
-    mItemConnector=new ItemConnector();
+    mItemConnector=new ItemConnector(this);
     mProperty=0;
     mFirstValue=QVariant();
     mDelegate=0;

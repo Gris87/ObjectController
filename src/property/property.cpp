@@ -2045,6 +2045,12 @@ CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWid
 
 // -------------------------------------------------------------------------------------
 
+PropertyTreeWidgetItem* Property::senderItem()
+{
+    return ((ItemConnector *)sender())->item();
+}
+
+
 #define GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
     if (aParentItem->childCount()>aID) \
     { \
@@ -2080,6 +2086,14 @@ CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWid
 \
     aNewItem->setText(0, aName);
 
+#define GET_OR_CREATE_ITEM_SETUP(aParentItem, aNewItem, aID, aName, aValue) \
+    GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName); \
+    setPropertiesForItem(aValue, aNewItem);
+
+#define GET_OR_CREATE_ITEM_CONNECT(aParentItem, aNewItem, aID, aName, aValue, aSlot) \
+    GET_OR_CREATE_ITEM_SETUP(aParentItem, aNewItem, aID, aName, aValue); \
+    connect(aNewItem->itemConnector(), SIGNAL(valueChanged(QVariant)), this, SLOT(aSlot(QVariant)));
+
 int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
@@ -2102,11 +2116,7 @@ int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetIte
         bool aChecked=(((aValue & aFlag)==aFlag) && (aFlag!=0 || aValue==0));
 
         PropertyTreeWidgetItem *aFlagItem;
-
-        GET_OR_CREATE_ITEM_NEW(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)));
-        setPropertiesForItem(aChecked, aFlagItem);
-
-        // TODO: Editors
+        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)), aChecked, flagChanged);
     }
 
     return aCount;

@@ -241,6 +241,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
+    PropertyTreeWidgetItem *senderItem();
+
     int subPropertiesForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
