@@ -18,6 +18,7 @@ PropertyTreeWidget::PropertyTreeWidget(ObjectController *aController) :
 
     //----------------------------------------------------------------------
 
+    mEnumDelegate        = mController->createEnumDelegate();
     mBoolDelegate        = mController->createBoolDelegate();
     mIntegerDelegate     = mController->createIntegerDelegate();
     mDoubleDelegate      = mController->createDoubleDelegate();
@@ -249,6 +250,11 @@ void PropertyTreeWidget::update(const QObjectList &aObjects)
 ObjectController* PropertyTreeWidget::controller() const
 {
     return mController;
+}
+
+CustomDelegate* PropertyTreeWidget::enumDelegate()
+{
+    return mEnumDelegate;
 }
 
 CustomDelegate* PropertyTreeWidget::boolDelegate()

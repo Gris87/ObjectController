@@ -45,11 +45,20 @@ PropertyTreeWidgetItem::PropertyTreeWidgetItem(const PropertyTreeWidgetItem &oth
     init();
 }
 
+PropertyTreeWidgetItem::~PropertyTreeWidgetItem()
+{
+    if (mMetaEnum)
+    {
+        delete mMetaEnum;
+    }
+}
+
 inline void PropertyTreeWidgetItem::init()
 {
     mProperty=0;
     mFirstValue=QVariant();
     mDelegate=0;
+    mMetaEnum=0;
     mModified=false;
 }
 
@@ -91,6 +100,32 @@ CustomDelegate* PropertyTreeWidgetItem::delegate() const
 void PropertyTreeWidgetItem::setDelegate(CustomDelegate *aDelegate)
 {
     mDelegate=aDelegate;
+}
+
+QMetaEnum* PropertyTreeWidgetItem::metaEnum() const
+{
+    return mMetaEnum;
+}
+
+void PropertyTreeWidgetItem::setMetaEnum(QMetaEnum *aMetaEnum)
+{
+    if (aMetaEnum)
+    {
+        if (!mMetaEnum)
+        {
+            mMetaEnum=new QMetaEnum();
+        }
+
+        *mMetaEnum=*aMetaEnum;
+    }
+    else
+    {
+        if (mMetaEnum)
+        {
+            delete mMetaEnum;
+            mMetaEnum=0;
+        }
+    }
 }
 
 bool PropertyTreeWidgetItem::isModified() const

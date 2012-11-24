@@ -24,6 +24,7 @@ public:
 
     ObjectController*     controller() const;
 
+    CustomDelegate*       enumDelegate();
     CustomDelegate*       boolDelegate();
     CustomDelegate*       integerDelegate();
     CustomDelegate*       doubleDelegate();
@@ -71,6 +72,7 @@ protected:
     ObjectController     *mController;
     PropertyItemDelegate *mItemDelegate;
 
+    CustomDelegate       *mEnumDelegate;
     CustomDelegate       *mBoolDelegate;
     CustomDelegate       *mIntegerDelegate;
     CustomDelegate       *mDoubleDelegate;

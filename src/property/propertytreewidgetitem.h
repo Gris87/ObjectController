@@ -19,6 +19,7 @@ public:
     PropertyTreeWidgetItem(PropertyTreeWidgetItem *parent, const QStringList &strings, int type = Type);
     PropertyTreeWidgetItem(PropertyTreeWidgetItem *parent, PropertyTreeWidgetItem *preceding, int type = Type);
     PropertyTreeWidgetItem(const PropertyTreeWidgetItem &other);
+    ~PropertyTreeWidgetItem();
 
     void update(const QObjectList &aObjects);
 
@@ -33,6 +34,9 @@ public:
     CustomDelegate* delegate() const;
     void            setDelegate(CustomDelegate *aDelegate);
 
+    QMetaEnum*      metaEnum() const;
+    void            setMetaEnum(QMetaEnum *aMetaEnum);
+
     bool            isModified() const;
     void            setModified(const bool &aModified);
 
@@ -40,6 +44,7 @@ protected:
     Property*       mProperty;
     QVariant        mFirstValue;
     CustomDelegate* mDelegate;
+    QMetaEnum*      mMetaEnum;
     bool            mModified;
 
     void init();

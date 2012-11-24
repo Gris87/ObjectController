@@ -2,6 +2,7 @@
 
 #include <QVBoxLayout>
 
+#include "delegates/enumdelegate.h"
 #include "delegates/booldelegate.h"
 #include "delegates/integerdelegate.h"
 #include "delegates/doubledelegate.h"
@@ -214,6 +215,11 @@ bool ObjectController::filterProperty(const QMetaObject * /*aMetaObject*/, QStri
 void ObjectController::propertyAdded(const QMetaObject * /*aMetaObject*/, Property * /*aProperty*/)
 {
     // Nothing
+}
+
+CustomDelegate* ObjectController::createEnumDelegate()
+{
+    return new EnumDelegate(this);
 }
 
 CustomDelegate* ObjectController::createBoolDelegate()

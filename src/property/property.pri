@@ -149,7 +149,9 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/delegates/quaterniondelegate.h \
            $$PWD/widgets/palettedemowidget.h \
            $$PWD/widgets/gradientwidget.h \
-           $$PWD/widgets/tabframe.h
+           $$PWD/widgets/tabframe.h \
+           $$PWD/delegates/enumdelegate.h \
+           $$PWD/editors/enumeditor.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -291,7 +293,9 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/vector2ddelegate.cpp \
            $$PWD/widgets/palettedemowidget.cpp \
            $$PWD/widgets/gradientwidget.cpp \
-           $$PWD/widgets/tabframe.cpp
+           $$PWD/widgets/tabframe.cpp \
+           $$PWD/delegates/enumdelegate.cpp \
+           $$PWD/editors/enumeditor.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -377,4 +381,5 @@ FORMS += \
            $$PWD/editors/vector2deditor.ui \
            $$PWD/editors/quaternioneditor.ui \
            $$PWD/widgets/palettedemowidget.ui \
-           $$PWD/widgets/tabframe.ui
+           $$PWD/widgets/tabframe.ui \
+           $$PWD/editors/enumeditor.ui

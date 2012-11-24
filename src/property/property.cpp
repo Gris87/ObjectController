@@ -1463,9 +1463,11 @@ CustomDelegate* Property::delegateForValueEnum(const int &/*aValue*/, PropertyTr
 {
     if (mIsWritable)
     {
-
+        aParentItem->setMetaEnum(&mMetaProperty.enumerator());
+        return ((PropertyTreeWidget*)aParentItem->treeWidget())->enumDelegate();
     }
 
+    aParentItem->setMetaEnum(0);
     return 0;
 }
 
