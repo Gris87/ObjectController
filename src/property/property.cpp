@@ -2101,7 +2101,9 @@ int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidge
 
 void Property::flagChanged(const QVariant &aNewValue)
 {
+    QString aFlagName=senderItem()->text(0);
 
+    // TODO: Use mMetaProperty from Item
 }
 
 int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem)
