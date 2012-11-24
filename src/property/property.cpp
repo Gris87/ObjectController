@@ -286,7 +286,7 @@ QString Property::valueToStringFlag(const int &aValue, PropertyTreeWidgetItem * 
     {
         int aFlag=aMetaEnum.value(i);
 
-        if ((aFlag==0 && aValue==0) || (aValue & aFlag))
+        if (((aValue & aFlag)==aFlag) && (aFlag!=0 || aValue==0))
         {
             bool good=true;
 
@@ -2068,7 +2068,23 @@ int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidge
 
 int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return 0;
+    int aCount=0;
+
+    QMetaEnum aMetaEnum=mMetaProperty.enumerator();
+
+    for (int i=0; i<aMetaEnum.keyCount(); ++i)
+    {
+        int aFlag=aMetaEnum.value(i);
+        bool aChecked=(((aValue & aFlag)==aFlag) && (aFlag!=0 || aValue==0));
+
+        PropertyTreeWidgetItem *aFlagItem;
+
+        GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)), valueToString(aChecked, aFlagItem), iconForValue(aChecked, aFlagItem));
+
+        // TODO: Editors
+    }
+
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const bool &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
