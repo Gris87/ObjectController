@@ -99,72 +99,86 @@ void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFir
 }
 
 #define FUNCTION_FOR_VARIANT(aValue, aParentItem, aFunction, aDefaultResult) \
-    switch (aValue.type()) \
+    if (mMetaProperty.isEnumType()) \
     { \
-        case QVariant::Bool:         return aFunction(aValue.value<bool>(), aParentItem); \
-        case QVariant::Int:          return aFunction(aValue.value<qint32>(), aParentItem); \
-        case QVariant::UInt:         return aFunction(aValue.value<quint32>(), aParentItem); \
-        case QVariant::LongLong:     return aFunction(aValue.value<qint64>(), aParentItem); \
-        case QVariant::ULongLong:    return aFunction(aValue.value<quint64>(), aParentItem); \
-        case QVariant::Double:       return aFunction(aValue.value<double>(), aParentItem); \
-        case QVariant::Char:         return aFunction(aValue.value<QChar>(), aParentItem); \
-        case QVariant::Map:          return aFunction(aValue.value<QVariantMap>(), aParentItem); \
-        case QVariant::List:         return aFunction(aValue.value<QVariantList>(), aParentItem); \
-        case QVariant::StringList:   return aFunction(aValue.value<QStringList>(), aParentItem); \
-        case QVariant::String:       return aFunction(aValue.value<QString>(), aParentItem); \
-        case QVariant::ByteArray:    return aFunction(aValue.value<QByteArray>(), aParentItem); \
-        case QVariant::BitArray:     return aFunction(aValue.value<QBitArray>(), aParentItem); \
-        case QVariant::Date:         return aFunction(aValue.value<QDate>(), aParentItem); \
-        case QVariant::Time:         return aFunction(aValue.value<QTime>(), aParentItem); \
-        case QVariant::DateTime:     return aFunction(aValue.value<QDateTime>(), aParentItem); \
-        case QVariant::Url:          return aFunction(aValue.value<QUrl>(), aParentItem); \
-        case QVariant::Locale:       return aFunction(aValue.value<QLocale>(), aParentItem); \
-        case QVariant::Rect:         return aFunction(aValue.value<QRect>(), aParentItem); \
-        case QVariant::RectF:        return aFunction(aValue.value<QRectF>(), aParentItem); \
-        case QVariant::Size:         return aFunction(aValue.value<QSize>(), aParentItem); \
-        case QVariant::SizeF:        return aFunction(aValue.value<QSizeF>(), aParentItem); \
-        case QVariant::Line:         return aFunction(aValue.value<QLine>(), aParentItem); \
-        case QVariant::LineF:        return aFunction(aValue.value<QLineF>(), aParentItem); \
-        case QVariant::Point:        return aFunction(aValue.value<QPoint>(), aParentItem); \
-        case QVariant::PointF:       return aFunction(aValue.value<QPointF>(), aParentItem); \
-        case QVariant::RegExp:       return aFunction(aValue.value<QRegExp>(), aParentItem); \
-        case QVariant::Hash:         return aFunction(aValue.value<QVariantHash>(), aParentItem); \
-        case QVariant::EasingCurve:  return aFunction(aValue.value<QEasingCurve>(), aParentItem); \
-        case QVariant::Font:         return aFunction(aValue.value<QFont>(), aParentItem); \
-        case QVariant::Pixmap:       return aFunction(aValue.value<QPixmap>(), aParentItem); \
-        case QVariant::Brush:        return aFunction(aValue.value<QBrush>(), aParentItem); \
-        case QVariant::Color:        return aFunction(aValue.value<QColor>(), aParentItem); \
-        case QVariant::Palette:      return aFunction(aValue.value<QPalette>(), aParentItem); \
-        case QVariant::Icon:         return aFunction(aValue.value<QIcon>(), aParentItem); \
-        case QVariant::Image:        return aFunction(aValue.value<QImage>(), aParentItem); \
-        case QVariant::Polygon:      return aFunction(aValue.value<QPolygon>(), aParentItem); \
-        case QVariant::Region:       return aFunction(aValue.value<QRegion>(), aParentItem); \
-        case QVariant::Bitmap:       return aFunction(aValue.value<QBitmap>(), aParentItem); \
-        case QVariant::Cursor:       return aFunction(aValue.value<QCursor>(), aParentItem); \
-        case QVariant::SizePolicy:   return aFunction(aValue.value<QSizePolicy>(), aParentItem); \
-        case QVariant::KeySequence:  return aFunction(aValue.value<QKeySequence>(), aParentItem); \
-        case QVariant::Pen:          return aFunction(aValue.value<QPen>(), aParentItem); \
-        case QVariant::TextLength:   return aFunction(aValue.value<QTextLength>(), aParentItem); \
-        case QVariant::TextFormat:   return aFunction(aValue.value<QTextFormat>(), aParentItem); \
-        case QVariant::Matrix:       return aFunction(aValue.value<QMatrix>(), aParentItem); \
-        case QVariant::Transform:    return aFunction(aValue.value<QTransform>(), aParentItem); \
-        case QVariant::Matrix4x4:    return aFunction(aValue.value<QMatrix4x4>(), aParentItem); \
-        case QVariant::Vector2D:     return aFunction(aValue.value<QVector2D>(), aParentItem); \
-        case QVariant::Vector3D:     return aFunction(aValue.value<QVector3D>(), aParentItem); \
-        case QVariant::Vector4D:     return aFunction(aValue.value<QVector4D>(), aParentItem); \
-        case QVariant::Quaternion:   return aFunction(aValue.value<QQuaternion>(), aParentItem); \
-        case QMetaType::Long:        return aFunction(aValue.value<qint32>(), aParentItem); \
-        case QMetaType::Short:       return aFunction(aValue.value<qint16>(), aParentItem); \
-        case QMetaType::Char:        return aFunction(aValue.value<qint8>(), aParentItem); \
-        case QMetaType::ULong:       return aFunction(aValue.value<quint32>(), aParentItem); \
-        case QMetaType::UShort:      return aFunction(aValue.value<quint16>(), aParentItem); \
-        case QMetaType::UChar:       return aFunction(aValue.value<quint8>(), aParentItem); \
-        case QMetaType::Float:       return aFunction(aValue.value<float>(), aParentItem); \
-        case QMetaType::VoidStar:    return aFunction(aValue.value<void *>(), aParentItem); \
-        case QMetaType::QObjectStar: return aFunction(aValue.value<QObject *>(), aParentItem); \
-        case QMetaType::QWidgetStar: return aFunction(aValue.value<QWidget *>(), aParentItem); \
-        default: return aDefaultResult; \
+        if (mMetaProperty.isFlagType()) \
+        { \
+             return aFunction##Flag(aValue.value<quint64>(), aParentItem); \
+        } \
+        else \
+        { \
+             return aFunction##Enum(aValue.value<quint64>(), aParentItem); \
+        } \
     } \
+    else \
+    { \
+        switch (aValue.type()) \
+        { \
+            case QVariant::Bool:         return aFunction(aValue.value<bool>(), aParentItem); \
+            case QVariant::Int:          return aFunction(aValue.value<qint32>(), aParentItem); \
+            case QVariant::UInt:         return aFunction(aValue.value<quint32>(), aParentItem); \
+            case QVariant::LongLong:     return aFunction(aValue.value<qint64>(), aParentItem); \
+            case QVariant::ULongLong:    return aFunction(aValue.value<quint64>(), aParentItem); \
+            case QVariant::Double:       return aFunction(aValue.value<double>(), aParentItem); \
+            case QVariant::Char:         return aFunction(aValue.value<QChar>(), aParentItem); \
+            case QVariant::Map:          return aFunction(aValue.value<QVariantMap>(), aParentItem); \
+            case QVariant::List:         return aFunction(aValue.value<QVariantList>(), aParentItem); \
+            case QVariant::StringList:   return aFunction(aValue.value<QStringList>(), aParentItem); \
+            case QVariant::String:       return aFunction(aValue.value<QString>(), aParentItem); \
+            case QVariant::ByteArray:    return aFunction(aValue.value<QByteArray>(), aParentItem); \
+            case QVariant::BitArray:     return aFunction(aValue.value<QBitArray>(), aParentItem); \
+            case QVariant::Date:         return aFunction(aValue.value<QDate>(), aParentItem); \
+            case QVariant::Time:         return aFunction(aValue.value<QTime>(), aParentItem); \
+            case QVariant::DateTime:     return aFunction(aValue.value<QDateTime>(), aParentItem); \
+            case QVariant::Url:          return aFunction(aValue.value<QUrl>(), aParentItem); \
+            case QVariant::Locale:       return aFunction(aValue.value<QLocale>(), aParentItem); \
+            case QVariant::Rect:         return aFunction(aValue.value<QRect>(), aParentItem); \
+            case QVariant::RectF:        return aFunction(aValue.value<QRectF>(), aParentItem); \
+            case QVariant::Size:         return aFunction(aValue.value<QSize>(), aParentItem); \
+            case QVariant::SizeF:        return aFunction(aValue.value<QSizeF>(), aParentItem); \
+            case QVariant::Line:         return aFunction(aValue.value<QLine>(), aParentItem); \
+            case QVariant::LineF:        return aFunction(aValue.value<QLineF>(), aParentItem); \
+            case QVariant::Point:        return aFunction(aValue.value<QPoint>(), aParentItem); \
+            case QVariant::PointF:       return aFunction(aValue.value<QPointF>(), aParentItem); \
+            case QVariant::RegExp:       return aFunction(aValue.value<QRegExp>(), aParentItem); \
+            case QVariant::Hash:         return aFunction(aValue.value<QVariantHash>(), aParentItem); \
+            case QVariant::EasingCurve:  return aFunction(aValue.value<QEasingCurve>(), aParentItem); \
+            case QVariant::Font:         return aFunction(aValue.value<QFont>(), aParentItem); \
+            case QVariant::Pixmap:       return aFunction(aValue.value<QPixmap>(), aParentItem); \
+            case QVariant::Brush:        return aFunction(aValue.value<QBrush>(), aParentItem); \
+            case QVariant::Color:        return aFunction(aValue.value<QColor>(), aParentItem); \
+            case QVariant::Palette:      return aFunction(aValue.value<QPalette>(), aParentItem); \
+            case QVariant::Icon:         return aFunction(aValue.value<QIcon>(), aParentItem); \
+            case QVariant::Image:        return aFunction(aValue.value<QImage>(), aParentItem); \
+            case QVariant::Polygon:      return aFunction(aValue.value<QPolygon>(), aParentItem); \
+            case QVariant::Region:       return aFunction(aValue.value<QRegion>(), aParentItem); \
+            case QVariant::Bitmap:       return aFunction(aValue.value<QBitmap>(), aParentItem); \
+            case QVariant::Cursor:       return aFunction(aValue.value<QCursor>(), aParentItem); \
+            case QVariant::SizePolicy:   return aFunction(aValue.value<QSizePolicy>(), aParentItem); \
+            case QVariant::KeySequence:  return aFunction(aValue.value<QKeySequence>(), aParentItem); \
+            case QVariant::Pen:          return aFunction(aValue.value<QPen>(), aParentItem); \
+            case QVariant::TextLength:   return aFunction(aValue.value<QTextLength>(), aParentItem); \
+            case QVariant::TextFormat:   return aFunction(aValue.value<QTextFormat>(), aParentItem); \
+            case QVariant::Matrix:       return aFunction(aValue.value<QMatrix>(), aParentItem); \
+            case QVariant::Transform:    return aFunction(aValue.value<QTransform>(), aParentItem); \
+            case QVariant::Matrix4x4:    return aFunction(aValue.value<QMatrix4x4>(), aParentItem); \
+            case QVariant::Vector2D:     return aFunction(aValue.value<QVector2D>(), aParentItem); \
+            case QVariant::Vector3D:     return aFunction(aValue.value<QVector3D>(), aParentItem); \
+            case QVariant::Vector4D:     return aFunction(aValue.value<QVector4D>(), aParentItem); \
+            case QVariant::Quaternion:   return aFunction(aValue.value<QQuaternion>(), aParentItem); \
+            case QMetaType::Long:        return aFunction(aValue.value<qint32>(), aParentItem); \
+            case QMetaType::Short:       return aFunction(aValue.value<qint16>(), aParentItem); \
+            case QMetaType::Char:        return aFunction(aValue.value<qint8>(), aParentItem); \
+            case QMetaType::ULong:       return aFunction(aValue.value<quint32>(), aParentItem); \
+            case QMetaType::UShort:      return aFunction(aValue.value<quint16>(), aParentItem); \
+            case QMetaType::UChar:       return aFunction(aValue.value<quint8>(), aParentItem); \
+            case QMetaType::Float:       return aFunction(aValue.value<float>(), aParentItem); \
+            case QMetaType::VoidStar:    return aFunction(aValue.value<void *>(), aParentItem); \
+            case QMetaType::QObjectStar: return aFunction(aValue.value<QObject *>(), aParentItem); \
+            case QMetaType::QWidgetStar: return aFunction(aValue.value<QWidget *>(), aParentItem); \
+            default: return aDefaultResult; \
+        } \
+    }
 
 QString Property::valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
 {
@@ -203,6 +217,11 @@ QColor Property::backgroundColor() const
     return mBackgroundColor;
 }
 
+void Property::setBackgroundColor(const QColor &aBackgroundColor)
+{
+    mBackgroundColor=aBackgroundColor;
+}
+
 bool Property::isWriteable() const
 {
     return mIsWritable;
@@ -239,6 +258,16 @@ bool Property::isNumber(const QVariant &aValue)
             ||
             aType==QMetaType::UChar
            );
+}
+
+QString Property::valueToStringEnum(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return "ENUM";
+}
+
+QString Property::valueToStringFlag(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return "FLAG";
 }
 
 QString Property::valueToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -980,6 +1009,16 @@ QString Property::valueToString(QObject *aValue, PropertyTreeWidgetItem * /*aPar
 
 // -------------------------------------------------------------------------------------
 
+QIcon Property::iconForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return QIcon();
+}
+
+QIcon Property::iconForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return QIcon();
+}
+
 QIcon Property::iconForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QPixmap aBoolPixmap=QPixmap(13, 13);
@@ -1378,6 +1417,21 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
 }
 
 // -------------------------------------------------------------------------------------
+
+CustomDelegate* Property::delegateForValueEnum(const quint64 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+{
+    if (mIsWritable)
+    {
+
+    }
+
+    return 0;
+}
+
+CustomDelegate* Property::delegateForValueFlag(const quint64 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+{
+    return 0;
+}
 
 CustomDelegate* Property::delegateForValue(const bool &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
@@ -1965,6 +2019,16 @@ CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWid
 #define GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aNewItem, aID, aName, aValue, aIcon) \
     GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
     aNewItem->setIcon(1, aIcon);
+
+int Property::subPropertiesForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return 0;
+}
+
+int Property::subPropertiesForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    return 0;
+}
 
 int Property::subPropertiesForValue(const bool &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
