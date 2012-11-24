@@ -4,6 +4,7 @@
 #include <QTreeWidgetItem>
 
 #include "property.h"
+#include "itemconnector.h"
 
 #include "delegates/customdelegate.h"
 
@@ -25,6 +26,8 @@ public:
 
     // -------------------------------------------------------------------------------------
 
+    ItemConnector*  itemConnector();
+
     Property*       property();
     void            setProperty(Property* aProperty);
 
@@ -41,6 +44,7 @@ public:
     void            setModified(const bool &aModified);
 
 protected:
+    ItemConnector*  mItemConnector;
     Property*       mProperty;
     QVariant        mFirstValue;
     CustomDelegate* mDelegate;

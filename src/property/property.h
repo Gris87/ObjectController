@@ -303,7 +303,6 @@ protected:
     int subPropertiesForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem);
 
 private slots:
-    void valueChangedSlot(const QVariant &aNewValue);
 
 signals:
     void valueChanged(const QVariant &aNewValue);

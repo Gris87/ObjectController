@@ -200,11 +200,6 @@ int Property::valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *
     FUNCTION_FOR_VARIANT(aValue, aParentItem, subPropertiesForValue, 0);
 }
 
-void Property::valueChangedSlot(const QVariant &aNewValue)
-{
-    emit valueChanged(aNewValue);
-}
-
 // -------------------------------------------------------------------------------------
 
 QString Property::name() const
@@ -1463,7 +1458,9 @@ CustomDelegate* Property::delegateForValueEnum(const int &/*aValue*/, PropertyTr
 {
     if (mIsWritable)
     {
-        aParentItem->setMetaEnum(&mMetaProperty.enumerator());
+        QMetaEnum aMetaEnum=mMetaProperty.enumerator();
+
+        aParentItem->setMetaEnum(&aMetaEnum);
         return ((PropertyTreeWidget*)aParentItem->treeWidget())->enumDelegate();
     }
 

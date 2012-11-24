@@ -34,7 +34,7 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
 
     aCustomEditor->setIcon(aItem->icon(1));
 
-    connect(aCustomEditor, SIGNAL(valueChanged(QVariant)), aItem->property(), SLOT(valueChangedSlot(QVariant)));
+    connect(aCustomEditor, SIGNAL(valueChanged(QVariant)), aItem->itemConnector(), SIGNAL(valueChanged(QVariant)));
 
     return aCustomEditor;
 }

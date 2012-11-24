@@ -47,6 +47,8 @@ PropertyTreeWidgetItem::PropertyTreeWidgetItem(const PropertyTreeWidgetItem &oth
 
 PropertyTreeWidgetItem::~PropertyTreeWidgetItem()
 {
+    delete mItemConnector;
+
     if (mMetaEnum)
     {
         delete mMetaEnum;
@@ -55,6 +57,7 @@ PropertyTreeWidgetItem::~PropertyTreeWidgetItem()
 
 inline void PropertyTreeWidgetItem::init()
 {
+    mItemConnector=new ItemConnector();
     mProperty=0;
     mFirstValue=QVariant();
     mDelegate=0;
@@ -72,6 +75,11 @@ void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
 
 // -------------------------------------------------------------------------------------
 
+ItemConnector* PropertyTreeWidgetItem::itemConnector()
+{
+    return mItemConnector;
+}
+
 Property* PropertyTreeWidgetItem::property()
 {
     return mProperty;
@@ -79,7 +87,17 @@ Property* PropertyTreeWidgetItem::property()
 
 void PropertyTreeWidgetItem::setProperty(Property* aProperty)
 {
+    if (mProperty)
+    {
+        QObject::disconnect(mItemConnector, SIGNAL(valueChanged(QVariant)), mProperty, SIGNAL(valueChanged(QVariant)));
+    }
+
     mProperty=aProperty;
+
+    if (mProperty)
+    {
+        QObject::connect(mItemConnector, SIGNAL(valueChanged(QVariant)), mProperty, SIGNAL(valueChanged(QVariant)));
+    }
 }
 
 QVariant PropertyTreeWidgetItem::firstValue() const

@@ -151,7 +151,8 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/gradientwidget.h \
            $$PWD/widgets/tabframe.h \
            $$PWD/delegates/enumdelegate.h \
-           $$PWD/editors/enumeditor.h
+           $$PWD/editors/enumeditor.h \
+           $$PWD/itemconnector.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -295,7 +296,8 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/gradientwidget.cpp \
            $$PWD/widgets/tabframe.cpp \
            $$PWD/delegates/enumdelegate.cpp \
-           $$PWD/editors/enumeditor.cpp
+           $$PWD/editors/enumeditor.cpp \
+           $$PWD/itemconnector.cpp
 
 RESOURCES += $$PWD/property.qrc
 
