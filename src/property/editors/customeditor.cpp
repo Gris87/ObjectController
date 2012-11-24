@@ -64,7 +64,7 @@ void CustomEditor::afterCreatingSlot()
     selectText();
 }
 
-void CustomEditor::setIcon(const QIcon &aIcon)
+void CustomEditor::setIcon(const QIcon &/*aIcon*/)
 {
     // Nothing
 }
