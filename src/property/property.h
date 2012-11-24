@@ -48,8 +48,8 @@ protected:
 
     bool isNumber(const QVariant &aValue);
 
-    QString valueToStringEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
-    QString valueToStringFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
+    QString valueToStringEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    QString valueToStringFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -112,8 +112,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
-    QIcon iconForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
-    QIcon iconForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
+    QIcon iconForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    QIcon iconForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -176,8 +176,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
-    CustomDelegate* delegateForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
-    CustomDelegate* delegateForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -240,8 +240,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
-    int subPropertiesForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
-    int subPropertiesForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem);
+    int subPropertiesForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    int subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);

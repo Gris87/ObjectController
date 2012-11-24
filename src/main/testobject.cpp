@@ -6,7 +6,7 @@ TestObject::TestObject(QObject *parent) :
     QObject(parent)
 {
     mEnumeration=ENUM_TWO;
-    mFlags=TestFlags(FLAG_1 | FLAG_3);
+    mFlags=FLAG_1_3;
 
     mBool=true;
     mInt8=1;

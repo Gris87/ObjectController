@@ -103,11 +103,11 @@ void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFir
     { \
         if (mMetaProperty.isFlagType()) \
         { \
-             return aFunction##Flag(aValue.value<quint64>(), aParentItem); \
+             return aFunction##Flag(aValue.value<int>(), aParentItem); \
         } \
         else \
         { \
-             return aFunction##Enum(aValue.value<quint64>(), aParentItem); \
+             return aFunction##Enum(aValue.value<int>(), aParentItem); \
         } \
     } \
     else \
@@ -260,14 +260,55 @@ bool Property::isNumber(const QVariant &aValue)
            );
 }
 
-QString Property::valueToStringEnum(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::valueToStringEnum(const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "ENUM";
+    QString res=qApp->translate("Property", "[No enumeration value]");
+    QMetaEnum aMetaEnum=mMetaProperty.enumerator();
+
+    for (int i=0; i<aMetaEnum.keyCount(); ++i)
+    {
+        if (aMetaEnum.value(i)==aValue)
+        {
+            res=QString::fromLatin1(aMetaEnum.key(i));
+            break;
+        }
+    }
+
+    return res;
 }
 
-QString Property::valueToStringFlag(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::valueToStringFlag(const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "FLAG";
+    QStringList resList;
+    QMetaEnum aMetaEnum=mMetaProperty.enumerator();
+
+    for (int i=0; i<aMetaEnum.keyCount(); ++i)
+    {
+        int aFlag=aMetaEnum.value(i);
+
+        if ((aFlag==0 && aValue==0) || (aValue & aFlag))
+        {
+            bool good=true;
+
+            while (aFlag)
+            {
+                if (aFlag & 1)
+                {
+                    good=(aFlag==1);
+                    break;
+                }
+
+                aFlag>>=1;
+            }
+
+            if (good)
+            {
+                resList.append(QString::fromLatin1(aMetaEnum.key(i)));
+            }
+        }
+    }
+
+    return "["+resList.join(", ")+"]";
 }
 
 QString Property::valueToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -1009,12 +1050,12 @@ QString Property::valueToString(QObject *aValue, PropertyTreeWidgetItem * /*aPar
 
 // -------------------------------------------------------------------------------------
 
-QIcon Property::iconForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+QIcon Property::iconForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+QIcon Property::iconForValueFlag(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
@@ -1418,7 +1459,7 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
 
 // -------------------------------------------------------------------------------------
 
-CustomDelegate* Property::delegateForValueEnum(const quint64 &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
     if (mIsWritable)
     {
@@ -1428,7 +1469,7 @@ CustomDelegate* Property::delegateForValueEnum(const quint64 &/*aValue*/, Proper
     return 0;
 }
 
-CustomDelegate* Property::delegateForValueFlag(const quint64 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValueFlag(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
 }
@@ -2020,12 +2061,12 @@ CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWid
     GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
     aNewItem->setIcon(1, aIcon);
 
-int Property::subPropertiesForValueEnum(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
 }
 
-int Property::subPropertiesForValueFlag(const quint64 &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     return 0;
 }

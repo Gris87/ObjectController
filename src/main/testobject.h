@@ -101,10 +101,17 @@ public:
     Q_FLAGS(TestFlags)
     enum TestFlag
     {
-        ALL_FLAGS = 0x0,
-        FLAG_1    = 0x1,
-        FLAG_2    = 0x2,
-        FLAG_3    = 0x4
+        NO_FLAGS   = 0,
+        FLAG_1     = 0x1,
+        FLAG_2     = 0x2,
+        FLAG_3     = 0x4,
+        FLAG_4     = 0x8,
+        FLAG_5     = 0x10,
+        FLAG_1_3   = FLAG_1 | FLAG_3,
+        FLAG_1_3_5 = FLAG_1 | FLAG_3 | FLAG_5,
+        FLAG_2_4   = FLAG_2 | FLAG_4,
+        FLAG_3_5   = FLAG_3 | FLAG_5,
+        ALL_FLAGS  = FLAG_1_3_5 | FLAG_2_4
     };
 
     Q_DECLARE_FLAGS(TestFlags, TestFlag)
