@@ -98,8 +98,13 @@ void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFir
     }
 }
 
+void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    setPropertiesForItem(aValue, aValue, aParentItem);
+}
+
 #define FUNCTION_FOR_VARIANT(aValue, aParentItem, aFunction, aDefaultResult) \
-    if (mMetaProperty.isEnumType()) \
+    if (aParentItem->property() && mMetaProperty.isEnumType()) \
     { \
         if (mMetaProperty.isFlagType()) \
         { \
@@ -2060,9 +2065,29 @@ CustomDelegate* Property::delegateForValue(QObject * /*aValue*/, PropertyTreeWid
     GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
     aNewItem->setIcon(1, aIcon);
 
+#define GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName) \
+    if (aParentItem->childCount()>aID) \
+    { \
+        aNewItem=(PropertyTreeWidgetItem *)aParentItem->child(aID); \
+    } \
+    else \
+    { \
+        aNewItem=new PropertyTreeWidgetItem(aParentItem); \
+        aNewItem->setFlags(aNewItem->flags() | Qt::ItemIsEditable); \
+    } \
+\
+    ++aID; \
+\
+    aNewItem->setText(0, aName);
+
 int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
+}
+
+void Property::flagChanged(const QVariant &aNewValue)
+{
+
 }
 
 int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2078,7 +2103,8 @@ int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetIte
 
         PropertyTreeWidgetItem *aFlagItem;
 
-        GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)), valueToString(aChecked, aFlagItem), iconForValue(aChecked, aFlagItem));
+        GET_OR_CREATE_ITEM_NEW(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)));
+        setPropertiesForItem(aChecked, aFlagItem);
 
         // TODO: Editors
     }
@@ -2155,7 +2181,7 @@ int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidge
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
-        setPropertiesForItem(i.value(), i.value(), aEntryItem);
+        setPropertiesForItem(i.value(), aEntryItem);
 
         // TODO: Editors
     }
@@ -2172,7 +2198,7 @@ int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidg
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
-        setPropertiesForItem(aValue.at(i), aValue.at(i), aEntryItem);
+        setPropertiesForItem(aValue.at(i), aEntryItem);
 
         // TODO: Editors
     }
@@ -2396,7 +2422,7 @@ int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidg
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
-        setPropertiesForItem(i.value(), i.value(), aEntryItem);
+        setPropertiesForItem(i.value(), aEntryItem);
 
         // TODO: Editors
     }
@@ -2472,7 +2498,7 @@ int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem
     QColor                  aGroup##_##aRole##_Color=aValue.color(QPalette::aGroup, QPalette::aRole); \
 \
     GET_OR_CREATE_ITEM(aParentItem, aGroup##_##aRole##_Item, aCount, #aRole" ("#aGroup")", valueToString(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item)); \
-    setPropertiesForItem(aGroup##_##aRole##_Color, aGroup##_##aRole##_Color, aGroup##_##aRole##_Item);
+    setPropertiesForItem(aGroup##_##aRole##_Color, aGroup##_##aRole##_Item);
 
 #define INSERT_COLOR_ROLE(aParentItem, aCount, aRole, aValue) \
     INSERT_COLOR(aParentItem, aCount, Active,   aRole, aValue); \
@@ -2526,7 +2552,7 @@ int Property::subPropertiesForValue(const QPolygon &aValue, PropertyTreeWidgetIt
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
-        setPropertiesForItem(aValue.at(i), aValue.at(i), aEntryItem);
+        setPropertiesForItem(aValue.at(i), aEntryItem);
 
         // TODO: Editors
     }
@@ -2545,7 +2571,7 @@ int Property::subPropertiesForValue(const QRegion &aValue, PropertyTreeWidgetIte
         PropertyTreeWidgetItem *aEntryItem;
 
         GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, QString::number(i+1), "");
-        setPropertiesForItem(aRects.at(i), aRects.at(i), aEntryItem);
+        setPropertiesForItem(aRects.at(i), aEntryItem);
 
         // TODO: Editors
     }
@@ -2695,7 +2721,7 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyle, QIcon(aJoinStylePixmap));
     GET_OR_CREATE_ITEM(          aParentItem, aColorItem,     aCount, qApp->translate("Property", "Color"),      valueToString(aValue.color(),     aColorItem));
 
-    setPropertiesForItem(aValue.color(), aValue.color(), aColorItem);
+    setPropertiesForItem(aValue.color(), aColorItem);
 
     // TODO: Editors
 

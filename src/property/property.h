@@ -39,6 +39,7 @@ protected:
     bool          mIsWritable;
 
     void setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem);
+    void setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* valueDelegate(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -303,6 +304,7 @@ protected:
     int subPropertiesForValue(QObject *aValue, PropertyTreeWidgetItem *aParentItem);
 
 private slots:
+    void flagChanged(const QVariant &aNewValue);
 
 signals:
     void valueChanged(const QVariant &aNewValue);
