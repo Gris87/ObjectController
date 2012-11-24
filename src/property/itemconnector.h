@@ -11,6 +11,8 @@ class ItemConnector : public QObject
 public:
     explicit ItemConnector(PropertyTreeWidgetItem *aItem, QObject *parent=0);
 
+    void sendSignal();
+
     PropertyTreeWidgetItem *item();
 
 protected:

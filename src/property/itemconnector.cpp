@@ -8,6 +8,11 @@ ItemConnector::ItemConnector(PropertyTreeWidgetItem *aItem, QObject *parent) :
     mItem=aItem;
 }
 
+void ItemConnector::sendSignal()
+{
+    emit valueChanged(mItem->firstValue());
+}
+
 PropertyTreeWidgetItem* ItemConnector::item()
 {
     return mItem;
