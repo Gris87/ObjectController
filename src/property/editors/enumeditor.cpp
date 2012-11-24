@@ -54,5 +54,11 @@ void EnumEditor::setValue(QMetaEnum *aMetaEnum, const int &aValue)
 
 void EnumEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
 {
-
+    for (int i=0; i<mMetaEnum->keyCount(); ++i)
+    {
+        if (QString::fromLatin1(mMetaEnum->key(i))==aValue)
+        {
+            modificationDone(mMetaEnum->value(i));
+        }
+    }
 }
