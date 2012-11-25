@@ -38,7 +38,7 @@ public:
     void            setDelegate(CustomDelegate *aDelegate);
 
     QMetaEnum*      metaEnum() const;
-    void            setMetaEnum(QMetaEnum *aMetaEnum);
+    void            setMetaEnum(const QMetaEnum &aMetaEnum);
 
     bool            isModified() const;
     void            setModified(const bool &aModified);

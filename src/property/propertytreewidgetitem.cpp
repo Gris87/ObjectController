@@ -125,25 +125,14 @@ QMetaEnum* PropertyTreeWidgetItem::metaEnum() const
     return mMetaEnum;
 }
 
-void PropertyTreeWidgetItem::setMetaEnum(QMetaEnum *aMetaEnum)
+void PropertyTreeWidgetItem::setMetaEnum(const QMetaEnum &aMetaEnum)
 {
-    if (aMetaEnum)
+    if (!mMetaEnum)
     {
-        if (!mMetaEnum)
-        {
-            mMetaEnum=new QMetaEnum();
-        }
+        mMetaEnum=new QMetaEnum();
+    }
 
-        *mMetaEnum=*aMetaEnum;
-    }
-    else
-    {
-        if (mMetaEnum)
-        {
-            delete mMetaEnum;
-            mMetaEnum=0;
-        }
-    }
+    *mMetaEnum=aMetaEnum;
 }
 
 bool PropertyTreeWidgetItem::isModified() const

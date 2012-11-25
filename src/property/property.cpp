@@ -108,11 +108,11 @@ void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetIt
     { \
         if (mMetaProperty.isFlagType()) \
         { \
-             return aFunction##Flag(aValue.value<int>(), aParentItem); \
+             return aFunction##Flag(mMetaProperty.enumerator(), aValue.value<int>(), aParentItem); \
         } \
         else \
         { \
-             return aFunction##Enum(aValue.value<int>(), aParentItem); \
+             return aFunction##Enum(mMetaProperty.enumerator(), aValue.value<int>(), aParentItem); \
         } \
     } \
     else \
@@ -260,10 +260,9 @@ bool Property::isNumber(const QVariant &aValue)
            );
 }
 
-QString Property::valueToStringEnum(const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::valueToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res=qApp->translate("Property", "[No enumeration value]");
-    QMetaEnum aMetaEnum=mMetaProperty.enumerator();
 
     for (int i=0; i<aMetaEnum.keyCount(); ++i)
     {
@@ -277,10 +276,9 @@ QString Property::valueToStringEnum(const int &aValue, PropertyTreeWidgetItem * 
     return res;
 }
 
-QString Property::valueToStringFlag(const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::valueToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QStringList resList;
-    QMetaEnum aMetaEnum=mMetaProperty.enumerator();
 
     for (int i=0; i<aMetaEnum.keyCount(); ++i)
     {
@@ -1050,12 +1048,12 @@ QString Property::valueToString(QObject *aValue, PropertyTreeWidgetItem * /*aPar
 
 // -------------------------------------------------------------------------------------
 
-QIcon Property::iconForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+QIcon Property::iconForValueEnum(const QMetaEnum &/*aMetaEnum*/, const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
 
-QIcon Property::iconForValueFlag(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+QIcon Property::iconForValueFlag(const QMetaEnum &/*aMetaEnum*/, const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QIcon();
 }
@@ -1459,21 +1457,18 @@ QIcon Property::iconForValue(QObject * /*aValue*/, PropertyTreeWidgetItem * /*aP
 
 // -------------------------------------------------------------------------------------
 
-CustomDelegate* Property::delegateForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
+CustomDelegate* Property::delegateForValueEnum(const QMetaEnum &aMetaEnum, const int &/*aValue*/, PropertyTreeWidgetItem *aParentItem)
 {
     if (mIsWritable)
     {
-        QMetaEnum aMetaEnum=mMetaProperty.enumerator();
-
-        aParentItem->setMetaEnum(&aMetaEnum);
+        aParentItem->setMetaEnum(aMetaEnum);
         return ((PropertyTreeWidget*)aParentItem->treeWidget())->enumDelegate();
     }
 
-    aParentItem->setMetaEnum(0);
     return 0;
 }
 
-CustomDelegate* Property::delegateForValueFlag(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+CustomDelegate* Property::delegateForValueFlag(const QMetaEnum &/*aMetaEnum*/, const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
 }
@@ -2050,6 +2045,13 @@ PropertyTreeWidgetItem* Property::senderItem()
     return ((ItemConnector *)sender())->item();
 }
 
+void Property::removeAllChildren(PropertyTreeWidgetItem *aParentItem)
+{
+    while (aParentItem->childCount()>0)
+    {
+        delete aParentItem->takeChild(0);
+    }
+}
 
 #define GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
     if (aParentItem->childCount()>aID) \
@@ -2090,12 +2092,27 @@ PropertyTreeWidgetItem* Property::senderItem()
     GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName); \
     setPropertiesForItem(aValue, aNewItem);
 
-#define GET_OR_CREATE_ITEM_CONNECT(aParentItem, aNewItem, aID, aName, aValue, aSlot) \
-    GET_OR_CREATE_ITEM_SETUP(aParentItem, aNewItem, aID, aName, aValue); \
+#define GET_OR_CREATE_ITEM_SETUP_ENUM(aParentItem, aNewItem, aID, aName, aEnum, aValue) \
+    GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName); \
+    aNewItem->setText(1, valueToStringEnum(aEnum, (int)aValue, aNewItem)); \
+    aNewItem->setIcon(1, iconForValueEnum(aEnum, (int)aValue, aNewItem)); \
+    aNewItem->setFirstValue((int)aValue); \
+    aNewItem->setDelegate(delegateForValueEnum(aEnum, (int)aValue, aNewItem)); \
+    removeAllChildren(aNewItem);
+
+#define GET_OR_CREATE_ITEM_CONNECT(aNewItem, aSlot) \
     aNewItem->itemConnector()->disconnect(); \
     connect(aNewItem->itemConnector(), SIGNAL(valueChanged(QVariant)), this, SLOT(aSlot(QVariant)));
 
-int Property::subPropertiesForValueEnum(const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+#define GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aNewItem, aID, aName, aValue, aSlot) \
+    GET_OR_CREATE_ITEM_SETUP(aParentItem, aNewItem, aID, aName, aValue); \
+    GET_OR_CREATE_ITEM_CONNECT(aNewItem, aSlot);
+
+#define GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aNewItem, aID, aName, aEnum, aValue, aSlot) \
+    GET_OR_CREATE_ITEM_SETUP_ENUM(aParentItem, aNewItem, aID, aName, aEnum, aValue); \
+    GET_OR_CREATE_ITEM_CONNECT(aNewItem, aSlot);
+
+int Property::subPropertiesForValueEnum(const QMetaEnum &/*aMetaEnum*/, const int &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return 0;
 }
@@ -2129,11 +2146,9 @@ void Property::flagChanged(const QVariant &aNewValue)
     aParentItem->itemConnector()->sendSignal();
 }
 
-int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem)
+int Property::subPropertiesForValueFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
-
-    QMetaEnum aMetaEnum=mMetaProperty.enumerator();
 
     for (int i=0; i<aMetaEnum.keyCount(); ++i)
     {
@@ -2141,7 +2156,7 @@ int Property::subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetIte
         bool aChecked=(((aValue & aFlag)==aFlag) && (aFlag!=0 || aValue==0));
 
         PropertyTreeWidgetItem *aFlagItem;
-        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)), aChecked, flagChanged);
+        GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aFlagItem, aCount, QString::fromLatin1(aMetaEnum.key(i)), aChecked, flagChanged);
     }
 
     return aCount;
@@ -2228,7 +2243,7 @@ int Property::subPropertiesForValue(const QVariantMap &aValue, PropertyTreeWidge
     for (QVariantMap::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aEntryItem, aCount, i.key(), i.value(), mapItemChanged);
+        GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aEntryItem, aCount, i.key(), i.value(), mapItemChanged);
     }
 
     return aCount;
@@ -2255,7 +2270,7 @@ int Property::subPropertiesForValue(const QVariantList &aValue, PropertyTreeWidg
     for (int i=0; i<aValue.length(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i), listItemChanged);
+        GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i), listItemChanged);
     }
 
     return aCount;
@@ -2282,7 +2297,7 @@ int Property::subPropertiesForValue(const QStringList &aValue, PropertyTreeWidge
     for (int i=0; i<aValue.length(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-        GET_OR_CREATE_ITEM_CONNECT(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i), stringListItemChanged);
+        GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aEntryItem, aCount, QString::number(i+1), aValue.at(i), stringListItemChanged);
     }
 
     return aCount;
@@ -2323,17 +2338,44 @@ int Property::subPropertiesForValue(const QUrl &/*aValue*/, PropertyTreeWidgetIt
     return 0;
 }
 
+void Property::localeLanguageChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLocale aLocale=aParentItem->firstValue().value<QLocale>();
+    aLocale=QLocale((QLocale::Language)aNewValue.value<int>(), aLocale.country());
+
+    aParentItem->setFirstValue(aLocale);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::localeCountryChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLocale aLocale=aParentItem->firstValue().value<QLocale>();
+    aLocale=QLocale(aLocale.language(), (QLocale::Country)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aLocale);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QLocale &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
 
+    QMetaEnum aLanguageEnum=QLocale::staticMetaObject.enumerator(QLocale::staticMetaObject.indexOfEnumerator("Language"));
+    QMetaEnum aCountryEnum=QLocale::staticMetaObject.enumerator(QLocale::staticMetaObject.indexOfEnumerator("Country"));
+    QLocale::Language aLanguage=aValue.language();
+    QLocale::Country aCountry=aValue.country();
+
     PropertyTreeWidgetItem *aLanguageItem;
     PropertyTreeWidgetItem *aCountryItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aLanguageItem, aCount, qApp->translate("Property", "Language"), aValue.languageToString(aValue.language()));
-    GET_OR_CREATE_ITEM(aParentItem, aCountryItem,  aCount, qApp->translate("Property", "Country"),  aValue.countryToString(aValue.country()));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aLanguageItem, aCount, qApp->translate("Property", "Language"), aLanguageEnum, aLanguage, localeLanguageChanged);
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aCountryItem,  aCount, qApp->translate("Property", "Country"), aCountryEnum, aCountry, localeCountryChanged);
 
     return aCount;
 }

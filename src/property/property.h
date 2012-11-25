@@ -49,8 +49,8 @@ protected:
 
     bool isNumber(const QVariant &aValue);
 
-    QString valueToStringEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
-    QString valueToStringFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    QString valueToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    QString valueToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -113,8 +113,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
-    QIcon iconForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
-    QIcon iconForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    QIcon iconForValueEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    QIcon iconForValueFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon iconForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -177,8 +177,8 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
-    CustomDelegate* delegateForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
-    CustomDelegate* delegateForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValueEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    CustomDelegate* delegateForValueFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* delegateForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -242,9 +242,10 @@ protected:
     // -------------------------------------------------------------------------------------
 
     PropertyTreeWidgetItem *senderItem();
+    void removeAllChildren(PropertyTreeWidgetItem *aParentItem);
 
-    int subPropertiesForValueEnum(const int &aValue, PropertyTreeWidgetItem *aParentItem);
-    int subPropertiesForValueFlag(const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    int subPropertiesForValueEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
+    int subPropertiesForValueFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const qint8 &aValue, PropertyTreeWidgetItem *aParentItem);
     int subPropertiesForValue(const quint8 &aValue, PropertyTreeWidgetItem *aParentItem);
@@ -310,6 +311,8 @@ private slots:
     void mapItemChanged(const QVariant &aNewValue);
     void listItemChanged(const QVariant &aNewValue);
     void stringListItemChanged(const QVariant &aNewValue);
+    void localeLanguageChanged(const QVariant &aNewValue);
+    void localeCountryChanged(const QVariant &aNewValue);
 
 signals:
     void valueChanged(const QVariant &aNewValue);
