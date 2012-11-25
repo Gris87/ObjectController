@@ -352,6 +352,26 @@ private slots:
 
     void hashItemChanged(const QVariant &aNewValue);
 
+    void fontFamilyChanged(const QVariant &aNewValue);
+    void fontSizeChanged(const QVariant &aNewValue);
+    void fontBoldChanged(const QVariant &aNewValue);
+    void fontItalicChanged(const QVariant &aNewValue);
+    void fontUnderlineChanged(const QVariant &aNewValue);
+    void fontStrikeOutChanged(const QVariant &aNewValue);
+    void fontKerningChanged(const QVariant &aNewValue);
+    void fontAntiAliasingChanged(const QVariant &aNewValue);
+
+    void colorRedChanged(const QVariant &aNewValue);
+    void colorGreenChanged(const QVariant &aNewValue);
+    void colorBlueChanged(const QVariant &aNewValue);
+    void colorAlphaChanged(const QVariant &aNewValue);
+
+    void paletteColorChanged(const QVariant &aNewValue);
+
+    void polygonItemChanged(const QVariant &aNewValue);
+
+    void regionItemChanged(const QVariant &aNewValue);
+
 signals:
     void valueChanged(const QVariant &aNewValue);
 };
