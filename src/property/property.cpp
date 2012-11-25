@@ -3148,23 +3148,71 @@ int Property::subPropertiesForValue(const QCursor &/*aValue*/, PropertyTreeWidge
     return 0;
 }
 
+void Property::sizePolicyHorizontalPolicyChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSizePolicy aSizePolicy=aParentItem->firstValue().value<QSizePolicy>();
+    aSizePolicy.setHorizontalPolicy((QSizePolicy::Policy)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aSizePolicy);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::sizePolicyVerticalPolicyChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSizePolicy aSizePolicy=aParentItem->firstValue().value<QSizePolicy>();
+    aSizePolicy.setVerticalPolicy((QSizePolicy::Policy)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aSizePolicy);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::sizePolicyHorizontalStretchChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSizePolicy aSizePolicy=aParentItem->firstValue().value<QSizePolicy>();
+    aSizePolicy.setHorizontalStretch(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aSizePolicy);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::sizePolicyVerticalStretchChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSizePolicy aSizePolicy=aParentItem->firstValue().value<QSizePolicy>();
+    aSizePolicy.setVerticalStretch(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aSizePolicy);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QSizePolicy &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
 
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
+    QSizePolicy::Policy aHorizontalPolicy=aValue.horizontalPolicy();
+    QSizePolicy::Policy aVerticalPolicy=aValue.verticalPolicy();
 
     PropertyTreeWidgetItem *aHorizontalPolicyItem;
     PropertyTreeWidgetItem *aVerticalPolicyItem;
     PropertyTreeWidgetItem *aHorizontalStretchItem;
     PropertyTreeWidgetItem *aVerticalStretchItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aHorizontalPolicyItem,  aCount, qApp->translate("Property", "Horizontal policy"),  aEnum.valueToKey(aValue.horizontalPolicy()));
-    GET_OR_CREATE_ITEM(aParentItem, aVerticalPolicyItem,    aCount, qApp->translate("Property", "Vertical policy"),    aEnum.valueToKey(aValue.verticalPolicy()));
-    GET_OR_CREATE_ITEM(aParentItem, aHorizontalStretchItem, aCount, qApp->translate("Property", "Horizontal stretch"), valueToString(aValue.horizontalStretch(), aHorizontalStretchItem));
-    GET_OR_CREATE_ITEM(aParentItem, aVerticalStretchItem,   aCount, qApp->translate("Property", "Vertical stretch"),   valueToString(aValue.verticalStretch(),   aVerticalStretchItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aHorizontalPolicyItem,  aCount, qApp->translate("Property", "Horizontal policy"),  aEnum, aHorizontalPolicy,   sizePolicyHorizontalPolicyChanged);
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aVerticalPolicyItem,    aCount, qApp->translate("Property", "Vertical policy"),    aEnum, aVerticalPolicy,     sizePolicyVerticalPolicyChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aHorizontalStretchItem, aCount, qApp->translate("Property", "Horizontal stretch"), aValue.horizontalStretch(), sizePolicyHorizontalStretchChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aVerticalStretchItem,   aCount, qApp->translate("Property", "Vertical stretch"),   aValue.verticalStretch(),   sizePolicyVerticalStretchChanged);
 
     return aCount;
 }

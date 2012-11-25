@@ -372,6 +372,11 @@ private slots:
 
     void regionItemChanged(const QVariant &aNewValue);
 
+    void sizePolicyHorizontalPolicyChanged(const QVariant &aNewValue);
+    void sizePolicyVerticalPolicyChanged(const QVariant &aNewValue);
+    void sizePolicyHorizontalStretchChanged(const QVariant &aNewValue);
+    void sizePolicyVerticalStretchChanged(const QVariant &aNewValue);
+
 signals:
     void valueChanged(const QVariant &aNewValue);
 };
