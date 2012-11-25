@@ -3345,6 +3345,120 @@ int Property::subPropertiesForValue(const QTextFormat &/*aValue*/, PropertyTreeW
     return 0;
 }
 
+void Property::matrixM11Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix aMatrix=aParentItem->firstValue().value<QMatrix>();
+    aMatrix.setMatrix(
+                      aNewValue.value<double>(),
+                      aMatrix.m12(),
+                      aMatrix.m21(),
+                      aMatrix.m22(),
+                      aMatrix.dx(),
+                      aMatrix.dy()
+                     );
+
+    aParentItem->setFirstValue(aMatrix);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::matrixM12Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix aMatrix=aParentItem->firstValue().value<QMatrix>();
+    aMatrix.setMatrix(
+                      aMatrix.m11(),
+                      aNewValue.value<double>(),
+                      aMatrix.m21(),
+                      aMatrix.m22(),
+                      aMatrix.dx(),
+                      aMatrix.dy()
+                     );
+
+    aParentItem->setFirstValue(aMatrix);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::matrixM21Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix aMatrix=aParentItem->firstValue().value<QMatrix>();
+    aMatrix.setMatrix(
+                      aMatrix.m11(),
+                      aMatrix.m12(),
+                      aNewValue.value<double>(),
+                      aMatrix.m22(),
+                      aMatrix.dx(),
+                      aMatrix.dy()
+                     );
+
+    aParentItem->setFirstValue(aMatrix);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::matrixM22Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix aMatrix=aParentItem->firstValue().value<QMatrix>();
+    aMatrix.setMatrix(
+                      aMatrix.m11(),
+                      aMatrix.m12(),
+                      aMatrix.m21(),
+                      aNewValue.value<double>(),
+                      aMatrix.dx(),
+                      aMatrix.dy()
+                     );
+
+    aParentItem->setFirstValue(aMatrix);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::matrixDxChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix aMatrix=aParentItem->firstValue().value<QMatrix>();
+    aMatrix.setMatrix(
+                      aMatrix.m11(),
+                      aMatrix.m12(),
+                      aMatrix.m21(),
+                      aMatrix.m22(),
+                      aNewValue.value<double>(),
+                      aMatrix.dy()
+                     );
+
+    aParentItem->setFirstValue(aMatrix);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::matrixDyChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix aMatrix=aParentItem->firstValue().value<QMatrix>();
+    aMatrix.setMatrix(
+                      aMatrix.m11(),
+                      aMatrix.m12(),
+                      aMatrix.m21(),
+                      aMatrix.m22(),
+                      aMatrix.dx(),
+                      aNewValue.value<double>()
+                     );
+
+    aParentItem->setFirstValue(aMatrix);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QMatrix &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
@@ -3356,16 +3470,212 @@ int Property::subPropertiesForValue(const QMatrix &aValue, PropertyTreeWidgetIte
     PropertyTreeWidgetItem *aDXItem;
     PropertyTreeWidgetItem *aDYItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aM11Item, aCount, qApp->translate("Property", "M11"), valueToString(aValue.m11(), aM11Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM12Item, aCount, qApp->translate("Property", "M12"), valueToString(aValue.m12(), aM12Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM21Item, aCount, qApp->translate("Property", "M21"), valueToString(aValue.m21(), aM21Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM22Item, aCount, qApp->translate("Property", "M22"), valueToString(aValue.m22(), aM22Item));
-    GET_OR_CREATE_ITEM(aParentItem, aDXItem,  aCount, qApp->translate("Property", "dx"),  valueToString(aValue.dx(),  aDXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aDYItem,  aCount, qApp->translate("Property", "dy"),  valueToString(aValue.dy(),  aDYItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM11Item, aCount, qApp->translate("Property", "M11"), aValue.m11(), matrixM11Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM12Item, aCount, qApp->translate("Property", "M12"), aValue.m12(), matrixM12Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM21Item, aCount, qApp->translate("Property", "M21"), aValue.m21(), matrixM21Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM22Item, aCount, qApp->translate("Property", "M22"), aValue.m22(), matrixM22Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aDXItem,  aCount, qApp->translate("Property", "dx"),  aValue.dx(),  matrixDxChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aDYItem,  aCount, qApp->translate("Property", "dy"),  aValue.dy(),  matrixDyChanged);
 
     return aCount;
+}
+
+void Property::transformM11Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aNewValue.value<double>(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM12Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aNewValue.value<double>(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM13Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aNewValue.value<double>(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM21Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aNewValue.value<double>(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM22Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aNewValue.value<double>(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM23Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aNewValue.value<double>(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM31Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aNewValue.value<double>(),
+                         aTransform.m32(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM32Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aNewValue.value<double>(),
+                         aTransform.m33()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::transformM33Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTransform aTransform=aParentItem->firstValue().value<QTransform>();
+    aTransform.setMatrix(
+                         aTransform.m11(),
+                         aTransform.m12(),
+                         aTransform.m13(),
+                         aTransform.m21(),
+                         aTransform.m22(),
+                         aTransform.m23(),
+                         aTransform.m31(),
+                         aTransform.m32(),
+                         aNewValue.value<double>()
+                        );
+
+    aParentItem->setFirstValue(aTransform);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QTransform &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -3382,19 +3692,34 @@ int Property::subPropertiesForValue(const QTransform &aValue, PropertyTreeWidget
     PropertyTreeWidgetItem *aM32Item;
     PropertyTreeWidgetItem *aM33Item;
 
-    GET_OR_CREATE_ITEM(aParentItem, aM11Item, aCount, qApp->translate("Property", "M11"), valueToString(aValue.m11(), aM11Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM12Item, aCount, qApp->translate("Property", "M12"), valueToString(aValue.m12(), aM12Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM13Item, aCount, qApp->translate("Property", "M13"), valueToString(aValue.m13(), aM13Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM21Item, aCount, qApp->translate("Property", "M21"), valueToString(aValue.m21(), aM21Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM22Item, aCount, qApp->translate("Property", "M22"), valueToString(aValue.m22(), aM22Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM23Item, aCount, qApp->translate("Property", "M23"), valueToString(aValue.m23(), aM23Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM31Item, aCount, qApp->translate("Property", "M31"), valueToString(aValue.m31(), aM31Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM32Item, aCount, qApp->translate("Property", "M32"), valueToString(aValue.m32(), aM32Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM33Item, aCount, qApp->translate("Property", "M33"), valueToString(aValue.m33(), aM33Item));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM11Item, aCount, qApp->translate("Property", "M11"), aValue.m11(), transformM11Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM12Item, aCount, qApp->translate("Property", "M12"), aValue.m12(), transformM12Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM13Item, aCount, qApp->translate("Property", "M13"), aValue.m13(), transformM13Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM21Item, aCount, qApp->translate("Property", "M21"), aValue.m21(), transformM21Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM22Item, aCount, qApp->translate("Property", "M22"), aValue.m22(), transformM22Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM23Item, aCount, qApp->translate("Property", "M23"), aValue.m23(), transformM23Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM31Item, aCount, qApp->translate("Property", "M31"), aValue.m31(), transformM31Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM32Item, aCount, qApp->translate("Property", "M32"), aValue.m32(), transformM32Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM33Item, aCount, qApp->translate("Property", "M33"), aValue.m33(), transformM33Changed);
 
     return aCount;
+}
+
+void Property::matrix4x4ItemChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QMatrix4x4 aMatrix4x4=aParentItem->firstValue().value<QMatrix4x4>();
+
+    qreal matrix[16];
+    aMatrix4x4.copyDataTo(matrix);
+
+    matrix[aParentItem->indexOfChild(aItem)]=aNewValue.value<double>();
+    aMatrix4x4=QMatrix4x4(matrix);
+
+    aParentItem->setFirstValue(aMatrix4x4);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QMatrix4x4 &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -3421,24 +3746,22 @@ int Property::subPropertiesForValue(const QMatrix4x4 &aValue, PropertyTreeWidget
     PropertyTreeWidgetItem *aM43Item;
     PropertyTreeWidgetItem *aM44Item;
 
-    GET_OR_CREATE_ITEM(aParentItem, aM11Item, aCount, qApp->translate("Property", "M11"), valueToString(matrix[0],  aM11Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM12Item, aCount, qApp->translate("Property", "M12"), valueToString(matrix[1],  aM12Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM13Item, aCount, qApp->translate("Property", "M13"), valueToString(matrix[2],  aM13Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM14Item, aCount, qApp->translate("Property", "M14"), valueToString(matrix[3],  aM14Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM21Item, aCount, qApp->translate("Property", "M21"), valueToString(matrix[4],  aM21Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM22Item, aCount, qApp->translate("Property", "M22"), valueToString(matrix[5],  aM22Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM23Item, aCount, qApp->translate("Property", "M23"), valueToString(matrix[6],  aM23Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM24Item, aCount, qApp->translate("Property", "M24"), valueToString(matrix[7],  aM24Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM31Item, aCount, qApp->translate("Property", "M31"), valueToString(matrix[8],  aM31Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM32Item, aCount, qApp->translate("Property", "M32"), valueToString(matrix[9],  aM32Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM33Item, aCount, qApp->translate("Property", "M33"), valueToString(matrix[10], aM33Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM34Item, aCount, qApp->translate("Property", "M34"), valueToString(matrix[11], aM34Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM41Item, aCount, qApp->translate("Property", "M41"), valueToString(matrix[12], aM41Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM42Item, aCount, qApp->translate("Property", "M42"), valueToString(matrix[13], aM42Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM43Item, aCount, qApp->translate("Property", "M43"), valueToString(matrix[14], aM43Item));
-    GET_OR_CREATE_ITEM(aParentItem, aM44Item, aCount, qApp->translate("Property", "M44"), valueToString(matrix[15], aM44Item));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM11Item, aCount, qApp->translate("Property", "M11"), matrix[0],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM12Item, aCount, qApp->translate("Property", "M12"), matrix[1],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM13Item, aCount, qApp->translate("Property", "M13"), matrix[2],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM14Item, aCount, qApp->translate("Property", "M14"), matrix[3],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM21Item, aCount, qApp->translate("Property", "M21"), matrix[4],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM22Item, aCount, qApp->translate("Property", "M22"), matrix[5],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM23Item, aCount, qApp->translate("Property", "M23"), matrix[6],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM24Item, aCount, qApp->translate("Property", "M24"), matrix[7],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM31Item, aCount, qApp->translate("Property", "M31"), matrix[8],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM32Item, aCount, qApp->translate("Property", "M32"), matrix[9],  matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM33Item, aCount, qApp->translate("Property", "M33"), matrix[10], matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM34Item, aCount, qApp->translate("Property", "M34"), matrix[11], matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM41Item, aCount, qApp->translate("Property", "M41"), matrix[12], matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM42Item, aCount, qApp->translate("Property", "M42"), matrix[13], matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM43Item, aCount, qApp->translate("Property", "M43"), matrix[14], matrix4x4ItemChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aM44Item, aCount, qApp->translate("Property", "M44"), matrix[15], matrix4x4ItemChanged);
 
     return aCount;
 }

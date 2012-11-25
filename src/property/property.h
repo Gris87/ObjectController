@@ -377,6 +377,25 @@ private slots:
     void sizePolicyHorizontalStretchChanged(const QVariant &aNewValue);
     void sizePolicyVerticalStretchChanged(const QVariant &aNewValue);
 
+    void matrixM11Changed(const QVariant &aNewValue);
+    void matrixM12Changed(const QVariant &aNewValue);
+    void matrixM21Changed(const QVariant &aNewValue);
+    void matrixM22Changed(const QVariant &aNewValue);
+    void matrixDxChanged(const QVariant &aNewValue);
+    void matrixDyChanged(const QVariant &aNewValue);
+
+    void transformM11Changed(const QVariant &aNewValue);
+    void transformM12Changed(const QVariant &aNewValue);
+    void transformM13Changed(const QVariant &aNewValue);
+    void transformM21Changed(const QVariant &aNewValue);
+    void transformM22Changed(const QVariant &aNewValue);
+    void transformM23Changed(const QVariant &aNewValue);
+    void transformM31Changed(const QVariant &aNewValue);
+    void transformM32Changed(const QVariant &aNewValue);
+    void transformM33Changed(const QVariant &aNewValue);
+
+    void matrix4x4ItemChanged(const QVariant &aNewValue);
+
 signals:
     void valueChanged(const QVariant &aNewValue);
 };
