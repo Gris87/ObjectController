@@ -308,11 +308,49 @@ protected:
 
 private slots:
     void flagChanged(const QVariant &aNewValue);
+
     void mapItemChanged(const QVariant &aNewValue);
+
     void listItemChanged(const QVariant &aNewValue);
+
     void stringListItemChanged(const QVariant &aNewValue);
+
     void localeLanguageChanged(const QVariant &aNewValue);
     void localeCountryChanged(const QVariant &aNewValue);
+
+    void rectXChanged(const QVariant &aNewValue);
+    void rectYChanged(const QVariant &aNewValue);
+    void rectWidthChanged(const QVariant &aNewValue);
+    void rectHeightChanged(const QVariant &aNewValue);
+
+    void rectFXChanged(const QVariant &aNewValue);
+    void rectFYChanged(const QVariant &aNewValue);
+    void rectFWidthChanged(const QVariant &aNewValue);
+    void rectFHeightChanged(const QVariant &aNewValue);
+
+    void sizeWidthChanged(const QVariant &aNewValue);
+    void sizeHeightChanged(const QVariant &aNewValue);
+
+    void sizeFWidthChanged(const QVariant &aNewValue);
+    void sizeFHeightChanged(const QVariant &aNewValue);
+
+    void lineX1Changed(const QVariant &aNewValue);
+    void lineY1Changed(const QVariant &aNewValue);
+    void lineX2Changed(const QVariant &aNewValue);
+    void lineY2Changed(const QVariant &aNewValue);
+
+    void lineFX1Changed(const QVariant &aNewValue);
+    void lineFY1Changed(const QVariant &aNewValue);
+    void lineFX2Changed(const QVariant &aNewValue);
+    void lineFY2Changed(const QVariant &aNewValue);
+
+    void pointX1Changed(const QVariant &aNewValue);
+    void pointY1Changed(const QVariant &aNewValue);
+
+    void pointFX1Changed(const QVariant &aNewValue);
+    void pointFY1Changed(const QVariant &aNewValue);
+
+    void hashItemChanged(const QVariant &aNewValue);
 
 signals:
     void valueChanged(const QVariant &aNewValue);

@@ -2380,6 +2380,54 @@ int Property::subPropertiesForValue(const QLocale &aValue, PropertyTreeWidgetIte
     return aCount;
 }
 
+void Property::rectXChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRect aRect=aParentItem->firstValue().value<QRect>();
+    aRect.moveLeft(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aRect);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::rectYChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRect aRect=aParentItem->firstValue().value<QRect>();
+    aRect.moveTop(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aRect);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::rectWidthChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRect aRect=aParentItem->firstValue().value<QRect>();
+    aRect.setWidth(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aRect);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::rectHeightChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRect aRect=aParentItem->firstValue().value<QRect>();
+    aRect.setHeight(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aRect);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QRect &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
@@ -2389,14 +2437,60 @@ int Property::subPropertiesForValue(const QRect &aValue, PropertyTreeWidgetItem 
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      aValue.x(),      rectXChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      aValue.y(),      rectYChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  aValue.width(),  rectWidthChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), aValue.height(), rectHeightChanged);
 
     return aCount;
+}
+
+void Property::rectFXChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRectF aRectF=aParentItem->firstValue().value<QRectF>();
+    aRectF.moveLeft(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aRectF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::rectFYChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRectF aRectF=aParentItem->firstValue().value<QRectF>();
+    aRectF.moveTop(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aRectF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::rectFWidthChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRectF aRectF=aParentItem->firstValue().value<QRectF>();
+    aRectF.setWidth(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aRectF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::rectFHeightChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QRectF aRectF=aParentItem->firstValue().value<QRectF>();
+    aRectF.setHeight(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aRectF);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QRectF &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2408,14 +2502,36 @@ int Property::subPropertiesForValue(const QRectF &aValue, PropertyTreeWidgetItem
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      aValue.x(),      rectFXChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      aValue.y(),      rectFYChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  aValue.width(),  rectFWidthChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), aValue.height(), rectFHeightChanged);
 
     return aCount;
+}
+
+void Property::sizeWidthChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSize aSize=aParentItem->firstValue().value<QSize>();
+    aSize.setWidth(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aSize);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::sizeHeightChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSize aSize=aParentItem->firstValue().value<QSize>();
+    aSize.setHeight(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aSize);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QSize &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2425,12 +2541,34 @@ int Property::subPropertiesForValue(const QSize &aValue, PropertyTreeWidgetItem 
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  aValue.width(),  sizeWidthChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), aValue.height(), sizeHeightChanged);
 
     return aCount;
+}
+
+void Property::sizeFWidthChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSizeF aSizeF=aParentItem->firstValue().value<QSizeF>();
+    aSizeF.setWidth(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aSizeF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::sizeFHeightChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QSizeF aSizeF=aParentItem->firstValue().value<QSizeF>();
+    aSizeF.setHeight(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aSizeF);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QSizeF &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2440,12 +2578,58 @@ int Property::subPropertiesForValue(const QSizeF &aValue, PropertyTreeWidgetItem
     PropertyTreeWidgetItem *aWidthItem;
     PropertyTreeWidgetItem *aHeightItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  valueToString(aValue.width(),  aWidthItem));
-    GET_OR_CREATE_ITEM(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), valueToString(aValue.height(), aHeightItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aWidthItem,  aCount, qApp->translate("Property", "Width"),  aValue.width(),  sizeFWidthChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aHeightItem, aCount, qApp->translate("Property", "Height"), aValue.height(), sizeFHeightChanged);
 
     return aCount;
+}
+
+void Property::lineX1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLine aLine=aParentItem->firstValue().value<QLine>();
+    aLine.setP1(QPoint(aNewValue.value<int>(), aLine.y1()));
+
+    aParentItem->setFirstValue(aLine);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::lineY1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLine aLine=aParentItem->firstValue().value<QLine>();
+    aLine.setP1(QPoint(aLine.x1(), aNewValue.value<int>()));
+
+    aParentItem->setFirstValue(aLine);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::lineX2Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLine aLine=aParentItem->firstValue().value<QLine>();
+    aLine.setP2(QPoint(aNewValue.value<int>(), aLine.y2()));
+
+    aParentItem->setFirstValue(aLine);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::lineY2Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLine aLine=aParentItem->firstValue().value<QLine>();
+    aLine.setP2(QPoint(aLine.x2(), aNewValue.value<int>()));
+
+    aParentItem->setFirstValue(aLine);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QLine &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2457,14 +2641,60 @@ int Property::subPropertiesForValue(const QLine &aValue, PropertyTreeWidgetItem 
     PropertyTreeWidgetItem *aX2Item;
     PropertyTreeWidgetItem *aY2Item;
 
-    GET_OR_CREATE_ITEM(aParentItem, aX1Item, aCount, qApp->translate("Property", "X1"), valueToString(aValue.x1(), aX1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY1Item, aCount, qApp->translate("Property", "Y1"), valueToString(aValue.y1(), aY1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aX2Item, aCount, qApp->translate("Property", "X2"), valueToString(aValue.x2(), aX2Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY2Item, aCount, qApp->translate("Property", "Y2"), valueToString(aValue.y2(), aY2Item));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aX1Item, aCount, qApp->translate("Property", "X1"), aValue.x1(), lineX1Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aY1Item, aCount, qApp->translate("Property", "Y1"), aValue.y1(), lineY1Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aX2Item, aCount, qApp->translate("Property", "X2"), aValue.x2(), lineX2Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aY2Item, aCount, qApp->translate("Property", "Y2"), aValue.y2(), lineY2Changed);
 
     return aCount;
+}
+
+void Property::lineFX1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLineF aLineF=aParentItem->firstValue().value<QLineF>();
+    aLineF.setP1(QPointF(aNewValue.value<double>(), aLineF.y1()));
+
+    aParentItem->setFirstValue(aLineF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::lineFY1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLineF aLineF=aParentItem->firstValue().value<QLineF>();
+    aLineF.setP1(QPointF(aLineF.x1(), aNewValue.value<double>()));
+
+    aParentItem->setFirstValue(aLineF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::lineFX2Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLineF aLineF=aParentItem->firstValue().value<QLineF>();
+    aLineF.setP2(QPointF(aNewValue.value<double>(), aLineF.y2()));
+
+    aParentItem->setFirstValue(aLineF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::lineFY2Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QLineF aLineF=aParentItem->firstValue().value<QLineF>();
+    aLineF.setP2(QPointF(aLineF.x2(), aNewValue.value<double>()));
+
+    aParentItem->setFirstValue(aLineF);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QLineF &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2476,14 +2706,36 @@ int Property::subPropertiesForValue(const QLineF &aValue, PropertyTreeWidgetItem
     PropertyTreeWidgetItem *aX2Item;
     PropertyTreeWidgetItem *aY2Item;
 
-    GET_OR_CREATE_ITEM(aParentItem, aX1Item, aCount, qApp->translate("Property", "X1"), valueToString(aValue.x1(), aX1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY1Item, aCount, qApp->translate("Property", "Y1"), valueToString(aValue.y1(), aY1Item));
-    GET_OR_CREATE_ITEM(aParentItem, aX2Item, aCount, qApp->translate("Property", "X2"), valueToString(aValue.x2(), aX2Item));
-    GET_OR_CREATE_ITEM(aParentItem, aY2Item, aCount, qApp->translate("Property", "Y2"), valueToString(aValue.y2(), aY2Item));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aX1Item, aCount, qApp->translate("Property", "X1"), aValue.x1(), lineFX1Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aY1Item, aCount, qApp->translate("Property", "Y1"), aValue.y1(), lineFY1Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aX2Item, aCount, qApp->translate("Property", "X2"), aValue.x2(), lineFX2Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aY2Item, aCount, qApp->translate("Property", "Y2"), aValue.y2(), lineFY2Changed);
 
     return aCount;
+}
+
+void Property::pointX1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPoint aPoint=aParentItem->firstValue().value<QPoint>();
+    aPoint.setX(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aPoint);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::pointY1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPoint aPoint=aParentItem->firstValue().value<QPoint>();
+    aPoint.setY(aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aPoint);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QPoint &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2493,12 +2745,34 @@ int Property::subPropertiesForValue(const QPoint &aValue, PropertyTreeWidgetItem
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), aValue.x(), pointX1Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), aValue.y(), pointY1Changed);
 
     return aCount;
+}
+
+void Property::pointFX1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPointF aPointF=aParentItem->firstValue().value<QPointF>();
+    aPointF.setX(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aPointF);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::pointFY1Changed(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPointF aPointF=aParentItem->firstValue().value<QPointF>();
+    aPointF.setY(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aPointF);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QPointF &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -2508,10 +2782,8 @@ int Property::subPropertiesForValue(const QPointF &aValue, PropertyTreeWidgetIte
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), aValue.x(), pointFX1Changed);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), aValue.y(), pointFY1Changed);
 
     return aCount;
 }
@@ -2521,6 +2793,20 @@ int Property::subPropertiesForValue(const QRegExp &/*aValue*/, PropertyTreeWidge
     return 0;
 }
 
+void Property::hashItemChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVariantHash aHash=aParentItem->firstValue().value<QVariantHash>();
+    QString aKey=aItem->text(0);
+
+    aHash[aKey]=aNewValue;
+
+    aParentItem->setFirstValue(aHash);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
@@ -2528,11 +2814,7 @@ int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidg
     for (QVariantHash::const_iterator i=aValue.constBegin(); i!=aValue.constEnd(); ++i)
     {
         PropertyTreeWidgetItem *aEntryItem;
-
-        GET_OR_CREATE_ITEM(aParentItem, aEntryItem, aCount, i.key(), "");
-        setPropertiesForItem(i.value(), aEntryItem);
-
-        // TODO: Editors
+        GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aEntryItem, aCount, i.key(), i.value(), hashItemChanged);
     }
 
     return aCount;
