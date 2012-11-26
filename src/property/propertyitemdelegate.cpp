@@ -28,7 +28,16 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
     else
     {
         DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
-        aDefaultEditor->setValue(aItem->text(1));
+
+        if (aItem->property())
+        {
+            aDefaultEditor->setValue(aItem->property()->valueText(aItem->firstValue(), aItem));
+        }
+        else
+        {
+            aDefaultEditor->setValue(aItem->text(1));
+        }
+
         aCustomEditor=aDefaultEditor;
     }
 

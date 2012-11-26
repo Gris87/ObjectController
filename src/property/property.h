@@ -25,6 +25,8 @@ public:
 
     // -------------------------------------------------------------------------------------
 
+    QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
+
     QString name() const;
 
     QColor  backgroundColor() const;
@@ -41,7 +43,6 @@ protected:
     void setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem);
     void setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     QIcon valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
-    QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     CustomDelegate* valueDelegate(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
     int valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
 
@@ -377,6 +378,13 @@ private slots:
     void sizePolicyHorizontalStretchChanged(const QVariant &aNewValue);
     void sizePolicyVerticalStretchChanged(const QVariant &aNewValue);
 
+    void penBrushChanged(const QVariant &aNewValue);
+    void penWidthChanged(const QVariant &aNewValue);
+    void penStyleChanged(const QVariant &aNewValue);
+    void penCapStyleChanged(const QVariant &aNewValue);
+    void penJoinStyleChanged(const QVariant &aNewValue);
+    void penColorChanged(const QVariant &aNewValue);
+
     void matrixM11Changed(const QVariant &aNewValue);
     void matrixM12Changed(const QVariant &aNewValue);
     void matrixM21Changed(const QVariant &aNewValue);
@@ -395,6 +403,23 @@ private slots:
     void transformM33Changed(const QVariant &aNewValue);
 
     void matrix4x4ItemChanged(const QVariant &aNewValue);
+
+    void vector2DXChanged(const QVariant &aNewValue);
+    void vector2DYChanged(const QVariant &aNewValue);
+
+    void vector3DXChanged(const QVariant &aNewValue);
+    void vector3DYChanged(const QVariant &aNewValue);
+    void vector3DZChanged(const QVariant &aNewValue);
+
+    void vector4DXChanged(const QVariant &aNewValue);
+    void vector4DYChanged(const QVariant &aNewValue);
+    void vector4DZChanged(const QVariant &aNewValue);
+    void vector4DWChanged(const QVariant &aNewValue);
+
+    void quaternionScalarChanged(const QVariant &aNewValue);
+    void quaternionXChanged(const QVariant &aNewValue);
+    void quaternionYChanged(const QVariant &aNewValue);
+    void quaternionZChanged(const QVariant &aNewValue);
 
 signals:
     void valueChanged(const QVariant &aNewValue);

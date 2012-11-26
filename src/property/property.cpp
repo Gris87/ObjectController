@@ -85,10 +85,10 @@ void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects
 void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem)
 {
     aParentItem->setText(1, valueText(aValue, aParentItem));
-    aParentItem->setIcon(1, valueIcon(aValue, aParentItem));
+    aParentItem->setIcon(1, valueIcon(aFirstValue, aParentItem));
 
     aParentItem->setFirstValue(aFirstValue);
-    aParentItem->setDelegate(valueDelegate(aValue, aParentItem));
+    aParentItem->setDelegate(valueDelegate(aFirstValue, aParentItem));
 
     int aChildCount=valueSubProperies(aValue, aParentItem);
 
@@ -3222,44 +3222,89 @@ int Property::subPropertiesForValue(const QKeySequence &/*aValue*/, PropertyTree
     return 0;
 }
 
+void Property::penBrushChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setBrush(aNewValue.value<QBrush>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::penWidthChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setWidthF(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::penStyleChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setStyle((Qt::PenStyle)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::penCapStyleChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setCapStyle((Qt::PenCapStyle)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::penJoinStyleChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setJoinStyle((Qt::PenJoinStyle)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::penColorChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setColor(aNewValue.value<QColor>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
 
-    QString aStyle="[Unknown style]";
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenStyle"));
+    QMetaEnum aCapStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenCapStyle"));
+    QMetaEnum aJoinStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenJoinStyle"));
 
-    switch (aValue.style())
-    {
-        case Qt::NoPen:          aStyle="NoPen";           break;
-        case Qt::SolidLine:      aStyle="SolidLine";       break;
-        case Qt::DashLine:       aStyle="DashLine";        break;
-        case Qt::DotLine:        aStyle="DotLine";         break;
-        case Qt::DashDotLine:    aStyle="DashDotLine";     break;
-        case Qt::DashDotDotLine: aStyle="DashDotDotLine";  break;
-        case Qt::CustomDashLine: aStyle="CustomDashLine";  break;
-        case Qt::MPenStyle:      aStyle="MPenStyle";       break;
-    }
-
-    QString aCapStyle="[Unknown style]";
-
-    switch (aValue.capStyle())
-    {
-        case Qt::FlatCap:      aCapStyle="FlatCap";         break;
-        case Qt::SquareCap:    aCapStyle="SquareCap";       break;
-        case Qt::RoundCap:     aCapStyle="RoundCap";        break;
-        case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
-    }
-
-    QString aJoinStyle="[Unknown style]";;
-
-    switch (aValue.joinStyle())
-    {
-        case Qt::MiterJoin:     aJoinStyle="MiterJoin";       break;
-        case Qt::BevelJoin:     aJoinStyle="BevelJoin";       break;
-        case Qt::RoundJoin:     aJoinStyle="RoundJoin";       break;
-        case Qt::SvgMiterJoin:  aJoinStyle="SvgMiterJoin";    break;
-        case Qt::MPenJoinStyle: aJoinStyle="MPenJoinStyle";   break;
-    }
+    Qt::PenStyle aStyle=aValue.style();
+    Qt::PenCapStyle aCapStyle=aValue.capStyle();
+    Qt::PenJoinStyle aJoinStyle=aValue.joinStyle();
 
     // -----------------------------------------------------------------
 
@@ -3277,9 +3322,9 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     QPen aCapStylePen;
     QPen aJoinStylePen;
 
-    aStylePen.setStyle(aValue.style());
-    aCapStylePen.setCapStyle(aValue.capStyle());
-    aJoinStylePen.setJoinStyle(aValue.joinStyle());
+    aStylePen.setStyle(aStyle);
+    aCapStylePen.setCapStyle(aCapStyle);
+    aJoinStylePen.setJoinStyle(aJoinStyle);
 
     aStylePen.setWidth(3);
     aCapStylePen.setWidth(24);
@@ -3321,16 +3366,16 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     PropertyTreeWidgetItem *aJoinStyleItem;
     PropertyTreeWidgetItem *aColorItem;
 
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      valueToString(aValue.brush(),     aBrushItem), iconForValue(aValue.brush(), aBrushItem));
-    GET_OR_CREATE_ITEM(          aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      valueToString(aValue.widthF(),    aWidthItem));
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyle,     QIcon(aStylePixmap));
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyle,  QIcon(aCapStylePixmap));
-    GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyle, QIcon(aJoinStylePixmap));
-    GET_OR_CREATE_ITEM(          aParentItem, aColorItem,     aCount, qApp->translate("Property", "Color"),      valueToString(aValue.color(),     aColorItem));
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      aValue.brush(),             penBrushChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      aValue.widthF(),            penWidthChanged);
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyleEnum, aStyle,         penStyleChanged);
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyleEnum, aCapStyle,   penCapStyleChanged);
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyleEnum, aJoinStyle, penJoinStyleChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aColorItem,     aCount, qApp->translate("Property", "Color"),      aValue.color(),             penColorChanged);
 
-    setPropertiesForItem(aValue.color(), aColorItem);
-
-    // TODO: Editors
+    aStyleItem->setIcon(1, QIcon(aStylePixmap));
+    aCapStyleItem->setIcon(1, QIcon(aCapStylePixmap));
+    aJoinStyleItem->setIcon(1, QIcon(aJoinStylePixmap));
 
     return aCount;
 }
@@ -3766,6 +3811,30 @@ int Property::subPropertiesForValue(const QMatrix4x4 &aValue, PropertyTreeWidget
     return aCount;
 }
 
+void Property::vector2DXChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector2D aVector2D=aParentItem->firstValue().value<QVector2D>();
+    aVector2D.setX(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector2D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::vector2DYChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector2D aVector2D=aParentItem->firstValue().value<QVector2D>();
+    aVector2D.setY(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector2D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
 int Property::subPropertiesForValue(const QVector2D &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     int aCount=0;
@@ -3773,12 +3842,46 @@ int Property::subPropertiesForValue(const QVector2D &aValue, PropertyTreeWidgetI
     PropertyTreeWidgetItem *aXItem;
     PropertyTreeWidgetItem *aYItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), aValue.x(), vector2DXChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), aValue.y(), vector2DYChanged);
 
     return aCount;
+}
+
+void Property::vector3DXChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector3D aVector3D=aParentItem->firstValue().value<QVector3D>();
+    aVector3D.setX(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector3D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::vector3DYChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector3D aVector3D=aParentItem->firstValue().value<QVector3D>();
+    aVector3D.setY(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector3D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::vector3DZChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector3D aVector3D=aParentItem->firstValue().value<QVector3D>();
+    aVector3D.setZ(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector3D);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QVector3D &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -3789,13 +3892,59 @@ int Property::subPropertiesForValue(const QVector3D &aValue, PropertyTreeWidgetI
     PropertyTreeWidgetItem *aYItem;
     PropertyTreeWidgetItem *aZItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aZItem, aCount, qApp->translate("Property", "Z"), valueToString(aValue.z(), aZItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), aValue.x(), vector3DXChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), aValue.y(), vector3DYChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aZItem, aCount, qApp->translate("Property", "Z"), aValue.z(), vector3DZChanged);
 
     return aCount;
+}
+
+void Property::vector4DXChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector4D aVector4D=aParentItem->firstValue().value<QVector4D>();
+    aVector4D.setX(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector4D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::vector4DYChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector4D aVector4D=aParentItem->firstValue().value<QVector4D>();
+    aVector4D.setY(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector4D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::vector4DZChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector4D aVector4D=aParentItem->firstValue().value<QVector4D>();
+    aVector4D.setZ(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector4D);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::vector4DWChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QVector4D aVector4D=aParentItem->firstValue().value<QVector4D>();
+    aVector4D.setW(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aVector4D);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QVector4D &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -3807,14 +3956,60 @@ int Property::subPropertiesForValue(const QVector4D &aValue, PropertyTreeWidgetI
     PropertyTreeWidgetItem *aZItem;
     PropertyTreeWidgetItem *aWItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), valueToString(aValue.x(), aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), valueToString(aValue.y(), aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aZItem, aCount, qApp->translate("Property", "Z"), valueToString(aValue.z(), aZItem));
-    GET_OR_CREATE_ITEM(aParentItem, aWItem, aCount, qApp->translate("Property", "W"), valueToString(aValue.w(), aWItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem, aCount, qApp->translate("Property", "X"), aValue.x(), vector4DXChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem, aCount, qApp->translate("Property", "Y"), aValue.y(), vector4DYChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aZItem, aCount, qApp->translate("Property", "Z"), aValue.z(), vector4DZChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aWItem, aCount, qApp->translate("Property", "W"), aValue.w(), vector4DWChanged);
 
     return aCount;
+}
+
+void Property::quaternionScalarChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QQuaternion aQuaternion=aParentItem->firstValue().value<QQuaternion>();
+    aQuaternion.setScalar(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aQuaternion);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::quaternionXChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QQuaternion aQuaternion=aParentItem->firstValue().value<QQuaternion>();
+    aQuaternion.setX(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aQuaternion);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::quaternionYChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QQuaternion aQuaternion=aParentItem->firstValue().value<QQuaternion>();
+    aQuaternion.setY(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aQuaternion);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::quaternionZChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QQuaternion aQuaternion=aParentItem->firstValue().value<QQuaternion>();
+    aQuaternion.setZ(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aQuaternion);
+    aParentItem->itemConnector()->sendSignal();
 }
 
 int Property::subPropertiesForValue(const QQuaternion &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -3826,12 +4021,10 @@ int Property::subPropertiesForValue(const QQuaternion &aValue, PropertyTreeWidge
     PropertyTreeWidgetItem *aYItem;
     PropertyTreeWidgetItem *aZItem;
 
-    GET_OR_CREATE_ITEM(aParentItem, aScalarItem, aCount, qApp->translate("Property", "Scalar"), valueToString(aValue.scalar(), aScalarItem));
-    GET_OR_CREATE_ITEM(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      valueToString(aValue.x(),      aXItem));
-    GET_OR_CREATE_ITEM(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      valueToString(aValue.y(),      aYItem));
-    GET_OR_CREATE_ITEM(aParentItem, aZItem,      aCount, qApp->translate("Property", "Z"),      valueToString(aValue.z(),      aZItem));
-
-    // TODO: Editors
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aScalarItem, aCount, qApp->translate("Property", "Scalar"), aValue.scalar(), quaternionScalarChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aXItem,      aCount, qApp->translate("Property", "X"),      aValue.x(),      quaternionXChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aYItem,      aCount, qApp->translate("Property", "Y"),      aValue.y(),      quaternionYChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aZItem,      aCount, qApp->translate("Property", "Z"),      aValue.z(),      quaternionZChanged);
 
     return aCount;
 }
