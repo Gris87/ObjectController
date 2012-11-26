@@ -46,6 +46,8 @@ private:
     void charUpdateProperties();
     void frameUpdateProperties();
     void imageUpdateProperties();
+    void listUpdateProperties();
+    void tableCellUpdateProperties();
     void updateProperties();
 
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
@@ -168,6 +170,22 @@ private slots:
     void on_imageNameEdit_textEdited(const QString &aValue);
     void on_imageWidthSpinBox_valueChanged(double aValue);
     void on_imageHeightSpinBox_valueChanged(double aValue);
+
+    // LIST
+    void on_listListButton_clicked();
+
+    void on_listStyleComboBox_currentIndexChanged(const QString &aValue);
+    void on_listIndentSpinBox_valueChanged(int aValue);
+    void on_listPrefixEdit_textEdited(const QString &aValue);
+    void on_listSuffixEdit_textEdited(const QString &aValue);
+
+    // TABLE CELL
+    void on_tableCellButton_clicked();
+
+    void on_tableCellTopPaddingSpinBox_valueChanged(double aValue);
+    void on_tableCellBottomPaddingSpinBox_valueChanged(double aValue);
+    void on_tableCellLeftPaddingSpinBox_valueChanged(double aValue);
+    void on_tableCellRightPaddingSpinBox_valueChanged(double aValue);
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

@@ -341,6 +341,14 @@ void TextFormatEditDialog::hideCategories()
     ui->typeStackedWidget->setCurrentIndex(3);
     on_imageImageButton_clicked();
 
+    // LIST
+    ui->typeStackedWidget->setCurrentIndex(4);
+    on_listListButton_clicked();
+
+    // TABLE CELL
+    ui->typeStackedWidget->setCurrentIndex(5);
+    on_tableCellButton_clicked();
+
     ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
 
 
@@ -1473,6 +1481,115 @@ void TextFormatEditDialog::on_imageHeightSpinBox_valueChanged(double aValue)
     IMAGE_MODIFICATION(setHeight(aValue));
 }
 
+void TextFormatEditDialog::on_listListButton_clicked()
+{
+    showOrHideCategory(ui->listListFrame, ui->listListButton);
+}
+
+#define LIST_MODIFICATION(action) \
+    mTextListFormat.action; \
+    ((QTextListFormat *)&mTextFormat)->action;
+
+void TextFormatEditDialog::on_listStyleComboBox_currentIndexChanged(const QString &aValue)
+{
+    QTextListFormat::Style aStyle=QTextListFormat::ListStyleUndefined;
+
+    if (aValue=="ListDisc")
+    {
+        aStyle=QTextListFormat::ListDisc;
+    }
+    else
+    if (aValue=="ListCircle")
+    {
+        aStyle=QTextListFormat::ListCircle;
+    }
+    else
+    if (aValue=="ListSquare")
+    {
+        aStyle=QTextListFormat::ListSquare;
+    }
+    else
+    if (aValue=="ListDecimal")
+    {
+        aStyle=QTextListFormat::ListDecimal;
+    }
+    else
+    if (aValue=="ListLowerAlpha")
+    {
+        aStyle=QTextListFormat::ListLowerAlpha;
+    }
+    else
+    if (aValue=="ListUpperAlpha")
+    {
+        aStyle=QTextListFormat::ListUpperAlpha;
+    }
+    else
+    if (aValue=="ListLowerRoman")
+    {
+        aStyle=QTextListFormat::ListLowerRoman;
+    }
+    else
+    if (aValue=="ListUpperRoman")
+    {
+        aStyle=QTextListFormat::ListUpperRoman;
+    }
+    else
+    if (aValue=="ListStyleUndefined")
+    {
+        aStyle=QTextListFormat::ListStyleUndefined;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    LIST_MODIFICATION(setStyle(aStyle));
+}
+
+void TextFormatEditDialog::on_listIndentSpinBox_valueChanged(int aValue)
+{
+    LIST_MODIFICATION(setIndent(aValue));
+}
+
+void TextFormatEditDialog::on_listPrefixEdit_textEdited(const QString &aValue)
+{
+    LIST_MODIFICATION(setNumberPrefix(aValue));
+}
+
+void TextFormatEditDialog::on_listSuffixEdit_textEdited(const QString &aValue)
+{
+    LIST_MODIFICATION(setNumberSuffix(aValue));
+}
+
+void TextFormatEditDialog::on_tableCellButton_clicked()
+{
+    showOrHideCategory(ui->tableCellFrame, ui->tableCellButton);
+}
+
+#define TABLE_CELL_MODIFICATION(action) \
+    mTextTableCellFormat.action; \
+    ((QTextTableCellFormat *)&mTextFormat)->action;
+
+void TextFormatEditDialog::on_tableCellTopPaddingSpinBox_valueChanged(double aValue)
+{
+    TABLE_CELL_MODIFICATION(setTopPadding(aValue));
+}
+
+void TextFormatEditDialog::on_tableCellBottomPaddingSpinBox_valueChanged(double aValue)
+{
+    TABLE_CELL_MODIFICATION(setBottomPadding(aValue));
+}
+
+void TextFormatEditDialog::on_tableCellLeftPaddingSpinBox_valueChanged(double aValue)
+{
+    TABLE_CELL_MODIFICATION(setLeftPadding(aValue));
+}
+
+void TextFormatEditDialog::on_tableCellRightPaddingSpinBox_valueChanged(double aValue)
+{
+    TABLE_CELL_MODIFICATION(setRightPadding(aValue));
+}
+
 #define BLOCK_BLOCK_SIGNALS(aLock) \
     ui->blockHorizontalAlignmentComboBox->blockSignals(aLock); \
     ui->blockVerticalAlignmentComboBox->blockSignals(aLock); \
@@ -2108,6 +2225,94 @@ void TextFormatEditDialog::imageUpdateProperties()
     IMAGE_BLOCK_SIGNALS(false);
 }
 
+#define LIST_BLOCK_SIGNALS(aLock) \
+    ui->listStyleComboBox->blockSignals(aLock); \
+    ui->listIndentSpinBox->blockSignals(aLock); \
+    ui->listPrefixEdit->blockSignals(aLock); \
+    ui->listSuffixEdit->blockSignals(aLock);
+
+void TextFormatEditDialog::listUpdateProperties()
+{
+    LIST_BLOCK_SIGNALS(true);
+
+    QTextListFormat::Style aStyle=((QTextListFormat *)&mTextFormat)->style();
+    QString aStyleStr="ListStyleUndefined";
+
+    if (aStyle==QTextListFormat::ListDisc)
+    {
+        aStyleStr="ListDisc";
+    }
+    else
+    if (aStyle==QTextListFormat::ListCircle)
+    {
+        aStyleStr="ListCircle";
+    }
+    else
+    if (aStyle==QTextListFormat::ListSquare)
+    {
+        aStyleStr="ListSquare";
+    }
+    else
+    if (aStyle==QTextListFormat::ListDecimal)
+    {
+        aStyleStr="ListDecimal";
+    }
+    else
+    if (aStyle==QTextListFormat::ListLowerAlpha)
+    {
+        aStyleStr="ListLowerAlpha";
+    }
+    else
+    if (aStyle==QTextListFormat::ListUpperAlpha)
+    {
+        aStyleStr="ListUpperAlpha";
+    }
+    else
+    if (aStyle==QTextListFormat::ListLowerRoman)
+    {
+        aStyleStr="ListLowerRoman";
+    }
+    else
+    if (aStyle==QTextListFormat::ListUpperRoman)
+    {
+        aStyleStr="ListUpperRoman";
+    }
+    else
+    if (aStyle==QTextListFormat::ListStyleUndefined)
+    {
+        aStyleStr="ListStyleUndefined";
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    ui->listStyleComboBox->setCurrentIndex(ui->listStyleComboBox->findText(aStyleStr));
+    ui->listIndentSpinBox->setValue(((QTextListFormat *)&mTextFormat)->indent());
+    ui->listPrefixEdit->setText(((QTextListFormat *)&mTextFormat)->numberPrefix());
+    ui->listSuffixEdit->setText(((QTextListFormat *)&mTextFormat)->numberSuffix());
+
+    LIST_BLOCK_SIGNALS(false);
+}
+
+#define TABLE_CELL_BLOCK_SIGNALS(aLock) \
+    ui->tableCellTopPaddingSpinBox->blockSignals(aLock); \
+    ui->tableCellBottomPaddingSpinBox->blockSignals(aLock); \
+    ui->tableCellLeftPaddingSpinBox->blockSignals(aLock); \
+    ui->tableCellRightPaddingSpinBox->blockSignals(aLock);
+
+void TextFormatEditDialog::tableCellUpdateProperties()
+{
+    TABLE_CELL_BLOCK_SIGNALS(true);
+
+    ui->tableCellTopPaddingSpinBox->setValue(((QTextTableCellFormat *)&mTextFormat)->topPadding());
+    ui->tableCellBottomPaddingSpinBox->setValue(((QTextTableCellFormat *)&mTextFormat)->bottomPadding());
+    ui->tableCellLeftPaddingSpinBox->setValue(((QTextTableCellFormat *)&mTextFormat)->leftPadding());
+    ui->tableCellRightPaddingSpinBox->setValue(((QTextTableCellFormat *)&mTextFormat)->rightPadding());
+
+    TABLE_CELL_BLOCK_SIGNALS(false);
+}
+
 #define BLOCK_SIGNALS(aLock) \
     ui->typeComboBox->blockSignals(aLock); \
     ui->layoutDirectionComboBox->blockSignals(aLock); \
@@ -2193,6 +2398,11 @@ void TextFormatEditDialog::updateProperties()
         case 3:
             charUpdateProperties();
             imageUpdateProperties();
+        break;
+        case 4: listUpdateProperties(); break;
+        case 5:
+            charUpdateProperties();
+            tableCellUpdateProperties();
         break;
     }
 
