@@ -48,6 +48,7 @@ private:
     void imageUpdateProperties();
     void listUpdateProperties();
     void tableCellUpdateProperties();
+    void tableUpdateProperties();
     void updateProperties();
 
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
@@ -65,6 +66,8 @@ private:
     void blockAddTabPosition();
 
     void charSetStyleStrategy(const QString &aStrategy, const QString &aFlag);
+
+    void tableSetAlignment(const QString &aHorizontal, const QString &aVertical);
 
 private slots:
     void hideCategories();
@@ -186,6 +189,18 @@ private slots:
     void on_tableCellBottomPaddingSpinBox_valueChanged(double aValue);
     void on_tableCellLeftPaddingSpinBox_valueChanged(double aValue);
     void on_tableCellRightPaddingSpinBox_valueChanged(double aValue);
+
+    // TABLE
+    void on_tableTableButton_clicked();
+    void on_tableAlignmentButton_clicked();
+    void on_tableColumnWidthConstraintsButton_clicked();
+
+    void on_tableHeaderRowsSpinBox_valueChanged(int aValue);
+    void on_tableColumnsSpinBox_valueChanged(int aValue);
+    void on_tableCellsSpacingSpinBox_valueChanged(double aValue);
+    void on_tableCellsPaddingSpinBox_valueChanged(double aValue);
+    void on_tableHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue);
+    void on_tableVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue);
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

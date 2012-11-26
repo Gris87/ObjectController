@@ -349,6 +349,12 @@ void TextFormatEditDialog::hideCategories()
     ui->typeStackedWidget->setCurrentIndex(5);
     on_tableCellButton_clicked();
 
+    // TABLE
+    ui->typeStackedWidget->setCurrentIndex(6);
+    on_tableTableButton_clicked();
+    on_tableAlignmentButton_clicked();
+    on_tableColumnWidthConstraintsButton_clicked();
+
     ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
 
 
@@ -1590,6 +1596,93 @@ void TextFormatEditDialog::on_tableCellRightPaddingSpinBox_valueChanged(double a
     TABLE_CELL_MODIFICATION(setRightPadding(aValue));
 }
 
+void TextFormatEditDialog::on_tableTableButton_clicked()
+{
+    showOrHideCategory(ui->tableTableFrame, ui->tableTableButton);
+}
+
+void TextFormatEditDialog::on_tableAlignmentButton_clicked()
+{
+    showOrHideCategory(ui->tableAlignmentFrame, ui->tableAlignmentButton);
+}
+
+void TextFormatEditDialog::on_tableColumnWidthConstraintsButton_clicked()
+{
+    showOrHideCategory(ui->tableColumnWidthConstraintsFrame, ui->tableColumnWidthConstraintsButton);
+}
+
+#define TABLE_MODIFICATION(action) \
+    mTextTableFormat.action; \
+    ((QTextTableFormat *)&mTextFormat)->action;
+
+void TextFormatEditDialog::on_tableHeaderRowsSpinBox_valueChanged(int aValue)
+{
+    TABLE_MODIFICATION(setHeaderRowCount(aValue));
+}
+
+void TextFormatEditDialog::on_tableColumnsSpinBox_valueChanged(int aValue)
+{
+    TABLE_MODIFICATION(setColumns(aValue));
+}
+
+void TextFormatEditDialog::on_tableCellsSpacingSpinBox_valueChanged(double aValue)
+{
+    TABLE_MODIFICATION(setCellSpacing(aValue));
+}
+
+void TextFormatEditDialog::on_tableCellsPaddingSpinBox_valueChanged(double aValue)
+{
+    TABLE_MODIFICATION(setCellPadding(aValue));
+}
+
+void TextFormatEditDialog::tableSetAlignment(const QString &aHorizontal, const QString &aVertical)
+{
+    Qt::Alignment aHorizontalAlignment=Qt::AlignLeft;
+    Qt::Alignment aVerticalAlignment=Qt::AlignTop;
+
+    if (aHorizontal=="AlignHCenter")
+    {
+        aHorizontalAlignment=Qt::AlignHCenter;
+    }
+    else
+    if (aHorizontal=="AlignRight")
+    {
+        aHorizontalAlignment=Qt::AlignRight;
+    }
+    else
+    if (aHorizontal=="AlignJustify")
+    {
+        aHorizontalAlignment=Qt::AlignJustify;
+    }
+    else
+    if (aHorizontal=="AlignAbsolute")
+    {
+        aHorizontalAlignment=Qt::AlignAbsolute;
+    }
+
+    if (aVertical=="AlignVCenter")
+    {
+        aVerticalAlignment=Qt::AlignVCenter;
+    }
+    else
+    if (aVertical=="AlignBottom")
+    {
+        aVerticalAlignment=Qt::AlignBottom;
+    }
+
+    TABLE_MODIFICATION(setAlignment(aHorizontalAlignment | aVerticalAlignment));
+}
+
+void TextFormatEditDialog::on_tableHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue)
+{
+    tableSetAlignment(aValue, ui->tableVerticalAlignmentComboBox->currentText());
+}
+
+void TextFormatEditDialog::on_tableVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue)
+{
+    tableSetAlignment(ui->tableHorizontalAlignmentComboBox->currentText(), aValue);
+}
+
 #define BLOCK_BLOCK_SIGNALS(aLock) \
     ui->blockHorizontalAlignmentComboBox->blockSignals(aLock); \
     ui->blockVerticalAlignmentComboBox->blockSignals(aLock); \
@@ -2313,6 +2406,62 @@ void TextFormatEditDialog::tableCellUpdateProperties()
     TABLE_CELL_BLOCK_SIGNALS(false);
 }
 
+#define TABLE_BLOCK_SIGNALS(aLock) \
+    ui->tableHeaderRowsSpinBox->blockSignals(aLock); \
+    ui->tableColumnsSpinBox->blockSignals(aLock); \
+    ui->tableCellsSpacingSpinBox->blockSignals(aLock); \
+    ui->tableCellsPaddingSpinBox->blockSignals(aLock); \
+    ui->tableHorizontalAlignmentComboBox->blockSignals(aLock); \
+    ui->tableVerticalAlignmentComboBox->blockSignals(aLock);
+
+void TextFormatEditDialog::tableUpdateProperties()
+{
+    TABLE_BLOCK_SIGNALS(true);
+
+    Qt::Alignment aAlignment=((QTextBlockFormat *)&mTextFormat)->alignment();
+    QString aHorizontalAlignment="AlignLeft";
+    QString aVerticalAlignment="AlignTop";
+
+    if (aAlignment & Qt::AlignHCenter)
+    {
+        aHorizontalAlignment="AlignHCenter";
+    }
+    else
+    if (aAlignment & Qt::AlignRight)
+    {
+        aHorizontalAlignment="AlignRight";
+    }
+    else
+    if (aAlignment & Qt::AlignJustify)
+    {
+        aHorizontalAlignment="AlignJustify";
+    }
+    else
+    if (aAlignment & Qt::AlignAbsolute)
+    {
+        aHorizontalAlignment="AlignAbsolute";
+    }
+
+    if (aAlignment & Qt::AlignVCenter)
+    {
+        aVerticalAlignment="AlignVCenter";
+    }
+    else
+    if (aAlignment & Qt::AlignBottom)
+    {
+        aVerticalAlignment="AlignBottom";
+    }
+
+    ui->tableHeaderRowsSpinBox->setValue(((QTextTableFormat *)&mTextFormat)->headerRowCount());
+    ui->tableColumnsSpinBox->setValue(((QTextTableFormat *)&mTextFormat)->columns());
+    ui->tableCellsSpacingSpinBox->setValue(((QTextTableFormat *)&mTextFormat)->cellSpacing());
+    ui->tableCellsPaddingSpinBox->setValue(((QTextTableFormat *)&mTextFormat)->cellPadding());
+    ui->tableHorizontalAlignmentComboBox->setCurrentIndex(ui->tableHorizontalAlignmentComboBox->findText(aHorizontalAlignment));
+    ui->tableVerticalAlignmentComboBox->setCurrentIndex(ui->tableVerticalAlignmentComboBox->findText(aVerticalAlignment));
+
+    TABLE_BLOCK_SIGNALS(false);
+}
+
 #define BLOCK_SIGNALS(aLock) \
     ui->typeComboBox->blockSignals(aLock); \
     ui->layoutDirectionComboBox->blockSignals(aLock); \
@@ -2403,6 +2552,10 @@ void TextFormatEditDialog::updateProperties()
         case 5:
             charUpdateProperties();
             tableCellUpdateProperties();
+        break;
+        case 6:
+            frameUpdateProperties();
+            tableUpdateProperties();
         break;
     }
 
