@@ -39,7 +39,7 @@ protected:
 
     virtual bool filterClass(QString &aClassName);
     virtual bool filterProperty(const QMetaObject *aMetaObject, QString aMetaPropertyName);
-    virtual void propertyAdded(const QMetaObject *aMetaObject, Property *aProperty);
+    virtual void propertyAdded(Property *aProperty, const QMetaObject *aMetaObject, QString aMetaPropertyName);
 
     virtual CustomDelegate* createEnumDelegate();
     virtual CustomDelegate* createBoolDelegate();
@@ -87,9 +87,11 @@ protected:
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);
+    void currentItemChangedSlot(QTreeWidgetItem *aCurrent, QTreeWidgetItem *aPrevious);
 
 signals:
     void valueChanged(Property *aProperty, const QVariant &aValue);
+    void currentItemChanged(PropertyTreeWidgetItem *aItem);
 };
 
 #endif // OBJECTCONTROLLER_H

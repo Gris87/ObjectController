@@ -16,6 +16,8 @@ ObjectController::ObjectController(QWidget *parent) :
     layout->addWidget(mTreeWidget);
 
     mTreeWidget->setRootIsDecorated(false);
+
+    connect(mTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*,QTreeWidgetItem*)), this, SLOT(currentItemChangedSlot(QTreeWidgetItem*,QTreeWidgetItem*)));
 }
 
 void ObjectController::invalidate()
@@ -111,6 +113,11 @@ void ObjectController::valueChangedSlot(const QVariant &aNewValue)
     emit valueChanged((Property *)sender(), aNewValue);
 }
 
+void ObjectController::currentItemChangedSlot(QTreeWidgetItem *aCurrent, QTreeWidgetItem * /*aPrevious*/)
+{
+    emit currentItemChanged((PropertyTreeWidgetItem *)aCurrent);
+}
+
 // -------------------------------------------------------------------------------------
 
 void ObjectController::setIgnoreEmptyClass(bool aValue)
@@ -187,7 +194,7 @@ bool ObjectController::filterProperty(const QMetaObject * /*aMetaObject*/, QStri
     return true;
 }
 
-void ObjectController::propertyAdded(const QMetaObject * /*aMetaObject*/, Property * /*aProperty*/)
+void ObjectController::propertyAdded(Property * /*aProperty*/, const QMetaObject * /*aMetaObject*/, QString /*aMetaPropertyName*/)
 {
     // Nothing
 }

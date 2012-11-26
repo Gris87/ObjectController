@@ -63,6 +63,8 @@ void HandleObject::reset()
             Property *aNewProperty=new Property(aProperty, mController);
             QObject::connect(aNewProperty, SIGNAL(valueChanged(QVariant)), mController, SLOT(valueChangedSlot(QVariant)));
             aPropertyGroup->addProperty(aNewProperty);
+
+            mController->propertyAdded(aNewProperty, aMetaObject, aProperty.name());
         }
     }
 }

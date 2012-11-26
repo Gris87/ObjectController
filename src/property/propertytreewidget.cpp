@@ -124,8 +124,6 @@ void PropertyTreeWidget::mousePressEvent(QMouseEvent *event)
     }
 }
 
-// TODO: Maybe useless. Remove it
-/*
 void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
 {
     QStyleOptionViewItemV3 opt=option;
@@ -193,7 +191,6 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
     painter->drawLine(option.rect.x(), option.rect.bottom(), option.rect.right(), option.rect.bottom());
     painter->restore();
 }
-*/
 
 void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
 {

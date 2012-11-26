@@ -45,6 +45,7 @@ private:
     void blockUpdateProperties();
     void charUpdateProperties();
     void frameUpdateProperties();
+    void imageUpdateProperties();
     void updateProperties();
 
     void drawBrush(const QBrush &aBrush, QLabel *aIconLabel);
@@ -160,6 +161,13 @@ private slots:
     void on_framePageBreakPolicyAutoCheckBox_toggled(bool checked);
     void on_framePageBreakPolicyBeforeCheckBox_toggled(bool checked);
     void on_framePageBreakPolicyAfterCheckBox_toggled(bool checked);
+
+    // IMAGE
+    void on_imageImageButton_clicked();
+
+    void on_imageNameEdit_textEdited(const QString &aValue);
+    void on_imageWidthSpinBox_valueChanged(double aValue);
+    void on_imageHeightSpinBox_valueChanged(double aValue);
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

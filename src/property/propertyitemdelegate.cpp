@@ -120,7 +120,7 @@ void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem 
     else
     {
         aPainter->fillRect(aOption.rect, aOption.palette.color(QPalette::Dark));
-        opt.font.setPointSize(opt.font.pointSize()+2);
+        opt.font.setPointSize(opt.font.pointSize());
         opt.font.setBold(true);
         opt.fontMetrics = QFontMetrics(opt.font);
     }

@@ -76,7 +76,6 @@ void TextFormatEditor::setValue(const QTextFormat &aValue)
     }
     else
     {
-        // TODO: Remove it when you implement ideal editor for TextFormat
         ui->editButton->setEnabled(false);
     }
 

@@ -337,6 +337,10 @@ void TextFormatEditDialog::hideCategories()
     on_frameSizeButton_clicked();
     on_framePageBreakButton_clicked();
 
+    // IMAGE
+    ui->typeStackedWidget->setCurrentIndex(3);
+    on_imageImageButton_clicked();
+
     ui->typeStackedWidget->setCurrentIndex(aOriginalIndex);
 
 
@@ -1445,6 +1449,30 @@ void TextFormatEditDialog::on_framePageBreakPolicyAfterCheckBox_toggled(bool che
     }
 }
 
+void TextFormatEditDialog::on_imageImageButton_clicked()
+{
+    showOrHideCategory(ui->imageImageFrame, ui->imageImageButton);
+}
+
+#define IMAGE_MODIFICATION(action) \
+    mTextImageFormat.action; \
+    ((QTextImageFormat *)&mTextFormat)->action;
+
+void TextFormatEditDialog::on_imageNameEdit_textEdited(const QString &aValue)
+{
+    IMAGE_MODIFICATION(setName(aValue));
+}
+
+void TextFormatEditDialog::on_imageWidthSpinBox_valueChanged(double aValue)
+{
+    IMAGE_MODIFICATION(setWidth(aValue));
+}
+
+void TextFormatEditDialog::on_imageHeightSpinBox_valueChanged(double aValue)
+{
+    IMAGE_MODIFICATION(setHeight(aValue));
+}
+
 #define BLOCK_BLOCK_SIGNALS(aLock) \
     ui->blockHorizontalAlignmentComboBox->blockSignals(aLock); \
     ui->blockVerticalAlignmentComboBox->blockSignals(aLock); \
@@ -2064,6 +2092,22 @@ void TextFormatEditDialog::frameUpdateProperties()
     FRAME_BLOCK_SIGNALS(false);
 }
 
+#define IMAGE_BLOCK_SIGNALS(aLock) \
+    ui->imageNameEdit->blockSignals(aLock); \
+    ui->imageWidthSpinBox->blockSignals(aLock); \
+    ui->imageHeightSpinBox->blockSignals(aLock);
+
+void TextFormatEditDialog::imageUpdateProperties()
+{
+    IMAGE_BLOCK_SIGNALS(true);
+
+    ui->imageNameEdit->setText(((QTextImageFormat *)&mTextFormat)->name());
+    ui->imageWidthSpinBox->setValue(((QTextImageFormat *)&mTextFormat)->width());
+    ui->imageHeightSpinBox->setValue(((QTextImageFormat *)&mTextFormat)->height());
+
+    IMAGE_BLOCK_SIGNALS(false);
+}
+
 #define BLOCK_SIGNALS(aLock) \
     ui->typeComboBox->blockSignals(aLock); \
     ui->layoutDirectionComboBox->blockSignals(aLock); \
@@ -2146,6 +2190,10 @@ void TextFormatEditDialog::updateProperties()
         case 0: blockUpdateProperties(); break;
         case 1: charUpdateProperties();  break;
         case 2: frameUpdateProperties(); break;
+        case 3:
+            charUpdateProperties();
+            imageUpdateProperties();
+        break;
     }
 
     BLOCK_SIGNALS(false);
