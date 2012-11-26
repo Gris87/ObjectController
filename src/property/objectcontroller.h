@@ -22,6 +22,9 @@ public:
     void reset();
     void clear();
 
+    void setIgnoreEmptyClass(bool aValue);
+    bool ignoreEmptyClass() const;
+
     void setObject(QObject *aObject);
     void setObjects(const QObjectList &aObjects);
     QObjectList objects() const;
@@ -30,6 +33,7 @@ protected:
     typedef QMap<QObject*, HandleObject*> HandledObjects;
 
     PropertyTreeWidget* mTreeWidget;
+    bool                mIgnoreEmptyClass;
     QObjectList         mObjects;
     HandledObjects      mHandledObjects;
 
@@ -83,6 +87,9 @@ protected:
 
 private slots:
     void valueChangedSlot(const QVariant &aNewValue);
+
+signals:
+    void valueChanged(Property *aProperty, const QVariant &aValue);
 };
 
 #endif // OBJECTCONTROLLER_H

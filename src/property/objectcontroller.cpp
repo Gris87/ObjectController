@@ -2,53 +2,13 @@
 
 #include <QVBoxLayout>
 
-#include "delegates/enumdelegate.h"
-#include "delegates/booldelegate.h"
-#include "delegates/integerdelegate.h"
-#include "delegates/doubledelegate.h"
-#include "delegates/chardelegate.h"
-#include "delegates/stringlistdelegate.h"
-#include "delegates/stringdelegate.h"
-#include "delegates/bytearraydelegate.h"
-#include "delegates/bitarraydelegate.h"
-#include "delegates/datedelegate.h"
-#include "delegates/timedelegate.h"
-#include "delegates/datetimedelegate.h"
-#include "delegates/localedelegate.h"
-#include "delegates/rectdelegate.h"
-#include "delegates/rectfdelegate.h"
-#include "delegates/sizedelegate.h"
-#include "delegates/sizefdelegate.h"
-#include "delegates/linedelegate.h"
-#include "delegates/linefdelegate.h"
-#include "delegates/pointdelegate.h"
-#include "delegates/pointfdelegate.h"
-#include "delegates/easingcurvedelegate.h"
-#include "delegates/fontdelegate.h"
-#include "delegates/pixmapdelegate.h"
-#include "delegates/brushdelegate.h"
-#include "delegates/colordelegate.h"
-#include "delegates/palettedelegate.h"
-#include "delegates/icondelegate.h"
-#include "delegates/polygondelegate.h"
-#include "delegates/regiondelegate.h"
-#include "delegates/cursordelegate.h"
-#include "delegates/sizepolicydelegate.h"
-#include "delegates/keysequencedelegate.h"
-#include "delegates/pendelegate.h"
-#include "delegates/textlengthdelegate.h"
-#include "delegates/textformatdelegate.h"
-#include "delegates/matrixdelegate.h"
-#include "delegates/transformdelegate.h"
-#include "delegates/matrix4x4delegate.h"
-#include "delegates/vector2ddelegate.h"
-#include "delegates/vector3ddelegate.h"
-#include "delegates/vector4ddelegate.h"
-#include "delegates/quaterniondelegate.h"
+#include "delegates/delegates.h"
 
 ObjectController::ObjectController(QWidget *parent) :
     QWidget(parent)
 {
+    mIgnoreEmptyClass=true;
+
     mTreeWidget=new PropertyTreeWidget(this);
 
     QVBoxLayout *layout = new QVBoxLayout(this);
@@ -148,9 +108,24 @@ void ObjectController::valueChangedSlot(const QVariant &aNewValue)
 {
     ((Property *)sender())->write(mObjects, aNewValue);
     update();
+    emit valueChanged((Property *)sender(), aNewValue);
 }
 
 // -------------------------------------------------------------------------------------
+
+void ObjectController::setIgnoreEmptyClass(bool aValue)
+{
+    if (mIgnoreEmptyClass!=aValue)
+    {
+        mIgnoreEmptyClass=aValue;
+        invalidate();
+    }
+}
+
+bool ObjectController::ignoreEmptyClass() const
+{
+    return mIgnoreEmptyClass;
+}
 
 void ObjectController::setObject(QObject *aObject)
 {

@@ -203,24 +203,23 @@ void PropertyTreeWidget::fillByPropertyGroups(QList<PropertyGroup *> aGroups)
 
     for (int i=0; i<aGroups.length(); ++i)
     {
-        PropertyTreeWidgetItem* aTopItem=new PropertyTreeWidgetItem();
-        aTopItem->setText(0, aGroups.at(i)->name());
-
-
-
         QList<Property *> aProperties=aGroups.at(i)->properties();
 
-        for (int j=0; j<aProperties.length(); ++j)
+        if (!mController->ignoreEmptyClass() || aProperties.length()>0)
         {
-            PropertyTreeWidgetItem* aItem=new PropertyTreeWidgetItem(aTopItem);
-            aItem->setProperty(aProperties.at(j));
-            aItem->setText(0, aProperties.at(j)->name());
-            aItem->setFlags(aItem->flags() | Qt::ItemIsEditable);
+            PropertyTreeWidgetItem* aTopItem=new PropertyTreeWidgetItem();
+            aTopItem->setText(0, aGroups.at(i)->name());
+
+            for (int j=0; j<aProperties.length(); ++j)
+            {
+                PropertyTreeWidgetItem* aItem=new PropertyTreeWidgetItem(aTopItem);
+                aItem->setProperty(aProperties.at(j));
+                aItem->setText(0, aProperties.at(j)->name());
+                aItem->setFlags(aItem->flags() | Qt::ItemIsEditable);
+            }
+
+            aTopLevelItems.append(aTopItem);
         }
-
-
-
-        aTopLevelItems.append(aTopItem);
     }
 
     addTopLevelItems(aTopLevelItems);

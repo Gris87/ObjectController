@@ -3256,6 +3256,8 @@ void Property::penStyleChanged(const QVariant &aNewValue)
 
     aParentItem->setFirstValue(aPen);
     aParentItem->itemConnector()->sendSignal();
+
+    ((CustomEditor *)aItem->itemConnector()->sender())->setIcon(aItem->icon(1));
 }
 
 void Property::penCapStyleChanged(const QVariant &aNewValue)
@@ -3268,6 +3270,8 @@ void Property::penCapStyleChanged(const QVariant &aNewValue)
 
     aParentItem->setFirstValue(aPen);
     aParentItem->itemConnector()->sendSignal();
+
+    ((CustomEditor *)aItem->itemConnector()->sender())->setIcon(aItem->icon(1));
 }
 
 void Property::penJoinStyleChanged(const QVariant &aNewValue)
@@ -3280,6 +3284,8 @@ void Property::penJoinStyleChanged(const QVariant &aNewValue)
 
     aParentItem->setFirstValue(aPen);
     aParentItem->itemConnector()->sendSignal();
+
+    ((CustomEditor *)aItem->itemConnector()->sender())->setIcon(aItem->icon(1));
 }
 
 void Property::penColorChanged(const QVariant &aNewValue)
