@@ -153,7 +153,8 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/rectframe.h \
            $$PWD/widgets/shortcutedit.h \
            $$PWD/widgets/stringframe.h \
-           $$PWD/widgets/tabframe.h
+           $$PWD/widgets/tabframe.h \
+           $$PWD/widgets/textlengthframe.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -298,7 +299,8 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/rectframe.cpp \
            $$PWD/widgets/shortcutedit.cpp \
            $$PWD/widgets/stringframe.cpp \
-           $$PWD/widgets/tabframe.cpp
+           $$PWD/widgets/tabframe.cpp \
+           $$PWD/widgets/textlengthframe.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -385,4 +387,5 @@ FORMS += \
            $$PWD/widgets/pointframe.ui \
            $$PWD/widgets/rectframe.ui \
            $$PWD/widgets/stringframe.ui \
-           $$PWD/widgets/tabframe.ui
+           $$PWD/widgets/tabframe.ui \
+           $$PWD/widgets/textlengthframe.ui

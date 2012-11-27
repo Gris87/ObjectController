@@ -68,6 +68,8 @@ private:
     void charSetStyleStrategy(const QString &aStrategy, const QString &aFlag);
 
     void tableSetAlignment(const QString &aHorizontal, const QString &aVertical);
+    void tableUpdateColumnWidthConstraints();
+    void tableAddColumnWidthConstraint();
 
 private slots:
     void hideCategories();
@@ -76,6 +78,11 @@ private slots:
     void blockTabPositionDown();
     void blockTabPositionDelete();
     void blockTabPositionChanged();
+
+    void tableColumnWidthConstraintUp();
+    void tableColumnWidthConstraintDown();
+    void tableColumnWidthConstraintDelete();
+    void tableColumnWidthConstraintChanged();
 
     void on_okButton_clicked();
     void on_cancelButton_clicked();
@@ -201,6 +208,7 @@ private slots:
     void on_tableCellsPaddingSpinBox_valueChanged(double aValue);
     void on_tableHorizontalAlignmentComboBox_currentIndexChanged(const QString &aValue);
     void on_tableVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue);
+    void on_tableColumnWidthConstraintsAddButton_clicked();
 };
 
 #endif // TEXTFORMATEDITDIALOG_H

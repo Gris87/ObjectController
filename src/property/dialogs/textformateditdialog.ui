@@ -287,7 +287,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-551</y>
                  <width>266</width>
                  <height>1021</height>
                 </rect>
@@ -851,6 +851,9 @@
                        </item>
                        <item>
                         <layout class="QHBoxLayout" name="horizontalLayout_5">
+                         <property name="spacing">
+                          <number>4</number>
+                         </property>
                          <item>
                           <widget class="QToolButton" name="blockTabPositionsAddButton">
                            <property name="text">
@@ -948,7 +951,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-607</y>
                  <width>266</width>
                  <height>989</height>
                 </rect>
@@ -1864,7 +1867,7 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
+                 <y>-297</y>
                  <width>266</width>
                  <height>679</height>
                 </rect>
@@ -2489,7 +2492,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>283</width>
-                 <height>267</height>
+                 <height>382</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="imageLayout">
@@ -2503,7 +2506,7 @@
                  <widget class="QWidget" name="imageWidget" native="true">
                   <layout class="QVBoxLayout" name="verticalLayout_10">
                    <property name="spacing">
-                    <number>0</number>
+                    <number>4</number>
                    </property>
                    <property name="margin">
                     <number>0</number>
@@ -2651,7 +2654,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>283</width>
-                 <height>267</height>
+                 <height>382</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="listLayout">
@@ -2665,7 +2668,7 @@
                  <widget class="QWidget" name="listWidget" native="true">
                   <layout class="QVBoxLayout" name="verticalLayout_45">
                    <property name="spacing">
-                    <number>0</number>
+                    <number>4</number>
                    </property>
                    <property name="margin">
                     <number>0</number>
@@ -2862,7 +2865,7 @@
                  <x>0</x>
                  <y>0</y>
                  <width>283</width>
-                 <height>267</height>
+                 <height>382</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="tableCellLayout">
@@ -2876,7 +2879,7 @@
                  <widget class="QWidget" name="tableCellWidget" native="true">
                   <layout class="QVBoxLayout" name="verticalLayout_47">
                    <property name="spacing">
-                    <number>0</number>
+                    <number>4</number>
                    </property>
                    <property name="margin">
                     <number>0</number>
@@ -3046,9 +3049,9 @@
                <property name="geometry">
                 <rect>
                  <x>0</x>
-                 <y>0</y>
-                 <width>283</width>
-                 <height>382</height>
+                 <y>-265</y>
+                 <width>266</width>
+                 <height>647</height>
                 </rect>
                </property>
                <layout class="QVBoxLayout" name="tableLayout">
@@ -3062,7 +3065,7 @@
                  <widget class="QWidget" name="tableWidget" native="true">
                   <layout class="QVBoxLayout" name="verticalLayout_48">
                    <property name="spacing">
-                    <number>0</number>
+                    <number>4</number>
                    </property>
                    <property name="margin">
                     <number>0</number>
@@ -3309,13 +3312,85 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QFrame" name="tableColumnWidthConstraintsFrame">
-                     <property name="frameShape">
-                      <enum>QFrame::StyledPanel</enum>
+                    <widget class="QScrollArea" name="tableColumnWidthConstraintsScrollArea">
+                     <property name="minimumSize">
+                      <size>
+                       <width>0</width>
+                       <height>300</height>
+                      </size>
                      </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Sunken</enum>
+                     <property name="widgetResizable">
+                      <bool>true</bool>
                      </property>
+                     <widget class="QWidget" name="scrollAreaWidgetContents_9">
+                      <property name="geometry">
+                       <rect>
+                        <x>0</x>
+                        <y>0</y>
+                        <width>256</width>
+                        <height>298</height>
+                       </rect>
+                      </property>
+                      <layout class="QVBoxLayout" name="verticalLayout_51">
+                       <property name="spacing">
+                        <number>4</number>
+                       </property>
+                       <property name="margin">
+                        <number>4</number>
+                       </property>
+                       <item>
+                        <layout class="QVBoxLayout" name="tableColumnWidthConstraintsLayout">
+                         <property name="spacing">
+                          <number>4</number>
+                         </property>
+                        </layout>
+                       </item>
+                       <item>
+                        <layout class="QHBoxLayout" name="horizontalLayout_7">
+                         <property name="spacing">
+                          <number>4</number>
+                         </property>
+                         <item>
+                          <widget class="QToolButton" name="tableColumnWidthConstraintsAddButton">
+                           <property name="text">
+                            <string/>
+                           </property>
+                           <property name="icon">
+                            <iconset resource="../property.qrc">
+                             <normaloff>:/objectcontroller/images/Add.png</normaloff>:/objectcontroller/images/Add.png</iconset>
+                           </property>
+                          </widget>
+                         </item>
+                         <item>
+                          <spacer name="horizontalSpacer_10">
+                           <property name="orientation">
+                            <enum>Qt::Horizontal</enum>
+                           </property>
+                           <property name="sizeHint" stdset="0">
+                            <size>
+                             <width>40</width>
+                             <height>20</height>
+                            </size>
+                           </property>
+                          </spacer>
+                         </item>
+                        </layout>
+                       </item>
+                       <item>
+                        <spacer name="verticalSpacer_10">
+                         <property name="orientation">
+                          <enum>Qt::Vertical</enum>
+                         </property>
+                         <property name="sizeHint" stdset="0">
+                          <size>
+                           <width>0</width>
+                           <height>0</height>
+                          </size>
+                         </property>
+                        </spacer>
+                       </item>
+                      </layout>
+                     </widget>
                     </widget>
                    </item>
                   </layout>

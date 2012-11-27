@@ -10,6 +10,7 @@
 #include "peneditdialog.h"
 #include "textlengtheditdialog.h"
 #include "../widgets/tabframe.h"
+#include "../widgets/textlengthframe.h"
 
 TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent) :
     QDialog(parent),
@@ -1608,7 +1609,7 @@ void TextFormatEditDialog::on_tableAlignmentButton_clicked()
 
 void TextFormatEditDialog::on_tableColumnWidthConstraintsButton_clicked()
 {
-    showOrHideCategory(ui->tableColumnWidthConstraintsFrame, ui->tableColumnWidthConstraintsButton);
+    showOrHideCategory(ui->tableColumnWidthConstraintsScrollArea, ui->tableColumnWidthConstraintsButton);
 }
 
 #define TABLE_MODIFICATION(action) \
@@ -1681,6 +1682,125 @@ void TextFormatEditDialog::on_tableHorizontalAlignmentComboBox_currentIndexChang
 void TextFormatEditDialog::on_tableVerticalAlignmentComboBox_currentIndexChanged(const QString &aValue)
 {
     tableSetAlignment(ui->tableHorizontalAlignmentComboBox->currentText(), aValue);
+}
+
+void TextFormatEditDialog::on_tableColumnWidthConstraintsAddButton_clicked()
+{
+    tableAddColumnWidthConstraint();
+    tableUpdateColumnWidthConstraints();
+}
+
+void TextFormatEditDialog::tableUpdateColumnWidthConstraints()
+{
+    QVector<QTextLength> aTextLengths;
+
+    for (int i=0; i<ui->tableColumnWidthConstraintsLayout->count(); ++i)
+    {
+        aTextLengths.append(((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(i)->widget())->value());
+    }
+
+    TABLE_MODIFICATION(setColumnWidthConstraints(aTextLengths));
+}
+
+void TextFormatEditDialog::tableAddColumnWidthConstraint()
+{
+    TextLengthFrame *aFrame=new TextLengthFrame(this);
+
+    if (ui->tableColumnWidthConstraintsLayout->count()==0)
+    {
+        aFrame->setUpEnabled(false);
+    }
+    else
+    {
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(ui->tableColumnWidthConstraintsLayout->count()-1)->widget())->setDownEnabled(true);
+    }
+
+    aFrame->setDownEnabled(false);
+
+    connect(aFrame, SIGNAL(upPressed()),     this, SLOT(tableColumnWidthConstraintUp()));
+    connect(aFrame, SIGNAL(downPressed()),   this, SLOT(tableColumnWidthConstraintDown()));
+    connect(aFrame, SIGNAL(deletePressed()), this, SLOT(tableColumnWidthConstraintDelete()));
+    connect(aFrame, SIGNAL(tabChanged()),    this, SLOT(tableColumnWidthConstraintChanged()));
+
+    ui->tableColumnWidthConstraintsLayout->addWidget(aFrame);
+    ui->tableColumnWidthConstraintsScrollArea->verticalScrollBar()->setValue(ui->tableColumnWidthConstraintsScrollArea->verticalScrollBar()->maximum());
+}
+
+void TextFormatEditDialog::tableColumnWidthConstraintUp()
+{
+    QWidget *aWidget=(QWidget *)sender();
+
+    int index=ui->tableColumnWidthConstraintsLayout->indexOf(aWidget);
+
+    if (index==1)
+    {
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(0)->widget())->setUpEnabled(true);
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(1)->widget())->setUpEnabled(false);
+    }
+
+    if (index==ui->tableColumnWidthConstraintsLayout->count()-1)
+    {
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(index-1)->widget())->setDownEnabled(false);
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(index)->widget())->setDownEnabled(true);
+    }
+
+    ui->tableColumnWidthConstraintsLayout->removeWidget(aWidget);
+    ui->tableColumnWidthConstraintsLayout->insertWidget(index-1, aWidget);
+
+    tableUpdateColumnWidthConstraints();
+}
+
+void TextFormatEditDialog::tableColumnWidthConstraintDown()
+{
+    QWidget *aWidget=(QWidget *)sender();
+
+    int index=ui->tableColumnWidthConstraintsLayout->indexOf(aWidget);
+
+    if (index==0)
+    {
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(0)->widget())->setUpEnabled(true);
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(1)->widget())->setUpEnabled(false);
+    }
+
+    if (index==ui->tableColumnWidthConstraintsLayout->count()-2)
+    {
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(index)->widget())->setDownEnabled(false);
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(index+1)->widget())->setDownEnabled(true);
+    }
+
+    ui->tableColumnWidthConstraintsLayout->removeWidget(aWidget);
+    ui->tableColumnWidthConstraintsLayout->insertWidget(index+1, aWidget);
+
+    tableUpdateColumnWidthConstraints();
+}
+
+void TextFormatEditDialog::tableColumnWidthConstraintDelete()
+{
+    QWidget *aWidget=(QWidget *)sender();
+
+    if (ui->tableColumnWidthConstraintsLayout->count()>1)
+    {
+        int index=ui->tableColumnWidthConstraintsLayout->indexOf(aWidget);
+
+        if (index==0)
+        {
+            ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(1)->widget())->setUpEnabled(false);
+        }
+
+        if (index==ui->tableColumnWidthConstraintsLayout->count()-1)
+        {
+            ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(index-1)->widget())->setDownEnabled(false);
+        }
+    }
+
+    delete aWidget;
+
+    tableUpdateColumnWidthConstraints();
+}
+
+void TextFormatEditDialog::tableColumnWidthConstraintChanged()
+{
+    tableUpdateColumnWidthConstraints();
 }
 
 #define BLOCK_BLOCK_SIGNALS(aLock) \
@@ -2458,6 +2578,22 @@ void TextFormatEditDialog::tableUpdateProperties()
     ui->tableCellsPaddingSpinBox->setValue(((QTextTableFormat *)&mTextFormat)->cellPadding());
     ui->tableHorizontalAlignmentComboBox->setCurrentIndex(ui->tableHorizontalAlignmentComboBox->findText(aHorizontalAlignment));
     ui->tableVerticalAlignmentComboBox->setCurrentIndex(ui->tableVerticalAlignmentComboBox->findText(aVerticalAlignment));
+
+    while (ui->tableColumnWidthConstraintsLayout->count()>0)
+    {
+        delete ui->tableColumnWidthConstraintsLayout->takeAt(0)->widget();
+    }
+
+    QVector<QTextLength> aColumnWidthConstraints=((QTextTableFormat *)&mTextFormat)->columnWidthConstraints();
+
+    for (int i=0; i<aColumnWidthConstraints.count(); ++i)
+    {
+        tableAddColumnWidthConstraint();
+
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(i)->widget())->blockSignals(true);
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(i)->widget())->setValue(aColumnWidthConstraints.at(i));
+        ((TextLengthFrame *)ui->tableColumnWidthConstraintsLayout->itemAt(i)->widget())->blockSignals(false);
+    }
 
     TABLE_BLOCK_SIGNALS(false);
 }
