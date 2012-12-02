@@ -11,6 +11,8 @@ StringEditor::StringEditor(QWidget *parent) :
     ui->setupUi(this);
 
     mDataType=STRING;
+
+    // Handle selection list attribute
 }
 
 StringEditor::~StringEditor()

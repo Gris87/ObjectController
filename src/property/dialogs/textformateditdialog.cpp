@@ -97,6 +97,8 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
     charDrawFont();
     charDrawTextOutlinePen();
     frameDrawBorderBrush();
+
+    // TODO: Add visual demonstration of changes
 }
 
 TextFormatEditDialog::~TextFormatEditDialog()

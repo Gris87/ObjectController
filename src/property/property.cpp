@@ -22,6 +22,8 @@ Property::Property(const QMetaProperty &aMetaProperty, QObject *parent) :
 
     mName=mMetaProperty.name();
     mIsWritable=mMetaProperty.isWritable();
+
+    // TODO: Support attributes for property
 }
 
 bool Property::equals(const Property *aProperty)
