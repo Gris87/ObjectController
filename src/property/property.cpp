@@ -15,9 +15,10 @@
 #include "propertytreewidget.h"
 #include "propertytreewidgetitem.h"
 
-Property::Property(const QMetaProperty &aMetaProperty, QObject *parent) :
+Property::Property(const QMetaObject *aPropertyObject, const QMetaProperty &aMetaProperty, QObject *parent) :
     QObject(parent)
 {
+    mPropertyObject=aPropertyObject;
     mMetaProperty=aMetaProperty;
 
     mName=mMetaProperty.name();
@@ -82,6 +83,12 @@ void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects
     QVariant aValue=read(aObjects, &aFirstValue);
 
     setPropertiesForItem(aValue, aFirstValue, aItem);
+}
+
+QMap<QString, QString> Property::attributes() const
+{
+    QMap<QString, QString> res;
+    return res;
 }
 
 void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem)
@@ -208,6 +215,11 @@ int Property::valueSubProperies(const QVariant &aValue, PropertyTreeWidgetItem *
 }
 
 // -------------------------------------------------------------------------------------
+
+const QMetaObject* Property::propertyObject() const
+{
+    return mPropertyObject;
+}
 
 QString Property::name() const
 {

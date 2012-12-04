@@ -26,6 +26,7 @@ public:
     ~CustomEditor();
 
     virtual void setIcon(const QIcon &aIcon);
+    virtual void handleAttributes(const QMap<QString, QString> &aAttributes);
 
 protected:
     bool mCanEmitValueChangedSignal;
@@ -36,7 +37,7 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 
     virtual void putFocus();
-    virtual void selectText();
+    virtual void selectText();    
     void modificationDone(const QVariant &aNewValue);
 
 private slots:

@@ -14,7 +14,7 @@ class Property : public QObject
 {
     Q_OBJECT
 public:
-    explicit Property(const QMetaProperty &aMetaProperty, QObject *parent = 0);
+    explicit Property(const QMetaObject *aPropertyObject, const QMetaProperty &aMetaProperty, QObject *parent = 0);
 
     bool equals(const Property *aProperty);
 
@@ -23,22 +23,26 @@ public:
 
     void update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects);
 
-    // -------------------------------------------------------------------------------------
-
+    QMap<QString, QString> attributes() const;
     QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
 
-    QString name() const;
+    // -------------------------------------------------------------------------------------
 
-    QColor  backgroundColor() const;
-    void setBackgroundColor(const QColor &aBackgroundColor);
+    const QMetaObject *propertyObject() const;
 
-    bool    isWriteable() const;
+    QString            name() const;
+
+    QColor             backgroundColor() const;
+    void               setBackgroundColor(const QColor &aBackgroundColor);
+
+    bool               isWriteable() const;
 
 protected:
-    QMetaProperty mMetaProperty;
-    QString       mName;
-    QColor        mBackgroundColor;
-    bool          mIsWritable;
+    const QMetaObject *mPropertyObject;
+    QMetaProperty      mMetaProperty;
+    QString            mName;
+    QColor             mBackgroundColor;
+    bool               mIsWritable;
 
     void setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem);
     void setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);

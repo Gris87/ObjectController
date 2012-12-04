@@ -68,3 +68,8 @@ void CustomEditor::setIcon(const QIcon &/*aIcon*/)
 {
     // Nothing
 }
+
+void CustomEditor::handleAttributes(const QMap<QString, QString> &/*aAttributes*/)
+{
+    // Nothing
+}
