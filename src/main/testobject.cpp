@@ -7,6 +7,7 @@ TestObject::TestObject(QObject *parent) :
 {
     mEnumeration=ENUM_TWO;
     mFlags=FLAG_1_3;
+    mStringCombo="Option 1";
 
     mBool=true;
     mInt8=1;
@@ -122,6 +123,11 @@ TestObject::TestEnumeration TestObject::getEnumeration() const
 TestObject::TestFlags TestObject::getFlags() const
 {
     return mFlags;
+}
+
+QString TestObject::getStringCombo() const
+{
+    return mStringCombo;
 }
 
 bool TestObject::getBool() const
@@ -450,6 +456,11 @@ void TestObject::setEnumeration(const TestEnumeration &aEnumeration)
 void TestObject::setFlags(const TestFlags &aFlags)
 {
     mFlags=aFlags;
+}
+
+void TestObject::setStringCombo(const QString &aStringCombo)
+{
+    mStringCombo=aStringCombo;
 }
 
 void TestObject::setBool(const bool &aBool)

@@ -24,6 +24,8 @@ public:
 
     void update(const QObjectList &aObjects);
 
+    Property*       topProperty();
+
     // -------------------------------------------------------------------------------------
 
     ItemConnector*  itemConnector();

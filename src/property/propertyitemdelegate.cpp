@@ -18,7 +18,6 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
     PropertyTreeWidget*     aTreeWidget = (PropertyTreeWidget *)parent();
     PropertyTreeWidgetItem* aItem       = (PropertyTreeWidgetItem *)aTreeWidget->itemFromIndex(aIndex);
 
-    Property *aProperty=aItem->property();
     CustomEditor *aCustomEditor=0;
 
     if (aItem->delegate())
@@ -29,6 +28,8 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
     else
     {
         DefaultEditor *aDefaultEditor=new DefaultEditor(aParent);
+
+        Property *aProperty=aItem->property();
 
         if (aProperty)
         {
@@ -44,29 +45,12 @@ QWidget* PropertyItemDelegate::createEditor(QWidget *aParent, const QStyleOption
 
     aCustomEditor->setIcon(aItem->icon(1));
 
+    Property *aTopProperty=aItem->topProperty();
 
-
-    PropertyTreeWidgetItem* aCurItem=aItem;
-
-    while (aProperty==0)
+    if (aTopProperty)
     {
-        QTreeWidgetItem *aParent=aCurItem->parent();
-
-        if (aParent==0)
-        {
-            break;
-        }
-
-        aCurItem=(PropertyTreeWidgetItem *)aParent;
-        aProperty=aCurItem->property();
+        aCustomEditor->handleAttributes(aTopProperty->attributes());
     }
-
-    if (aProperty)
-    {
-        aCustomEditor->handleAttributes(aProperty->attributes());
-    }
-
-
 
     connect(aCustomEditor, SIGNAL(valueChanged(QVariant)), aItem->itemConnector(), SIGNAL(valueChanged(QVariant)));
 

@@ -24,8 +24,9 @@ class TestObject : public QObject
 {
     Q_OBJECT
 public:
-    Q_PROPERTY(TestEnumeration   Enumeration   READ getEnumeration   WRITE setEnumeration)
+    Q_PROPERTY(TestEnumeration   Enumeration   READ getEnumeration   WRITE setEnumeration)    
     Q_PROPERTY(TestFlags         Flags         READ getFlags         WRITE setFlags)
+    Q_PROPERTY(QString           StringCombo   READ getStringCombo   WRITE setStringCombo)
     Q_PROPERTY(bool              Bool          READ getBool          WRITE setBool)
     Q_PROPERTY(qint8             Int8          READ getInt8          WRITE setInt8)
     Q_PROPERTY(quint8            UInt8         READ getUInt8         WRITE setUInt8)
@@ -120,6 +121,7 @@ public:
 
     TestEnumeration        mEnumeration;
     TestFlags              mFlags;
+    QString                mStringCombo;
     bool                   mBool;
     qint8                  mInt8;
     quint8                 mUInt8;
@@ -184,6 +186,7 @@ public:
 
     TestEnumeration        getEnumeration() const;
     TestFlags              getFlags() const;
+    QString                getStringCombo() const;
     bool                   getBool() const;
     qint8                  getInt8() const;
     quint8                 getUInt8() const;
@@ -248,6 +251,7 @@ public:
 
     void setEnumeration(const TestEnumeration &aEnumeration);
     void setFlags(const TestFlags &aFlags);
+    void setStringCombo(const QString &aStringCombo);
     void setBool(const bool &aBool);
     void setInt8(const qint8 &aInt8);
     void setUInt8(const quint8 &aUInt8);

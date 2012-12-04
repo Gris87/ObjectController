@@ -73,6 +73,30 @@ void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
     }
 }
 
+Property* PropertyTreeWidgetItem::topProperty()
+{
+    PropertyTreeWidgetItem* aCurItem=this;
+
+    do
+    {
+        if (aCurItem->property())
+        {
+            return aCurItem->property();
+        }
+
+        QTreeWidgetItem *aParent=aCurItem->parent();
+
+        if (aParent==0)
+        {
+            break;
+        }
+
+        aCurItem=(PropertyTreeWidgetItem *)aParent;
+    } while (true);
+
+    return 0;
+}
+
 // -------------------------------------------------------------------------------------
 
 ItemConnector* PropertyTreeWidgetItem::itemConnector()
