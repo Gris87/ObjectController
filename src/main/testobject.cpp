@@ -113,6 +113,20 @@ TestObject::TestObject(QObject *parent) :
     mObject=this;
 }
 
+bool TestObject::valuesForProperty(QString aPropertyName, QStringList &aValues)
+{
+    if (aPropertyName=="StringCombo")
+    {
+        aValues.append("Option 1");
+        aValues.append("Option 2");
+        aValues.append("Option 3");
+
+        return true;
+    }
+
+    return false;
+}
+
 // ----------------------------------------------------------------------------------------------------
 
 TestObject::TestEnumeration TestObject::getEnumeration() const

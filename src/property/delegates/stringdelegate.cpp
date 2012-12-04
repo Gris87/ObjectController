@@ -27,23 +27,28 @@ void StringDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
 
     bool good=aTopProperty
               &&
-              ((PropertyTreeWidget *)aItem->treeWidget())->controller()->objects().length()>0;
+              ((PropertyTreeWidget *)aItem->treeWidget())->controller()->objects().length()>0;    
 
     if (good)
     {
         const QMetaObject *aMetaObject=aTopProperty->propertyObject();
 
-        int index=aMetaObject->indexOfMethod("QStringList valuesForProperty(QString)");
+        int index=aMetaObject->indexOfMethod("valuesForProperty(QString,QStringList&)");
         good=(index>=0);
 
         if (good)
         {
+            bool filtered;
+
             good=aMetaObject->method(index).invoke(
                                                    ((PropertyTreeWidget *)aItem->treeWidget())->controller()->objects().at(0),
                                                    Qt::DirectConnection,
-                                                   Q_RETURN_ARG(QStringList, aValues),
-                                                   Q_ARG(QString, aTopProperty->name())
+                                                   Q_RETURN_ARG(bool, filtered),
+                                                   Q_ARG(QString, aTopProperty->name()),
+                                                   Q_ARG(QStringList, aValues)
                                                   );
+
+            good=(good && filtered);
         }
     }
 

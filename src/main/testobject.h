@@ -89,7 +89,7 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
-    explicit TestObject(QObject *parent = 0);
+    explicit TestObject(QObject *parent = 0);    
 
     Q_ENUMS(TestEnumeration)
     enum TestEnumeration
@@ -309,6 +309,9 @@ public:
     void setVector3D(const QVector3D &aVector3D);
     void setVector4D(const QVector4D &aVector4D);
     void setQuaternion(const QQuaternion &aQuaternion);
+
+public slots:
+    bool valuesForProperty(QString aPropertyName, QStringList &aValues);
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(TestObject::TestFlags)
