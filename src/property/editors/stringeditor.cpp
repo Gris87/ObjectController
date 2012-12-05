@@ -10,9 +10,11 @@ StringEditor::StringEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    mDataType=STRING;
+    ui->valueStackedWidget->setCurrentWidget(ui->editPage);
 
-    // Handle selection list attribute
+    connect(ui->valueComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(on_valueEdit_textEdited(QString)));
+
+    mDataType=STRING;
 }
 
 StringEditor::~StringEditor()
@@ -22,12 +24,23 @@ StringEditor::~StringEditor()
 
 void StringEditor::putFocus()
 {
-    ui->valueEdit->setFocus();
+    if (ui->valueStackedWidget->currentWidget()==ui->editPage)
+    {
+        ui->valueEdit->setFocus();
+    }
+    else
+    if (ui->valueStackedWidget->currentWidget()==ui->comboBoxPage)
+    {
+        ui->valueEdit->setFocus();
+    }
 }
 
 void StringEditor::selectText()
 {
-    ui->valueEdit->selectAll();
+    if (ui->valueStackedWidget->currentWidget()==ui->editPage)
+    {
+        ui->valueEdit->selectAll();
+    }
 }
 
 void StringEditor::setIcon(const QIcon &aIcon)
@@ -38,18 +51,51 @@ void StringEditor::setIcon(const QIcon &aIcon)
 void StringEditor::setValue(const QString &aValue)
 {
     ui->valueEdit->setText(aValue);
+    ui->valueStackedWidget->setCurrentWidget(ui->editPage);
     mDataType=STRING;
 }
 
 void StringEditor::setValue(const QUrl &aValue)
 {
     ui->valueEdit->setText(aValue.toString());
+    ui->valueStackedWidget->setCurrentWidget(ui->editPage);
     mDataType=URL;
 }
 
 void StringEditor::setValue(const QRegExp &aValue)
 {
     ui->valueEdit->setText(aValue.pattern());
+    ui->valueStackedWidget->setCurrentWidget(ui->editPage);
+    mDataType=REGEXP;
+}
+
+void StringEditor::setValue(const QStringList &aValues, const QString &aValue)
+{
+    ui->valueComboBox->clear();
+    ui->valueComboBox->addItems(aValues);
+    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue));
+
+    ui->valueStackedWidget->setCurrentWidget(ui->comboBoxPage);
+    mDataType=STRING;
+}
+
+void StringEditor::setValue(const QStringList &aValues, const QUrl &aValue)
+{
+    ui->valueComboBox->clear();
+    ui->valueComboBox->addItems(aValues);
+    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue.toString()));
+
+    ui->valueStackedWidget->setCurrentWidget(ui->comboBoxPage);
+    mDataType=URL;
+}
+
+void StringEditor::setValue(const QStringList &aValues, const QRegExp &aValue)
+{
+    ui->valueComboBox->clear();
+    ui->valueComboBox->addItems(aValues);
+    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue.pattern()));
+
+    ui->valueStackedWidget->setCurrentWidget(ui->comboBoxPage);
     mDataType=REGEXP;
 }
 

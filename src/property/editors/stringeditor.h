@@ -26,6 +26,9 @@ public:
     void setValue(const QString &aValue);
     void setValue(const QUrl &aValue);
     void setValue(const QRegExp &aValue);
+    void setValue(const QStringList &aValues, const QString &aValue);
+    void setValue(const QStringList &aValues, const QUrl &aValue);
+    void setValue(const QStringList &aValues, const QRegExp &aValue);
 
 protected:
     DataType mDataType;

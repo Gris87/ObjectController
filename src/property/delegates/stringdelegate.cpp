@@ -27,7 +27,7 @@ void StringDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
 
     bool good=aTopProperty
               &&
-              ((PropertyTreeWidget *)aItem->treeWidget())->controller()->objects().length()>0;    
+              ((PropertyTreeWidget *)aItem->treeWidget())->controller()->objects().length()>0;
 
     if (good)
     {
@@ -54,7 +54,21 @@ void StringDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
 
     if (good)
     {
-
+        switch (aItem->firstValue().type())
+        {
+            case QVariant::String:
+                aStringEditor->setValue(aValues, aItem->firstValue().value<QString>());
+            break;
+            case QVariant::Url:
+                aStringEditor->setValue(aValues, aItem->firstValue().value<QUrl>());
+            break;
+            case QVariant::RegExp:
+                aStringEditor->setValue(aValues, aItem->firstValue().value<QRegExp>());
+            break;
+            default:
+                Q_ASSERT(false); // Impossible
+            break;
+        }
     }
     else
     {
