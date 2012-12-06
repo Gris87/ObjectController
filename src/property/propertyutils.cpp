@@ -1,4 +1,4 @@
-#include "propertyutil.h"
+#include "propertyutils.h"
 
 #include <QList>
 

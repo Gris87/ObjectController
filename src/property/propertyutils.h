@@ -1,8 +1,8 @@
-#ifndef PROPERTYUTIL_H
-#define PROPERTYUTIL_H
+#ifndef PROPERTYUTILS_H
+#define PROPERTYUTILS_H
 
 #include <QString>
 
 QString doubleToString(double aValue, int aDecimals=6);
 
-#endif // PROPERTYUTIL_H
+#endif // PROPERTYUTILS_H

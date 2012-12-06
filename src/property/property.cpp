@@ -14,7 +14,7 @@
 
 #include "propertytreewidget.h"
 #include "propertytreewidgetitem.h"
-#include "propertyutil.h"
+#include "propertyutils.h"
 
 Property::Property(const QMetaObject *aPropertyObject, const QMetaProperty &aMetaProperty, QObject *parent) :
     QObject(parent)
