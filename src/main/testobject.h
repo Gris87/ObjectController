@@ -89,13 +89,25 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
-    Q_CLASSINFO("Float attributes", "min      :      0 ;"
-                                    "max      :  30.73 ;"
-                                    "decimals :      3 ;")
+    Q_CLASSINFO("Float attributes", "minValue    :     0             ;"
+                                    "maxValue    : 30.73             ;"
+                                    "decimals    : 3                 ;"
+                                    "toolTip     : \"It is a float\" ;"
+                                    "wrapping    : true              ;"
+                                    "accelerated : false             ;"
+                                    "prefix      : \"per \"          ;"
+                                    "suffix      : \" item(s)\"      ;"
+                                    "step        : 0.1               ;")
 
-    Q_CLASSINFO("Double attributes", "min      : -20.65 ;"
-                                     "max      :  54.34 ;"
-                                     "decimals :      5 ;")
+    Q_CLASSINFO("Double attributes", "minValue    : -20.65             ;"
+                                     "maxValue    :  54.34             ;"
+                                     "decimals    :      5             ;"
+                                     "toolTip     : \"It is a double\" ;"
+                                     "wrapping    : false              ;"
+                                     "accelerated : reue               ;"
+                                     "prefix      : \"of \"            ;"
+                                     "suffix      : \" element(s)\"    ;"
+                                     "step        : 0.03               ;")
 
     // ----------------------------------------------------------------------------------------------------
 

@@ -25,6 +25,23 @@ void PropertyAttributes::fromString(const QString &aString)
     }
 }
 
+bool PropertyAttributes::boolValue(const QString &aKey, const bool aDefaultValue) const
+{
+    QString aValue=value(aKey);
+
+    if (aValue=="1" || aValue.compare("true", Qt::CaseInsensitive))
+    {
+        return true;
+    }
+
+    if (aValue=="0" || aValue.compare("false", Qt::CaseInsensitive))
+    {
+        return false;
+    }
+
+    return aDefaultValue;
+}
+
 int PropertyAttributes::intValue(const QString &aKey, const int aDefaultValue) const
 {
     QString aValue=value(aKey);
@@ -55,4 +72,21 @@ double PropertyAttributes::doubleValue(const QString &aKey, const double aDefaul
     }
 
     return aDefaultValue;
+}
+
+QString PropertyAttributes::stringValue(const QString &aKey, const QString aDefaultValue) const
+{
+    QString aValue=value(aKey, aDefaultValue);
+
+    if (aValue.endsWith("\""))
+    {
+        aValue.remove(aValue.length()-1, 1);
+    }
+
+    if (aValue.startsWith("\""))
+    {
+        aValue.remove(0, 1);
+    }
+
+    return aValue;
 }

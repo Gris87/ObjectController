@@ -63,6 +63,21 @@ inline void PropertyTreeWidgetItem::init()
     mDelegate=0;
     mMetaEnum=0;
     mModified=false;
+
+    initToolTip();
+}
+
+void PropertyTreeWidgetItem::initToolTip()
+{
+    Property* aTopProperty=topProperty();
+
+    if (aTopProperty)
+    {
+        QString aToolTip=aTopProperty->attributes().stringValue("toolTip");
+
+        setToolTip(0, aToolTip);
+        setToolTip(1, aToolTip);
+    }
 }
 
 void PropertyTreeWidgetItem::update(const QObjectList &aObjects)
@@ -117,6 +132,7 @@ void PropertyTreeWidgetItem::setProperty(Property* aProperty)
     }
 
     mProperty=aProperty;
+    initToolTip();
 
     if (mProperty)
     {

@@ -54,6 +54,7 @@ protected:
     bool            mModified;
 
     void init();
+    void initToolTip();
 };
 
 #endif // PROPERTYTREEWIDGETITEM_H

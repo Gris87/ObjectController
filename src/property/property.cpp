@@ -337,52 +337,72 @@ QString Property::valueToString(const bool &aValue, PropertyTreeWidgetItem * /*a
 
 QString Property::valueToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const quint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const qint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const quint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const qint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const quint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const qint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString::number(aValue);
+    return mAttributes.stringValue("prefix")+
+           QString::number(aValue)+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const float &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return doubleToString(aValue, mAttributes.intValue("decimals", 6));
+    return mAttributes.stringValue("prefix")+
+           doubleToString(aValue, mAttributes.intValue("decimals", 6))+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const double &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return doubleToString(aValue, mAttributes.intValue("decimals", 6));
+    return mAttributes.stringValue("prefix")+
+           doubleToString(aValue, mAttributes.intValue("decimals", 6))+
+           mAttributes.stringValue("suffix");
 }
 
 QString Property::valueToString(const QChar &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
