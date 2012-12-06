@@ -89,14 +89,23 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
+    Q_CLASSINFO("Int32 attributes", //"minValue    :   0             ;"
+                                    //"maxValue    : 100             ;"
+                                      "toolTip     : \"It is a int\" ;"
+                                    //"wrapping    : true            ;"
+                                    //"accelerated : true            ;"
+                                      "prefix      : \"per \"        ;"
+                                      "suffix      : \" item(s)\"    ;"
+                                      "step        : 2               ;")
+
     Q_CLASSINFO("Float attributes", "minValue    :     0             ;"
                                     "maxValue    : 30.73             ;"
                                     "decimals    : 3                 ;"
                                     "toolTip     : \"It is a float\" ;"
                                     "wrapping    : true              ;"
                                     "accelerated : false             ;"
-                                    "prefix      : \"per \"          ;"
-                                    "suffix      : \" item(s)\"      ;"
+                                    "prefix      : \"I have \"       ;"
+                                    "suffix      : \" apple(s)\"     ;"
                                     "step        : 0.1               ;")
 
     Q_CLASSINFO("Double attributes", "minValue    : -20.65             ;"
@@ -105,8 +114,8 @@ public:
                                      "toolTip     : \"It is a double\" ;"
                                      "wrapping    : false              ;"
                                      "accelerated : reue               ;"
-                                     "prefix      : \"of \"            ;"
-                                     "suffix      : \" element(s)\"    ;"
+                                     "prefix      : \"There is no \"   ;"
+                                     "suffix      : \" human(s)\"      ;"
                                      "step        : 0.03               ;")
 
     // ----------------------------------------------------------------------------------------------------
