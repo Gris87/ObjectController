@@ -29,12 +29,12 @@ bool PropertyAttributes::boolValue(const QString &aKey, const bool aDefaultValue
 {
     QString aValue=value(aKey);
 
-    if (aValue=="1" || aValue.compare("true", Qt::CaseInsensitive))
+    if (aValue=="1" || aValue.compare("true", Qt::CaseInsensitive)==0)
     {
         return true;
     }
 
-    if (aValue=="0" || aValue.compare("false", Qt::CaseInsensitive))
+    if (aValue=="0" || aValue.compare("false", Qt::CaseInsensitive)==0)
     {
         return false;
     }

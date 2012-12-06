@@ -24,6 +24,7 @@ public:
     void setValue(const quint32 &aValue);
     void setValue(const qint64 &aValue);
     void setValue(const quint64 &aValue);
+    void handleAttributes(const PropertyAttributes &aAttributes);
 
 protected:
     void putFocus();
