@@ -38,6 +38,13 @@ void DoubleEditor::setValue(const float &aValue)
     ui->valueSpinBox->setValue(aValue);
 }
 
+void DoubleEditor::handleAttributes(const PropertyAttributes &aAttributes)
+{
+    ui->valueSpinBox->setMinimum(aAttributes.doubleValue("min", -DBL_MAX));
+    ui->valueSpinBox->setMaximum(aAttributes.doubleValue("max", DBL_MAX));
+    ui->valueSpinBox->setDecimals(aAttributes.intValue("decimals", 6));
+}
+
 void DoubleEditor::on_valueSpinBox_valueChanged(double aValue)
 {
     modificationDone(aValue);

@@ -18,6 +18,7 @@ public:
     void setIcon(const QIcon &aIcon);
     void setValue(const double &aValue);
     void setValue(const float &aValue);
+    void handleAttributes(const PropertyAttributes &aAttributes);
 
 protected:
     void putFocus();

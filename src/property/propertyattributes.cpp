@@ -25,7 +25,7 @@ void PropertyAttributes::fromString(const QString &aString)
     }
 }
 
-int PropertyAttributes::intValue(const QString &aKey, const int aDefaultValue)
+int PropertyAttributes::intValue(const QString &aKey, const int aDefaultValue) const
 {
     QString aValue=value(aKey);
 
@@ -41,7 +41,7 @@ int PropertyAttributes::intValue(const QString &aKey, const int aDefaultValue)
     return aDefaultValue;
 }
 
-double PropertyAttributes::doubleValue(const QString &aKey, const double aDefaultValue)
+double PropertyAttributes::doubleValue(const QString &aKey, const double aDefaultValue) const
 {
     QString aValue=value(aKey);
 

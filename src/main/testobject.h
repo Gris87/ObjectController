@@ -87,9 +87,15 @@ public:
     Q_PROPERTY(void*             Void          READ getVoid)
     Q_PROPERTY(QObject*          Object        READ getObject)
 
-    Q_CLASSINFO("Double attributes", "min      : -2.65 ;"
-                                     "max      :  5.34 ;"
-                                     "decimals :     2 ;")
+    // ----------------------------------------------------------------------------------------------------
+
+    Q_CLASSINFO("Float attributes", "min      :      0 ;"
+                                    "max      :  30.73 ;"
+                                    "decimals :      3 ;")
+
+    Q_CLASSINFO("Double attributes", "min      : -20.65 ;"
+                                     "max      :  54.34 ;"
+                                     "decimals :      5 ;")
 
     // ----------------------------------------------------------------------------------------------------
 

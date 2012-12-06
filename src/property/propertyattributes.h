@@ -10,8 +10,8 @@ public:
 
     void fromString(const QString &aString);
 
-    int intValue(const QString &aKey, const int aDefaultValue=0);
-    double doubleValue(const QString &aKey, const double aDefaultValue=0);
+    int intValue(const QString &aKey, const int aDefaultValue=0) const;
+    double doubleValue(const QString &aKey, const double aDefaultValue=0) const;
 };
 
 #endif // PROPERTYATTRIBUTES_H
