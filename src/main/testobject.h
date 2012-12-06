@@ -24,7 +24,7 @@ class TestObject : public QObject
 {
     Q_OBJECT
 public:
-    Q_PROPERTY(TestEnumeration   Enumeration   READ getEnumeration   WRITE setEnumeration)    
+    Q_PROPERTY(TestEnumeration   Enumeration   READ getEnumeration   WRITE setEnumeration)
     Q_PROPERTY(TestFlags         Flags         READ getFlags         WRITE setFlags)
     Q_PROPERTY(QString           StringCombo   READ getStringCombo   WRITE setStringCombo)
     Q_PROPERTY(bool              Bool          READ getBool          WRITE setBool)
@@ -87,9 +87,13 @@ public:
     Q_PROPERTY(void*             Void          READ getVoid)
     Q_PROPERTY(QObject*          Object        READ getObject)
 
+    Q_CLASSINFO("Double attributes", "min      : -2.65 ;"
+                                     "max      :  5.34 ;"
+                                     "decimals :     2 ;")
+
     // ----------------------------------------------------------------------------------------------------
 
-    explicit TestObject(QObject *parent = 0);    
+    explicit TestObject(QObject *parent = 0);
 
     Q_ENUMS(TestEnumeration)
     enum TestEnumeration

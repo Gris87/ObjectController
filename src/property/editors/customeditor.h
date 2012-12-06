@@ -6,6 +6,8 @@
 #include <QVariant>
 #include <QTimer>
 
+#include "../propertyattributes.h"
+
 #define SET_ICON(aIcon) \
     if (aIcon.isNull()) \
     { \
@@ -26,7 +28,7 @@ public:
     ~CustomEditor();
 
     virtual void setIcon(const QIcon &aIcon);
-    virtual void handleAttributes(const QMap<QString, QString> &aAttributes);
+    virtual void handleAttributes(const PropertyAttributes &aAttributes);
 
 protected:
     bool mCanEmitValueChangedSignal;
@@ -37,7 +39,7 @@ protected:
     void mousePressEvent(QMouseEvent *event);
 
     virtual void putFocus();
-    virtual void selectText();    
+    virtual void selectText();
     void modificationDone(const QVariant &aNewValue);
 
 private slots:

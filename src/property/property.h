@@ -7,6 +7,7 @@
 #include <QColor>
 
 #include "delegates/customdelegate.h"
+#include "propertyattributes.h"
 
 class PropertyTreeWidgetItem;
 
@@ -23,7 +24,7 @@ public:
 
     void update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects);
 
-    QMap<QString, QString> attributes() const;
+    PropertyAttributes attributes() const;
     QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
 
     // -------------------------------------------------------------------------------------
@@ -40,6 +41,7 @@ public:
 protected:
     const QMetaObject *mPropertyObject;
     QMetaProperty      mMetaProperty;
+    PropertyAttributes mAttributes;
     QString            mName;
     QColor             mBackgroundColor;
     bool               mIsWritable;

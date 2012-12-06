@@ -24,7 +24,14 @@ Property::Property(const QMetaObject *aPropertyObject, const QMetaProperty &aMet
     mName=mMetaProperty.name();
     mIsWritable=mMetaProperty.isWritable();
 
-    // TODO: Support attributes for property
+
+
+    int index=mPropertyObject->indexOfClassInfo(QString(mName+" attributes").toLatin1());
+
+    if (index>=0)
+    {
+        mAttributes.fromString(mPropertyObject->classInfo(index).value());
+    }
 }
 
 bool Property::equals(const Property *aProperty)
@@ -85,10 +92,9 @@ void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects
     setPropertiesForItem(aValue, aFirstValue, aItem);
 }
 
-QMap<QString, QString> Property::attributes() const
+PropertyAttributes Property::attributes() const
 {
-    QMap<QString, QString> res;
-    return res;
+    return mAttributes;
 }
 
 void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem)
