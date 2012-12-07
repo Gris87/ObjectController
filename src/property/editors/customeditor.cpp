@@ -69,7 +69,7 @@ void CustomEditor::setIcon(const QIcon &/*aIcon*/)
     // Nothing
 }
 
-void CustomEditor::handleAttributes(const PropertyAttributes &/*aAttributes*/)
+void CustomEditor::handleAttributes(const PropertyAttributes * /*aAttributes*/)
 {
     // Nothing
 }

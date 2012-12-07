@@ -20,7 +20,7 @@ public:
     void setIcon(const QIcon &aIcon);
     void setValue(const QRectF &aValue);
     void updateUI();
-    void handleAttributes(const PropertyAttributes &aAttributes);
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();

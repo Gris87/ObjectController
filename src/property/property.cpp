@@ -93,9 +93,9 @@ void Property::update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects
     setPropertiesForItem(aValue, aFirstValue, aItem);
 }
 
-PropertyAttributes Property::attributes() const
+const PropertyAttributes* Property::attributes() const
 {
-    return mAttributes;
+    return &mAttributes;
 }
 
 void Property::setPropertiesForItem(const QVariant &aValue, const QVariant &aFirstValue, PropertyTreeWidgetItem *aParentItem)

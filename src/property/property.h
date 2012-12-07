@@ -24,7 +24,7 @@ public:
 
     void update(PropertyTreeWidgetItem *aItem, const QObjectList &aObjects);
 
-    PropertyAttributes attributes() const;
+    const PropertyAttributes *attributes() const;
     QString valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem);
 
     // -------------------------------------------------------------------------------------

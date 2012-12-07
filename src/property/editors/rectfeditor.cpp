@@ -54,9 +54,9 @@ void RectFEditor::updateUI()
                           );
 }
 
-void RectFEditor::handleAttributes(const PropertyAttributes &aAttributes)
+void RectFEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
-    int aDecimals=aAttributes.intValue("decimals", mDecimals);
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
 
     if (mDecimals!=aDecimals)
     {

@@ -42,17 +42,17 @@ void DoubleEditor::setValue(const float &aValue)
     ui->valueSpinBox->setMaximum(FLT_MAX);
 }
 
-void DoubleEditor::handleAttributes(const PropertyAttributes &aAttributes)
+void DoubleEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
-    ui->valueSpinBox->setToolTip(    aAttributes.stringValue("toolTip",     ui->valueSpinBox->toolTip()));
-    ui->valueSpinBox->setWrapping(   aAttributes.boolValue(  "wrapping",    ui->valueSpinBox->wrapping()));
-    ui->valueSpinBox->setAccelerated(aAttributes.boolValue(  "accelerated", ui->valueSpinBox->isAccelerated()));
-    ui->valueSpinBox->setPrefix(     aAttributes.stringValue("prefix",      ui->valueSpinBox->prefix()));
-    ui->valueSpinBox->setSuffix(     aAttributes.stringValue("suffix",      ui->valueSpinBox->suffix()));
-    ui->valueSpinBox->setMinimum(    aAttributes.doubleValue("minValue",    ui->valueSpinBox->minimum()));
-    ui->valueSpinBox->setMaximum(    aAttributes.doubleValue("maxValue",    ui->valueSpinBox->maximum()));
-    ui->valueSpinBox->setDecimals(   aAttributes.intValue(   "decimals",    ui->valueSpinBox->decimals()));
-    ui->valueSpinBox->setSingleStep( aAttributes.doubleValue("step",        ui->valueSpinBox->singleStep()));
+    ui->valueSpinBox->setToolTip(    aAttributes->stringValue("toolTip",     ui->valueSpinBox->toolTip()));
+    ui->valueSpinBox->setWrapping(   aAttributes->boolValue(  "wrapping",    ui->valueSpinBox->wrapping()));
+    ui->valueSpinBox->setAccelerated(aAttributes->boolValue(  "accelerated", ui->valueSpinBox->isAccelerated()));
+    ui->valueSpinBox->setPrefix(     aAttributes->stringValue("prefix",      ui->valueSpinBox->prefix()));
+    ui->valueSpinBox->setSuffix(     aAttributes->stringValue("suffix",      ui->valueSpinBox->suffix()));
+    ui->valueSpinBox->setMinimum(    aAttributes->doubleValue("minValue",    ui->valueSpinBox->minimum()));
+    ui->valueSpinBox->setMaximum(    aAttributes->doubleValue("maxValue",    ui->valueSpinBox->maximum()));
+    ui->valueSpinBox->setDecimals(   aAttributes->intValue(   "decimals",    ui->valueSpinBox->decimals()));
+    ui->valueSpinBox->setSingleStep( aAttributes->doubleValue("step",        ui->valueSpinBox->singleStep()));
 }
 
 void DoubleEditor::on_valueSpinBox_valueChanged(double aValue)

@@ -28,7 +28,7 @@ public:
     ~CustomEditor();
 
     virtual void setIcon(const QIcon &aIcon);
-    virtual void handleAttributes(const PropertyAttributes &aAttributes);
+    virtual void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     bool mCanEmitValueChangedSignal;

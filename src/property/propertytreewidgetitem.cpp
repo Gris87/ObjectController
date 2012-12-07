@@ -73,7 +73,7 @@ void PropertyTreeWidgetItem::initToolTip()
 
     if (aTopProperty)
     {
-        QString aToolTip=aTopProperty->attributes().stringValue("toolTip");
+        QString aToolTip=aTopProperty->attributes()->stringValue("toolTip");
 
         setToolTip(0, aToolTip);
         setToolTip(1, aToolTip);

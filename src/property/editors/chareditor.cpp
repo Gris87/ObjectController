@@ -35,13 +35,13 @@ void CharEditor::setValue(const QChar &aValue)
     ui->valueEdit->setText(aValue);
 }
 
-void CharEditor::handleAttributes(const PropertyAttributes &aAttributes)
+void CharEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
 
-    ui->valueEdit->setInputMask(      aAttributes.stringValue("inputMask",       ui->valueEdit->inputMask()));
-    QString aMode =                   aAttributes.stringValue("echoMode",        QString::fromLatin1(aEchoModeEnum.valueToKey(ui->valueEdit->echoMode())));
-    ui->valueEdit->setPlaceholderText(aAttributes.stringValue("placeholderText", ui->valueEdit->placeholderText()));
+    ui->valueEdit->setInputMask(      aAttributes->stringValue("inputMask",       ui->valueEdit->inputMask()));
+    QString aMode =                   aAttributes->stringValue("echoMode",        QString::fromLatin1(aEchoModeEnum.valueToKey(ui->valueEdit->echoMode())));
+    ui->valueEdit->setPlaceholderText(aAttributes->stringValue("placeholderText", ui->valueEdit->placeholderText()));
 
     for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
     {
