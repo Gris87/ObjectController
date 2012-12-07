@@ -5,11 +5,22 @@
 
 #include "../widgets/stringframe.h"
 
-StringListEditDialog::StringListEditDialog(QStringList aValue, QWidget *parent) :
+StringListEditDialog::StringListEditDialog(QStringList aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StringListEditDialog)
 {
     ui->setupUi(this);
+
+    minCount=0;
+    maxCount=INT_MAX;
+
+    mAttributes=aAttributes;
+
+    if (aAttributes)
+    {
+        minCount=aAttributes->intValue("minCount", minCount);
+        maxCount=aAttributes->intValue("maxCount", maxCount);
+    }
 
     setList(aValue);
 }
@@ -54,7 +65,12 @@ void StringListEditDialog::on_cancelButton_clicked()
 
 void StringListEditDialog::on_addButton_clicked()
 {
-    StringFrame *aFrame=new StringFrame(this);
+    if (ui->itemsLayout->count()>=maxCount)
+    {
+        return;
+    }
+
+    StringFrame *aFrame=new StringFrame(mAttributes, this);
 
     if (ui->itemsLayout->count()==0)
     {
@@ -121,6 +137,11 @@ void StringListEditDialog::itemDown()
 
 void StringListEditDialog::itemDelete()
 {
+    if (ui->itemsLayout->count()<=minCount)
+    {
+        return;
+    }
+
     QWidget *aWidget=(QWidget *)sender();
 
     if (ui->itemsLayout->count()>1)

@@ -111,6 +111,7 @@ void StringEditor::handleAttributes(const PropertyAttributes *aAttributes)
     QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
 
     ui->valueEdit->setInputMask(      aAttributes->stringValue("inputMask",       ui->valueEdit->inputMask()));
+    ui->valueEdit->setMaxLength(      aAttributes->intValue(   "maxLength",       ui->valueEdit->maxLength()));
     QString aMode =                   aAttributes->stringValue("echoMode",        QString::fromLatin1(aEchoModeEnum.valueToKey(ui->valueEdit->echoMode())));
     ui->valueEdit->setPlaceholderText(aAttributes->stringValue("placeholderText", ui->valueEdit->placeholderText()));
 

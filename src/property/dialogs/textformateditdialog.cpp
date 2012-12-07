@@ -1064,7 +1064,7 @@ void TextFormatEditDialog::on_charAnchorHrefLineEdit_textEdited(const QString &a
 
 void TextFormatEditDialog::on_charAnchorNamesButton_clicked()
 {
-    StringListEditDialog dialog(((QTextCharFormat *)&mTextFormat)->anchorNames(), this);
+    StringListEditDialog dialog(((QTextCharFormat *)&mTextFormat)->anchorNames(), 0, this);
 
     if (dialog.exec())
     {

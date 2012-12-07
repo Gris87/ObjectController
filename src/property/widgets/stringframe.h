@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
     class StringFrame;
 }
@@ -12,8 +14,10 @@ class StringFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit StringFrame(QWidget *parent = 0);
+    explicit StringFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~StringFrame();
+
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
     void setUpEnabled(bool aEnabled);
     void setDownEnabled(bool aEnabled);

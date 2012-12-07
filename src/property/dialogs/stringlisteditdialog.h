@@ -5,6 +5,8 @@
 
 #include <QStringList>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class StringListEditDialog;
 }
@@ -14,7 +16,7 @@ class StringListEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit StringListEditDialog(QStringList aValue, QWidget *parent = 0);
+    explicit StringListEditDialog(QStringList aValue, const PropertyAttributes *aAttributes, QWidget *parent=0);
     ~StringListEditDialog();
 
     QStringList resultValue() const;
@@ -22,6 +24,9 @@ public:
 
 private:
     Ui::StringListEditDialog *ui;
+    const PropertyAttributes *mAttributes;
+    int minCount;
+    int maxCount;
 
 private slots:
     void itemUp();

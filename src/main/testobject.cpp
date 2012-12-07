@@ -32,7 +32,7 @@ TestObject::TestObject(QObject *parent) :
 
     mStringList << "Ann" << "John" << "Mary";
 
-    mString="It is a string";
+    mString="My_Password";
 
     mByteArray=QString("It is a test object. Try to edit it...").toUtf8();
 

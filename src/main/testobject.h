@@ -235,15 +235,17 @@ public:
                                           "delay           : 100                     ;"
                                           "minCount        : 1                       ;"
                                           "maxCount        : 5                       ;"
-                                       // "inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
-                                       // "echoMode        : Password                ;"
+                                        //"inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "maxLength       : 10                      ;"
+                                        //"echoMode        : Password                ;"
                                           "placeholderText : \"Insert name\"         ;")
 
     Q_CLASSINFO("String attributes",      "toolTip         : \"It is a String\"      ;"
                                           "delay           : 100                     ;"
-                                          "inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                        //"inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "maxLength       : 16                      ;"
                                           "echoMode        : Password                ;"
-                                          "placeholderText : \"Insert sentence\"     ;")
+                                          "placeholderText : \"Insert password\"     ;")
 
     Q_CLASSINFO("Rect attributes",        "toolTip         : \"It is a Rect\"        ;"
                                           "delay           : 100                     ;"

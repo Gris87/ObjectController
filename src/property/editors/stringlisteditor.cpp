@@ -55,9 +55,15 @@ void StringListEditor::setValue(const QStringList &aValue)
     ui->valueEdit->setText(res);
 }
 
+void StringListEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+}
+
 void StringListEditor::on_editButton_clicked()
 {
-    StringListEditDialog dialog(mValue, this);
+    StringListEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {
