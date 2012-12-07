@@ -32,6 +32,7 @@ public:
 
 protected:
     bool mCanEmitValueChangedSignal;
+    int mDelay;
     QTimer mModificationTimer;
     QVariant mNewValue;
 

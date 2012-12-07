@@ -86,6 +86,8 @@ void IntegerEditor::setValue(const quint64 &aValue)
 
 void IntegerEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
+    CustomEditor::handleAttributes(aAttributes);
+
     ui->valueSpinBox->setToolTip(    aAttributes->stringValue("toolTip",     ui->valueSpinBox->toolTip()));
     ui->valueSpinBox->setWrapping(   aAttributes->boolValue(  "wrapping",    ui->valueSpinBox->wrapping()));
     ui->valueSpinBox->setAccelerated(aAttributes->boolValue(  "accelerated", ui->valueSpinBox->isAccelerated()));

@@ -102,6 +102,8 @@ void StringEditor::setValue(const QStringList &aValues, const QRegExp &aValue)
 
 void StringEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
+    CustomEditor::handleAttributes(aAttributes);
+
     ui->valueComboBox->setMaxVisibleItems(aAttributes->intValue("maxVisibleItems", ui->valueComboBox->maxVisibleItems()));
 
 

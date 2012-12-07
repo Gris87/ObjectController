@@ -44,6 +44,8 @@ void DoubleEditor::setValue(const float &aValue)
 
 void DoubleEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
+    CustomEditor::handleAttributes(aAttributes);
+
     ui->valueSpinBox->setToolTip(    aAttributes->stringValue("toolTip",     ui->valueSpinBox->toolTip()));
     ui->valueSpinBox->setWrapping(   aAttributes->boolValue(  "wrapping",    ui->valueSpinBox->wrapping()));
     ui->valueSpinBox->setAccelerated(aAttributes->boolValue(  "accelerated", ui->valueSpinBox->isAccelerated()));

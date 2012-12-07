@@ -4,6 +4,7 @@ CustomEditor::CustomEditor(QWidget *parent) :
     QWidget(parent)
 {
     mCanEmitValueChangedSignal=false;
+    mDelay=100;
 
     setAutoFillBackground(true);
 
@@ -46,7 +47,7 @@ void CustomEditor::modificationDone(const QVariant &aNewValue)
         mNewValue=aNewValue;
 
         mModificationTimer.stop();
-        mModificationTimer.start(100);
+        mModificationTimer.start(mDelay);
     }
 }
 
@@ -69,7 +70,7 @@ void CustomEditor::setIcon(const QIcon &/*aIcon*/)
     // Nothing
 }
 
-void CustomEditor::handleAttributes(const PropertyAttributes * /*aAttributes*/)
+void CustomEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
-    // Nothing
+    mDelay=aAttributes->intValue("delay", mDelay);
 }

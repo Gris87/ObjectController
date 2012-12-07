@@ -37,6 +37,8 @@ void CharEditor::setValue(const QChar &aValue)
 
 void CharEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
+    CustomEditor::handleAttributes(aAttributes);
+
     QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
 
     ui->valueEdit->setInputMask(      aAttributes->stringValue("inputMask",       ui->valueEdit->inputMask()));

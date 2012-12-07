@@ -54,6 +54,8 @@ void EnumEditor::setValue(QMetaEnum *aMetaEnum, const int &aValue)
 
 void EnumEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
+    CustomEditor::handleAttributes(aAttributes);
+
     ui->valueComboBox->setMaxVisibleItems(aAttributes->intValue("maxVisibleItems", ui->valueComboBox->maxVisibleItems()));
 }
 
