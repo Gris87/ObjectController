@@ -215,6 +215,36 @@ public:
                                           "decimals        : 3                       ;"
                                           "step            : 0.1                     ;")
 
+    Q_CLASSINFO("Map attributes",         "toolTip         : \"It is a Map\"         ;"
+                                        //"wrapping        : false                   ;"
+                                        //"accelerated     : false                   ;"
+                                        //"prefix          : \"\"                    ;"
+                                          "suffix          : \" book(s)\"            ;"
+                                          "minValue        : 0                       ;"
+                                          "maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("List attributes",        "toolTip         : \"It is a List\"        ;"
+                                        //"wrapping        : false                   ;"
+                                        //"accelerated     : false                   ;"
+                                        //"prefix          : \"\"                    ;"
+                                          "suffix          : \" PC(s)\"              ;"
+                                          "minValue        : 0                       ;"
+                                          "maxValue        : 10                      ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("StringList attributes",  "toolTip         : \"It is a StringList\"  ;"
+                                          "minCount        : 1                       ;"
+                                          "maxCount        : 5                       ;"
+                                       // "inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                       // "echoMode        : Password                ;"
+                                          "placeholderText : \"Insert name\"         ;")
+
+    Q_CLASSINFO("String attributes",      "toolTip         : \"It is a String\"      ;"
+                                          "inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "echoMode        : Password                ;"
+                                          "placeholderText : \"Insert sentence\"     ;")
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);
