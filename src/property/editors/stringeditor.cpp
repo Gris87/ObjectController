@@ -99,6 +99,11 @@ void StringEditor::setValue(const QStringList &aValues, const QRegExp &aValue)
     mDataType=REGEXP;
 }
 
+void StringEditor::handleAttributes(const PropertyAttributes &aAttributes)
+{
+    ui->valueComboBox->setMaxVisibleItems(aAttributes.intValue("maxVisibleItems", ui->valueComboBox->maxVisibleItems()));
+}
+
 void StringEditor::on_valueEdit_textEdited(const QString &aValue)
 {
     switch (mDataType)

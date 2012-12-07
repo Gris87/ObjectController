@@ -120,6 +120,9 @@ bool TestObject::valuesForProperty(QString aPropertyName, QStringList &aValues)
         aValues.append("Option 1");
         aValues.append("Option 2");
         aValues.append("Option 3");
+        aValues.append("Option 4");
+        aValues.append("Option 5");
+        aValues.append("Option 6");
 
         return true;
     }

@@ -89,56 +89,131 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
-    Q_CLASSINFO("Enumeration attributes", "toolTip         : \"It is a TestEnumeration\" ;"
-                                          "maxVisibleItems : 5                           ;")
+    Q_CLASSINFO("Enumeration attributes", "toolTip         : \"It is a Enumeration\" ;"
+                                          "maxVisibleItems : 5                       ;")
 
-    Q_CLASSINFO("Int32 attributes", "minValue    : 0                  ;"
-                                    "maxValue    : 100                ;"
-                                    "toolTip     : \"It is a qint32\" ;"
-                                    "wrapping    : true               ;"
-                                    "accelerated : true               ;"
-                                    "prefix      : \"per \"           ;"
-                                    "suffix      : \" item(s)\"       ;"
-                                    "step        : 2                  ;")
+    Q_CLASSINFO("Flags attributes",       "toolTip         : \"It is a Flags\"       ;")
 
-    Q_CLASSINFO("Float attributes", "minValue    : 0                 ;"
-                                    "maxValue    : 30.73             ;"
-                                    "decimals    : 3                 ;"
-                                    "toolTip     : \"It is a float\" ;"
-                                    "wrapping    : true              ;"
-                                    "accelerated : false             ;"
-                                    "prefix      : \"I have \"       ;"
-                                    "suffix      : \" apple(s)\"     ;"
-                                    "step        : 0.1               ;")
+    Q_CLASSINFO("StringCombo attributes", "toolTip         : \"It is a StringCombo\" ;"
+                                          "maxVisibleItems : 5                       ;")
 
-    Q_CLASSINFO("Double attributes", "minValue    : -20.65             ;"
-                                     "maxValue    : 54.34              ;"
-                                     "decimals    : 5                  ;"
-                                     "toolTip     : \"It is a double\" ;"
-                                     "wrapping    : false              ;"
-                                     "accelerated : true               ;"
-                                     "prefix      : \"There is no \"   ;"
-                                     "suffix      : \" human(s)\"      ;"
-                                     "step        : 0.03               ;")
+    Q_CLASSINFO("Bool attributes",        "toolTip         : \"It is a Bool\"        ;")
 
-    Q_CLASSINFO("Rect attributes", "minValue    : 0                 ;"
-                                   "maxValue    : 2000              ;"
-                                   "toolTip     : \"It is a QRect\" ;"
-                                 //"wrapping    : false             ;"
-                                 //"accelerated : false             ;"
-                                 //"prefix      : \"\"              ;"
-                                   "suffix      : \" px\"           ;"
-                                   "step        : 10                ;")
+    Q_CLASSINFO("Int8 attributes",        "toolTip         : \"It is a Int8\"        ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
 
-    Q_CLASSINFO("RectF attributes", "minValue    : 0                  ;"
-                                    "maxValue    : 2000               ;"
-                                    "decimals    : 3                  ;"
-                                    "toolTip     : \"It is a QRectF\" ;"
-                                  //"wrapping    : false              ;"
-                                  //"accelerated : false              ;"
-                                  //"prefix      : \"\"               ;"
-                                    "suffix      : \" px\"            ;"
-                                    "step        : 0.1                ;")
+    Q_CLASSINFO("UInt8 attributes",       "toolTip         : \"It is a UInt8\"       ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("Int16 attributes",       "toolTip         : \"It is a Int16\"       ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("UInt16 attributes",      "toolTip         : \"It is a UInt16\"      ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("Int32 attributes",       "toolTip         : \"It is a Int32\"       ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("UInt32 attributes",      "toolTip         : \"It is a UInt32\"      ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("Int64 attributes",       "toolTip         : \"It is a Int64\"       ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("UInt64 attributes",      "toolTip         : \"It is a UInt64\"      ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"per \"                ;"
+                                          "suffix          : \" item(s)\"            ;"
+                                        //"minValue        : 0                       ;"
+                                        //"maxValue        : 100                     ;"
+                                          "step            : 1                       ;")
+
+    Q_CLASSINFO("Float attributes",       "toolTip         : \"It is a Float\"       ;"
+                                          "wrapping        : true                    ;"
+                                          "accelerated     : false                   ;"
+                                          "prefix          : \"I have \"             ;"
+                                          "suffix          : \" apple(s)\"           ;"
+                                          "minValue        : 0                       ;"
+                                          "maxValue        : 30.73                   ;"
+                                          "decimals        : 3                       ;"
+                                          "step            : 0.1                     ;")
+
+    Q_CLASSINFO("Double attributes",      "toolTip         : \"It is a Double\"      ;"
+                                          "wrapping        : false                   ;"
+                                          "accelerated     : true                    ;"
+                                          "prefix          : \"There is no \"        ;"
+                                          "suffix          : \" human(s)\"           ;"
+                                          "minValue        : 0.05                    ;"
+                                          "maxValue        : 54.34                   ;"
+                                          "decimals        : 5                       ;"
+                                          "step            : 0.03                    ;")
+
+    Q_CLASSINFO("Char attributes",        "toolTip         : \"It is a Char\"        ;"
+                                          "inputMask       : >A!                     ;"
+                                          "echoMode        : Password                ;"
+                                          "placeholderText : \"Insert capital\"      ;")
+
+    Q_CLASSINFO("Rect attributes",        "toolTip         : \"It is a Rect\"        ;"
+                                        //"wrapping        : false                   ;"
+                                        //"accelerated     : false                   ;"
+                                        //"prefix          : \"\"                    ;"
+                                          "suffix          : \" px\"                 ;"
+                                          "minValue        : 0                       ;"
+                                          "maxValue        : 2000                    ;"
+                                          "step            : 10                      ;")
+
+    Q_CLASSINFO("RectF attributes",       "toolTip         : \"It is a RectF\"       ;"
+                                        //"wrapping        : false                   ;"
+                                        //"accelerated     : false                   ;"
+                                        //"prefix          : \"\"                    ;"
+                                          "suffix          : \" px\"                 ;"
+                                          "minValue        : 0                       ;"
+                                          "maxValue        : 2000                    ;"
+                                          "decimals        : 3                       ;"
+                                          "step            : 0.1                     ;")
 
     // ----------------------------------------------------------------------------------------------------
 
