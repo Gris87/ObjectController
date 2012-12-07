@@ -52,6 +52,11 @@ void EnumEditor::setValue(QMetaEnum *aMetaEnum, const int &aValue)
     ui->valueComboBox->setCurrentIndex(aIndex);
 }
 
+void EnumEditor::handleAttributes(const PropertyAttributes &aAttributes)
+{
+    ui->valueComboBox->setMaxVisibleItems(aAttributes.intValue("maxVisibleItems", ui->valueComboBox->maxVisibleItems()));
+}
+
 void EnumEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
 {
     for (int i=0; i<mMetaEnum->keyCount(); ++i)

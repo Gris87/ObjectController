@@ -89,16 +89,19 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
-    Q_CLASSINFO("Int32 attributes", //"minValue    :   0             ;"
-                                    //"maxValue    : 100             ;"
-                                      "toolTip     : \"It is a int\" ;"
-                                    //"wrapping    : true            ;"
-                                    //"accelerated : true            ;"
-                                      "prefix      : \"per \"        ;"
-                                      "suffix      : \" item(s)\"    ;"
-                                      "step        : 2               ;")
+    Q_CLASSINFO("Enumeration attributes", "toolTip         : \"It is a TestEnumeration\" ;"
+                                          "maxVisibleItems : 5                           ;")
 
-    Q_CLASSINFO("Float attributes", "minValue    :     0             ;"
+    Q_CLASSINFO("Int32 attributes", "minValue    : 0                  ;"
+                                    "maxValue    : 100                ;"
+                                    "toolTip     : \"It is a qint32\" ;"
+                                    "wrapping    : true               ;"
+                                    "accelerated : true               ;"
+                                    "prefix      : \"per \"           ;"
+                                    "suffix      : \" item(s)\"       ;"
+                                    "step        : 2                  ;")
+
+    Q_CLASSINFO("Float attributes", "minValue    : 0                 ;"
                                     "maxValue    : 30.73             ;"
                                     "decimals    : 3                 ;"
                                     "toolTip     : \"It is a float\" ;"
@@ -109,14 +112,33 @@ public:
                                     "step        : 0.1               ;")
 
     Q_CLASSINFO("Double attributes", "minValue    : -20.65             ;"
-                                     "maxValue    :  54.34             ;"
-                                     "decimals    :      5             ;"
+                                     "maxValue    : 54.34              ;"
+                                     "decimals    : 5                  ;"
                                      "toolTip     : \"It is a double\" ;"
                                      "wrapping    : false              ;"
-                                     "accelerated : reue               ;"
+                                     "accelerated : true               ;"
                                      "prefix      : \"There is no \"   ;"
                                      "suffix      : \" human(s)\"      ;"
                                      "step        : 0.03               ;")
+
+    Q_CLASSINFO("Rect attributes", "minValue    : 0                 ;"
+                                   "maxValue    : 2000              ;"
+                                   "toolTip     : \"It is a QRect\" ;"
+                                 //"wrapping    : false             ;"
+                                 //"accelerated : false             ;"
+                                 //"prefix      : \"\"              ;"
+                                   "suffix      : \" px\"           ;"
+                                   "step        : 10                ;")
+
+    Q_CLASSINFO("RectF attributes", "minValue    : 0                  ;"
+                                    "maxValue    : 2000               ;"
+                                    "decimals    : 3                  ;"
+                                    "toolTip     : \"It is a QRectF\" ;"
+                                  //"wrapping    : false              ;"
+                                  //"accelerated : false              ;"
+                                  //"prefix      : \"\"               ;"
+                                    "suffix      : \" px\"            ;"
+                                    "step        : 0.1                ;")
 
     // ----------------------------------------------------------------------------------------------------
 
@@ -127,7 +149,10 @@ public:
     {
         ENUM_ONE,
         ENUM_TWO,
-        ENUM_THREE
+        ENUM_THREE,
+        ENUM_FOUR,
+        ENUM_FIVE,
+        ENUM_SIX
     };
 
     Q_FLAGS(TestFlags)

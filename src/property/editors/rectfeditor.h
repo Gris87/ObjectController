@@ -19,6 +19,8 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QRectF &aValue);
+    void updateUI();
+    void handleAttributes(const PropertyAttributes &aAttributes);
 
 protected:
     void putFocus();
@@ -27,6 +29,7 @@ protected:
 private:
     Ui::RectFEditor *ui;
     QRectF mValue;
+    int mDecimals;
 
 private slots:
     void on_editButton_clicked();

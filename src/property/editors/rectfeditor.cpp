@@ -2,12 +2,15 @@
 #include "ui_rectfeditor.h"
 
 #include "../dialogs/rectfeditdialog.h"
+#include "../propertyutils.h"
 
 RectFEditor::RectFEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::RectFEditor)
 {
     ui->setupUi(this);
+
+    mDecimals=6;
 }
 
 RectFEditor::~RectFEditor()
@@ -33,20 +36,33 @@ void RectFEditor::setIcon(const QIcon &aIcon)
 void RectFEditor::setValue(const QRectF &aValue)
 {
     mValue=aValue;
+    updateUI();
+}
 
-
-
+void RectFEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "[("+
-                           QString::number(mValue.x())+
+                           doubleToString(mValue.x(), mDecimals)+
                            ", "+
-                           QString::number(mValue.y())+
+                           doubleToString(mValue.y(), mDecimals)+
                            "), "+
-                           QString::number(mValue.width())+
+                           doubleToString(mValue.width(), mDecimals)+
                            " x "+
-                           QString::number(mValue.height())+
+                           doubleToString(mValue.height(), mDecimals)+
                            "]"
                           );
+}
+
+void RectFEditor::handleAttributes(const PropertyAttributes &aAttributes)
+{
+    int aDecimals=aAttributes.intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
 }
 
 void RectFEditor::on_editButton_clicked()
