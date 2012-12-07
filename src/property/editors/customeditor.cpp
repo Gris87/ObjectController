@@ -73,4 +73,9 @@ void CustomEditor::setIcon(const QIcon &/*aIcon*/)
 void CustomEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     mDelay=aAttributes->intValue("delay", mDelay);
+
+    if (mDelay<0)
+    {
+        mDelay=0;
+    }
 }

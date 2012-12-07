@@ -39,6 +39,11 @@ void StringFrame::handleAttributes(const PropertyAttributes *aAttributes)
     }
 }
 
+void StringFrame::setDelEnabled(bool aEnabled)
+{
+    ui->delToolButton->setEnabled(aEnabled);
+}
+
 void StringFrame::setUpEnabled(bool aEnabled)
 {
     ui->upToolButton->setEnabled(aEnabled);

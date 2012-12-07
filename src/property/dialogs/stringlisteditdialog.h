@@ -28,6 +28,8 @@ private:
     int minCount;
     int maxCount;
 
+    void updateCountButtons();
+
 private slots:
     void itemUp();
     void itemDown();

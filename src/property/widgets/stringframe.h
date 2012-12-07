@@ -19,6 +19,7 @@ public:
 
     void handleAttributes(const PropertyAttributes *aAttributes);
 
+    void setDelEnabled(bool aEnabled);
     void setUpEnabled(bool aEnabled);
     void setDownEnabled(bool aEnabled);
 

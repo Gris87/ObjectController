@@ -20,6 +20,16 @@ StringListEditDialog::StringListEditDialog(QStringList aValue, const PropertyAtt
     {
         minCount=aAttributes->intValue("minCount", minCount);
         maxCount=aAttributes->intValue("maxCount", maxCount);
+
+        if (minCount<0)
+        {
+            minCount=0;
+        }
+
+        if (maxCount<minCount)
+        {
+            maxCount=minCount;
+        }
     }
 
     setList(aValue);
@@ -44,12 +54,54 @@ QStringList StringListEditDialog::resultValue() const
 
 void StringListEditDialog::setList(const QStringList &aValue)
 {
-    on_clearButton_clicked();
+    while (ui->itemsLayout->count()>0)
+    {
+        delete ui->itemsLayout->takeAt(0)->widget();
+    }
 
     for (int i=0; i<aValue.length(); ++i)
     {
         on_addButton_clicked();
         ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setValue(aValue.at(i));
+    }
+
+    updateCountButtons();
+}
+
+void StringListEditDialog::updateCountButtons()
+{
+    if (minCount>0)
+    {
+        if (ui->itemsLayout->count()<=minCount)
+        {
+            for (int i=0; i<ui->itemsLayout->count(); ++i)
+            {
+                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(false);
+            }
+
+            ui->clearButton->setEnabled(false);
+        }
+        else
+        {
+            for (int i=0; i<ui->itemsLayout->count(); ++i)
+            {
+                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(true);
+            }
+
+            ui->clearButton->setEnabled(true);
+        }
+    }
+
+    if (maxCount!=INT_MAX)
+    {
+        if (ui->itemsLayout->count()>=maxCount)
+        {
+            ui->addButton->setEnabled(false);
+        }
+        else
+        {
+            ui->addButton->setEnabled(true);
+        }
     }
 }
 
@@ -65,11 +117,6 @@ void StringListEditDialog::on_cancelButton_clicked()
 
 void StringListEditDialog::on_addButton_clicked()
 {
-    if (ui->itemsLayout->count()>=maxCount)
-    {
-        return;
-    }
-
     StringFrame *aFrame=new StringFrame(mAttributes, this);
 
     if (ui->itemsLayout->count()==0)
@@ -89,6 +136,8 @@ void StringListEditDialog::on_addButton_clicked()
 
     ui->itemsLayout->addWidget(aFrame);
     ui->mainScrollArea->verticalScrollBar()->setValue(ui->mainScrollArea->verticalScrollBar()->maximum());
+
+    updateCountButtons();
 }
 
 void StringListEditDialog::itemUp()
@@ -137,11 +186,6 @@ void StringListEditDialog::itemDown()
 
 void StringListEditDialog::itemDelete()
 {
-    if (ui->itemsLayout->count()<=minCount)
-    {
-        return;
-    }
-
     QWidget *aWidget=(QWidget *)sender();
 
     if (ui->itemsLayout->count()>1)
@@ -160,6 +204,8 @@ void StringListEditDialog::itemDelete()
     }
 
     delete aWidget;
+
+    updateCountButtons();
 }
 
 void StringListEditDialog::on_sortButton_clicked()
@@ -171,8 +217,15 @@ void StringListEditDialog::on_sortButton_clicked()
 
 void StringListEditDialog::on_clearButton_clicked()
 {
-    while (ui->itemsLayout->count()>0)
+    while (ui->itemsLayout->count()>minCount)
     {
         delete ui->itemsLayout->takeAt(0)->widget();
     }
+
+    if (ui->itemsLayout->count()>0)
+    {
+        ((StringFrame *)ui->itemsLayout->itemAt(0)->widget())->setUpEnabled(false);
+    }
+
+    updateCountButtons();
 }
