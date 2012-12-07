@@ -19,6 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QByteArray &aValue);
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();
@@ -27,6 +28,7 @@ protected:
 private:
     Ui::ByteArrayEditor *ui;
     QByteArray mValue;
+    const PropertyAttributes *mAttributes;
 
 private slots:
     void on_editButton_clicked();

@@ -1,7 +1,9 @@
 #include "bitarrayeditdialog.h"
 #include "ui_bitarrayeditdialog.h"
 
-BitArrayEditDialog::BitArrayEditDialog(QBitArray aValue, QWidget *parent) :
+#include "../propertyutils.h"
+
+BitArrayEditDialog::BitArrayEditDialog(QBitArray aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BitArrayEditDialog)
 {
@@ -13,6 +15,8 @@ BitArrayEditDialog::BitArrayEditDialog(QBitArray aValue, QWidget *parent) :
     QPalette aPalette=mBitEditor->palette();
     aPalette.setColor(QPalette::AlternateBase, QColor(10, 200, 90));
     mBitEditor->setPalette(aPalette);
+
+    applyAttributesToPalette(mBitEditor, aAttributes);
 
     ui->mainLayout->insertWidget(0, mBitEditor);
 }

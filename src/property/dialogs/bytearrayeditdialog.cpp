@@ -1,7 +1,9 @@
 #include "bytearrayeditdialog.h"
 #include "ui_bytearrayeditdialog.h"
 
-ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, QWidget *parent) :
+#include "../propertyutils.h"
+
+ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ByteArrayEditDialog)
 {
@@ -13,6 +15,8 @@ ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, QWidget *parent) :
     QPalette aPalette=mHexEditor->palette();
     aPalette.setColor(QPalette::AlternateBase, QColor(10, 200, 90));
     mHexEditor->setPalette(aPalette);
+
+    applyAttributesToPalette(mHexEditor, aAttributes);
 
     ui->mainLayout->insertWidget(0, mHexEditor);
 }

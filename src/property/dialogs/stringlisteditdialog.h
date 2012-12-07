@@ -16,7 +16,7 @@ class StringListEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit StringListEditDialog(QStringList aValue, const PropertyAttributes *aAttributes, QWidget *parent=0);
+    explicit StringListEditDialog(QStringList aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~StringListEditDialog();
 
     QStringList resultValue() const;

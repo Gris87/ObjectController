@@ -6,6 +6,7 @@
 #include <QByteArray>
 
 #include "../widgets/hexeditor.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class ByteArrayEditDialog;
@@ -16,7 +17,7 @@ class ByteArrayEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ByteArrayEditDialog(QByteArray aValue, QWidget *parent = 0);
+    explicit ByteArrayEditDialog(QByteArray aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~ByteArrayEditDialog();
 
     QByteArray resultValue() const;

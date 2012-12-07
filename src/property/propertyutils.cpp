@@ -28,3 +28,8 @@ QString doubleToString(double aValue, int aDecimals)
 
     return QString::number(qRound(aValue*aMultiplier)/aMultiplier);
 }
+
+void applyAttributesToPalette(QWidget *aWidget, const PropertyAttributes *aAttributes)
+{
+
+}

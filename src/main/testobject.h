@@ -89,184 +89,199 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
-    Q_CLASSINFO("Enumeration attributes", "toolTip         : \"It is a Enumeration\" ;"
-                                          "delay           : 100                     ;"
-                                          "maxVisibleItems : 5                       ;")
+    Q_CLASSINFO("Enumeration attributes", "toolTip            : \"It is a Enumeration\" ;"
+                                          "delay              : 100                     ;"
+                                          "maxVisibleItems    : 5                       ;")
 
-    Q_CLASSINFO("Flags attributes",       "toolTip         : \"It is a Flags\"       ;"
-                                          "delay           : 100                     ;")
+    Q_CLASSINFO("Flags attributes",       "toolTip            : \"It is a Flags\"       ;"
+                                          "delay              : 100                     ;")
 
-    Q_CLASSINFO("StringCombo attributes", "toolTip         : \"It is a StringCombo\" ;"
-                                          "delay           : 100                     ;"
-                                          "maxVisibleItems : 5                       ;")
+    Q_CLASSINFO("StringCombo attributes", "toolTip            : \"It is a StringCombo\" ;"
+                                          "delay              : 100                     ;"
+                                          "maxVisibleItems    : 5                       ;")
 
-    Q_CLASSINFO("Bool attributes",        "toolTip         : \"It is a Bool\"        ;"
-                                          "delay           : 100                     ;")
+    Q_CLASSINFO("Bool attributes",        "toolTip            : \"It is a Bool\"        ;"
+                                          "delay              : 100                     ;")
 
-    Q_CLASSINFO("Int8 attributes",        "toolTip         : \"It is a Int8\"        ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("Int8 attributes",        "toolTip            : \"It is a Int8\"        ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("UInt8 attributes",       "toolTip         : \"It is a UInt8\"       ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("UInt8 attributes",       "toolTip            : \"It is a UInt8\"       ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("Int16 attributes",       "toolTip         : \"It is a Int16\"       ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("Int16 attributes",       "toolTip            : \"It is a Int16\"       ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("UInt16 attributes",      "toolTip         : \"It is a UInt16\"      ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("UInt16 attributes",      "toolTip            : \"It is a UInt16\"      ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("Int32 attributes",       "toolTip         : \"It is a Int32\"       ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("Int32 attributes",       "toolTip            : \"It is a Int32\"       ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("UInt32 attributes",      "toolTip         : \"It is a UInt32\"      ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("UInt32 attributes",      "toolTip            : \"It is a UInt32\"      ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("Int64 attributes",       "toolTip         : \"It is a Int64\"       ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("Int64 attributes",       "toolTip            : \"It is a Int64\"       ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("UInt64 attributes",      "toolTip         : \"It is a UInt64\"      ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"per \"                ;"
-                                          "suffix          : \" item(s)\"            ;"
-                                        //"minValue        : 0                       ;"
-                                        //"maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("UInt64 attributes",      "toolTip            : \"It is a UInt64\"      ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"per \"                ;"
+                                          "suffix             : \" item(s)\"            ;"
+                                        //"minValue           : 0                       ;"
+                                        //"maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("Float attributes",       "toolTip         : \"It is a Float\"       ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : true                    ;"
-                                          "accelerated     : false                   ;"
-                                          "prefix          : \"I have \"             ;"
-                                          "suffix          : \" apple(s)\"           ;"
-                                          "minValue        : 0                       ;"
-                                          "maxValue        : 30.73                   ;"
-                                          "decimals        : 3                       ;"
-                                          "step            : 0.1                     ;")
+    Q_CLASSINFO("Float attributes",       "toolTip            : \"It is a Float\"       ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : true                    ;"
+                                          "accelerated        : false                   ;"
+                                          "prefix             : \"I have \"             ;"
+                                          "suffix             : \" apple(s)\"           ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 30.73                   ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.1                     ;")
 
-    Q_CLASSINFO("Double attributes",      "toolTip         : \"It is a Double\"      ;"
-                                          "delay           : 100                     ;"
-                                          "wrapping        : false                   ;"
-                                          "accelerated     : true                    ;"
-                                          "prefix          : \"There is no \"        ;"
-                                          "suffix          : \" human(s)\"           ;"
-                                          "minValue        : 0.05                    ;"
-                                          "maxValue        : 54.34                   ;"
-                                          "decimals        : 5                       ;"
-                                          "step            : 0.03                    ;")
+    Q_CLASSINFO("Double attributes",      "toolTip            : \"It is a Double\"      ;"
+                                          "delay              : 100                     ;"
+                                          "wrapping           : false                   ;"
+                                          "accelerated        : true                    ;"
+                                          "prefix             : \"There is no \"        ;"
+                                          "suffix             : \" human(s)\"           ;"
+                                          "minValue           : 0.05                    ;"
+                                          "maxValue           : 54.34                   ;"
+                                          "decimals           : 5                       ;"
+                                          "step               : 0.03                    ;")
 
-    Q_CLASSINFO("Char attributes",        "toolTip         : \"It is a Char\"        ;"
-                                          "delay           : 100                     ;"
-                                          "inputMask       : >A!                     ;"
-                                          "echoMode        : Password                ;"
-                                          "placeholderText : \"Insert capital\"      ;")
+    Q_CLASSINFO("Char attributes",        "toolTip            : \"It is a Char\"        ;"
+                                          "delay              : 100                     ;"
+                                          "inputMask          : >A!                     ;"
+                                          "echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert capital\"      ;")
 
-    Q_CLASSINFO("Map attributes",         "toolTip         : \"It is a Map\"         ;"
-                                          "delay           : 100                     ;"
-                                        //"wrapping        : false                   ;"
-                                        //"accelerated     : false                   ;"
-                                        //"prefix          : \"\"                    ;"
-                                          "suffix          : \" book(s)\"            ;"
-                                          "minValue        : 0                       ;"
-                                          "maxValue        : 100                     ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("Map attributes",         "toolTip            : \"It is a Map\"         ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" book(s)\"            ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 100                     ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("List attributes",        "toolTip         : \"It is a List\"        ;"
-                                          "delay           : 100                     ;"
-                                        //"wrapping        : false                   ;"
-                                        //"accelerated     : false                   ;"
-                                        //"prefix          : \"\"                    ;"
-                                          "suffix          : \" PC(s)\"              ;"
-                                          "minValue        : 0                       ;"
-                                          "maxValue        : 10                      ;"
-                                          "step            : 1                       ;")
+    Q_CLASSINFO("List attributes",        "toolTip            : \"It is a List\"        ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" PC(s)\"              ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 10                      ;"
+                                          "step               : 1                       ;")
 
-    Q_CLASSINFO("StringList attributes",  "toolTip         : \"It is a StringList\"  ;"
-                                          "delay           : 100                     ;"
-                                          "minCount        : 1                       ;"
-                                          "maxCount        : 5                       ;"
-                                        //"inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
-                                          "maxLength       : 10                      ;"
-                                        //"echoMode        : Password                ;"
-                                          "placeholderText : \"Insert name\"         ;")
+    Q_CLASSINFO("StringList attributes",  "toolTip            : \"It is a StringList\"  ;"
+                                          "delay              : 100                     ;"
+                                          "minCount           : 1                       ;"
+                                          "maxCount           : 5                       ;"
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "maxLength          : 10                      ;"
+                                        //"echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert name\"         ;")
 
-    Q_CLASSINFO("String attributes",      "toolTip         : \"It is a String\"      ;"
-                                          "delay           : 100                     ;"
-                                        //"inputMask       : >A!AAAAAAAAAAAAAAAAAAAA ;"
-                                          "maxLength       : 16                      ;"
-                                          "echoMode        : Password                ;"
-                                          "placeholderText : \"Insert password\"     ;")
+    Q_CLASSINFO("String attributes",      "toolTip            : \"It is a String\"      ;"
+                                          "delay              : 100                     ;"
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "maxLength          : 16                      ;"
+                                          "echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert password\"     ;")
 
-    Q_CLASSINFO("Rect attributes",        "toolTip         : \"It is a Rect\"        ;"
-                                          "delay           : 100                     ;"
-                                        //"wrapping        : false                   ;"
-                                        //"accelerated     : false                   ;"
-                                        //"prefix          : \"\"                    ;"
-                                          "suffix          : \" px\"                 ;"
-                                          "minValue        : 0                       ;"
-                                          "maxValue        : 2000                    ;"
-                                          "step            : 10                      ;")
+    Q_CLASSINFO("String attributes",      "toolTip            : \"It is a String\"      ;"
+                                          "delay              : 100                     ;"
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "maxLength          : 16                      ;"
+                                          "echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert password\"     ;")
 
-    Q_CLASSINFO("RectF attributes",       "toolTip         : \"It is a RectF\"       ;"
-                                          "delay           : 100                     ;"
-                                        //"wrapping        : false                   ;"
-                                        //"accelerated     : false                   ;"
-                                        //"prefix          : \"\"                    ;"
-                                          "suffix          : \" px\"                 ;"
-                                          "minValue        : 0                       ;"
-                                          "maxValue        : 2000                    ;"
-                                          "decimals        : 3                       ;"
-                                          "step            : 0.1                     ;")
+    Q_CLASSINFO("ByteArray attributes",   "toolTip            : \"It is a ByteArray\"   ;"
+                                          "delay              : 100                     ;"
+                                          "alternateBaseColor : #FF0000FF               ;")
+
+    Q_CLASSINFO("BitArray attributes",    "toolTip            : \"It is a BitArray\"    ;"
+                                          "delay              : 100                     ;"
+                                          "alternateBaseColor : #FF0000FF               ;")
+
+    Q_CLASSINFO("Rect attributes",        "toolTip            : \"It is a Rect\"        ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "step               : 10                      ;")
+
+    Q_CLASSINFO("RectF attributes",       "toolTip            : \"It is a RectF\"       ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.1                     ;")
 
     // ----------------------------------------------------------------------------------------------------
 

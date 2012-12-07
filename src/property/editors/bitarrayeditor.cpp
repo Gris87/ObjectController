@@ -8,6 +8,7 @@ BitArrayEditor::BitArrayEditor(QWidget *parent) :
     ui(new Ui::BitArrayEditor)
 {
     ui->setupUi(this);
+    mAttributes=0;
 }
 
 BitArrayEditor::~BitArrayEditor()
@@ -44,9 +45,15 @@ void BitArrayEditor::setValue(const QBitArray &aValue)
     ui->valueEdit->setText(res);
 }
 
+void BitArrayEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+}
+
 void BitArrayEditor::on_editButton_clicked()
 {
-    BitArrayEditDialog dialog(mValue, this);
+    BitArrayEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

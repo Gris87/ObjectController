@@ -8,6 +8,7 @@ StringListEditor::StringListEditor(QWidget *parent) :
     ui(new Ui::StringListEditor)
 {
     ui->setupUi(this);
+    mAttributes=0;
 }
 
 StringListEditor::~StringListEditor()

@@ -8,6 +8,7 @@ ByteArrayEditor::ByteArrayEditor(QWidget *parent) :
     ui(new Ui::ByteArrayEditor)
 {
     ui->setupUi(this);
+    mAttributes=0;
 }
 
 ByteArrayEditor::~ByteArrayEditor()
@@ -37,9 +38,15 @@ void ByteArrayEditor::setValue(const QByteArray &aValue)
     ui->valueEdit->setText(mValue.toHex().toUpper());
 }
 
+void ByteArrayEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+}
+
 void ByteArrayEditor::on_editButton_clicked()
 {
-    ByteArrayEditDialog dialog(mValue, this);
+    ByteArrayEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

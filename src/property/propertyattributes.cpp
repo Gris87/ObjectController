@@ -90,3 +90,16 @@ QString PropertyAttributes::stringValue(const QString &aKey, const QString aDefa
 
     return aValue;
 }
+
+QColor PropertyAttributes::colorValue(const QString &aKey, const QColor aDefaultValue) const
+{
+    QString aValue=value(aKey, aDefaultValue.name());
+    QColor res(aValue);
+
+    if (res.isValid())
+    {
+        return res;
+    }
+
+    return aDefaultValue;
+}

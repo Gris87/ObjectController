@@ -3,6 +3,7 @@
 
 #include <QMap>
 #include <QString>
+#include <QColor>
 
 class PropertyAttributes: public QMap<QString, QString>
 {
@@ -15,6 +16,7 @@ public:
     int intValue(const QString &aKey, const int aDefaultValue=0) const;
     double doubleValue(const QString &aKey, const double aDefaultValue=0) const;
     QString stringValue(const QString &aKey, const QString aDefaultValue=QString()) const;
+    QColor colorValue(const QString &aKey, const QColor aDefaultValue=QColor()) const;
 };
 
 #endif // PROPERTYATTRIBUTES_H
