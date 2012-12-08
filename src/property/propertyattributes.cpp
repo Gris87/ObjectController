@@ -91,6 +91,32 @@ QString PropertyAttributes::stringValue(const QString &aKey, const QString aDefa
     return aValue;
 }
 
+QDate PropertyAttributes::dateValue(const QString &aKey, const QDate aDefaultValue) const
+{
+    QString aValue=value(aKey);
+    QDate res=QDate::fromString(aValue, "dd.MM.yyyy");
+
+    if (res.isValid())
+    {
+        return res;
+    }
+
+    return aDefaultValue;
+}
+
+QTime PropertyAttributes::timeValue(const QString &aKey, const QTime aDefaultValue) const
+{
+    QString aValue=value(aKey);
+    QTime res=QTime::fromString(aValue, "HH:mm:ss");
+
+    if (res.isValid())
+    {
+        return res;
+    }
+
+    return aDefaultValue;
+}
+
 QColor PropertyAttributes::colorValue(const QString &aKey, const QColor aDefaultValue) const
 {
     QString aValue=value(aKey, aDefaultValue.name());
