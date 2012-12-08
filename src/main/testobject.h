@@ -256,11 +256,11 @@ public:
 
     Q_CLASSINFO("ByteArray attributes",   "toolTip            : \"It is a ByteArray\"   ;"
                                           "delay              : 100                     ;"
-                                          "alternateBaseColor : #FF0000FF               ;")
+                                          "alternateBaseColor : #FF0000                 ;")
 
     Q_CLASSINFO("BitArray attributes",    "toolTip            : \"It is a BitArray\"    ;"
                                           "delay              : 100                     ;"
-                                          "alternateBaseColor : #FF0000FF               ;")
+                                          "alternateBaseColor : #FF0000                 ;")
 
     Q_CLASSINFO("Rect attributes",        "toolTip            : \"It is a Rect\"        ;"
                                           "delay              : 100                     ;"
