@@ -8,6 +8,8 @@ LocaleEditor::LocaleEditor(QWidget *parent) :
     ui(new Ui::LocaleEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 LocaleEditor::~LocaleEditor()
@@ -43,9 +45,16 @@ void LocaleEditor::setValue(const QLocale &aValue)
                           );
 }
 
+void LocaleEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    mAttributes=aAttributes;
+}
+
 void LocaleEditor::on_editButton_clicked()
 {
-    LocaleEditDialog dialog(mValue, this);
+    LocaleEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

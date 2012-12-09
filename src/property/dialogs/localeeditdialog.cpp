@@ -4,7 +4,7 @@
 #include <QTime>
 #include <QMetaEnum>
 
-LocaleEditDialog::LocaleEditDialog(QLocale aLocale, QWidget *parent) :
+LocaleEditDialog::LocaleEditDialog(QLocale aLocale, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LocaleEditDialog)
 {
@@ -17,6 +17,14 @@ LocaleEditDialog::LocaleEditDialog(QLocale aLocale, QWidget *parent) :
     updateLanguages();
     updateCountries();
     updateValues();
+
+    if (aAttributes)
+    {
+        int aMaxVisibleItems=aAttributes->intValue("maxVisibleItems", 10);
+
+        ui->languageComboBox->setMaxVisibleItems(aMaxVisibleItems);
+        ui->countryComboBox->setMaxVisibleItems(aMaxVisibleItems);
+    }
 }
 
 LocaleEditDialog::~LocaleEditDialog()

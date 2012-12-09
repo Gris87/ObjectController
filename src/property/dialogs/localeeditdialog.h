@@ -5,6 +5,8 @@
 
 #include <QLocale>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class LocaleEditDialog;
 }
@@ -14,7 +16,7 @@ class LocaleEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit LocaleEditDialog(QLocale aLocale, QWidget *parent = 0);
+    explicit LocaleEditDialog(QLocale aLocale, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~LocaleEditDialog();
 
     QLocale resultValue() const;

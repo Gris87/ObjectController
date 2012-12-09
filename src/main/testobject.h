@@ -284,6 +284,17 @@ public:
                                           "displayFormat      : yyyy-MM-dd HH:mm:ss.zzz ;"
                                           "calendarPopup      : true                    ;")
 
+    Q_CLASSINFO("Url attributes",         "toolTip            : \"It is a Url\"         ;"
+                                          "delay              : 100                     ;"
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                        //"maxLength          : 16                      ;"
+                                        //"echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert url\"          ;")
+
+    Q_CLASSINFO("Locale attributes",      "toolTip            : \"It is a Locale\"      ;"
+                                          "delay              : 100                     ;"
+                                          "maxVisibleItems    : 5                       ;")
+
     Q_CLASSINFO("Rect attributes",        "toolTip            : \"It is a Rect\"        ;"
                                           "delay              : 100                     ;"
                                         //"wrapping           : false                   ;"
