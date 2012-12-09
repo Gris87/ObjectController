@@ -316,6 +316,70 @@ public:
                                           "decimals           : 3                       ;"
                                           "step               : 0.1                     ;")
 
+    Q_CLASSINFO("Size attributes",        "toolTip            : \"It is a Size\"        ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "step               : 10                      ;")
+
+    Q_CLASSINFO("SizeF attributes",       "toolTip            : \"It is a SizeF\"       ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.1                     ;")
+
+    Q_CLASSINFO("Line attributes",        "toolTip            : \"It is a Line\"        ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "step               : 10                      ;")
+
+    Q_CLASSINFO("LineF attributes",       "toolTip            : \"It is a LineF\"       ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.1                     ;")
+
+    Q_CLASSINFO("Point attributes",       "toolTip            : \"It is a Point\"       ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "step               : 10                      ;")
+
+    Q_CLASSINFO("PointF attributes",      "toolTip            : \"It is a PointF\"      ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 2000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.1                     ;")
+
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);
