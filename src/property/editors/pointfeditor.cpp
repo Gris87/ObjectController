@@ -2,12 +2,16 @@
 #include "ui_pointfeditor.h"
 
 #include "../dialogs/pointfeditdialog.h"
+#include "../propertyutils.h"
 
 PointFEditor::PointFEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::PointFEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 PointFEditor::~PointFEditor()
@@ -38,16 +42,16 @@ void PointFEditor::setValue(const QPointF &aValue)
 
     ui->valueEdit->setText(
                            "("+
-                           QString::number(mValue.x())+
+                           doubleToString(mValue.x(), mDecimals)+
                            ", "+
-                           QString::number(mValue.y())+
+                           doubleToString(mValue.y(), mDecimals)+
                            ")"
                           );
 }
 
 void PointFEditor::on_editButton_clicked()
 {
-    PointFEditDialog dialog(mValue, this);
+    PointFEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

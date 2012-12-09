@@ -8,6 +8,8 @@ PointEditor::PointEditor(QWidget *parent) :
     ui(new Ui::PointEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 PointEditor::~PointEditor()
@@ -47,7 +49,7 @@ void PointEditor::setValue(const QPoint &aValue)
 
 void PointEditor::on_editButton_clicked()
 {
-    PointEditDialog dialog(mValue, this);
+    PointEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

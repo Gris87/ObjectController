@@ -2,12 +2,16 @@
 #include "ui_linefeditor.h"
 
 #include "../dialogs/linefeditdialog.h"
+#include "../propertyutils.h"
 
 LineFEditor::LineFEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::LineFEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 LineFEditor::~LineFEditor()
@@ -38,20 +42,20 @@ void LineFEditor::setValue(const QLineF &aValue)
 
     ui->valueEdit->setText(
                            "[("+
-                           QString::number(mValue.x1())+
+                           doubleToString(mValue.x1(), mDecimals)+
                            ", "+
-                           QString::number(mValue.y1())+
+                           doubleToString(mValue.y1(), mDecimals)+
                            "), ("+
-                           QString::number(mValue.x2())+
+                           doubleToString(mValue.x2(), mDecimals)+
                            ", "+
-                           QString::number(mValue.y2())+
+                           doubleToString(mValue.y2(), mDecimals)+
                            ")]"
                           );
 }
 
 void LineFEditor::on_editButton_clicked()
 {
-    LineFEditDialog dialog(mValue, this);
+    LineFEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

@@ -2,12 +2,16 @@
 #include "ui_sizefeditor.h"
 
 #include "../dialogs/sizefeditdialog.h"
+#include "../propertyutils.h"
 
 SizeFEditor::SizeFEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::SizeFEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 SizeFEditor::~SizeFEditor()
@@ -37,15 +41,15 @@ void SizeFEditor::setValue(const QSizeF &aValue)
 
 
     ui->valueEdit->setText(
-                           QString::number(mValue.width())+
+                           doubleToString(mValue.width(), mDecimals)+
                            " x "+
-                           QString::number(mValue.height())
+                           doubleToString(mValue.height(), mDecimals)
                           );
 }
 
 void SizeFEditor::on_editButton_clicked()
 {
-    SizeFEditDialog dialog(mValue, this);
+    SizeFEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

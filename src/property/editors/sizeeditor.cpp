@@ -8,6 +8,8 @@ SizeEditor::SizeEditor(QWidget *parent) :
     ui(new Ui::SizeEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 SizeEditor::~SizeEditor()
@@ -45,7 +47,7 @@ void SizeEditor::setValue(const QSize &aValue)
 
 void SizeEditor::on_editButton_clicked()
 {
-    SizeEditDialog dialog(mValue, this);
+    SizeEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

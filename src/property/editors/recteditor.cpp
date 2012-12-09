@@ -8,6 +8,8 @@ RectEditor::RectEditor(QWidget *parent) :
     ui(new Ui::RectEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 RectEditor::~RectEditor()
@@ -51,7 +53,7 @@ void RectEditor::setValue(const QRect &aValue)
 
 void RectEditor::on_editButton_clicked()
 {
-    RectEditDialog dialog(mValue, this);
+    RectEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

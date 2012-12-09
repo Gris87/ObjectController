@@ -29,6 +29,7 @@ protected:
 private:
     Ui::RectFEditor *ui;
     QRectF mValue;
+    const PropertyAttributes *mAttributes;
     int mDecimals;
 
 private slots:

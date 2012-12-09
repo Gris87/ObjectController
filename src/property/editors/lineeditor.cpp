@@ -8,6 +8,8 @@ LineEditor::LineEditor(QWidget *parent) :
     ui(new Ui::LineEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 LineEditor::~LineEditor()
@@ -51,7 +53,7 @@ void LineEditor::setValue(const QLine &aValue)
 
 void LineEditor::on_editButton_clicked()
 {
-    LineEditDialog dialog(mValue, this);
+    LineEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

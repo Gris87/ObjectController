@@ -10,6 +10,7 @@ RectFEditor::RectFEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mAttributes=0;
     mDecimals=6;
 }
 
@@ -69,7 +70,7 @@ void RectFEditor::handleAttributes(const PropertyAttributes *aAttributes)
 
 void RectFEditor::on_editButton_clicked()
 {
-    RectFEditDialog dialog(mValue, this);
+    RectFEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {
