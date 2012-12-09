@@ -51,6 +51,13 @@ void LineEditor::setValue(const QLine &aValue)
                           );
 }
 
+void LineEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    mAttributes=aAttributes;
+}
+
 void LineEditor::on_editButton_clicked()
 {
     LineEditDialog dialog(mValue, mAttributes, this);

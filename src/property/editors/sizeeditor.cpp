@@ -45,6 +45,13 @@ void SizeEditor::setValue(const QSize &aValue)
                           );
 }
 
+void SizeEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    mAttributes=aAttributes;
+}
+
 void SizeEditor::on_editButton_clicked()
 {
     SizeEditDialog dialog(mValue, mAttributes, this);

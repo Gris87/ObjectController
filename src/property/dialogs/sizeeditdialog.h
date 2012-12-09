@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class SizeEditDialog;
 }
@@ -12,7 +14,7 @@ class SizeEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit SizeEditDialog(QSize aSize, QWidget *parent = 0);
+    explicit SizeEditDialog(QSize aSize, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~SizeEditDialog();
 
     QSize resultValue();

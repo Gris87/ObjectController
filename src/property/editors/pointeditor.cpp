@@ -47,6 +47,13 @@ void PointEditor::setValue(const QPoint &aValue)
                           );
 }
 
+void PointEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    mAttributes=aAttributes;
+}
+
 void PointEditor::on_editButton_clicked()
 {
     PointEditDialog dialog(mValue, mAttributes, this);

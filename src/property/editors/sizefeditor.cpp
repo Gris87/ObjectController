@@ -37,14 +37,31 @@ void SizeFEditor::setIcon(const QIcon &aIcon)
 void SizeFEditor::setValue(const QSizeF &aValue)
 {
     mValue=aValue;
+    updateUI();
+}
 
-
-
+void SizeFEditor::updateUI()
+{
     ui->valueEdit->setText(
                            doubleToString(mValue.width(), mDecimals)+
                            " x "+
                            doubleToString(mValue.height(), mDecimals)
                           );
+}
+
+void SizeFEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    mAttributes=aAttributes;
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
 }
 
 void SizeFEditor::on_editButton_clicked()

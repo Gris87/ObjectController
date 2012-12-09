@@ -1,7 +1,7 @@
 #include "lineeditdialog.h"
 #include "ui_lineeditdialog.h"
 
-LineEditDialog::LineEditDialog(QLine aLine, QWidget *parent) :
+LineEditDialog::LineEditDialog(QLine aLine, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LineEditDialog)
 {

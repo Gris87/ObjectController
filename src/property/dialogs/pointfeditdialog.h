@@ -3,6 +3,8 @@
 
 #include <QDialog>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class PointFEditDialog;
 }
@@ -12,7 +14,7 @@ class PointFEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PointFEditDialog(QPointF aPointF, QWidget *parent = 0);
+    explicit PointFEditDialog(QPointF aPointF, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PointFEditDialog();
 
     QPointF resultValue();

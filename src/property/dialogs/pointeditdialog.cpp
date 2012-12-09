@@ -1,7 +1,7 @@
 #include "pointeditdialog.h"
 #include "ui_pointeditdialog.h"
 
-PointEditDialog::PointEditDialog(QPoint aPoint, QWidget *parent) :
+PointEditDialog::PointEditDialog(QPoint aPoint, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PointEditDialog)
 {

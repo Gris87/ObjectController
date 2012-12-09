@@ -51,6 +51,13 @@ void RectEditor::setValue(const QRect &aValue)
                           );
 }
 
+void RectEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    mAttributes=aAttributes;
+}
+
 void RectEditor::on_editButton_clicked()
 {
     RectEditDialog dialog(mValue, mAttributes, this);

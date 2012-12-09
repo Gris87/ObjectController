@@ -1,7 +1,7 @@
 #include "recteditdialog.h"
 #include "ui_recteditdialog.h"
 
-RectEditDialog::RectEditDialog(QRect aRect, QWidget *parent) :
+RectEditDialog::RectEditDialog(QRect aRect, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RectEditDialog)
 {

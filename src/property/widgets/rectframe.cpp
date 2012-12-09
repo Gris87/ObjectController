@@ -66,7 +66,8 @@ void RectFrame::on_delToolButton_clicked()
 
 void RectFrame::on_editButton_clicked()
 {
-    RectEditDialog dialog(mRect, this);
+    // TODO: Add attributes here
+    RectEditDialog dialog(mRect, 0, this);
 
     if (dialog.exec())
     {

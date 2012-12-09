@@ -62,7 +62,8 @@ void PointFrame::on_delToolButton_clicked()
 
 void PointFrame::on_editButton_clicked()
 {
-    PointEditDialog dialog(mPoint, this);
+    // TODO: Add attributes here
+    PointEditDialog dialog(mPoint, 0, this);
 
     if (dialog.exec())
     {

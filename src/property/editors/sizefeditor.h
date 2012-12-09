@@ -19,6 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QSizeF &aValue);
+    void updateUI();
     void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:

@@ -1,7 +1,7 @@
 #include "sizeeditdialog.h"
 #include "ui_sizeeditdialog.h"
 
-SizeEditDialog::SizeEditDialog(QSize aSize, QWidget *parent) :
+SizeEditDialog::SizeEditDialog(QSize aSize, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SizeEditDialog)
 {

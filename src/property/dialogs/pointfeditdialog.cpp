@@ -1,7 +1,7 @@
 #include "pointfeditdialog.h"
 #include "ui_pointfeditdialog.h"
 
-PointFEditDialog::PointFEditDialog(QPointF aPointF, QWidget *parent) :
+PointFEditDialog::PointFEditDialog(QPointF aPointF, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PointFEditDialog)
 {
