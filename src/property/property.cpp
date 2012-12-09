@@ -521,17 +521,17 @@ QString Property::valueToString(const QBitArray &aValue, PropertyTreeWidgetItem 
 
 QString Property::valueToString(const QDate &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString("dd.MM.yyyy");
+    return aValue.toString(mAttributes.stringValue("displayFormat", "dd.MM.yyyy"));
 }
 
 QString Property::valueToString(const QTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString("HH:mm:ss");
+    return aValue.toString(mAttributes.stringValue("displayFormat", "HH:mm:ss"));
 }
 
 QString Property::valueToString(const QDateTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString("dd.MM.yyyy HH:mm:ss");
+    return aValue.toString(mAttributes.stringValue("displayFormat", "dd.MM.yyyy HH:mm:ss"));
 }
 
 QString Property::valueToString(const QUrl &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

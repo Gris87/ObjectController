@@ -277,8 +277,8 @@ public:
 
     Q_CLASSINFO("DateTime attributes",    "toolTip            : \"It is a DateTime\"    ;"
                                           "delay              : 100                     ;"
-                                          "minTime            : 2000-01-01              ;"
-                                          "maxTime            : 2020-12-31              ;"
+                                          "minDate            : 01.01.2000              ;"
+                                          "maxDate            : 31.12.2020              ;"
                                           "minTime            : 12:34:56                ;"
                                           "maxTime            : 23:59:59                ;"
                                           "displayFormat      : yyyy-MM-dd HH:mm:ss.zzz ;"
