@@ -84,7 +84,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAt
         {
             for (int i=0; i<aColors.length(); ++i)
             {
-                aColors[i]=aAttributes->colorValue("color"+QString(i+1), aColors.at(i));
+                aColors[i]=aAttributes->colorValue("color"+QString::number(i+1), aColors.at(i));
             }
         }
 
@@ -107,6 +107,22 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAt
                 connect(aArea, SIGNAL(clicked()),      this, SLOT(colorLeftSelected()));
                 connect(aArea, SIGNAL(rightClicked()), this, SLOT(colorRightSelected()));
             }
+        }
+    }
+
+    if (aAttributes)
+    {
+        bool aAllowOpen=aAttributes->boolValue("allowOpen", true);
+        bool aAllowResize=aAttributes->boolValue("allowResize", true);
+
+        if (aAllowOpen || aAllowResize)
+        {
+            ui->openButton->setVisible(aAllowOpen);
+            ui->resizeButton->setVisible(aAllowResize);
+        }
+        else
+        {
+            ui->headerWidget->setVisible(false);
         }
     }
 }
