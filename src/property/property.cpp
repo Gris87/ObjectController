@@ -703,31 +703,8 @@ QString Property::valueToString(const QPixmap &aValue, PropertyTreeWidgetItem *a
 
 QString Property::valueToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    // TODO: Use QMetaEnum
-    switch (aValue.style())
-    {
-        case Qt::NoBrush:                return "NoBrush";
-        case Qt::SolidPattern:           return "SolidPattern";
-        case Qt::Dense1Pattern:          return "Dense1Pattern";
-        case Qt::Dense2Pattern:          return "Dense2Pattern";
-        case Qt::Dense3Pattern:          return "Dense3Pattern";
-        case Qt::Dense4Pattern:          return "Dense4Pattern";
-        case Qt::Dense5Pattern:          return "Dense5Pattern";
-        case Qt::Dense6Pattern:          return "Dense6Pattern";
-        case Qt::Dense7Pattern:          return "Dense7Pattern";
-        case Qt::HorPattern:             return "HorPattern";
-        case Qt::VerPattern:             return "VerPattern";
-        case Qt::CrossPattern:           return "CrossPattern";
-        case Qt::BDiagPattern:           return "BDiagPattern";
-        case Qt::FDiagPattern:           return "FDiagPattern";
-        case Qt::DiagCrossPattern:       return "DiagCrossPattern";
-        case Qt::LinearGradientPattern:  return "LinearGradientPattern";
-        case Qt::RadialGradientPattern:  return "RadialGradientPattern";
-        case Qt::ConicalGradientPattern: return "ConicalGradientPattern";
-        case Qt::TexturePattern:         return "TexturePattern";
-    }
-
-    return "[Unknown brush style]";
+    QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
+    return aEnum.valueToKey(aValue.style());
 }
 
 QString Property::valueToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

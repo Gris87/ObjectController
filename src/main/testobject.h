@@ -495,7 +495,7 @@ public:
     Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"       ;"
                                           "delay              : 100                     ;"
                                         //"allowChangeType    : false                   ;"
-                                          "allowGradient      : false                   ;"
+                                        //"allowGradient      : false                   ;"
                                         //"allowTransform     : false                   ;"
 
                                           "maxVisibleItems    : 5                       ;"

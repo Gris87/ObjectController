@@ -303,104 +303,31 @@ void BrushEditDialog::on_cancelButton_clicked()
 
 void BrushEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 {
-    // TODO: Use QMetaEnum
-    if (aValue=="NoBrush")
-    {
-        mBrush.setStyle(Qt::NoBrush);
-    }
-    else
-    if (aValue=="SolidPattern")
-    {
-        mBrush.setStyle(Qt::SolidPattern);
-    }
-    else
-    if (aValue=="Dense1Pattern")
-    {
-        mBrush.setStyle(Qt::Dense1Pattern);
-    }
-    else
-    if (aValue=="Dense2Pattern")
-    {
-        mBrush.setStyle(Qt::Dense2Pattern);
-    }
-    else
-    if (aValue=="Dense3Pattern")
-    {
-        mBrush.setStyle(Qt::Dense3Pattern);
-    }
-    else
-    if (aValue=="Dense4Pattern")
-    {
-        mBrush.setStyle(Qt::Dense4Pattern);
-    }
-    else
-    if (aValue=="Dense5Pattern")
-    {
-        mBrush.setStyle(Qt::Dense5Pattern);
-    }
-    else
-    if (aValue=="Dense6Pattern")
-    {
-        mBrush.setStyle(Qt::Dense6Pattern);
-    }
-    else
-    if (aValue=="Dense7Pattern")
-    {
-        mBrush.setStyle(Qt::Dense7Pattern);
-    }
-    else
-    if (aValue=="HorPattern")
-    {
-        mBrush.setStyle(Qt::HorPattern);
-    }
-    else
-    if (aValue=="VerPattern")
-    {
-        mBrush.setStyle(Qt::VerPattern);
-    }
-    else
-    if (aValue=="CrossPattern")
-    {
-        mBrush.setStyle(Qt::CrossPattern);
-    }
-    else
-    if (aValue=="BDiagPattern")
-    {
-        mBrush.setStyle(Qt::BDiagPattern);
-    }
-    else
-    if (aValue=="FDiagPattern")
-    {
-        mBrush.setStyle(Qt::FDiagPattern);
-    }
-    else
-    if (aValue=="DiagCrossPattern")
-    {
-        mBrush.setStyle(Qt::DiagCrossPattern);
-    }
-    else
-    if (aValue=="LinearGradientPattern")
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
+    Qt::BrushStyle aStyle=(Qt::BrushStyle)aStyleEnum.keyToValue(aValue.toLatin1());
+
+    if (aStyle==Qt::LinearGradientPattern)
     {
         copyFromBrush(QBrush(mLinearGradient));
     }
     else
-    if (aValue=="RadialGradientPattern")
+    if (aStyle==Qt::RadialGradientPattern)
     {
         copyFromBrush(QBrush(mRadialGradient));
     }
     else
-    if (aValue=="ConicalGradientPattern")
+    if (aStyle==Qt::ConicalGradientPattern)
     {
         copyFromBrush(QBrush(mConicalGradient));
     }
     else
-    if (aValue=="TexturePattern")
+    if (aStyle==Qt::TexturePattern)
     {
         copyFromBrush(QBrush(mTexture));
     }
     else
     {
-        Q_ASSERT(false);
+        mBrush.setStyle(aStyle);
     }
 
     updateProperties();
@@ -653,31 +580,8 @@ void BrushEditDialog::updateProperties()
     BLOCK_SIGNALS(true);
 
     Qt::BrushStyle aStyle=mBrush.style();
-    QString aStyleStr="[Unknown brush style]";
-
-    // TODO: Use QMetaEnum
-    switch (aStyle)
-    {
-        case Qt::NoBrush:                aStyleStr="NoBrush";                break;
-        case Qt::SolidPattern:           aStyleStr="SolidPattern";           break;
-        case Qt::Dense1Pattern:          aStyleStr="Dense1Pattern";          break;
-        case Qt::Dense2Pattern:          aStyleStr="Dense2Pattern";          break;
-        case Qt::Dense3Pattern:          aStyleStr="Dense3Pattern";          break;
-        case Qt::Dense4Pattern:          aStyleStr="Dense4Pattern";          break;
-        case Qt::Dense5Pattern:          aStyleStr="Dense5Pattern";          break;
-        case Qt::Dense6Pattern:          aStyleStr="Dense6Pattern";          break;
-        case Qt::Dense7Pattern:          aStyleStr="Dense7Pattern";          break;
-        case Qt::HorPattern:             aStyleStr="HorPattern";             break;
-        case Qt::VerPattern:             aStyleStr="VerPattern";             break;
-        case Qt::CrossPattern:           aStyleStr="CrossPattern";           break;
-        case Qt::BDiagPattern:           aStyleStr="BDiagPattern";           break;
-        case Qt::FDiagPattern:           aStyleStr="FDiagPattern";           break;
-        case Qt::DiagCrossPattern:       aStyleStr="DiagCrossPattern";       break;
-        case Qt::LinearGradientPattern:  aStyleStr="LinearGradientPattern";  break;
-        case Qt::RadialGradientPattern:  aStyleStr="RadialGradientPattern";  break;
-        case Qt::ConicalGradientPattern: aStyleStr="ConicalGradientPattern"; break;
-        case Qt::TexturePattern:         aStyleStr="TexturePattern";         break;
-    }
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
+    QString aStyleStr=aStyleEnum.valueToKey(aStyle);
 
     QTransform aTransform=mBrush.transform();
 

@@ -2,6 +2,7 @@
 #include "ui_brusheditor.h"
 
 #include <QPainter>
+#include <QMetaEnum>
 
 #include "../dialogs/brusheditdialog.h"
 
@@ -40,33 +41,8 @@ void BrushEditor::setValue(const QBrush &aValue)
 
 
 
-    QString res="[Unknown brush style]";
-
-    // TODO: Use QMetaEnum
-    switch (mValue.style())
-    {
-        case Qt::NoBrush:                res="NoBrush";                break;
-        case Qt::SolidPattern:           res="SolidPattern";           break;
-        case Qt::Dense1Pattern:          res="Dense1Pattern";          break;
-        case Qt::Dense2Pattern:          res="Dense2Pattern";          break;
-        case Qt::Dense3Pattern:          res="Dense3Pattern";          break;
-        case Qt::Dense4Pattern:          res="Dense4Pattern";          break;
-        case Qt::Dense5Pattern:          res="Dense5Pattern";          break;
-        case Qt::Dense6Pattern:          res="Dense6Pattern";          break;
-        case Qt::Dense7Pattern:          res="Dense7Pattern";          break;
-        case Qt::HorPattern:             res="HorPattern";             break;
-        case Qt::VerPattern:             res="VerPattern";             break;
-        case Qt::CrossPattern:           res="CrossPattern";           break;
-        case Qt::BDiagPattern:           res="BDiagPattern";           break;
-        case Qt::FDiagPattern:           res="FDiagPattern";           break;
-        case Qt::DiagCrossPattern:       res="DiagCrossPattern";       break;
-        case Qt::LinearGradientPattern:  res="LinearGradientPattern";  break;
-        case Qt::RadialGradientPattern:  res="RadialGradientPattern";  break;
-        case Qt::ConicalGradientPattern: res="ConicalGradientPattern"; break;
-        case Qt::TexturePattern:         res="TexturePattern";         break;
-    }
-
-    ui->valueEdit->setText(res);
+    QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
+    ui->valueEdit->setText(aEnum.valueToKey(aValue.style()));
 
 
 
