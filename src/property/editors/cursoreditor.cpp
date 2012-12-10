@@ -314,7 +314,8 @@ void CursorEditor::on_ySpinBox_valueChanged(int /*aValue*/)
 
 void CursorEditor::on_bitmapButton_clicked()
 {
-    PaintDialog dialog(QPixmap::fromImage(mCursor.bitmap()->toImage()), true, this);
+    // TODO: Add attributes here
+    PaintDialog dialog(QPixmap::fromImage(mCursor.bitmap()->toImage()), true, 0, this);
 
     if (dialog.exec())
     {
@@ -327,7 +328,8 @@ void CursorEditor::on_bitmapButton_clicked()
 
 void CursorEditor::on_maskButton_clicked()
 {
-    PaintDialog dialog(QPixmap::fromImage(mCursor.mask()->toImage()), true, this);
+    // TODO: Add attributes here
+    PaintDialog dialog(QPixmap::fromImage(mCursor.mask()->toImage()), true, 0, this);
 
     if (dialog.exec())
     {
@@ -340,7 +342,8 @@ void CursorEditor::on_maskButton_clicked()
 
 void CursorEditor::on_pixmapButton_clicked()
 {
-    PaintDialog dialog(mCursor.pixmap(), false, this);
+    // TODO: Add attributes here
+    PaintDialog dialog(mCursor.pixmap(), false, 0, this);
 
     if (dialog.exec())
     {

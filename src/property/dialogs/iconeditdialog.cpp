@@ -1,7 +1,7 @@
 #include "iconeditdialog.h"
 #include "ui_iconeditdialog.h"
 
-IconEditDialog::IconEditDialog(QIcon aIcon, QWidget *parent) :
+IconEditDialog::IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::IconEditDialog)
 {
@@ -36,7 +36,7 @@ IconEditDialog::IconEditDialog(QIcon aIcon, QWidget *parent) :
 
             QVBoxLayout* aLayout = new QVBoxLayout(aWidget);
             aEntry.checkbox      = new QCheckBox(tr("Use this pixmap"), aWidget);
-            aEntry.paintframe    = new PaintFrame(aIcon.pixmap(128, 128, aEntry.mode, aEntry.state), false, aWidget);
+            aEntry.paintframe    = new PaintFrame(aIcon.pixmap(128, 128, aEntry.mode, aEntry.state), false, aAttributes, aWidget);
 
             aEntry.checkbox->setChecked(aIcon.availableSizes(aEntry.mode, aEntry.state).length()>0);
             aEntry.paintframe->setEnabled(aEntry.checkbox->isChecked());

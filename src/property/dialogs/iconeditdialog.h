@@ -7,6 +7,7 @@
 #include <QCheckBox>
 
 #include "../widgets/paintframe.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class IconEditDialog;
@@ -17,7 +18,7 @@ class IconEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit IconEditDialog(QIcon aIcon, QWidget *parent = 0);
+    explicit IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~IconEditDialog();
 
     QIcon resultValue() const;

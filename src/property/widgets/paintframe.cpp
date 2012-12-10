@@ -5,7 +5,7 @@
 
 #include "../dialogs/sizeeditdialog.h"
 
-PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
+PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PaintFrame)
 {
@@ -79,6 +79,14 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
         aColors.append(QColor(128, 128, 255));
         aColors.append(QColor(255, 0,   128));
         aColors.append(QColor(255, 128, 64));
+
+        if (aAttributes)
+        {
+            for (int i=0; i<aColors.length(); ++i)
+            {
+                aColors[i]=aAttributes->colorValue("color"+QString(i+1), aColors.at(i));
+            }
+        }
 
         for (int i=0; i<2; ++i)
         {

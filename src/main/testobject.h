@@ -475,6 +475,12 @@ public:
                                         //"values             :                         ;"
                )
 
+    Q_CLASSINFO("Pixmap attributes",      "toolTip            : \"It is a Pixmap\"      ;"
+                                          "delay              : 100                     ;"
+                                          "color1             : #ABCDEF                 ;"
+                                          "color28            : #FEDCBA                 ;"
+               )
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);

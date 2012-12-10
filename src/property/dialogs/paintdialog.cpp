@@ -1,7 +1,7 @@
 #include "paintdialog.h"
 #include "ui_paintdialog.h"
 
-PaintDialog::PaintDialog(QPixmap aValue, bool aMono, QWidget *parent) :
+PaintDialog::PaintDialog(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PaintDialog)
 {
@@ -9,7 +9,7 @@ PaintDialog::PaintDialog(QPixmap aValue, bool aMono, QWidget *parent) :
 
     setWindowFlags(Qt::Window);
 
-    mPaintFrame=new PaintFrame(aValue, aMono, this);
+    mPaintFrame=new PaintFrame(aValue, aMono, aAttributes, this);
     ui->mainLayout->insertWidget(0, mPaintFrame);
 
     addAction(ui->actionOpen);

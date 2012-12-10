@@ -28,6 +28,7 @@ public:
     void setValue(const QPixmap &aValue);
     void setValue(const QImage &aValue);
     void setValue(const QBitmap &aValue);
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     DataType mDataType;
@@ -38,6 +39,7 @@ protected:
 private:
     Ui::PixmapEditor *ui;
     QPixmap mValue;
+    const PropertyAttributes *mAttributes;
 
 private slots:
     void on_editButton_clicked();

@@ -9,6 +9,8 @@ IconEditor::IconEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mAttributes=0;
+
     ui->valueEdit->setText("Icon");
 }
 
@@ -39,9 +41,15 @@ void IconEditor::setValue(const QIcon &aValue)
     setIcon(mValue);
 }
 
+void IconEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+}
+
 void IconEditor::on_editButton_clicked()
 {
-    IconEditDialog dialog(mValue, this);
+    IconEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

@@ -12,6 +12,8 @@ PixmapEditor::PixmapEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mAttributes=0;
+
     mDataType=PIXMAP;
 }
 
@@ -80,6 +82,12 @@ void PixmapEditor::setValue(const QBitmap &aValue)
     mDataType=BITMAP;
 }
 
+void PixmapEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+}
+
 void PixmapEditor::on_editButton_clicked()
 {
     PaintDialog *dialog=0;
@@ -87,13 +95,13 @@ void PixmapEditor::on_editButton_clicked()
     switch (mDataType)
     {
         case PIXMAP:
-            dialog=new PaintDialog(mValue, false, this);
+            dialog=new PaintDialog(mValue, false, mAttributes, this);
         break;
         case IMAGE:
-            dialog=new PaintDialog(mValue, false, this);
+            dialog=new PaintDialog(mValue, false, mAttributes, this);
         break;
         case BITMAP:
-            dialog=new PaintDialog(mValue, true, this);
+            dialog=new PaintDialog(mValue, true, mAttributes, this);
         break;
     }
 

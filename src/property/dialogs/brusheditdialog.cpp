@@ -498,7 +498,8 @@ void BrushEditDialog::on_conicalAngleSpinBox_valueChanged(double aValue)
 
 void BrushEditDialog::on_textureButton_clicked()
 {
-    PaintDialog dialog(mBrush.texture(), false, this);
+    // TODO: Add attributes here
+    PaintDialog dialog(mBrush.texture(), false, 0, this);
 
     if (dialog.exec())
     {

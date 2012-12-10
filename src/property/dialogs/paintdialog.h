@@ -4,6 +4,7 @@
 #include <QDialog>
 
 #include "../widgets/paintframe.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class PaintDialog;
@@ -14,7 +15,7 @@ class PaintDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PaintDialog(QPixmap aValue, bool aMono, QWidget *parent = 0);
+    explicit PaintDialog(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PaintDialog();
 
     QPixmap resultValue() const;
