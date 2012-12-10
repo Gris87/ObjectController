@@ -39,20 +39,7 @@ void CharEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
 
-    QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
-
-    ui->valueEdit->setInputMask(      aAttributes->stringValue("inputMask",       ui->valueEdit->inputMask()));
-    QString aMode =                   aAttributes->stringValue("echoMode",        QString::fromLatin1(aEchoModeEnum.valueToKey(ui->valueEdit->echoMode())));
-    ui->valueEdit->setPlaceholderText(aAttributes->stringValue("placeholderText", ui->valueEdit->placeholderText()));
-
-    for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
-    {
-        if (QString::fromLatin1(aEchoModeEnum.key(i))==aMode)
-        {
-            ui->valueEdit->setEchoMode((QLineEdit::EchoMode)aEchoModeEnum.value(i));
-            break;
-        }
-    }
+    aAttributes->applyToLineEdit1Char(ui->valueEdit);
 }
 
 void CharEditor::on_valueEdit_textEdited(const QString &aValue)

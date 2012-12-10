@@ -56,7 +56,7 @@ void EnumEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
 
-    ui->valueComboBox->setMaxVisibleItems(aAttributes->intValue("maxVisibleItems", ui->valueComboBox->maxVisibleItems()));
+    aAttributes->applyToCombobox(ui->valueComboBox);
 }
 
 void EnumEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)

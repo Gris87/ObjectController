@@ -131,6 +131,24 @@ QColor PropertyAttributes::colorValue(const QString &aKey, const QColor aDefault
     return aDefaultValue;
 }
 
+void PropertyAttributes::applyToPalette(QWidget *aWidget) const
+{
+    QMetaEnum aMetaEnum=QPalette::staticMetaObject.enumerator(QPalette::staticMetaObject.indexOfEnumerator("ColorRole"));
+
+    QPalette aPalette=aWidget->palette();
+
+    for (int i=0; i<QPalette::NColorRoles; ++i)
+    {
+        QString aColorName=aMetaEnum.valueToKey(i);
+        aColorName[0]=aColorName.at(0).toLower();
+        aColorName.append("Color");
+
+        aPalette.setColor((QPalette::ColorRole)i, colorValue(aColorName, aPalette.color((QPalette::ColorRole)i)));
+    }
+
+    aWidget->setPalette(aPalette);
+}
+
 void PropertyAttributes::applyToWidget(QWidget *aWidget) const
 {
     aWidget->setToolTip(stringValue("toolTip", aWidget->toolTip()));
@@ -165,21 +183,67 @@ void PropertyAttributes::applyToDoubleSpinBox(QDoubleSpinBox *aWidget) const
     aWidget->setSingleStep( doubleValue("step",        aWidget->singleStep()));
 }
 
-void PropertyAttributes::applyToPalette(QWidget *aWidget) const
+void PropertyAttributes::applyToLineEdit1Char(QLineEdit *aWidget) const
 {
-    QMetaEnum aMetaEnum=QPalette::staticMetaObject.enumerator(QPalette::staticMetaObject.indexOfEnumerator("ColorRole"));
+    applyToWidget(aWidget);
 
-    QPalette aPalette=aWidget->palette();
+    QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
 
-    for (int i=0; i<QPalette::NColorRoles; ++i)
+    aWidget->setInputMask(      stringValue("inputMask",       aWidget->inputMask()));
+    QString aMode =             stringValue("echoMode",        QString::fromLatin1(aEchoModeEnum.valueToKey(aWidget->echoMode())));
+    aWidget->setPlaceholderText(stringValue("placeholderText", aWidget->placeholderText()));
+
+    for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
     {
-        QString aColorName=aMetaEnum.valueToKey(i);
-        aColorName[0]=aColorName.at(0).toLower();
-        aColorName.append("Color");
-
-        aPalette.setColor((QPalette::ColorRole)i, colorValue(aColorName, aPalette.color((QPalette::ColorRole)i)));
+        if (QString::fromLatin1(aEchoModeEnum.key(i))==aMode)
+        {
+            aWidget->setEchoMode((QLineEdit::EchoMode)aEchoModeEnum.value(i));
+            break;
+        }
     }
-
-    aWidget->setPalette(aPalette);
 }
 
+void PropertyAttributes::applyToLineEdit(QLineEdit *aWidget) const
+{
+    applyToLineEdit1Char(aWidget);
+
+    aWidget->setMaxLength(intValue("maxLength", aWidget->maxLength()));
+}
+
+void PropertyAttributes::applyToCombobox(QComboBox *aWidget) const
+{
+    applyToWidget(aWidget);
+
+    aWidget->setMaxVisibleItems(intValue("maxVisibleItems", aWidget->maxVisibleItems()));
+}
+
+void PropertyAttributes::applyToDateEdit(QDateEdit *aWidget) const
+{
+    applyToWidget(aWidget);
+
+    aWidget->setMinimumDate(  dateValue(  "minDate",       aWidget->minimumDate()));
+    aWidget->setMaximumDate(  dateValue(  "maxDate",       aWidget->maximumDate()));
+    aWidget->setDisplayFormat(stringValue("displayFormat", aWidget->displayFormat()));
+    aWidget->setCalendarPopup(boolValue(  "calendarPopup", aWidget->calendarPopup()));
+}
+
+void PropertyAttributes::applyToTimeEdit(QTimeEdit *aWidget) const
+{
+    applyToWidget(aWidget);
+
+    aWidget->setMinimumTime(  timeValue(  "minTime",       aWidget->minimumTime()));
+    aWidget->setMaximumTime(  timeValue(  "maxTime",       aWidget->maximumTime()));
+    aWidget->setDisplayFormat(stringValue("displayFormat", aWidget->displayFormat()));
+}
+
+void PropertyAttributes::applyToDateTimeEdit(QDateTimeEdit *aWidget) const
+{
+    applyToWidget(aWidget);
+
+    aWidget->setMinimumDate(  dateValue(  "minDate",       aWidget->minimumDate()));
+    aWidget->setMaximumDate(  dateValue(  "maxDate",       aWidget->maximumDate()));
+    aWidget->setMinimumTime(  timeValue(  "minTime",       aWidget->minimumTime()));
+    aWidget->setMaximumTime(  timeValue(  "maxTime",       aWidget->maximumTime()));
+    aWidget->setDisplayFormat(stringValue("displayFormat", aWidget->displayFormat()));
+    aWidget->setCalendarPopup(boolValue(  "calendarPopup", aWidget->calendarPopup()));
+}

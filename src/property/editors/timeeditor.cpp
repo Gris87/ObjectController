@@ -37,10 +37,7 @@ void TimeEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
 
-    ui->valueTimeEdit->setToolTip(      aAttributes->stringValue("toolTip",       ui->valueTimeEdit->toolTip()));
-    ui->valueTimeEdit->setMinimumTime(  aAttributes->timeValue(  "minTime",       ui->valueTimeEdit->minimumTime()));
-    ui->valueTimeEdit->setMaximumTime(  aAttributes->timeValue(  "maxTime",       ui->valueTimeEdit->maximumTime()));
-    ui->valueTimeEdit->setDisplayFormat(aAttributes->stringValue("displayFormat", ui->valueTimeEdit->displayFormat()));
+    aAttributes->applyToTimeEdit(ui->valueTimeEdit);
 }
 
 void TimeEditor::on_valueTimeEdit_timeChanged(const QTime &aValue)

@@ -9,6 +9,11 @@
 #include <QWidget>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
+#include <QLineEdit>
+#include <QComboBox>
+#include <QDateEdit>
+#include <QTimeEdit>
+#include <QDateTimeEdit>
 
 class PropertyAttributes: public QMap<QString, QString>
 {
@@ -25,10 +30,16 @@ public:
     QTime timeValue(const QString &aKey, const QTime aDefaultValue=QTime()) const;
     QColor colorValue(const QString &aKey, const QColor aDefaultValue=QColor()) const;
 
+    void applyToPalette(QWidget *aWidget) const;
     void applyToWidget(QWidget *aWidget) const;
     void applyToSpinBox(QSpinBox *aWidget) const;
     void applyToDoubleSpinBox(QDoubleSpinBox *aWidget) const;
-    void applyToPalette(QWidget *aWidget) const;
+    void applyToLineEdit1Char(QLineEdit *aWidget) const;
+    void applyToLineEdit(QLineEdit *aWidget) const;
+    void applyToCombobox(QComboBox *aWidget) const;
+    void applyToDateEdit(QDateEdit *aWidget) const;
+    void applyToTimeEdit(QTimeEdit *aWidget) const;
+    void applyToDateTimeEdit(QDateTimeEdit *aWidget) const;
 };
 
 #endif // PROPERTYATTRIBUTES_H

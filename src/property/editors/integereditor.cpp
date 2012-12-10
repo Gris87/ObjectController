@@ -88,14 +88,7 @@ void IntegerEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
 
-    ui->valueSpinBox->setToolTip(    aAttributes->stringValue("toolTip",     ui->valueSpinBox->toolTip()));
-    ui->valueSpinBox->setWrapping(   aAttributes->boolValue(  "wrapping",    ui->valueSpinBox->wrapping()));
-    ui->valueSpinBox->setAccelerated(aAttributes->boolValue(  "accelerated", ui->valueSpinBox->isAccelerated()));
-    ui->valueSpinBox->setPrefix(     aAttributes->stringValue("prefix",      ui->valueSpinBox->prefix()));
-    ui->valueSpinBox->setSuffix(     aAttributes->stringValue("suffix",      ui->valueSpinBox->suffix()));
-    ui->valueSpinBox->setMinimum(    aAttributes->intValue(   "minValue",    ui->valueSpinBox->minimum()));
-    ui->valueSpinBox->setMaximum(    aAttributes->intValue(   "maxValue",    ui->valueSpinBox->maximum()));
-    ui->valueSpinBox->setSingleStep( aAttributes->intValue(   "step",        ui->valueSpinBox->singleStep()));
+    aAttributes->applyToSpinBox(ui->valueSpinBox);
 }
 
 void IntegerEditor::on_valueSpinBox_valueChanged(int aValue)

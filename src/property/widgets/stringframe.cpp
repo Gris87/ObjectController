@@ -21,21 +21,7 @@ void StringFrame::handleAttributes(const PropertyAttributes *aAttributes)
 {
     if (aAttributes)
     {
-        QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
-
-        ui->valueEdit->setInputMask(      aAttributes->stringValue("inputMask",       ui->valueEdit->inputMask()));
-        ui->valueEdit->setMaxLength(      aAttributes->intValue(   "maxLength",       ui->valueEdit->maxLength()));
-        QString aMode =                   aAttributes->stringValue("echoMode",        QString::fromLatin1(aEchoModeEnum.valueToKey(ui->valueEdit->echoMode())));
-        ui->valueEdit->setPlaceholderText(aAttributes->stringValue("placeholderText", ui->valueEdit->placeholderText()));
-
-        for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
-        {
-            if (QString::fromLatin1(aEchoModeEnum.key(i))==aMode)
-            {
-                ui->valueEdit->setEchoMode((QLineEdit::EchoMode)aEchoModeEnum.value(i));
-                break;
-            }
-        }
+        aAttributes->applyToLineEdit(ui->valueEdit);
     }
 }
 

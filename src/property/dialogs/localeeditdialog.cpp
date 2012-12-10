@@ -20,10 +20,8 @@ LocaleEditDialog::LocaleEditDialog(QLocale aLocale, const PropertyAttributes *aA
 
     if (aAttributes)
     {
-        int aMaxVisibleItems=aAttributes->intValue("maxVisibleItems", 10);
-
-        ui->languageComboBox->setMaxVisibleItems(aMaxVisibleItems);
-        ui->countryComboBox->setMaxVisibleItems(aMaxVisibleItems);
+        aAttributes->applyToCombobox(ui->languageComboBox);
+        aAttributes->applyToCombobox(ui->countryComboBox);
     }
 }
 
