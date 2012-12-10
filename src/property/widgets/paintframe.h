@@ -29,6 +29,7 @@ private:
     PaintView      *mImageView;
     ColorArea      *mLeftArea;
     ColorArea      *mRightArea;
+    const PropertyAttributes *mAttributes;
 
 private slots:
     void colorLeftSelected();

@@ -11,6 +11,8 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAt
 {
     ui->setupUi(this);
 
+    mAttributes=aAttributes;
+
     mImageView=new PaintView(aValue, this);
     ui->mainLayout->insertWidget(1, mImageView);
 
@@ -171,8 +173,7 @@ void PaintFrame::on_openButton_clicked()
 
 void PaintFrame::on_resizeButton_clicked()
 {
-    // TODO: Add attributes here
-    SizeEditDialog dialog(mImageView->image().size(), 0, this);
+    SizeEditDialog dialog(mImageView->image().size(), mAttributes, this);
 
     dialog.setWindowTitle("Resize");
 
