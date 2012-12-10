@@ -50,7 +50,6 @@ void PointEditor::setValue(const QPoint &aValue)
 void PointEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 }
 

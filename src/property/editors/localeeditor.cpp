@@ -48,7 +48,6 @@ void LocaleEditor::setValue(const QLocale &aValue)
 void LocaleEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 }
 

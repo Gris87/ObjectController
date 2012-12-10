@@ -379,6 +379,52 @@ public:
                                           "decimals           : 3                       ;"
                                           "step               : 0.1                     ;")
 
+    Q_CLASSINFO("RegExp attributes",      "toolTip            : \"It is a RegExp\"      ;"
+                                          "delay              : 100                     ;"
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                        //"maxLength          : 16                      ;"
+                                        //"echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert RegExp\"       ;")
+
+    Q_CLASSINFO("Hash attributes",        "toolTip            : \"It is a Hash\"        ;"
+                                          "delay              : 100                     ;"
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" ID\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 255                     ;"
+                                          "step               : 1                       ;")
+
+    Q_CLASSINFO("EasingCurve attributes", "toolTip            : \"It is a EasingCurve\" ;"
+                                          "delay              : 100                     ;"
+                                          "maxVisibleItems    : 5                       ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" `\"                  ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 100                     ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;")
+
+    Q_CLASSINFO("Font attributes",        "toolTip            : \"It is a Font\"        ;"
+                                          "delay              : 100                     ;"
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                        //"maxLength          : 16                      ;"
+                                        //"echoMode           : Password                ;"
+                                          "placeholderText    : \"Insert font family\"  ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" pt\"                 ;"
+                                          "minValue           : 8                       ;"
+                                          "maxValue           : 72                      ;"
+                                          "step               : 1                       ;"
+
+                                          "maxVisibleItems    : 5                       ;")
 
     // ----------------------------------------------------------------------------------------------------
 

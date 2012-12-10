@@ -5,6 +5,8 @@
 
 #include <QEasingCurve>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class EasingCurveEditDialog;
 }
@@ -14,7 +16,7 @@ class EasingCurveEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget *parent = 0);
+    explicit EasingCurveEditDialog(QEasingCurve aEasingCurve, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~EasingCurveEditDialog();
 
     QEasingCurve resultValue() const;

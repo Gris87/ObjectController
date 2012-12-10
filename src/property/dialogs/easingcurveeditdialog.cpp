@@ -5,7 +5,7 @@
 #include <QMetaEnum>
 #include <QTimer>
 
-EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget *parent) :
+EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EasingCurveEditDialog)
 {
@@ -50,6 +50,14 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget 
 
 
     QTimer::singleShot(0, this, SLOT(drawCurve()));
+
+    if (aAttributes)
+    {
+        aAttributes->applyToCombobox(ui->typeComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->amplitudeSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->overshootSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->periodSpinBox);
+    }
 }
 
 EasingCurveEditDialog::~EasingCurveEditDialog()

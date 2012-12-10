@@ -52,7 +52,6 @@ void SizeFEditor::updateUI()
 void SizeFEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 
     int aDecimals=aAttributes->intValue("decimals", mDecimals);

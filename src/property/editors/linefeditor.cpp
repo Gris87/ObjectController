@@ -58,7 +58,6 @@ void LineFEditor::updateUI()
 void LineFEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 
     int aDecimals=aAttributes->intValue("decimals", mDecimals);

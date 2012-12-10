@@ -54,7 +54,6 @@ void PointFEditor::updateUI()
 void PointFEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 
     int aDecimals=aAttributes->intValue("decimals", mDecimals);

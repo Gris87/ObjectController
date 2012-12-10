@@ -58,7 +58,6 @@ void RectFEditor::updateUI()
 void RectFEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 
     int aDecimals=aAttributes->intValue("decimals", mDecimals);

@@ -10,6 +10,8 @@ EasingCurveEditor::EasingCurveEditor(QWidget *parent) :
     ui(new Ui::EasingCurveEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 EasingCurveEditor::~EasingCurveEditor()
@@ -40,9 +42,15 @@ void EasingCurveEditor::setValue(const QEasingCurve &aValue)
     ui->valueEdit->setText(aEnum.valueToKey(mValue.type()));
 }
 
+void EasingCurveEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+}
+
 void EasingCurveEditor::on_editButton_clicked()
 {
-    EasingCurveEditDialog dialog(mValue, this);
+    EasingCurveEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

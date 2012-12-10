@@ -54,7 +54,6 @@ void LineEditor::setValue(const QLine &aValue)
 void LineEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
-
     mAttributes=aAttributes;
 }
 
