@@ -42,10 +42,17 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
 
 
 
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
     QMetaEnum aCoordinateModeEnum=QGradient::staticMetaObject.enumerator(QGradient::staticMetaObject.indexOfEnumerator("CoordinateMode"));
     QMetaEnum aSpreadEnum=QGradient::staticMetaObject.enumerator(QGradient::staticMetaObject.indexOfEnumerator("Spread"));
+    QStringList aStyleItems;
     QStringList aCoordinateModeItems;
     QStringList aSpreadItems;
+
+    for (int i=0; i<aStyleEnum.keyCount(); ++i)
+    {
+        aStyleItems.append(QString::fromLatin1(aStyleEnum.key(i)));
+    }
 
     for (int i=0; i<aCoordinateModeEnum.keyCount(); ++i)
     {
@@ -57,12 +64,15 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
         aSpreadItems.append(QString::fromLatin1(aSpreadEnum.key(i)));
     }
 
+    ui->styleComboBox->blockSignals(true);
     ui->coordinateModeComboBox->blockSignals(true);
     ui->spreadComboBox->blockSignals(true);
 
+    ui->styleComboBox->addItems(aStyleItems);
     ui->coordinateModeComboBox->addItems(aCoordinateModeItems);
     ui->spreadComboBox->addItems(aSpreadItems);
 
+    ui->styleComboBox->blockSignals(false);
     ui->coordinateModeComboBox->blockSignals(false);
     ui->spreadComboBox->blockSignals(false);
 
@@ -134,9 +144,30 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
         }
         else
         {
+            aStyleItems.removeOne("LinearGradientPattern");
+            aStyleItems.removeOne("RadialGradientPattern");
+            aStyleItems.removeOne("ConicalGradientPattern");
 
+            ui->styleComboBox->blockSignals(true);
+
+            ui->styleComboBox->clear();
+            ui->styleComboBox->addItems(aStyleItems);
+
+            ui->styleComboBox->blockSignals(false);
+
+            if (
+                aStyle==Qt::LinearGradientPattern
+                ||
+                aStyle==Qt::RadialGradientPattern
+                ||
+                aStyle==Qt::ConicalGradientPattern
+               )
+            {
+                mBrush.setStyle(Qt::NoBrush);
+            }
         }
     }
+
 
 
     updateProperties();
