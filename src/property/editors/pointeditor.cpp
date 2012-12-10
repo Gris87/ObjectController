@@ -51,6 +51,7 @@ void PointEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
 }
 
 void PointEditor::on_editButton_clicked()

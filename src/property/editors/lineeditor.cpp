@@ -55,6 +55,7 @@ void LineEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
 }
 
 void LineEditor::on_editButton_clicked()
