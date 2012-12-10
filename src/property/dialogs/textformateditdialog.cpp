@@ -264,7 +264,8 @@ void TextFormatEditDialog::on_typeComboBox_currentIndexChanged(const QString &aV
 
 void TextFormatEditDialog::on_backgroundButton_clicked()
 {
-    BrushEditDialog dialog(mTextFormat.background(), this);
+    // TODO: Add attributes here
+    BrushEditDialog dialog(mTextFormat.background(), 0, this);
 
     if (dialog.exec())
     {
@@ -275,7 +276,8 @@ void TextFormatEditDialog::on_backgroundButton_clicked()
 
 void TextFormatEditDialog::on_foregroundButton_clicked()
 {
-    BrushEditDialog dialog(mTextFormat.foreground(), this);
+    // TODO: Add attributes here
+    BrushEditDialog dialog(mTextFormat.foreground(), 0, this);
 
     if (dialog.exec())
     {
@@ -1265,7 +1267,8 @@ void TextFormatEditDialog::on_frameBorderSpinBox_valueChanged(double aValue)
 
 void TextFormatEditDialog::on_frameBorderBrushButton_clicked()
 {
-    BrushEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->borderBrush(), this);
+    // TODO: Add attributes here
+    BrushEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->borderBrush(), 0, this);
 
     if (dialog.exec())
     {

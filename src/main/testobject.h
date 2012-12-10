@@ -232,6 +232,7 @@ public:
 
     Q_CLASSINFO("Map attributes",         "toolTip            : \"It is a Map\"         ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -243,6 +244,7 @@ public:
 
     Q_CLASSINFO("List attributes",        "toolTip            : \"It is a List\"        ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -254,20 +256,14 @@ public:
 
     Q_CLASSINFO("StringList attributes",  "toolTip            : \"It is a StringList\"  ;"
                                           "delay              : 100                     ;"
+
                                           "minCount           : 1                       ;"
                                           "maxCount           : 5                       ;"
+
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
                                           "maxLength          : 10                      ;"
                                         //"echoMode           : Password                ;"
                                           "placeholderText    : \"Insert name\"         ;"
-               )
-
-    Q_CLASSINFO("String attributes",      "toolTip            : \"It is a String\"      ;"
-                                          "delay              : 100                     ;"
-                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
-                                          "maxLength          : 16                      ;"
-                                          "echoMode           : Password                ;"
-                                          "placeholderText    : \"Insert password\"     ;"
                )
 
     Q_CLASSINFO("String attributes",      "toolTip            : \"It is a String\"      ;"
@@ -323,6 +319,7 @@ public:
 
     Q_CLASSINFO("Locale attributes",      "toolTip            : \"It is a Locale\"      ;"
                                           "delay              : 100                     ;"
+
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
@@ -330,6 +327,7 @@ public:
 
     Q_CLASSINFO("Rect attributes",        "toolTip            : \"It is a Rect\"        ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -341,6 +339,7 @@ public:
 
     Q_CLASSINFO("RectF attributes",       "toolTip            : \"It is a RectF\"       ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -353,6 +352,7 @@ public:
 
     Q_CLASSINFO("Size attributes",        "toolTip            : \"It is a Size\"        ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -364,6 +364,7 @@ public:
 
     Q_CLASSINFO("SizeF attributes",       "toolTip            : \"It is a SizeF\"       ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -376,6 +377,7 @@ public:
 
     Q_CLASSINFO("Line attributes",        "toolTip            : \"It is a Line\"        ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -387,6 +389,7 @@ public:
 
     Q_CLASSINFO("LineF attributes",       "toolTip            : \"It is a LineF\"       ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -399,6 +402,7 @@ public:
 
     Q_CLASSINFO("Point attributes",       "toolTip            : \"It is a Point\"       ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -410,6 +414,7 @@ public:
 
     Q_CLASSINFO("PointF attributes",      "toolTip            : \"It is a PointF\"      ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -430,6 +435,7 @@ public:
 
     Q_CLASSINFO("Hash attributes",        "toolTip            : \"It is a Hash\"        ;"
                                           "delay              : 100                     ;"
+
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
@@ -441,6 +447,8 @@ public:
 
     Q_CLASSINFO("EasingCurve attributes", "toolTip            : \"It is a EasingCurve\" ;"
                                           "delay              : 100                     ;"
+                                          "allowChangeType    : false                   ;"
+
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
@@ -457,6 +465,7 @@ public:
 
     Q_CLASSINFO("Font attributes",        "toolTip            : \"It is a Font\"        ;"
                                           "delay              : 100                     ;"
+
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
                                         //"maxLength          : 16                      ;"
                                         //"echoMode           : Password                ;"
@@ -481,6 +490,26 @@ public:
                                           "color28            : #FEDCBA                 ;"
                                           "allowOpen          : false                   ;"
                                           "allowResize        : false                   ;"
+               )
+
+    Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"       ;"
+                                          "delay              : 100                     ;"
+                                        //"allowChangeType    : false                   ;"
+                                          "allowGradient      : false                   ;"
+                                        //"allowTransform     : false                   ;"
+
+                                          "maxVisibleItems    : 5                       ;"
+                                          "editable           : false                   ;"
+                                        //"values             :                         ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \"!\"                   ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
                )
 
     // ----------------------------------------------------------------------------------------------------

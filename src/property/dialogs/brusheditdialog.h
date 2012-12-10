@@ -7,6 +7,7 @@
 
 #include "../widgets/colorarea.h"
 #include "../widgets/gradientwidget.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class BrushEditDialog;
@@ -17,7 +18,7 @@ class BrushEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BrushEditDialog(QBrush aBrush, QWidget *parent = 0);
+    explicit BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~BrushEditDialog();
 
     QBrush resultValue() const;
@@ -35,6 +36,8 @@ private:
     QConicalGradient     mConicalGradient;
     QPixmap              mTexture;
     QPixmap              mTransparentArea;
+    int                  mDecimals;
+    const PropertyAttributes *mAttributes;
 
     void copyFromBrush(QBrush aBrush);
     void updateGradient();

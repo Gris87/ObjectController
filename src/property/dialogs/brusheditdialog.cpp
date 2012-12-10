@@ -8,8 +8,9 @@
 #include "paintdialog.h"
 #include "matrixeditdialog.h"
 #include "transformeditdialog.h"
+#include "../propertyutils.h"
 
-BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
+BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BrushEditDialog)
 {
@@ -18,6 +19,8 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
     setWindowFlags(Qt::Window);
 
     mBrush=aBrush;
+    mDecimals=6;
+    mAttributes=aAttributes;
 
 
 
@@ -98,6 +101,42 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
         mTexture.fill(QColor(255, 255, 255));
     }
 
+
+
+    if (aAttributes)
+    {
+        aAttributes->applyToCombobox(ui->styleComboBox);
+
+        mDecimals=aAttributes->intValue("decimals", mDecimals);
+
+        ui->styleComboBox->setEnabled(  aAttributes->boolValue("allowChangeType", ui->styleComboBox->isEnabled()));
+        ui->transformButton->setVisible(aAttributes->boolValue("allowTransform",  true));
+
+        if (aAttributes->boolValue("allowGradient", true))
+        {
+            aAttributes->applyToCombobox(ui->coordinateModeComboBox);
+            aAttributes->applyToCombobox(ui->spreadComboBox);
+
+            aAttributes->applyToDoubleSpinBox(ui->linearX1SpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->linearY1SpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->linearX2SpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->linearY2SpinBox);
+
+            aAttributes->applyToDoubleSpinBox(ui->radialCenterXSpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->radialCenterYSpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->radialRadiusSpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->radialFocalXSpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->radialFocalYSpinBox);
+
+            aAttributes->applyToDoubleSpinBox(ui->conicalCenterXSpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->conicalCenterYSpinBox);
+            aAttributes->applyToDoubleSpinBox(ui->conicalAngleSpinBox);
+        }
+        else
+        {
+
+        }
+    }
 
 
     updateProperties();
@@ -233,6 +272,7 @@ void BrushEditDialog::on_cancelButton_clicked()
 
 void BrushEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 {
+    // TODO: Use QMetaEnum
     if (aValue=="NoBrush")
     {
         mBrush.setStyle(Qt::NoBrush);
@@ -498,8 +538,7 @@ void BrushEditDialog::on_conicalAngleSpinBox_valueChanged(double aValue)
 
 void BrushEditDialog::on_textureButton_clicked()
 {
-    // TODO: Add attributes here
-    PaintDialog dialog(mBrush.texture(), false, 0, this);
+    PaintDialog dialog(mBrush.texture(), false, mAttributes, this);
 
     if (dialog.exec())
     {
@@ -585,6 +624,7 @@ void BrushEditDialog::updateProperties()
     Qt::BrushStyle aStyle=mBrush.style();
     QString aStyleStr="[Unknown brush style]";
 
+    // TODO: Use QMetaEnum
     switch (aStyle)
     {
         case Qt::NoBrush:                aStyleStr="NoBrush";                break;
@@ -645,23 +685,23 @@ void BrushEditDialog::updateProperties()
 
     ui->transformEdit->setText(
                                "[("+
-                               QString::number(aTransform.m11())+
+                               doubleToString(aTransform.m11(), mDecimals)+
                                ", "+
-                               QString::number(aTransform.m12())+
+                               doubleToString(aTransform.m12(), mDecimals)+
                                ", "+
-                               QString::number(aTransform.m13())+
+                               doubleToString(aTransform.m13(), mDecimals)+
                                "), ("+
-                               QString::number(aTransform.m21())+
+                               doubleToString(aTransform.m21(), mDecimals)+
                                ", "+
-                               QString::number(aTransform.m22())+
+                               doubleToString(aTransform.m22(), mDecimals)+
                                ", "+
-                               QString::number(aTransform.m23())+
+                               doubleToString(aTransform.m23(), mDecimals)+
                                "), ("+
-                               QString::number(aTransform.m31())+
+                               doubleToString(aTransform.m31(), mDecimals)+
                                ", "+
-                               QString::number(aTransform.m32())+
+                               doubleToString(aTransform.m32(), mDecimals)+
                                ", "+
-                               QString::number(aTransform.m33())+
+                               doubleToString(aTransform.m33(), mDecimals)+
                                ")]"
                               );
 

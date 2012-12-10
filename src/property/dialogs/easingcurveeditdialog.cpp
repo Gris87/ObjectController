@@ -57,6 +57,8 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, const Pr
         aAttributes->applyToDoubleSpinBox(ui->amplitudeSpinBox);
         aAttributes->applyToDoubleSpinBox(ui->overshootSpinBox);
         aAttributes->applyToDoubleSpinBox(ui->periodSpinBox);
+
+        ui->typeComboBox->setEnabled(aAttributes->boolValue("allowChangeType", ui->typeComboBox->isEnabled()));
     }
 }
 

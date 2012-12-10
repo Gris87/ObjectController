@@ -10,6 +10,8 @@ BrushEditor::BrushEditor(QWidget *parent) :
     ui(new Ui::BrushEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 BrushEditor::~BrushEditor()
@@ -40,6 +42,7 @@ void BrushEditor::setValue(const QBrush &aValue)
 
     QString res="[Unknown brush style]";
 
+    // TODO: Use QMetaEnum
     switch (mValue.style())
     {
         case Qt::NoBrush:                res="NoBrush";                break;
@@ -77,9 +80,16 @@ void BrushEditor::setValue(const QBrush &aValue)
     setIcon(QIcon(aBrushPixmap));
 }
 
+void BrushEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+}
+
 void BrushEditor::on_editButton_clicked()
 {
-    BrushEditDialog dialog(mValue, this);
+    BrushEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

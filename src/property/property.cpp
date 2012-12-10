@@ -703,6 +703,7 @@ QString Property::valueToString(const QPixmap &aValue, PropertyTreeWidgetItem *a
 
 QString Property::valueToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
+    // TODO: Use QMetaEnum
     switch (aValue.style())
     {
         case Qt::NoBrush:                return "NoBrush";

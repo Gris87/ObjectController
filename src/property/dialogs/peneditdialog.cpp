@@ -110,7 +110,8 @@ void PenEditDialog::on_cancelButton_clicked()
 
 void PenEditDialog::on_brushButton_clicked()
 {
-    BrushEditDialog dialog(mPen.brush(), this);
+    // TODO: Add attributes here
+    BrushEditDialog dialog(mPen.brush(), 0, this);
 
     if (dialog.exec())
     {
