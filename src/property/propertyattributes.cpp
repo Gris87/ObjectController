@@ -214,7 +214,16 @@ void PropertyAttributes::applyToCombobox(QComboBox *aWidget) const
 {
     applyToWidget(aWidget);
 
-    aWidget->setMaxVisibleItems(intValue("maxVisibleItems", aWidget->maxVisibleItems()));
+    aWidget->setMaxVisibleItems(intValue( "maxVisibleItems", aWidget->maxVisibleItems()));
+    aWidget->setEditable(       boolValue("editable",        aWidget->isEditable()));
+
+    QString aValues=stringValue("values");
+
+    if (aValues!="")
+    {
+        aWidget->clear();
+        aWidget->addItems(aValues.split(";"));
+    }
 }
 
 void PropertyAttributes::applyToDateEdit(QDateEdit *aWidget) const
