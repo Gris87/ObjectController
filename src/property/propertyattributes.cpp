@@ -221,8 +221,20 @@ void PropertyAttributes::applyToCombobox(QComboBox *aWidget) const
 
     if (aValues!="")
     {
+        QString aValue=aWidget->currentText();
+        QStringList aItems=aValues.split("|");
+
         aWidget->clear();
-        aWidget->addItems(aValues.split(";"));
+        aWidget->addItems(aItems);
+
+        int index=aItems.indexOf(aValue);
+        aWidget->setCurrentIndex(index);
+
+        if (index<0)
+        {
+            aWidget->setEditable(true);
+            aWidget->setEditText(aValue);
+        }
     }
 }
 

@@ -29,7 +29,7 @@ void StringDelegate::setEditorData(QWidget *aEditor, PropertyTreeWidgetItem *aIt
               &&
               ((PropertyTreeWidget *)aItem->treeWidget())->controller()->objects().length()>0;
 
-    if (good)
+    if (good && aTopProperty->attributes()->stringValue("values")=="")
     {
         const QMetaObject *aMetaObject=aTopProperty->propertyObject();
 

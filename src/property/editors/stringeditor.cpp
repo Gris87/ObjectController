@@ -74,7 +74,15 @@ void StringEditor::setValue(const QStringList &aValues, const QString &aValue)
 {
     ui->valueComboBox->clear();
     ui->valueComboBox->addItems(aValues);
-    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue));
+
+    int index=aValues.indexOf(aValue);
+    ui->valueComboBox->setCurrentIndex(index);
+
+    if (index<0)
+    {
+        ui->valueComboBox->setEditable(true);
+        ui->valueComboBox->setEditText(aValue);
+    }
 
     ui->valueStackedWidget->setCurrentWidget(ui->comboBoxPage);
     mDataType=STRING;
@@ -84,7 +92,15 @@ void StringEditor::setValue(const QStringList &aValues, const QUrl &aValue)
 {
     ui->valueComboBox->clear();
     ui->valueComboBox->addItems(aValues);
-    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue.toString()));
+
+    int index=aValues.indexOf(aValue.toString());
+    ui->valueComboBox->setCurrentIndex(index);
+
+    if (index<0)
+    {
+        ui->valueComboBox->setEditable(true);
+        ui->valueComboBox->setEditText(aValue.toString());
+    }
 
     ui->valueStackedWidget->setCurrentWidget(ui->comboBoxPage);
     mDataType=URL;
@@ -94,7 +110,15 @@ void StringEditor::setValue(const QStringList &aValues, const QRegExp &aValue)
 {
     ui->valueComboBox->clear();
     ui->valueComboBox->addItems(aValues);
-    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue.pattern()));
+
+    int index=aValues.indexOf(aValue.pattern());
+    ui->valueComboBox->setCurrentIndex(index);
+
+    if (index<0)
+    {
+        ui->valueComboBox->setEditable(true);
+        ui->valueComboBox->setEditText(aValue.pattern());
+    }
 
     ui->valueStackedWidget->setCurrentWidget(ui->comboBoxPage);
     mDataType=REGEXP;

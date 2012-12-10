@@ -102,9 +102,9 @@ public:
 
     Q_CLASSINFO("StringCombo attributes", "toolTip            : \"It is a StringCombo\" ;"
                                           "delay              : 100                     ;"
-                                          "maxVisibleItems    : 5                       ;"
+                                        //"maxVisibleItems    : 5                       ;"
                                           "editable           : true                    ;"
-                                          "values             : Value1;Value2;Value3    ;"
+                                          "values             : Value1|Value2|Value3    ;"
                )
 
     Q_CLASSINFO("Bool attributes",        "toolTip            : \"It is a Bool\"        ;"
