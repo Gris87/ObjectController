@@ -13,6 +13,14 @@ LineEditDialog::LineEditDialog(QLine aLine, const PropertyAttributes *aAttribute
     ui->y1SpinBox->setValue(aLine.y1());
     ui->x2SpinBox->setValue(aLine.x2());
     ui->y2SpinBox->setValue(aLine.y2());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToSpinBox(ui->x1SpinBox);
+        aAttributes->applyToSpinBox(ui->y1SpinBox);
+        aAttributes->applyToSpinBox(ui->x2SpinBox);
+        aAttributes->applyToSpinBox(ui->y2SpinBox);
+    }
 }
 
 LineEditDialog::~LineEditDialog()

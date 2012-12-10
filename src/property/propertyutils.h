@@ -7,6 +7,5 @@
 #include "propertyattributes.h"
 
 QString doubleToString(double aValue, int aDecimals=6);
-void applyAttributesToPalette(QWidget *aWidget, const PropertyAttributes *aAttributes);
 
 #endif // PROPERTYUTILS_H

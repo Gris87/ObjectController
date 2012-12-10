@@ -13,6 +13,14 @@ RectFEditDialog::RectFEditDialog(QRectF aRectF, const PropertyAttributes *aAttri
     ui->ySpinBox->setValue(aRectF.y());
     ui->widthSpinBox->setValue(aRectF.width());
     ui->heightSpinBox->setValue(aRectF.height());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->xSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->ySpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->widthSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->heightSpinBox);
+    }
 }
 
 RectFEditDialog::~RectFEditDialog()

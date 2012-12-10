@@ -13,6 +13,14 @@ LineFEditDialog::LineFEditDialog(QLineF aLineF, const PropertyAttributes *aAttri
     ui->y1SpinBox->setValue(aLineF.y1());
     ui->x2SpinBox->setValue(aLineF.x2());
     ui->y2SpinBox->setValue(aLineF.y2());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->x1SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->y1SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->x2SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->y2SpinBox);
+    }
 }
 
 LineFEditDialog::~LineFEditDialog()

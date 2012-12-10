@@ -11,6 +11,12 @@ SizeEditDialog::SizeEditDialog(QSize aSize, const PropertyAttributes *aAttribute
 
     ui->widthSpinBox->setValue(aSize.width());
     ui->heightSpinBox->setValue(aSize.height());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToSpinBox(ui->widthSpinBox);
+        aAttributes->applyToSpinBox(ui->heightSpinBox);
+    }
 }
 
 SizeEditDialog::~SizeEditDialog()

@@ -13,6 +13,14 @@ RectEditDialog::RectEditDialog(QRect aRect, const PropertyAttributes *aAttribute
     ui->ySpinBox->setValue(aRect.y());
     ui->widthSpinBox->setValue(aRect.width());
     ui->heightSpinBox->setValue(aRect.height());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToSpinBox(ui->xSpinBox);
+        aAttributes->applyToSpinBox(ui->ySpinBox);
+        aAttributes->applyToSpinBox(ui->widthSpinBox);
+        aAttributes->applyToSpinBox(ui->heightSpinBox);
+    }
 }
 
 RectEditDialog::~RectEditDialog()

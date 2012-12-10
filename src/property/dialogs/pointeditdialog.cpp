@@ -11,6 +11,12 @@ PointEditDialog::PointEditDialog(QPoint aPoint, const PropertyAttributes *aAttri
 
     ui->xSpinBox->setValue(aPoint.x());
     ui->ySpinBox->setValue(aPoint.y());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToSpinBox(ui->xSpinBox);
+        aAttributes->applyToSpinBox(ui->ySpinBox);
+    }
 }
 
 PointEditDialog::~PointEditDialog()

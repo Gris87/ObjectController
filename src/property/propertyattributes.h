@@ -6,6 +6,9 @@
 #include <QDate>
 #include <QTime>
 #include <QColor>
+#include <QWidget>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
 
 class PropertyAttributes: public QMap<QString, QString>
 {
@@ -21,6 +24,11 @@ public:
     QDate dateValue(const QString &aKey, const QDate aDefaultValue=QDate()) const;
     QTime timeValue(const QString &aKey, const QTime aDefaultValue=QTime()) const;
     QColor colorValue(const QString &aKey, const QColor aDefaultValue=QColor()) const;
+
+    void applyToWidget(QWidget *aWidget) const;
+    void applyToSpinBox(QSpinBox *aWidget) const;
+    void applyToDoubleSpinBox(QDoubleSpinBox *aWidget) const;
+    void applyToPalette(QWidget *aWidget) const;
 };
 
 #endif // PROPERTYATTRIBUTES_H

@@ -16,7 +16,10 @@ ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, const PropertyAttrib
     aPalette.setColor(QPalette::AlternateBase, QColor(10, 200, 90));
     mHexEditor->setPalette(aPalette);
 
-    applyAttributesToPalette(mHexEditor, aAttributes);
+    if (aAttributes)
+    {
+        aAttributes->applyToPalette(mHexEditor);
+    }
 
     ui->mainLayout->insertWidget(0, mHexEditor);
 }

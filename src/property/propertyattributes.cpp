@@ -1,6 +1,7 @@
 #include "propertyattributes.h"
 
 #include <QStringList>
+#include <QMetaEnum>
 
 PropertyAttributes::PropertyAttributes() :
     QMap<QString, QString>()
@@ -129,3 +130,56 @@ QColor PropertyAttributes::colorValue(const QString &aKey, const QColor aDefault
 
     return aDefaultValue;
 }
+
+void PropertyAttributes::applyToWidget(QWidget *aWidget) const
+{
+    aWidget->setToolTip(stringValue("toolTip", aWidget->toolTip()));
+
+    applyToPalette(aWidget);
+}
+
+void PropertyAttributes::applyToSpinBox(QSpinBox *aWidget) const
+{
+    applyToWidget(aWidget);
+
+    aWidget->setWrapping(   boolValue(  "wrapping",    aWidget->wrapping()));
+    aWidget->setAccelerated(boolValue(  "accelerated", aWidget->isAccelerated()));
+    aWidget->setPrefix(     stringValue("prefix",      aWidget->prefix()));
+    aWidget->setSuffix(     stringValue("suffix",      aWidget->suffix()));
+    aWidget->setMinimum(    intValue(   "minValue",    aWidget->minimum()));
+    aWidget->setMaximum(    intValue(   "maxValue",    aWidget->maximum()));
+    aWidget->setSingleStep( intValue(   "step",        aWidget->singleStep()));
+}
+
+void PropertyAttributes::applyToDoubleSpinBox(QDoubleSpinBox *aWidget) const
+{
+    applyToWidget(aWidget);
+
+    aWidget->setWrapping(   boolValue(  "wrapping",    aWidget->wrapping()));
+    aWidget->setAccelerated(boolValue(  "accelerated", aWidget->isAccelerated()));
+    aWidget->setPrefix(     stringValue("prefix",      aWidget->prefix()));
+    aWidget->setSuffix(     stringValue("suffix",      aWidget->suffix()));
+    aWidget->setMinimum(    doubleValue("minValue",    aWidget->minimum()));
+    aWidget->setMaximum(    doubleValue("maxValue",    aWidget->maximum()));
+    aWidget->setDecimals(   intValue(   "decimals",    aWidget->decimals()));
+    aWidget->setSingleStep( doubleValue("step",        aWidget->singleStep()));
+}
+
+void PropertyAttributes::applyToPalette(QWidget *aWidget) const
+{
+    QMetaEnum aMetaEnum=QPalette::staticMetaObject.enumerator(QPalette::staticMetaObject.indexOfEnumerator("ColorRole"));
+
+    QPalette aPalette=aWidget->palette();
+
+    for (int i=0; i<QPalette::NColorRoles; ++i)
+    {
+        QString aColorName=aMetaEnum.valueToKey(i);
+        aColorName[0]=aColorName.at(0).toLower();
+        aColorName.append("Color");
+
+        aPalette.setColor((QPalette::ColorRole)i, colorValue(aColorName, aPalette.color((QPalette::ColorRole)i)));
+    }
+
+    aWidget->setPalette(aPalette);
+}
+

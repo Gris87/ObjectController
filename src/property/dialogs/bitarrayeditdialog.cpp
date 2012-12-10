@@ -16,7 +16,10 @@ BitArrayEditDialog::BitArrayEditDialog(QBitArray aValue, const PropertyAttribute
     aPalette.setColor(QPalette::AlternateBase, QColor(10, 200, 90));
     mBitEditor->setPalette(aPalette);
 
-    applyAttributesToPalette(mBitEditor, aAttributes);
+    if (aAttributes)
+    {
+        aAttributes->applyToPalette(mBitEditor);
+    }
 
     ui->mainLayout->insertWidget(0, mBitEditor);
 }
