@@ -539,6 +539,34 @@ public:
                                           "standardColor48    : #FEDCBA                 ;"
                )
 
+    Q_CLASSINFO("Icon attributes",        "toolTip            : \"It is a Icon\"        ;"
+                                          "delay              : 100                     ;"
+                                          "tabOthers          : false                   ;"
+                                          "tabNormalOFF       : true                    ;"
+
+                                          "color1             : #ABCDEF                 ;"
+                                          "color28            : #FEDCBA                 ;"
+                                          "allowOpen          : false                   ;"
+                                          "allowResize        : false                   ;"
+
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
+               )
+
+    Q_CLASSINFO("Image attributes",       "toolTip            : \"It is a Image\"       ;"
+                                          "delay              : 100                     ;"
+
+                                          "color1             : #ABCDEF                 ;"
+                                          "color28            : #FEDCBA                 ;"
+                                          "allowOpen          : false                   ;"
+                                          "allowResize        : false                   ;"
+
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
+               )
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);

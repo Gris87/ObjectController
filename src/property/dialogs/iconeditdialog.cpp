@@ -21,6 +21,13 @@ IconEditDialog::IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttribute
     aStates.append(QIcon::Off);
     aStates.append(QIcon::On);
 
+    bool aTabOthers=true;
+
+    if (aAttributes)
+    {
+        aTabOthers=aAttributes->boolValue("tabOthers", aTabOthers);
+    }
+
     for (int i=0; i<aModes.length(); ++i)
     {
         for (int j=0; j<aStates.length(); ++j)
@@ -30,7 +37,16 @@ IconEditDialog::IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttribute
             aEntry.mode=aModes.at(i);
             aEntry.state=aStates.at(j);
 
+            QString aModeStr=modeToString(aEntry.mode);
+            QString aStateStr=stateToString(aEntry.state);
 
+            if (aAttributes)
+            {
+                if (!aAttributes->boolValue("tab"+aModeStr+aStateStr, aTabOthers))
+                {
+                    continue;
+                }
+            }
 
             QWidget *aWidget=new QWidget(this);
 
@@ -48,7 +64,7 @@ IconEditDialog::IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttribute
             aLayout->addWidget(aEntry.paintframe);
             aWidget->setLayout(aLayout);
 
-            ui->iconTabWidget->addTab(aWidget, modeToString(aEntry.mode)+" ("+stateToString(aEntry.state)+")");
+            ui->iconTabWidget->addTab(aWidget, aModeStr+" ("+aStateStr+")");
 
             mPages.append(aEntry);
         }
