@@ -3,7 +3,7 @@
 
 #include <QSettings>
 
-ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
+ColorEditDialog::ColorEditDialog(QColor aColor, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ColorEditDialog)
 {
@@ -66,6 +66,14 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
     aColors.append(QColor(192, 192, 192));
     aColors.append(QColor(64,  0,   64));
     aColors.append(QColor(255, 255, 255));
+
+    if (aAttributes)
+    {
+        for (int i=0; i<aColors.length(); ++i)
+        {
+            aColors[i]=aAttributes->colorValue("standardColor"+QString::number(i+1), aColors.at(i));
+        }
+    }
 
     for (int i=0; i<6; ++i)
     {
@@ -184,6 +192,16 @@ ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
     ui->propertiesLayout->insertWidget(0, mMainColorArea);
 
     setColor(aColor);
+
+    if (aAttributes)
+    {
+        if (!aAttributes->boolValue("alphaEnabled", true))
+        {
+            mTransparencyColorBar->setVisible(false);
+            ui->alphaLabel->setVisible(false);
+            ui->alphaSpinBox->setVisible(false);
+        }
+    }
 }
 
 ColorEditDialog::~ColorEditDialog()

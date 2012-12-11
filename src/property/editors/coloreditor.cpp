@@ -10,6 +10,9 @@ ColorEditor::ColorEditor(QWidget *parent) :
     ui(new Ui::ColorEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mAlphaEnabled=true;
 }
 
 ColorEditor::~ColorEditor()
@@ -36,21 +39,7 @@ void ColorEditor::setValue(const QColor &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->valueEdit->setText(
-                           "("+
-                           QString::number(mValue.red())+
-                           ", "+
-                           QString::number(mValue.green())+
-                           ", "+
-                           QString::number(mValue.blue())+
-                           ") ["+
-                           QString::number(mValue.alpha())+
-                           "]"
-                          );
-
-
+    updateText();
 
     QColor aSolidColor(mValue.red(), mValue.green(), mValue.blue());
 
@@ -67,9 +56,54 @@ void ColorEditor::setValue(const QColor &aValue)
     setIcon(QIcon(aColorPixmap));
 }
 
+void ColorEditor::updateText()
+{
+    if (mAlphaEnabled)
+    {
+        ui->valueEdit->setText(
+                               "("+
+                               QString::number(mValue.red())+
+                               ", "+
+                               QString::number(mValue.green())+
+                               ", "+
+                               QString::number(mValue.blue())+
+                               ") ["+
+                               QString::number(mValue.alpha())+
+                               "]"
+                              );
+    }
+    else
+    {
+        ui->valueEdit->setText(
+                               "("+
+                               QString::number(mValue.red())+
+                               ", "+
+                               QString::number(mValue.green())+
+                               ", "+
+                               QString::number(mValue.blue())+
+                               ")"
+                              );
+    }
+}
+
+void ColorEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    bool aAlphaEnabled=aAttributes->boolValue("alphaEnabled", mAlphaEnabled);
+
+    if (mAlphaEnabled!=aAlphaEnabled)
+    {
+        mAlphaEnabled=aAlphaEnabled;
+        updateText();
+    }
+}
+
 void ColorEditor::on_editButton_clicked()
 {
-    ColorEditDialog dialog(mValue, this);
+    ColorEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

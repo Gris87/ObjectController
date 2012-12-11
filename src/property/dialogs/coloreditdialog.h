@@ -9,6 +9,7 @@
 #include "../widgets/colorarea.h"
 #include "../widgets/colorspectrum.h"
 #include "../widgets/colorbar.h"
+#include "../propertyattributes.h"
 #else
 #include "colorarea.h"
 #include "colorspectrum.h"
@@ -24,7 +25,8 @@ class ColorEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ColorEditDialog(QColor aColor=QColor(0, 0, 0), QWidget *parent = 0);
+    // TODO: Should be QColor aColor=QColor(0, 0, 0)
+    explicit ColorEditDialog(QColor aColor, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~ColorEditDialog();
 
     QColor selectedColor() const;

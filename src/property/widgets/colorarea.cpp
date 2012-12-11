@@ -39,7 +39,8 @@ void ColorArea::mousePressEvent(QMouseEvent *event)
     {
         if (mSelectAllowed)
         {
-            ColorEditDialog dialog(color(), this);
+            // TODO: Add attributes here
+            ColorEditDialog dialog(color(), 0, this);
 
             if (dialog.exec())
             {

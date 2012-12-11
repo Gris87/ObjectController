@@ -709,15 +709,28 @@ QString Property::valueToString(const QBrush &aValue, PropertyTreeWidgetItem * /
 
 QString Property::valueToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "("+
-           QString::number(aValue.red())+
-           ", "+
-           QString::number(aValue.green())+
-           ", "+
-           QString::number(aValue.blue())+
-           ") ["+
-           QString::number(aValue.alpha())+
-           "]";
+    if (mAttributes.boolValue("alphaEnabled", true))
+    {
+        return "("+
+               QString::number(aValue.red())+
+               ", "+
+               QString::number(aValue.green())+
+               ", "+
+               QString::number(aValue.blue())+
+               ") ["+
+               QString::number(aValue.alpha())+
+               "]";
+    }
+    else
+    {
+        return "("+
+               QString::number(aValue.red())+
+               ", "+
+               QString::number(aValue.green())+
+               ", "+
+               QString::number(aValue.blue())+
+               ")";
+    }
 }
 
 QString Property::valueToString(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -3056,12 +3069,16 @@ int Property::subPropertiesForValue(const QColor &aValue, PropertyTreeWidgetItem
     PropertyTreeWidgetItem *aRedItem;
     PropertyTreeWidgetItem *aGreenItem;
     PropertyTreeWidgetItem *aBlueItem;
-    PropertyTreeWidgetItem *aAlphaItem;
 
     GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aRedItem,   aCount, qApp->translate("Property", "Red"),   aValue.red(),   colorRedChanged);
     GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aGreenItem, aCount, qApp->translate("Property", "Green"), aValue.green(), colorGreenChanged);
     GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aBlueItem,  aCount, qApp->translate("Property", "Blue"),  aValue.blue(),  colorBlueChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aAlphaItem, aCount, qApp->translate("Property", "Alpha"), aValue.alpha(), colorAlphaChanged);
+
+    if (mAttributes.boolValue("alphaEnabled", true))
+    {
+        PropertyTreeWidgetItem *aAlphaItem;
+        GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aAlphaItem, aCount, qApp->translate("Property", "Alpha"), aValue.alpha(), colorAlphaChanged);
+    }
 
     return aCount;
 }

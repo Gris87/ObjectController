@@ -19,6 +19,8 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QColor &aValue);
+    void updateText();
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();
@@ -27,6 +29,8 @@ protected:
 private:
     Ui::ColorEditor *ui;
     QColor mValue;
+    bool mAlphaEnabled;
+    const PropertyAttributes *mAttributes;
 
 private slots:
     void on_editButton_clicked();

@@ -512,6 +512,13 @@ public:
                                           "step               : 0.001                   ;"
                )
 
+    Q_CLASSINFO("Color attributes",       "toolTip            : \"It is a Color\"       ;"
+                                          "delay              : 100                     ;"
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
+               )
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);

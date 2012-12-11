@@ -119,7 +119,8 @@ void GradientWidget::mouseReleaseEvent(QMouseEvent *event)
         {
             if (mSelectedIndex>=0)
             {
-                ColorEditDialog dialog(mGradientStops.at(mSelectedIndex).second, this);
+                // TODO: Add attributes here
+                ColorEditDialog dialog(mGradientStops.at(mSelectedIndex).second, 0, this);
 
                 if (dialog.exec())
                 {
