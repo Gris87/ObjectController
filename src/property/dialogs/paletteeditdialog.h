@@ -6,6 +6,8 @@
 #include <QPalette>
 #include <QMdiSubWindow>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class PaletteEditDialog;
 }
@@ -15,7 +17,7 @@ class PaletteEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PaletteEditDialog(QPalette aPalette, QWidget *parent = 0);
+    explicit PaletteEditDialog(QPalette aPalette, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PaletteEditDialog();
 
     QPalette resultValue() const;

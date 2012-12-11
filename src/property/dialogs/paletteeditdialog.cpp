@@ -7,7 +7,7 @@
 #include "../widgets/colorarea.h"
 #include "../widgets/palettedemowidget.h"
 
-PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
+PaletteEditDialog::PaletteEditDialog(QPalette aPalette, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PaletteEditDialog)
 {
@@ -15,8 +15,7 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
 
 
 
-    // TODO: Add attributes here
-    ColorArea *aFastArea=new ColorArea(0, this);
+    ColorArea *aFastArea=new ColorArea(aAttributes, this);
     aFastArea->setColor(aPalette.color(QPalette::Active, QPalette::Button));
     aFastArea->setMinimumSize(90, 16);
     aFastArea->setMaximumSize(90, 16);
@@ -44,8 +43,7 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
 
         for (int j=0; j<QPalette::NColorGroups; ++j)
         {
-            // TODO: Add attributes here
-            ColorArea *aArea=new ColorArea(0, this);
+            ColorArea *aArea=new ColorArea(aAttributes, this);
             aArea->setColor(aPalette.color((QPalette::ColorGroup)j, (QPalette::ColorRole)i));
 
             ui->colorsTableWidget->setCellWidget(i, j, aArea);
@@ -56,8 +54,45 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
 
 
 
+    // TODO: Add easter egg
     mDemoWidget=ui->demoMdiArea->addSubWindow(new PaletteDemoWidget(this), Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
     mDemoWidget->setWindowState(Qt::WindowMaximized);
+
+
+
+    if (aAttributes)
+    {
+        bool aAllowFastColor=aAttributes->boolValue("allowFastColor", true);
+        bool aAllowChangeDetails=aAttributes->boolValue("allowChangeDetails", true);
+        bool aShowDetails=aAttributes->boolValue("showDetails", true);
+
+        if (aAllowFastColor || aAllowChangeDetails)
+        {
+            ui->fastLabel->setVisible(aAllowFastColor);
+            aFastArea->setVisible(aAllowFastColor);
+            ui->calculateDetailsRadioButton->setVisible(aAllowChangeDetails);
+            ui->showDetailsRadioButton->setVisible(aAllowChangeDetails);
+        }
+        else
+        {
+            ui->optionsWidget->setVisible(false);
+        }
+
+        if (aShowDetails)
+        {
+            ui->showDetailsRadioButton->blockSignals(true);
+            ui->showDetailsRadioButton->setChecked(true);
+            ui->showDetailsRadioButton->blockSignals(false);
+        }
+        else
+        {
+            ui->calculateDetailsRadioButton->blockSignals(true);
+            ui->calculateDetailsRadioButton->setChecked(true);
+            ui->calculateDetailsRadioButton->blockSignals(false);
+        }
+
+        ui->demoMdiArea->setVisible(aAttributes->boolValue("preview", true));
+    }
 
 
 

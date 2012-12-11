@@ -9,6 +9,8 @@ PaletteEditor::PaletteEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mAttributes=0;
+
     ui->valueEdit->setText("Palette");
 }
 
@@ -37,9 +39,16 @@ void PaletteEditor::setValue(const QPalette &aValue)
     mValue=aValue;
 }
 
+void PaletteEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+}
+
 void PaletteEditor::on_editButton_clicked()
 {
-    PaletteEditDialog dialog(mValue, this);
+    PaletteEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

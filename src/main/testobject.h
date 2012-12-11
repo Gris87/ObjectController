@@ -490,6 +490,10 @@ public:
                                           "color28            : #FEDCBA                 ;"
                                           "allowOpen          : false                   ;"
                                           "allowResize        : false                   ;"
+
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
                )
 
     Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"       ;"
@@ -501,6 +505,10 @@ public:
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
+
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -514,6 +522,18 @@ public:
 
     Q_CLASSINFO("Color attributes",       "toolTip            : \"It is a Color\"       ;"
                                           "delay              : 100                     ;"
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
+               )
+
+    Q_CLASSINFO("Palette attributes",     "toolTip            : \"It is a Palette\"     ;"
+                                          "delay              : 100                     ;"
+                                          "allowFastColor     : false                   ;"
+                                          "allowChangeDetails : true                    ;"
+                                          "showDetails        : true                    ;"
+                                          "preview            : true                    ;"
+
                                           "alphaEnabled       : false                   ;"
                                           "standardColor1     : #ABCDEF                 ;"
                                           "standardColor48    : #FEDCBA                 ;"
