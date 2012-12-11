@@ -555,7 +555,6 @@ public:
 
     Q_CLASSINFO("Image attributes",       "toolTip            : \"It is a Image\"       ;"
                                           "delay              : 100                     ;"
-
                                           "color1             : #ABCDEF                 ;"
                                           "color28            : #FEDCBA                 ;"
                                           "allowOpen          : false                   ;"
