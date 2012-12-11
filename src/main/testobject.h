@@ -256,7 +256,6 @@ public:
 
     Q_CLASSINFO("StringList attributes",  "toolTip            : \"It is a StringList\"  ;"
                                           "delay              : 100                     ;"
-
                                           "minCount           : 1                       ;"
                                           "maxCount           : 5                       ;"
 
@@ -565,6 +564,34 @@ public:
                                           "alphaEnabled       : false                   ;"
                                           "standardColor1     : #ABCDEF                 ;"
                                           "standardColor48    : #FEDCBA                 ;"
+               )
+
+    Q_CLASSINFO("Polygon attributes",     "toolTip            : \"It is a Polygon\"     ;"
+                                          "delay              : 100                     ;"
+                                          "minCount           : 1                       ;"
+                                          "maxCount           : 5                       ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : -2000                   ;"
+                                          "maxValue           : 2000                    ;"
+                                          "step               : 1                       ;"
+               )
+
+    Q_CLASSINFO("Region attributes",      "toolTip            : \"It is a Region\"      ;"
+                                          "delay              : 100                     ;"
+                                          "minCount           : 1                       ;"
+                                          "maxCount           : 5                       ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : -2000                   ;"
+                                          "maxValue           : 2000                    ;"
+                                          "step               : 1                       ;"
                )
 
     // ----------------------------------------------------------------------------------------------------
