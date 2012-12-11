@@ -22,7 +22,8 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
 
 
 
-    mCharUnderlineColorArea=new ColorArea(this);
+    // TODO: Add attributes here
+    mCharUnderlineColorArea=new ColorArea(0, this);
     mCharUnderlineColorArea->setMinimumSize(20, 20);
     mCharUnderlineColorArea->setMaximumSize(20, 20);
     mCharUnderlineColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

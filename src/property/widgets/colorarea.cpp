@@ -12,9 +12,11 @@
 #include "coloreditdialog.h"
 #endif
 
-ColorArea::ColorArea(QWidget *parent) :
+ColorArea::ColorArea(const PropertyAttributes *aAttributes, QWidget *parent) :
     QFrame(parent)
 {
+    mAttributes=aAttributes;
+
     setSizePolicy(QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
 
     setFrameShadow(QFrame::Sunken);
@@ -39,8 +41,7 @@ void ColorArea::mousePressEvent(QMouseEvent *event)
     {
         if (mSelectAllowed)
         {
-            // TODO: Add attributes here
-            ColorEditDialog dialog(color(), 0, this);
+            ColorEditDialog dialog(color(), mAttributes, this);
 
             if (dialog.exec())
             {
@@ -94,7 +95,7 @@ void ColorArea::mousePressEvent(QMouseEvent *event)
             {
                 for (int j=0; j<mPopupCount*mPopupCount; j++)
                 {
-                    ColorArea *aArea=new ColorArea(this);
+                    ColorArea *aArea=new ColorArea(0, this);
 
                     aArea->mPopupAllowed=false;
                     aArea->mSelectAllowed=false;

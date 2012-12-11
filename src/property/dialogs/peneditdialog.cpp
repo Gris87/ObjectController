@@ -18,7 +18,8 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
 
     mPen=aPen;
 
-    mColorArea=new ColorArea(this);
+    // TODO: Add attributes here
+    mColorArea=new ColorArea(0, this);
     mColorArea->setMinimumSize(20, 20);
     mColorArea->setMaximumSize(20, 20);
     mColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

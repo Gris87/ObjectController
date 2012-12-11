@@ -79,7 +79,7 @@ ColorEditDialog::ColorEditDialog(QColor aColor, const PropertyAttributes *aAttri
     {
         for (int j=0; j<8; ++j)
         {
-            ColorArea *aArea=new ColorArea(this);
+            ColorArea *aArea=new ColorArea(0, this);
             aArea->setColor(aColors.at(i*8+j));
             aArea->setMinimumSize(26, 22);
             aArea->setMaximumSize(26, 22);
@@ -123,7 +123,7 @@ ColorEditDialog::ColorEditDialog(QColor aColor, const PropertyAttributes *aAttri
     {
         for (int j=0; j<8; ++j)
         {
-            ColorArea *aArea=new ColorArea(this);
+            ColorArea *aArea=new ColorArea(0, this);
             aArea->setColor(aColors.at(i*8+j));
             aArea->setMinimumSize(26, 22);
             aArea->setMaximumSize(26, 22);
@@ -181,7 +181,7 @@ ColorEditDialog::ColorEditDialog(QColor aColor, const PropertyAttributes *aAttri
 
     // --------------------------------------------------------------------------------------------
 
-    mMainColorArea=new ColorArea(this);
+    mMainColorArea=new ColorArea(0, this);
     mMainColorArea->setMinimumSize(60, 78);
     mMainColorArea->setMaximumSize(60, 78);
     mMainColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);

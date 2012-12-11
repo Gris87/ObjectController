@@ -15,7 +15,8 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
 
 
 
-    ColorArea *aFastArea=new ColorArea(this);
+    // TODO: Add attributes here
+    ColorArea *aFastArea=new ColorArea(0, this);
     aFastArea->setColor(aPalette.color(QPalette::Active, QPalette::Button));
     aFastArea->setMinimumSize(90, 16);
     aFastArea->setMaximumSize(90, 16);
@@ -43,7 +44,8 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
 
         for (int j=0; j<QPalette::NColorGroups; ++j)
         {
-            ColorArea *aArea=new ColorArea(this);
+            // TODO: Add attributes here
+            ColorArea *aArea=new ColorArea(0, this);
             aArea->setColor(aPalette.color((QPalette::ColorGroup)j, (QPalette::ColorRole)i));
 
             ui->colorsTableWidget->setCellWidget(i, j, aArea);

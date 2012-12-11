@@ -16,7 +16,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAt
     mImageView=new PaintView(aValue, this);
     ui->mainLayout->insertWidget(1, mImageView);
 
-    mLeftArea=new ColorArea(this);
+    mLeftArea=new ColorArea(mAttributes, this);
     mLeftArea->setColor(QColor(0, 0, 0));
     mLeftArea->setMinimumSize(16, 16);
     mLeftArea->setMaximumSize(16, 16);
@@ -32,7 +32,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAt
 
 
 
-    mRightArea=new ColorArea(this);
+    mRightArea=new ColorArea(mAttributes, this);
     mRightArea->setColor(QColor(255, 255, 255));
     mRightArea->setMinimumSize(16, 16);
     mRightArea->setMaximumSize(16, 16);
@@ -94,7 +94,7 @@ PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAt
         {
             for (int j=0; j<14; ++j)
             {
-                ColorArea *aArea=new ColorArea(this);
+                ColorArea *aArea=new ColorArea(0, this);
                 aArea->setColor(aColors.at(i*14+j));
                 aArea->setMinimumSize(16, 16);
                 aArea->setMaximumSize(16, 16);

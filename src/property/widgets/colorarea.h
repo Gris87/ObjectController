@@ -3,11 +3,13 @@
 
 #include <QFrame>
 
+#include "../propertyattributes.h"
+
 class ColorArea : public QFrame
 {
     Q_OBJECT
 public:
-    explicit ColorArea(QWidget *parent = 0);
+    explicit ColorArea(const PropertyAttributes *aAttributes, QWidget *parent = 0);
 
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
@@ -46,6 +48,7 @@ protected:
     bool     mPopupAllowed;
     quint8   mPopupCount;
     quint8   mPopupCellSize;
+    const PropertyAttributes *mAttributes;
 
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);

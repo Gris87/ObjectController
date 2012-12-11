@@ -24,7 +24,7 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
 
 
 
-    mColorArea=new ColorArea(this);
+    mColorArea=new ColorArea(mAttributes, this);
     mColorArea->setMinimumSize(20, 20);
     mColorArea->setMaximumSize(20, 20);
     mColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
