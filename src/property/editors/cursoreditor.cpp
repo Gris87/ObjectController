@@ -11,6 +11,10 @@ CursorEditor::CursorEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mAttributes=0;
+
+    // TODO: Use QMetaEnum to initialize list
+
     connect(&mHotSpotTimer, SIGNAL(timeout()), this, SLOT(hotSpotChanged()));
 }
 
@@ -45,6 +49,7 @@ void CursorEditor::setValue(const QCursor &aValue)
 
 
 
+    // TODO: Use QMetaEnum
     QString res="[Unknown cursor]";
 
     switch (mCursor.shape())
@@ -145,8 +150,19 @@ void CursorEditor::setValue(const QCursor &aValue)
     ui->ySpinBox->blockSignals(false);
 }
 
+void CursorEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+
+    aAttributes->applyToCombobox(ui->valueComboBox);
+    aAttributes->applyToSpinBox(ui->xSpinBox);
+    aAttributes->applyToSpinBox(ui->ySpinBox);
+}
+
 void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
 {
+    // TODO: Use QMetaEnum
     if (aValue=="ArrowCursor")
     {
         mCursor.setShape(Qt::ArrowCursor);
@@ -314,8 +330,7 @@ void CursorEditor::on_ySpinBox_valueChanged(int /*aValue*/)
 
 void CursorEditor::on_bitmapButton_clicked()
 {
-    // TODO: Add attributes here
-    PaintDialog dialog(QPixmap::fromImage(mCursor.bitmap()->toImage()), true, 0, this);
+    PaintDialog dialog(QPixmap::fromImage(mCursor.bitmap()->toImage()), true, mAttributes, this);
 
     if (dialog.exec())
     {
@@ -328,8 +343,7 @@ void CursorEditor::on_bitmapButton_clicked()
 
 void CursorEditor::on_maskButton_clicked()
 {
-    // TODO: Add attributes here
-    PaintDialog dialog(QPixmap::fromImage(mCursor.mask()->toImage()), true, 0, this);
+    PaintDialog dialog(QPixmap::fromImage(mCursor.mask()->toImage()), true, mAttributes, this);
 
     if (dialog.exec())
     {
@@ -342,8 +356,7 @@ void CursorEditor::on_maskButton_clicked()
 
 void CursorEditor::on_pixmapButton_clicked()
 {
-    // TODO: Add attributes here
-    PaintDialog dialog(mCursor.pixmap(), false, 0, this);
+    PaintDialog dialog(mCursor.pixmap(), false, mAttributes, this);
 
     if (dialog.exec())
     {

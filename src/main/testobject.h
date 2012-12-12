@@ -631,6 +631,30 @@ public:
                                           "step               : 1                       ;"
                )
 
+    Q_CLASSINFO("Cursor attributes",      "toolTip            : \"It is a Cursor\"      ;"
+                                          "delay              : 100                     ;"
+                                          "maxVisibleItems    : 5                       ;"
+                                          "editable           : false                   ;"
+                                        //"values             :                         ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : -100                    ;"
+                                          "maxValue           : 100                     ;"
+                                          "step               : 1                       ;"
+
+                                          "color1             : #ABCDEF                 ;"
+                                          "color28            : #FEDCBA                 ;"
+                                          "allowOpen          : true                    ;"
+                                          "allowResize        : false                   ;"
+
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
+               )
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);

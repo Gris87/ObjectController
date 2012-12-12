@@ -821,6 +821,7 @@ QString Property::valueToString(const QBitmap &aValue, PropertyTreeWidgetItem *a
 
 QString Property::valueToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
+    // TODO: Use QMetaEnum
     switch (aValue.shape())
     {
         case Qt::ArrowCursor:        return "ArrowCursor";

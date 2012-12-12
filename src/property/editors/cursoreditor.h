@@ -17,6 +17,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QCursor &aValue);
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();
@@ -26,6 +27,7 @@ private:
     QCursor           mCursor;
     QCursor           mBitmapCursor;
     QTimer            mHotSpotTimer;
+    const PropertyAttributes *mAttributes;
 
 private slots:
     void hotSpotChanged();
