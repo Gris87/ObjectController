@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
     class RectFrame;
 }
@@ -12,9 +14,10 @@ class RectFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit RectFrame(QWidget *parent = 0);
+    explicit RectFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~RectFrame();
 
+    void setDelEnabled(bool aEnabled);
     void setUpEnabled(bool aEnabled);
     void setDownEnabled(bool aEnabled);
 
@@ -24,6 +27,7 @@ public:
 private:
     Ui::RectFrame *ui;
     QRect          mRect;
+    const PropertyAttributes *mAttributes;
 
 signals:
     void deletePressed();

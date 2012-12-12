@@ -3,11 +3,13 @@
 
 #include "../dialogs/recteditdialog.h"
 
-RectFrame::RectFrame(QWidget *parent) :
+RectFrame::RectFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RectFrame)
 {
     ui->setupUi(this);
+
+    mAttributes=aAttributes;
 
     setValue(QRect(0, 0, 0, 0));
 }
@@ -15,6 +17,11 @@ RectFrame::RectFrame(QWidget *parent) :
 RectFrame::~RectFrame()
 {
     delete ui;
+}
+
+void RectFrame::setDelEnabled(bool aEnabled)
+{
+    ui->delToolButton->setEnabled(aEnabled);
 }
 
 void RectFrame::setUpEnabled(bool aEnabled)
@@ -66,8 +73,7 @@ void RectFrame::on_delToolButton_clicked()
 
 void RectFrame::on_editButton_clicked()
 {
-    // TODO: Add attributes here
-    RectEditDialog dialog(mRect, 0, this);
+    RectEditDialog dialog(mRect, mAttributes, this);
 
     if (dialog.exec())
     {

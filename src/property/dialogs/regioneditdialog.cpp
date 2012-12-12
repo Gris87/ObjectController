@@ -5,11 +5,32 @@
 
 #include "../widgets/rectframe.h"
 
-RegionEditDialog::RegionEditDialog(QRegion aValue, QWidget *parent) :
+RegionEditDialog::RegionEditDialog(QRegion aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RegionEditDialog)
 {
     ui->setupUi(this);
+
+    minCount=0;
+    maxCount=INT_MAX;
+
+    mAttributes=aAttributes;
+
+    if (aAttributes)
+    {
+        minCount=aAttributes->intValue("minCount", minCount);
+        maxCount=aAttributes->intValue("maxCount", maxCount);
+
+        if (minCount<0)
+        {
+            minCount=0;
+        }
+
+        if (maxCount<minCount)
+        {
+            maxCount=minCount;
+        }
+    }
 
     setRegion(aValue);
 }
@@ -35,7 +56,10 @@ QRegion RegionEditDialog::resultValue() const
 
 void RegionEditDialog::setRegion(const QRegion &aValue)
 {
-    on_clearButton_clicked();
+    while (ui->itemsLayout->count()>0)
+    {
+        delete ui->itemsLayout->takeAt(0)->widget();
+    }
 
     QVector<QRect> aRects=aValue.rects();
 
@@ -43,6 +67,45 @@ void RegionEditDialog::setRegion(const QRegion &aValue)
     {
         on_addButton_clicked();
         ((RectFrame *)ui->itemsLayout->itemAt(i)->widget())->setValue(aRects.at(i));
+    }
+
+    updateCountButtons();
+}
+
+void RegionEditDialog::updateCountButtons()
+{
+    if (minCount>0)
+    {
+        if (ui->itemsLayout->count()<=minCount)
+        {
+            for (int i=0; i<ui->itemsLayout->count(); ++i)
+            {
+                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(false);
+            }
+
+            ui->clearButton->setEnabled(false);
+        }
+        else
+        {
+            for (int i=0; i<ui->itemsLayout->count(); ++i)
+            {
+                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(true);
+            }
+
+            ui->clearButton->setEnabled(true);
+        }
+    }
+
+    if (maxCount!=INT_MAX)
+    {
+        if (ui->itemsLayout->count()>=maxCount)
+        {
+            ui->addButton->setEnabled(false);
+        }
+        else
+        {
+            ui->addButton->setEnabled(true);
+        }
     }
 }
 
@@ -58,7 +121,7 @@ void RegionEditDialog::on_cancelButton_clicked()
 
 void RegionEditDialog::on_addButton_clicked()
 {
-    RectFrame *aFrame=new RectFrame(this);
+    RectFrame *aFrame=new RectFrame(mAttributes, this);
 
     if (ui->itemsLayout->count()==0)
     {
@@ -77,6 +140,8 @@ void RegionEditDialog::on_addButton_clicked()
 
     ui->itemsLayout->addWidget(aFrame);
     ui->mainScrollArea->verticalScrollBar()->setValue(ui->mainScrollArea->verticalScrollBar()->maximum());
+
+    updateCountButtons();
 }
 
 void RegionEditDialog::itemUp()
@@ -143,12 +208,21 @@ void RegionEditDialog::itemDelete()
     }
 
     delete aWidget;
+
+    updateCountButtons();
 }
 
 void RegionEditDialog::on_clearButton_clicked()
 {
-    while (ui->itemsLayout->count()>0)
+    while (ui->itemsLayout->count()>minCount)
     {
         delete ui->itemsLayout->takeAt(0)->widget();
     }
+
+    if (ui->itemsLayout->count()>0)
+    {
+        ((StringFrame *)ui->itemsLayout->itemAt(0)->widget())->setUpEnabled(false);
+    }
+
+    updateCountButtons();
 }

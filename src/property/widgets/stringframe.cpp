@@ -1,28 +1,21 @@
 #include "stringframe.h"
 #include "ui_stringframe.h"
 
-#include <QMetaEnum>
-
 StringFrame::StringFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StringFrame)
 {
     ui->setupUi(this);
 
-    handleAttributes(aAttributes);
+    if (aAttributes)
+    {
+        aAttributes->applyToLineEdit(ui->valueEdit);
+    }
 }
 
 StringFrame::~StringFrame()
 {
     delete ui;
-}
-
-void StringFrame::handleAttributes(const PropertyAttributes *aAttributes)
-{
-    if (aAttributes)
-    {
-        aAttributes->applyToLineEdit(ui->valueEdit);
-    }
 }
 
 void StringFrame::setDelEnabled(bool aEnabled)

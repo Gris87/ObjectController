@@ -5,6 +5,8 @@
 
 #include <QPolygon>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class PolygonEditDialog;
 }
@@ -14,7 +16,7 @@ class PolygonEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PolygonEditDialog(QPolygon aValue, QWidget *parent = 0);
+    explicit PolygonEditDialog(QPolygon aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PolygonEditDialog();
 
     QPolygon resultValue() const;
@@ -22,6 +24,11 @@ public:
 
 private:
     Ui::PolygonEditDialog *ui;
+    const PropertyAttributes *mAttributes;
+    int minCount;
+    int maxCount;
+
+    void updateCountButtons();
 
 private slots:
     void itemUp();

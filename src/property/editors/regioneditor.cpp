@@ -8,6 +8,8 @@ RegionEditor::RegionEditor(QWidget *parent) :
     ui(new Ui::RegionEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 RegionEditor::~RegionEditor()
@@ -65,9 +67,16 @@ void RegionEditor::setValue(const QRegion &aValue)
     ui->valueEdit->setText(res);
 }
 
+void RegionEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+}
+
 void RegionEditor::on_editButton_clicked()
 {
-    RegionEditDialog dialog(mValue, this);
+    RegionEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

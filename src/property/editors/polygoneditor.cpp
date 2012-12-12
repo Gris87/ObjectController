@@ -8,6 +8,8 @@ PolygonEditor::PolygonEditor(QWidget *parent) :
     ui(new Ui::PolygonEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 PolygonEditor::~PolygonEditor()
@@ -62,9 +64,16 @@ void PolygonEditor::setValue(const QPolygon &aValue)
     ui->valueEdit->setText(res);
 }
 
+void PolygonEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+}
+
 void PolygonEditor::on_editButton_clicked()
 {
-    PolygonEditDialog dialog(mValue, this);
+    PolygonEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

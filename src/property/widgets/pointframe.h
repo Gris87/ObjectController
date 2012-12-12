@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
     class PointFrame;
 }
@@ -12,9 +14,10 @@ class PointFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit PointFrame(QWidget *parent = 0);
+    explicit PointFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PointFrame();
 
+    void setDelEnabled(bool aEnabled);
     void setUpEnabled(bool aEnabled);
     void setDownEnabled(bool aEnabled);
 
@@ -24,6 +27,7 @@ public:
 private:
     Ui::PointFrame *ui;
     QPoint          mPoint;
+    const PropertyAttributes *mAttributes;
 
 signals:
     void deletePressed();

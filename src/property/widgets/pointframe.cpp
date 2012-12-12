@@ -3,11 +3,13 @@
 
 #include "../dialogs/pointeditdialog.h"
 
-PointFrame::PointFrame(QWidget *parent) :
+PointFrame::PointFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PointFrame)
 {
     ui->setupUi(this);
+
+    mAttributes=aAttributes;
 
     setValue(QPoint(0, 0));
 }
@@ -15,6 +17,11 @@ PointFrame::PointFrame(QWidget *parent) :
 PointFrame::~PointFrame()
 {
     delete ui;
+}
+
+void PointFrame::setDelEnabled(bool aEnabled)
+{
+    ui->delToolButton->setEnabled(aEnabled);
 }
 
 void PointFrame::setUpEnabled(bool aEnabled)
@@ -62,8 +69,7 @@ void PointFrame::on_delToolButton_clicked()
 
 void PointFrame::on_editButton_clicked()
 {
-    // TODO: Add attributes here
-    PointEditDialog dialog(mPoint, 0, this);
+    PointEditDialog dialog(mPoint, mAttributes, this);
 
     if (dialog.exec())
     {
