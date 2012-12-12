@@ -10,6 +10,8 @@ SizePolicyEditor::SizePolicyEditor(QWidget *parent) :
     ui(new Ui::SizePolicyEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 SizePolicyEditor::~SizePolicyEditor()
@@ -53,9 +55,16 @@ void SizePolicyEditor::setValue(const QSizePolicy &aValue)
                           );
 }
 
+void SizePolicyEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+}
+
 void SizePolicyEditor::on_editButton_clicked()
 {
-    SizePolicyEditDialog dialog(mValue, this);
+    SizePolicyEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

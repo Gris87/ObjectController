@@ -655,6 +655,21 @@ public:
                                           "standardColor48    : #FEDCBA                 ;"
                )
 
+    Q_CLASSINFO("SizePolicy attributes",  "toolTip            : \"It is a SizePolicy\"  ;"
+                                          "delay              : 100                     ;"
+                                          "maxVisibleItems    : 5                       ;"
+                                          "editable           : false                   ;"
+                                        //"values             :                         ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \"#\"                   ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 100                     ;"
+                                          "step               : 1                       ;"
+               )
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);

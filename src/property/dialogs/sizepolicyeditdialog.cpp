@@ -3,7 +3,7 @@
 
 #include <QMetaEnum>
 
-SizePolicyEditDialog::SizePolicyEditDialog(QSizePolicy aSizePolicy, QWidget *parent) :
+SizePolicyEditDialog::SizePolicyEditDialog(QSizePolicy aSizePolicy, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SizePolicyEditDialog)
 {
@@ -29,6 +29,16 @@ SizePolicyEditDialog::SizePolicyEditDialog(QSizePolicy aSizePolicy, QWidget *par
     ui->verticalPolicyComboBox->setCurrentIndex(ui->verticalPolicyComboBox->findText(aEnum.valueToKey(aSizePolicy.verticalPolicy())));
     ui->horizontalStretchSpinBox->setValue(aSizePolicy.horizontalStretch());
     ui->verticalStretchSpinBox->setValue(aSizePolicy.verticalStretch());
+
+
+
+    if (aAttributes)
+    {
+        aAttributes->applyToCombobox(ui->horizontalPolicyComboBox);
+        aAttributes->applyToCombobox(ui->verticalPolicyComboBox);
+        aAttributes->applyToSpinBox(ui->horizontalStretchSpinBox);
+        aAttributes->applyToSpinBox(ui->verticalStretchSpinBox);
+    }
 }
 
 SizePolicyEditDialog::~SizePolicyEditDialog()
