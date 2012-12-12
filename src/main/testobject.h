@@ -493,6 +493,14 @@ public:
                                           "alphaEnabled       : false                   ;"
                                           "standardColor1     : #ABCDEF                 ;"
                                           "standardColor48    : #FEDCBA                 ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 5000                    ;"
+                                          "step               : 1                       ;"
                )
 
     Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"       ;"
@@ -545,24 +553,40 @@ public:
 
                                           "color1             : #ABCDEF                 ;"
                                           "color28            : #FEDCBA                 ;"
-                                          "allowOpen          : false                   ;"
-                                          "allowResize        : false                   ;"
+                                          "allowOpen          : true                    ;"
+                                          "allowResize        : true                    ;"
 
                                           "alphaEnabled       : false                   ;"
                                           "standardColor1     : #ABCDEF                 ;"
                                           "standardColor48    : #FEDCBA                 ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 5000                    ;"
+                                          "step               : 1                       ;"
                )
 
     Q_CLASSINFO("Image attributes",       "toolTip            : \"It is a Image\"       ;"
                                           "delay              : 100                     ;"
                                           "color1             : #ABCDEF                 ;"
                                           "color28            : #FEDCBA                 ;"
-                                          "allowOpen          : false                   ;"
+                                          "allowOpen          : true                    ;"
                                           "allowResize        : false                   ;"
 
                                           "alphaEnabled       : false                   ;"
                                           "standardColor1     : #ABCDEF                 ;"
                                           "standardColor48    : #FEDCBA                 ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 5000                    ;"
+                                          "step               : 1                       ;"
                )
 
     Q_CLASSINFO("Polygon attributes",     "toolTip            : \"It is a Polygon\"     ;"
@@ -590,6 +614,20 @@ public:
                                           "suffix             : \" px\"                 ;"
                                           "minValue           : -2000                   ;"
                                           "maxValue           : 2000                    ;"
+                                          "step               : 1                       ;"
+               )
+
+    Q_CLASSINFO("Bitmap attributes",      "toolTip            : \"It is a Bitmap\"      ;"
+                                          "delay              : 100                     ;"
+                                          "allowOpen          : false                   ;"
+                                          "allowResize        : true                    ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" px\"                 ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 5000                    ;"
                                           "step               : 1                       ;"
                )
 

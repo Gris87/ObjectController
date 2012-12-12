@@ -80,7 +80,7 @@ void RegionEditDialog::updateCountButtons()
         {
             for (int i=0; i<ui->itemsLayout->count(); ++i)
             {
-                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(false);
+                ((RectFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(false);
             }
 
             ui->clearButton->setEnabled(false);
@@ -89,7 +89,7 @@ void RegionEditDialog::updateCountButtons()
         {
             for (int i=0; i<ui->itemsLayout->count(); ++i)
             {
-                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(true);
+                ((RectFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(true);
             }
 
             ui->clearButton->setEnabled(true);
@@ -221,7 +221,7 @@ void RegionEditDialog::on_clearButton_clicked()
 
     if (ui->itemsLayout->count()>0)
     {
-        ((StringFrame *)ui->itemsLayout->itemAt(0)->widget())->setUpEnabled(false);
+        ((RectFrame *)ui->itemsLayout->itemAt(0)->widget())->setUpEnabled(false);
     }
 
     updateCountButtons();

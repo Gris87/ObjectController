@@ -76,7 +76,7 @@ void PolygonEditDialog::updateCountButtons()
         {
             for (int i=0; i<ui->itemsLayout->count(); ++i)
             {
-                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(false);
+                ((PointFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(false);
             }
 
             ui->clearButton->setEnabled(false);
@@ -85,7 +85,7 @@ void PolygonEditDialog::updateCountButtons()
         {
             for (int i=0; i<ui->itemsLayout->count(); ++i)
             {
-                ((StringFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(true);
+                ((PointFrame *)ui->itemsLayout->itemAt(i)->widget())->setDelEnabled(true);
             }
 
             ui->clearButton->setEnabled(true);
@@ -217,7 +217,7 @@ void PolygonEditDialog::on_clearButton_clicked()
 
     if (ui->itemsLayout->count()>0)
     {
-        ((StringFrame *)ui->itemsLayout->itemAt(0)->widget())->setUpEnabled(false);
+        ((PointFrame *)ui->itemsLayout->itemAt(0)->widget())->setUpEnabled(false);
     }
 
     updateCountButtons();
