@@ -28,6 +28,8 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
 
     connect(mColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
 
+    // TODO: Use QMetaEnum to initialize list
+
     updateProperties(true);
 
     drawBrush();
@@ -135,6 +137,7 @@ void PenEditDialog::on_widthSpinBox_valueChanged(double aValue)
 
 void PenEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 {
+    // TODO: Use QMetaEnum
     if (aValue=="NoPen")
     {
         mPen.setStyle(Qt::NoPen);
@@ -186,6 +189,7 @@ void PenEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 
 void PenEditDialog::on_capStyleComboBox_currentIndexChanged(const QString &aValue)
 {
+    // TODO: Use QMetaEnum
     if (aValue=="FlatCap")
     {
         mPen.setCapStyle(Qt::FlatCap);
@@ -217,6 +221,7 @@ void PenEditDialog::on_capStyleComboBox_currentIndexChanged(const QString &aValu
 
 void PenEditDialog::on_joinStyleComboBox_currentIndexChanged(const QString &aValue)
 {
+    // TODO: Use QMetaEnum
     if (aValue=="MiterJoin")
     {
         mPen.setJoinStyle(Qt::MiterJoin);
@@ -419,6 +424,7 @@ void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
 {
     BLOCK_SIGNALS(true);
 
+    // TODO: Use QMetaEnum
     QString aStyle="[Unknown style]";
 
     switch (mPen.style())
@@ -433,6 +439,7 @@ void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
         case Qt::MPenStyle:      aStyle="MPenStyle";       break;
     }
 
+    // TODO: Use QMetaEnum
     QString aCapStyle="[Unknown style]";
 
     switch (mPen.capStyle())
@@ -443,6 +450,7 @@ void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
         case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
     }
 
+    // TODO: Use QMetaEnum
     QString aJoinStyle="[Unknown style]";
 
     switch (mPen.joinStyle())
