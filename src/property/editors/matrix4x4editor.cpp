@@ -37,6 +37,7 @@ void Matrix4x4Editor::setIcon(const QIcon &aIcon)
 void Matrix4x4Editor::setValue(const QMatrix4x4 &aValue)
 {
     mValue=aValue;
+    updateUI();
 }
 
 void Matrix4x4Editor::updateUI()

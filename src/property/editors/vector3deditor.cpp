@@ -37,6 +37,7 @@ void Vector3DEditor::setIcon(const QIcon &aIcon)
 void Vector3DEditor::setValue(const QVector3D &aValue)
 {
     mValue=aValue;
+    updateUI();
 }
 
 void Vector3DEditor::updateUI()

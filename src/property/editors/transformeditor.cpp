@@ -37,6 +37,7 @@ void TransformEditor::setIcon(const QIcon &aIcon)
 void TransformEditor::setValue(const QTransform &aValue)
 {
     mValue=aValue;
+    updateUI();
 }
 
 void TransformEditor::updateUI()

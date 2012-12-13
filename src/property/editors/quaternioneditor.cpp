@@ -37,6 +37,7 @@ void QuaternionEditor::setIcon(const QIcon &aIcon)
 void QuaternionEditor::setValue(const QQuaternion &aValue)
 {
     mValue=aValue;
+    updateUI();
 }
 
 void QuaternionEditor::updateUI()

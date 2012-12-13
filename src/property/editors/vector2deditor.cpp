@@ -37,6 +37,7 @@ void Vector2DEditor::setIcon(const QIcon &aIcon)
 void Vector2DEditor::setValue(const QVector2D &aValue)
 {
     mValue=aValue;
+    updateUI();
 }
 
 void Vector2DEditor::updateUI()
