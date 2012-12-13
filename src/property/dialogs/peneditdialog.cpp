@@ -4,6 +4,7 @@
 #include <QPainter>
 #include <QScrollBar>
 #include <QTimer>
+#include <QMetaEnum>
 
 #include "brusheditdialog.h"
 #include "../widgets/doubleframe.h"
@@ -28,7 +29,43 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
 
     connect(mColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
 
-    // TODO: Use QMetaEnum to initialize list
+
+
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenStyle"));
+    QMetaEnum aCapStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenCapStyle"));
+    QMetaEnum aJoinStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenJoinStyle"));
+    QStringList aStyleItems;
+    QStringList aCapStyleItems;
+    QStringList aJoinStyleItems;
+
+    for (int i=0; i<aStyleEnum.keyCount(); ++i)
+    {
+        aStyleItems.append(QString::fromLatin1(aStyleEnum.key(i)));
+    }
+
+    for (int i=0; i<aCapStyleEnum.keyCount(); ++i)
+    {
+        aCapStyleItems.append(QString::fromLatin1(aCapStyleEnum.key(i)));
+    }
+
+    for (int i=0; i<aJoinStyleEnum.keyCount(); ++i)
+    {
+        aJoinStyleItems.append(QString::fromLatin1(aJoinStyleEnum.key(i)));
+    }
+
+    ui->styleComboBox->blockSignals(true);
+    ui->capStyleComboBox->blockSignals(true);
+    ui->joinStyleComboBox->blockSignals(true);
+
+    ui->styleComboBox->addItems(aStyleItems);
+    ui->capStyleComboBox->addItems(aCapStyleItems);
+    ui->joinStyleComboBox->addItems(aJoinStyleItems);
+
+    ui->styleComboBox->blockSignals(false);
+    ui->capStyleComboBox->blockSignals(false);
+    ui->joinStyleComboBox->blockSignals(false);
+
+
 
     updateProperties(true);
 
@@ -137,50 +174,8 @@ void PenEditDialog::on_widthSpinBox_valueChanged(double aValue)
 
 void PenEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 {
-    // TODO: Use QMetaEnum
-    if (aValue=="NoPen")
-    {
-        mPen.setStyle(Qt::NoPen);
-    }
-    else
-    if (aValue=="SolidLine")
-    {
-        mPen.setStyle(Qt::SolidLine);
-    }
-    else
-    if (aValue=="DashLine")
-    {
-        mPen.setStyle(Qt::DashLine);
-    }
-    else
-    if (aValue=="DotLine")
-    {
-        mPen.setStyle(Qt::DotLine);
-    }
-    else
-    if (aValue=="DashDotLine")
-    {
-        mPen.setStyle(Qt::DashDotLine);
-    }
-    else
-    if (aValue=="DashDotDotLine")
-    {
-        mPen.setStyle(Qt::DashDotDotLine);
-    }
-    else
-    if (aValue=="CustomDashLine")
-    {
-        mPen.setStyle(Qt::CustomDashLine);
-    }
-    else
-    if (aValue=="MPenStyle")
-    {
-        mPen.setStyle(Qt::MPenStyle);
-    }
-    else
-    {
-        Q_ASSERT(false);
-    }
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenStyle"));
+    mPen.setStyle((Qt::PenStyle)aStyleEnum.keyToValue(aValue.toLatin1()));
 
     updateProperties(true);
 
@@ -189,30 +184,8 @@ void PenEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 
 void PenEditDialog::on_capStyleComboBox_currentIndexChanged(const QString &aValue)
 {
-    // TODO: Use QMetaEnum
-    if (aValue=="FlatCap")
-    {
-        mPen.setCapStyle(Qt::FlatCap);
-    }
-    else
-    if (aValue=="SquareCap")
-    {
-        mPen.setCapStyle(Qt::SquareCap);
-    }
-    else
-    if (aValue=="RoundCap")
-    {
-        mPen.setCapStyle(Qt::RoundCap);
-    }
-    else
-    if (aValue=="MPenCapStyle")
-    {
-        mPen.setCapStyle(Qt::MPenCapStyle);
-    }
-    else
-    {
-        Q_ASSERT(false);
-    }
+    QMetaEnum aCapStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenCapStyle"));
+    mPen.setCapStyle((Qt::PenCapStyle)aCapStyleEnum.keyToValue(aValue.toLatin1()));
 
     updateProperties(true);
 
@@ -221,35 +194,8 @@ void PenEditDialog::on_capStyleComboBox_currentIndexChanged(const QString &aValu
 
 void PenEditDialog::on_joinStyleComboBox_currentIndexChanged(const QString &aValue)
 {
-    // TODO: Use QMetaEnum
-    if (aValue=="MiterJoin")
-    {
-        mPen.setJoinStyle(Qt::MiterJoin);
-    }
-    else
-    if (aValue=="BevelJoin")
-    {
-        mPen.setJoinStyle(Qt::BevelJoin);
-    }
-    else
-    if (aValue=="RoundJoin")
-    {
-        mPen.setJoinStyle(Qt::RoundJoin);
-    }
-    else
-    if (aValue=="SvgMiterJoin")
-    {
-        mPen.setJoinStyle(Qt::SvgMiterJoin);
-    }
-    else
-    if (aValue=="MPenJoinStyle")
-    {
-        mPen.setJoinStyle(Qt::MPenJoinStyle);
-    }
-    else
-    {
-        Q_ASSERT(false);
-    }
+    QMetaEnum aJoinStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenJoinStyle"));
+    mPen.setJoinStyle((Qt::PenJoinStyle)aJoinStyleEnum.keyToValue(aValue.toLatin1()));
 
     updateProperties(true);
 
@@ -424,43 +370,14 @@ void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
 {
     BLOCK_SIGNALS(true);
 
-    // TODO: Use QMetaEnum
-    QString aStyle="[Unknown style]";
+    QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenStyle"));
+    QString aStyle=QString::fromLatin1(aStyleEnum.valueToKey(mPen.style()));
 
-    switch (mPen.style())
-    {
-        case Qt::NoPen:          aStyle="NoPen";           break;
-        case Qt::SolidLine:      aStyle="SolidLine";       break;
-        case Qt::DashLine:       aStyle="DashLine";        break;
-        case Qt::DotLine:        aStyle="DotLine";         break;
-        case Qt::DashDotLine:    aStyle="DashDotLine";     break;
-        case Qt::DashDotDotLine: aStyle="DashDotDotLine";  break;
-        case Qt::CustomDashLine: aStyle="CustomDashLine";  break;
-        case Qt::MPenStyle:      aStyle="MPenStyle";       break;
-    }
+    QMetaEnum aCapStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenCapStyle"));
+    QString aCapStyle=QString::fromLatin1(aCapStyleEnum.valueToKey(mPen.capStyle()));
 
-    // TODO: Use QMetaEnum
-    QString aCapStyle="[Unknown style]";
-
-    switch (mPen.capStyle())
-    {
-        case Qt::FlatCap:      aCapStyle="FlatCap";         break;
-        case Qt::SquareCap:    aCapStyle="SquareCap";       break;
-        case Qt::RoundCap:     aCapStyle="RoundCap";        break;
-        case Qt::MPenCapStyle: aCapStyle="MPenCapStyle";    break;
-    }
-
-    // TODO: Use QMetaEnum
-    QString aJoinStyle="[Unknown style]";
-
-    switch (mPen.joinStyle())
-    {
-        case Qt::MiterJoin:     aJoinStyle="MiterJoin";       break;
-        case Qt::BevelJoin:     aJoinStyle="BevelJoin";       break;
-        case Qt::RoundJoin:     aJoinStyle="RoundJoin";       break;
-        case Qt::SvgMiterJoin:  aJoinStyle="SvgMiterJoin";    break;
-        case Qt::MPenJoinStyle: aJoinStyle="MPenJoinStyle";   break;
-    }
+    QMetaEnum aJoinStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenJoinStyle"));
+    QString aJoinStyle=QString::fromLatin1(aJoinStyleEnum.valueToKey(mPen.joinStyle()));
 
     mColorArea->setColor(mPen.color());
     ui->widthSpinBox->setValue(mPen.widthF());

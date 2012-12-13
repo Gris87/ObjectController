@@ -190,48 +190,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="styleComboBox">
-          <item>
-           <property name="text">
-            <string>NoPen</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>SolidLine</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DashLine</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DotLine</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DashDotLine</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>DashDotDotLine</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>CustomDashLine</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>MPenStyle</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QComboBox" name="styleComboBox"/>
         </item>
         <item>
          <widget class="QLabel" name="capStyleLabel">
@@ -241,28 +200,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="capStyleComboBox">
-          <item>
-           <property name="text">
-            <string>FlatCap</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>SquareCap</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>RoundCap</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>MPenCapStyle</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QComboBox" name="capStyleComboBox"/>
         </item>
         <item>
          <widget class="QLabel" name="joinStyleLabel">
@@ -272,33 +210,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QComboBox" name="joinStyleComboBox">
-          <item>
-           <property name="text">
-            <string>MiterJoin</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>BevelJoin</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>RoundJoin</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>SvgMiterJoin</string>
-           </property>
-          </item>
-          <item>
-           <property name="text">
-            <string>MPenJoinStyle</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QComboBox" name="joinStyleComboBox"/>
         </item>
         <item>
          <widget class="QCheckBox" name="cosmeticCheckBox">

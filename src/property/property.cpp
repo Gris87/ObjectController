@@ -821,36 +821,8 @@ QString Property::valueToString(const QBitmap &aValue, PropertyTreeWidgetItem *a
 
 QString Property::valueToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    // TODO: Use QMetaEnum
-    switch (aValue.shape())
-    {
-        case Qt::ArrowCursor:        return "ArrowCursor";
-        case Qt::UpArrowCursor:      return "UpArrowCursor";
-        case Qt::CrossCursor:        return "CrossCursor";
-        case Qt::WaitCursor:         return "WaitCursor";
-        case Qt::IBeamCursor:        return "IBeamCursor";
-        case Qt::SizeVerCursor:      return "SizeVerCursor";
-        case Qt::SizeHorCursor:      return "SizeHorCursor";
-        case Qt::SizeBDiagCursor:    return "SizeBDiagCursor";
-        case Qt::SizeFDiagCursor:    return "SizeFDiagCursor";
-        case Qt::SizeAllCursor:      return "SizeAllCursor";
-        case Qt::BlankCursor:        return "BlankCursor";
-        case Qt::SplitVCursor:       return "SplitVCursor";
-        case Qt::SplitHCursor:       return "SplitHCursor";
-        case Qt::PointingHandCursor: return "PointingHandCursor";
-        case Qt::ForbiddenCursor:    return "ForbiddenCursor";
-        case Qt::WhatsThisCursor:    return "WhatsThisCursor";
-        case Qt::BusyCursor:         return "BusyCursor";
-        case Qt::OpenHandCursor:     return "OpenHandCursor";
-        case Qt::ClosedHandCursor:   return "ClosedHandCursor";
-        case Qt::DragCopyCursor:     return "DragCopyCursor";
-        case Qt::DragMoveCursor:     return "DragMoveCursor";
-        case Qt::DragLinkCursor:     return "DragLinkCursor";
-        case Qt::BitmapCursor:       return "BitmapCursor";
-        case Qt::CustomCursor:       return "CustomCursor";
-    }
-
-    return "[Unknown cursor]";
+    QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("CursorShape"));
+    return QString::fromLatin1(aEnum.valueToKey(aValue.shape()));
 }
 
 QString Property::valueToString(const QSizePolicy &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
