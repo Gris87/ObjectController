@@ -5,6 +5,8 @@
 
 #include <QVector2D>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
 class Vector2DEditDialog;
 }
@@ -14,7 +16,7 @@ class Vector2DEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit Vector2DEditDialog(QVector2D aVector2D, QWidget *parent = 0);
+    explicit Vector2DEditDialog(QVector2D aVector2D, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~Vector2DEditDialog();
 
     QVector2D resultValue();

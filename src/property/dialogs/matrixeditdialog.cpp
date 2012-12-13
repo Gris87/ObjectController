@@ -1,7 +1,7 @@
 #include "matrixeditdialog.h"
 #include "ui_matrixeditdialog.h"
 
-MatrixEditDialog::MatrixEditDialog(QMatrix aMatrix, QWidget *parent) :
+MatrixEditDialog::MatrixEditDialog(QMatrix aMatrix, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MatrixEditDialog)
 {
@@ -15,6 +15,16 @@ MatrixEditDialog::MatrixEditDialog(QMatrix aMatrix, QWidget *parent) :
     ui->m22SpinBox->setValue(aMatrix.m22());
     ui->dxSpinBox->setValue(aMatrix.dx());
     ui->dySpinBox->setValue(aMatrix.dy());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->m11SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m12SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m21SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m22SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->dxSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->dySpinBox);
+    }
 }
 
 MatrixEditDialog::~MatrixEditDialog()

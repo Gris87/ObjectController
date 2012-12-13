@@ -1,7 +1,7 @@
 #include "matrix4x4editdialog.h"
 #include "ui_matrix4x4editdialog.h"
 
-Matrix4x4EditDialog::Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, QWidget *parent) :
+Matrix4x4EditDialog::Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Matrix4x4EditDialog)
 {
@@ -28,6 +28,26 @@ Matrix4x4EditDialog::Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, QWidget *parent)
     ui->m42SpinBox->setValue(aMatrix[13]);
     ui->m43SpinBox->setValue(aMatrix[14]);
     ui->m44SpinBox->setValue(aMatrix[15]);
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->m11SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m12SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m13SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m14SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m21SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m22SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m23SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m24SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m31SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m32SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m33SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m34SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m41SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m42SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m43SpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->m44SpinBox);
+    }
 }
 
 Matrix4x4EditDialog::~Matrix4x4EditDialog()

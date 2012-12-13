@@ -1,7 +1,7 @@
 #include "vector3deditdialog.h"
 #include "ui_vector3deditdialog.h"
 
-Vector3DEditDialog::Vector3DEditDialog(QVector3D aVector3D, QWidget *parent) :
+Vector3DEditDialog::Vector3DEditDialog(QVector3D aVector3D, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Vector3DEditDialog)
 {
@@ -12,6 +12,13 @@ Vector3DEditDialog::Vector3DEditDialog(QVector3D aVector3D, QWidget *parent) :
     ui->xSpinBox->setValue(aVector3D.x());
     ui->ySpinBox->setValue(aVector3D.y());
     ui->zSpinBox->setValue(aVector3D.z());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->xSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->ySpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->zSpinBox);
+    }
 }
 
 Vector3DEditDialog::~Vector3DEditDialog()

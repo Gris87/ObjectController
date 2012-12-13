@@ -510,7 +510,7 @@ void BrushEditDialog::on_textureButton_clicked()
 
 void BrushEditDialog::on_transformButton_clicked()
 {
-    TransformEditDialog dialog(mBrush.transform(), this);
+    TransformEditDialog dialog(mBrush.transform(), mAttributes, this);
 
     if (dialog.exec())
     {

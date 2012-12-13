@@ -44,13 +44,13 @@ void Vector4DEditor::updateUI()
 {
     ui->valueEdit->setText(
                            "["+
-                           doubleToString(aValue.x(), mDecimals)+
+                           doubleToString(mValue.x(), mDecimals)+
                            ", "+
-                           doubleToString(aValue.y(), mDecimals)+
+                           doubleToString(mValue.y(), mDecimals)+
                            ", "+
-                           doubleToString(aValue.z(), mDecimals)+
+                           doubleToString(mValue.z(), mDecimals)+
                            ", "+
-                           doubleToString(aValue.w(), mDecimals)+
+                           doubleToString(mValue.w(), mDecimals)+
                            "]"
                           );
 }

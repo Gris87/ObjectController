@@ -1,7 +1,7 @@
 #include "quaternioneditdialog.h"
 #include "ui_quaternioneditdialog.h"
 
-QuaternionEditDialog::QuaternionEditDialog(QQuaternion aQuaternion, QWidget *parent) :
+QuaternionEditDialog::QuaternionEditDialog(QQuaternion aQuaternion, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::QuaternionEditDialog)
 {
@@ -13,6 +13,14 @@ QuaternionEditDialog::QuaternionEditDialog(QQuaternion aQuaternion, QWidget *par
     ui->xSpinBox->setValue(aQuaternion.x());
     ui->ySpinBox->setValue(aQuaternion.y());
     ui->zSpinBox->setValue(aQuaternion.z());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->scalarSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->xSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->ySpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->zSpinBox);
+    }
 }
 
 QuaternionEditDialog::~QuaternionEditDialog()

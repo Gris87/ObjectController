@@ -43,13 +43,13 @@ void QuaternionEditor::updateUI()
 {
     ui->valueEdit->setText(
                            "["+
-                           doubleToString(aValue.scalar(), mDecimals)+
+                           doubleToString(mValue.scalar(), mDecimals)+
                            "; "+
-                           doubleToString(aValue.x(), mDecimals)+
+                           doubleToString(mValue.x(), mDecimals)+
                            ", "+
-                           doubleToString(aValue.y(), mDecimals)+
+                           doubleToString(mValue.y(), mDecimals)+
                            ", "+
-                           doubleToString(aValue.z(), mDecimals)+
+                           doubleToString(mValue.z(), mDecimals)+
                            "]"
                           );
 }

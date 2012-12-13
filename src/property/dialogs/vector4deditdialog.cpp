@@ -1,7 +1,7 @@
 #include "vector4deditdialog.h"
 #include "ui_vector4deditdialog.h"
 
-Vector4DEditDialog::Vector4DEditDialog(QVector4D aVector4D, QWidget *parent) :
+Vector4DEditDialog::Vector4DEditDialog(QVector4D aVector4D, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Vector4DEditDialog)
 {
@@ -13,6 +13,14 @@ Vector4DEditDialog::Vector4DEditDialog(QVector4D aVector4D, QWidget *parent) :
     ui->ySpinBox->setValue(aVector4D.y());
     ui->zSpinBox->setValue(aVector4D.z());
     ui->wSpinBox->setValue(aVector4D.w());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->xSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->ySpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->zSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->wSpinBox);
+    }
 }
 
 Vector4DEditDialog::~Vector4DEditDialog()
