@@ -59,7 +59,7 @@ void QuaternionEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
-    aAttributes->applyToPalette(ui->valueEdit);
+    aAttributes->applyToWidget(ui->valueEdit);
 
     int aDecimals=aAttributes->intValue("decimals", mDecimals);
 

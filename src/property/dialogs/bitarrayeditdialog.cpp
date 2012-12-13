@@ -18,7 +18,7 @@ BitArrayEditDialog::BitArrayEditDialog(QBitArray aValue, const PropertyAttribute
 
     if (aAttributes)
     {
-        aAttributes->applyToPalette(mBitEditor);
+        aAttributes->applyToWidget(mBitEditor);
     }
 
     ui->mainLayout->insertWidget(0, mBitEditor);

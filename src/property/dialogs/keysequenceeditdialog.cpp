@@ -1,13 +1,13 @@
 #include "keysequenceeditdialog.h"
 #include "ui_keysequenceeditdialog.h"
 
-KeySequenceEditDialog::KeySequenceEditDialog(QKeySequence aKeySequence, QWidget *parent) :
+KeySequenceEditDialog::KeySequenceEditDialog(QKeySequence aKeySequence, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::KeySequenceEditDialog)
 {
     ui->setupUi(this);
 
-    mShortCutEdit=new ShortCutEdit(this);
+    mShortCutEdit=new ShortCutEdit(aAttributes, this);
     mShortCutEdit->setText(aKeySequence.toString());
     ui->mainLayout->insertWidget(0, mShortCutEdit);
 

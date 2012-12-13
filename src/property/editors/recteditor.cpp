@@ -55,7 +55,7 @@ void RectEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
-    aAttributes->applyToPalette(ui->valueEdit);
+    aAttributes->applyToWidget(ui->valueEdit);
 }
 
 void RectEditor::on_editButton_clicked()

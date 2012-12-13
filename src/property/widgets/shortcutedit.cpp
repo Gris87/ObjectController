@@ -2,9 +2,14 @@
 
 #include <QKeyEvent>
 
-ShortCutEdit::ShortCutEdit(QWidget *parent) :
+ShortCutEdit::ShortCutEdit(const PropertyAttributes *aAttributes, QWidget *parent) :
     QLineEdit(parent)
 {
+    if (aAttributes)
+    {
+        aAttributes->applyToWidget(this);
+        mRejection=aAttributes->stringValues("rejectShortcuts");
+    }
 }
 
 void ShortCutEdit::keyPressEvent(QKeyEvent *event)
@@ -48,5 +53,10 @@ void ShortCutEdit::keyPressEvent(QKeyEvent *event)
         aKey|=Qt::META;
     }
 
-    setText(QKeySequence(aKey).toString());
+    QString aShortcut=QKeySequence(aKey).toString();
+
+    if (!mRejection.contains(aShortcut))
+    {
+        setText(aShortcut);
+    }
 }

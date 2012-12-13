@@ -670,7 +670,12 @@ public:
                                           "step               : 1                       ;"
                )
 
-    // TODO: Insert KeySequence, Pen, TextLength and TextFormat
+    Q_CLASSINFO("KeySequence attributes", "toolTip            : \"It is a KeySequence\" ;"
+                                          "delay              : 100                     ;"
+                                          "rejectShortcuts    : Ctrl+S|Alt+X|A|B|C|D|E  ;"
+               )
+
+    // TODO: Insert Pen, TextLength and TextFormat
 
     Q_CLASSINFO("Matrix attributes",      "toolTip            : \"It is a Matrix\"      ;"
                                           "delay              : 100                     ;"

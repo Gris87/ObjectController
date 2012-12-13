@@ -26,109 +26,112 @@ void PropertyAttributes::fromString(const QString &aString)
     }
 }
 
+#define RETURN_ONE(aType, aConvertFunc, aKey, aDefValueForKey, aDefaultValue) \
+    aType res; \
+\
+    if (aConvertFunc(value(aKey, aDefValueForKey), res)) \
+    { \
+        return res; \
+    } \
+\
+    return aDefaultValue;
+
 bool PropertyAttributes::boolValue(const QString &aKey, const bool aDefaultValue) const
 {
-    QString aValue=value(aKey);
-
-    if (aValue=="1" || aValue.compare("true", Qt::CaseInsensitive)==0)
-    {
-        return true;
-    }
-
-    if (aValue=="0" || aValue.compare("false", Qt::CaseInsensitive)==0)
-    {
-        return false;
-    }
-
-    return aDefaultValue;
+    RETURN_ONE(bool, valueToBool, aKey, "", aDefaultValue);
 }
 
 int PropertyAttributes::intValue(const QString &aKey, const int aDefaultValue) const
 {
-    QString aValue=value(aKey);
-
-    bool ok;
-
-    int res=aValue.toInt(&ok);
-
-    if (ok)
-    {
-        return res;
-    }
-
-    return aDefaultValue;
+    RETURN_ONE(int, valueToInt, aKey, "", aDefaultValue);
 }
 
 double PropertyAttributes::doubleValue(const QString &aKey, const double aDefaultValue) const
 {
-    QString aValue=value(aKey);
-
-    bool ok;
-
-    double res=aValue.toDouble(&ok);
-
-    if (ok)
-    {
-        return res;
-    }
-
-    return aDefaultValue;
+    RETURN_ONE(double, valueToDouble, aKey, "", aDefaultValue);
 }
 
 QString PropertyAttributes::stringValue(const QString &aKey, const QString aDefaultValue) const
 {
-    QString aValue=value(aKey, aDefaultValue);
-
-    if (aValue.endsWith("\""))
-    {
-        aValue.remove(aValue.length()-1, 1);
-    }
-
-    if (aValue.startsWith("\""))
-    {
-        aValue.remove(0, 1);
-    }
-
-    return aValue;
+    RETURN_ONE(QString, valueToString, aKey, aDefaultValue, aDefaultValue);
 }
 
 QDate PropertyAttributes::dateValue(const QString &aKey, const QDate aDefaultValue) const
 {
-    QString aValue=value(aKey);
-    QDate res=QDate::fromString(aValue, "dd.MM.yyyy");
-
-    if (res.isValid())
-    {
-        return res;
-    }
-
-    return aDefaultValue;
+    RETURN_ONE(QDate, valueToDate, aKey, "", aDefaultValue);
 }
 
 QTime PropertyAttributes::timeValue(const QString &aKey, const QTime aDefaultValue) const
 {
-    QString aValue=value(aKey);
-    QTime res=QTime::fromString(aValue, "HH:mm:ss");
-
-    if (res.isValid())
-    {
-        return res;
-    }
-
-    return aDefaultValue;
+    RETURN_ONE(QTime, valueToTime, aKey, "", aDefaultValue);
 }
 
 QColor PropertyAttributes::colorValue(const QString &aKey, const QColor aDefaultValue) const
 {
-    QString aValue=value(aKey, aDefaultValue.name());
-    QColor res(aValue);
+    RETURN_ONE(QColor, valueToColor, aKey, aDefaultValue.name(), aDefaultValue);
+}
 
-    if (res.isValid())
-    {
-        return res;
-    }
+#define RETURN_LIST(aListType, aType, aConvertFunc, aKey, aDefaultValues) \
+    QString aValue=value(aKey); \
+\
+    if (aValue=="") \
+    { \
+        return aDefaultValues; \
+    } \
+\
+    QStringList aParts=aValue.split("|"); \
+    aListType aResultList; \
+\
+    for (int i=0; i<aParts.length(); ++i) \
+    { \
+        aType aItem; \
+\
+        if (aConvertFunc(aParts.at(i).trimmed(), aItem)) \
+        { \
+            aResultList.append(aItem); \
+        } \
+    } \
+\
+    if (aResultList.length()==0) \
+    { \
+        return aDefaultValues; \
+    } \
+\
+    return aResultList;
 
-    return aDefaultValue;
+QList<bool> PropertyAttributes::boolValues(const QString &aKey, const QList<bool> aDefaultValues) const
+{
+    RETURN_LIST(QList<bool>, bool, valueToBool, aKey, aDefaultValues);
+}
+
+QList<int> PropertyAttributes::intValues(const QString &aKey, const QList<int> aDefaultValues) const
+{
+    RETURN_LIST(QList<int>, int, valueToInt, aKey, aDefaultValues);
+}
+
+QList<double> PropertyAttributes::doubleValues(const QString &aKey, const QList<double> aDefaultValues) const
+{
+    RETURN_LIST(QList<double>, double, valueToDouble, aKey, aDefaultValues);
+}
+
+QStringList PropertyAttributes::stringValues(const QString &aKey, const QStringList aDefaultValues) const
+{
+    RETURN_LIST(QStringList, QString, valueToString, aKey, aDefaultValues);
+}
+
+QList<QDate> PropertyAttributes::dateValues(const QString &aKey, const QList<QDate> aDefaultValues) const
+{
+    RETURN_LIST(QList<QDate>, QDate, valueToDate, aKey, aDefaultValues);
+}
+
+QList<QTime> PropertyAttributes::timeValues(const QString &aKey, const QList<QTime> aDefaultValues) const
+{
+    RETURN_LIST(QList<QTime>, QTime, valueToTime, aKey, aDefaultValues);
+}
+
+QList<QColor> PropertyAttributes::colorValues(const QString &aKey, const QList<QColor> aDefaultValues) const
+{
+    RETURN_LIST(QList<QColor>, QColor, valueToColor, aKey, aDefaultValues);
 }
 
 void PropertyAttributes::applyToPalette(QWidget *aWidget) const
@@ -217,12 +220,11 @@ void PropertyAttributes::applyToCombobox(QComboBox *aWidget) const
     aWidget->setMaxVisibleItems(intValue( "maxVisibleItems", aWidget->maxVisibleItems()));
     aWidget->setEditable(       boolValue("editable",        aWidget->isEditable()));
 
-    QString aValues=stringValue("values");
+    QStringList aItems=stringValues("values");
 
-    if (aValues!="")
+    if (aItems.length()>0)
     {
         QString aValue=aWidget->currentText();
-        QStringList aItems=aValues.split("|");
 
         aWidget->clear();
         aWidget->addItems(aItems);
@@ -267,4 +269,70 @@ void PropertyAttributes::applyToDateTimeEdit(QDateTimeEdit *aWidget) const
     aWidget->setMaximumTime(  timeValue(  "maxTime",       aWidget->maximumTime()));
     aWidget->setDisplayFormat(stringValue("displayFormat", aWidget->displayFormat()));
     aWidget->setCalendarPopup(boolValue(  "calendarPopup", aWidget->calendarPopup()));
+}
+
+bool PropertyAttributes::valueToBool(const QString &aValue, bool &aResultValue) const
+{
+    if (aValue=="1" || aValue.compare("true", Qt::CaseInsensitive)==0)
+    {
+        aResultValue=true;
+        return true;
+    }
+
+    if (aValue=="0" || aValue.compare("false", Qt::CaseInsensitive)==0)
+    {
+        aResultValue=false;
+        return true;
+    }
+
+    return false;
+}
+
+bool PropertyAttributes::valueToInt(const QString &aValue, int &aResultValue) const
+{
+    bool ok;
+    aResultValue=aValue.toInt(&ok);
+    return ok;
+}
+
+bool PropertyAttributes::valueToDouble(const QString &aValue, double &aResultValue) const
+{
+    bool ok;
+    aResultValue=aValue.toDouble(&ok);
+    return ok;
+}
+
+bool PropertyAttributes::valueToString(const QString &aValue, QString &aResultValue) const
+{
+    aResultValue=aValue;
+
+    if (aResultValue.endsWith("\""))
+    {
+        aResultValue.remove(aResultValue.length()-1, 1);
+    }
+
+    if (aResultValue.startsWith("\""))
+    {
+        aResultValue.remove(0, 1);
+    }
+
+    return true;
+}
+
+bool PropertyAttributes::valueToDate(const QString &aValue, QDate &aResultValue) const
+{
+    aResultValue=QDate::fromString(aValue, "dd.MM.yyyy");
+    return aResultValue.isValid();
+}
+
+bool PropertyAttributes::valueToTime(const QString &aValue, QTime &aResultValue) const
+{
+    aResultValue=QTime::fromString(aValue, "HH:mm:ss");
+    return aResultValue.isValid();
+}
+
+bool PropertyAttributes::valueToColor(const QString &aValue, QColor &aResultValue) const
+{
+    aResultValue.setNamedColor(aValue);
+    return aResultValue.isValid();
 }

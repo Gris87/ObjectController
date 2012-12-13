@@ -30,6 +30,14 @@ public:
     QTime timeValue(const QString &aKey, const QTime aDefaultValue=QTime()) const;
     QColor colorValue(const QString &aKey, const QColor aDefaultValue=QColor()) const;
 
+    QList<bool> boolValues(const QString &aKey, const QList<bool> aDefaultValues=QList<bool>()) const;
+    QList<int> intValues(const QString &aKey, const QList<int> aDefaultValues=QList<int>()) const;
+    QList<double> doubleValues(const QString &aKey, const QList<double> aDefaultValues=QList<double>()) const;
+    QStringList stringValues(const QString &aKey, const QStringList aDefaultValues=QStringList()) const;
+    QList<QDate> dateValues(const QString &aKey, const QList<QDate> aDefaultValues=QList<QDate>()) const;
+    QList<QTime> timeValues(const QString &aKey, const QList<QTime> aDefaultValues=QList<QTime>()) const;
+    QList<QColor> colorValues(const QString &aKey, const QList<QColor> aDefaultValues=QList<QColor>()) const;
+
     void applyToPalette(QWidget *aWidget) const;
     void applyToWidget(QWidget *aWidget) const;
     void applyToSpinBox(QSpinBox *aWidget) const;
@@ -40,6 +48,15 @@ public:
     void applyToDateEdit(QDateEdit *aWidget) const;
     void applyToTimeEdit(QTimeEdit *aWidget) const;
     void applyToDateTimeEdit(QDateTimeEdit *aWidget) const;
+
+protected:
+    bool valueToBool(const QString &aValue, bool &aResultValue) const;
+    bool valueToInt(const QString &aValue, int &aResultValue) const;
+    bool valueToDouble(const QString &aValue, double &aResultValue) const;
+    bool valueToString(const QString &aValue, QString &aResultValue) const;
+    bool valueToDate(const QString &aValue, QDate &aResultValue) const;
+    bool valueToTime(const QString &aValue, QTime &aResultValue) const;
+    bool valueToColor(const QString &aValue, QColor &aResultValue) const;
 };
 
 #endif // PROPERTYATTRIBUTES_H

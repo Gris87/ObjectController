@@ -144,6 +144,8 @@ void CursorEditor::handleAttributes(const PropertyAttributes *aAttributes)
     aAttributes->applyToCombobox(ui->valueComboBox);
     aAttributes->applyToSpinBox(ui->xSpinBox);
     aAttributes->applyToSpinBox(ui->ySpinBox);
+
+    // TODO: Handle removing Bitmap
 }
 
 void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)

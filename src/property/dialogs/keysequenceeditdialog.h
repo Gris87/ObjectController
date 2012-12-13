@@ -6,6 +6,7 @@
 #include <QKeySequence>
 
 #include "../widgets/shortcutedit.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class KeySequenceEditDialog;
@@ -16,7 +17,7 @@ class KeySequenceEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit KeySequenceEditDialog(QKeySequence aKeySequence, QWidget *parent = 0);
+    explicit KeySequenceEditDialog(QKeySequence aKeySequence, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~KeySequenceEditDialog();
 
     QKeySequence resultValue() const;

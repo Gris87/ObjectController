@@ -18,7 +18,7 @@ ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, const PropertyAttrib
 
     if (aAttributes)
     {
-        aAttributes->applyToPalette(mHexEditor);
+        aAttributes->applyToWidget(mHexEditor);
     }
 
     ui->mainLayout->insertWidget(0, mHexEditor);

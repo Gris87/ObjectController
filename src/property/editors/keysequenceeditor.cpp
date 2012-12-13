@@ -8,6 +8,8 @@ KeySequenceEditor::KeySequenceEditor(QWidget *parent) :
     ui(new Ui::KeySequenceEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 KeySequenceEditor::~KeySequenceEditor()
@@ -37,9 +39,16 @@ void KeySequenceEditor::setValue(const QKeySequence &aValue)
     ui->valueEdit->setText(mValue.toString());
 }
 
+void KeySequenceEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToWidget(ui->valueEdit);
+}
+
 void KeySequenceEditor::on_editButton_clicked()
 {
-    KeySequenceEditDialog dialog(mValue, this);
+    KeySequenceEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

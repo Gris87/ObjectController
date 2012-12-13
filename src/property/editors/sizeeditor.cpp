@@ -49,7 +49,7 @@ void SizeEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
-    aAttributes->applyToPalette(ui->valueEdit);
+    aAttributes->applyToWidget(ui->valueEdit);
 }
 
 void SizeEditor::on_editButton_clicked()
