@@ -2,12 +2,16 @@
 #include "ui_vector3deditor.h"
 
 #include "../dialogs/vector3deditdialog.h"
+#include "../propertyutils.h"
 
 Vector3DEditor::Vector3DEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::Vector3DEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 Vector3DEditor::~Vector3DEditor()
@@ -33,23 +37,39 @@ void Vector3DEditor::setIcon(const QIcon &aIcon)
 void Vector3DEditor::setValue(const QVector3D &aValue)
 {
     mValue=aValue;
+}
 
-
-
+void Vector3DEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "["+
-                           QString::number(aValue.x())+
+                           doubleToString(aValue.x(), mDecimals)+
                            ", "+
-                           QString::number(aValue.y())+
+                           doubleToString(aValue.y(), mDecimals)+
                            ", "+
-                           QString::number(aValue.z())+
+                           doubleToString(aValue.z(), mDecimals)+
                            "]"
                           );
 }
 
+void Vector3DEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void Vector3DEditor::on_editButton_clicked()
 {
-    Vector3DEditDialog dialog(mValue, this);
+    Vector3DEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

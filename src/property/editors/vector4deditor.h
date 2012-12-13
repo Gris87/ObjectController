@@ -19,6 +19,8 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QVector4D &aValue);
+    void updateUI();
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();
@@ -27,6 +29,8 @@ protected:
 private:
     Ui::Vector4DEditor *ui;
     QVector4D mValue;
+    const PropertyAttributes *mAttributes;
+    int mDecimals;
 
 private slots:
     void on_editButton_clicked();

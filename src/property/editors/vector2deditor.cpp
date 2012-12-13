@@ -2,12 +2,16 @@
 #include "ui_vector2deditor.h"
 
 #include "../dialogs/vector2deditdialog.h"
+#include "../propertyutils.h"
 
 Vector2DEditor::Vector2DEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::Vector2DEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 Vector2DEditor::~Vector2DEditor()
@@ -33,21 +37,37 @@ void Vector2DEditor::setIcon(const QIcon &aIcon)
 void Vector2DEditor::setValue(const QVector2D &aValue)
 {
     mValue=aValue;
+}
 
-
-
+void Vector2DEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "["+
-                           QString::number(mValue.x())+
+                           doubleToString(mValue.x(), mDecimals)+
                            ", "+
-                           QString::number(mValue.y())+
+                           doubleToString(mValue.y(), mDecimals)+
                            "]"
                           );
 }
 
+void Vector2DEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void Vector2DEditor::on_editButton_clicked()
 {
-    Vector2DEditDialog dialog(mValue, this);
+    Vector2DEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

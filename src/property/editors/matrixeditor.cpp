@@ -2,12 +2,16 @@
 #include "ui_matrixeditor.h"
 
 #include "../dialogs/matrixeditdialog.h"
+#include "../propertyutils.h"
 
 MatrixEditor::MatrixEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::MatrixEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 MatrixEditor::~MatrixEditor()
@@ -33,29 +37,45 @@ void MatrixEditor::setIcon(const QIcon &aIcon)
 void MatrixEditor::setValue(const QMatrix &aValue)
 {
     mValue=aValue;
+}
 
-
-
+void MatrixEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "[("+
-                           QString::number(mValue.m11())+
+                           doubleToString(mValue.m11(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m12())+
+                           doubleToString(mValue.m12(), mDecimals)+
                            "), ("+
-                           QString::number(mValue.m21())+
+                           doubleToString(mValue.m21(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m22())+
+                           doubleToString(mValue.m22(), mDecimals)+
                            "); ("+
-                           QString::number(mValue.dx())+
+                           doubleToString(mValue.dx(), mDecimals)+
                            ", "+
-                           QString::number(mValue.dy())+
+                           doubleToString(mValue.dy(), mDecimals)+
                            ")]"
                           );
 }
 
+void MatrixEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void MatrixEditor::on_editButton_clicked()
 {
-    MatrixEditDialog dialog(mValue, this);
+    MatrixEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

@@ -670,6 +670,107 @@ public:
                                           "step               : 1                       ;"
                )
 
+    // TODO: Insert Pen, TextLength and TextFormat
+
+    Q_CLASSINFO("Matrix attributes",      "toolTip            : \"It is a Matrix\"      ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Transform attributes",   "toolTip            : \"It is a Transform\"   ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Matrix4x4 attributes",   "toolTip            : \"It is a Matrix4x4\"   ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Vector2D attributes",    "toolTip            : \"It is a Vector2D\"    ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Vector3D attributes",    "toolTip            : \"It is a Vector3D\"    ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Vector4D attributes",    "toolTip            : \"It is a Vector4D\"    ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Quaternion attributes",  "toolTip            : \"It is a Quaternion\"  ;"
+                                          "delay              : 100                     ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                        //"suffix             : \" `\"                  ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    Q_CLASSINFO("Void attributes",        "toolTip            : \"It is a Void\"        ;"
+                                          "delay              : 100                     ;"
+               )
+
+    Q_CLASSINFO("Object attributes",      "toolTip            : \"It is a Object\"      ;"
+                                          "delay              : 100                     ;"
+               )
+
     // ----------------------------------------------------------------------------------------------------
 
     explicit TestObject(QObject *parent = 0);

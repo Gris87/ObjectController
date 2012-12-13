@@ -2,12 +2,16 @@
 #include "ui_transformeditor.h"
 
 #include "../dialogs/transformeditdialog.h"
+#include "../propertyutils.h"
 
 TransformEditor::TransformEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::TransformEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 TransformEditor::~TransformEditor()
@@ -33,35 +37,51 @@ void TransformEditor::setIcon(const QIcon &aIcon)
 void TransformEditor::setValue(const QTransform &aValue)
 {
     mValue=aValue;
+}
 
-
-
+void TransformEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "[("+
-                           QString::number(mValue.m11())+
+                           doubleToString(mValue.m11(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m12())+
+                           doubleToString(mValue.m12(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m13())+
+                           doubleToString(mValue.m13(), mDecimals)+
                            "), ("+
-                           QString::number(mValue.m21())+
+                           doubleToString(mValue.m21(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m22())+
+                           doubleToString(mValue.m22(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m23())+
+                           doubleToString(mValue.m23(), mDecimals)+
                            "), ("+
-                           QString::number(mValue.m31())+
+                           doubleToString(mValue.m31(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m32())+
+                           doubleToString(mValue.m32(), mDecimals)+
                            ", "+
-                           QString::number(mValue.m33())+
+                           doubleToString(mValue.m33(), mDecimals)+
                            ")]"
                           );
 }
 
+void TransformEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void TransformEditor::on_editButton_clicked()
 {
-    TransformEditDialog dialog(mValue, this);
+    TransformEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

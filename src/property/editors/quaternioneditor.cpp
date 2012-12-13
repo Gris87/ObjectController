@@ -2,12 +2,16 @@
 #include "ui_quaternioneditor.h"
 
 #include "../dialogs/quaternioneditdialog.h"
+#include "../propertyutils.h"
 
 QuaternionEditor::QuaternionEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::QuaternionEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 QuaternionEditor::~QuaternionEditor()
@@ -33,25 +37,41 @@ void QuaternionEditor::setIcon(const QIcon &aIcon)
 void QuaternionEditor::setValue(const QQuaternion &aValue)
 {
     mValue=aValue;
+}
 
-
-
+void QuaternionEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "["+
-                           QString::number(aValue.scalar())+
+                           doubleToString(aValue.scalar(), mDecimals)+
                            "; "+
-                           QString::number(aValue.x())+
+                           doubleToString(aValue.x(), mDecimals)+
                            ", "+
-                           QString::number(aValue.y())+
+                           doubleToString(aValue.y(), mDecimals)+
                            ", "+
-                           QString::number(aValue.z())+
+                           doubleToString(aValue.z(), mDecimals)+
                            "]"
                           );
 }
 
+void QuaternionEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void QuaternionEditor::on_editButton_clicked()
 {
-    QuaternionEditDialog dialog(mValue, this);
+    QuaternionEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

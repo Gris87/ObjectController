@@ -2,12 +2,16 @@
 #include "ui_vector4deditor.h"
 
 #include "../dialogs/vector4deditdialog.h"
+#include "../propertyutils.h"
 
 Vector4DEditor::Vector4DEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::Vector4DEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 Vector4DEditor::~Vector4DEditor()
@@ -33,25 +37,42 @@ void Vector4DEditor::setIcon(const QIcon &aIcon)
 void Vector4DEditor::setValue(const QVector4D &aValue)
 {
     mValue=aValue;
+    updateUI();
+}
 
-
-
+void Vector4DEditor::updateUI()
+{
     ui->valueEdit->setText(
                            "["+
-                           QString::number(aValue.x())+
+                           doubleToString(aValue.x(), mDecimals)+
                            ", "+
-                           QString::number(aValue.y())+
+                           doubleToString(aValue.y(), mDecimals)+
                            ", "+
-                           QString::number(aValue.z())+
+                           doubleToString(aValue.z(), mDecimals)+
                            ", "+
-                           QString::number(aValue.w())+
+                           doubleToString(aValue.w(), mDecimals)+
                            "]"
                           );
 }
 
+void Vector4DEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToPalette(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void Vector4DEditor::on_editButton_clicked()
 {
-    Vector4DEditDialog dialog(mValue, this);
+    Vector4DEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {
