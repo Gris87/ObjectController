@@ -636,6 +636,7 @@ public:
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
+                                          "allowBitmap        : false                   ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"

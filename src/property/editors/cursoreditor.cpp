@@ -145,7 +145,34 @@ void CursorEditor::handleAttributes(const PropertyAttributes *aAttributes)
     aAttributes->applyToSpinBox(ui->xSpinBox);
     aAttributes->applyToSpinBox(ui->ySpinBox);
 
-    // TODO: Handle removing Bitmap
+    if (!aAttributes->boolValue("allowBitmap", true))
+    {
+        ui->valueComboBox->blockSignals(true);
+
+        if (ui->valueComboBox->currentText()=="BitmapCursor")
+        {
+            ui->valueComboBox->setCurrentIndex(0);
+        }
+
+        QString aValue=ui->valueComboBox->currentText();
+        QStringList aValues;
+
+        for (int i=0; i<ui->valueComboBox->count(); ++i)
+        {
+            QString aItem=ui->valueComboBox->itemText(i);
+
+            if (aItem!="BitmapCursor")
+            {
+                aValues.append(aItem);
+            }
+        }
+
+        ui->valueComboBox->clear();
+        ui->valueComboBox->addItems(aValues);
+        ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(aValue));
+
+        ui->valueComboBox->blockSignals(false);
+    }
 }
 
 void CursorEditor::on_valueComboBox_currentIndexChanged(const QString &aValue)
