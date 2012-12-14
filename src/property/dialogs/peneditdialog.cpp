@@ -76,6 +76,10 @@ PenEditDialog::PenEditDialog(QPen aPen, const PropertyAttributes *aAttributes, Q
         aAttributes->applyToCheckBox(ui->cosmeticCheckBox);
         aAttributes->applyToDoubleSpinBox(ui->milerLimitSpinBox);
         aAttributes->applyToDoubleSpinBox(ui->dashOffsetSpinBox);
+
+        ui->styleComboBox->setEnabled(aAttributes->boolValue("allowSetStyle", ui->styleComboBox->isEnabled()));
+        ui->capStyleComboBox->setEnabled(aAttributes->boolValue("allowSetCapStyle", ui->capStyleComboBox->isEnabled()));
+        ui->joinStyleComboBox->setEnabled(aAttributes->boolValue("allowSetJoinStyle", ui->joinStyleComboBox->isEnabled()));
     }
 
 

@@ -446,7 +446,7 @@ public:
 
     Q_CLASSINFO("EasingCurve attributes", "toolTip            : \"It is a EasingCurve\" ;"
                                           "delay              : 100                     ;"
-                                          "allowChangeType    : false                   ;"
+                                          "allowSetType       : false                   ;"
 
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
@@ -505,7 +505,7 @@ public:
 
     Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"       ;"
                                           "delay              : 100                     ;"
-                                        //"allowChangeType    : false                   ;"
+                                        //"allowSetBrushStyle : false                   ;"
                                         //"allowGradient      : false                   ;"
                                         //"allowTransform     : false                   ;"
 
@@ -633,10 +633,11 @@ public:
 
     Q_CLASSINFO("Cursor attributes",      "toolTip            : \"It is a Cursor\"      ;"
                                           "delay              : 100                     ;"
+                                          "allowBitmap        : false                   ;"
+
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
-                                          "allowBitmap        : false                   ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -658,6 +659,7 @@ public:
 
     Q_CLASSINFO("SizePolicy attributes",  "toolTip            : \"It is a SizePolicy\"  ;"
                                           "delay              : 100                     ;"
+
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
@@ -678,7 +680,11 @@ public:
 
     Q_CLASSINFO("Pen attributes",         "toolTip            : \"It is a Pen\"         ;"
                                           "delay              : 100                     ;"
-                                        //"allowChangeType    : false                   ;"
+                                          "allowSetStyle      : false                   ;"
+                                          "allowSetCapStyle   : false                   ;"
+                                          "allowSetJoinStyle  : false                   ;"
+
+                                        //"allowSetBrushStyle : false                   ;"
                                         //"allowGradient      : false                   ;"
                                         //"allowTransform     : false                   ;"
 

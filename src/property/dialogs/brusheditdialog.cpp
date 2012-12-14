@@ -119,7 +119,7 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
 
         mDecimals=aAttributes->intValue("decimals", mDecimals);
 
-        ui->styleComboBox->setEnabled(  aAttributes->boolValue("allowChangeType", ui->styleComboBox->isEnabled()));
+        ui->styleComboBox->setEnabled(  aAttributes->boolValue("allowSetBrushStyle", ui->styleComboBox->isEnabled()));
         ui->transformButton->setVisible(aAttributes->boolValue("allowTransform",  true));
 
         if (aAttributes->boolValue("allowGradient", true))
