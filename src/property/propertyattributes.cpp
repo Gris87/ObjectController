@@ -296,7 +296,7 @@ bool PropertyAttributes::valueToBool(const QString &aValue, bool &aResultValue) 
 bool PropertyAttributes::valueToInt(const QString &aValue, int &aResultValue) const
 {
     bool ok;
-    aResultValue=aValue.toInt(&ok);
+    aResultValue=qRound(aValue.toDouble(&ok));
     return ok;
 }
 

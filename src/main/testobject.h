@@ -724,7 +724,28 @@ public:
                                           "step               : 0.001                   ;"
                )
 
-    // TODO: Insert TextFormat
+    Q_CLASSINFO("TextFormat attributes",  "toolTip            : \"It is a TextFormat\"  ;"
+                                          "delay              : 100                     ;"
+                                          "allowSetFormatType : true                    ;"
+
+                                          "maxVisibleItems    : 5                       ;"
+                                          "editable           : false                   ;"
+                                        //"values             :                         ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \"$\"                  ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 100                     ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+
+                                        //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
+                                          "maxLength          : 16                      ;"
+                                        //"echoMode           : Password                ;"
+                                          "placeholderText    : \"Modify TextFormat\"   ;"
+               )
 
     Q_CLASSINFO("Matrix attributes",      "toolTip            : \"It is a Matrix\"      ;"
                                           "delay              : 100                     ;"

@@ -100,7 +100,84 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const Proper
 
     if (aAttributes)
     {
+        aAttributes->applyToCombobox(ui->typeComboBox);
+        aAttributes->applyToCombobox(ui->layoutDirectionComboBox);
+        aAttributes->applyToSpinBox(ui->objectIndexSpinBox);
+
+        aAttributes->applyToCombobox(ui->blockHorizontalAlignmentComboBox);
+        aAttributes->applyToCombobox(ui->blockVerticalAlignmentComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->blockTopMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->blockBottomMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->blockLeftMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->blockRightMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->blockTextIndentSpinBox);
+        aAttributes->applyToSpinBox(ui->blockIndentSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->blockLineHeightSpinBox);
+        aAttributes->applyToCombobox(ui->blockLineHeightTypeComboBox);
+        aAttributes->applyToCheckBox(ui->blockNonBreakableLinesCheckBox);
+        aAttributes->applyToCheckBox(ui->blockPageBreakPolicyAutoCheckBox);
+        aAttributes->applyToCheckBox(ui->blockPageBreakPolicyBeforeCheckBox);
+        aAttributes->applyToCheckBox(ui->blockPageBreakPolicyAfterCheckBox);
+
+        aAttributes->applyToLineEdit(ui->charFontFamilyEdit);
+        aAttributes->applyToDoubleSpinBox(ui->charFontPointSizeSpinBox);
+        aAttributes->applyToSpinBox(ui->charFontWeightSpinBox);
+        aAttributes->applyToCheckBox(ui->charFontItalicCheckBox);
+        aAttributes->applyToCheckBox(ui->charFontFixedPitchCheckBox);
+        aAttributes->applyToCheckBox(ui->charFontStrikeOutCheckBox);
+        aAttributes->applyToCheckBox(ui->charFontKerningCheckBox);
+        aAttributes->applyToCheckBox(ui->charFontOverlineCheckBox);
+        aAttributes->applyToCheckBox(ui->charFontUnderlineCheckBox);
+        aAttributes->applyToCombobox(ui->charUnderlineStyleComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->charFontLetterSpacingSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->charFontWordSpacingSpinBox);
+        aAttributes->applyToCombobox(ui->charFontStyleHintComboBox);
+        aAttributes->applyToCombobox(ui->charFontStyleStrategyComboBox);
+        aAttributes->applyToCombobox(ui->charFontStyleStrategyFlagComboBox);
+        aAttributes->applyToCheckBox(ui->charAnchorCheckBox);
+        aAttributes->applyToLineEdit(ui->charAnchorHrefLineEdit);
+        aAttributes->applyToCombobox(ui->charFontCapitalizationComboBox);
+        aAttributes->applyToCombobox(ui->charFontHintingPreferenceComboBox);
+        aAttributes->applyToCombobox(ui->charVerticalAlignmentComboBox);
+        aAttributes->applyToLineEdit(ui->charTooltipEdit);
+
+        aAttributes->applyToCombobox(ui->framePositionComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->frameBorderSpinBox);
+        aAttributes->applyToCombobox(ui->frameBorderStyleComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->frameMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->frameTopMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->frameBottomMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->frameLeftMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->frameRightMarginSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->framePaddingSpinBox);
+        aAttributes->applyToCheckBox(ui->framePageBreakPolicyAutoCheckBox);
+        aAttributes->applyToCheckBox(ui->framePageBreakPolicyBeforeCheckBox);
+        aAttributes->applyToCheckBox(ui->framePageBreakPolicyAfterCheckBox);
+
+        aAttributes->applyToLineEdit(ui->imageNameEdit);
+        aAttributes->applyToDoubleSpinBox(ui->imageWidthSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->imageHeightSpinBox);
+
+        aAttributes->applyToCombobox(ui->listStyleComboBox);
+        aAttributes->applyToSpinBox(ui->listIndentSpinBox);
+        aAttributes->applyToLineEdit(ui->listPrefixEdit);
+        aAttributes->applyToLineEdit(ui->listSuffixEdit);
+
+        aAttributes->applyToDoubleSpinBox(ui->tableCellTopPaddingSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->tableCellBottomPaddingSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->tableCellRightPaddingSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->tableCellLeftPaddingSpinBox);
+
+        aAttributes->applyToSpinBox(ui->tableHeaderRowsSpinBox);
+        aAttributes->applyToSpinBox(ui->tableColumnsSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->tableCellsSpacingSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->tableCellsPaddingSpinBox);
+        aAttributes->applyToCombobox(ui->tableHorizontalAlignmentComboBox);
+        aAttributes->applyToCombobox(ui->tableVerticalAlignmentComboBox);
+
         mDecimals=aAttributes->intValue("decimals", mDecimals);
+
+        ui->typeComboBox->setEnabled(aAttributes->boolValue("allowSetFormatType", ui->typeComboBox->isEnabled()));
     }
 
 
