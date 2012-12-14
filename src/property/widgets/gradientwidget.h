@@ -5,11 +5,13 @@
 
 #include <QPainter>
 
+#include "../propertyattributes.h"
+
 class GradientWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit GradientWidget(QWidget *parent = 0);
+    explicit GradientWidget(const PropertyAttributes *aAttributes, QWidget *parent = 0);
 
     QSize minimumSizeHint() const;
     QSize sizeHint() const;
@@ -24,6 +26,7 @@ protected:
     int            mSelectedIndex;
     bool           mDragging;
     QGradientStops mGradientStops;
+    const PropertyAttributes *mAttributes;
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

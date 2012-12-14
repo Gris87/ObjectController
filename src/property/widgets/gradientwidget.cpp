@@ -10,7 +10,7 @@
 #include "coloreditdialog.h"
 #endif
 
-GradientWidget::GradientWidget(QWidget *parent) :
+GradientWidget::GradientWidget(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent)
 {
     mLeftPressed=false;
@@ -18,6 +18,8 @@ GradientWidget::GradientWidget(QWidget *parent) :
     mStartY=0;
     mSelectedIndex=-1;
     mDragging=false;
+
+    mAttributes=aAttributes;
 
     mGradientStops.append(QGradientStop(0, QColor(255, 255, 255)));
     mGradientStops.append(QGradientStop(1, QColor(0, 0, 0)));
@@ -119,8 +121,7 @@ void GradientWidget::mouseReleaseEvent(QMouseEvent *event)
         {
             if (mSelectedIndex>=0)
             {
-                // TODO: Add attributes here
-                ColorEditDialog dialog(mGradientStops.at(mSelectedIndex).second, 0, this);
+                ColorEditDialog dialog(mGradientStops.at(mSelectedIndex).second, mAttributes, this);
 
                 if (dialog.exec())
                 {

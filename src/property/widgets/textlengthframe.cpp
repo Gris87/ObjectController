@@ -2,12 +2,21 @@
 #include "ui_textlengthframe.h"
 
 #include "../dialogs/textlengtheditdialog.h"
+#include "../propertyutils.h"
 
-TextLengthFrame::TextLengthFrame(QWidget *parent) :
+TextLengthFrame::TextLengthFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TextLengthFrame)
 {
     ui->setupUi(this);
+
+    mAttributes=aAttributes;
+    mDecimals=6;
+
+    if (aAttributes)
+    {
+        mDecimals=aAttributes->intValue("decimals", mDecimals);
+    }
 
     setValue(QTextLength());
 }
@@ -48,8 +57,7 @@ void TextLengthFrame::setValue(const QTextLength &aValue)
     }
 
     res.append(", ");
-    // TODO: Use doubleToString
-    res.append(QString::number(mTextLength.rawValue()));
+    res.append(doubleToString(mTextLength.rawValue(), mDecimals));
     res.append("]");
 
     ui->valueEdit->setText(res);

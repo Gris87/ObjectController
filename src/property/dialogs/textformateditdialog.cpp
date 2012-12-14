@@ -1713,7 +1713,8 @@ void TextFormatEditDialog::tableUpdateColumnWidthConstraints()
 
 void TextFormatEditDialog::tableAddColumnWidthConstraint()
 {
-    TextLengthFrame *aFrame=new TextLengthFrame(this);
+    // TODO: Add attributes here
+    TextLengthFrame *aFrame=new TextLengthFrame(0, this);
 
     if (ui->tableColumnWidthConstraintsLayout->count()==0)
     {

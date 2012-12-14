@@ -5,6 +5,8 @@
 
 #include <QTextLength>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
     class TextLengthFrame;
 }
@@ -14,7 +16,7 @@ class TextLengthFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit TextLengthFrame(QWidget *parent = 0);
+    explicit TextLengthFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~TextLengthFrame();
 
     void setUpEnabled(bool aEnabled);
@@ -26,6 +28,8 @@ public:
 private:
     Ui::TextLengthFrame *ui;
     QTextLength          mTextLength;
+    const PropertyAttributes *mAttributes;
+    int mDecimals;
 
 signals:
     void deletePressed();

@@ -35,7 +35,7 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
 
 
 
-    mGradientWidget=new GradientWidget(this);
+    mGradientWidget=new GradientWidget(mAttributes, this);
     ui->gradientLayout->insertWidget(1, mGradientWidget);
 
     connect(mGradientWidget, SIGNAL(gradientChanged(QGradientStops)), this, SLOT(gradientChanged(QGradientStops)));
