@@ -10,6 +10,7 @@
 #include <QBoxLayout>
 
 #include "../widgets/colorarea.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class TextFormatEditDialog;
@@ -20,7 +21,7 @@ class TextFormatEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent = 0);
+    explicit TextFormatEditDialog(QTextFormat aTextFormat, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~TextFormatEditDialog();
 
     QTextFormat resultValue() const;
@@ -38,6 +39,9 @@ private:
     QTextTableFormat          mTextTableFormat;
 
     ColorArea                *mCharUnderlineColorArea;
+
+    const PropertyAttributes *mAttributes;
+    int mDecimals;
 
     void copyFromTextFormat(QTextFormat aTextFormat);
     void putWidgetToLayout(QWidget *aWidget, QBoxLayout *aLayout);

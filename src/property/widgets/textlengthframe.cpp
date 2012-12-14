@@ -80,8 +80,7 @@ void TextLengthFrame::on_delToolButton_clicked()
 
 void TextLengthFrame::on_editButton_clicked()
 {
-    // TODO: Add attributes here
-    TextLengthEditDialog dialog(mTextLength, 0, this);
+    TextLengthEditDialog dialog(mTextLength, mAttributes, this);
 
     if (dialog.exec())
     {

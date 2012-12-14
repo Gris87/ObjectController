@@ -8,6 +8,8 @@ TextFormatEditor::TextFormatEditor(QWidget *parent) :
     ui(new Ui::TextFormatEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 TextFormatEditor::~TextFormatEditor()
@@ -82,9 +84,16 @@ void TextFormatEditor::setValue(const QTextFormat &aValue)
     ui->valueEdit->setText(res);
 }
 
+void TextFormatEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToWidget(ui->valueEdit);
+}
+
 void TextFormatEditor::on_editButton_clicked()
 {
-    TextFormatEditDialog dialog(mValue, this);
+    TextFormatEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

@@ -11,8 +11,9 @@
 #include "textlengtheditdialog.h"
 #include "../widgets/tabframe.h"
 #include "../widgets/textlengthframe.h"
+#include "../propertyutils.h"
 
-TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent) :
+TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TextFormatEditDialog)
 {
@@ -22,8 +23,12 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
 
 
 
-    // TODO: Add attributes here
-    mCharUnderlineColorArea=new ColorArea(0, this);
+    mAttributes=aAttributes;
+    mDecimals=6;
+
+
+
+    mCharUnderlineColorArea=new ColorArea(mAttributes, this);
     mCharUnderlineColorArea->setMinimumSize(20, 20);
     mCharUnderlineColorArea->setMaximumSize(20, 20);
     mCharUnderlineColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -90,6 +95,15 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *par
     {
         Q_ASSERT(false);
     }
+
+
+
+    if (aAttributes)
+    {
+        mDecimals=aAttributes->intValue("decimals", mDecimals);
+    }
+
+
 
     updateProperties();
 
@@ -265,8 +279,7 @@ void TextFormatEditDialog::on_typeComboBox_currentIndexChanged(const QString &aV
 
 void TextFormatEditDialog::on_backgroundButton_clicked()
 {
-    // TODO: Add attributes here
-    BrushEditDialog dialog(mTextFormat.background(), 0, this);
+    BrushEditDialog dialog(mTextFormat.background(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -277,8 +290,7 @@ void TextFormatEditDialog::on_backgroundButton_clicked()
 
 void TextFormatEditDialog::on_foregroundButton_clicked()
 {
-    // TODO: Add attributes here
-    BrushEditDialog dialog(mTextFormat.foreground(), 0, this);
+    BrushEditDialog dialog(mTextFormat.foreground(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -1191,8 +1203,7 @@ void TextFormatEditDialog::on_charVerticalAlignmentComboBox_currentIndexChanged(
 
 void TextFormatEditDialog::on_charTextOutlineButton_clicked()
 {
-    // TODO: Add attributes here
-    PenEditDialog dialog(((QTextCharFormat *)&mTextFormat)->textOutline(), 0, this);
+    PenEditDialog dialog(((QTextCharFormat *)&mTextFormat)->textOutline(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -1269,8 +1280,7 @@ void TextFormatEditDialog::on_frameBorderSpinBox_valueChanged(double aValue)
 
 void TextFormatEditDialog::on_frameBorderBrushButton_clicked()
 {
-    // TODO: Add attributes here
-    BrushEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->borderBrush(), 0, this);
+    BrushEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->borderBrush(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -1378,8 +1388,7 @@ void TextFormatEditDialog::on_framePaddingSpinBox_valueChanged(double aValue)
 
 void TextFormatEditDialog::on_frameWidthButton_clicked()
 {
-    // TODO: Add attributes here
-    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->width(), 0, this);
+    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->width(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -1390,8 +1399,7 @@ void TextFormatEditDialog::on_frameWidthButton_clicked()
 
 void TextFormatEditDialog::on_frameHeightButton_clicked()
 {
-    // TODO: Add attributes here
-    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->height(), 0, this);
+    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->height(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -1713,8 +1721,7 @@ void TextFormatEditDialog::tableUpdateColumnWidthConstraints()
 
 void TextFormatEditDialog::tableAddColumnWidthConstraint()
 {
-    // TODO: Add attributes here
-    TextLengthFrame *aFrame=new TextLengthFrame(0, this);
+    TextLengthFrame *aFrame=new TextLengthFrame(mAttributes, this);
 
     if (ui->tableColumnWidthConstraintsLayout->count()==0)
     {
@@ -2393,8 +2400,7 @@ void TextFormatEditDialog::frameUpdateProperties()
     }
 
     aWidthStr.append(", ");
-    // TODO: Use doubleToString
-    aWidthStr.append(QString::number(aWidth.rawValue()));
+    aWidthStr.append(doubleToString(aWidth.rawValue(), mDecimals));
     aWidthStr.append("]");
 
     QTextLength aHeight=((QTextFrameFormat *)&mTextFormat)->height();
@@ -2408,8 +2414,7 @@ void TextFormatEditDialog::frameUpdateProperties()
     }
 
     aHeightStr.append(", ");
-    // TODO: Use doubleToString
-    aHeightStr.append(QString::number(aHeight.rawValue()));
+    aHeightStr.append(doubleToString(aHeight.rawValue(), mDecimals));
     aHeightStr.append("]");
 
     QTextFormat::PageBreakFlags aPageBreaks=((QTextFrameFormat *)&mTextFormat)->pageBreakPolicy();
