@@ -16,6 +16,7 @@ public:
     ~BoolEditor();
 
     void setValue(const bool &aValue);
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();

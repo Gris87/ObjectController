@@ -23,6 +23,11 @@ void BoolEditor::setValue(const bool &aValue)
     ui->valueCheckBox->setChecked(aValue);
 }
 
+void BoolEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    aAttributes->applyToCheckBox(ui->valueCheckBox);
+}
+
 void BoolEditor::on_valueCheckBox_toggled(bool checked)
 {
     if (checked)
