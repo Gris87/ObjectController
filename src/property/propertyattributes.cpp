@@ -159,6 +159,11 @@ void PropertyAttributes::applyToWidget(QWidget *aWidget) const
     applyToPalette(aWidget);
 }
 
+void PropertyAttributes::applyToCheckBox(QCheckBox *aWidget) const
+{
+    applyToWidget(aWidget);
+}
+
 void PropertyAttributes::applyToSpinBox(QSpinBox *aWidget) const
 {
     applyToWidget(aWidget);

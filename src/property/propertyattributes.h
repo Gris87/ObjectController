@@ -7,6 +7,7 @@
 #include <QTime>
 #include <QColor>
 #include <QWidget>
+#include <QCheckBox>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
 #include <QLineEdit>
@@ -40,6 +41,7 @@ public:
 
     void applyToPalette(QWidget *aWidget) const;
     void applyToWidget(QWidget *aWidget) const;
+    void applyToCheckBox(QCheckBox *aWidget) const;
     void applyToSpinBox(QSpinBox *aWidget) const;
     void applyToDoubleSpinBox(QDoubleSpinBox *aWidget) const;
     void applyToLineEdit1Char(QLineEdit *aWidget) const;

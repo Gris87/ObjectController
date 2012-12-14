@@ -1,11 +1,16 @@
 #include "doubleframe.h"
 #include "ui_doubleframe.h"
 
-DoubleFrame::DoubleFrame(QWidget *parent) :
+DoubleFrame::DoubleFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DoubleFrame)
 {
     ui->setupUi(this);
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->valueSpinBox);
+    }
 }
 
 DoubleFrame::~DoubleFrame()

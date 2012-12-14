@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
     class DoubleFrame;
 }
@@ -12,7 +14,7 @@ class DoubleFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit DoubleFrame(QWidget *parent = 0);
+    explicit DoubleFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~DoubleFrame();
 
     void setUpEnabled(bool aEnabled);

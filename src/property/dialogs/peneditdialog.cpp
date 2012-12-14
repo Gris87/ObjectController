@@ -9,7 +9,7 @@
 #include "brusheditdialog.h"
 #include "../widgets/doubleframe.h"
 
-PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
+PenEditDialog::PenEditDialog(QPen aPen, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PenEditDialog)
 {
@@ -18,9 +18,9 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
     setWindowFlags(Qt::Window);
 
     mPen=aPen;
+    mAttributes=aAttributes;
 
-    // TODO: Add attributes here
-    mColorArea=new ColorArea(0, this);
+    mColorArea=new ColorArea(mAttributes, this);
     mColorArea->setMinimumSize(20, 20);
     mColorArea->setMaximumSize(20, 20);
     mColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -64,6 +64,19 @@ PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
     ui->styleComboBox->blockSignals(false);
     ui->capStyleComboBox->blockSignals(false);
     ui->joinStyleComboBox->blockSignals(false);
+
+
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->widthSpinBox);
+        aAttributes->applyToCombobox(ui->styleComboBox);
+        aAttributes->applyToCombobox(ui->capStyleComboBox);
+        aAttributes->applyToCombobox(ui->joinStyleComboBox);
+        aAttributes->applyToCheckBox(ui->cosmeticCheckBox);
+        aAttributes->applyToDoubleSpinBox(ui->milerLimitSpinBox);
+        aAttributes->applyToDoubleSpinBox(ui->dashOffsetSpinBox);
+    }
 
 
 
@@ -150,8 +163,7 @@ void PenEditDialog::on_cancelButton_clicked()
 
 void PenEditDialog::on_brushButton_clicked()
 {
-    // TODO: Add attributes here
-    BrushEditDialog dialog(mPen.brush(), 0, this);
+    BrushEditDialog dialog(mPen.brush(), mAttributes, this);
 
     if (dialog.exec())
     {
@@ -257,7 +269,7 @@ void PenEditDialog::updatePattern()
 
 void PenEditDialog::addPattern()
 {
-    DoubleFrame *aFrame=new DoubleFrame(this);
+    DoubleFrame *aFrame=new DoubleFrame(mAttributes, this);
 
     if (ui->patternLayout->count()==0)
     {

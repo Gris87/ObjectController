@@ -1191,7 +1191,8 @@ void TextFormatEditDialog::on_charVerticalAlignmentComboBox_currentIndexChanged(
 
 void TextFormatEditDialog::on_charTextOutlineButton_clicked()
 {
-    PenEditDialog dialog(((QTextCharFormat *)&mTextFormat)->textOutline(), this);
+    // TODO: Add attributes here
+    PenEditDialog dialog(((QTextCharFormat *)&mTextFormat)->textOutline(), 0, this);
 
     if (dialog.exec())
     {

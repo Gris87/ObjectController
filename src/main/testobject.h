@@ -676,7 +676,31 @@ public:
                                           "rejectShortcuts    : Ctrl+S|Alt+X|A|B|C|D|E  ;"
                )
 
-    // TODO: Insert Pen, TextLength and TextFormat
+    Q_CLASSINFO("Pen attributes",         "toolTip            : \"It is a Pen\"         ;"
+                                          "delay              : 100                     ;"
+                                        //"allowChangeType    : false                   ;"
+                                        //"allowGradient      : false                   ;"
+                                        //"allowTransform     : false                   ;"
+
+                                          "maxVisibleItems    : 5                       ;"
+                                          "editable           : false                   ;"
+                                        //"values             :                         ;"
+
+                                          "alphaEnabled       : false                   ;"
+                                          "standardColor1     : #ABCDEF                 ;"
+                                          "standardColor48    : #FEDCBA                 ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \"!\"                   ;"
+                                          "minValue           : -1000                   ;"
+                                          "maxValue           : 1000                    ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    // TODO: Insert TextLength and TextFormat
 
     Q_CLASSINFO("Matrix attributes",      "toolTip            : \"It is a Matrix\"      ;"
                                           "delay              : 100                     ;"

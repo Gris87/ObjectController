@@ -6,6 +6,7 @@
 #include <QPen>
 
 #include "../widgets/colorarea.h"
+#include "../propertyattributes.h"
 
 namespace Ui {
 class PenEditDialog;
@@ -16,7 +17,7 @@ class PenEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit PenEditDialog(QPen aPen, QWidget *parent = 0);
+    explicit PenEditDialog(QPen aPen, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PenEditDialog();
 
     QPen resultValue() const;
@@ -28,6 +29,7 @@ private:
     Ui::PenEditDialog *ui;
     QPen               mPen;
     ColorArea         *mColorArea;
+    const PropertyAttributes *mAttributes;
 
     void updateProperties(const bool &aNeedToUpdatePattern=true);
     void updatePattern();

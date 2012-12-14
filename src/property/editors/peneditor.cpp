@@ -11,6 +11,8 @@ PenEditor::PenEditor(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    mAttributes=0;
+
     ui->valueEdit->setText("Pen");
 }
 
@@ -51,9 +53,16 @@ void PenEditor::setValue(const QPen &aValue)
     setIcon(QIcon(aPenPixmap));
 }
 
+void PenEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToWidget(ui->valueEdit);
+}
+
 void PenEditor::on_editButton_clicked()
 {
-    PenEditDialog dialog(mValue, this);
+    PenEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {
