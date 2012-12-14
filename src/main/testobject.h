@@ -706,7 +706,25 @@ public:
                                           "step               : 0.001                   ;"
                )
 
-    // TODO: Insert TextLength and TextFormat
+    Q_CLASSINFO("TextLength attributes",  "toolTip            : \"It is a TextLength\"  ;"
+                                          "delay              : 100                     ;"
+                                          "allowSetLengthType : false                   ;"
+
+                                          "maxVisibleItems    : 5                       ;"
+                                          "editable           : false                   ;"
+                                        //"values             :                         ;"
+
+                                        //"wrapping           : false                   ;"
+                                        //"accelerated        : false                   ;"
+                                        //"prefix             : \"\"                    ;"
+                                          "suffix             : \" %\"                  ;"
+                                          "minValue           : 0                       ;"
+                                          "maxValue           : 100                     ;"
+                                          "decimals           : 3                       ;"
+                                          "step               : 0.001                   ;"
+               )
+
+    // TODO: Insert TextFormat
 
     Q_CLASSINFO("Matrix attributes",      "toolTip            : \"It is a Matrix\"      ;"
                                           "delay              : 100                     ;"

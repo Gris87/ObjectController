@@ -1378,7 +1378,8 @@ void TextFormatEditDialog::on_framePaddingSpinBox_valueChanged(double aValue)
 
 void TextFormatEditDialog::on_frameWidthButton_clicked()
 {
-    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->width(), this);
+    // TODO: Add attributes here
+    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->width(), 0, this);
 
     if (dialog.exec())
     {
@@ -1389,7 +1390,8 @@ void TextFormatEditDialog::on_frameWidthButton_clicked()
 
 void TextFormatEditDialog::on_frameHeightButton_clicked()
 {
-    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->height(), this);
+    // TODO: Add attributes here
+    TextLengthEditDialog dialog(((QTextFrameFormat *)&mTextFormat)->height(), 0, this);
 
     if (dialog.exec())
     {
@@ -2390,6 +2392,7 @@ void TextFormatEditDialog::frameUpdateProperties()
     }
 
     aWidthStr.append(", ");
+    // TODO: Use doubleToString
     aWidthStr.append(QString::number(aWidth.rawValue()));
     aWidthStr.append("]");
 
@@ -2404,6 +2407,7 @@ void TextFormatEditDialog::frameUpdateProperties()
     }
 
     aHeightStr.append(", ");
+    // TODO: Use doubleToString
     aHeightStr.append(QString::number(aHeight.rawValue()));
     aHeightStr.append("]");
 

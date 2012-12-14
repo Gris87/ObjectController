@@ -48,6 +48,7 @@ void TextLengthFrame::setValue(const QTextLength &aValue)
     }
 
     res.append(", ");
+    // TODO: Use doubleToString
     res.append(QString::number(mTextLength.rawValue()));
     res.append("]");
 
@@ -71,7 +72,8 @@ void TextLengthFrame::on_delToolButton_clicked()
 
 void TextLengthFrame::on_editButton_clicked()
 {
-    TextLengthEditDialog dialog(mTextLength, this);
+    // TODO: Add attributes here
+    TextLengthEditDialog dialog(mTextLength, 0, this);
 
     if (dialog.exec())
     {

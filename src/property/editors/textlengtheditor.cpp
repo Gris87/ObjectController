@@ -2,12 +2,16 @@
 #include "ui_textlengtheditor.h"
 
 #include "../dialogs/textlengtheditdialog.h"
+#include "propertyutils.h"
 
 TextLengthEditor::TextLengthEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::TextLengthEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
+    mDecimals=6;
 }
 
 TextLengthEditor::~TextLengthEditor()
@@ -33,9 +37,11 @@ void TextLengthEditor::setIcon(const QIcon &aIcon)
 void TextLengthEditor::setValue(const QTextLength &aValue)
 {
     mValue=aValue;
+    updateUI();
+}
 
-
-
+void TextLengthEditor::updateUI()
+{
     QString res="[";
 
     switch (mValue.type())
@@ -46,15 +52,30 @@ void TextLengthEditor::setValue(const QTextLength &aValue)
     }
 
     res.append(", ");
-    res.append(QString::number(mValue.rawValue()));
+    res.append(doubleToString(mValue.rawValue(), mDecimals));
     res.append("]");
 
     ui->valueEdit->setText(res);
 }
 
+void TextLengthEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToWidget(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
+}
+
 void TextLengthEditor::on_editButton_clicked()
 {
-    TextLengthEditDialog dialog(mValue, this);
+    TextLengthEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

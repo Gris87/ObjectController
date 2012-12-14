@@ -1,7 +1,7 @@
 #include "textlengtheditdialog.h"
 #include "ui_textlengtheditdialog.h"
 
-TextLengthEditDialog::TextLengthEditDialog(QTextLength aTextLength, QWidget *parent) :
+TextLengthEditDialog::TextLengthEditDialog(QTextLength aTextLength, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TextLengthEditDialog)
 {
@@ -26,6 +26,14 @@ TextLengthEditDialog::TextLengthEditDialog(QTextLength aTextLength, QWidget *par
 
     ui->typeComboBox->setCurrentIndex(ui->typeComboBox->findText(aTypeStr));
     ui->valueSpinBox->setValue(aTextLength.rawValue());
+
+    if (aAttributes)
+    {
+        aAttributes->applyToCombobox(ui->typeComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->valueSpinBox);
+
+        ui->typeComboBox->setEnabled(aAttributes->boolValue("allowSetLengthType", ui->typeComboBox->isEnabled()));
+    }
 }
 
 TextLengthEditDialog::~TextLengthEditDialog()
