@@ -12,6 +12,8 @@ QT       += core gui
 TARGET = ObjectController
 TEMPLATE = app
 
+DEFINES += CONTROLLER_APP
+
 RC_FILE = Resources.rc
 RESOURCES += Resources.qrc
 

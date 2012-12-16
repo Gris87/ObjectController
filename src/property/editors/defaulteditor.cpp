@@ -32,3 +32,10 @@ void DefaultEditor::setValue(const QString &aValue)
 {
     ui->valueEdit->setText(aValue);
 }
+
+void DefaultEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+
+    aAttributes->applyToWidget(ui->valueEdit);
+}

@@ -447,6 +447,7 @@ public:
     Q_CLASSINFO("EasingCurve attributes", "toolTip            : \"It is a EasingCurve\" ;"
                                           "delay              : 100                     ;"
                                           "allowSetType       : false                   ;"
+                                          "preview            : false                   ;"
 
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"

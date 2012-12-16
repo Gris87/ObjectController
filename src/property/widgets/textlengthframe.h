@@ -35,6 +35,7 @@ signals:
     void deletePressed();
     void upPressed();
     void downPressed();
+    void textLengthChanged();
 
 private slots:
     void on_downToolButton_clicked();

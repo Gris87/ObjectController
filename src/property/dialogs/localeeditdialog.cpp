@@ -20,6 +20,12 @@ LocaleEditDialog::LocaleEditDialog(QLocale aLocale, const PropertyAttributes *aA
 
     if (aAttributes)
     {
+        aAttributes->applyToWidget(ui->numberEdit);
+        aAttributes->applyToWidget(ui->currencyEdit);
+        aAttributes->applyToWidget(ui->timeEdit);
+        aAttributes->applyToWidget(ui->shortDateEdit);
+        aAttributes->applyToWidget(ui->longDateEdit);
+
         aAttributes->applyToCombobox(ui->languageComboBox);
         aAttributes->applyToCombobox(ui->countryComboBox);
     }

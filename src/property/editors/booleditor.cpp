@@ -25,6 +25,8 @@ void BoolEditor::setValue(const bool &aValue)
 
 void BoolEditor::handleAttributes(const PropertyAttributes *aAttributes)
 {
+    CustomEditor::handleAttributes(aAttributes);
+
     aAttributes->applyToCheckBox(ui->valueCheckBox);
 }
 

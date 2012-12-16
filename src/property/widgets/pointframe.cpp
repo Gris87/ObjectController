@@ -11,6 +11,11 @@ PointFrame::PointFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
 
     mAttributes=aAttributes;
 
+    if (aAttributes)
+    {
+        aAttributes->applyToWidget(ui->valueEdit);
+    }
+
     setValue(QPoint(0, 0));
 }
 

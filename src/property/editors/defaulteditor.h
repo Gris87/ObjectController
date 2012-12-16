@@ -17,6 +17,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QString &aValue);
+    void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
     void putFocus();

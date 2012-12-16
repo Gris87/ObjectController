@@ -59,6 +59,7 @@ EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, const Pr
         aAttributes->applyToDoubleSpinBox(ui->periodSpinBox);
 
         ui->typeComboBox->setEnabled(aAttributes->boolValue("allowSetType", ui->typeComboBox->isEnabled()));
+        ui->resultFrame->setVisible(aAttributes->boolValue("preview", true));
     }
 }
 

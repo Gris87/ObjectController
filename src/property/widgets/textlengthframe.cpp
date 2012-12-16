@@ -15,6 +15,8 @@ TextLengthFrame::TextLengthFrame(const PropertyAttributes *aAttributes, QWidget 
 
     if (aAttributes)
     {
+        aAttributes->applyToWidget(ui->valueEdit);
+
         mDecimals=aAttributes->intValue("decimals", mDecimals);
     }
 
@@ -85,5 +87,6 @@ void TextLengthFrame::on_editButton_clicked()
     if (dialog.exec())
     {
         setValue(dialog.resultValue());
+        emit textLengthChanged();
     }
 }

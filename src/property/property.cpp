@@ -3419,6 +3419,10 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
 
 int Property::subPropertiesForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
+#ifdef CONTROLLER_APP
+    // TODO: Create 2 sub-items
+#endif
+
     return 0;
 }
 

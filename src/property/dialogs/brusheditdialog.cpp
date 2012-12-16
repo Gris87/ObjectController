@@ -116,6 +116,7 @@ BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttri
     if (aAttributes)
     {
         aAttributes->applyToCombobox(ui->styleComboBox);
+        aAttributes->applyToWidget(ui->transformEdit);
 
         mDecimals=aAttributes->intValue("decimals", mDecimals);
 

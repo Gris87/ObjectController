@@ -119,6 +119,7 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const Proper
         aAttributes->applyToCheckBox(ui->blockPageBreakPolicyBeforeCheckBox);
         aAttributes->applyToCheckBox(ui->blockPageBreakPolicyAfterCheckBox);
 
+        aAttributes->applyToWidget(ui->charFontEdit);
         aAttributes->applyToLineEdit(ui->charFontFamilyEdit);
         aAttributes->applyToDoubleSpinBox(ui->charFontPointSizeSpinBox);
         aAttributes->applyToSpinBox(ui->charFontWeightSpinBox);
@@ -136,6 +137,7 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const Proper
         aAttributes->applyToCombobox(ui->charFontStyleStrategyFlagComboBox);
         aAttributes->applyToCheckBox(ui->charAnchorCheckBox);
         aAttributes->applyToLineEdit(ui->charAnchorHrefLineEdit);
+        aAttributes->applyToWidget(ui->charAnchorNamesEdit);
         aAttributes->applyToCombobox(ui->charFontCapitalizationComboBox);
         aAttributes->applyToCombobox(ui->charFontHintingPreferenceComboBox);
         aAttributes->applyToCombobox(ui->charVerticalAlignmentComboBox);
@@ -150,6 +152,8 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const Proper
         aAttributes->applyToDoubleSpinBox(ui->frameLeftMarginSpinBox);
         aAttributes->applyToDoubleSpinBox(ui->frameRightMarginSpinBox);
         aAttributes->applyToDoubleSpinBox(ui->framePaddingSpinBox);
+        aAttributes->applyToWidget(ui->frameWidthEdit);
+        aAttributes->applyToWidget(ui->frameHeightEdit);
         aAttributes->applyToCheckBox(ui->framePageBreakPolicyAutoCheckBox);
         aAttributes->applyToCheckBox(ui->framePageBreakPolicyBeforeCheckBox);
         aAttributes->applyToCheckBox(ui->framePageBreakPolicyAfterCheckBox);
@@ -190,7 +194,9 @@ TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const Proper
     charDrawTextOutlinePen();
     frameDrawBorderBrush();
 
+#ifdef CONTROLLER_APP
     // TODO: Add visual demonstration of changes
+#endif
 }
 
 TextFormatEditDialog::~TextFormatEditDialog()
@@ -726,7 +732,7 @@ void TextFormatEditDialog::blockUpdateTabPositions()
 
 void TextFormatEditDialog::blockAddTabPosition()
 {
-    TabFrame *aFrame=new TabFrame(this);
+    TabFrame *aFrame=new TabFrame(mAttributes, this);
 
     if (ui->blockTabPositionsLayout->count()==0)
     {
@@ -1811,10 +1817,10 @@ void TextFormatEditDialog::tableAddColumnWidthConstraint()
 
     aFrame->setDownEnabled(false);
 
-    connect(aFrame, SIGNAL(upPressed()),     this, SLOT(tableColumnWidthConstraintUp()));
-    connect(aFrame, SIGNAL(downPressed()),   this, SLOT(tableColumnWidthConstraintDown()));
-    connect(aFrame, SIGNAL(deletePressed()), this, SLOT(tableColumnWidthConstraintDelete()));
-    connect(aFrame, SIGNAL(tabChanged()),    this, SLOT(tableColumnWidthConstraintChanged()));
+    connect(aFrame, SIGNAL(upPressed()),         this, SLOT(tableColumnWidthConstraintUp()));
+    connect(aFrame, SIGNAL(downPressed()),       this, SLOT(tableColumnWidthConstraintDown()));
+    connect(aFrame, SIGNAL(deletePressed()),     this, SLOT(tableColumnWidthConstraintDelete()));
+    connect(aFrame, SIGNAL(textLengthChanged()), this, SLOT(tableColumnWidthConstraintChanged()));
 
     ui->tableColumnWidthConstraintsLayout->addWidget(aFrame);
     ui->tableColumnWidthConstraintsScrollArea->verticalScrollBar()->setValue(ui->tableColumnWidthConstraintsScrollArea->verticalScrollBar()->maximum());

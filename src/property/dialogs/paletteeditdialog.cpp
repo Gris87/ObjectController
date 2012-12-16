@@ -54,7 +54,9 @@ PaletteEditDialog::PaletteEditDialog(QPalette aPalette, const PropertyAttributes
 
 
 
+#ifdef CONTROLLER_APP
     // TODO: Add easter egg
+#endif
     mDemoWidget=ui->demoMdiArea->addSubWindow(new PaletteDemoWidget(this), Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
     mDemoWidget->setWindowState(Qt::WindowMaximized);
 

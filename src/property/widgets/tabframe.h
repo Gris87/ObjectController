@@ -5,6 +5,8 @@
 
 #include <QTextOption>
 
+#include "../propertyattributes.h"
+
 namespace Ui {
     class TabFrame;
 }
@@ -14,7 +16,7 @@ class TabFrame : public QWidget
     Q_OBJECT
 
 public:
-    explicit TabFrame(QWidget *parent = 0);
+    explicit TabFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~TabFrame();
 
     void setUpEnabled(bool aEnabled);

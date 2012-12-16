@@ -11,6 +11,11 @@ RectFrame::RectFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
 
     mAttributes=aAttributes;
 
+    if (aAttributes)
+    {
+        aAttributes->applyToWidget(ui->valueEdit);
+    }
+
     setValue(QRect(0, 0, 0, 0));
 }
 

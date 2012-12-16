@@ -25,7 +25,9 @@ class ColorEditDialog : public QDialog
     Q_OBJECT
 
 public:
+#ifdef CONTROLLER_APP
     // TODO: Should be QColor aColor=QColor(0, 0, 0)
+#endif
     explicit ColorEditDialog(QColor aColor, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~ColorEditDialog();
 

@@ -9,6 +9,8 @@ FontEditor::FontEditor(QWidget *parent) :
     ui(new Ui::FontEditor)
 {
     ui->setupUi(this);
+
+    mAttributes=0;
 }
 
 FontEditor::~FontEditor()
@@ -79,8 +81,18 @@ void FontEditor::setValue(const QFont &aValue)
     }
 }
 
+void FontEditor::handleAttributes(const PropertyAttributes *aAttributes)
+{
+    CustomEditor::handleAttributes(aAttributes);
+    mAttributes=aAttributes;
+    aAttributes->applyToWidget(ui->valueEdit);
+}
+
 void FontEditor::on_editButton_clicked()
 {
+#ifdef CONTROLLER_APP
+    // TODO: Create own font editor that will handle mAttributes
+#endif
     QFontDialog dialog(mValue, this);
 
     if (dialog.exec())

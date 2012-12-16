@@ -9,6 +9,10 @@ StringListEditor::StringListEditor(QWidget *parent) :
 {
     ui->setupUi(this);
     mAttributes=0;
+
+#ifdef CONTROLLER_APP
+    // TODO: Fix crash
+#endif
 }
 
 StringListEditor::~StringListEditor()

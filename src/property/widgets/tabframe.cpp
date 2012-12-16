@@ -1,11 +1,18 @@
 #include "tabframe.h"
 #include "ui_tabframe.h"
 
-TabFrame::TabFrame(QWidget *parent) :
+TabFrame::TabFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TabFrame)
 {
     ui->setupUi(this);
+
+    if (aAttributes)
+    {
+        aAttributes->applyToDoubleSpinBox(ui->positionSpinBox);
+        aAttributes->applyToCombobox(ui->typeComboBox);
+        aAttributes->applyToLineEdit1Char(ui->delimiterEdit);
+    }
 }
 
 TabFrame::~TabFrame()
