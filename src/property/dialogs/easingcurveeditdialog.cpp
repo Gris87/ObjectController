@@ -5,9 +5,35 @@
 #include <QMetaEnum>
 #include <QTimer>
 
+EasingCurveEditDialog::EasingCurveEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::EasingCurveEditDialog)
+{
+    init(QEasingCurve(), 0);
+}
+
+EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::EasingCurveEditDialog)
+{
+    init(aEasingCurve, 0);
+}
+
+EasingCurveEditDialog::EasingCurveEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::EasingCurveEditDialog)
+{
+    init(QEasingCurve(), aAttributes);
+}
+
 EasingCurveEditDialog::EasingCurveEditDialog(QEasingCurve aEasingCurve, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::EasingCurveEditDialog)
+{
+    init(aEasingCurve, aAttributes);
+}
+
+void EasingCurveEditDialog::init(QEasingCurve aEasingCurve, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

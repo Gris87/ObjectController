@@ -16,6 +16,9 @@ class EasingCurveEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit EasingCurveEditDialog(QWidget *parent = 0);
+    explicit EasingCurveEditDialog(QEasingCurve aEasingCurve, QWidget *parent = 0);
+    explicit EasingCurveEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit EasingCurveEditDialog(QEasingCurve aEasingCurve, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~EasingCurveEditDialog();
 
@@ -28,6 +31,8 @@ private:
     Ui::EasingCurveEditDialog *ui;
     QEasingCurve               mOriginalEasingCurve;
     QEasingCurve               mEasingCurve;
+
+    void init(QEasingCurve aEasingCurve, const PropertyAttributes *aAttributes);
 
 private slots:
     void drawCurve();
