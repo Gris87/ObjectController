@@ -3,9 +3,35 @@
 
 #include <QSettings>
 
+ColorEditDialog::ColorEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ColorEditDialog)
+{
+    init(QColor(0, 0, 0), 0);
+}
+
+ColorEditDialog::ColorEditDialog(QColor aColor, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ColorEditDialog)
+{
+    init(aColor, 0);
+}
+
+ColorEditDialog::ColorEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ColorEditDialog)
+{
+    init(QColor(0, 0, 0), aAttributes);
+}
+
 ColorEditDialog::ColorEditDialog(QColor aColor, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ColorEditDialog)
+{
+    init(aColor, aAttributes);
+}
+
+void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

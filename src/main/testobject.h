@@ -89,6 +89,8 @@ public:
 
     // ----------------------------------------------------------------------------------------------------
 
+    // Uncomment it if you want to check attributes
+    /*
     Q_CLASSINFO("Enumeration attributes", "toolTip            : \"It is a Enumeration\" ;"
                                           "delay              : 100                     ;"
                                           "maxVisibleItems    : 5                       ;"
@@ -846,6 +848,8 @@ public:
     Q_CLASSINFO("Object attributes",      "toolTip            : \"It is a Object\"      ;"
                                           "delay              : 100                     ;"
                )
+
+    */
 
     // ----------------------------------------------------------------------------------------------------
 
