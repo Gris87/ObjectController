@@ -18,6 +18,9 @@ class BrushEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit BrushEditDialog(QWidget *parent = 0);
+    explicit BrushEditDialog(QBrush aBrush, QWidget *parent = 0);
+    explicit BrushEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~BrushEditDialog();
 
@@ -38,6 +41,8 @@ private:
     QPixmap              mTransparentArea;
     int                  mDecimals;
     const PropertyAttributes *mAttributes;
+
+    void init(QBrush aBrush, const PropertyAttributes *aAttributes);
 
     void copyFromBrush(QBrush aBrush);
     void updateGradient();

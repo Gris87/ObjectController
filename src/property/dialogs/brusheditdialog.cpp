@@ -10,9 +10,35 @@
 #include "transformeditdialog.h"
 #include "../propertyutils.h"
 
+BrushEditDialog::BrushEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::BrushEditDialog)
+{
+    init(QBrush(QColor(0, 0, 0)), 0);
+}
+
+BrushEditDialog::BrushEditDialog(QBrush aBrush, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::BrushEditDialog)
+{
+    init(aBrush, 0);
+}
+
+BrushEditDialog::BrushEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::BrushEditDialog)
+{
+    init(QBrush(QColor(0, 0, 0)), aAttributes);
+}
+
 BrushEditDialog::BrushEditDialog(QBrush aBrush, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BrushEditDialog)
+{
+    init(aBrush, aAttributes);
+}
+
+void BrushEditDialog::init(QBrush aBrush, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
