@@ -3,9 +3,35 @@
 
 #include "../propertyutils.h"
 
+ByteArrayEditDialog::ByteArrayEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ByteArrayEditDialog)
+{
+    init(QByteArray(), 0);
+}
+
+ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ByteArrayEditDialog)
+{
+    init(aValue, 0);
+}
+
+ByteArrayEditDialog::ByteArrayEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::ByteArrayEditDialog)
+{
+    init(QByteArray(), aAttributes);
+}
+
 ByteArrayEditDialog::ByteArrayEditDialog(QByteArray aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::ByteArrayEditDialog)
+{
+    init(aValue, aAttributes);
+}
+
+void ByteArrayEditDialog::init(QByteArray aValue, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

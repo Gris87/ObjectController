@@ -17,6 +17,9 @@ class ByteArrayEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit ByteArrayEditDialog(QWidget *parent = 0);
+    explicit ByteArrayEditDialog(QByteArray aValue, QWidget *parent = 0);
+    explicit ByteArrayEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit ByteArrayEditDialog(QByteArray aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~ByteArrayEditDialog();
 
@@ -25,6 +28,8 @@ public:
 private:
     Ui::ByteArrayEditDialog *ui;
     HexEditor               *mHexEditor;
+
+    void init(QByteArray aValue, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
