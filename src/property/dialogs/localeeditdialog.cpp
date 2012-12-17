@@ -4,9 +4,35 @@
 #include <QTime>
 #include <QMetaEnum>
 
+LocaleEditDialog::LocaleEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::LocaleEditDialog)
+{
+    init(QLocale(), 0);
+}
+
+LocaleEditDialog::LocaleEditDialog(QLocale aLocale, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::LocaleEditDialog)
+{
+    init(aLocale, 0);
+}
+
+LocaleEditDialog::LocaleEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::LocaleEditDialog)
+{
+    init(QLocale(), aAttributes);
+}
+
 LocaleEditDialog::LocaleEditDialog(QLocale aLocale, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LocaleEditDialog)
+{
+    init(aLocale, aAttributes);
+}
+
+void LocaleEditDialog::init(QLocale aLocale, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

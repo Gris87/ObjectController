@@ -16,6 +16,9 @@ class LocaleEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit LocaleEditDialog(QWidget *parent = 0);
+    explicit LocaleEditDialog(QLocale aLocale, QWidget *parent = 0);
+    explicit LocaleEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit LocaleEditDialog(QLocale aLocale, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~LocaleEditDialog();
 
@@ -24,6 +27,8 @@ public:
 private:
     Ui::LocaleEditDialog *ui;
     QLocale               mLocale;
+
+    void init(QLocale aLocale, const PropertyAttributes *aAttributes);
 
     QLocale::Language stringToLanguage(const QString &aLanguage);
     QLocale::Country stringToCountry(const QString &aCountry);
