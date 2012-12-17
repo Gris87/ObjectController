@@ -17,6 +17,9 @@ class PenEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit PenEditDialog(QWidget *parent = 0);
+    explicit PenEditDialog(QPen aPen, QWidget *parent = 0);
+    explicit PenEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit PenEditDialog(QPen aPen, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PenEditDialog();
 
@@ -30,6 +33,8 @@ private:
     QPen               mPen;
     ColorArea         *mColorArea;
     const PropertyAttributes *mAttributes;
+
+    void init(QPen aPen, const PropertyAttributes *aAttributes);
 
     void updateProperties(const bool &aNeedToUpdatePattern=true);
     void updatePattern();

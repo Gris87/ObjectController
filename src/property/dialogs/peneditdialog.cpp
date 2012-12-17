@@ -9,9 +9,35 @@
 #include "brusheditdialog.h"
 #include "../widgets/doubleframe.h"
 
+PenEditDialog::PenEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PenEditDialog)
+{
+    init(QPen(), 0);
+}
+
+PenEditDialog::PenEditDialog(QPen aPen, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PenEditDialog)
+{
+    init(aPen, 0);
+}
+
+PenEditDialog::PenEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PenEditDialog)
+{
+    init(QPen(), aAttributes);
+}
+
 PenEditDialog::PenEditDialog(QPen aPen, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PenEditDialog)
+{
+    init(aPen, aAttributes);
+}
+
+void PenEditDialog::init(QPen aPen, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
