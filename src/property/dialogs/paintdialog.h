@@ -15,6 +15,13 @@ class PaintDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit PaintDialog(QWidget *parent = 0);
+    explicit PaintDialog(QPixmap aValue, QWidget *parent = 0);
+    explicit PaintDialog(QPixmap aValue, bool aMono, QWidget *parent = 0);
+    explicit PaintDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
+    explicit PaintDialog(bool aMono, QWidget *parent = 0);
+    explicit PaintDialog(bool aMono, const PropertyAttributes *aAttributes, QWidget *parent = 0);
+    explicit PaintDialog(QPixmap aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit PaintDialog(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PaintDialog();
 
@@ -23,6 +30,8 @@ public:
 private:
     Ui::PaintDialog *ui;
     PaintFrame      *mPaintFrame;
+
+    void init(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();

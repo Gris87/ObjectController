@@ -1,9 +1,63 @@
 #include "paintdialog.h"
 #include "ui_paintdialog.h"
 
+PaintDialog::PaintDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(QPixmap(32, 32), true, 0);
+}
+
+PaintDialog::PaintDialog(QPixmap aValue, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(aValue, true, 0);
+}
+
+PaintDialog::PaintDialog(QPixmap aValue, bool aMono, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(aValue, aMono, 0);
+}
+
+PaintDialog::PaintDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(QPixmap(32, 32), true, aAttributes);
+}
+
+PaintDialog::PaintDialog(bool aMono, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(QPixmap(32, 32), aMono, 0);
+}
+
+PaintDialog::PaintDialog(bool aMono, const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(QPixmap(32, 32), aMono, aAttributes);
+}
+
+PaintDialog::PaintDialog(QPixmap aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaintDialog)
+{
+    init(aValue, true, aAttributes);
+}
+
 PaintDialog::PaintDialog(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PaintDialog)
+{
+    init(aValue, aMono, aAttributes);
+}
+
+void PaintDialog::init(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
