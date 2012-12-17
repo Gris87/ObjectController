@@ -1,5 +1,5 @@
 #include "pixmapeditor.h"
-#include "ui_pixmapeditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QImage>
 #include <QBitmap>
@@ -8,7 +8,7 @@
 
 PixmapEditor::PixmapEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::PixmapEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

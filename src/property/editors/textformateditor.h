@@ -6,7 +6,7 @@
 #include <QTextFormat>
 
 namespace Ui {
-class TextFormatEditor;
+class DialogEditor;
 }
 
 class TextFormatEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::TextFormatEditor *ui;
+    Ui::DialogEditor *ui;
     QTextFormat mValue;
     const PropertyAttributes *mAttributes;
 

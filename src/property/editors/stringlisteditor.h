@@ -6,7 +6,7 @@
 #include <QStringList>
 
 namespace Ui {
-class StringListEditor;
+class DialogEditor;
 }
 
 class StringListEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::StringListEditor *ui;
+    Ui::DialogEditor *ui;
     QStringList mValue;
     const PropertyAttributes *mAttributes;
 

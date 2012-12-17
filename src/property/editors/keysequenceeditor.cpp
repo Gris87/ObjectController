@@ -1,11 +1,11 @@
 #include "keysequenceeditor.h"
-#include "ui_keysequenceeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/keysequenceeditdialog.h"
 
 KeySequenceEditor::KeySequenceEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::KeySequenceEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

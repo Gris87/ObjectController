@@ -1,12 +1,12 @@
 #include "vector2deditor.h"
-#include "ui_vector2deditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/vector2deditdialog.h"
 #include "../propertyutils.h"
 
 Vector2DEditor::Vector2DEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::Vector2DEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

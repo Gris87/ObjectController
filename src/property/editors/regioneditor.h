@@ -6,7 +6,7 @@
 #include <QRegion>
 
 namespace Ui {
-class RegionEditor;
+class DialogEditor;
 }
 
 class RegionEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::RegionEditor *ui;
+    Ui::DialogEditor *ui;
     QRegion mValue;
     const PropertyAttributes *mAttributes;
 

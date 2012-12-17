@@ -6,7 +6,7 @@
 #include <QMatrix4x4>
 
 namespace Ui {
-class Matrix4x4Editor;
+class DialogEditor;
 }
 
 class Matrix4x4Editor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::Matrix4x4Editor *ui;
+    Ui::DialogEditor *ui;
     QMatrix4x4 mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

@@ -1,11 +1,11 @@
 #include "recteditor.h"
-#include "ui_recteditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/recteditdialog.h"
 
 RectEditor::RectEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::RectEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

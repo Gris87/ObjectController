@@ -6,7 +6,7 @@
 #include <QTransform>
 
 namespace Ui {
-class TransformEditor;
+class DialogEditor;
 }
 
 class TransformEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::TransformEditor *ui;
+    Ui::DialogEditor *ui;
     QTransform mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

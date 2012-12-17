@@ -6,7 +6,7 @@
 #include <QPoint>
 
 namespace Ui {
-class PointEditor;
+class DialogEditor;
 }
 
 class PointEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::PointEditor *ui;
+    Ui::DialogEditor *ui;
     QPoint mValue;
     const PropertyAttributes *mAttributes;
 

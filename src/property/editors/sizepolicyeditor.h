@@ -6,7 +6,7 @@
 #include <QSizePolicy>
 
 namespace Ui {
-class SizePolicyEditor;
+class DialogEditor;
 }
 
 class SizePolicyEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::SizePolicyEditor *ui;
+    Ui::DialogEditor *ui;
     QSizePolicy mValue;
     const PropertyAttributes *mAttributes;
 

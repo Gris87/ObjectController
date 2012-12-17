@@ -1,11 +1,11 @@
 #include "regioneditor.h"
-#include "ui_regioneditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/regioneditdialog.h"
 
 RegionEditor::RegionEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::RegionEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

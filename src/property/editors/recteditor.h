@@ -6,7 +6,7 @@
 #include <QRect>
 
 namespace Ui {
-class RectEditor;
+class DialogEditor;
 }
 
 class RectEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::RectEditor *ui;
+    Ui::DialogEditor *ui;
     QRect mValue;
     const PropertyAttributes *mAttributes;
 

@@ -1,11 +1,11 @@
 #include "textformateditor.h"
-#include "ui_textformateditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/textformateditdialog.h"
 
 TextFormatEditor::TextFormatEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::TextFormatEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

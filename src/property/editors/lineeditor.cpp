@@ -1,11 +1,11 @@
 #include "lineeditor.h"
-#include "ui_lineeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/lineeditdialog.h"
 
 LineEditor::LineEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::LineEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

@@ -6,7 +6,7 @@
 #include <QFont>
 
 namespace Ui {
-class FontEditor;
+class DialogEditor;
 }
 
 class FontEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::FontEditor *ui;
+    Ui::DialogEditor *ui;
     QFont mValue;
     const PropertyAttributes *mAttributes;
 

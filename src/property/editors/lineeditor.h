@@ -6,7 +6,7 @@
 #include <QLine>
 
 namespace Ui {
-class LineEditor;
+class DialogEditor;
 }
 
 class LineEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::LineEditor *ui;
+    Ui::DialogEditor *ui;
     QLine mValue;
     const PropertyAttributes *mAttributes;
 

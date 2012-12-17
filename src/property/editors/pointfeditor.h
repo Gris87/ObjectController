@@ -6,7 +6,7 @@
 #include <QPointF>
 
 namespace Ui {
-class PointFEditor;
+class DialogEditor;
 }
 
 class PointFEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::PointFEditor *ui;
+    Ui::DialogEditor *ui;
     QPointF mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

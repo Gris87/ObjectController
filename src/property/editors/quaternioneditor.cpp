@@ -1,12 +1,12 @@
 #include "quaternioneditor.h"
-#include "ui_quaternioneditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/quaternioneditdialog.h"
 #include "../propertyutils.h"
 
 QuaternionEditor::QuaternionEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::QuaternionEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

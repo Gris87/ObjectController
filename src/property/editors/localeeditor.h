@@ -6,7 +6,7 @@
 #include <QLocale>
 
 namespace Ui {
-class LocaleEditor;
+class DialogEditor;
 }
 
 class LocaleEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::LocaleEditor *ui;
+    Ui::DialogEditor *ui;
     QLocale mValue;
     const PropertyAttributes *mAttributes;
 

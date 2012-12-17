@@ -6,7 +6,7 @@
 #include <QKeySequence>
 
 namespace Ui {
-class KeySequenceEditor;
+class DialogEditor;
 }
 
 class KeySequenceEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::KeySequenceEditor *ui;
+    Ui::DialogEditor *ui;
     QKeySequence mValue;
     const PropertyAttributes *mAttributes;
 

@@ -6,7 +6,7 @@
 #include <QPen>
 
 namespace Ui {
-class PenEditor;
+class DialogEditor;
 }
 
 class PenEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::PenEditor *ui;
+    Ui::DialogEditor *ui;
     QPen mValue;
     const PropertyAttributes *mAttributes;
 

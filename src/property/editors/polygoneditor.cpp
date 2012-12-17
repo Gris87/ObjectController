@@ -1,11 +1,11 @@
 #include "polygoneditor.h"
-#include "ui_polygoneditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/polygoneditdialog.h"
 
 PolygonEditor::PolygonEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::PolygonEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

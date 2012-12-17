@@ -1,12 +1,12 @@
 #include "matrix4x4editor.h"
-#include "ui_matrix4x4editor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/matrix4x4editdialog.h"
 #include "../propertyutils.h"
 
 Matrix4x4Editor::Matrix4x4Editor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::Matrix4x4Editor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

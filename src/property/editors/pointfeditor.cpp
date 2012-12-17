@@ -1,12 +1,12 @@
 #include "pointfeditor.h"
-#include "ui_pointfeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/pointfeditdialog.h"
 #include "../propertyutils.h"
 
 PointFEditor::PointFEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::PointFEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

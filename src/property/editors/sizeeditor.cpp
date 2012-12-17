@@ -1,11 +1,11 @@
 #include "sizeeditor.h"
-#include "ui_sizeeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/sizeeditdialog.h"
 
 SizeEditor::SizeEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::SizeEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

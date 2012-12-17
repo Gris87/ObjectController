@@ -6,7 +6,7 @@
 #include <QColor>
 
 namespace Ui {
-class ColorEditor;
+class DialogEditor;
 }
 
 class ColorEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::ColorEditor *ui;
+    Ui::DialogEditor *ui;
     QColor mValue;
     bool mAlphaEnabled;
     const PropertyAttributes *mAttributes;

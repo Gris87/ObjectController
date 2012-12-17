@@ -6,7 +6,7 @@
 #include <QBrush>
 
 namespace Ui {
-class BrushEditor;
+class DialogEditor;
 }
 
 class BrushEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::BrushEditor *ui;
+    Ui::DialogEditor *ui;
     QBrush mValue;
     const PropertyAttributes *mAttributes;
 

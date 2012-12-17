@@ -1,11 +1,11 @@
 #include "stringlisteditor.h"
-#include "ui_stringlisteditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/stringlisteditdialog.h"
 
 StringListEditor::StringListEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::StringListEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
     mAttributes=0;

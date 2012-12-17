@@ -1,11 +1,11 @@
 #include "iconeditor.h"
-#include "ui_iconeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/iconeditdialog.h"
 
 IconEditor::IconEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::IconEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

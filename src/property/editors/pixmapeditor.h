@@ -6,7 +6,7 @@
 #include <QPixmap>
 
 namespace Ui {
-class PixmapEditor;
+class DialogEditor;
 }
 
 class PixmapEditor : public CustomEditor
@@ -37,7 +37,7 @@ protected:
     void selectText();
 
 private:
-    Ui::PixmapEditor *ui;
+    Ui::DialogEditor *ui;
     QPixmap mValue;
     const PropertyAttributes *mAttributes;
 

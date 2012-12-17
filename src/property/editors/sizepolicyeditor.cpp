@@ -1,5 +1,5 @@
 #include "sizepolicyeditor.h"
-#include "ui_sizepolicyeditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QMetaEnum>
 
@@ -7,7 +7,7 @@
 
 SizePolicyEditor::SizePolicyEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::SizePolicyEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

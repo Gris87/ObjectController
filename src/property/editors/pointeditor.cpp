@@ -1,11 +1,11 @@
 #include "pointeditor.h"
-#include "ui_pointeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/pointeditdialog.h"
 
 PointEditor::PointEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::PointEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

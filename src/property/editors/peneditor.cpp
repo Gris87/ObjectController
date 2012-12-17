@@ -1,5 +1,5 @@
 #include "peneditor.h"
-#include "ui_peneditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QPainter>
 
@@ -7,7 +7,7 @@
 
 PenEditor::PenEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::PenEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

@@ -343,48 +343,16 @@ FORMS += \
            $$PWD/dialogs/vector4deditdialog.ui \
            $$PWD/editors/dialogeditor.ui \
            $$PWD/editors/booleditor.ui \
-           $$PWD/editors/brusheditor.ui \
-           $$PWD/editors/bytearrayeditor.ui \
            $$PWD/editors/chareditor.ui \
-           $$PWD/editors/coloreditor.ui \
            $$PWD/editors/cursoreditor.ui \
            $$PWD/editors/dateeditor.ui \
            $$PWD/editors/datetimeeditor.ui \
            $$PWD/editors/defaulteditor.ui \
            $$PWD/editors/doubleeditor.ui \
-           $$PWD/editors/easingcurveeditor.ui \
            $$PWD/editors/enumeditor.ui \
-           $$PWD/editors/fonteditor.ui \
-           $$PWD/editors/iconeditor.ui \
            $$PWD/editors/integereditor.ui \
-           $$PWD/editors/keysequenceeditor.ui \
-           $$PWD/editors/lineeditor.ui \
-           $$PWD/editors/linefeditor.ui \
-           $$PWD/editors/localeeditor.ui \
-           $$PWD/editors/matrix4x4editor.ui \
-           $$PWD/editors/matrixeditor.ui \
-           $$PWD/editors/paletteeditor.ui \
-           $$PWD/editors/peneditor.ui \
-           $$PWD/editors/pixmapeditor.ui \
-           $$PWD/editors/pointeditor.ui \
-           $$PWD/editors/pointfeditor.ui \
-           $$PWD/editors/polygoneditor.ui \
-           $$PWD/editors/quaternioneditor.ui \
-           $$PWD/editors/recteditor.ui \
-           $$PWD/editors/rectfeditor.ui \
-           $$PWD/editors/regioneditor.ui \
-           $$PWD/editors/sizeeditor.ui \
-           $$PWD/editors/sizefeditor.ui \
-           $$PWD/editors/sizepolicyeditor.ui \
            $$PWD/editors/stringeditor.ui \
-           $$PWD/editors/stringlisteditor.ui \
-           $$PWD/editors/textformateditor.ui \
-           $$PWD/editors/textlengtheditor.ui \
            $$PWD/editors/timeeditor.ui \
-           $$PWD/editors/transformeditor.ui \
-           $$PWD/editors/vector2deditor.ui \
-           $$PWD/editors/vector3deditor.ui \
-           $$PWD/editors/vector4deditor.ui \
            $$PWD/widgets/doubleframe.ui \
            $$PWD/widgets/paintframe.ui \
            $$PWD/widgets/palettedemowidget.ui \

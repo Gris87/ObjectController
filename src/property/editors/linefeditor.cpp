@@ -1,12 +1,12 @@
 #include "linefeditor.h"
-#include "ui_linefeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/linefeditdialog.h"
 #include "../propertyutils.h"
 
 LineFEditor::LineFEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::LineFEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

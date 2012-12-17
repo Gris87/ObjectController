@@ -1,11 +1,11 @@
 #include "bytearrayeditor.h"
-#include "ui_bytearrayeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/bytearrayeditdialog.h"
 
 ByteArrayEditor::ByteArrayEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::ByteArrayEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
     mAttributes=0;

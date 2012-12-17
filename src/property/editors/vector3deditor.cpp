@@ -1,12 +1,12 @@
 #include "vector3deditor.h"
-#include "ui_vector3deditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/vector3deditdialog.h"
 #include "../propertyutils.h"
 
 Vector3DEditor::Vector3DEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::Vector3DEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

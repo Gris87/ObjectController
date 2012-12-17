@@ -6,7 +6,7 @@
 #include <QSize>
 
 namespace Ui {
-class SizeEditor;
+class DialogEditor;
 }
 
 class SizeEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::SizeEditor *ui;
+    Ui::DialogEditor *ui;
     QSize mValue;
     const PropertyAttributes *mAttributes;
 

@@ -1,11 +1,11 @@
 #include "localeeditor.h"
-#include "ui_localeeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/localeeditdialog.h"
 
 LocaleEditor::LocaleEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::LocaleEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

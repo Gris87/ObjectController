@@ -1,12 +1,12 @@
 #include "fonteditor.h"
-#include "ui_fonteditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QFontDialog>
 #include <QPainter>
 
 FontEditor::FontEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::FontEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

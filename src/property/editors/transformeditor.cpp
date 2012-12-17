@@ -1,12 +1,12 @@
 #include "transformeditor.h"
-#include "ui_transformeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/transformeditdialog.h"
 #include "../propertyutils.h"
 
 TransformEditor::TransformEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::TransformEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

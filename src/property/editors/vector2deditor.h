@@ -6,7 +6,7 @@
 #include <QVector2D>
 
 namespace Ui {
-class Vector2DEditor;
+class DialogEditor;
 }
 
 class Vector2DEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::Vector2DEditor *ui;
+    Ui::DialogEditor *ui;
     QVector2D mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

@@ -6,7 +6,7 @@
 #include <QPolygon>
 
 namespace Ui {
-class PolygonEditor;
+class DialogEditor;
 }
 
 class PolygonEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::PolygonEditor *ui;
+    Ui::DialogEditor *ui;
     QPolygon mValue;
     const PropertyAttributes *mAttributes;
 

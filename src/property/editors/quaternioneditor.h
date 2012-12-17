@@ -6,7 +6,7 @@
 #include <QQuaternion>
 
 namespace Ui {
-class QuaternionEditor;
+class DialogEditor;
 }
 
 class QuaternionEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::QuaternionEditor *ui;
+    Ui::DialogEditor *ui;
     QQuaternion mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

@@ -6,7 +6,7 @@
 #include <QSizeF>
 
 namespace Ui {
-class SizeFEditor;
+class DialogEditor;
 }
 
 class SizeFEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::SizeFEditor *ui;
+    Ui::DialogEditor *ui;
     QSizeF mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

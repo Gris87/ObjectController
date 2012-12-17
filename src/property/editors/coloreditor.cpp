@@ -1,5 +1,5 @@
 #include "coloreditor.h"
-#include "ui_coloreditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QPainter>
 
@@ -7,7 +7,7 @@
 
 ColorEditor::ColorEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::ColorEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

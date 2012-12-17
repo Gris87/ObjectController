@@ -1,12 +1,12 @@
 #include "rectfeditor.h"
-#include "ui_rectfeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/rectfeditdialog.h"
 #include "../propertyutils.h"
 
 RectFEditor::RectFEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::RectFEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

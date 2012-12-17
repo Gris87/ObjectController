@@ -1,12 +1,12 @@
 #include "textlengtheditor.h"
-#include "ui_textlengtheditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/textlengtheditdialog.h"
 #include "propertyutils.h"
 
 TextLengthEditor::TextLengthEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::TextLengthEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

@@ -6,7 +6,7 @@
 #include <QRectF>
 
 namespace Ui {
-class RectFEditor;
+class DialogEditor;
 }
 
 class RectFEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::RectFEditor *ui;
+    Ui::DialogEditor *ui;
     QRectF mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

@@ -6,7 +6,7 @@
 #include <QIcon>
 
 namespace Ui {
-class IconEditor;
+class DialogEditor;
 }
 
 class IconEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::IconEditor *ui;
+    Ui::DialogEditor *ui;
     QIcon mValue;
     const PropertyAttributes *mAttributes;
 

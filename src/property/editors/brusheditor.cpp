@@ -1,5 +1,5 @@
 #include "brusheditor.h"
-#include "ui_brusheditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QPainter>
 #include <QMetaEnum>
@@ -8,7 +8,7 @@
 
 BrushEditor::BrushEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::BrushEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

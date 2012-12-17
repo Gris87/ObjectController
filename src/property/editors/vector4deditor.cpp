@@ -1,12 +1,12 @@
 #include "vector4deditor.h"
-#include "ui_vector4deditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/vector4deditdialog.h"
 #include "../propertyutils.h"
 
 Vector4DEditor::Vector4DEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::Vector4DEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

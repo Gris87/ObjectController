@@ -6,7 +6,7 @@
 #include <QEasingCurve>
 
 namespace Ui {
-class EasingCurveEditor;
+class DialogEditor;
 }
 
 class EasingCurveEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::EasingCurveEditor *ui;
+    Ui::DialogEditor *ui;
     QEasingCurve mValue;
     const PropertyAttributes *mAttributes;
 

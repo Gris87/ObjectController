@@ -6,7 +6,7 @@
 #include <QTextLength>
 
 namespace Ui {
-class TextLengthEditor;
+class DialogEditor;
 }
 
 class TextLengthEditor : public CustomEditor
@@ -27,7 +27,7 @@ protected:
     void selectText();
 
 private:
-    Ui::TextLengthEditor *ui;
+    Ui::DialogEditor *ui;
     QTextLength mValue;
     const PropertyAttributes *mAttributes;
     int mDecimals;

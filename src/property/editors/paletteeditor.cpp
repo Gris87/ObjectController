@@ -1,11 +1,11 @@
 #include "paletteeditor.h"
-#include "ui_paletteeditor.h"
+#include "ui_dialogeditor.h"
 
 #include "../dialogs/paletteeditdialog.h"
 
 PaletteEditor::PaletteEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::PaletteEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 

@@ -6,7 +6,7 @@
 #include <QPalette>
 
 namespace Ui {
-class PaletteEditor;
+class DialogEditor;
 }
 
 class PaletteEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::PaletteEditor *ui;
+    Ui::DialogEditor *ui;
     QPalette mValue;
     const PropertyAttributes *mAttributes;
 

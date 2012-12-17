@@ -1,5 +1,5 @@
 #include "easingcurveeditor.h"
-#include "ui_easingcurveeditor.h"
+#include "ui_dialogeditor.h"
 
 #include <QMetaEnum>
 
@@ -7,7 +7,7 @@
 
 EasingCurveEditor::EasingCurveEditor(QWidget *parent) :
     CustomEditor(parent),
-    ui(new Ui::EasingCurveEditor)
+    ui(new Ui::DialogEditor)
 {
     ui->setupUi(this);
 
