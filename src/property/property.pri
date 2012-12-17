@@ -135,10 +135,12 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/itemconnector.h \
            $$PWD/objectcontroller.h \
            $$PWD/property.h \
+           $$PWD/propertyattributes.h \
            $$PWD/propertygroup.h \
            $$PWD/propertyitemdelegate.h \
            $$PWD/propertytreewidget.h \
            $$PWD/propertytreewidgetitem.h \
+           $$PWD/propertyutils.h \
            $$PWD/widgets/biteditor.h \
            $$PWD/widgets/colorarea.h \
            $$PWD/widgets/colorbar.h \
@@ -149,15 +151,13 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/widgets/paintframe.h \
            $$PWD/widgets/paintview.h \
            $$PWD/widgets/palettedemowidget.h \
+           $$PWD/widgets/palettepreviewmdiarea.h \
            $$PWD/widgets/pointframe.h \
            $$PWD/widgets/rectframe.h \
            $$PWD/widgets/shortcutedit.h \
            $$PWD/widgets/stringframe.h \
            $$PWD/widgets/tabframe.h \
-           $$PWD/widgets/textlengthframe.h \
-           $$PWD/propertyattributes.h \
-           $$PWD/propertyutils.h \
-           $$PWD/widgets/palettepreviewmdiarea.h
+           $$PWD/widgets/textlengthframe.h
 
 SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/delegates/booldelegate.cpp \
@@ -284,10 +284,12 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/itemconnector.cpp \
            $$PWD/objectcontroller.cpp \
            $$PWD/property.cpp \
+           $$PWD/propertyattributes.cpp \
            $$PWD/propertygroup.cpp \
            $$PWD/propertyitemdelegate.cpp \
            $$PWD/propertytreewidget.cpp \
            $$PWD/propertytreewidgetitem.cpp \
+           $$PWD/propertyutils.cpp \
            $$PWD/widgets/biteditor.cpp \
            $$PWD/widgets/colorarea.cpp \
            $$PWD/widgets/colorbar.cpp \
@@ -298,15 +300,13 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/widgets/paintframe.cpp \
            $$PWD/widgets/paintview.cpp \
            $$PWD/widgets/palettedemowidget.cpp \
+           $$PWD/widgets/palettepreviewmdiarea.cpp \
            $$PWD/widgets/pointframe.cpp \
            $$PWD/widgets/rectframe.cpp \
            $$PWD/widgets/shortcutedit.cpp \
            $$PWD/widgets/stringframe.cpp \
            $$PWD/widgets/tabframe.cpp \
-           $$PWD/widgets/textlengthframe.cpp \
-           $$PWD/propertyattributes.cpp \
-           $$PWD/propertyutils.cpp \
-           $$PWD/widgets/palettepreviewmdiarea.cpp
+           $$PWD/widgets/textlengthframe.cpp
 
 RESOURCES += $$PWD/property.qrc
 
@@ -343,13 +343,13 @@ FORMS += \
            $$PWD/dialogs/vector2deditdialog.ui \
            $$PWD/dialogs/vector3deditdialog.ui \
            $$PWD/dialogs/vector4deditdialog.ui \
-           $$PWD/editors/dialogeditor.ui \
            $$PWD/editors/booleditor.ui \
            $$PWD/editors/chareditor.ui \
            $$PWD/editors/cursoreditor.ui \
            $$PWD/editors/dateeditor.ui \
            $$PWD/editors/datetimeeditor.ui \
            $$PWD/editors/defaulteditor.ui \
+           $$PWD/editors/dialogeditor.ui \
            $$PWD/editors/doubleeditor.ui \
            $$PWD/editors/enumeditor.ui \
            $$PWD/editors/integereditor.ui \
