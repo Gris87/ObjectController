@@ -1,9 +1,35 @@
 #include "quaternioneditdialog.h"
 #include "ui_quaternioneditdialog.h"
 
+QuaternionEditDialog::QuaternionEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::QuaternionEditDialog)
+{
+    init(QQuaternion(), 0);
+}
+
+QuaternionEditDialog::QuaternionEditDialog(QQuaternion aQuaternion, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::QuaternionEditDialog)
+{
+    init(aQuaternion, 0);
+}
+
+QuaternionEditDialog::QuaternionEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::QuaternionEditDialog)
+{
+    init(QQuaternion(), aAttributes);
+}
+
 QuaternionEditDialog::QuaternionEditDialog(QQuaternion aQuaternion, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::QuaternionEditDialog)
+{
+    init(aQuaternion, aAttributes);
+}
+
+void QuaternionEditDialog::init(QQuaternion aQuaternion, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
