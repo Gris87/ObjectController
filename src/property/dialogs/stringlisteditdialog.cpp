@@ -5,9 +5,35 @@
 
 #include "../widgets/stringframe.h"
 
+StringListEditDialog::StringListEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::StringListEditDialog)
+{
+    init(QStringList(), 0);
+}
+
+StringListEditDialog::StringListEditDialog(QStringList aValue, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::StringListEditDialog)
+{
+    init(aValue, 0);
+}
+
+StringListEditDialog::StringListEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::StringListEditDialog)
+{
+    init(QStringList(), aAttributes);
+}
+
 StringListEditDialog::StringListEditDialog(QStringList aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::StringListEditDialog)
+{
+    init(aValue, aAttributes);
+}
+
+void StringListEditDialog::init(QStringList aValue, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

@@ -16,6 +16,9 @@ class StringListEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit StringListEditDialog(QWidget *parent = 0);
+    explicit StringListEditDialog(QStringList aValue, QWidget *parent = 0);
+    explicit StringListEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit StringListEditDialog(QStringList aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~StringListEditDialog();
 
@@ -27,6 +30,8 @@ private:
     const PropertyAttributes *mAttributes;
     int minCount;
     int maxCount;
+
+    void init(QStringList aValue, const PropertyAttributes *aAttributes);
 
     void updateCountButtons();
 
