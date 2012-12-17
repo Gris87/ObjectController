@@ -14,6 +14,9 @@ class RectFEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit RectFEditDialog(QWidget *parent = 0);
+    explicit RectFEditDialog(QRectF aRectF, QWidget *parent = 0);
+    explicit RectFEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit RectFEditDialog(QRectF aRectF, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~RectFEditDialog();
 
@@ -21,6 +24,8 @@ public:
 
 private:
     Ui::RectFEditDialog *ui;
+
+    void init(QRectF aRectF, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
