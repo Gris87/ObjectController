@@ -17,6 +17,9 @@ class KeySequenceEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit KeySequenceEditDialog(QWidget *parent = 0);
+    explicit KeySequenceEditDialog(QKeySequence aKeySequence, QWidget *parent = 0);
+    explicit KeySequenceEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit KeySequenceEditDialog(QKeySequence aKeySequence, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~KeySequenceEditDialog();
 
@@ -25,6 +28,8 @@ public:
 private:
     Ui::KeySequenceEditDialog *ui;
     ShortCutEdit              *mShortCutEdit;
+
+    void init(QKeySequence aKeySequence, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();

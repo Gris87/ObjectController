@@ -1,9 +1,35 @@
 #include "keysequenceeditdialog.h"
 #include "ui_keysequenceeditdialog.h"
 
+KeySequenceEditDialog::KeySequenceEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::KeySequenceEditDialog)
+{
+    init(QKeySequence(), 0);
+}
+
+KeySequenceEditDialog::KeySequenceEditDialog(QKeySequence aKeySequence, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::KeySequenceEditDialog)
+{
+    init(aKeySequence, 0);
+}
+
+KeySequenceEditDialog::KeySequenceEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::KeySequenceEditDialog)
+{
+    init(QKeySequence(), aAttributes);
+}
+
 KeySequenceEditDialog::KeySequenceEditDialog(QKeySequence aKeySequence, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::KeySequenceEditDialog)
+{
+    init(aKeySequence, aAttributes);
+}
+
+void KeySequenceEditDialog::init(QKeySequence aKeySequence, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
