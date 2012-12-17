@@ -16,6 +16,9 @@ class Matrix4x4EditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit Matrix4x4EditDialog(QWidget *parent = 0);
+    explicit Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, QWidget *parent = 0);
+    explicit Matrix4x4EditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~Matrix4x4EditDialog();
 
@@ -23,6 +26,8 @@ public:
 
 private:
     Ui::Matrix4x4EditDialog *ui;
+
+    void init(QMatrix4x4 aMatrix4x4, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();

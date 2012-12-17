@@ -1,9 +1,35 @@
 #include "matrix4x4editdialog.h"
 #include "ui_matrix4x4editdialog.h"
 
+Matrix4x4EditDialog::Matrix4x4EditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Matrix4x4EditDialog)
+{
+    init(QMatrix4x4(), 0);
+}
+
+Matrix4x4EditDialog::Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Matrix4x4EditDialog)
+{
+    init(aMatrix4x4, 0);
+}
+
+Matrix4x4EditDialog::Matrix4x4EditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Matrix4x4EditDialog)
+{
+    init(QMatrix4x4(), aAttributes);
+}
+
 Matrix4x4EditDialog::Matrix4x4EditDialog(QMatrix4x4 aMatrix4x4, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Matrix4x4EditDialog)
+{
+    init(aMatrix4x4, aAttributes);
+}
+
+void Matrix4x4EditDialog::init(QMatrix4x4 aMatrix4x4, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
