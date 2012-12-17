@@ -1,9 +1,35 @@
 #include "vector2deditdialog.h"
 #include "ui_vector2deditdialog.h"
 
+Vector2DEditDialog::Vector2DEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector2DEditDialog)
+{
+    init(QVector2D(), 0);
+}
+
+Vector2DEditDialog::Vector2DEditDialog(QVector2D aVector2D, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector2DEditDialog)
+{
+    init(aVector2D, 0);
+}
+
+Vector2DEditDialog::Vector2DEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector2DEditDialog)
+{
+    init(QVector2D(), aAttributes);
+}
+
 Vector2DEditDialog::Vector2DEditDialog(QVector2D aVector2D, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Vector2DEditDialog)
+{
+    init(aVector2D, aAttributes);
+}
+
+void Vector2DEditDialog::init(QVector2D aVector2D, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
