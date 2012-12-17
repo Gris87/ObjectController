@@ -5,9 +5,35 @@
 
 #include "../widgets/rectframe.h"
 
+RegionEditDialog::RegionEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::RegionEditDialog)
+{
+    init(QRegion(), 0);
+}
+
+RegionEditDialog::RegionEditDialog(QRegion aValue, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::RegionEditDialog)
+{
+    init(aValue, 0);
+}
+
+RegionEditDialog::RegionEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::RegionEditDialog)
+{
+    init(QRegion(), aAttributes);
+}
+
 RegionEditDialog::RegionEditDialog(QRegion aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::RegionEditDialog)
+{
+    init(aValue, aAttributes);
+}
+
+void RegionEditDialog::init(QRegion aValue, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

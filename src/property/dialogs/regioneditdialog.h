@@ -16,6 +16,9 @@ class RegionEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit RegionEditDialog(QWidget *parent = 0);
+    explicit RegionEditDialog(QRegion aValue, QWidget *parent = 0);
+    explicit RegionEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit RegionEditDialog(QRegion aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~RegionEditDialog();
 
@@ -27,6 +30,8 @@ private:
     const PropertyAttributes *mAttributes;
     int minCount;
     int maxCount;
+
+    void init(QRegion aValue, const PropertyAttributes *aAttributes);
 
     void updateCountButtons();
 
