@@ -11,7 +11,7 @@ StringListEditor::StringListEditor(QWidget *parent) :
     mAttributes=0;
 
 #ifdef CONTROLLER_APP
-    // TODO: Fix crash
+    // TODO: Fix crash when you try to delete item from big amount of items
 #endif
 }
 

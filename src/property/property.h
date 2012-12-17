@@ -15,6 +15,10 @@ class Property : public QObject
 {
     Q_OBJECT
 public:
+    // It is a hack to provide Type from QTextLength
+    Q_ENUMS(LengthType)
+    enum LengthType { VariableLength = 0, FixedLength, PercentageLength };
+
     explicit Property(const QMetaObject *aPropertyObject, const QMetaProperty &aMetaProperty, QObject *parent = 0);
 
     bool equals(const Property *aProperty);
@@ -390,6 +394,9 @@ private slots:
     void penCapStyleChanged(const QVariant &aNewValue);
     void penJoinStyleChanged(const QVariant &aNewValue);
     void penColorChanged(const QVariant &aNewValue);
+
+    void textLengthTypeChanged(const QVariant &aNewValue);
+    void textLengthValueChanged(const QVariant &aNewValue);
 
     void matrixM11Changed(const QVariant &aNewValue);
     void matrixM12Changed(const QVariant &aNewValue);

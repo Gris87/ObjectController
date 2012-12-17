@@ -3417,13 +3417,67 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
     return aCount;
 }
 
-int Property::subPropertiesForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+void Property::textLengthTypeChanged(const QVariant &aNewValue)
 {
-#ifdef CONTROLLER_APP
-    // TODO: Create 2 sub-items
-#endif
+    QMetaEnum aTypeEnum=staticMetaObject.enumerator(staticMetaObject.indexOfEnumerator("LengthType"));
+    QString aTypeStr=QString::fromLatin1(aTypeEnum.valueToKey(aNewValue.value<int>()));
+    QTextLength::Type aType;
 
-    return 0;
+    if (aTypeStr=="VariableLength")
+    {
+        aType=QTextLength::VariableLength;
+    }
+    else
+    if (aTypeStr=="FixedLength")
+    {
+        aType=QTextLength::FixedLength;
+    }
+    else
+    if (aTypeStr=="PercentageLength")
+    {
+        aType=QTextLength::PercentageLength;
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTextLength aTextLength=aParentItem->firstValue().value<QTextLength>();
+    aTextLength=QTextLength(aType, aTextLength.rawValue());
+
+    aParentItem->setFirstValue(aTextLength);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::textLengthValueChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QTextLength aTextLength=aParentItem->firstValue().value<QTextLength>();
+    aTextLength=QTextLength(aTextLength.type(), aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aTextLength);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+int Property::subPropertiesForValue(const QTextLength &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    int aCount=0;
+
+    QMetaEnum aTypeEnum=staticMetaObject.enumerator(staticMetaObject.indexOfEnumerator("LengthType"));
+    QTextLength::Type aType=aValue.type();
+
+    PropertyTreeWidgetItem *aTypeItem;
+    PropertyTreeWidgetItem *aValueItem;
+
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aTypeItem,  aCount, qApp->translate("Property", "Type"),  aTypeEnum, aType,  textLengthTypeChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aValueItem, aCount, qApp->translate("Property", "Value"), aValue.rawValue(), textLengthValueChanged);
+
+    return aCount;
 }
 
 int Property::subPropertiesForValue(const QTextFormat &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
