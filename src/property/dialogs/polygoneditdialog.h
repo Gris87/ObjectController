@@ -16,6 +16,9 @@ class PolygonEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit PolygonEditDialog(QWidget *parent = 0);
+    explicit PolygonEditDialog(QPolygon aValue, QWidget *parent = 0);
+    explicit PolygonEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit PolygonEditDialog(QPolygon aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PolygonEditDialog();
 
@@ -27,6 +30,8 @@ private:
     const PropertyAttributes *mAttributes;
     int minCount;
     int maxCount;
+
+    void init(QPolygon aValue, const PropertyAttributes *aAttributes);
 
     void updateCountButtons();
 

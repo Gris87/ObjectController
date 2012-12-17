@@ -5,9 +5,35 @@
 
 #include "../widgets/pointframe.h"
 
+PolygonEditDialog::PolygonEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PolygonEditDialog)
+{
+    init(QPolygon(), 0);
+}
+
+PolygonEditDialog::PolygonEditDialog(QPolygon aValue, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PolygonEditDialog)
+{
+    init(aValue, 0);
+}
+
+PolygonEditDialog::PolygonEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PolygonEditDialog)
+{
+    init(QPolygon(), aAttributes);
+}
+
 PolygonEditDialog::PolygonEditDialog(QPolygon aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PolygonEditDialog)
+{
+    init(aValue, aAttributes);
+}
+
+void PolygonEditDialog::init(QPolygon aValue, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

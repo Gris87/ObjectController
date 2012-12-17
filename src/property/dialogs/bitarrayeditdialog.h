@@ -12,6 +12,10 @@ namespace Ui {
 class BitArrayEditDialog;
 }
 
+#ifdef CONTROLLER_APP
+    // TODO: Common UI for editors
+#endif
+
 class BitArrayEditDialog : public QDialog
 {
     Q_OBJECT
