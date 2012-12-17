@@ -1,9 +1,35 @@
 #include "transformeditdialog.h"
 #include "ui_transformeditdialog.h"
 
+TransformEditDialog::TransformEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::TransformEditDialog)
+{
+    init(QTransform(), 0);
+}
+
+TransformEditDialog::TransformEditDialog(QTransform aTransform, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::TransformEditDialog)
+{
+    init(aTransform, 0);
+}
+
+TransformEditDialog::TransformEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::TransformEditDialog)
+{
+    init(QTransform(), aAttributes);
+}
+
 TransformEditDialog::TransformEditDialog(QTransform aTransform, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TransformEditDialog)
+{
+    init(aTransform, aAttributes);
+}
+
+void TransformEditDialog::init(QTransform aTransform, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
