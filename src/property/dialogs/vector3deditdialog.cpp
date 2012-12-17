@@ -1,9 +1,35 @@
 #include "vector3deditdialog.h"
 #include "ui_vector3deditdialog.h"
 
+Vector3DEditDialog::Vector3DEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector3DEditDialog)
+{
+    init(QVector3D(), 0);
+}
+
+Vector3DEditDialog::Vector3DEditDialog(QVector3D aVector3D, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector3DEditDialog)
+{
+    init(aVector3D, 0);
+}
+
+Vector3DEditDialog::Vector3DEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector3DEditDialog)
+{
+    init(QVector3D(), aAttributes);
+}
+
 Vector3DEditDialog::Vector3DEditDialog(QVector3D aVector3D, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Vector3DEditDialog)
+{
+    init(aVector3D, aAttributes);
+}
+
+void Vector3DEditDialog::init(QVector3D aVector3D, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

@@ -16,6 +16,9 @@ class Vector3DEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit Vector3DEditDialog(QWidget *parent = 0);
+    explicit Vector3DEditDialog(QVector3D aVector3D, QWidget *parent = 0);
+    explicit Vector3DEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit Vector3DEditDialog(QVector3D aVector3D, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~Vector3DEditDialog();
 
@@ -23,6 +26,8 @@ public:
 
 private:
     Ui::Vector3DEditDialog *ui;
+
+    void init(QVector3D aVector3D, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
