@@ -1,9 +1,35 @@
 #include "matrixeditdialog.h"
 #include "ui_matrixeditdialog.h"
 
+MatrixEditDialog::MatrixEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::MatrixEditDialog)
+{
+    init(QMatrix(), 0);
+}
+
+MatrixEditDialog::MatrixEditDialog(QMatrix aMatrix, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::MatrixEditDialog)
+{
+    init(aMatrix, 0);
+}
+
+MatrixEditDialog::MatrixEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::MatrixEditDialog)
+{
+    init(QMatrix(), aAttributes);
+}
+
 MatrixEditDialog::MatrixEditDialog(QMatrix aMatrix, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MatrixEditDialog)
+{
+    init(aMatrix, aAttributes);
+}
+
+void MatrixEditDialog::init(QMatrix aMatrix, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

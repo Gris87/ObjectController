@@ -14,6 +14,9 @@ class MatrixEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit MatrixEditDialog(QWidget *parent = 0);
+    explicit MatrixEditDialog(QMatrix aMatrix, QWidget *parent = 0);
+    explicit MatrixEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit MatrixEditDialog(QMatrix aMatrix, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~MatrixEditDialog();
 
@@ -21,6 +24,8 @@ public:
 
 private:
     Ui::MatrixEditDialog *ui;
+
+    void init(QMatrix aMatrix, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
