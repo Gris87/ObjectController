@@ -1,9 +1,35 @@
 #include "linefeditdialog.h"
 #include "ui_linefeditdialog.h"
 
+LineFEditDialog::LineFEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::LineFEditDialog)
+{
+    init(QLineF(), 0);
+}
+
+LineFEditDialog::LineFEditDialog(QLineF aLineF, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::LineFEditDialog)
+{
+    init(aLineF, 0);
+}
+
+LineFEditDialog::LineFEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::LineFEditDialog)
+{
+    init(QLineF(), aAttributes);
+}
+
 LineFEditDialog::LineFEditDialog(QLineF aLineF, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LineFEditDialog)
+{
+    init(aLineF, aAttributes);
+}
+
+void LineFEditDialog::init(QLineF aLineF, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

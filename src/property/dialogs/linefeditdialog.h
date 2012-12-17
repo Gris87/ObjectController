@@ -14,6 +14,9 @@ class LineFEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit LineFEditDialog(QWidget *parent = 0);
+    explicit LineFEditDialog(QLineF aLineF, QWidget *parent = 0);
+    explicit LineFEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit LineFEditDialog(QLineF aLineF, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~LineFEditDialog();
 
@@ -21,6 +24,8 @@ public:
 
 private:
     Ui::LineFEditDialog *ui;
+
+    void init(QLineF aLineF, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
