@@ -13,9 +13,35 @@
 #include "../widgets/textlengthframe.h"
 #include "../propertyutils.h"
 
+TextFormatEditDialog::TextFormatEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::TextFormatEditDialog)
+{
+    init(QTextFormat(), 0);
+}
+
+TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::TextFormatEditDialog)
+{
+    init(aTextFormat, 0);
+}
+
+TextFormatEditDialog::TextFormatEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::TextFormatEditDialog)
+{
+    init(QTextFormat(), aAttributes);
+}
+
 TextFormatEditDialog::TextFormatEditDialog(QTextFormat aTextFormat, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::TextFormatEditDialog)
+{
+    init(aTextFormat, aAttributes);
+}
+
+void TextFormatEditDialog::init(QTextFormat aTextFormat, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

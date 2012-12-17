@@ -21,6 +21,9 @@ class TextFormatEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit TextFormatEditDialog(QWidget *parent = 0);
+    explicit TextFormatEditDialog(QTextFormat aTextFormat, QWidget *parent = 0);
+    explicit TextFormatEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit TextFormatEditDialog(QTextFormat aTextFormat, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~TextFormatEditDialog();
 
@@ -42,6 +45,8 @@ private:
 
     const PropertyAttributes *mAttributes;
     int mDecimals;
+
+    void init(QTextFormat aTextFormat, const PropertyAttributes *aAttributes);
 
     void copyFromTextFormat(QTextFormat aTextFormat);
     void putWidgetToLayout(QWidget *aWidget, QBoxLayout *aLayout);
