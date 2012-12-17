@@ -80,10 +80,9 @@ void PaletteEditDialog::init(QPalette aPalette, const PropertyAttributes *aAttri
 
 
 
-#ifdef CONTROLLER_APP
-    // TODO: Add easter egg
-#endif
-    mDemoWidget=ui->demoMdiArea->addSubWindow(new PaletteDemoWidget(this), Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
+    mPreviewArea=new PalettePreviewMdiArea(this);
+    ui->previewLayout->addWidget(mPreviewArea);
+    mDemoWidget=mPreviewArea->addSubWindow(new PaletteDemoWidget(this), Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
     mDemoWidget->setWindowState(Qt::WindowMaximized);
 
 
@@ -119,7 +118,7 @@ void PaletteEditDialog::init(QPalette aPalette, const PropertyAttributes *aAttri
             ui->calculateDetailsRadioButton->blockSignals(false);
         }
 
-        ui->demoMdiArea->setVisible(aAttributes->boolValue("preview", true));
+        ui->previewGroupBox->setVisible(aAttributes->boolValue("preview", true));
     }
 
 
@@ -184,7 +183,7 @@ void PaletteEditDialog::on_enabledRadioButton_toggled(bool checked)
 {
     if (checked)
     {
-        ui->demoMdiArea->setActiveSubWindow(mDemoWidget);
+        mPreviewArea->setActiveSubWindow(mDemoWidget);
         mDemoWidget->setEnabled(true);
     }
 }
@@ -193,7 +192,7 @@ void PaletteEditDialog::on_disabledRadioButton_toggled(bool checked)
 {
     if (checked)
     {
-        ui->demoMdiArea->setActiveSubWindow(mDemoWidget);
+        mPreviewArea->setActiveSubWindow(mDemoWidget);
         mDemoWidget->setEnabled(false);
     }
 }
@@ -202,7 +201,7 @@ void PaletteEditDialog::on_inactiveRadioButton_toggled(bool checked)
 {
     if (checked)
     {
-        ui->demoMdiArea->setActiveSubWindow(0);
+        mPreviewArea->setActiveSubWindow(0);
         mDemoWidget->setEnabled(true);
     }
 }

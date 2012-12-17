@@ -135,7 +135,7 @@
      <property name="title">
       <string>Preview</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <layout class="QVBoxLayout" name="previewLayout">
       <property name="spacing">
        <number>4</number>
       </property>
@@ -172,9 +172,6 @@
          </widget>
         </item>
        </layout>
-      </item>
-      <item>
-       <widget class="QMdiArea" name="demoMdiArea"/>
       </item>
      </layout>
     </widget>

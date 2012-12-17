@@ -6,6 +6,7 @@
 #include <QPalette>
 #include <QMdiSubWindow>
 
+#include "../widgets/palettepreviewmdiarea.h"
 #include "../propertyattributes.h"
 
 namespace Ui {
@@ -31,6 +32,7 @@ protected:
 private:
     Ui::PaletteEditDialog *ui;
     QMdiSubWindow         *mDemoWidget;
+    PalettePreviewMdiArea *mPreviewArea;
 
     void init(QPalette aPalette, const PropertyAttributes *aAttributes);
 
