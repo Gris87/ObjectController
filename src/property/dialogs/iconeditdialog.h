@@ -18,6 +18,9 @@ class IconEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit IconEditDialog(QWidget *parent = 0);
+    explicit IconEditDialog(QIcon aIcon, QWidget *parent = 0);
+    explicit IconEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~IconEditDialog();
 
@@ -34,6 +37,8 @@ private:
 
     Ui::IconEditDialog *ui;
     QList<PageEntry>    mPages;
+
+    void init(QIcon aIcon, const PropertyAttributes *aAttributes);
 
     QString modeToString(const QIcon::Mode &aMode) const;
     QString stateToString(const QIcon::State &aState) const;

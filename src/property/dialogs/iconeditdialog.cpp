@@ -1,9 +1,35 @@
 #include "iconeditdialog.h"
 #include "ui_iconeditdialog.h"
 
+IconEditDialog::IconEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::IconEditDialog)
+{
+    init(QIcon(), 0);
+}
+
+IconEditDialog::IconEditDialog(QIcon aIcon, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::IconEditDialog)
+{
+    init(aIcon, 0);
+}
+
+IconEditDialog::IconEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::IconEditDialog)
+{
+    init(QIcon(), aAttributes);
+}
+
 IconEditDialog::IconEditDialog(QIcon aIcon, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::IconEditDialog)
+{
+    init(aIcon, aAttributes);
+}
+
+void IconEditDialog::init(QIcon aIcon, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
