@@ -1,9 +1,35 @@
 #include "sizeeditdialog.h"
 #include "ui_sizeeditdialog.h"
 
+SizeEditDialog::SizeEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::SizeEditDialog)
+{
+    init(QSize(), 0);
+}
+
+SizeEditDialog::SizeEditDialog(QSize aSize, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::SizeEditDialog)
+{
+    init(aSize, 0);
+}
+
+SizeEditDialog::SizeEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::SizeEditDialog)
+{
+    init(QSize(), aAttributes);
+}
+
 SizeEditDialog::SizeEditDialog(QSize aSize, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SizeEditDialog)
+{
+    init(aSize, aAttributes);
+}
+
+void SizeEditDialog::init(QSize aSize, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
