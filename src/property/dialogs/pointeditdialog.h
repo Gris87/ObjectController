@@ -14,6 +14,9 @@ class PointEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit PointEditDialog(QWidget *parent = 0);
+    explicit PointEditDialog(QPoint aPoint, QWidget *parent = 0);
+    explicit PointEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit PointEditDialog(QPoint aPoint, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PointEditDialog();
 
@@ -21,6 +24,8 @@ public:
 
 private:
     Ui::PointEditDialog *ui;
+
+    void init(QPoint aPoint, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
