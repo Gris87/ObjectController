@@ -5,7 +5,6 @@
 #include <QTimer>
 
 #include "../widgets/colorarea.h"
-#include "../widgets/palettedemowidget.h"
 
 PaletteEditDialog::PaletteEditDialog(QWidget *parent) :
     QDialog(parent),
@@ -82,8 +81,6 @@ void PaletteEditDialog::init(QPalette aPalette, const PropertyAttributes *aAttri
 
     mPreviewArea=new PalettePreviewMdiArea(this);
     ui->previewLayout->addWidget(mPreviewArea);
-    mDemoWidget=mPreviewArea->addSubWindow(new PaletteDemoWidget(this), Qt::SubWindow | Qt::CustomizeWindowHint | Qt::WindowMinimizeButtonHint | Qt::WindowMaximizeButtonHint);
-    mDemoWidget->setWindowState(Qt::WindowMaximized);
 
 
 
@@ -183,8 +180,7 @@ void PaletteEditDialog::on_enabledRadioButton_toggled(bool checked)
 {
     if (checked)
     {
-        mPreviewArea->setActiveSubWindow(mDemoWidget);
-        mDemoWidget->setEnabled(true);
+        mPreviewArea->setEnabledState();
     }
 }
 
@@ -192,8 +188,7 @@ void PaletteEditDialog::on_disabledRadioButton_toggled(bool checked)
 {
     if (checked)
     {
-        mPreviewArea->setActiveSubWindow(mDemoWidget);
-        mDemoWidget->setEnabled(false);
+        mPreviewArea->setDisabledState();
     }
 }
 
@@ -201,8 +196,7 @@ void PaletteEditDialog::on_inactiveRadioButton_toggled(bool checked)
 {
     if (checked)
     {
-        mPreviewArea->setActiveSubWindow(0);
-        mDemoWidget->setEnabled(true);
+        mPreviewArea->setInactiveState();
     }
 }
 
@@ -416,5 +410,5 @@ void PaletteEditDialog::updateDemo()
 
 
 
-    mDemoWidget->setPalette(aDemoPalette);
+    mPreviewArea->setPreviewPalette(aDemoPalette);
 }
