@@ -6,7 +6,7 @@
 #include <QBitArray>
 
 namespace Ui {
-class BitArrayEditor;
+class DialogEditor;
 }
 
 class BitArrayEditor : public CustomEditor
@@ -26,7 +26,7 @@ protected:
     void selectText();
 
 private:
-    Ui::BitArrayEditor *ui;
+    Ui::DialogEditor *ui;
     QBitArray mValue;
     const PropertyAttributes *mAttributes;
 

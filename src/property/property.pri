@@ -341,7 +341,7 @@ FORMS += \
            $$PWD/dialogs/vector2deditdialog.ui \
            $$PWD/dialogs/vector3deditdialog.ui \
            $$PWD/dialogs/vector4deditdialog.ui \
-           $$PWD/editors/bitarrayeditor.ui \
+           $$PWD/editors/dialogeditor.ui \
            $$PWD/editors/booleditor.ui \
            $$PWD/editors/brusheditor.ui \
            $$PWD/editors/bytearrayeditor.ui \
