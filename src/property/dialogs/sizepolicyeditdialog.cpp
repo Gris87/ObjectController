@@ -3,9 +3,35 @@
 
 #include <QMetaEnum>
 
+SizePolicyEditDialog::SizePolicyEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::SizePolicyEditDialog)
+{
+    init(QSizePolicy(), 0);
+}
+
+SizePolicyEditDialog::SizePolicyEditDialog(QSizePolicy aSizePolicy, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::SizePolicyEditDialog)
+{
+    init(aSizePolicy, 0);
+}
+
+SizePolicyEditDialog::SizePolicyEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::SizePolicyEditDialog)
+{
+    init(QSizePolicy(), aAttributes);
+}
+
 SizePolicyEditDialog::SizePolicyEditDialog(QSizePolicy aSizePolicy, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SizePolicyEditDialog)
+{
+    init(aSizePolicy, aAttributes);
+}
+
+void SizePolicyEditDialog::init(QSizePolicy aSizePolicy, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
