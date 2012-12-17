@@ -7,9 +7,35 @@
 #include "../widgets/colorarea.h"
 #include "../widgets/palettedemowidget.h"
 
+PaletteEditDialog::PaletteEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaletteEditDialog)
+{
+    init(QPalette(), 0);
+}
+
+PaletteEditDialog::PaletteEditDialog(QPalette aPalette, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaletteEditDialog)
+{
+    init(aPalette, 0);
+}
+
+PaletteEditDialog::PaletteEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PaletteEditDialog)
+{
+    init(QPalette(), aAttributes);
+}
+
 PaletteEditDialog::PaletteEditDialog(QPalette aPalette, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PaletteEditDialog)
+{
+    init(aPalette, aAttributes);
+}
+
+void PaletteEditDialog::init(QPalette aPalette, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

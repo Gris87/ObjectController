@@ -17,6 +17,9 @@ class PaletteEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit PaletteEditDialog(QWidget *parent = 0);
+    explicit PaletteEditDialog(QPalette aPalette, QWidget *parent = 0);
+    explicit PaletteEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit PaletteEditDialog(QPalette aPalette, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PaletteEditDialog();
 
@@ -28,6 +31,8 @@ protected:
 private:
     Ui::PaletteEditDialog *ui;
     QMdiSubWindow         *mDemoWidget;
+
+    void init(QPalette aPalette, const PropertyAttributes *aAttributes);
 
     void calculateColor(int aRow, QColor aColor);
 
