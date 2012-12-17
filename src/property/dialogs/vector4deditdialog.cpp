@@ -1,9 +1,35 @@
 #include "vector4deditdialog.h"
 #include "ui_vector4deditdialog.h"
 
+Vector4DEditDialog::Vector4DEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector4DEditDialog)
+{
+    init(QVector4D(), 0);
+}
+
+Vector4DEditDialog::Vector4DEditDialog(QVector4D aVector4D, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector4DEditDialog)
+{
+    init(aVector4D, 0);
+}
+
+Vector4DEditDialog::Vector4DEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::Vector4DEditDialog)
+{
+    init(QVector4D(), aAttributes);
+}
+
 Vector4DEditDialog::Vector4DEditDialog(QVector4D aVector4D, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Vector4DEditDialog)
+{
+    init(aVector4D, aAttributes);
+}
+
+void Vector4DEditDialog::init(QVector4D aVector4D, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

@@ -16,6 +16,9 @@ class Vector4DEditDialog : public QDialog
     Q_OBJECT
 
 public:
+    explicit Vector4DEditDialog(QWidget *parent = 0);
+    explicit Vector4DEditDialog(QVector4D aVector4D, QWidget *parent = 0);
+    explicit Vector4DEditDialog(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit Vector4DEditDialog(QVector4D aVector4D, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~Vector4DEditDialog();
 
@@ -23,6 +26,8 @@ public:
 
 private:
     Ui::Vector4DEditDialog *ui;
+
+    void init(QVector4D aVector4D, const PropertyAttributes *aAttributes);
 
 private slots:
     void on_okButton_clicked();
