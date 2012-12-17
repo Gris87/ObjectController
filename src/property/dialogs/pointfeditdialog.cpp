@@ -1,9 +1,35 @@
 #include "pointfeditdialog.h"
 #include "ui_pointfeditdialog.h"
 
+PointFEditDialog::PointFEditDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PointFEditDialog)
+{
+    init(QPointF(), 0);
+}
+
+PointFEditDialog::PointFEditDialog(QPointF aPointF, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PointFEditDialog)
+{
+    init(aPointF, 0);
+}
+
+PointFEditDialog::PointFEditDialog(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PointFEditDialog)
+{
+    init(QPointF(), aAttributes);
+}
+
 PointFEditDialog::PointFEditDialog(QPointF aPointF, const PropertyAttributes *aAttributes, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::PointFEditDialog)
+{
+    init(aPointF, aAttributes);
+}
+
+void PointFEditDialog::init(QPointF aPointF, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
