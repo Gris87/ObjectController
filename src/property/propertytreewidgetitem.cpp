@@ -45,6 +45,18 @@ PropertyTreeWidgetItem::PropertyTreeWidgetItem(const PropertyTreeWidgetItem &oth
     init();
 }
 
+inline void PropertyTreeWidgetItem::init()
+{
+    mItemConnector=new ItemConnector(this);
+    mProperty=0;
+    mFirstValue=QVariant();
+    mDelegate=0;
+    mMetaEnum=0;
+    mDefaultValue=0;
+
+    initToolTip();
+}
+
 PropertyTreeWidgetItem::~PropertyTreeWidgetItem()
 {
     delete mItemConnector;
@@ -53,22 +65,11 @@ PropertyTreeWidgetItem::~PropertyTreeWidgetItem()
     {
         delete mMetaEnum;
     }
-}
 
-inline void PropertyTreeWidgetItem::init()
-{
-    mItemConnector=new ItemConnector(this);
-    mProperty=0;
-    mFirstValue=QVariant();
-    mDelegate=0;
-    mMetaEnum=0;
-    mModified=false;
-
-#ifdef CONTROLLER_APP
-    // TODO: Handle mModified for PropertyTreeWidgetItem
-#endif
-
-    initToolTip();
+    if (mDefaultValue)
+    {
+        delete mDefaultValue;
+    }
 }
 
 void PropertyTreeWidgetItem::initToolTip()
@@ -105,13 +106,10 @@ Property* PropertyTreeWidgetItem::topProperty()
 
         QTreeWidgetItem *aParent=aCurItem->parent();
 
-#ifndef QT_NO_DEBUG
         if (aParent==0)
         {
-            Q_ASSERT(false);
             break;
         }
-#endif
 
         aCurItem=(PropertyTreeWidgetItem *)aParent;
     } while (true);
@@ -143,7 +141,37 @@ void PropertyTreeWidgetItem::setProperty(Property* aProperty)
 
     if (mProperty)
     {
+        const PropertyAttributes* aAttributes=mProperty->attributes();
+
+        if (aAttributes->contains("default"))
+        {
+            if (mDefaultValue)
+            {
+                *mDefaultValue=mProperty->attributes()->stringValue("default");
+            }
+            else
+            {
+                mDefaultValue=new QString(mProperty->attributes()->stringValue("default"));
+            }
+        }
+        else
+        {
+            if (mDefaultValue)
+            {
+                delete mDefaultValue;
+                mDefaultValue=0;
+            }
+        }
+
         QObject::connect(mItemConnector, SIGNAL(valueChanged(QVariant)), mProperty, SIGNAL(valueChanged(QVariant)));
+    }
+    else
+    {
+        if (mDefaultValue)
+        {
+            delete mDefaultValue;
+            mDefaultValue=0;
+        }
     }
 }
 
@@ -184,11 +212,11 @@ void PropertyTreeWidgetItem::setMetaEnum(const QMetaEnum &aMetaEnum)
 
 bool PropertyTreeWidgetItem::isModified() const
 {
-    return mModified;
+    return (
+            mDefaultValue
+            &&
+            (*mDefaultValue)!=""
+            &&
+            (*mDefaultValue)!=text(1)
+           );
 }
-
-void PropertyTreeWidgetItem::setModified(const bool &aModified)
-{
-    mModified=aModified;
-}
-

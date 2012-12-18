@@ -43,7 +43,6 @@ public:
     void            setMetaEnum(const QMetaEnum &aMetaEnum);
 
     bool            isModified() const;
-    void            setModified(const bool &aModified);
 
 protected:
     ItemConnector*  mItemConnector;
@@ -51,7 +50,7 @@ protected:
     QVariant        mFirstValue;
     CustomDelegate* mDelegate;
     QMetaEnum*      mMetaEnum;
-    bool            mModified;
+    QString*        mDefaultValue;
 
     void init();
     void initToolTip();

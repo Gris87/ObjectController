@@ -93,6 +93,7 @@ public:
     /*
     Q_CLASSINFO("Enumeration attributes", "toolTip            : \"It is a Enumeration\" ;"
                                           "delay              : 100                     ;"
+                                          "default            : ENUM_TWO                ;"
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
                                         //"values             :                         ;"
