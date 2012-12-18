@@ -215,8 +215,6 @@ bool PropertyTreeWidgetItem::isModified() const
     return (
             mDefaultValue
             &&
-            (*mDefaultValue)!=""
-            &&
             (*mDefaultValue)!=text(1)
            );
 }
