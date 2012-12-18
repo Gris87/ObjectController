@@ -9,10 +9,13 @@ class ShortCutEdit : public QLineEdit
 {
     Q_OBJECT
 public:
+    explicit ShortCutEdit(QWidget *parent = 0);
     explicit ShortCutEdit(const PropertyAttributes *aAttributes, QWidget *parent = 0);
 
 protected:
     QStringList mRejection;
+
+    void init(const PropertyAttributes *aAttributes);
 
     void keyPressEvent(QKeyEvent *event);
 };

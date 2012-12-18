@@ -3,9 +3,21 @@
 
 #include "../dialogs/pointeditdialog.h"
 
+PointFrame::PointFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PointFrame)
+{
+    init(0);
+}
+
 PointFrame::PointFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PointFrame)
+{
+    init(aAttributes);
+}
+
+void PointFrame::init(const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

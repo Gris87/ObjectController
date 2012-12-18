@@ -14,6 +14,7 @@ class RectFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit RectFrame(QWidget *parent = 0);
     explicit RectFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~RectFrame();
 
@@ -28,6 +29,8 @@ private:
     Ui::RectFrame *ui;
     QRect          mRect;
     const PropertyAttributes *mAttributes;
+
+    void init(const PropertyAttributes *aAttributes);
 
 signals:
     void deletePressed();

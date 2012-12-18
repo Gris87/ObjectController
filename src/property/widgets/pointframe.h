@@ -14,6 +14,7 @@ class PointFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit PointFrame(QWidget *parent = 0);
     explicit PointFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PointFrame();
 
@@ -28,6 +29,8 @@ private:
     Ui::PointFrame *ui;
     QPoint          mPoint;
     const PropertyAttributes *mAttributes;
+
+    void init(const PropertyAttributes *aAttributes);
 
 signals:
     void deletePressed();

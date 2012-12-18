@@ -1,9 +1,21 @@
 #include "tabframe.h"
 #include "ui_tabframe.h"
 
+TabFrame::TabFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::TabFrame)
+{
+    init(0);
+}
+
 TabFrame::TabFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TabFrame)
+{
+    init(aAttributes);
+}
+
+void TabFrame::init(const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

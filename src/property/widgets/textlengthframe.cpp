@@ -4,9 +4,21 @@
 #include "../dialogs/textlengtheditdialog.h"
 #include "../propertyutils.h"
 
+TextLengthFrame::TextLengthFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::TextLengthFrame)
+{
+    init(0);
+}
+
 TextLengthFrame::TextLengthFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::TextLengthFrame)
+{
+    init(aAttributes);
+}
+
+void TextLengthFrame::init(const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

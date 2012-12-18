@@ -16,6 +16,7 @@ class TextLengthFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit TextLengthFrame(QWidget *parent = 0);
     explicit TextLengthFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~TextLengthFrame();
 
@@ -30,6 +31,8 @@ private:
     QTextLength          mTextLength;
     const PropertyAttributes *mAttributes;
     int mDecimals;
+
+    void init(const PropertyAttributes *aAttributes);
 
 signals:
     void deletePressed();

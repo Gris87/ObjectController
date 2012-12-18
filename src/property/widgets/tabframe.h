@@ -16,6 +16,7 @@ class TabFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit TabFrame(QWidget *parent = 0);
     explicit TabFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~TabFrame();
 
@@ -36,6 +37,8 @@ public:
 
 private:
     Ui::TabFrame *ui;
+
+    void init(const PropertyAttributes *aAttributes);
 
 signals:
     void deletePressed();

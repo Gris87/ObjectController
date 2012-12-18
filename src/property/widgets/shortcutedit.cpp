@@ -2,8 +2,19 @@
 
 #include <QKeyEvent>
 
+ShortCutEdit::ShortCutEdit(QWidget *parent) :
+    QLineEdit(parent)
+{
+    init(0);
+}
+
 ShortCutEdit::ShortCutEdit(const PropertyAttributes *aAttributes, QWidget *parent) :
     QLineEdit(parent)
+{
+    init(aAttributes);
+}
+
+void ShortCutEdit::init(const PropertyAttributes *aAttributes)
 {
     if (aAttributes)
     {

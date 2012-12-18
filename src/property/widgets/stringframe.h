@@ -14,6 +14,7 @@ class StringFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit StringFrame(QWidget *parent = 0);
     explicit StringFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~StringFrame();
 
@@ -26,6 +27,8 @@ public:
 
 private:
     Ui::StringFrame *ui;
+
+    void init(const PropertyAttributes *aAttributes);
 
 signals:
     void deletePressed();

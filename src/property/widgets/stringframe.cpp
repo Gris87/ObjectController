@@ -1,9 +1,21 @@
 #include "stringframe.h"
 #include "ui_stringframe.h"
 
+StringFrame::StringFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::StringFrame)
+{
+    init(0);
+}
+
 StringFrame::StringFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::StringFrame)
+{
+    init(aAttributes);
+}
+
+void StringFrame::init(const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

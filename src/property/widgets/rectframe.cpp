@@ -3,9 +3,21 @@
 
 #include "../dialogs/recteditdialog.h"
 
+RectFrame::RectFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::RectFrame)
+{
+    init(0);
+}
+
 RectFrame::RectFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RectFrame)
+{
+    init(aAttributes);
+}
+
+void RectFrame::init(const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 
