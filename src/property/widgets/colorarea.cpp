@@ -12,8 +12,19 @@
 #include "coloreditdialog.h"
 #endif
 
+ColorArea::ColorArea(QWidget *parent) :
+    QFrame(parent)
+{
+    init(0);
+}
+
 ColorArea::ColorArea(const PropertyAttributes *aAttributes, QWidget *parent) :
     QFrame(parent)
+{
+    init(aAttributes);
+}
+
+void ColorArea::init(const PropertyAttributes *aAttributes)
 {
     mAttributes=aAttributes;
 

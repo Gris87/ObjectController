@@ -1,9 +1,21 @@
 #include "doubleframe.h"
 #include "ui_doubleframe.h"
 
+DoubleFrame::DoubleFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::DoubleFrame)
+{
+    init(0);
+}
+
 DoubleFrame::DoubleFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DoubleFrame)
+{
+    init(aAttributes);
+}
+
+void DoubleFrame::init(const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

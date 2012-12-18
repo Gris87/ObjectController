@@ -9,6 +9,7 @@ class ColorArea : public QFrame
 {
     Q_OBJECT
 public:
+    explicit ColorArea(QWidget *parent = 0);
     explicit ColorArea(const PropertyAttributes *aAttributes, QWidget *parent = 0);
 
     QSize minimumSizeHint() const;
@@ -49,6 +50,8 @@ protected:
     quint8   mPopupCount;
     quint8   mPopupCellSize;
     const PropertyAttributes *mAttributes;
+
+    void init(const PropertyAttributes *aAttributes);
 
     void mousePressEvent(QMouseEvent *event);
     void paintEvent(QPaintEvent *event);

@@ -11,6 +11,7 @@ class GradientWidget : public QWidget
 {
     Q_OBJECT
 public:
+    explicit GradientWidget(QWidget *parent = 0);
     explicit GradientWidget(const PropertyAttributes *aAttributes, QWidget *parent = 0);
 
     QSize minimumSizeHint() const;
@@ -27,6 +28,8 @@ protected:
     bool           mDragging;
     QGradientStops mGradientStops;
     const PropertyAttributes *mAttributes;
+
+    void init(const PropertyAttributes *aAttributes);
 
     void mousePressEvent(QMouseEvent *event);
     void mouseMoveEvent(QMouseEvent *event);

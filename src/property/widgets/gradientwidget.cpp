@@ -10,8 +10,19 @@
 #include "coloreditdialog.h"
 #endif
 
+GradientWidget::GradientWidget(QWidget *parent) :
+    QWidget(parent)
+{
+    init(0);
+}
+
 GradientWidget::GradientWidget(const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent)
+{
+    init(aAttributes);
+}
+
+void GradientWidget::init(const PropertyAttributes *aAttributes)
 {
     mLeftPressed=false;
     mStartX=0;

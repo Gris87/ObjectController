@@ -14,6 +14,7 @@ class DoubleFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit DoubleFrame(QWidget *parent = 0);
     explicit DoubleFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~DoubleFrame();
 
@@ -25,6 +26,8 @@ public:
 
 private:
     Ui::DoubleFrame *ui;
+
+    void init(const PropertyAttributes *aAttributes);
 
 signals:
     void deletePressed();
