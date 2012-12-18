@@ -5,9 +5,63 @@
 
 #include "../dialogs/sizeeditdialog.h"
 
+PaintFrame::PaintFrame(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(QPixmap(32, 32), true, 0);
+}
+
+PaintFrame::PaintFrame(QPixmap aValue, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(aValue, true, 0);
+}
+
+PaintFrame::PaintFrame(QPixmap aValue, bool aMono, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(aValue, aMono, 0);
+}
+
+PaintFrame::PaintFrame(const PropertyAttributes *aAttributes, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(QPixmap(32, 32), true, aAttributes);
+}
+
+PaintFrame::PaintFrame(bool aMono, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(QPixmap(32, 32), aMono, 0);
+}
+
+PaintFrame::PaintFrame(bool aMono, const PropertyAttributes *aAttributes, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(QPixmap(32, 32), aMono, aAttributes);
+}
+
+PaintFrame::PaintFrame(QPixmap aValue, const PropertyAttributes *aAttributes, QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::PaintFrame)
+{
+    init(aValue, true, aAttributes);
+}
+
 PaintFrame::PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PaintFrame)
+{
+    init(aValue, aMono, aAttributes);
+}
+
+void PaintFrame::init(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes)
 {
     ui->setupUi(this);
 

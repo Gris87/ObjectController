@@ -17,6 +17,13 @@ class PaintFrame : public QWidget
     Q_OBJECT
 
 public:
+    explicit PaintFrame(QWidget *parent = 0);
+    explicit PaintFrame(QPixmap aValue, QWidget *parent = 0);
+    explicit PaintFrame(QPixmap aValue, bool aMono, QWidget *parent = 0);
+    explicit PaintFrame(const PropertyAttributes *aAttributes, QWidget *parent = 0);
+    explicit PaintFrame(bool aMono, QWidget *parent = 0);
+    explicit PaintFrame(bool aMono, const PropertyAttributes *aAttributes, QWidget *parent = 0);
+    explicit PaintFrame(QPixmap aValue, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     explicit PaintFrame(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes, QWidget *parent = 0);
     ~PaintFrame();
 
@@ -30,6 +37,8 @@ private:
     ColorArea      *mLeftArea;
     ColorArea      *mRightArea;
     const PropertyAttributes *mAttributes;
+
+    void init(QPixmap aValue, bool aMono, const PropertyAttributes *aAttributes);
 
 private slots:
     void colorLeftSelected();
