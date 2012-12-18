@@ -467,6 +467,7 @@ public:
 
     Q_CLASSINFO("Font attributes",        "toolTip            : \"It is a Font\"        ;"
                                           "delay              : 100                     ;"
+                                          "allowModifySample  : true                    ;"
 
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
                                         //"maxLength          : 16                      ;"
@@ -477,8 +478,8 @@ public:
                                         //"accelerated        : false                   ;"
                                         //"prefix             : \"\"                    ;"
                                           "suffix             : \" pt\"                 ;"
-                                          "minValue           : 8                       ;"
-                                          "maxValue           : 72                      ;"
+                                          "minValue           : 9                       ;"
+                                          "maxValue           : 36                      ;"
                                           "step               : 1                       ;"
 
                                           "maxVisibleItems    : 5                       ;"
@@ -849,7 +850,7 @@ public:
                                           "delay              : 100                     ;"
                )
 
-    */
+    /**/
 
     // ----------------------------------------------------------------------------------------------------
 

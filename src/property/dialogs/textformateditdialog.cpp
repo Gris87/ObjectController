@@ -3,11 +3,11 @@
 
 #include <QScrollBar>
 #include <QTimer>
-#include <QFontDialog>
 
 #include "brusheditdialog.h"
-#include "stringlisteditdialog.h"
+#include "fonteditdialog.h"
 #include "peneditdialog.h"
+#include "stringlisteditdialog.h"
 #include "textlengtheditdialog.h"
 #include "../widgets/tabframe.h"
 #include "../widgets/textlengthframe.h"
@@ -890,7 +890,7 @@ void TextFormatEditDialog::on_charOthersButton_clicked()
 
 void TextFormatEditDialog::on_charFontButton_clicked()
 {
-    QFontDialog dialog(((QTextCharFormat *)&mTextFormat)->font(), this);
+    FontEditDialog dialog(((QTextCharFormat *)&mTextFormat)->font(), mAttributes, this);
 
     if (dialog.exec())
     {

@@ -59,6 +59,7 @@ HEADERS += $$PWD/delegates/bitarraydelegate.h \
            $$PWD/dialogs/bytearrayeditdialog.h \
            $$PWD/dialogs/coloreditdialog.h \
            $$PWD/dialogs/easingcurveeditdialog.h \
+           $$PWD/dialogs/fonteditdialog.h \
            $$PWD/dialogs/iconeditdialog.h \
            $$PWD/dialogs/keysequenceeditdialog.h \
            $$PWD/dialogs/lineeditdialog.h \
@@ -208,6 +209,7 @@ SOURCES += $$PWD/delegates/bitarraydelegate.cpp \
            $$PWD/dialogs/bytearrayeditdialog.cpp \
            $$PWD/dialogs/coloreditdialog.cpp \
            $$PWD/dialogs/easingcurveeditdialog.cpp \
+           $$PWD/dialogs/fonteditdialog.cpp \
            $$PWD/dialogs/iconeditdialog.cpp \
            $$PWD/dialogs/keysequenceeditdialog.cpp \
            $$PWD/dialogs/lineeditdialog.cpp \
@@ -316,6 +318,7 @@ FORMS += \
            $$PWD/dialogs/bytearrayeditdialog.ui \
            $$PWD/dialogs/coloreditdialog.ui \
            $$PWD/dialogs/easingcurveeditdialog.ui \
+           $$PWD/dialogs/fonteditdialog.ui \
            $$PWD/dialogs/iconeditdialog.ui \
            $$PWD/dialogs/keysequenceeditdialog.ui \
            $$PWD/dialogs/lineeditdialog.ui \

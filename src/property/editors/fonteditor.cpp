@@ -1,8 +1,9 @@
 #include "fonteditor.h"
 #include "ui_dialogeditor.h"
 
-#include <QFontDialog>
 #include <QPainter>
+
+#include "../dialogs/fonteditdialog.h"
 
 FontEditor::FontEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -90,10 +91,7 @@ void FontEditor::handleAttributes(const PropertyAttributes *aAttributes)
 
 void FontEditor::on_editButton_clicked()
 {
-#ifdef CONTROLLER_APP
-    // TODO: Create own font editor that will handle mAttributes
-#endif
-    QFontDialog dialog(mValue, this);
+    FontEditDialog dialog(mValue, mAttributes, this);
 
     if (dialog.exec())
     {

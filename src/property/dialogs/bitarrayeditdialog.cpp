@@ -1,8 +1,6 @@
 #include "bitarrayeditdialog.h"
 #include "ui_bitarrayeditdialog.h"
 
-#include "../propertyutils.h"
-
 BitArrayEditDialog::BitArrayEditDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::BitArrayEditDialog)
