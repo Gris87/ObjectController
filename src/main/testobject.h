@@ -90,7 +90,7 @@ public:
     // ----------------------------------------------------------------------------------------------------
 
     // Uncomment it if you want to check attributes
-    /*
+    /**/
     Q_CLASSINFO("Enumeration attributes", "toolTip            : \"It is a Enumeration\" ;"
                                           "delay              : 100                     ;"
                                           "default            : ENUM_TWO                ;"

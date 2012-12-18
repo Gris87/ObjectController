@@ -147,11 +147,11 @@ void PropertyTreeWidgetItem::setProperty(Property* aProperty)
         {
             if (mDefaultValue)
             {
-                *mDefaultValue=mProperty->attributes()->stringValue("default");
+                *mDefaultValue=aAttributes->stringValue("default");
             }
             else
             {
-                mDefaultValue=new QString(mProperty->attributes()->stringValue("default"));
+                mDefaultValue=new QString(aAttributes->stringValue("default"));
             }
         }
         else
