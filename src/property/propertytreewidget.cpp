@@ -132,29 +132,7 @@ void PropertyTreeWidget::drawRow(QPainter *painter, const QStyleOptionViewItem &
 
     if (aItem->parent())
     {
-        Property *aProperty;
-        PropertyTreeWidgetItem* aCurItem=aItem;
-
-        do
-        {
-            aProperty=aCurItem->property();
-
-            if (aProperty)
-            {
-                break;
-            }
-
-            aCurItem=(PropertyTreeWidgetItem *)aCurItem->parent();
-
-#ifndef QT_NO_DEBUG
-            if (aCurItem==0)
-            {
-                Q_ASSERT(false);
-                break;
-            }
-#endif
-        } while (true);
-
+        Property *aProperty=aItem->topProperty();
 
 #ifndef QT_NO_DEBUG
         if (aProperty)

@@ -366,3 +366,6 @@ FORMS += \
            $$PWD/widgets/stringframe.ui \
            $$PWD/widgets/tabframe.ui \
            $$PWD/widgets/textlengthframe.ui
+
+OTHER_FILES += \
+           $$PWD/Readme.txt

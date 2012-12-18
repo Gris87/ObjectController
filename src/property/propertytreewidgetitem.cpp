@@ -64,6 +64,10 @@ inline void PropertyTreeWidgetItem::init()
     mMetaEnum=0;
     mModified=false;
 
+#ifdef CONTROLLER_APP
+    // TODO: Handle mModified for PropertyTreeWidgetItem
+#endif
+
     initToolTip();
 }
 
@@ -101,10 +105,13 @@ Property* PropertyTreeWidgetItem::topProperty()
 
         QTreeWidgetItem *aParent=aCurItem->parent();
 
+#ifndef QT_NO_DEBUG
         if (aParent==0)
         {
+            Q_ASSERT(false);
             break;
         }
+#endif
 
         aCurItem=(PropertyTreeWidgetItem *)aParent;
     } while (true);
