@@ -84,7 +84,7 @@ void PropertyItemDelegate::paint(QPainter *aPainter, const QStyleOptionViewItem 
                 aPainter->fillRect(aOption.rect, aColor);
             }
 
-            if (aIndex.column()==0 && aItem->isModified())
+            if (aItem->isModified())
             {
                 opt.font.setBold(true);
                 opt.fontMetrics = QFontMetrics(opt.font);
