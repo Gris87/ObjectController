@@ -308,7 +308,7 @@ public:
 
     Q_CLASSINFO("Date attributes",        "toolTip            : \"It is a Date\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : 2012-12-19              ;"
                                           "minDate            : 01.01.2000              ;"
                                           "maxDate            : 31.12.2020              ;"
                                           "displayFormat      : yyyy-MM-dd              ;"
@@ -317,7 +317,7 @@ public:
 
     Q_CLASSINFO("Time attributes",        "toolTip            : \"It is a Time\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : 20:32:30.861            ;"
                                           "minTime            : 12:34:56                ;"
                                           "maxTime            : 23:59:59                ;"
                                           "displayFormat      : HH:mm:ss.zzz            ;"
@@ -325,7 +325,7 @@ public:
 
     Q_CLASSINFO("DateTime attributes",    "toolTip            : \"It is a DateTime\"    ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : 2012-12-19 20:32:30.861 ;"
                                           "minDate            : 01.01.2000              ;"
                                           "maxDate            : 31.12.2020              ;"
                                           "minTime            : 12:34:56                ;"
@@ -336,7 +336,7 @@ public:
 
     Q_CLASSINFO("Url attributes",         "toolTip            : \"It is a Url\"         ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : http:/google.com        ;"
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
                                         //"maxLength          : 16                      ;"
                                         //"echoMode           : Password                ;"
@@ -345,7 +345,7 @@ public:
 
     Q_CLASSINFO("Locale attributes",      "toolTip            : \"It is a Locale\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : Russian, RussianFederation ;"
 
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
@@ -354,7 +354,7 @@ public:
 
     Q_CLASSINFO("Rect attributes",        "toolTip            : \"It is a Rect\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [(10, 20), 800 x 600]   ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -367,7 +367,7 @@ public:
 
     Q_CLASSINFO("RectF attributes",       "toolTip            : \"It is a RectF\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [(20, 10), 640 x 480]   ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -381,7 +381,7 @@ public:
 
     Q_CLASSINFO("Size attributes",        "toolTip            : \"It is a Size\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : 32 x 32                 ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -394,7 +394,7 @@ public:
 
     Q_CLASSINFO("SizeF attributes",       "toolTip            : \"It is a SizeF\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : 48 x 48                 ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -408,7 +408,7 @@ public:
 
     Q_CLASSINFO("Line attributes",        "toolTip            : \"It is a Line\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [(10, 10), (600, 10)]   ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -421,7 +421,7 @@ public:
 
     Q_CLASSINFO("LineF attributes",       "toolTip            : \"It is a LineF\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [(4, 4), (4, 300)]      ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -435,7 +435,7 @@ public:
 
     Q_CLASSINFO("Point attributes",       "toolTip            : \"It is a Point\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : (320, 240)              ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -448,7 +448,7 @@ public:
 
     Q_CLASSINFO("PointF attributes",      "toolTip            : \"It is a PointF\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : (240, 320)              ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -462,7 +462,7 @@ public:
 
     Q_CLASSINFO("RegExp attributes",      "toolTip            : \"It is a RegExp\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : ^[a-z]                  ;"
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
                                         //"maxLength          : 16                      ;"
                                         //"echoMode           : Password                ;"
@@ -471,7 +471,7 @@ public:
 
     Q_CLASSINFO("Hash attributes",        "toolTip            : \"It is a Hash\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : []                      ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -484,7 +484,7 @@ public:
 
     Q_CLASSINFO("EasingCurve attributes", "toolTip            : \"It is a EasingCurve\" ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : InOutCubic              ;"
                                           "allowSetType       : false                   ;"
                                           "preview            : false                   ;"
 
@@ -504,7 +504,7 @@ public:
 
     Q_CLASSINFO("Font attributes",        "toolTip            : \"It is a Font\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [Times New Roman, 12]   ;"
                                           "allowModifySample  : true                    ;"
 
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA ;"
@@ -527,7 +527,7 @@ public:
 
     Q_CLASSINFO("Pixmap attributes",      "toolTip            : \"It is a Pixmap\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : 64 x 64                 ;"
                                           "color1             : #ABCDEF                 ;"
                                           "color28            : #FEDCBA                 ;"
                                           "allowOpen          : false                   ;"
@@ -548,7 +548,7 @@ public:
 
     Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : RadialGradientPattern   ;"
                                         //"allowSetBrushStyle : false                   ;"
                                         //"allowGradient      : false                   ;"
                                         //"allowTransform     : false                   ;"
@@ -573,7 +573,7 @@ public:
 
     Q_CLASSINFO("Color attributes",       "toolTip            : \"It is a Color\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : (128, 0, 255)           ;"
                                           "alphaEnabled       : false                   ;"
                                           "standardColor1     : #ABCDEF                 ;"
                                           "standardColor48    : #FEDCBA                 ;"
@@ -581,7 +581,7 @@ public:
 
     Q_CLASSINFO("Palette attributes",     "toolTip            : \"It is a Palette\"     ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : Palette                 ;"
                                           "allowFastColor     : false                   ;"
                                           "allowChangeDetails : true                    ;"
                                           "showDetails        : true                    ;"
@@ -594,7 +594,7 @@ public:
 
     Q_CLASSINFO("Icon attributes",        "toolTip            : \"It is a Icon\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : Icon                    ;"
                                           "tabOthers          : false                   ;"
                                           "tabNormalOFF       : true                    ;"
 
@@ -618,7 +618,7 @@ public:
 
     Q_CLASSINFO("Image attributes",       "toolTip            : \"It is a Image\"       ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : 64 x 64                 ;"
                                           "color1             : #ABCDEF                 ;"
                                           "color28            : #FEDCBA                 ;"
                                           "allowOpen          : true                    ;"
@@ -639,7 +639,7 @@ public:
 
     Q_CLASSINFO("Polygon attributes",     "toolTip            : \"It is a Polygon\"     ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [(10, 40); (30, 97); (43, 16)] ;"
                                           "minCount           : 1                       ;"
                                           "maxCount           : 5                       ;"
 
@@ -654,7 +654,7 @@ public:
 
     Q_CLASSINFO("Region attributes",      "toolTip            : \"It is a Region\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [[(10, 30), 40 x 90]]   ;"
                                           "minCount           : 1                       ;"
                                           "maxCount           : 5                       ;"
 
@@ -669,7 +669,7 @@ public:
 
     Q_CLASSINFO("Bitmap attributes",      "toolTip            : \"It is a Bitmap\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : 64 x 64                 ;"
                                           "allowOpen          : false                   ;"
                                           "allowResize        : true                    ;"
 
@@ -684,7 +684,7 @@ public:
 
     Q_CLASSINFO("Cursor attributes",      "toolTip            : \"It is a Cursor\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : PointingHandCursor      ;"
                                           "allowBitmap        : false                   ;"
 
                                           "maxVisibleItems    : 5                       ;"
@@ -711,7 +711,7 @@ public:
 
     Q_CLASSINFO("SizePolicy attributes",  "toolTip            : \"It is a SizePolicy\"  ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [Minimum, Expanding, 0, 0] ;"
 
                                           "maxVisibleItems    : 5                       ;"
                                           "editable           : false                   ;"
@@ -728,13 +728,13 @@ public:
 
     Q_CLASSINFO("KeySequence attributes", "toolTip            : \"It is a KeySequence\" ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : Ctrl+O                  ;"
                                           "rejectShortcuts    : Ctrl+S|Alt+X|A|B|C|D|E  ;"
                )
 
     Q_CLASSINFO("Pen attributes",         "toolTip            : \"It is a Pen\"         ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : Pen                     ;"
                                           "allowSetStyle      : false                   ;"
                                           "allowSetCapStyle   : false                   ;"
                                           "allowSetJoinStyle  : false                   ;"
@@ -763,7 +763,7 @@ public:
 
     Q_CLASSINFO("TextLength attributes",  "toolTip            : \"It is a TextLength\"  ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [PercentageLength, 90]  ;"
                                           "allowSetLengthType : false                   ;"
 
                                           "maxVisibleItems    : 5                       ;"
@@ -782,7 +782,7 @@ public:
 
     Q_CLASSINFO("TextFormat attributes",  "toolTip            : \"It is a TextFormat\"  ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : TableFormat             ;"
                                           "allowSetFormatType : true                    ;"
 
                                           "maxVisibleItems    : 5                       ;"
@@ -806,7 +806,7 @@ public:
 
     Q_CLASSINFO("Matrix attributes",      "toolTip            : \"It is a Matrix\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [(6, 9), (12, 5); (7, 6)] ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -820,7 +820,7 @@ public:
 
     Q_CLASSINFO("Transform attributes",   "toolTip            : \"It is a Transform\"   ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : []                      ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -834,7 +834,7 @@ public:
 
     Q_CLASSINFO("Matrix4x4 attributes",   "toolTip            : \"It is a Matrix4x4\"   ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            : []                      ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -848,7 +848,7 @@ public:
 
     Q_CLASSINFO("Vector2D attributes",    "toolTip            : \"It is a Vector2D\"    ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [6, 7]                  ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -862,7 +862,7 @@ public:
 
     Q_CLASSINFO("Vector3D attributes",    "toolTip            : \"It is a Vector3D\"    ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [1, 5, 8]               ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -876,7 +876,7 @@ public:
 
     Q_CLASSINFO("Vector4D attributes",    "toolTip            : \"It is a Vector4D\"    ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [4, 3, 9, 6]            ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -890,7 +890,7 @@ public:
 
     Q_CLASSINFO("Quaternion attributes",  "toolTip            : \"It is a Quaternion\"  ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                          "default            : [1; 7, 6, 5]            ;"
 
                                         //"wrapping           : false                   ;"
                                         //"accelerated        : false                   ;"
@@ -904,12 +904,12 @@ public:
 
     Q_CLASSINFO("Void attributes",        "toolTip            : \"It is a Void\"        ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            :                         ;"
                )
 
     Q_CLASSINFO("Object attributes",      "toolTip            : \"It is a Object\"      ;"
                                           "delay              : 100                     ;"
-                                          "default            :                         ;"
+                                        //"default            :                         ;"
                )
     /**/
 
