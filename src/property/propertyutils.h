@@ -25,5 +25,8 @@ QString stringListToString(const QStringList &aValue, const QString &aEchoMode=Q
 QString stringToString(const QString &aValue, const QString &aEchoMode=QString());
 QString byteArrayToString(const QByteArray &aValue);
 QString bitArrayToString(const QBitArray &aValue);
+QString dateToString(const QDate &aValue, const QString &aFormat=QString("dd.MM.yyyy"));
+QString timeToString(const QTime &aValue, const QString &aFormat=QString("HH:mm:ss"));
+QString dateTimeToString(const QDateTime &aValue, const QString &aFormat=QString("dd.MM.yyyy HH:mm:ss"));
 
 #endif // PROPERTYUTILS_H

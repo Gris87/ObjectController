@@ -433,22 +433,23 @@ QString Property::variantToString(const QBitArray &aValue, PropertyTreeWidgetIte
 
 QString Property::variantToString(const QDate &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString(mAttributes.stringValue("displayFormat", "dd.MM.yyyy"));
+    return dateToString(aValue, mAttributes.stringValue("displayFormat", "dd.MM.yyyy"));
 }
 
 QString Property::variantToString(const QTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString(mAttributes.stringValue("displayFormat", "HH:mm:ss"));
+    return timeToString(aValue, mAttributes.stringValue("displayFormat", "HH:mm:ss"));
 }
 
 QString Property::variantToString(const QDateTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString(mAttributes.stringValue("displayFormat", "dd.MM.yyyy HH:mm:ss"));
+    return dateTimeToString(aValue, mAttributes.stringValue("displayFormat", "dd.MM.yyyy HH:mm:ss"));
 }
 
 QString Property::variantToString(const QUrl &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString();
+    return stringToString(aValue.toString(),
+                          mAttributes.stringValue("echoMode", "Normal"));
 }
 
 QString Property::variantToString(const QLocale &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

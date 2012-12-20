@@ -280,3 +280,18 @@ QString bitArrayToString(const QBitArray &aValue)
 
     return res;
 }
+
+QString dateToString(const QDate &aValue, const QString &aFormat)
+{
+    return aValue.toString(aFormat);
+}
+
+QString timeToString(const QTime &aValue, const QString &aFormat)
+{
+    return aValue.toString(aFormat);
+}
+
+QString dateTimeToString(const QDateTime &aValue, const QString &aFormat)
+{
+    return aValue.toString(aFormat);
+}
