@@ -5,6 +5,7 @@
 #include <QByteArray>
 #include <QBitArray>
 #include <QEasingCurve>
+#include <QBitmap>
 
 class QT_Object : public QObject
 {
@@ -447,4 +448,54 @@ QString colorToString(const QColor &aValue, bool alphaEnabled)
                QString::number(aValue.blue())+
                ")";
     }
+}
+
+QString imageToString(const QImage &aValue)
+{
+    return sizeToString(aValue.size());
+}
+
+QString polygonToString(const QPolygon &aValue)
+{
+    QString res="[";
+
+    for (int i=0; i<aValue.count(); ++i)
+    {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
+        res.append(pointToString(aValue.at(i)));
+    }
+
+    res.append("]");
+
+    return res;
+}
+
+QString regionToString(const QRegion &aValue)
+{
+    QVector<QRect> aRects=aValue.rects();
+
+    QString res="[";
+
+    for (int i=0; i<aRects.count(); ++i)
+    {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
+        res.append(rectToString(aRects.at(i)));
+    }
+
+    res.append("]");
+
+    return res;
+}
+
+QString bitmapToString(const QBitmap &aValue)
+{
+    return sizeToString(aValue.size());
 }

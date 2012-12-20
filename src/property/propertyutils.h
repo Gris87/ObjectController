@@ -38,5 +38,9 @@ QString fontToString(const QFont &aValue);
 QString pixmapToString(const QPixmap &aValue);
 QString brushToString(const QBrush &aValue);
 QString colorToString(const QColor &aValue, bool alphaEnabled=true);
+QString imageToString(const QImage &aValue);
+QString polygonToString(const QPolygon &aValue);
+QString regionToString(const QRegion &aValue);
+QString bitmapToString(const QBitmap &aValue);
 
 #endif // PROPERTYUTILS_H

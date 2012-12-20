@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/regioneditdialog.h"
+#include "../propertyutils.h"
 
 RegionEditor::RegionEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,35 +37,7 @@ void RegionEditor::setValue(const QRegion &aValue)
 {
     mValue=aValue;
 
-
-
-    QVector<QRect> aRects=mValue.rects();
-
-    QString res="[";
-
-    for (int i=0; i<aRects.count(); ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        res.append(
-                   "[("+
-                   QString::number(aRects.at(i).x())+
-                   ", "+
-                   QString::number(aRects.at(i).y())+
-                   "), "+
-                   QString::number(aRects.at(i).width())+
-                   " x "+
-                   QString::number(aRects.at(i).height())+
-                   "]"
-                  );
-    }
-
-    res.append("]");
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(regionToString(mValue));
 }
 
 void RegionEditor::handleAttributes(const PropertyAttributes *aAttributes)

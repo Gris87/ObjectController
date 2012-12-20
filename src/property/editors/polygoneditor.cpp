@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/polygoneditdialog.h"
+#include "../propertyutils.h"
 
 PolygonEditor::PolygonEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,32 +37,7 @@ void PolygonEditor::setValue(const QPolygon &aValue)
 {
     mValue=aValue;
 
-
-
-    QString res="[";
-
-    for (int i=0; i<mValue.count(); ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        int x;
-        int y;
-
-        mValue.point(i, &x, &y);
-
-        res.append("(");
-        res.append(QString::number(x));
-        res.append(", ");
-        res.append(QString::number(y));
-        res.append(")");
-    }
-
-    res.append("]");
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(polygonToString(mValue));
 }
 
 void PolygonEditor::handleAttributes(const PropertyAttributes *aAttributes)

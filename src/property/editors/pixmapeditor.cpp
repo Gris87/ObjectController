@@ -52,7 +52,7 @@ void PixmapEditor::setValue(const QImage &aValue)
 {
     mValue=QPixmap::fromImage(aValue);
 
-    ui->valueEdit->setText(pixmapToString(mValue));
+    ui->valueEdit->setText(imageToString(aValue));
     setIcon(QIcon(mValue));
 
     mDataType=IMAGE;
@@ -62,7 +62,7 @@ void PixmapEditor::setValue(const QBitmap &aValue)
 {
     mValue=QPixmap::fromImage(aValue.toImage());
 
-    ui->valueEdit->setText(pixmapToString(mValue));
+    ui->valueEdit->setText(bitmapToString(aValue));
     setIcon(QIcon(mValue));
 
     mDataType=BITMAP;

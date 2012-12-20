@@ -578,83 +578,27 @@ QString Property::variantToString(const QPalette &/*aValue*/, PropertyTreeWidget
 
 QString Property::variantToString(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res=aValue.name();
-
-    if (res!="")
-    {
-        return res;
-    }
-
     return "Icon";
 }
 
 QString Property::variantToString(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return variantToString(aValue.size(), aParentItem);
+    return imageToString(aValue);
 }
 
 QString Property::variantToString(const QPolygon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res="[";
-
-    for (int i=0; i<aValue.count(); ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        int x;
-        int y;
-
-        aValue.point(i, &x, &y);
-
-        res.append("(");
-        res.append(QString::number(x));
-        res.append(", ");
-        res.append(QString::number(y));
-        res.append(")");
-    }
-
-    res.append("]");
-
-    return res;
+    return polygonToString(aValue);
 }
 
 QString Property::variantToString(const QRegion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QVector<QRect> aRects=aValue.rects();
-
-    QString res="[";
-
-    for (int i=0; i<aRects.count(); ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        res.append(
-                   "[("+
-                   QString::number(aRects.at(i).x())+
-                   ", "+
-                   QString::number(aRects.at(i).y())+
-                   "), "+
-                   QString::number(aRects.at(i).width())+
-                   " x "+
-                   QString::number(aRects.at(i).height())+
-                   "]"
-                  );
-    }
-
-    res.append("]");
-
-    return res;
+    return regionToString(aValue);
 }
 
 QString Property::variantToString(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return variantToString(aValue.size(), aParentItem);
+    return bitmapToString(aValue);
 }
 
 QString Property::variantToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

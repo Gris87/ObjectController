@@ -654,7 +654,7 @@ public:
 
     Q_CLASSINFO("Region attributes",      "toolTip            : \"It is a Region\"             ;"
                                           "delay              : 100                            ;"
-                                          "default            : [[(10, 30), 40 x 90]]          ;"
+                                          "default            : [(10, 30, 40 x 90)]            ;"
                                           "minCount           : 1                              ;"
                                           "maxCount           : 5                              ;"
 
