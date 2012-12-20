@@ -23,5 +23,7 @@ QString doubleToString(double aValue, const QString &aPrefix=QString(), const QS
 QString charToString(const QChar &aValue, const QString &aEchoMode=QString());
 QString stringListToString(const QStringList &aValue, const QString &aEchoMode=QString());
 QString stringToString(const QString &aValue, const QString &aEchoMode=QString());
+QString byteArrayToString(const QByteArray &aValue);
+QString bitArrayToString(const QBitArray &aValue);
 
 #endif // PROPERTYUTILS_H

@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/bitarrayeditdialog.h"
+#include "../propertyutils.h"
 
 BitArrayEditor::BitArrayEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -35,14 +36,7 @@ void BitArrayEditor::setValue(const QBitArray &aValue)
 {
     mValue=aValue;
 
-    QString res;
-
-    for (int i=0; i<mValue.count(); ++i)
-    {
-        res.append(mValue.at(i) ? "1" : "0");
-    }
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(bitArrayToString(mValue));
 }
 
 void BitArrayEditor::handleAttributes(const PropertyAttributes *aAttributes)

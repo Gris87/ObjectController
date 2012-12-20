@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/bytearrayeditdialog.h"
+#include "../propertyutils.h"
 
 ByteArrayEditor::ByteArrayEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -35,7 +36,7 @@ void ByteArrayEditor::setValue(const QByteArray &aValue)
 {
     mValue=aValue;
 
-    ui->valueEdit->setText(mValue.toHex().toUpper());
+    ui->valueEdit->setText(byteArrayToString(mValue));
 }
 
 void ByteArrayEditor::handleAttributes(const PropertyAttributes *aAttributes)

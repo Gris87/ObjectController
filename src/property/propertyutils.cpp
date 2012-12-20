@@ -2,6 +2,8 @@
 
 #include <QApplication>
 #include <QList>
+#include <QByteArray>
+#include <QBitArray>
 
 QString enumToString(const QMetaEnum &aMetaEnum, const int &aValue)
 {
@@ -260,4 +262,21 @@ QString stringToString(const QString &aValue, const QString &aEchoMode)
     }
 
     return aValue;
+}
+
+QString byteArrayToString(const QByteArray &aValue)
+{
+    return aValue.toHex().toUpper();
+}
+
+QString bitArrayToString(const QBitArray &aValue)
+{
+    QString res;
+
+    for (int i=0; i<aValue.count(); ++i)
+    {
+        res.append(aValue.at(i) ? "1" : "0");
+    }
+
+    return res;
 }

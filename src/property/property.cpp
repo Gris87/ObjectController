@@ -423,19 +423,12 @@ QString Property::variantToString(const QString &aValue, PropertyTreeWidgetItem 
 
 QString Property::variantToString(const QByteArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toHex().toUpper();
+    return byteArrayToString(aValue);
 }
 
 QString Property::variantToString(const QBitArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res;
-
-    for (int i=0; i<aValue.count(); ++i)
-    {
-        res.append(aValue.at(i) ? "1" : "0");
-    }
-
-    return res;
+    return bitArrayToString(aValue);
 }
 
 QString Property::variantToString(const QDate &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
