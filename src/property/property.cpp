@@ -203,7 +203,7 @@ void Property::setPropertiesForItem(const QVariant &aValue, PropertyTreeWidgetIt
 
 QString Property::valueText(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    FUNCTION_FOR_VARIANT(aValue, aParentItem, valueToString, aValue.toString());
+    FUNCTION_FOR_VARIANT(aValue, aParentItem, variantToString, aValue.toString());
 }
 
 QIcon Property::valueIcon(const QVariant &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -250,7 +250,7 @@ bool Property::isWriteable() const
 
 // -------------------------------------------------------------------------------------
 
-QString Property::valueToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res=qApp->translate("Property", "[No enumeration value]");
 
@@ -266,7 +266,7 @@ QString Property::valueToStringEnum(const QMetaEnum &aMetaEnum, const int &aValu
     return res;
 }
 
-QString Property::valueToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QStringList resList;
 
@@ -299,87 +299,87 @@ QString Property::valueToStringFlag(const QMetaEnum &aMetaEnum, const int &aValu
     return "["+resList.join(", ")+"]";
 }
 
-QString Property::valueToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue ? qApp->translate("Property", "true") : qApp->translate("Property", "false");
 }
 
-QString Property::valueToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const quint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const quint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const qint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const qint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const quint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const quint16 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const qint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const qint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const quint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const quint32 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const qint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const qint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const quint64 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            QString::number(aValue)+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const float &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const float &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            doubleToString(aValue, mAttributes.intValue("decimals", 6))+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const double &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const double &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return mAttributes.stringValue("prefix")+
            doubleToString(aValue, mAttributes.intValue("decimals", 6))+
            mAttributes.stringValue("suffix");
 }
 
-QString Property::valueToString(const QChar &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QChar &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString(aValue);
 }
 
-QString Property::valueToString(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QString res="[";
 
@@ -417,7 +417,7 @@ QString Property::valueToString(const QVariantMap &aValue, PropertyTreeWidgetIte
     return res;
 }
 
-QString Property::valueToString(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QVariantList &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QString res="[";
 
@@ -445,7 +445,7 @@ QString Property::valueToString(const QVariantList &aValue, PropertyTreeWidgetIt
     return res;
 }
 
-QString Property::valueToString(const QStringList &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QStringList &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[";
 
@@ -466,17 +466,17 @@ QString Property::valueToString(const QStringList &aValue, PropertyTreeWidgetIte
     return res;
 }
 
-QString Property::valueToString(const QString &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QString &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue;
 }
 
-QString Property::valueToString(const QByteArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QByteArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toHex().toUpper();
 }
 
-QString Property::valueToString(const QBitArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QBitArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res;
 
@@ -488,34 +488,34 @@ QString Property::valueToString(const QBitArray &aValue, PropertyTreeWidgetItem 
     return res;
 }
 
-QString Property::valueToString(const QDate &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QDate &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString(mAttributes.stringValue("displayFormat", "dd.MM.yyyy"));
 }
 
-QString Property::valueToString(const QTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString(mAttributes.stringValue("displayFormat", "HH:mm:ss"));
 }
 
-QString Property::valueToString(const QDateTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QDateTime &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString(mAttributes.stringValue("displayFormat", "dd.MM.yyyy HH:mm:ss"));
 }
 
-QString Property::valueToString(const QUrl &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QUrl &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString();
 }
 
-QString Property::valueToString(const QLocale &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QLocale &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.languageToString(aValue.language())+
            ", "+
            aValue.countryToString(aValue.country());
 }
 
-QString Property::valueToString(const QRect &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QRect &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "("+
            QString::number(aValue.x())+
@@ -528,7 +528,7 @@ QString Property::valueToString(const QRect &aValue, PropertyTreeWidgetItem * /*
            ")";
 }
 
-QString Property::valueToString(const QRectF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QRectF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -543,14 +543,14 @@ QString Property::valueToString(const QRectF &aValue, PropertyTreeWidgetItem * /
            ")";
 }
 
-QString Property::valueToString(const QSize &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QSize &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return QString::number(aValue.width())+
            " x "+
            QString::number(aValue.height());
 }
 
-QString Property::valueToString(const QSizeF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QSizeF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -559,7 +559,7 @@ QString Property::valueToString(const QSizeF &aValue, PropertyTreeWidgetItem * /
            doubleToString(aValue.height(), aDecimals);
 }
 
-QString Property::valueToString(const QLine &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QLine &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "[("+
            QString::number(aValue.x1())+
@@ -572,7 +572,7 @@ QString Property::valueToString(const QLine &aValue, PropertyTreeWidgetItem * /*
            ")]";
 }
 
-QString Property::valueToString(const QLineF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QLineF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -587,7 +587,7 @@ QString Property::valueToString(const QLineF &aValue, PropertyTreeWidgetItem * /
            ")]";
 }
 
-QString Property::valueToString(const QPoint &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPoint &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "("+
            QString::number(aValue.x())+
@@ -596,7 +596,7 @@ QString Property::valueToString(const QPoint &aValue, PropertyTreeWidgetItem * /
            ")";
 }
 
-QString Property::valueToString(const QPointF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPointF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -607,12 +607,12 @@ QString Property::valueToString(const QPointF &aValue, PropertyTreeWidgetItem * 
            ")";
 }
 
-QString Property::valueToString(const QRegExp &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QRegExp &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.pattern();
 }
 
-QString Property::valueToString(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)
 {
     QString res="[";
 
@@ -650,13 +650,13 @@ QString Property::valueToString(const QVariantHash &aValue, PropertyTreeWidgetIt
     return res;
 }
 
-QString Property::valueToString(const QEasingCurve &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QEasingCurve &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
     return aEnum.valueToKey(aValue.type());
 }
 
-QString Property::valueToString(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "["+
            aValue.family()+
@@ -665,18 +665,18 @@ QString Property::valueToString(const QFont &aValue, PropertyTreeWidgetItem * /*
            "]";
 }
 
-QString Property::valueToString(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return valueToString(aValue.size(), aParentItem);
+    return variantToString(aValue.size(), aParentItem);
 }
 
-QString Property::valueToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
     return aEnum.valueToKey(aValue.style());
 }
 
-QString Property::valueToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     if (mAttributes.boolValue("alphaEnabled", true))
     {
@@ -702,12 +702,12 @@ QString Property::valueToString(const QColor &aValue, PropertyTreeWidgetItem * /
     }
 }
 
-QString Property::valueToString(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "Palette";
 }
 
-QString Property::valueToString(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res=aValue.name();
 
@@ -719,12 +719,12 @@ QString Property::valueToString(const QIcon &aValue, PropertyTreeWidgetItem * /*
     return "Icon";
 }
 
-QString Property::valueToString(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return valueToString(aValue.size(), aParentItem);
+    return variantToString(aValue.size(), aParentItem);
 }
 
-QString Property::valueToString(const QPolygon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPolygon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[";
 
@@ -752,7 +752,7 @@ QString Property::valueToString(const QPolygon &aValue, PropertyTreeWidgetItem *
     return res;
 }
 
-QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QRegion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QVector<QRect> aRects=aValue.rects();
 
@@ -783,18 +783,18 @@ QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem * 
     return res;
 }
 
-QString Property::valueToString(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    return valueToString(aValue.size(), aParentItem);
+    return variantToString(aValue.size(), aParentItem);
 }
 
-QString Property::valueToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("CursorShape"));
     return QString::fromLatin1(aEnum.valueToKey(aValue.shape()));
 }
 
-QString Property::valueToString(const QSizePolicy &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QSizePolicy &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
 
@@ -809,17 +809,17 @@ QString Property::valueToString(const QSizePolicy &aValue, PropertyTreeWidgetIte
            "]";
 }
 
-QString Property::valueToString(const QKeySequence &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QKeySequence &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return aValue.toString();
 }
 
-QString Property::valueToString(const QPen &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPen &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "Pen";
 }
 
-QString Property::valueToString(const QTextLength &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QTextLength &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[";
 
@@ -837,7 +837,7 @@ QString Property::valueToString(const QTextLength &aValue, PropertyTreeWidgetIte
     return res;
 }
 
-QString Property::valueToString(const QTextFormat &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QTextFormat &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res="[Unknown type]";
 
@@ -879,7 +879,7 @@ QString Property::valueToString(const QTextFormat &aValue, PropertyTreeWidgetIte
     return res;
 }
 
-QString Property::valueToString(const QMatrix &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QMatrix &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -898,7 +898,7 @@ QString Property::valueToString(const QMatrix &aValue, PropertyTreeWidgetItem * 
            ")]";
 }
 
-QString Property::valueToString(const QTransform &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QTransform &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -923,7 +923,7 @@ QString Property::valueToString(const QTransform &aValue, PropertyTreeWidgetItem
            ")]";
 }
 
-QString Property::valueToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -960,7 +960,7 @@ QString Property::valueToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem
     return res;
 }
 
-QString Property::valueToString(const QVector2D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QVector2D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -971,7 +971,7 @@ QString Property::valueToString(const QVector2D &aValue, PropertyTreeWidgetItem 
            "]";
 }
 
-QString Property::valueToString(const QVector3D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QVector3D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -984,7 +984,7 @@ QString Property::valueToString(const QVector3D &aValue, PropertyTreeWidgetItem 
            "]";
 }
 
-QString Property::valueToString(const QVector4D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QVector4D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -999,7 +999,7 @@ QString Property::valueToString(const QVector4D &aValue, PropertyTreeWidgetItem 
            "]";
 }
 
-QString Property::valueToString(const QQuaternion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QQuaternion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
@@ -1014,12 +1014,12 @@ QString Property::valueToString(const QQuaternion &aValue, PropertyTreeWidgetIte
            "]";
 }
 
-QString Property::valueToString(void *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(void *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "0x"+QString::number((qint64)aValue, 16).toUpper();
 }
 
-QString Property::valueToString(QObject *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(QObject *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     if (aValue==0)
     {
@@ -1366,7 +1366,7 @@ QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aPar
         }
         else
         {
-            aIcon=QIcon(":/objectcontroller/images/Cursor-"+valueToString(aValue, aParentItem)+".png");
+            aIcon=QIcon(":/objectcontroller/images/Cursor-"+variantToString(aValue, aParentItem)+".png");
         }
     }
 
@@ -2049,27 +2049,7 @@ void Property::removeAllChildren(PropertyTreeWidgetItem *aParentItem)
     }
 }
 
-#define GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
-    if (aParentItem->childCount()>aID) \
-    { \
-        aNewItem=(PropertyTreeWidgetItem *)aParentItem->child(aID); \
-    } \
-    else \
-    { \
-        aNewItem=new PropertyTreeWidgetItem(aParentItem); \
-        aNewItem->setFlags(aNewItem->flags() | Qt::ItemIsEditable); \
-    } \
-\
-    ++aID; \
-\
-    aNewItem->setText(0, aName); \
-    aNewItem->setText(1, aValue);
-
-#define GET_OR_CREATE_ITEM_WITH_ICON(aParentItem, aNewItem, aID, aName, aValue, aIcon) \
-    GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName, aValue) \
-    aNewItem->setIcon(1, aIcon);
-
-#define GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName) \
+#define GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName) \
     if (aParentItem->childCount()>aID) \
     { \
         aNewItem=(PropertyTreeWidgetItem *)aParentItem->child(aID); \
@@ -2085,12 +2065,12 @@ void Property::removeAllChildren(PropertyTreeWidgetItem *aParentItem)
     aNewItem->setText(0, aName);
 
 #define GET_OR_CREATE_ITEM_SETUP(aParentItem, aNewItem, aID, aName, aValue) \
-    GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName); \
+    GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName); \
     setPropertiesForItem(aValue, aNewItem);
 
 #define GET_OR_CREATE_ITEM_SETUP_ENUM(aParentItem, aNewItem, aID, aName, aEnum, aValue) \
-    GET_OR_CREATE_ITEM_NEW(aParentItem, aNewItem, aID, aName); \
-    aNewItem->setText(1, valueToStringEnum(aEnum, (int)aValue, aNewItem)); \
+    GET_OR_CREATE_ITEM(aParentItem, aNewItem, aID, aName); \
+    aNewItem->setText(1, variantToStringEnum(aEnum, (int)aValue, aNewItem)); \
     aNewItem->setIcon(1, iconForValueEnum(aEnum, (int)aValue, aNewItem)); \
     aNewItem->setFirstValue((int)aValue); \
     aNewItem->setDelegate(delegateForValueEnum(aEnum, (int)aValue, aNewItem)); \
