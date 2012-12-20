@@ -19,6 +19,46 @@ QString enumToString(const QMetaEnum &aMetaEnum, const int &aValue)
     return res;
 }
 
+QString flagsToString(const QMetaEnum &aMetaEnum, const int &aValue)
+{
+    QString res="[";
+
+    for (int i=0; i<aMetaEnum.keyCount(); ++i)
+    {
+        int aFlag=aMetaEnum.value(i);
+
+        if (((aValue & aFlag)==aFlag) && (aFlag!=0 || aValue==0))
+        {
+            bool good=true;
+
+            while (aFlag)
+            {
+                if (aFlag & 1)
+                {
+                    good=(aFlag==1);
+                    break;
+                }
+
+                aFlag>>=1;
+            }
+
+            if (good)
+            {
+                if (res.length()>1)
+                {
+                    res.append(", ");
+                }
+
+                res.append(QString::fromLatin1(aMetaEnum.key(i)));
+            }
+        }
+    }
+
+    res.append("]");
+
+    return res;
+}
+
 QList<double> *decimals=0;
 
 QString doubleToString(double aValue, int aDecimals)

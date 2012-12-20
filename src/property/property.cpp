@@ -257,42 +257,7 @@ QString Property::variantToStringEnum(const QMetaEnum &aMetaEnum, const int &aVa
 
 QString Property::variantToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res="[";
-
-    for (int i=0; i<aMetaEnum.keyCount(); ++i)
-    {
-        int aFlag=aMetaEnum.value(i);
-
-        if (((aValue & aFlag)==aFlag) && (aFlag!=0 || aValue==0))
-        {
-            bool good=true;
-
-            while (aFlag)
-            {
-                if (aFlag & 1)
-                {
-                    good=(aFlag==1);
-                    break;
-                }
-
-                aFlag>>=1;
-            }
-
-            if (good)
-            {
-                if (res.length()>1)
-                {
-                    res.append(", ");
-                }
-
-                res.append(QString::fromLatin1(aMetaEnum.key(i)));
-            }
-        }
-    }
-
-    res.append("]");
-
-    return res;
+    return flagsToString(aMetaEnum, aValue);
 }
 
 QString Property::variantToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
