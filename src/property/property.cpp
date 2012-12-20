@@ -252,23 +252,12 @@ bool Property::isWriteable() const
 
 QString Property::variantToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res=qApp->translate("Property", "[No enumeration value]");
-
-    for (int i=0; i<aMetaEnum.keyCount(); ++i)
-    {
-        if (aMetaEnum.value(i)==aValue)
-        {
-            res=QString::fromLatin1(aMetaEnum.key(i));
-            break;
-        }
-    }
-
-    return res;
+    return enumToString(aMetaEnum, aValue);
 }
 
 QString Property::variantToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QStringList resList;
+    QString res="[";
 
     for (int i=0; i<aMetaEnum.keyCount(); ++i)
     {
@@ -291,17 +280,24 @@ QString Property::variantToStringFlag(const QMetaEnum &aMetaEnum, const int &aVa
 
             if (good)
             {
-                resList.append(QString::fromLatin1(aMetaEnum.key(i)));
+                if (res.length()>1)
+                {
+                    res.append(", ");
+                }
+
+                res.append(QString::fromLatin1(aMetaEnum.key(i)));
             }
         }
     }
 
-    return "["+resList.join(", ")+"]";
+    res.append("]");
+
+    return res;
 }
 
 QString Property::variantToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue ? qApp->translate("Property", "true") : qApp->translate("Property", "false");
+    return aValue ? "true" : "false";
 }
 
 QString Property::variantToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

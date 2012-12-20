@@ -1,6 +1,23 @@
 #include "propertyutils.h"
 
+#include <QApplication>
 #include <QList>
+
+QString enumToString(const QMetaEnum &aMetaEnum, const int &aValue)
+{
+    QString res=qApp->translate("Property", "[No enumeration value]");
+
+    for (int i=0; i<aMetaEnum.keyCount(); ++i)
+    {
+        if (aMetaEnum.value(i)==aValue)
+        {
+            res=QString::fromLatin1(aMetaEnum.key(i));
+            break;
+        }
+    }
+
+    return res;
+}
 
 QList<double> *decimals=0;
 
