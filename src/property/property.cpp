@@ -262,7 +262,7 @@ QString Property::variantToStringFlag(const QMetaEnum &aMetaEnum, const int &aVa
 
 QString Property::variantToString(const bool &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue ? "true" : "false";
+    return boolToString(aValue);
 }
 
 QString Property::variantToString(const qint8 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

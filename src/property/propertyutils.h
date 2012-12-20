@@ -9,6 +9,7 @@
 
 QString enumToString(const QMetaEnum &aMetaEnum, const int &aValue);
 QString flagsToString(const QMetaEnum &aMetaEnum, const int &aValue);
+QString boolToString(const bool &aValue);
 QString doubleToString(double aValue, int aDecimals=6);
 
 #endif // PROPERTYUTILS_H

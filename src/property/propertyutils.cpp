@@ -59,6 +59,11 @@ QString flagsToString(const QMetaEnum &aMetaEnum, const int &aValue)
     return res;
 }
 
+QString boolToString(const bool &aValue)
+{
+    return aValue ? "true" : "false";
+}
+
 QList<double> *decimals=0;
 
 QString doubleToString(double aValue, int aDecimals)

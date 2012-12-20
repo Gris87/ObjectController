@@ -1,6 +1,8 @@
 #include "booleditor.h"
 #include "ui_booleditor.h"
 
+#include "../propertyutils.h"
+
 BoolEditor::BoolEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::BoolEditor)
@@ -20,7 +22,12 @@ void BoolEditor::putFocus()
 
 void BoolEditor::setValue(const bool &aValue)
 {
+    ui->valueCheckBox->blockSignals(true);
+
     ui->valueCheckBox->setChecked(aValue);
+    ui->valueCheckBox->setText(boolToString(aValue));
+
+    ui->valueCheckBox->blockSignals(false);
 }
 
 void BoolEditor::handleAttributes(const PropertyAttributes *aAttributes)
@@ -32,14 +39,6 @@ void BoolEditor::handleAttributes(const PropertyAttributes *aAttributes)
 
 void BoolEditor::on_valueCheckBox_toggled(bool checked)
 {
-    if (checked)
-    {
-        ui->valueCheckBox->setText(tr("true"));
-    }
-    else
-    {
-        ui->valueCheckBox->setText(tr("false"));
-    }
-
-    modificationDone(checked);
+    setValue(checked);
+    emit valueChanged(checked);
 }
