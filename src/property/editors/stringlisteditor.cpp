@@ -45,14 +45,14 @@ void StringListEditor::setValue(const QStringList &aValue)
 
     for (int i=0; i<mValue.length(); ++i)
     {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
         res.append("\"");
         res.append(mValue.at(i));
         res.append("\"");
-
-        if (i<mValue.length()-1)
-        {
-            res.append("; ");
-        }
     }
 
     res.append("]");

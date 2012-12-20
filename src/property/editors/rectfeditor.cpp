@@ -43,15 +43,15 @@ void RectFEditor::setValue(const QRectF &aValue)
 void RectFEditor::updateUI()
 {
     ui->valueEdit->setText(
-                           "[("+
+                           "("+
                            doubleToString(mValue.x(), mDecimals)+
                            ", "+
                            doubleToString(mValue.y(), mDecimals)+
-                           "), "+
+                           ", "+
                            doubleToString(mValue.width(), mDecimals)+
                            " x "+
                            doubleToString(mValue.height(), mDecimals)+
-                           "]"
+                           ")"
                           );
 }
 

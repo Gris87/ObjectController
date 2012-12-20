@@ -45,7 +45,7 @@ void QuaternionEditor::updateUI()
     ui->valueEdit->setText(
                            "["+
                            doubleToString(mValue.scalar(), mDecimals)+
-                           "; "+
+                           ", "+
                            doubleToString(mValue.x(), mDecimals)+
                            ", "+
                            doubleToString(mValue.y(), mDecimals)+

@@ -39,15 +39,15 @@ void RectEditor::setValue(const QRect &aValue)
 
 
     ui->valueEdit->setText(
-                           "[("+
+                           "("+
                            QString::number(mValue.x())+
                            ", "+
                            QString::number(mValue.y())+
-                           "), "+
+                           ", "+
                            QString::number(mValue.width())+
                            " x "+
                            QString::number(mValue.height())+
-                           "]"
+                           ")"
                           );
 }
 

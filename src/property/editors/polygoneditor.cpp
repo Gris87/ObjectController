@@ -42,6 +42,11 @@ void PolygonEditor::setValue(const QPolygon &aValue)
 
     for (int i=0; i<mValue.count(); ++i)
     {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
         int x;
         int y;
 
@@ -52,11 +57,6 @@ void PolygonEditor::setValue(const QPolygon &aValue)
         res.append(", ");
         res.append(QString::number(y));
         res.append(")");
-
-        if (i<mValue.count()-1)
-        {
-            res.append("; ");
-        }
     }
 
     res.append("]");

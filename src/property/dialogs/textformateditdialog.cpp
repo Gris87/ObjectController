@@ -2252,14 +2252,14 @@ void TextFormatEditDialog::charUpdateProperties()
 
     for (int i=0; i<aAnchors.length(); ++i)
     {
+        if (i>0)
+        {
+            anchorNames.append(", ");
+        }
+
         anchorNames.append("\"");
         anchorNames.append(aAnchors.at(i));
         anchorNames.append("\"");
-
-        if (i<aAnchors.length()-1)
-        {
-            anchorNames.append("; ");
-        }
     }
 
     anchorNames.append("]");

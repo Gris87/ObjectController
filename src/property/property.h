@@ -58,8 +58,6 @@ protected:
 
     // -------------------------------------------------------------------------------------
 
-    bool isNumber(const QVariant &aValue);
-
     QString valueToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToStringFlag(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem *aParentItem);
     QString valueToString(const bool &aValue, PropertyTreeWidgetItem *aParentItem);

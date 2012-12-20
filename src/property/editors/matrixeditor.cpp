@@ -51,7 +51,7 @@ void MatrixEditor::updateUI()
                            doubleToString(mValue.m21(), mDecimals)+
                            ", "+
                            doubleToString(mValue.m22(), mDecimals)+
-                           "); ("+
+                           "), ("+
                            doubleToString(mValue.dx(), mDecimals)+
                            ", "+
                            doubleToString(mValue.dy(), mDecimals)+

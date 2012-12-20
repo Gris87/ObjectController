@@ -44,6 +44,11 @@ void RegionEditor::setValue(const QRegion &aValue)
 
     for (int i=0; i<aRects.count(); ++i)
     {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
         res.append(
                    "[("+
                    QString::number(aRects.at(i).x())+
@@ -55,11 +60,6 @@ void RegionEditor::setValue(const QRegion &aValue)
                    QString::number(aRects.at(i).height())+
                    "]"
                   );
-
-        if (i<aRects.count()-1)
-        {
-            res.append("; ");
-        }
     }
 
     res.append("]");

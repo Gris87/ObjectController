@@ -250,37 +250,6 @@ bool Property::isWriteable() const
 
 // -------------------------------------------------------------------------------------
 
-bool Property::isNumber(const QVariant &aValue)
-{
-    int aType=aValue.type();
-
-    return (
-            aType==QVariant::Int
-            ||
-            aType==QVariant::UInt
-            ||
-            aType==QVariant::LongLong
-            ||
-            aType==QVariant::ULongLong
-            ||
-            aType==QVariant::Double
-            ||
-            aType==QMetaType::Float
-            ||
-            aType==QMetaType::Long
-            ||
-            aType==QMetaType::Short
-            ||
-            aType==QMetaType::Char
-            ||
-            aType==QMetaType::ULong
-            ||
-            aType==QMetaType::UShort
-            ||
-            aType==QMetaType::UChar
-           );
-}
-
 QString Property::valueToStringEnum(const QMetaEnum &aMetaEnum, const int &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     QString res=qApp->translate("Property", "[No enumeration value]");
@@ -418,7 +387,7 @@ QString Property::valueToString(const QVariantMap &aValue, PropertyTreeWidgetIte
     {
         if (res.length()>1)
         {
-            res.append("; ");
+            res.append(", ");
         }
 
         res.append("(");
@@ -429,15 +398,15 @@ QString Property::valueToString(const QVariantMap &aValue, PropertyTreeWidgetIte
 
         res.append(", ");
 
-        if (isNumber(i.value()))
+        if (i.value().type()==QVariant::String)
         {
+            res.append("\"");
             res.append(valueText(i.value(), aParentItem));
+            res.append("\"");
         }
         else
         {
-            res.append("\"");
             res.append(valueText(i.value(), aParentItem));
-            res.append("\"");
         }
 
         res.append(")");
@@ -454,20 +423,20 @@ QString Property::valueToString(const QVariantList &aValue, PropertyTreeWidgetIt
 
     for (int i=0; i<aValue.length(); ++i)
     {
-        if (isNumber(aValue.at(i)))
+        if (i>0)
         {
+            res.append(", ");
+        }
+
+        if (aValue.at(i).type()==QVariant::String)
+        {
+            res.append("\"");
             res.append(valueText(aValue.at(i), aParentItem));
+            res.append("\"");
         }
         else
         {
-            res.append("\"");
             res.append(valueText(aValue.at(i), aParentItem));
-            res.append("\"");
-        }
-
-        if (i<aValue.length()-1)
-        {
-            res.append("; ");
         }
     }
 
@@ -482,14 +451,14 @@ QString Property::valueToString(const QStringList &aValue, PropertyTreeWidgetIte
 
     for (int i=0; i<aValue.length(); ++i)
     {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
         res.append("\"");
         res.append(aValue.at(i));
         res.append("\"");
-
-        if (i<aValue.length()-1)
-        {
-            res.append("; ");
-        }
     }
 
     res.append("]");
@@ -548,30 +517,30 @@ QString Property::valueToString(const QLocale &aValue, PropertyTreeWidgetItem * 
 
 QString Property::valueToString(const QRect &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "[("+
+    return "("+
            QString::number(aValue.x())+
            ", "+
            QString::number(aValue.y())+
-           "), "+
+           ", "+
            QString::number(aValue.width())+
            " x "+
            QString::number(aValue.height())+
-           "]";
+           ")";
 }
 
 QString Property::valueToString(const QRectF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     int aDecimals=mAttributes.intValue("decimals", 6);
 
-    return "[("+
+    return "("+
            doubleToString(aValue.x(), aDecimals)+
            ", "+
            doubleToString(aValue.y(), aDecimals)+
-           "), "+
+           ", "+
            doubleToString(aValue.width(), aDecimals)+
            " x "+
            doubleToString(aValue.height(), aDecimals)+
-           "]";
+           ")";
 }
 
 QString Property::valueToString(const QSize &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -651,7 +620,7 @@ QString Property::valueToString(const QVariantHash &aValue, PropertyTreeWidgetIt
     {
         if (res.length()>1)
         {
-            res.append("; ");
+            res.append(", ");
         }
 
         res.append("(");
@@ -662,15 +631,15 @@ QString Property::valueToString(const QVariantHash &aValue, PropertyTreeWidgetIt
 
         res.append(", ");
 
-        if (isNumber(i.value()))
+        if (i.value().type()==QVariant::String)
         {
+            res.append("\"");
             res.append(valueText(i.value(), aParentItem));
+            res.append("\"");
         }
         else
         {
-            res.append("\"");
             res.append(valueText(i.value(), aParentItem));
-            res.append("\"");
         }
 
         res.append(")");
@@ -761,6 +730,11 @@ QString Property::valueToString(const QPolygon &aValue, PropertyTreeWidgetItem *
 
     for (int i=0; i<aValue.count(); ++i)
     {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
         int x;
         int y;
 
@@ -771,11 +745,6 @@ QString Property::valueToString(const QPolygon &aValue, PropertyTreeWidgetItem *
         res.append(", ");
         res.append(QString::number(y));
         res.append(")");
-
-        if (i<aValue.count()-1)
-        {
-            res.append("; ");
-        }
     }
 
     res.append("]");
@@ -791,6 +760,11 @@ QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem * 
 
     for (int i=0; i<aRects.count(); ++i)
     {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
         res.append(
                    "[("+
                    QString::number(aRects.at(i).x())+
@@ -802,11 +776,6 @@ QString Property::valueToString(const QRegion &aValue, PropertyTreeWidgetItem * 
                    QString::number(aRects.at(i).height())+
                    "]"
                   );
-
-        if (i<aRects.count()-1)
-        {
-            res.append("; ");
-        }
     }
 
     res.append("]");
@@ -922,7 +891,7 @@ QString Property::valueToString(const QMatrix &aValue, PropertyTreeWidgetItem * 
            doubleToString(aValue.m21(), aDecimals)+
            ", "+
            doubleToString(aValue.m22(), aDecimals)+
-           "); ("+
+           "), ("+
            doubleToString(aValue.dx(), aDecimals)+
            ", "+
            doubleToString(aValue.dy(), aDecimals)+
@@ -1036,7 +1005,7 @@ QString Property::valueToString(const QQuaternion &aValue, PropertyTreeWidgetIte
 
     return "["+
            doubleToString(aValue.scalar(), aDecimals)+
-           "; "+
+           ", "+
            doubleToString(aValue.x(), aDecimals)+
            ", "+
            doubleToString(aValue.y(), aDecimals)+
