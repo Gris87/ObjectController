@@ -42,11 +42,7 @@ void SizeFEditor::setValue(const QSizeF &aValue)
 
 void SizeFEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           doubleToString(mValue.width(), mDecimals)+
-                           " x "+
-                           doubleToString(mValue.height(), mDecimals)
-                          );
+    ui->valueEdit->setText(sizeFToString(mValue, mDecimals));
 }
 
 void SizeFEditor::handleAttributes(const PropertyAttributes *aAttributes)

@@ -316,7 +316,7 @@ QString rectToString(const QRect &aValue)
            ")";
 }
 
-QString rectfToString(const QRectF &aValue, int aDecimals)
+QString rectFToString(const QRectF &aValue, int aDecimals)
 {
     return "("+
            doubleToString(aValue.x(), aDecimals)+
@@ -327,4 +327,18 @@ QString rectfToString(const QRectF &aValue, int aDecimals)
            " x "+
            doubleToString(aValue.height(), aDecimals)+
            ")";
+}
+
+QString sizeToString(const QSize &aValue)
+{
+    return QString::number(aValue.width())+
+           " x "+
+           QString::number(aValue.height());
+}
+
+QString sizeFToString(const QSizeF &aValue, int aDecimals)
+{
+    return doubleToString(aValue.width(), aDecimals)+
+           " x "+
+           doubleToString(aValue.height(), aDecimals);
 }

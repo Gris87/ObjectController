@@ -30,6 +30,8 @@ QString timeToString(const QTime &aValue, const QString &aFormat=QString("HH:mm:
 QString dateTimeToString(const QDateTime &aValue, const QString &aFormat=QString("dd.MM.yyyy HH:mm:ss"));
 QString localeToString(const QLocale &aValue);
 QString rectToString(const QRect &aValue);
-QString rectfToString(const QRectF &aValue, int aDecimals=6);
+QString rectFToString(const QRectF &aValue, int aDecimals=6);
+QString sizeToString(const QSize &aValue);
+QString sizeFToString(const QSizeF &aValue, int aDecimals=6);
 
 #endif // PROPERTYUTILS_H

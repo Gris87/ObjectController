@@ -42,7 +42,7 @@ void RectFEditor::setValue(const QRectF &aValue)
 
 void RectFEditor::updateUI()
 {
-    ui->valueEdit->setText(rectfToString(mValue, mDecimals));
+    ui->valueEdit->setText(rectFToString(mValue, mDecimals));
 }
 
 void RectFEditor::handleAttributes(const PropertyAttributes *aAttributes)

@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/sizeeditdialog.h"
+#include "../propertyutils.h"
 
 SizeEditor::SizeEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,13 +37,7 @@ void SizeEditor::setValue(const QSize &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->valueEdit->setText(
-                           QString::number(mValue.width())+
-                           " x "+
-                           QString::number(mValue.height())
-                          );
+    ui->valueEdit->setText(sizeToString(mValue));
 }
 
 void SizeEditor::handleAttributes(const PropertyAttributes *aAttributes)
