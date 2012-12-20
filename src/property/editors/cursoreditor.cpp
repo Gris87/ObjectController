@@ -5,6 +5,7 @@
 #include <QMetaEnum>
 
 #include "../dialogs/paintdialog.h"
+#include "../propertyutils.h"
 
 CursorEditor::CursorEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -63,8 +64,7 @@ void CursorEditor::setValue(const QCursor &aValue)
 
 
 
-    QMetaEnum aShapeEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("CursorShape"));
-    QString res=QString::fromLatin1(aShapeEnum.valueToKey(mCursor.shape()));
+    QString res=cursorToString(mCursor);
 
     ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(res));
 

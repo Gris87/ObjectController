@@ -603,28 +603,17 @@ QString Property::variantToString(const QBitmap &aValue, PropertyTreeWidgetItem 
 
 QString Property::variantToString(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("CursorShape"));
-    return QString::fromLatin1(aEnum.valueToKey(aValue.shape()));
+    return cursorToString(aValue);
 }
 
 QString Property::variantToString(const QSizePolicy &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Policy"));
-
-    return "["+
-           QString::fromLatin1(aEnum.valueToKey(aValue.horizontalPolicy()))+
-           ", "+
-           QString::fromLatin1(aEnum.valueToKey(aValue.verticalPolicy()))+
-           ", "+
-           QString::number(aValue.horizontalStretch())+
-           ", "+
-           QString::number(aValue.verticalStretch())+
-           "]";
+    return sizePolicyToString(aValue);
 }
 
 QString Property::variantToString(const QKeySequence &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.toString();
+    return keySequenceToString(aValue);
 }
 
 QString Property::variantToString(const QPen &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)

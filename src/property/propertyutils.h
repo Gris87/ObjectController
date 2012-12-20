@@ -42,5 +42,8 @@ QString imageToString(const QImage &aValue);
 QString polygonToString(const QPolygon &aValue);
 QString regionToString(const QRegion &aValue);
 QString bitmapToString(const QBitmap &aValue);
+QString cursorToString(const QCursor &aValue);
+QString sizePolicyToString(const QSizePolicy &aValue);
+QString keySequenceToString(const QKeySequence &aValue);
 
 #endif // PROPERTYUTILS_H

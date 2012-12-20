@@ -4,6 +4,7 @@
 #include <QMetaEnum>
 
 #include "../dialogs/sizepolicyeditdialog.h"
+#include "../propertyutils.h"
 
 SizePolicyEditor::SizePolicyEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -38,21 +39,7 @@ void SizePolicyEditor::setValue(const QSizePolicy &aValue)
 {
     mValue=aValue;
 
-
-
-    QMetaEnum aEnum=mValue.staticMetaObject.enumerator(mValue.staticMetaObject.indexOfEnumerator("Policy"));
-
-    ui->valueEdit->setText(
-                           "["+
-                           QString::fromLatin1(aEnum.valueToKey(mValue.horizontalPolicy()))+
-                           ", "+
-                           QString::fromLatin1(aEnum.valueToKey(mValue.verticalPolicy()))+
-                           ", "+
-                           QString::number(mValue.horizontalStretch())+
-                           ", "+
-                           QString::number(mValue.verticalStretch())+
-                           "]"
-                          );
+    ui->valueEdit->setText(sizePolicyToString(mValue));
 }
 
 void SizePolicyEditor::handleAttributes(const PropertyAttributes *aAttributes)

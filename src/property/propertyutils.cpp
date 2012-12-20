@@ -499,3 +499,29 @@ QString bitmapToString(const QBitmap &aValue)
 {
     return sizeToString(aValue.size());
 }
+
+QString cursorToString(const QCursor &aValue)
+{
+    QMetaEnum aEnum=QT_Object::qtMetaObject().enumerator(QT_Object::qtMetaObject().indexOfEnumerator("CursorShape"));
+    return QString::fromLatin1(aEnum.valueToKey(aValue.shape()));
+}
+
+QString sizePolicyToString(const QSizePolicy &aValue)
+{
+    QMetaEnum aEnum=QSizePolicy::staticMetaObject.enumerator(QSizePolicy::staticMetaObject.indexOfEnumerator("Policy"));
+
+    return "["+
+           QString::fromLatin1(aEnum.valueToKey(aValue.horizontalPolicy()))+
+           ", "+
+           QString::fromLatin1(aEnum.valueToKey(aValue.verticalPolicy()))+
+           ", "+
+           QString::number(aValue.horizontalStretch())+
+           ", "+
+           QString::number(aValue.verticalStretch())+
+           "]";
+}
+
+QString keySequenceToString(const QKeySequence &aValue)
+{
+    return aValue.toString();
+}

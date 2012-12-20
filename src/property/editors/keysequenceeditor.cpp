@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/keysequenceeditdialog.h"
+#include "../propertyutils.h"
 
 KeySequenceEditor::KeySequenceEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,7 +37,7 @@ void KeySequenceEditor::setValue(const QKeySequence &aValue)
 {
     mValue=aValue;
 
-    ui->valueEdit->setText(mValue.toString());
+    ui->valueEdit->setText(keySequenceToString(mValue));
 }
 
 void KeySequenceEditor::handleAttributes(const PropertyAttributes *aAttributes)
