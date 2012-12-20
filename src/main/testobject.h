@@ -241,9 +241,9 @@ public:
 
     Q_CLASSINFO("Char attributes",        "toolTip            : \"It is a Char\"               ;"
                                           "delay              : 100                            ;"
-                                          "default            : T                              ;"
+                                        //"default            : T                              ;"
                                           "inputMask          : >A!                            ;"
-                                          "echoMode           : Password                       ;"
+                                          "echoMode           : PasswordEchoOnEdit             ;"
                                           "placeholderText    : \"Insert capital\"             ;"
                )
 
@@ -281,13 +281,13 @@ public:
 
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA        ;"
                                           "maxLength          : 10                             ;"
-                                        //"echoMode           : Password                       ;"
+                                        //"echoMode           : PasswordEchoOnEdit             ;"
                                           "placeholderText    : \"Insert name\"                ;"
                )
 
     Q_CLASSINFO("String attributes",      "toolTip            : \"It is a String\"             ;"
                                           "delay              : 100                            ;"
-                                          "default            : My_Password                    ;"
+                                        //"default            : My_Password                    ;"
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA        ;"
                                           "maxLength          : 16                             ;"
                                           "echoMode           : Password                       ;"

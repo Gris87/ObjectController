@@ -172,12 +172,92 @@ QString charToString(const QChar &aValue, const QString &aEchoMode)
     {
         case QLineEdit::Normal:             return QString(aValue);
         case QLineEdit::NoEcho:             return "";
-        case QLineEdit::Password:           return qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter);
-        case QLineEdit::PasswordEchoOnEdit: return QString(aValue);
+        case QLineEdit::Password:
+        case QLineEdit::PasswordEchoOnEdit: return qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter);
         default:
             Q_ASSERT(false);
         break;
     }
 
     return QString(aValue);
+}
+
+QString stringListToString(const QStringList &aValue, const QString &aEchoMode)
+{
+    QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
+    QLineEdit::EchoMode aMode=QLineEdit::Normal;
+
+    for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
+    {
+        if (QString::fromLatin1(aEchoModeEnum.key(i))==aEchoMode)
+        {
+            aMode=(QLineEdit::EchoMode)aEchoModeEnum.value(i);
+            break;
+        }
+    }
+
+    QString res="[";
+
+    for (int i=0; i<aValue.length(); ++i)
+    {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
+
+
+        res.append("\"");
+
+        switch (aMode)
+        {
+            case QLineEdit::Normal:
+                res.append(aValue.at(i));
+            break;
+            case QLineEdit::NoEcho:
+                // Nothing
+            break;
+            case QLineEdit::Password:
+            case QLineEdit::PasswordEchoOnEdit:
+                res.append(QString(aValue.at(i).length(), qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter)));
+            break;
+            default:
+                Q_ASSERT(false);
+            break;
+        }
+
+        res.append("\"");
+    }
+
+    res.append("]");
+
+    return res;
+}
+
+QString stringToString(const QString &aValue, const QString &aEchoMode)
+{
+    QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
+    QLineEdit::EchoMode aMode=QLineEdit::Normal;
+
+    for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
+    {
+        if (QString::fromLatin1(aEchoModeEnum.key(i))==aEchoMode)
+        {
+            aMode=(QLineEdit::EchoMode)aEchoModeEnum.value(i);
+            break;
+        }
+    }
+
+    switch (aMode)
+    {
+        case QLineEdit::Normal:             return aValue;
+        case QLineEdit::NoEcho:             return "";
+        case QLineEdit::Password:
+        case QLineEdit::PasswordEchoOnEdit: return QString(aValue.length(), qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter));
+        default:
+            Q_ASSERT(false);
+        break;
+    }
+
+    return aValue;
 }

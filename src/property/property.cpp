@@ -339,7 +339,8 @@ QString Property::variantToString(const double &aValue, PropertyTreeWidgetItem *
 
 QString Property::variantToString(const QChar &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return charToString(aValue, mAttributes.stringValue("echoMode"));
+    return charToString(aValue,
+                        mAttributes.stringValue("echoMode", "Normal"));
 }
 
 QString Property::variantToString(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)
@@ -410,28 +411,14 @@ QString Property::variantToString(const QVariantList &aValue, PropertyTreeWidget
 
 QString Property::variantToString(const QStringList &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res="[";
-
-    for (int i=0; i<aValue.length(); ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        res.append("\"");
-        res.append(aValue.at(i));
-        res.append("\"");
-    }
-
-    res.append("]");
-
-    return res;
+    return stringListToString(aValue,
+                              mAttributes.stringValue("echoMode", "Normal"));
 }
 
 QString Property::variantToString(const QString &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue;
+    return stringToString(aValue,
+                          mAttributes.stringValue("echoMode", "Normal"));
 }
 
 QString Property::variantToString(const QByteArray &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

@@ -21,5 +21,7 @@ QString intToString(const quint64 &aValue, const QString &aPrefix=QString(), con
 QString doubleToString(double aValue, int aDecimals=6);
 QString doubleToString(double aValue, const QString &aPrefix=QString(), const QString &aSuffix=QString(), int aDecimals=6);
 QString charToString(const QChar &aValue, const QString &aEchoMode=QString());
+QString stringListToString(const QStringList &aValue, const QString &aEchoMode=QString());
+QString stringToString(const QString &aValue, const QString &aEchoMode=QString());
 
 #endif // PROPERTYUTILS_H

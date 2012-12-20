@@ -19,6 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QStringList &aValue);
+    void updateUI();
     void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
@@ -29,6 +30,7 @@ private:
     Ui::DialogEditor *ui;
     QStringList mValue;
     const PropertyAttributes *mAttributes;
+    QString mEchoMode;
 
 private slots:
     void on_editButton_clicked();
