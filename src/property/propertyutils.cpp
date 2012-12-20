@@ -1,9 +1,19 @@
 #include "propertyutils.h"
 
 #include <QApplication>
-#include <QList>
+#include <QMetaEnum>
 #include <QByteArray>
 #include <QBitArray>
+#include <QEasingCurve>
+
+class QT_Object : public QObject
+{
+public:
+    static const QMetaObject qtMetaObject()
+    {
+        return staticQtMetaObject;
+    }
+};
 
 QString enumToString(const QMetaEnum &aMetaEnum, const int &aValue)
 {
@@ -385,4 +395,56 @@ QString pointFToString(const QPointF &aValue, int aDecimals)
            ", "+
            doubleToString(aValue.y(), aDecimals)+
            ")";
+}
+
+QString easingCurveToString(const QEasingCurve &aValue)
+{
+    QMetaEnum aEnum=QEasingCurve::staticMetaObject.enumerator(QEasingCurve::staticMetaObject.indexOfEnumerator("Type"));
+    return QString::fromLatin1(aEnum.valueToKey(aValue.type()));
+}
+
+QString fontToString(const QFont &aValue)
+{
+    return "["+
+           aValue.family()+
+           ", "+
+           QString::number(aValue.pointSize())+
+           "]";
+}
+
+QString pixmapToString(const QPixmap &aValue)
+{
+    return sizeToString(aValue.size());
+}
+
+QString brushToString(const QBrush &aValue)
+{
+    QMetaEnum aEnum=QT_Object::qtMetaObject().enumerator(QT_Object::qtMetaObject().indexOfEnumerator("BrushStyle"));
+    return aEnum.valueToKey(aValue.style());
+}
+
+QString colorToString(const QColor &aValue, bool alphaEnabled)
+{
+    if (alphaEnabled)
+    {
+        return "("+
+               QString::number(aValue.red())+
+               ", "+
+               QString::number(aValue.green())+
+               ", "+
+               QString::number(aValue.blue())+
+               ") ["+
+               QString::number(aValue.alpha())+
+               "]";
+    }
+    else
+    {
+        return "("+
+               QString::number(aValue.red())+
+               ", "+
+               QString::number(aValue.green())+
+               ", "+
+               QString::number(aValue.blue())+
+               ")";
+    }
 }

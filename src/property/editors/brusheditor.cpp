@@ -5,6 +5,7 @@
 #include <QMetaEnum>
 
 #include "../dialogs/brusheditdialog.h"
+#include "../propertyutils.h"
 
 BrushEditor::BrushEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -41,8 +42,7 @@ void BrushEditor::setValue(const QBrush &aValue)
 
 
 
-    QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
-    ui->valueEdit->setText(aEnum.valueToKey(aValue.style()));
+    ui->valueEdit->setText(brushToString(mValue));
 
 
 

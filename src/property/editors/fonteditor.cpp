@@ -4,6 +4,7 @@
 #include <QPainter>
 
 #include "../dialogs/fonteditdialog.h"
+#include "../propertyutils.h"
 
 FontEditor::FontEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -40,13 +41,7 @@ void FontEditor::setValue(const QFont &aValue)
 
 
 
-    ui->valueEdit->setText(
-                           "["+
-                           mValue.family()+
-                           ", "+
-                           QString::number(mValue.pointSize())+
-                           "]"
-                          );
+    ui->valueEdit->setText(fontToString(mValue));
 
 
 

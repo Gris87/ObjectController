@@ -1,10 +1,6 @@
 #ifndef PROPERTYUTILS_H
 #define PROPERTYUTILS_H
 
-#include <QWidget>
-#include <QString>
-#include <QMetaEnum>
-
 #include "propertyattributes.h"
 
 QString enumToString(const QMetaEnum &aMetaEnum, const int &aValue);
@@ -37,5 +33,10 @@ QString lineToString(const QLine &aValue);
 QString lineFToString(const QLineF &aValue, int aDecimals=6);
 QString pointToString(const QPoint &aValue);
 QString pointFToString(const QPointF &aValue, int aDecimals=6);
+QString easingCurveToString(const QEasingCurve &aValue);
+QString fontToString(const QFont &aValue);
+QString pixmapToString(const QPixmap &aValue);
+QString brushToString(const QBrush &aValue);
+QString colorToString(const QColor &aValue, bool alphaEnabled=true);
 
 #endif // PROPERTYUTILS_H

@@ -4,6 +4,7 @@
 #include <QPainter>
 
 #include "../dialogs/coloreditdialog.h"
+#include "../propertyutils.h"
 
 ColorEditor::ColorEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -58,32 +59,7 @@ void ColorEditor::setValue(const QColor &aValue)
 
 void ColorEditor::updateText()
 {
-    if (mAlphaEnabled)
-    {
-        ui->valueEdit->setText(
-                               "("+
-                               QString::number(mValue.red())+
-                               ", "+
-                               QString::number(mValue.green())+
-                               ", "+
-                               QString::number(mValue.blue())+
-                               ") ["+
-                               QString::number(mValue.alpha())+
-                               "]"
-                              );
-    }
-    else
-    {
-        ui->valueEdit->setText(
-                               "("+
-                               QString::number(mValue.red())+
-                               ", "+
-                               QString::number(mValue.green())+
-                               ", "+
-                               QString::number(mValue.blue())+
-                               ")"
-                              );
-    }
+    ui->valueEdit->setText(colorToString(mValue, mAlphaEnabled));
 }
 
 void ColorEditor::handleAttributes(const PropertyAttributes *aAttributes)

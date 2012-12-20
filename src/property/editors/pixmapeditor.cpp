@@ -5,6 +5,7 @@
 #include <QBitmap>
 
 #include "../dialogs/paintdialog.h"
+#include "../propertyutils.h"
 
 PixmapEditor::PixmapEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -41,12 +42,7 @@ void PixmapEditor::setValue(const QPixmap &aValue)
 {
     mValue=aValue;
 
-    ui->valueEdit->setText(
-                           QString::number(mValue.width())+
-                           " x "+
-                           QString::number(mValue.height())
-                          );
-
+    ui->valueEdit->setText(pixmapToString(mValue));
     setIcon(QIcon(mValue));
 
     mDataType=PIXMAP;
@@ -56,12 +52,7 @@ void PixmapEditor::setValue(const QImage &aValue)
 {
     mValue=QPixmap::fromImage(aValue);
 
-    ui->valueEdit->setText(
-                           QString::number(mValue.width())+
-                           " x "+
-                           QString::number(mValue.height())
-                          );
-
+    ui->valueEdit->setText(pixmapToString(mValue));
     setIcon(QIcon(mValue));
 
     mDataType=IMAGE;
@@ -71,12 +62,7 @@ void PixmapEditor::setValue(const QBitmap &aValue)
 {
     mValue=QPixmap::fromImage(aValue.toImage());
 
-    ui->valueEdit->setText(
-                           QString::number(mValue.width())+
-                           " x "+
-                           QString::number(mValue.height())
-                          );
-
+    ui->valueEdit->setText(pixmapToString(mValue));
     setIcon(QIcon(mValue));
 
     mDataType=BITMAP;

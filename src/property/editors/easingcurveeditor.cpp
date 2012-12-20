@@ -4,6 +4,7 @@
 #include <QMetaEnum>
 
 #include "../dialogs/easingcurveeditdialog.h"
+#include "../propertyutils.h"
 
 EasingCurveEditor::EasingCurveEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -38,8 +39,7 @@ void EasingCurveEditor::setValue(const QEasingCurve &aValue)
 {
     mValue=aValue;
 
-    QMetaEnum aEnum=mValue.staticMetaObject.enumerator(mValue.staticMetaObject.indexOfEnumerator("Type"));
-    ui->valueEdit->setText(aEnum.valueToKey(mValue.type()));
+    ui->valueEdit->setText(easingCurveToString(mValue));
 }
 
 void EasingCurveEditor::handleAttributes(const PropertyAttributes *aAttributes)

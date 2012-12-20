@@ -547,54 +547,28 @@ QString Property::variantToString(const QVariantHash &aValue, PropertyTreeWidget
 
 QString Property::variantToString(const QEasingCurve &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
-    return aEnum.valueToKey(aValue.type());
+    return easingCurveToString(aValue);
 }
 
 QString Property::variantToString(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "["+
-           aValue.family()+
-           ", "+
-           QString::number(aValue.pointSize())+
-           "]";
+    return fontToString(aValue);
 }
 
-QString Property::variantToString(const QPixmap &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QPixmap &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return variantToString(aValue.size(), aParentItem);
+    return pixmapToString(aValue);
 }
 
 QString Property::variantToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QMetaEnum aEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("BrushStyle"));
-    return aEnum.valueToKey(aValue.style());
+    return brushToString(aValue);
 }
 
 QString Property::variantToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (mAttributes.boolValue("alphaEnabled", true))
-    {
-        return "("+
-               QString::number(aValue.red())+
-               ", "+
-               QString::number(aValue.green())+
-               ", "+
-               QString::number(aValue.blue())+
-               ") ["+
-               QString::number(aValue.alpha())+
-               "]";
-    }
-    else
-    {
-        return "("+
-               QString::number(aValue.red())+
-               ", "+
-               QString::number(aValue.green())+
-               ", "+
-               QString::number(aValue.blue())+
-               ")";
-    }
+    return colorToString(aValue,
+                         mAttributes.boolValue("alphaEnabled", true));
 }
 
 QString Property::variantToString(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
