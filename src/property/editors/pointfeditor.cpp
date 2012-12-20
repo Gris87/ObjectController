@@ -42,13 +42,7 @@ void PointFEditor::setValue(const QPointF &aValue)
 
 void PointFEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "("+
-                           doubleToString(mValue.x(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y(), mDecimals)+
-                           ")"
-                          );
+    ui->valueEdit->setText(pointFToString(mValue, mDecimals));
 }
 
 void PointFEditor::handleAttributes(const PropertyAttributes *aAttributes)

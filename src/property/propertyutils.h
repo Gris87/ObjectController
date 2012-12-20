@@ -33,5 +33,9 @@ QString rectToString(const QRect &aValue);
 QString rectFToString(const QRectF &aValue, int aDecimals=6);
 QString sizeToString(const QSize &aValue);
 QString sizeFToString(const QSizeF &aValue, int aDecimals=6);
+QString lineToString(const QLine &aValue);
+QString lineFToString(const QLineF &aValue, int aDecimals=6);
+QString pointToString(const QPoint &aValue);
+QString pointFToString(const QPointF &aValue, int aDecimals=6);
 
 #endif // PROPERTYUTILS_H

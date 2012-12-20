@@ -42,17 +42,7 @@ void LineFEditor::setValue(const QLineF &aValue)
 
 void LineFEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "[("+
-                           doubleToString(mValue.x1(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y1(), mDecimals)+
-                           "), ("+
-                           doubleToString(mValue.x2(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y2(), mDecimals)+
-                           ")]"
-                          );
+    ui->valueEdit->setText(lineFToString(mValue, mDecimals));
 }
 
 void LineFEditor::handleAttributes(const PropertyAttributes *aAttributes)

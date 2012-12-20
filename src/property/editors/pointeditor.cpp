@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/pointeditdialog.h"
+#include "../propertyutils.h"
 
 PointEditor::PointEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,15 +37,7 @@ void PointEditor::setValue(const QPoint &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->valueEdit->setText(
-                           "("+
-                           QString::number(mValue.x())+
-                           ", "+
-                           QString::number(mValue.y())+
-                           ")"
-                          );
+    ui->valueEdit->setText(pointToString(mValue));
 }
 
 void PointEditor::handleAttributes(const PropertyAttributes *aAttributes)

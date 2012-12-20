@@ -481,55 +481,30 @@ QString Property::variantToString(const QSizeF &aValue, PropertyTreeWidgetItem *
 
 QString Property::variantToString(const QLine &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "[("+
-           QString::number(aValue.x1())+
-           ", "+
-           QString::number(aValue.y1())+
-           "), ("+
-           QString::number(aValue.x2())+
-           ", "+
-           QString::number(aValue.y2())+
-           ")]";
+    return lineToString(aValue);
 }
 
 QString Property::variantToString(const QLineF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "[("+
-           doubleToString(aValue.x1(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y1(), aDecimals)+
-           "), ("+
-           doubleToString(aValue.x2(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y2(), aDecimals)+
-           ")]";
+    return lineFToString(aValue,
+                         mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QPoint &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "("+
-           QString::number(aValue.x())+
-           ", "+
-           QString::number(aValue.y())+
-           ")";
+    return pointToString(aValue);
 }
 
 QString Property::variantToString(const QPointF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "("+
-           doubleToString(aValue.x(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y(), aDecimals)+
-           ")";
+    return pointFToString(aValue,
+                          mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QRegExp &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.pattern();
+    return stringToString(aValue.pattern(),
+                          mAttributes.stringValue("echoMode", "Normal"));
 }
 
 QString Property::variantToString(const QVariantHash &aValue, PropertyTreeWidgetItem *aParentItem)

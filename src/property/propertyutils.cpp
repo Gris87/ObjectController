@@ -342,3 +342,47 @@ QString sizeFToString(const QSizeF &aValue, int aDecimals)
            " x "+
            doubleToString(aValue.height(), aDecimals);
 }
+
+QString lineToString(const QLine &aValue)
+{
+    return "[("+
+           QString::number(aValue.x1())+
+           ", "+
+           QString::number(aValue.y1())+
+           "), ("+
+           QString::number(aValue.x2())+
+           ", "+
+           QString::number(aValue.y2())+
+           ")]";
+}
+
+QString lineFToString(const QLineF &aValue, int aDecimals)
+{
+    return "[("+
+           doubleToString(aValue.x1(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y1(), aDecimals)+
+           "), ("+
+           doubleToString(aValue.x2(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y2(), aDecimals)+
+           ")]";
+}
+
+QString pointToString(const QPoint &aValue)
+{
+    return "("+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ")";
+}
+
+QString pointFToString(const QPointF &aValue, int aDecimals)
+{
+    return "("+
+           doubleToString(aValue.x(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y(), aDecimals)+
+           ")";
+}

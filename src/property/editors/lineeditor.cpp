@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/lineeditdialog.h"
+#include "../propertyutils.h"
 
 LineEditor::LineEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,19 +37,7 @@ void LineEditor::setValue(const QLine &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->valueEdit->setText(
-                           "[("+
-                           QString::number(mValue.x1())+
-                           ", "+
-                           QString::number(mValue.y1())+
-                           "), ("+
-                           QString::number(mValue.x2())+
-                           ", "+
-                           QString::number(mValue.y2())+
-                           ")]"
-                          );
+    ui->valueEdit->setText(lineToString(mValue));
 }
 
 void LineEditor::handleAttributes(const PropertyAttributes *aAttributes)
