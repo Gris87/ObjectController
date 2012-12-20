@@ -339,7 +339,7 @@ QString Property::variantToString(const double &aValue, PropertyTreeWidgetItem *
 
 QString Property::variantToString(const QChar &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QString(aValue);
+    return charToString(aValue, mAttributes.stringValue("echoMode"));
 }
 
 QString Property::variantToString(const QVariantMap &aValue, PropertyTreeWidgetItem *aParentItem)

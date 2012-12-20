@@ -153,3 +153,31 @@ QString doubleToString(double aValue, const QString &aPrefix, const QString &aSu
            doubleToString(aValue, aDecimals)+
            aSuffix;
 }
+
+QString charToString(const QChar &aValue, const QString &aEchoMode)
+{
+    QMetaEnum aEchoModeEnum=QLineEdit::staticMetaObject.enumerator(QLineEdit::staticMetaObject.indexOfEnumerator("EchoMode"));
+    QLineEdit::EchoMode aMode=QLineEdit::Normal;
+
+    for (int i=0; i<aEchoModeEnum.keyCount(); ++i)
+    {
+        if (QString::fromLatin1(aEchoModeEnum.key(i))==aEchoMode)
+        {
+            aMode=(QLineEdit::EchoMode)aEchoModeEnum.value(i);
+            break;
+        }
+    }
+
+    switch (aMode)
+    {
+        case QLineEdit::Normal:             return QString(aValue);
+        case QLineEdit::NoEcho:             return "";
+        case QLineEdit::Password:           return qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter);
+        case QLineEdit::PasswordEchoOnEdit: return QString(aValue);
+        default:
+            Q_ASSERT(false);
+        break;
+    }
+
+    return QString(aValue);
+}
