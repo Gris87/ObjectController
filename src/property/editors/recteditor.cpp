@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/recteditdialog.h"
+#include "../propertyutils.h"
 
 RectEditor::RectEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,19 +37,7 @@ void RectEditor::setValue(const QRect &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->valueEdit->setText(
-                           "("+
-                           QString::number(mValue.x())+
-                           ", "+
-                           QString::number(mValue.y())+
-                           ", "+
-                           QString::number(mValue.width())+
-                           " x "+
-                           QString::number(mValue.height())+
-                           ")"
-                          );
+    ui->valueEdit->setText(rectToString(mValue));
 }
 
 void RectEditor::handleAttributes(const PropertyAttributes *aAttributes)

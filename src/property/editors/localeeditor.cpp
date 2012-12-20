@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/localeeditdialog.h"
+#include "../propertyutils.h"
 
 LocaleEditor::LocaleEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,13 +37,7 @@ void LocaleEditor::setValue(const QLocale &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->valueEdit->setText(
-                           mValue.languageToString(mValue.language())+
-                           ", "+
-                           mValue.countryToString(mValue.country())
-                          );
+    ui->valueEdit->setText(localeToString(mValue));
 }
 
 void LocaleEditor::handleAttributes(const PropertyAttributes *aAttributes)

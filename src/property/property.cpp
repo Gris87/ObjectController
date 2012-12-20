@@ -454,37 +454,18 @@ QString Property::variantToString(const QUrl &aValue, PropertyTreeWidgetItem * /
 
 QString Property::variantToString(const QLocale &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return aValue.languageToString(aValue.language())+
-           ", "+
-           aValue.countryToString(aValue.country());
+    return localeToString(aValue);
 }
 
 QString Property::variantToString(const QRect &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "("+
-           QString::number(aValue.x())+
-           ", "+
-           QString::number(aValue.y())+
-           ", "+
-           QString::number(aValue.width())+
-           " x "+
-           QString::number(aValue.height())+
-           ")";
+    return rectToString(aValue);
 }
 
 QString Property::variantToString(const QRectF &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "("+
-           doubleToString(aValue.x(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y(), aDecimals)+
-           ", "+
-           doubleToString(aValue.width(), aDecimals)+
-           " x "+
-           doubleToString(aValue.height(), aDecimals)+
-           ")";
+    return rectfToString(aValue,
+                         mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QSize &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

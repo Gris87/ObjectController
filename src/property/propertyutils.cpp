@@ -295,3 +295,36 @@ QString dateTimeToString(const QDateTime &aValue, const QString &aFormat)
 {
     return aValue.toString(aFormat);
 }
+
+QString localeToString(const QLocale &aValue)
+{
+    return aValue.languageToString(aValue.language())+
+           ", "+
+           aValue.countryToString(aValue.country());
+}
+
+QString rectToString(const QRect &aValue)
+{
+    return "("+
+           QString::number(aValue.x())+
+           ", "+
+           QString::number(aValue.y())+
+           ", "+
+           QString::number(aValue.width())+
+           " x "+
+           QString::number(aValue.height())+
+           ")";
+}
+
+QString rectfToString(const QRectF &aValue, int aDecimals)
+{
+    return "("+
+           doubleToString(aValue.x(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y(), aDecimals)+
+           ", "+
+           doubleToString(aValue.width(), aDecimals)+
+           " x "+
+           doubleToString(aValue.height(), aDecimals)+
+           ")";
+}

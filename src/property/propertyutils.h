@@ -28,5 +28,8 @@ QString bitArrayToString(const QBitArray &aValue);
 QString dateToString(const QDate &aValue, const QString &aFormat=QString("dd.MM.yyyy"));
 QString timeToString(const QTime &aValue, const QString &aFormat=QString("HH:mm:ss"));
 QString dateTimeToString(const QDateTime &aValue, const QString &aFormat=QString("dd.MM.yyyy HH:mm:ss"));
+QString localeToString(const QLocale &aValue);
+QString rectToString(const QRect &aValue);
+QString rectfToString(const QRectF &aValue, int aDecimals=6);
 
 #endif // PROPERTYUTILS_H
