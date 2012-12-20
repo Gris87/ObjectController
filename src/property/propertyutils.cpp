@@ -64,6 +64,62 @@ QString boolToString(const bool &aValue)
     return aValue ? "true" : "false";
 }
 
+QString intToString(const qint8 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const quint8 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const qint16 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const quint16 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const qint32 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const quint32 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const qint64 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
+QString intToString(const quint64 &aValue, const QString &aPrefix, const QString &aSuffix)
+{
+    return aPrefix+
+           QString::number(aValue)+
+           aSuffix;
+}
+
 QList<double> *decimals=0;
 
 QString doubleToString(double aValue, int aDecimals)
@@ -89,4 +145,11 @@ QString doubleToString(double aValue, int aDecimals)
     double aMultiplier=decimals->at(aDecimals);
 
     return QString::number(qRound(aValue*aMultiplier)/aMultiplier);
+}
+
+QString doubleToString(double aValue, const QString &aPrefix, const QString &aSuffix, int aDecimals)
+{
+    return aPrefix+
+           doubleToString(aValue, aDecimals)+
+           aSuffix;
 }
