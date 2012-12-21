@@ -47,15 +47,6 @@ void PenEditDialog::init(QPen aPen, const PropertyAttributes *aAttributes)
     mPen=aPen;
     mAttributes=aAttributes;
 
-    mColorArea=new ColorArea(mAttributes, this);
-    mColorArea->setMinimumSize(20, 20);
-    mColorArea->setMaximumSize(20, 20);
-    mColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-    mColorArea->setTransparentBlockSize(5);
-    ui->colorLayout->insertWidget(0, mColorArea);
-
-    connect(mColorArea, SIGNAL(colorChanged(QColor)), this, SLOT(colorChanged(QColor)));
-
 
 
     QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenStyle"));
@@ -96,10 +87,10 @@ void PenEditDialog::init(QPen aPen, const PropertyAttributes *aAttributes)
 
     if (aAttributes)
     {
-        aAttributes->applyToDoubleSpinBox(ui->widthSpinBox);
         aAttributes->applyToCombobox(ui->styleComboBox);
         aAttributes->applyToCombobox(ui->capStyleComboBox);
         aAttributes->applyToCombobox(ui->joinStyleComboBox);
+        aAttributes->applyToDoubleSpinBox(ui->widthSpinBox);
         aAttributes->applyToCheckBox(ui->cosmeticCheckBox);
         aAttributes->applyToDoubleSpinBox(ui->milerLimitSpinBox);
         aAttributes->applyToDoubleSpinBox(ui->dashOffsetSpinBox);
@@ -182,29 +173,6 @@ void PenEditDialog::on_cancelButton_clicked()
     reject();
 }
 
-void PenEditDialog::on_brushButton_clicked()
-{
-    BrushEditDialog dialog(mPen.brush(), mAttributes, this);
-
-    if (dialog.exec())
-    {
-        mPen.setBrush(dialog.resultValue());
-
-        mColorArea->blockSignals(true);
-        mColorArea->setColor(mPen.color());
-        mColorArea->blockSignals(false);
-
-        drawBrush();
-        drawPen();
-    }
-}
-
-void PenEditDialog::on_widthSpinBox_valueChanged(double aValue)
-{
-    mPen.setWidthF(aValue);
-    drawPen();
-}
-
 void PenEditDialog::on_styleComboBox_currentIndexChanged(const QString &aValue)
 {
     QMetaEnum aStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenStyle"));
@@ -235,12 +203,23 @@ void PenEditDialog::on_joinStyleComboBox_currentIndexChanged(const QString &aVal
     drawPen();
 }
 
-void PenEditDialog::colorChanged(QColor aColor)
+void PenEditDialog::on_widthSpinBox_valueChanged(double aValue)
 {
-    mPen.setColor(aColor);
-
-    drawBrush();
+    mPen.setWidthF(aValue);
     drawPen();
+}
+
+void PenEditDialog::on_brushButton_clicked()
+{
+    BrushEditDialog dialog(mPen.brush(), mAttributes, this);
+
+    if (dialog.exec())
+    {
+        mPen.setBrush(dialog.resultValue());
+
+        drawBrush();
+        drawPen();
+    }
 }
 
 void PenEditDialog::on_cosmeticCheckBox_toggled(bool aChecked)
@@ -390,11 +369,10 @@ void PenEditDialog::patternValueChanged(double /*aValue*/)
 }
 
 #define BLOCK_SIGNALS(aLock) \
-    mColorArea->blockSignals(aLock); \
-    ui->widthSpinBox->blockSignals(aLock); \
     ui->styleComboBox->blockSignals(aLock); \
     ui->capStyleComboBox->blockSignals(aLock); \
     ui->joinStyleComboBox->blockSignals(aLock); \
+    ui->widthSpinBox->blockSignals(aLock); \
     ui->cosmeticCheckBox->blockSignals(aLock); \
     ui->milerLimitSpinBox->blockSignals(aLock); \
     ui->dashOffsetSpinBox->blockSignals(aLock);
@@ -412,11 +390,10 @@ void PenEditDialog::updateProperties(const bool &aNeedToUpdatePattern)
     QMetaEnum aJoinStyleEnum=staticQtMetaObject.enumerator(staticQtMetaObject.indexOfEnumerator("PenJoinStyle"));
     QString aJoinStyle=QString::fromLatin1(aJoinStyleEnum.valueToKey(mPen.joinStyle()));
 
-    mColorArea->setColor(mPen.color());
-    ui->widthSpinBox->setValue(mPen.widthF());
     ui->styleComboBox->setCurrentIndex(ui->styleComboBox->findText(aStyle));
     ui->capStyleComboBox->setCurrentIndex(ui->capStyleComboBox->findText(aCapStyle));
     ui->joinStyleComboBox->setCurrentIndex(ui->joinStyleComboBox->findText(aJoinStyle));
+    ui->widthSpinBox->setValue(mPen.widthF());
     ui->cosmeticCheckBox->setChecked(mPen.isCosmetic());
     ui->milerLimitSpinBox->setValue(mPen.miterLimit());
     ui->dashOffsetSpinBox->setValue(mPen.dashOffset());

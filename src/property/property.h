@@ -391,12 +391,11 @@ private slots:
     void sizePolicyHorizontalStretchChanged(const QVariant &aNewValue);
     void sizePolicyVerticalStretchChanged(const QVariant &aNewValue);
 
-    void penBrushChanged(const QVariant &aNewValue);
-    void penWidthChanged(const QVariant &aNewValue);
     void penStyleChanged(const QVariant &aNewValue);
     void penCapStyleChanged(const QVariant &aNewValue);
     void penJoinStyleChanged(const QVariant &aNewValue);
-    void penColorChanged(const QVariant &aNewValue);
+    void penWidthChanged(const QVariant &aNewValue);
+    void penBrushChanged(const QVariant &aNewValue);
 
     void textLengthTypeChanged(const QVariant &aNewValue);
     void textLengthValueChanged(const QVariant &aNewValue);

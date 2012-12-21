@@ -5,7 +5,6 @@
 
 #include <QPen>
 
-#include "../widgets/colorarea.h"
 #include "../propertyattributes.h"
 
 namespace Ui {
@@ -31,7 +30,6 @@ protected:
 private:
     Ui::PenEditDialog *ui;
     QPen               mPen;
-    ColorArea         *mColorArea;
     const PropertyAttributes *mAttributes;
 
     void init(QPen aPen, const PropertyAttributes *aAttributes);
@@ -43,7 +41,6 @@ private:
 
 private slots:
     void drawPen();
-    void colorChanged(QColor aColor);
     void patternUp();
     void patternDown();
     void patternDelete();
@@ -51,11 +48,11 @@ private slots:
 
     void on_okButton_clicked();
     void on_cancelButton_clicked();
-    void on_brushButton_clicked();
-    void on_widthSpinBox_valueChanged(double aValue);
     void on_styleComboBox_currentIndexChanged(const QString &aValue);
     void on_capStyleComboBox_currentIndexChanged(const QString &aValue);
     void on_joinStyleComboBox_currentIndexChanged(const QString &aValue);
+    void on_widthSpinBox_valueChanged(double aValue);
+    void on_brushButton_clicked();
     void on_cosmeticCheckBox_toggled(bool aChecked);
     void on_milerLimitSpinBox_valueChanged(double aValue);
     void on_dashOffsetSpinBox_valueChanged(double aValue);

@@ -2817,30 +2817,6 @@ int Property::subPropertiesForValue(const QKeySequence &/*aValue*/, PropertyTree
     return 0;
 }
 
-void Property::penBrushChanged(const QVariant &aNewValue)
-{
-    PropertyTreeWidgetItem *aItem=senderItem();
-    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
-
-    QPen aPen=aParentItem->firstValue().value<QPen>();
-    aPen.setBrush(aNewValue.value<QBrush>());
-
-    aParentItem->setFirstValue(aPen);
-    aParentItem->itemConnector()->sendSignal();
-}
-
-void Property::penWidthChanged(const QVariant &aNewValue)
-{
-    PropertyTreeWidgetItem *aItem=senderItem();
-    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
-
-    QPen aPen=aParentItem->firstValue().value<QPen>();
-    aPen.setWidthF(aNewValue.value<double>());
-
-    aParentItem->setFirstValue(aPen);
-    aParentItem->itemConnector()->sendSignal();
-}
-
 void Property::penStyleChanged(const QVariant &aNewValue)
 {
     PropertyTreeWidgetItem *aItem=senderItem();
@@ -2883,13 +2859,25 @@ void Property::penJoinStyleChanged(const QVariant &aNewValue)
     ((CustomEditor *)aItem->itemConnector()->sender())->setIcon(aItem->icon(1));
 }
 
-void Property::penColorChanged(const QVariant &aNewValue)
+void Property::penWidthChanged(const QVariant &aNewValue)
 {
     PropertyTreeWidgetItem *aItem=senderItem();
     PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
 
     QPen aPen=aParentItem->firstValue().value<QPen>();
-    aPen.setColor(aNewValue.value<QColor>());
+    aPen.setWidthF(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aPen);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::penBrushChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QPen aPen=aParentItem->firstValue().value<QPen>();
+    aPen.setBrush(aNewValue.value<QBrush>());
 
     aParentItem->setFirstValue(aPen);
     aParentItem->itemConnector()->sendSignal();
@@ -2960,23 +2948,32 @@ int Property::subPropertiesForValue(const QPen &aValue, PropertyTreeWidgetItem *
 
     // -----------------------------------------------------------------
 
-    PropertyTreeWidgetItem *aBrushItem;
     PropertyTreeWidgetItem *aWidthItem;
-    PropertyTreeWidgetItem *aStyleItem;
-    PropertyTreeWidgetItem *aCapStyleItem;
-    PropertyTreeWidgetItem *aJoinStyleItem;
-    PropertyTreeWidgetItem *aColorItem;
+    PropertyTreeWidgetItem *aBrushItem;
 
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      aValue.brush(),             penBrushChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      aValue.widthF(),            penWidthChanged);
-    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyleEnum, aStyle,         penStyleChanged);
-    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyleEnum, aCapStyle,   penCapStyleChanged);
-    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyleEnum, aJoinStyle, penJoinStyleChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aColorItem,     aCount, qApp->translate("Property", "Color"),      aValue.color(),             penColorChanged);
+    if (mAttributes.boolValue("allowSetStyle", true))
+    {
+        PropertyTreeWidgetItem *aStyleItem;
+        GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aStyleItem,     aCount, qApp->translate("Property", "Style"),      aStyleEnum, aStyle,         penStyleChanged);
+        aStyleItem->setIcon(1, QIcon(aStylePixmap));
+    }
 
-    aStyleItem->setIcon(1, QIcon(aStylePixmap));
-    aCapStyleItem->setIcon(1, QIcon(aCapStylePixmap));
-    aJoinStyleItem->setIcon(1, QIcon(aJoinStylePixmap));
+    if (mAttributes.boolValue("allowSetCapStyle", true))
+    {
+        PropertyTreeWidgetItem *aCapStyleItem;
+        GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aCapStyleItem,  aCount, qApp->translate("Property", "Cap style"),  aCapStyleEnum, aCapStyle,   penCapStyleChanged);
+        aCapStyleItem->setIcon(1, QIcon(aCapStylePixmap));
+    }
+
+    if (mAttributes.boolValue("allowSetJoinStyle", true))
+    {
+        PropertyTreeWidgetItem *aJoinStyleItem;
+        GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aJoinStyleItem, aCount, qApp->translate("Property", "Join style"), aJoinStyleEnum, aJoinStyle, penJoinStyleChanged);
+        aJoinStyleItem->setIcon(1, QIcon(aJoinStylePixmap));
+    }
+
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(         aParentItem, aWidthItem,     aCount, qApp->translate("Property", "Width"),      aValue.widthF(),            penWidthChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(         aParentItem, aBrushItem,     aCount, qApp->translate("Property", "Brush"),      aValue.brush(),             penBrushChanged);
 
     return aCount;
 }
@@ -3035,11 +3032,15 @@ int Property::subPropertiesForValue(const QTextLength &aValue, PropertyTreeWidge
     QMetaEnum aTypeEnum=staticMetaObject.enumerator(staticMetaObject.indexOfEnumerator("LengthType"));
     QTextLength::Type aType=aValue.type();
 
-    PropertyTreeWidgetItem *aTypeItem;
     PropertyTreeWidgetItem *aValueItem;
 
-    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aTypeItem,  aCount, qApp->translate("Property", "Type"),  aTypeEnum, aType,  textLengthTypeChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aValueItem, aCount, qApp->translate("Property", "Value"), aValue.rawValue(), textLengthValueChanged);
+    if (mAttributes.boolValue("allowSetLengthType", true))
+    {
+        PropertyTreeWidgetItem *aTypeItem;
+        GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aTypeItem,  aCount, qApp->translate("Property", "Type"),  aTypeEnum, aType,  textLengthTypeChanged);
+    }
+
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(         aParentItem, aValueItem, aCount, qApp->translate("Property", "Value"), aValue.rawValue(), textLengthValueChanged);
 
     return aCount;
 }
