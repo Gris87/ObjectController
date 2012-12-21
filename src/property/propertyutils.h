@@ -72,5 +72,14 @@ QIcon iconForLineF();
 QIcon iconForPoint();
 QIcon iconForPointF();
 QIcon iconForEasingCurve();
+QIcon iconForFont(QFont aValue);
+QIcon iconForPixmap(const QPixmap &aValue);
+QIcon iconForBrush(const QBrush &aValue);
+QIcon iconForColor(const QColor &aValue);
+QIcon iconForPalette();
+QIcon iconForImage(const QImage &aValue);
+QIcon iconForPolygon();
+QIcon iconForRegion();
+QIcon iconForBitmap(const QBitmap &aValue);
 
 #endif // PROPERTYUTILS_H

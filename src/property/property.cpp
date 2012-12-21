@@ -869,75 +869,27 @@ QIcon Property::iconForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetI
 
 QIcon Property::iconForValue(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QFont aFont=aValue;
-    aFont.setPixelSize(32);
-
-    QFontMetrics aMetrics(aFont);
-
-    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-6;
-
-    if (aSize<1)
-    {
-        aSize=1;
-    }
-
-    QRect aBoundingRect(0, 0, aSize, aSize);
-
-    QPixmap aPenPixmap=QPixmap(aSize, aSize);
-    aPenPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aPenPixmap);
-    aPainter.setFont(aFont);
-    aPainter.drawText(aBoundingRect, Qt::AlignCenter, "A", &aBoundingRect);
-    aPainter.end();
-
-    if (aSize<32)
-    {
-        return QIcon(aPenPixmap.scaled(32, 32));
-    }
-    else
-    {
-        return QIcon(aPenPixmap);
-    }
+    return iconForFont(aValue);
 }
 
 QIcon Property::iconForValue(const QPixmap &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(aValue);
+    return iconForPixmap(aValue);
 }
 
 QIcon Property::iconForValue(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QPixmap aBrushPixmap=QPixmap(32, 32);
-    aBrushPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aBrushPixmap);
-    aPainter.fillRect(0, 0, aBrushPixmap.width(), aBrushPixmap.height(), aValue);
-    aPainter.end();
-
-    return QIcon(aBrushPixmap);
+    return iconForBrush(aValue);
 }
 
 QIcon Property::iconForValue(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QColor aSolidColor(aValue.red(), aValue.green(), aValue.blue());
-
-    QPixmap aColorPixmap=QPixmap(16, 16);
-    aColorPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aColorPixmap);
-
-    aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), aValue);
-    aPainter.fillRect(aColorPixmap.width()>>2, aColorPixmap.height()>>2, aColorPixmap.width()>>1, aColorPixmap.height()>>1, aSolidColor);
-
-    aPainter.end();
-
-    return QIcon(aColorPixmap);
+    return iconForColor(aValue);
 }
 
 QIcon Property::iconForValue(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Palette.png");
+    return iconForPalette();
 }
 
 QIcon Property::iconForValue(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -947,22 +899,22 @@ QIcon Property::iconForValue(const QIcon &aValue, PropertyTreeWidgetItem * /*aPa
 
 QIcon Property::iconForValue(const QImage &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(QPixmap::fromImage(aValue));
+    return iconForImage(aValue);
 }
 
 QIcon Property::iconForValue(const QPolygon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Polygon.png");
+    return iconForPolygon();
 }
 
 QIcon Property::iconForValue(const QRegion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Region.png");
+    return iconForRegion();
 }
 
 QIcon Property::iconForValue(const QBitmap &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(QPixmap::fromImage(aValue.toImage()));
+    return iconForBitmap(aValue);
 }
 
 QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)

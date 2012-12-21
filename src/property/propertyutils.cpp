@@ -829,3 +829,95 @@ QIcon iconForEasingCurve()
 {
     return QIcon(":/objectcontroller/images/EasingCurve.png");
 }
+
+QIcon iconForFont(QFont aValue)
+{
+    aValue.setPixelSize(32);
+
+    QFontMetrics aMetrics(aValue);
+
+    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-6;
+
+    if (aSize<1)
+    {
+        aSize=1;
+    }
+
+    QRect aBoundingRect(0, 0, aSize, aSize);
+
+    QPixmap aPenPixmap=QPixmap(aSize, aSize);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setFont(aValue);
+    aPainter.drawText(aBoundingRect, Qt::AlignCenter, "A", &aBoundingRect);
+    aPainter.end();
+
+    if (aSize<32)
+    {
+        return QIcon(aPenPixmap.scaled(32, 32));
+    }
+    else
+    {
+        return QIcon(aPenPixmap);
+    }
+}
+
+QIcon iconForPixmap(const QPixmap &aValue)
+{
+    return QIcon(aValue);
+}
+
+QIcon iconForBrush(const QBrush &aValue)
+{
+    QPixmap aBrushPixmap=QPixmap(32, 32);
+    aBrushPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aBrushPixmap);
+    aPainter.fillRect(0, 0, aBrushPixmap.width(), aBrushPixmap.height(), aValue);
+    aPainter.end();
+
+    return QIcon(aBrushPixmap);
+}
+
+QIcon iconForColor(const QColor &aValue)
+{
+    QColor aSolidColor(aValue.red(), aValue.green(), aValue.blue());
+
+    QPixmap aColorPixmap=QPixmap(16, 16);
+    aColorPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aColorPixmap);
+
+    aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), aValue);
+    aPainter.fillRect(aColorPixmap.width()>>2, aColorPixmap.height()>>2, aColorPixmap.width()>>1, aColorPixmap.height()>>1, aSolidColor);
+
+    aPainter.end();
+
+    return QIcon(aColorPixmap);
+}
+
+QIcon iconForPalette()
+{
+    return QIcon(":/objectcontroller/images/Palette.png");
+}
+
+QIcon iconForImage(const QImage &aValue)
+{
+    return QIcon(QPixmap::fromImage(aValue));
+}
+
+QIcon iconForPolygon()
+{
+    return QIcon(":/objectcontroller/images/Polygon.png");
+}
+
+QIcon iconForRegion()
+{
+    return QIcon(":/objectcontroller/images/Region.png");
+}
+
+QIcon iconForBitmap(const QBitmap &aValue)
+{
+    return QIcon(QPixmap::fromImage(aValue.toImage()));
+}
