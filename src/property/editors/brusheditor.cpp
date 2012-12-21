@@ -14,6 +14,8 @@ BrushEditor::BrushEditor(QWidget *parent) :
     ui->setupUi(this);
 
     mAttributes=0;
+    mAlphaEnabled=true;
+    mDecimals=6;
 }
 
 BrushEditor::~BrushEditor()
@@ -40,8 +42,13 @@ void BrushEditor::setValue(const QBrush &aValue)
 {
     mValue=aValue;
 
-    ui->valueEdit->setText(brushToString(mValue));
+    updateText();
     setIcon(iconForBrush(mValue));
+}
+
+void BrushEditor::updateText()
+{
+    ui->valueEdit->setText(brushToString(mValue, mAlphaEnabled, mDecimals));
 }
 
 void BrushEditor::handleAttributes(const PropertyAttributes *aAttributes)
@@ -49,6 +56,35 @@ void BrushEditor::handleAttributes(const PropertyAttributes *aAttributes)
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
     aAttributes->applyToWidget(ui->valueEdit);
+
+    bool needUpdate=false;
+
+
+
+    bool aAlphaEnabled=aAttributes->boolValue("alphaEnabled", mAlphaEnabled);
+
+    if (mAlphaEnabled!=aAlphaEnabled)
+    {
+        mAlphaEnabled=aAlphaEnabled;
+        needUpdate=true;
+    }
+
+
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        needUpdate=true;
+    }
+
+
+
+    if (needUpdate)
+    {
+        updateText();
+    }
 }
 
 void BrushEditor::on_editButton_clicked()

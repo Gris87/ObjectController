@@ -563,7 +563,9 @@ QString Property::variantToString(const QPixmap &aValue, PropertyTreeWidgetItem 
 
 QString Property::variantToString(const QBrush &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return brushToString(aValue);
+    return brushToString(aValue,
+                         mAttributes.boolValue("alphaEnabled", true),
+                         mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QColor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

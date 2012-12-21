@@ -36,7 +36,7 @@ QString pointFToString(const QPointF &aValue, int aDecimals=6);
 QString easingCurveToString(const QEasingCurve &aValue, int aDecimals=6);
 QString fontToString(const QFont &aValue);
 QString pixmapToString(const QPixmap &aValue);
-QString brushToString(const QBrush &aValue);
+QString brushToString(const QBrush &aValue, bool alphaEnabled=true, int aDecimals=6);
 QString colorToString(const QColor &aValue, bool alphaEnabled=true);
 QString imageToString(const QImage &aValue);
 QString polygonToString(const QPolygon &aValue);

@@ -548,7 +548,7 @@ public:
 
     Q_CLASSINFO("Brush attributes",       "toolTip            : \"It is a Brush\"                                                 ;"
                                           "delay              : 100                                                               ;"
-                                          "default            : RadialGradientPattern                                             ;"
+                                          "default            : (RadialGradientPattern, (0, (255, 255, 255)), (1, (0, 0, 0)))     ;"
                                         //"allowSetBrushStyle : false                                                             ;"
                                         //"allowGradient      : false                                                             ;"
                                         //"allowTransform     : false                                                             ;"

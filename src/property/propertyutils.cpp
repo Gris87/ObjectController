@@ -466,10 +466,37 @@ QString pixmapToString(const QPixmap &aValue)
     return sizeToString(aValue.size());
 }
 
-QString brushToString(const QBrush &aValue)
+QString brushToString(const QBrush &aValue, bool alphaEnabled, int aDecimals)
 {
+    QString res="(";
+
     QMetaEnum aEnum=QT_Object::qtMetaObject().enumerator(QT_Object::qtMetaObject().indexOfEnumerator("BrushStyle"));
-    return aEnum.valueToKey(aValue.style());
+    res.append(QString::fromLatin1(aEnum.valueToKey(aValue.style())));
+
+    const QGradient *aGradient=aValue.gradient();
+
+    if (aGradient)
+    {
+        const QGradientStops aStops=aGradient->stops();
+
+        for (int i=0; i<aStops.count(); ++i)
+        {
+            res.append(", (");
+            res.append(doubleToString(aStops.at(i).first, aDecimals));
+            res.append(", ");
+            res.append(colorToString(aStops.at(i).second, alphaEnabled));
+            res.append(")");
+        }
+    }
+    else
+    {
+        res.append(", ");
+        res.append(colorToString(aValue.color(), alphaEnabled));
+    }
+
+    res.append(")");
+
+    return res;
 }
 
 QString colorToString(const QColor &aValue, bool alphaEnabled)
