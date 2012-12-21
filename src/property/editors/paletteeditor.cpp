@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/paletteeditdialog.h"
+#include "../propertyutils.h"
 
 PaletteEditor::PaletteEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -10,8 +11,7 @@ PaletteEditor::PaletteEditor(QWidget *parent) :
     ui->setupUi(this);
 
     mAttributes=0;
-
-    ui->valueEdit->setText("Palette");
+    mAlphaEnabled=true;
 }
 
 PaletteEditor::~PaletteEditor()
@@ -37,6 +37,12 @@ void PaletteEditor::setIcon(const QIcon &aIcon)
 void PaletteEditor::setValue(const QPalette &aValue)
 {
     mValue=aValue;
+    updateText();
+}
+
+void PaletteEditor::updateText()
+{
+    ui->valueEdit->setText(paletteToString(mValue, mAlphaEnabled));
 }
 
 void PaletteEditor::handleAttributes(const PropertyAttributes *aAttributes)
@@ -44,6 +50,14 @@ void PaletteEditor::handleAttributes(const PropertyAttributes *aAttributes)
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
     aAttributes->applyToWidget(ui->valueEdit);
+
+    bool aAlphaEnabled=aAttributes->boolValue("alphaEnabled", mAlphaEnabled);
+
+    if (mAlphaEnabled!=aAlphaEnabled)
+    {
+        mAlphaEnabled=aAlphaEnabled;
+        updateText();
+    }
 }
 
 void PaletteEditor::on_editButton_clicked()

@@ -37,10 +37,10 @@ void QuaternionEditor::setIcon(const QIcon &aIcon)
 void QuaternionEditor::setValue(const QQuaternion &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void QuaternionEditor::updateUI()
+void QuaternionEditor::updateText()
 {
     ui->valueEdit->setText(quaternionToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void QuaternionEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

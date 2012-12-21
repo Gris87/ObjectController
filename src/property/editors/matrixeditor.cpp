@@ -37,10 +37,10 @@ void MatrixEditor::setIcon(const QIcon &aIcon)
 void MatrixEditor::setValue(const QMatrix &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void MatrixEditor::updateUI()
+void MatrixEditor::updateText()
 {
     ui->valueEdit->setText(matrixToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void MatrixEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

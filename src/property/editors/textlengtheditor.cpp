@@ -37,10 +37,10 @@ void TextLengthEditor::setIcon(const QIcon &aIcon)
 void TextLengthEditor::setValue(const QTextLength &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void TextLengthEditor::updateUI()
+void TextLengthEditor::updateText()
 {
     ui->valueEdit->setText(textLengthToString(mValue));
 }
@@ -56,7 +56,7 @@ void TextLengthEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

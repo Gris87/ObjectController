@@ -37,10 +37,10 @@ void SizeFEditor::setIcon(const QIcon &aIcon)
 void SizeFEditor::setValue(const QSizeF &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void SizeFEditor::updateUI()
+void SizeFEditor::updateText()
 {
     ui->valueEdit->setText(sizeFToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void SizeFEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

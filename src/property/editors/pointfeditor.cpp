@@ -37,10 +37,10 @@ void PointFEditor::setIcon(const QIcon &aIcon)
 void PointFEditor::setValue(const QPointF &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void PointFEditor::updateUI()
+void PointFEditor::updateText()
 {
     ui->valueEdit->setText(pointFToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void PointFEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

@@ -40,10 +40,10 @@ void StringListEditor::setIcon(const QIcon &aIcon)
 void StringListEditor::setValue(const QStringList &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void StringListEditor::updateUI()
+void StringListEditor::updateText()
 {
     ui->valueEdit->setText(stringListToString(mValue, mEchoMode));
 }
@@ -61,7 +61,7 @@ void StringListEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mEchoMode!=aEchoMode)
     {
         mEchoMode=aEchoMode;
-        updateUI();
+        updateText();
     }
 }
 

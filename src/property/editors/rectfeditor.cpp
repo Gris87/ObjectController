@@ -37,10 +37,10 @@ void RectFEditor::setIcon(const QIcon &aIcon)
 void RectFEditor::setValue(const QRectF &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void RectFEditor::updateUI()
+void RectFEditor::updateText()
 {
     ui->valueEdit->setText(rectFToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void RectFEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

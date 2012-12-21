@@ -37,10 +37,10 @@ void LineFEditor::setIcon(const QIcon &aIcon)
 void LineFEditor::setValue(const QLineF &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void LineFEditor::updateUI()
+void LineFEditor::updateText()
 {
     ui->valueEdit->setText(lineFToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void LineFEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

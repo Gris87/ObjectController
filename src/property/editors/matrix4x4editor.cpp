@@ -37,10 +37,10 @@ void Matrix4x4Editor::setIcon(const QIcon &aIcon)
 void Matrix4x4Editor::setValue(const QMatrix4x4 &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void Matrix4x4Editor::updateUI()
+void Matrix4x4Editor::updateText()
 {
     ui->valueEdit->setText(matrix4x4ToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void Matrix4x4Editor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

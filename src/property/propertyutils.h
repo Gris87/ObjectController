@@ -38,6 +38,7 @@ QString fontToString(const QFont &aValue);
 QString pixmapToString(const QPixmap &aValue);
 QString brushToString(const QBrush &aValue, bool alphaEnabled=true, int aDecimals=6);
 QString colorToString(const QColor &aValue, bool alphaEnabled=true);
+QString paletteToString(const QPalette &aValue, bool alphaEnabled=true);
 QString imageToString(const QImage &aValue);
 QString polygonToString(const QPolygon &aValue);
 QString regionToString(const QRegion &aValue);

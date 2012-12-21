@@ -37,10 +37,10 @@ void TransformEditor::setIcon(const QIcon &aIcon)
 void TransformEditor::setValue(const QTransform &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void TransformEditor::updateUI()
+void TransformEditor::updateText()
 {
     ui->valueEdit->setText(transformToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void TransformEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

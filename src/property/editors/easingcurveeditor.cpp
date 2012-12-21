@@ -39,10 +39,10 @@ void EasingCurveEditor::setIcon(const QIcon &aIcon)
 void EasingCurveEditor::setValue(const QEasingCurve &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void EasingCurveEditor::updateUI()
+void EasingCurveEditor::updateText()
 {
     ui->valueEdit->setText(easingCurveToString(mValue, mDecimals));
 }
@@ -58,7 +58,7 @@ void EasingCurveEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

@@ -19,7 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QMatrix4x4 &aValue);
-    void updateUI();
+    void updateText();
     void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:

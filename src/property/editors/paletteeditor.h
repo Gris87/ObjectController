@@ -19,6 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QPalette &aValue);
+    void updateText();
     void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
@@ -29,6 +30,7 @@ private:
     Ui::DialogEditor *ui;
     QPalette mValue;
     const PropertyAttributes *mAttributes;
+    bool mAlphaEnabled;
 
 private slots:
     void on_editButton_clicked();

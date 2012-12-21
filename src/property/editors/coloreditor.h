@@ -29,8 +29,8 @@ protected:
 private:
     Ui::DialogEditor *ui;
     QColor mValue;
-    bool mAlphaEnabled;
     const PropertyAttributes *mAttributes;
+    bool mAlphaEnabled;
 
 private slots:
     void on_editButton_clicked();

@@ -19,7 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QVector3D &aValue);
-    void updateUI();
+    void updateText();
     void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:

@@ -37,10 +37,10 @@ void Vector3DEditor::setIcon(const QIcon &aIcon)
 void Vector3DEditor::setValue(const QVector3D &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void Vector3DEditor::updateUI()
+void Vector3DEditor::updateText()
 {
     ui->valueEdit->setText(vector3DToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void Vector3DEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 

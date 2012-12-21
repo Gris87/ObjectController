@@ -509,9 +509,9 @@ QString colorToString(const QColor &aValue, bool alphaEnabled)
                QString::number(aValue.green())+
                ", "+
                QString::number(aValue.blue())+
-               ") ["+
+               ", "+
                QString::number(aValue.alpha())+
-               "]";
+               ")";
     }
     else
     {
@@ -523,6 +523,39 @@ QString colorToString(const QColor &aValue, bool alphaEnabled)
                QString::number(aValue.blue())+
                ")";
     }
+}
+
+QString paletteToString(const QPalette &aValue, bool alphaEnabled)
+{
+    QMetaEnum aGroupEnum=QPalette::staticMetaObject.enumerator(QPalette::staticMetaObject.indexOfEnumerator("ColorGroup"));
+    QMetaEnum aRoleEnum=QPalette::staticMetaObject.enumerator(QPalette::staticMetaObject.indexOfEnumerator("ColorRole"));
+
+    QString res="[";
+
+    for (int i=0; i<QPalette::NColorRoles; ++i)
+    {
+        for (int j=0; j<QPalette::NColorGroups; ++j)
+        {
+            if (res.length()>1)
+            {
+                res.append(", ");
+            }
+
+            res.append("(");
+            res.append(QString::fromLatin1(aRoleEnum.valueToKey(i)));
+            res.append("_");
+            res.append(QString::fromLatin1(aGroupEnum.valueToKey(j)));
+
+            res.append(", ");
+
+            res.append(colorToString(aValue.color((QPalette::ColorGroup)j, (QPalette::ColorRole)i), alphaEnabled));
+            res.append(")");
+        }
+    }
+
+    res.append("]");
+
+    return res;
 }
 
 QString imageToString(const QImage &aValue)

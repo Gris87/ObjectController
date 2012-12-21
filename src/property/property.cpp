@@ -574,9 +574,10 @@ QString Property::variantToString(const QColor &aValue, PropertyTreeWidgetItem *
                          mAttributes.boolValue("alphaEnabled", true));
 }
 
-QString Property::variantToString(const QPalette &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPalette &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "Palette";
+    return paletteToString(aValue,
+                           mAttributes.boolValue("alphaEnabled", true));
 }
 
 QString Property::variantToString(const QIcon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -2655,7 +2656,7 @@ int Property::subPropertiesForValue(const QPalette &aValue, PropertyTreeWidgetIt
             PropertyTreeWidgetItem *aColorItem;
             QColor                  aColor=aValue.color((QPalette::ColorGroup)j, (QPalette::ColorRole)i);
 
-            GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aColorItem, aCount, QString::fromLatin1(aRoleEnum.valueToKey(i))+" ("+QString::fromLatin1(aGroupEnum.valueToKey(j))+")", aColor, paletteColorChanged);
+            GET_OR_CREATE_ITEM_SETUP_CONNECT(aParentItem, aColorItem, aCount, QString::fromLatin1(aRoleEnum.valueToKey(i))+"_"+QString::fromLatin1(aGroupEnum.valueToKey(j)), aColor, paletteColorChanged);
         }
     }
 

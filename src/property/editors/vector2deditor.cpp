@@ -37,10 +37,10 @@ void Vector2DEditor::setIcon(const QIcon &aIcon)
 void Vector2DEditor::setValue(const QVector2D &aValue)
 {
     mValue=aValue;
-    updateUI();
+    updateText();
 }
 
-void Vector2DEditor::updateUI()
+void Vector2DEditor::updateText()
 {
     ui->valueEdit->setText(vector2DToString(mValue, mDecimals));
 }
@@ -56,7 +56,7 @@ void Vector2DEditor::handleAttributes(const PropertyAttributes *aAttributes)
     if (mDecimals!=aDecimals)
     {
         mDecimals=aDecimals;
-        updateUI();
+        updateText();
     }
 }
 
