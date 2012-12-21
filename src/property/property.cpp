@@ -698,28 +698,8 @@ QIcon Property::iconForValueFlag(const QMetaEnum &/*aMetaEnum*/, const int &/*aV
 
 QIcon Property::iconForValue(const bool &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    QPixmap aBoolPixmap=QPixmap(13, 13);
-    aBoolPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aBoolPixmap);
-
-    QStyleOptionButton checkboxstyle;
-    checkboxstyle.rect.setRect(0, 0, aBoolPixmap.width(), aBoolPixmap.height());
-
-    if (aValue)
-    {
-        checkboxstyle.state = QStyle::State_On|QStyle::State_Enabled;
-    }
-    else
-    {
-        checkboxstyle.state = QStyle::State_Off|QStyle::State_Enabled;
-    }
-
-    aParentItem->treeWidget()->style()->drawControl(QStyle::CE_CheckBox, &checkboxstyle, &aPainter);
-
-    aPainter.end();
-
-    return QIcon(aBoolPixmap);
+    return iconForBool(aValue,
+                       aParentItem->treeWidget()->style());
 }
 
 QIcon Property::iconForValue(const qint8 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -809,17 +789,17 @@ QIcon Property::iconForValue(const QBitArray &/*aValue*/, PropertyTreeWidgetItem
 
 QIcon Property::iconForValue(const QDate &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Date.png");
+    return iconForDate();
 }
 
 QIcon Property::iconForValue(const QTime &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Time.png");
+    return iconForTime();
 }
 
 QIcon Property::iconForValue(const QDateTime &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/DateTime.png");
+    return iconForDateTime();
 }
 
 QIcon Property::iconForValue(const QUrl &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -834,42 +814,42 @@ QIcon Property::iconForValue(const QLocale &/*aValue*/, PropertyTreeWidgetItem *
 
 QIcon Property::iconForValue(const QRect &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Rect.png");
+    return iconForRect();
 }
 
 QIcon Property::iconForValue(const QRectF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Rect.png");
+    return iconForRectF();
 }
 
 QIcon Property::iconForValue(const QSize &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Size.png");
+    return iconForSize();
 }
 
 QIcon Property::iconForValue(const QSizeF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Size.png");
+    return iconForSizeF();
 }
 
 QIcon Property::iconForValue(const QLine &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Line.png");
+    return iconForLine();
 }
 
 QIcon Property::iconForValue(const QLineF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Line.png");
+    return iconForLineF();
 }
 
 QIcon Property::iconForValue(const QPoint &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Point.png");
+    return iconForPoint();
 }
 
 QIcon Property::iconForValue(const QPointF &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Point.png");
+    return iconForPointF();
 }
 
 QIcon Property::iconForValue(const QRegExp &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -884,7 +864,7 @@ QIcon Property::iconForValue(const QVariantHash &/*aValue*/, PropertyTreeWidgetI
 
 QIcon Property::iconForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/EasingCurve.png");
+    return iconForEasingCurve();
 }
 
 QIcon Property::iconForValue(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

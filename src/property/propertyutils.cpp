@@ -8,6 +8,7 @@
 #include <QBitmap>
 #include <QMatrix4x4>
 #include <QVector2D>
+#include <QPainter>
 
 class QT_Object : public QObject
 {
@@ -739,4 +740,92 @@ QString objectToString(QObject *aValue)
     res.append(QString::number((qint64)aValue, 16).toUpper());
 
     return res;
+}
+
+// -------------------------------------------------------------------------------------
+
+QIcon iconForBool(const bool &aValue, QStyle *aStyle)
+{
+    QPixmap aBoolPixmap=QPixmap(13, 13);
+    aBoolPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aBoolPixmap);
+
+    QStyleOptionButton checkboxstyle;
+    checkboxstyle.rect.setRect(0, 0, aBoolPixmap.width(), aBoolPixmap.height());
+
+    if (aValue)
+    {
+        checkboxstyle.state = QStyle::State_On|QStyle::State_Enabled;
+    }
+    else
+    {
+        checkboxstyle.state = QStyle::State_Off|QStyle::State_Enabled;
+    }
+
+    aStyle->drawControl(QStyle::CE_CheckBox, &checkboxstyle, &aPainter);
+
+    aPainter.end();
+
+    return QIcon(aBoolPixmap);
+}
+
+QIcon iconForDate()
+{
+    return QIcon(":/objectcontroller/images/Date.png");
+}
+
+QIcon iconForTime()
+{
+    return QIcon(":/objectcontroller/images/Time.png");
+}
+
+QIcon iconForDateTime()
+{
+    return QIcon(":/objectcontroller/images/DateTime.png");
+}
+
+QIcon iconForRect()
+{
+    return QIcon(":/objectcontroller/images/Rect.png");
+}
+
+QIcon iconForRectF()
+{
+    return QIcon(":/objectcontroller/images/Rect.png");
+}
+
+QIcon iconForSize()
+{
+    return QIcon(":/objectcontroller/images/Size.png");
+}
+
+QIcon iconForSizeF()
+{
+    return QIcon(":/objectcontroller/images/Size.png");
+}
+
+QIcon iconForLine()
+{
+    return QIcon(":/objectcontroller/images/Line.png");
+}
+
+QIcon iconForLineF()
+{
+    return QIcon(":/objectcontroller/images/Line.png");
+}
+
+QIcon iconForPoint()
+{
+    return QIcon(":/objectcontroller/images/Point.png");
+}
+
+QIcon iconForPointF()
+{
+    return QIcon(":/objectcontroller/images/Point.png");
+}
+
+QIcon iconForEasingCurve()
+{
+    return QIcon(":/objectcontroller/images/EasingCurve.png");
 }

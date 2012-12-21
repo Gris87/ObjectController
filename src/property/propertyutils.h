@@ -57,4 +57,20 @@ QString quaternionToString(const QQuaternion &aValue, int aDecimals=6);
 QString voidToString(void *aValue);
 QString objectToString(QObject *aValue);
 
+// -------------------------------------------------------------------------------------
+
+QIcon iconForBool(const bool &aValue, QStyle *aStyle);
+QIcon iconForDate();
+QIcon iconForTime();
+QIcon iconForDateTime();
+QIcon iconForRect();
+QIcon iconForRectF();
+QIcon iconForSize();
+QIcon iconForSizeF();
+QIcon iconForLine();
+QIcon iconForLineF();
+QIcon iconForPoint();
+QIcon iconForPointF();
+QIcon iconForEasingCurve();
+
 #endif // PROPERTYUTILS_H
