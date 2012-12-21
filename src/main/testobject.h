@@ -20,8 +20,6 @@
 #include <QMatrix4x4>
 #include <QVector2D>
 
-// TODO: Pen
-
 class TestObject : public QObject
 {
     Q_OBJECT

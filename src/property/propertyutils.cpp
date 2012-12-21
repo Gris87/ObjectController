@@ -1072,6 +1072,11 @@ QIcon iconForCursor(const QCursor &aValue)
     }
 }
 
+QIcon iconForKeySequence()
+{
+    return QIcon(":/objectcontroller/images/KeySequence.png");
+}
+
 QIcon iconForPen(const QPen &aValue)
 {
     QPixmap aPenPixmap=QPixmap(16, 16);

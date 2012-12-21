@@ -935,7 +935,7 @@ QIcon Property::iconForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetIt
 
 QIcon Property::iconForValue(const QKeySequence &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon();
+    return iconForKeySequence();
 }
 
 QIcon Property::iconForValue(const QPen &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

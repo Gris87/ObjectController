@@ -84,6 +84,7 @@ QIcon iconForPolygon();
 QIcon iconForRegion();
 QIcon iconForBitmap(const QBitmap &aValue);
 QIcon iconForCursor(const QCursor &aValue);
+QIcon iconForKeySequence();
 QIcon iconForPen(const QPen &aValue);
 QIcon iconForMatrix();
 QIcon iconForTransform();
