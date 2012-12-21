@@ -361,6 +361,11 @@ private slots:
 
     void hashItemChanged(const QVariant &aNewValue);
 
+    void easingCurveTypeChanged(const QVariant &aNewValue);
+    void easingCurveAmplitudeChanged(const QVariant &aNewValue);
+    void easingCurveOvershootChanged(const QVariant &aNewValue);
+    void easingCurvePeriodChanged(const QVariant &aNewValue);
+
     void fontFamilyChanged(const QVariant &aNewValue);
     void fontSizeChanged(const QVariant &aNewValue);
     void fontBoldChanged(const QVariant &aNewValue);

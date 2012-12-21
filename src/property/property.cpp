@@ -2338,9 +2338,72 @@ int Property::subPropertiesForValue(const QVariantHash &aValue, PropertyTreeWidg
     return aCount;
 }
 
-int Property::subPropertiesForValue(const QEasingCurve &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+void Property::easingCurveTypeChanged(const QVariant &aNewValue)
 {
-    return 0;
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QEasingCurve aEasingCurve=aParentItem->firstValue().value<QEasingCurve>();
+    aEasingCurve.setType((QEasingCurve::Type)aNewValue.value<int>());
+
+    aParentItem->setFirstValue(aEasingCurve);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::easingCurveAmplitudeChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QEasingCurve aEasingCurve=aParentItem->firstValue().value<QEasingCurve>();
+    aEasingCurve.setAmplitude(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aEasingCurve);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::easingCurveOvershootChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QEasingCurve aEasingCurve=aParentItem->firstValue().value<QEasingCurve>();
+    aEasingCurve.setOvershoot(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aEasingCurve);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+void Property::easingCurvePeriodChanged(const QVariant &aNewValue)
+{
+    PropertyTreeWidgetItem *aItem=senderItem();
+    PropertyTreeWidgetItem *aParentItem=(PropertyTreeWidgetItem *)aItem->parent();
+
+    QEasingCurve aEasingCurve=aParentItem->firstValue().value<QEasingCurve>();
+    aEasingCurve.setPeriod(aNewValue.value<double>());
+
+    aParentItem->setFirstValue(aEasingCurve);
+    aParentItem->itemConnector()->sendSignal();
+}
+
+int Property::subPropertiesForValue(const QEasingCurve &aValue, PropertyTreeWidgetItem *aParentItem)
+{
+    int aCount=0;
+
+    QMetaEnum aTypeEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
+    QEasingCurve::Type aType=aValue.type();
+
+    PropertyTreeWidgetItem *aTypeItem;
+    PropertyTreeWidgetItem *aAmplitudeItem;
+    PropertyTreeWidgetItem *aOvershootItem;
+    PropertyTreeWidgetItem *aPeriodItem;
+
+    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aTypeItem,      aCount, qApp->translate("Property", "Type"),      aTypeEnum, aType,   easingCurveTypeChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aAmplitudeItem, aCount, qApp->translate("Property", "Amplitude"), aValue.amplitude(), easingCurveAmplitudeChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aOvershootItem, aCount, qApp->translate("Property", "Overshoot"), aValue.overshoot(), easingCurveOvershootChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aPeriodItem,    aCount, qApp->translate("Property", "Period"),    aValue.period(),    easingCurvePeriodChanged);
+
+    return aCount;
 }
 
 void Property::fontFamilyChanged(const QVariant &aNewValue)
