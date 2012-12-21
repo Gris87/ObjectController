@@ -645,27 +645,7 @@ void BrushEditDialog::updateProperties()
 
 
 
-    ui->transformEdit->setText(
-                               "[("+
-                               doubleToString(aTransform.m11(), mDecimals)+
-                               ", "+
-                               doubleToString(aTransform.m12(), mDecimals)+
-                               ", "+
-                               doubleToString(aTransform.m13(), mDecimals)+
-                               "), ("+
-                               doubleToString(aTransform.m21(), mDecimals)+
-                               ", "+
-                               doubleToString(aTransform.m22(), mDecimals)+
-                               ", "+
-                               doubleToString(aTransform.m23(), mDecimals)+
-                               "), ("+
-                               doubleToString(aTransform.m31(), mDecimals)+
-                               ", "+
-                               doubleToString(aTransform.m32(), mDecimals)+
-                               ", "+
-                               doubleToString(aTransform.m33(), mDecimals)+
-                               ")]"
-                              );
+    ui->transformEdit->setText(transformToString(aTransform));
 
     ui->colorWidget->setVisible(
                                 aStyle==Qt::SolidPattern

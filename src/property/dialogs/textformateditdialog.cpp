@@ -2453,33 +2453,8 @@ void TextFormatEditDialog::frameUpdateProperties()
         Q_ASSERT(false);
     }
 
-    QTextLength aWidth=((QTextFrameFormat *)&mTextFormat)->width();
-    QString aWidthStr="[";
-
-    switch (aWidth.type())
-    {
-        case QTextLength::VariableLength:   aWidthStr.append("VariableLength");   break;
-        case QTextLength::FixedLength:      aWidthStr.append("FixedLength");      break;
-        case QTextLength::PercentageLength: aWidthStr.append("PercentageLength"); break;
-    }
-
-    aWidthStr.append(", ");
-    aWidthStr.append(doubleToString(aWidth.rawValue(), mDecimals));
-    aWidthStr.append("]");
-
-    QTextLength aHeight=((QTextFrameFormat *)&mTextFormat)->height();
-    QString aHeightStr="[";
-
-    switch (aHeight.type())
-    {
-        case QTextLength::VariableLength:   aHeightStr.append("VariableLength");   break;
-        case QTextLength::FixedLength:      aHeightStr.append("FixedLength");      break;
-        case QTextLength::PercentageLength: aHeightStr.append("PercentageLength"); break;
-    }
-
-    aHeightStr.append(", ");
-    aHeightStr.append(doubleToString(aHeight.rawValue(), mDecimals));
-    aHeightStr.append("]");
+    QString aWidthStr=textLengthToString(((QTextFrameFormat *)&mTextFormat)->width(), mDecimals);
+    QString aHeightStr=textLengthToString(((QTextFrameFormat *)&mTextFormat)->height(), mDecimals);
 
     QTextFormat::PageBreakFlags aPageBreaks=((QTextFrameFormat *)&mTextFormat)->pageBreakPolicy();
 
