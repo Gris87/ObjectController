@@ -43,7 +43,7 @@ void PixmapEditor::setValue(const QPixmap &aValue)
     mValue=aValue;
 
     ui->valueEdit->setText(pixmapToString(mValue));
-    setIcon(QIcon(mValue));
+    setIcon(iconForPixmap(mValue));
 
     mDataType=PIXMAP;
 }
@@ -53,7 +53,7 @@ void PixmapEditor::setValue(const QImage &aValue)
     mValue=QPixmap::fromImage(aValue);
 
     ui->valueEdit->setText(imageToString(aValue));
-    setIcon(QIcon(mValue));
+    setIcon(iconForPixmap(mValue));
 
     mDataType=IMAGE;
 }
@@ -63,7 +63,7 @@ void PixmapEditor::setValue(const QBitmap &aValue)
     mValue=QPixmap::fromImage(aValue.toImage());
 
     ui->valueEdit->setText(bitmapToString(aValue));
-    setIcon(QIcon(mValue));
+    setIcon(iconForPixmap(mValue));
 
     mDataType=BITMAP;
 }
@@ -97,16 +97,26 @@ void PixmapEditor::on_editButton_clicked()
         switch (mDataType)
         {
             case PIXMAP:
+            {
                 setValue(dialog->resultValue());
                 emit valueChanged(mValue);
+            }
             break;
             case IMAGE:
-                setValue(dialog->resultValue().toImage());
-                emit valueChanged(mValue.toImage());
+            {
+                QImage aImage=dialog->resultValue().toImage();
+
+                setValue(aImage);
+                emit valueChanged(aImage);
+            }
             break;
             case BITMAP:
-                setValue(QBitmap::fromImage(dialog->resultValue().toImage()));
-                emit valueChanged(QBitmap::fromImage(mValue.toImage()));
+            {
+                QBitmap aBitmap=QBitmap::fromImage(dialog->resultValue().toImage());
+
+                setValue(aBitmap);
+                emit valueChanged(aBitmap);
+            }
             break;
         }
     }

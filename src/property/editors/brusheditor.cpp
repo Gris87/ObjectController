@@ -40,20 +40,8 @@ void BrushEditor::setValue(const QBrush &aValue)
 {
     mValue=aValue;
 
-
-
     ui->valueEdit->setText(brushToString(mValue));
-
-
-
-    QPixmap aBrushPixmap=QPixmap(32, 32);
-    aBrushPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aBrushPixmap);
-    aPainter.fillRect(0, 0, aBrushPixmap.width(), aBrushPixmap.height(), mValue);
-    aPainter.end();
-
-    setIcon(QIcon(aBrushPixmap));
+    setIcon(iconForBrush(mValue));
 }
 
 void BrushEditor::handleAttributes(const PropertyAttributes *aAttributes)

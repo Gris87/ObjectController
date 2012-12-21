@@ -919,32 +919,7 @@ QIcon Property::iconForValue(const QBitmap &aValue, PropertyTreeWidgetItem * /*a
 
 QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)
 {
-    QIcon aIcon;
-
-    QPixmap aPixmap=aValue.pixmap();
-
-    if (!aPixmap.isNull())
-    {
-        aIcon=QIcon(aPixmap);
-    }
-    else
-    {
-        const QBitmap *aBitmap=aValue.bitmap();
-
-        if (aBitmap)
-        {
-            aPixmap=QPixmap::fromImage(aBitmap->toImage());
-            aPixmap.setMask(*aValue.mask());
-
-            aIcon=QIcon(aPixmap);
-        }
-        else
-        {
-            aIcon=QIcon(":/objectcontroller/images/Cursor-"+variantToString(aValue, aParentItem)+".png");
-        }
-    }
-
-    return aIcon;
+    return iconForCursor(aValue);
 }
 
 QIcon Property::iconForValue(const QSizePolicy &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -959,15 +934,7 @@ QIcon Property::iconForValue(const QKeySequence &/*aValue*/, PropertyTreeWidgetI
 
 QIcon Property::iconForValue(const QPen &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QPixmap aPenPixmap=QPixmap(16, 16);
-    aPenPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aPenPixmap);
-    aPainter.setPen(aValue);
-    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
-    aPainter.end();
-
-    return QIcon(aPenPixmap);
+    return iconForPen(aValue);
 }
 
 QIcon Property::iconForValue(const QTextLength &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -982,32 +949,32 @@ QIcon Property::iconForValue(const QTextFormat &/*aValue*/, PropertyTreeWidgetIt
 
 QIcon Property::iconForValue(const QMatrix &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Matrix.png");
+    return iconForMatrix();
 }
 
 QIcon Property::iconForValue(const QTransform &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Transform.png");
+    return iconForTransform();
 }
 
 QIcon Property::iconForValue(const QMatrix4x4 &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Matrix4x4.png");
+    return iconForMatrix4x4();
 }
 
 QIcon Property::iconForValue(const QVector2D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Vector2D.png");
+    return iconForVector2D();
 }
 
 QIcon Property::iconForValue(const QVector3D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Vector3D.png");
+    return iconForVector3D();
 }
 
 QIcon Property::iconForValue(const QVector4D &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return QIcon(":/objectcontroller/images/Vector4D.png");
+    return iconForVector4D();
 }
 
 QIcon Property::iconForValue(const QQuaternion &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)

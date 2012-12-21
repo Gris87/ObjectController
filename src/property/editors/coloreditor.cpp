@@ -41,20 +41,7 @@ void ColorEditor::setValue(const QColor &aValue)
     mValue=aValue;
 
     updateText();
-
-    QColor aSolidColor(mValue.red(), mValue.green(), mValue.blue());
-
-    QPixmap aColorPixmap=QPixmap(16, 16);
-    aColorPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aColorPixmap);
-
-    aPainter.fillRect(0, 0, aColorPixmap.width(), aColorPixmap.height(), mValue);
-    aPainter.fillRect(aColorPixmap.width()>>2, aColorPixmap.height()>>2, aColorPixmap.width()>>1, aColorPixmap.height()>>1, aSolidColor);
-
-    aPainter.end();
-
-    setIcon(QIcon(aColorPixmap));
+    setIcon(iconForColor(mValue));
 }
 
 void ColorEditor::updateText()

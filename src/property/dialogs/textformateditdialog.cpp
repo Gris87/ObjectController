@@ -237,17 +237,7 @@ QTextFormat TextFormatEditDialog::resultValue() const
 
 void TextFormatEditDialog::drawBrush(const QBrush &aBrush, QLabel *aIconLabel)
 {
-    int aWidth=32;
-    int aHeight=32;
-
-    QPixmap aPixmap(aWidth, aHeight);
-    aPixmap.fill(QColor(255, 255, 255));
-
-    QPainter aPainter(&aPixmap);
-    aPainter.fillRect(0, 0, aWidth, aHeight, aBrush);
-    aPainter.end();
-
-    aIconLabel->setPixmap(QIcon(aPixmap).pixmap(18, 18));
+    aIconLabel->setPixmap(iconForBrush(aBrush).pixmap(18, 18));
 }
 
 void TextFormatEditDialog::drawBackgroundBrush()
@@ -263,48 +253,13 @@ void TextFormatEditDialog::drawForegroundBrush()
 void TextFormatEditDialog::charDrawFont()
 {
     QFont aFont=((QTextCharFormat *)&mTextFormat)->font();
-    aFont.setPixelSize(32);
-
-    QFontMetrics aMetrics(aFont);
-
-    int aSize=qMax(aMetrics.width('A'), aMetrics.height())-6;
-
-    if (aSize<1)
-    {
-        aSize=1;
-    }
-
-    QRect aBoundingRect(0, 0, aSize, aSize);
-
-    QPixmap aPenPixmap=QPixmap(aSize, aSize);
-    aPenPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aPenPixmap);
-    aPainter.setFont(aFont);
-    aPainter.drawText(aBoundingRect, Qt::AlignCenter, "A", &aBoundingRect);
-    aPainter.end();
-
-    if (aSize<32)
-    {
-        ui->charFontIconLabel->setPixmap(QIcon(aPenPixmap.scaled(32, 32)).pixmap(18, 18));
-    }
-    else
-    {
-        ui->charFontIconLabel->setPixmap(QIcon(aPenPixmap).pixmap(18, 18));
-    }
+    ui->charFontIconLabel->setPixmap(iconForFont(aFont).pixmap(18, 18));
 }
 
 void TextFormatEditDialog::charDrawTextOutlinePen()
 {
-    QPixmap aPenPixmap=QPixmap(16, 16);
-    aPenPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aPenPixmap);
-    aPainter.setPen(((QTextCharFormat *)&mTextFormat)->textOutline());
-    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
-    aPainter.end();
-
-    ui->charTextOutlineIconLabel->setPixmap(QIcon(aPenPixmap).pixmap(18, 18));
+    QPen aPen=((QTextCharFormat *)&mTextFormat)->textOutline();
+    ui->charTextOutlineIconLabel->setPixmap(iconForPen(aPen).pixmap(18, 18));
 }
 
 void TextFormatEditDialog::frameDrawBorderBrush()

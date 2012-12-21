@@ -62,40 +62,8 @@ void CursorEditor::setValue(const QCursor &aValue)
         mBitmapCursor=mCursor;
     }
 
-
-
-    QString res=cursorToString(mCursor);
-
-    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(res));
-
-
-
-    QIcon aIcon;
-
-    QPixmap aPixmap=mCursor.pixmap();
-
-    if (!aPixmap.isNull())
-    {
-        aIcon=QIcon(aPixmap);
-    }
-    else
-    {
-        const QBitmap *aBitmap=mCursor.bitmap();
-
-        if (aBitmap)
-        {
-            aPixmap=QPixmap::fromImage(aBitmap->toImage());
-            aPixmap.setMask(*mCursor.mask());
-
-            aIcon=QIcon(aPixmap);
-        }
-        else
-        {
-            aIcon=QIcon(":/objectcontroller/images/Cursor-"+res+".png");
-        }
-    }
-
-    setIcon(aIcon);
+    ui->valueComboBox->setCurrentIndex(ui->valueComboBox->findText(cursorToString(mCursor)));
+    setIcon(iconForCursor(mCursor));
 
 
 
@@ -107,7 +75,7 @@ void CursorEditor::setValue(const QCursor &aValue)
     ui->maskButton->setVisible(false);
     ui->pixmapButton->setVisible(false);
 
-    aPixmap=mCursor.pixmap();
+    QPixmap aPixmap=mCursor.pixmap();
 
     if (!aPixmap.isNull())
     {

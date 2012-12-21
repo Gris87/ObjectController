@@ -81,5 +81,13 @@ QIcon iconForImage(const QImage &aValue);
 QIcon iconForPolygon();
 QIcon iconForRegion();
 QIcon iconForBitmap(const QBitmap &aValue);
+QIcon iconForCursor(const QCursor &aValue);
+QIcon iconForPen(const QPen &aValue);
+QIcon iconForMatrix();
+QIcon iconForTransform();
+QIcon iconForMatrix4x4();
+QIcon iconForVector2D();
+QIcon iconForVector3D();
+QIcon iconForVector4D();
 
 #endif // PROPERTYUTILS_H

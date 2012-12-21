@@ -921,3 +921,72 @@ QIcon iconForBitmap(const QBitmap &aValue)
 {
     return QIcon(QPixmap::fromImage(aValue.toImage()));
 }
+
+QIcon iconForCursor(const QCursor &aValue)
+{
+    QPixmap aPixmap=aValue.pixmap();
+
+    if (!aPixmap.isNull())
+    {
+        return QIcon(aPixmap);
+    }
+    else
+    {
+        const QBitmap *aBitmap=aValue.bitmap();
+
+        if (aBitmap)
+        {
+            aPixmap=QPixmap::fromImage(aBitmap->toImage());
+            aPixmap.setMask(*aValue.mask());
+
+            return QIcon(aPixmap);
+        }
+        else
+        {
+            return QIcon(":/objectcontroller/images/Cursor-"+cursorToString(aValue)+".png");
+        }
+    }
+}
+
+QIcon iconForPen(const QPen &aValue)
+{
+    QPixmap aPenPixmap=QPixmap(16, 16);
+    aPenPixmap.fill(QColor(255, 255, 255, 0));
+
+    QPainter aPainter(&aPenPixmap);
+    aPainter.setPen(aValue);
+    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
+    aPainter.end();
+
+    return QIcon(aPenPixmap);
+}
+
+QIcon iconForMatrix()
+{
+    return QIcon(":/objectcontroller/images/Matrix.png");
+}
+
+QIcon iconForTransform()
+{
+    return QIcon(":/objectcontroller/images/Transform.png");
+}
+
+QIcon iconForMatrix4x4()
+{
+    return QIcon(":/objectcontroller/images/Matrix4x4.png");
+}
+
+QIcon iconForVector2D()
+{
+    return QIcon(":/objectcontroller/images/Vector2D.png");
+}
+
+QIcon iconForVector3D()
+{
+    return QIcon(":/objectcontroller/images/Vector3D.png");
+}
+
+QIcon iconForVector4D()
+{
+    return QIcon(":/objectcontroller/images/Vector4D.png");
+}

@@ -221,7 +221,7 @@ void BrushEditDialog::resizeEvent(QResizeEvent *event)
 
 void BrushEditDialog::drawTexture()
 {
-    ui->textureIconLabel->setPixmap(QIcon(mTexture).pixmap(18));
+    ui->textureIconLabel->setPixmap(iconForPixmap(mTexture).pixmap(18));
 }
 
 void BrushEditDialog::updateTransparentArea()

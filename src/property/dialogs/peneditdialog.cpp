@@ -8,6 +8,7 @@
 
 #include "brusheditdialog.h"
 #include "../widgets/doubleframe.h"
+#include "../propertyutils.h"
 
 PenEditDialog::PenEditDialog(QWidget *parent) :
     QDialog(parent),
@@ -134,17 +135,7 @@ void PenEditDialog::resizeEvent(QResizeEvent *event)
 
 void PenEditDialog::drawBrush()
 {
-    int aWidth=32;
-    int aHeight=32;
-
-    QPixmap aPixmap(aWidth, aHeight);
-    aPixmap.fill(QColor(255, 255, 255));
-
-    QPainter aPainter(&aPixmap);
-    aPainter.fillRect(0, 0, aWidth, aHeight, mPen.brush());
-    aPainter.end();
-
-    ui->brushIconLabel->setPixmap(QIcon(aPixmap).pixmap(18, 18));
+    ui->brushIconLabel->setPixmap(iconForBrush(mPen.brush()).pixmap(18, 18));
 }
 
 void PenEditDialog::drawPen()

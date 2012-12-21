@@ -4,6 +4,7 @@
 #include <QPainter>
 
 #include "../dialogs/peneditdialog.h"
+#include "../propertyutils.h"
 
 PenEditor::PenEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -40,17 +41,7 @@ void PenEditor::setValue(const QPen &aValue)
 {
     mValue=aValue;
 
-
-
-    QPixmap aPenPixmap=QPixmap(16, 16);
-    aPenPixmap.fill(QColor(255, 255, 255, 0));
-
-    QPainter aPainter(&aPenPixmap);
-    aPainter.setPen(mValue);
-    aPainter.drawLine(aPenPixmap.width(), 0, 0, aPenPixmap.height());
-    aPainter.end();
-
-    setIcon(QIcon(aPenPixmap));
+    setIcon(iconForPen(mValue));
 }
 
 void PenEditor::handleAttributes(const PropertyAttributes *aAttributes)
