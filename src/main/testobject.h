@@ -822,7 +822,7 @@ public:
 
     Q_CLASSINFO("Transform attributes",   "toolTip            : \"It is a Transform\"                                             ;"
                                           "delay              : 100                                                               ;"
-                                        //"default            : []                                                                ;"
+                                          "default            : [(1, 2, 3), (4, 5, 6), (7, 8, 9)]                                 ;"
 
                                         //"wrapping           : false                                                             ;"
                                         //"accelerated        : false                                                             ;"
