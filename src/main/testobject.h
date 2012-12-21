@@ -736,7 +736,7 @@ public:
 
     Q_CLASSINFO("Pen attributes",         "toolTip            : \"It is a Pen\"                                                   ;"
                                           "delay              : 100                                                               ;"
-                                        //"default            : Pen                                                               ;"
+                                          "default            : (DotLine, SquareCap, BevelJoin, 2, (SolidPattern, (0, 0, 0)))     ;"
                                           "allowSetStyle      : false                                                             ;"
                                           "allowSetCapStyle   : false                                                             ;"
                                           "allowSetJoinStyle  : false                                                             ;"

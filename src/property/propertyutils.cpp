@@ -636,7 +636,21 @@ QString keySequenceToString(const QKeySequence &aValue)
 
 QString penToString(const QPen &aValue, bool alphaEnabled, int aDecimals)
 {
-    return "Pen";
+    QMetaEnum aStyleEnum=QT_Object::qtMetaObject().enumerator(QT_Object::qtMetaObject().indexOfEnumerator("PenStyle"));
+    QMetaEnum aCapStyleEnum=QT_Object::qtMetaObject().enumerator(QT_Object::qtMetaObject().indexOfEnumerator("PenCapStyle"));
+    QMetaEnum aJoinStyleEnum=QT_Object::qtMetaObject().enumerator(QT_Object::qtMetaObject().indexOfEnumerator("PenJoinStyle"));
+
+    return "("+
+           QString::fromLatin1(aStyleEnum.valueToKey(aValue.style()))+
+           ", "+
+           QString::fromLatin1(aCapStyleEnum.valueToKey(aValue.capStyle()))+
+           ", "+
+           QString::fromLatin1(aJoinStyleEnum.valueToKey(aValue.joinStyle()))+
+           ", "+
+           doubleToString(aValue.widthF(), aDecimals)+
+           ", "+
+           brushToString(aValue.brush(), alphaEnabled, aDecimals)+
+           ")";
 }
 
 QString textLengthToString(const QTextLength &aValue, int aDecimals)
