@@ -2322,7 +2322,7 @@ void TextFormatEditDialog::charUpdateProperties()
 
 
 
-    ui->charFontEdit->setText("["+aFont.family()+", "+QString::number(aFont.pointSize())+"]");
+    ui->charFontEdit->setText(fontToString(aFont));
     ui->charFontFamilyEdit->setText(((QTextCharFormat *)&mTextFormat)->fontFamily());
     ui->charFontPointSizeSpinBox->setValue(((QTextCharFormat *)&mTextFormat)->fontPointSize());
     ui->charFontWeightSpinBox->setValue(((QTextCharFormat *)&mTextFormat)->fontWeight());

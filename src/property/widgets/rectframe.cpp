@@ -2,6 +2,7 @@
 #include "ui_rectframe.h"
 
 #include "../dialogs/recteditdialog.h"
+#include "../propertyutils.h"
 
 RectFrame::RectFrame(QWidget *parent) :
     QWidget(parent),
@@ -60,17 +61,7 @@ void RectFrame::setValue(const QRect &aValue)
 {
     mRect=aValue;
 
-    ui->valueEdit->setText(
-                           "[("+
-                           QString::number(mRect.x())+
-                           ", "+
-                           QString::number(mRect.y())+
-                           "), "+
-                           QString::number(mRect.width())+
-                           " x "+
-                           QString::number(mRect.height())+
-                           "]"
-                          );
+    ui->valueEdit->setText(rectToString(mRect));
 }
 
 void RectFrame::on_downToolButton_clicked()

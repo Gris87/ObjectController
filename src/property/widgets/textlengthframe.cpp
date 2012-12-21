@@ -59,22 +59,7 @@ void TextLengthFrame::setValue(const QTextLength &aValue)
 {
     mTextLength=aValue;
 
-
-
-    QString res="[";
-
-    switch (mTextLength.type())
-    {
-        case QTextLength::VariableLength:   res.append("VariableLength");   break;
-        case QTextLength::FixedLength:      res.append("FixedLength");      break;
-        case QTextLength::PercentageLength: res.append("PercentageLength"); break;
-    }
-
-    res.append(", ");
-    res.append(doubleToString(mTextLength.rawValue(), mDecimals));
-    res.append("]");
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(textLengthToString(mTextLength, mDecimals));
 }
 
 void TextLengthFrame::on_downToolButton_clicked()

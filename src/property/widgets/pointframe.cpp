@@ -2,6 +2,7 @@
 #include "ui_pointframe.h"
 
 #include "../dialogs/pointeditdialog.h"
+#include "../propertyutils.h"
 
 PointFrame::PointFrame(QWidget *parent) :
     QWidget(parent),
@@ -60,13 +61,7 @@ void PointFrame::setValue(const QPoint &aValue)
 {
     mPoint=aValue;
 
-    ui->valueEdit->setText(
-                           "("+
-                           QString::number(mPoint.x())+
-                           ", "+
-                           QString::number(mPoint.y())+
-                           ")"
-                          );
+    ui->valueEdit->setText(pointToString(mPoint));
 }
 
 void PointFrame::on_downToolButton_clicked()
