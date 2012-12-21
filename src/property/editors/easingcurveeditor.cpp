@@ -13,6 +13,7 @@ EasingCurveEditor::EasingCurveEditor(QWidget *parent) :
     ui->setupUi(this);
 
     mAttributes=0;
+    mDecimals=6;
 }
 
 EasingCurveEditor::~EasingCurveEditor()
@@ -38,8 +39,12 @@ void EasingCurveEditor::setIcon(const QIcon &aIcon)
 void EasingCurveEditor::setValue(const QEasingCurve &aValue)
 {
     mValue=aValue;
+    updateUI();
+}
 
-    ui->valueEdit->setText(easingCurveToString(mValue));
+void EasingCurveEditor::updateUI()
+{
+    ui->valueEdit->setText(easingCurveToString(mValue, mDecimals));
 }
 
 void EasingCurveEditor::handleAttributes(const PropertyAttributes *aAttributes)
@@ -47,6 +52,14 @@ void EasingCurveEditor::handleAttributes(const PropertyAttributes *aAttributes)
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
     aAttributes->applyToWidget(ui->valueEdit);
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        updateUI();
+    }
 }
 
 void EasingCurveEditor::on_editButton_clicked()

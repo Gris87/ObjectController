@@ -401,10 +401,18 @@ QString pointFToString(const QPointF &aValue, int aDecimals)
            ")";
 }
 
-QString easingCurveToString(const QEasingCurve &aValue)
+QString easingCurveToString(const QEasingCurve &aValue, int aDecimals)
 {
     QMetaEnum aEnum=QEasingCurve::staticMetaObject.enumerator(QEasingCurve::staticMetaObject.indexOfEnumerator("Type"));
-    return QString::fromLatin1(aEnum.valueToKey(aValue.type()));
+    return "("+
+           QString::fromLatin1(aEnum.valueToKey(aValue.type()))+
+           ", "+
+           doubleToString(aValue.amplitude(), aDecimals)+
+           ", "+
+           doubleToString(aValue.overshoot(), aDecimals)+
+           ", "+
+           doubleToString(aValue.period(), aDecimals)+
+           ")";
 }
 
 QString fontToString(const QFont &aValue)
@@ -670,27 +678,27 @@ QString matrix4x4ToString(const QMatrix4x4 &aValue, int aDecimals)
 
 QString vector2DToString(const QVector2D &aValue, int aDecimals)
 {
-    return "["+
+    return "("+
            doubleToString(aValue.x(), aDecimals)+
            ", "+
            doubleToString(aValue.y(), aDecimals)+
-           "]";
+           ")";
 }
 
 QString vector3DToString(const QVector3D &aValue, int aDecimals)
 {
-    return "["+
+    return "("+
            doubleToString(aValue.x(), aDecimals)+
            ", "+
            doubleToString(aValue.y(), aDecimals)+
            ", "+
            doubleToString(aValue.z(), aDecimals)+
-           "]";
+           ")";
 }
 
 QString vector4DToString(const QVector4D &aValue, int aDecimals)
 {
-    return "["+
+    return "("+
            doubleToString(aValue.x(), aDecimals)+
            ", "+
            doubleToString(aValue.y(), aDecimals)+
@@ -698,12 +706,12 @@ QString vector4DToString(const QVector4D &aValue, int aDecimals)
            doubleToString(aValue.z(), aDecimals)+
            ", "+
            doubleToString(aValue.w(), aDecimals)+
-           "]";
+           ")";
 }
 
 QString quaternionToString(const QQuaternion &aValue, int aDecimals)
 {
-    return "["+
+    return "("+
            doubleToString(aValue.scalar(), aDecimals)+
            ", "+
            doubleToString(aValue.x(), aDecimals)+
@@ -711,7 +719,7 @@ QString quaternionToString(const QQuaternion &aValue, int aDecimals)
            doubleToString(aValue.y(), aDecimals)+
            ", "+
            doubleToString(aValue.z(), aDecimals)+
-           "]";
+           ")";
 }
 
 QString voidToString(void *aValue)

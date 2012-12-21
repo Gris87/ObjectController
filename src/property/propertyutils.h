@@ -33,7 +33,7 @@ QString lineToString(const QLine &aValue);
 QString lineFToString(const QLineF &aValue, int aDecimals=6);
 QString pointToString(const QPoint &aValue);
 QString pointFToString(const QPointF &aValue, int aDecimals=6);
-QString easingCurveToString(const QEasingCurve &aValue);
+QString easingCurveToString(const QEasingCurve &aValue, int aDecimals=6);
 QString fontToString(const QFont &aValue);
 QString pixmapToString(const QPixmap &aValue);
 QString brushToString(const QBrush &aValue);

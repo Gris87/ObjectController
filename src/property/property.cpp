@@ -547,7 +547,8 @@ QString Property::variantToString(const QVariantHash &aValue, PropertyTreeWidget
 
 QString Property::variantToString(const QEasingCurve &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return easingCurveToString(aValue);
+    return easingCurveToString(aValue,
+                               mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QFont &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
@@ -917,7 +918,7 @@ QIcon Property::iconForValue(const QBitmap &aValue, PropertyTreeWidgetItem * /*a
     return iconForBitmap(aValue);
 }
 
-QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem *aParentItem)
+QIcon Property::iconForValue(const QCursor &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return iconForCursor(aValue);
 }

@@ -19,6 +19,7 @@ public:
 
     void setIcon(const QIcon &aIcon);
     void setValue(const QEasingCurve &aValue);
+    void updateUI();
     void handleAttributes(const PropertyAttributes *aAttributes);
 
 protected:
@@ -29,6 +30,7 @@ private:
     Ui::DialogEditor *ui;
     QEasingCurve mValue;
     const PropertyAttributes *mAttributes;
+    int mDecimals;
 
 private slots:
     void on_editButton_clicked();
