@@ -47,5 +47,14 @@ QString sizePolicyToString(const QSizePolicy &aValue);
 QString keySequenceToString(const QKeySequence &aValue);
 QString textLengthToString(const QTextLength &aValue, int aDecimals=6);
 QString textFormatToString(const QTextFormat &aValue);
+QString matrixToString(const QMatrix &aValue, int aDecimals=6);
+QString transformToString(const QTransform &aValue, int aDecimals=6);
+QString matrix4x4ToString(const QMatrix4x4 &aValue, int aDecimals=6);
+QString vector2DToString(const QVector2D &aValue, int aDecimals=6);
+QString vector3DToString(const QVector3D &aValue, int aDecimals=6);
+QString vector4DToString(const QVector4D &aValue, int aDecimals=6);
+QString quaternionToString(const QQuaternion &aValue, int aDecimals=6);
+QString voidToString(void *aValue);
+QString objectToString(QObject *aValue);
 
 #endif // PROPERTYUTILS_H

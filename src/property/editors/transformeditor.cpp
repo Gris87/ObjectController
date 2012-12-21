@@ -42,27 +42,7 @@ void TransformEditor::setValue(const QTransform &aValue)
 
 void TransformEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "[("+
-                           doubleToString(mValue.m11(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m12(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m13(), mDecimals)+
-                           "), ("+
-                           doubleToString(mValue.m21(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m22(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m23(), mDecimals)+
-                           "), ("+
-                           doubleToString(mValue.m31(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m32(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m33(), mDecimals)+
-                           ")]"
-                          );
+    ui->valueEdit->setText(transformToString(mValue, mDecimals));
 }
 
 void TransformEditor::handleAttributes(const PropertyAttributes *aAttributes)

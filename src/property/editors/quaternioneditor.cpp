@@ -42,17 +42,7 @@ void QuaternionEditor::setValue(const QQuaternion &aValue)
 
 void QuaternionEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "["+
-                           doubleToString(mValue.scalar(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.x(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.z(), mDecimals)+
-                           "]"
-                          );
+    ui->valueEdit->setText(quaternionToString(mValue, mDecimals));
 }
 
 void QuaternionEditor::handleAttributes(const PropertyAttributes *aAttributes)

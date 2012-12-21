@@ -42,15 +42,7 @@ void Vector3DEditor::setValue(const QVector3D &aValue)
 
 void Vector3DEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "["+
-                           doubleToString(mValue.x(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.z(), mDecimals)+
-                           "]"
-                          );
+    ui->valueEdit->setText(vector3DToString(mValue, mDecimals));
 }
 
 void Vector3DEditor::handleAttributes(const PropertyAttributes *aAttributes)

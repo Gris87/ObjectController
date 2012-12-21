@@ -42,21 +42,7 @@ void MatrixEditor::setValue(const QMatrix &aValue)
 
 void MatrixEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "[("+
-                           doubleToString(mValue.m11(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m12(), mDecimals)+
-                           "), ("+
-                           doubleToString(mValue.m21(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.m22(), mDecimals)+
-                           "), ("+
-                           doubleToString(mValue.dx(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.dy(), mDecimals)+
-                           ")]"
-                          );
+    ui->valueEdit->setText(matrixToString(mValue, mDecimals));
 }
 
 void MatrixEditor::handleAttributes(const PropertyAttributes *aAttributes)

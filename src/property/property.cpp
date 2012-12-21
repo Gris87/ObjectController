@@ -634,165 +634,54 @@ QString Property::variantToString(const QTextFormat &aValue, PropertyTreeWidgetI
 
 QString Property::variantToString(const QMatrix &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "[("+
-           doubleToString(aValue.m11(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m12(), aDecimals)+
-           "), ("+
-           doubleToString(aValue.m21(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m22(), aDecimals)+
-           "), ("+
-           doubleToString(aValue.dx(), aDecimals)+
-           ", "+
-           doubleToString(aValue.dy(), aDecimals)+
-           ")]";
+    return matrixToString(aValue,
+                          mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QTransform &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "[("+
-           doubleToString(aValue.m11(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m12(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m13(), aDecimals)+
-           "), ("+
-           doubleToString(aValue.m21(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m22(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m23(), aDecimals)+
-           "), ("+
-           doubleToString(aValue.m31(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m32(), aDecimals)+
-           ", "+
-           doubleToString(aValue.m33(), aDecimals)+
-           ")]";
+    return transformToString(aValue,
+                             mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QMatrix4x4 &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    qreal aMatrix[16];
-
-    aValue.copyDataTo(aMatrix);
-
-    QString res="[";
-
-    for (int i=0; i<4; ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        res.append("(");
-
-        for (int j=0; j<4; ++j)
-        {
-            if (j>0)
-            {
-                res.append(", ");
-            }
-
-            res.append(doubleToString(aMatrix[i*4+j], aDecimals));
-        }
-
-        res.append(")");
-    }
-
-    res.append("]");
-
-    return res;
+    return matrix4x4ToString(aValue,
+                             mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QVector2D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "["+
-           doubleToString(aValue.x(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y(), aDecimals)+
-           "]";
+    return vector2DToString(aValue,
+                            mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QVector3D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "["+
-           doubleToString(aValue.x(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y(), aDecimals)+
-           ", "+
-           doubleToString(aValue.z(), aDecimals)+
-           "]";
+    return vector3DToString(aValue,
+                            mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QVector4D &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "["+
-           doubleToString(aValue.x(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y(), aDecimals)+
-           ", "+
-           doubleToString(aValue.z(), aDecimals)+
-           ", "+
-           doubleToString(aValue.w(), aDecimals)+
-           "]";
+    return vector4DToString(aValue,
+                            mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QQuaternion &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    int aDecimals=mAttributes.intValue("decimals", 6);
-
-    return "["+
-           doubleToString(aValue.scalar(), aDecimals)+
-           ", "+
-           doubleToString(aValue.x(), aDecimals)+
-           ", "+
-           doubleToString(aValue.y(), aDecimals)+
-           ", "+
-           doubleToString(aValue.z(), aDecimals)+
-           "]";
+    return quaternionToString(aValue,
+                              mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(void *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "0x"+QString::number((qint64)aValue, 16).toUpper();
+    return voidToString(aValue);
 }
 
 QString Property::variantToString(QObject *aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    if (aValue==0)
-    {
-        return "0x0";
-    }
-
-    QString res=aValue->metaObject()->className();
-    QString aObjectName=aValue->objectName();
-
-    if (aObjectName!="")
-    {
-        res.append(" (");
-        res.append(aObjectName);
-        res.append(")");
-    }
-
-    res.append(" 0x");
-    res.append(QString::number((qint64)aValue, 16).toUpper());
-
-    return res;
+    return objectToString(aValue);
 }
 
 // -------------------------------------------------------------------------------------

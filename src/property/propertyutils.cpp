@@ -6,6 +6,8 @@
 #include <QBitArray>
 #include <QEasingCurve>
 #include <QBitmap>
+#include <QMatrix4x4>
+#include <QVector2D>
 
 class QT_Object : public QObject
 {
@@ -586,6 +588,155 @@ QString textFormatToString(const QTextFormat &aValue)
     {
         Q_ASSERT(false);
     }
+
+    return res;
+}
+
+QString matrixToString(const QMatrix &aValue, int aDecimals)
+{
+    return "[("+
+           doubleToString(aValue.m11(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m12(), aDecimals)+
+           "), ("+
+           doubleToString(aValue.m21(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m22(), aDecimals)+
+           "), ("+
+           doubleToString(aValue.dx(), aDecimals)+
+           ", "+
+           doubleToString(aValue.dy(), aDecimals)+
+           ")]";
+}
+
+QString transformToString(const QTransform &aValue, int aDecimals)
+{
+    return "[("+
+           doubleToString(aValue.m11(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m12(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m13(), aDecimals)+
+           "), ("+
+           doubleToString(aValue.m21(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m22(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m23(), aDecimals)+
+           "), ("+
+           doubleToString(aValue.m31(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m32(), aDecimals)+
+           ", "+
+           doubleToString(aValue.m33(), aDecimals)+
+           ")]";
+}
+
+QString matrix4x4ToString(const QMatrix4x4 &aValue, int aDecimals)
+{
+    qreal aMatrix[16];
+
+    aValue.copyDataTo(aMatrix);
+
+    QString res="[";
+
+    for (int i=0; i<4; ++i)
+    {
+        if (i>0)
+        {
+            res.append(", ");
+        }
+
+        res.append("(");
+
+        for (int j=0; j<4; ++j)
+        {
+            if (j>0)
+            {
+                res.append(", ");
+            }
+
+            res.append(doubleToString(aMatrix[i*4+j], aDecimals));
+        }
+
+        res.append(")");
+    }
+
+    res.append("]");
+
+    return res;
+}
+
+QString vector2DToString(const QVector2D &aValue, int aDecimals)
+{
+    return "["+
+           doubleToString(aValue.x(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y(), aDecimals)+
+           "]";
+}
+
+QString vector3DToString(const QVector3D &aValue, int aDecimals)
+{
+    return "["+
+           doubleToString(aValue.x(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y(), aDecimals)+
+           ", "+
+           doubleToString(aValue.z(), aDecimals)+
+           "]";
+}
+
+QString vector4DToString(const QVector4D &aValue, int aDecimals)
+{
+    return "["+
+           doubleToString(aValue.x(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y(), aDecimals)+
+           ", "+
+           doubleToString(aValue.z(), aDecimals)+
+           ", "+
+           doubleToString(aValue.w(), aDecimals)+
+           "]";
+}
+
+QString quaternionToString(const QQuaternion &aValue, int aDecimals)
+{
+    return "["+
+           doubleToString(aValue.scalar(), aDecimals)+
+           ", "+
+           doubleToString(aValue.x(), aDecimals)+
+           ", "+
+           doubleToString(aValue.y(), aDecimals)+
+           ", "+
+           doubleToString(aValue.z(), aDecimals)+
+           "]";
+}
+
+QString voidToString(void *aValue)
+{
+    return "0x"+QString::number((qint64)aValue, 16).toUpper();
+}
+
+QString objectToString(QObject *aValue)
+{
+    if (aValue==0)
+    {
+        return "0x0";
+    }
+
+    QString res=aValue->metaObject()->className();
+    QString aObjectName=aValue->objectName();
+
+    if (aObjectName!="")
+    {
+        res.append(" (");
+        res.append(aObjectName);
+        res.append(")");
+    }
+
+    res.append(" 0x");
+    res.append(QString::number((qint64)aValue, 16).toUpper());
 
     return res;
 }

@@ -42,17 +42,7 @@ void Vector4DEditor::setValue(const QVector4D &aValue)
 
 void Vector4DEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "["+
-                           doubleToString(mValue.x(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.z(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.w(), mDecimals)+
-                           "]"
-                          );
+    ui->valueEdit->setText(vector4DToString(mValue, mDecimals));
 }
 
 void Vector4DEditor::handleAttributes(const PropertyAttributes *aAttributes)

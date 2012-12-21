@@ -42,13 +42,7 @@ void Vector2DEditor::setValue(const QVector2D &aValue)
 
 void Vector2DEditor::updateUI()
 {
-    ui->valueEdit->setText(
-                           "["+
-                           doubleToString(mValue.x(), mDecimals)+
-                           ", "+
-                           doubleToString(mValue.y(), mDecimals)+
-                           "]"
-                          );
+    ui->valueEdit->setText(vector2DToString(mValue, mDecimals));
 }
 
 void Vector2DEditor::handleAttributes(const PropertyAttributes *aAttributes)

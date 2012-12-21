@@ -42,37 +42,7 @@ void Matrix4x4Editor::setValue(const QMatrix4x4 &aValue)
 
 void Matrix4x4Editor::updateUI()
 {
-    qreal aMatrix[16];
-
-    mValue.copyDataTo(aMatrix);
-
-    QString res="[";
-
-    for (int i=0; i<4; ++i)
-    {
-        if (i>0)
-        {
-            res.append(", ");
-        }
-
-        res.append("(");
-
-        for (int j=0; j<4; ++j)
-        {
-            if (j>0)
-            {
-                res.append(", ");
-            }
-
-            res.append(doubleToString(aMatrix[i*4+j], mDecimals));
-        }
-
-        res.append(")");
-    }
-
-    res.append("]");
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(matrix4x4ToString(mValue, mDecimals));
 }
 
 void Matrix4x4Editor::handleAttributes(const PropertyAttributes *aAttributes)
