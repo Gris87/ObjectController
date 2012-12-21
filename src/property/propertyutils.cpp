@@ -417,10 +417,47 @@ QString easingCurveToString(const QEasingCurve &aValue, int aDecimals)
 
 QString fontToString(const QFont &aValue)
 {
+    QMetaEnum aEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("StyleStrategy"));
+
+    QString aFontAttrs;
+
+    if (aValue.bold())
+    {
+        aFontAttrs.append("B");
+    }
+
+    if (aValue.italic())
+    {
+        aFontAttrs.append("I");
+    }
+
+    if (aValue.underline())
+    {
+        aFontAttrs.append("U");
+    }
+
+    if (aValue.strikeOut())
+    {
+        aFontAttrs.append("S");
+    }
+
+    if (aValue.kerning())
+    {
+        aFontAttrs.append("K");
+    }
+
+    if (aFontAttrs!="")
+    {
+        aFontAttrs.insert(0, ", ");
+    }
+
     return "["+
            aValue.family()+
            ", "+
            QString::number(aValue.pointSize())+
+           aFontAttrs+
+           ", "+
+           QString::fromLatin1(aEnum.valueToKey(aValue.styleStrategy()))+
            "]";
 }
 

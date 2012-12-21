@@ -484,7 +484,7 @@ public:
 
     Q_CLASSINFO("EasingCurve attributes", "toolTip            : \"It is a EasingCurve\"        ;"
                                           "delay              : 100                            ;"
-                                          "default            : InOutCubic                     ;"
+                                          "default            : (InOutCubic, 1, 1.702, 0.3)    ;"
                                           "allowSetType       : false                          ;"
                                           "preview            : false                          ;"
 
@@ -504,7 +504,7 @@ public:
 
     Q_CLASSINFO("Font attributes",        "toolTip            : \"It is a Font\"               ;"
                                           "delay              : 100                            ;"
-                                          "default            : [Times New Roman, 12]          ;"
+                                          "default            : [Times New Roman, 12, K, PreferDefault] ;"
                                           "allowModifySample  : true                           ;"
 
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA        ;"
@@ -834,7 +834,7 @@ public:
 
     Q_CLASSINFO("Matrix4x4 attributes",   "toolTip            : \"It is a Matrix4x4\"          ;"
                                           "delay              : 100                            ;"
-                                        //"default            : []                             ;"
+                                          "default            : [(16, 15, 14, 13), (12, 11, 10, 9), (8, 7, 6, 5), (4, 3, 2, 1)] ;"
 
                                         //"wrapping           : false                          ;"
                                         //"accelerated        : false                          ;"
@@ -848,7 +848,7 @@ public:
 
     Q_CLASSINFO("Vector2D attributes",    "toolTip            : \"It is a Vector2D\"           ;"
                                           "delay              : 100                            ;"
-                                          "default            : [6, 7]                         ;"
+                                          "default            : (6, 7)                         ;"
 
                                         //"wrapping           : false                          ;"
                                         //"accelerated        : false                          ;"
@@ -862,7 +862,7 @@ public:
 
     Q_CLASSINFO("Vector3D attributes",    "toolTip            : \"It is a Vector3D\"           ;"
                                           "delay              : 100                            ;"
-                                          "default            : [1, 5, 8]                      ;"
+                                          "default            : (1, 5, 8)                      ;"
 
                                         //"wrapping           : false                          ;"
                                         //"accelerated        : false                          ;"
@@ -876,7 +876,7 @@ public:
 
     Q_CLASSINFO("Vector4D attributes",    "toolTip            : \"It is a Vector4D\"           ;"
                                           "delay              : 100                            ;"
-                                          "default            : [4, 3, 9, 6]                   ;"
+                                          "default            : (4, 3, 9, 6)                   ;"
 
                                         //"wrapping           : false                          ;"
                                         //"accelerated        : false                          ;"
@@ -890,7 +890,7 @@ public:
 
     Q_CLASSINFO("Quaternion attributes",  "toolTip            : \"It is a Quaternion\"         ;"
                                           "delay              : 100                            ;"
-                                          "default            : [1, 7, 6, 5]                   ;"
+                                          "default            : (1, 7, 6, 5)                   ;"
 
                                         //"wrapping           : false                          ;"
                                         //"accelerated        : false                          ;"

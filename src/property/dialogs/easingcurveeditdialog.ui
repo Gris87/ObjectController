@@ -84,7 +84,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="amplitudeSpinBox">
          <property name="decimals">
-          <number>2</number>
+          <number>6</number>
          </property>
          <property name="minimum">
           <double>0.000000000000000</double>
@@ -107,7 +107,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="overshootSpinBox">
          <property name="decimals">
-          <number>2</number>
+          <number>6</number>
          </property>
          <property name="minimum">
           <double>0.000000000000000</double>
@@ -130,7 +130,7 @@
        <item>
         <widget class="QDoubleSpinBox" name="periodSpinBox">
          <property name="decimals">
-          <number>2</number>
+          <number>6</number>
          </property>
          <property name="minimum">
           <double>0.000000000000000</double>

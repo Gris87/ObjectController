@@ -2390,18 +2390,23 @@ int Property::subPropertiesForValue(const QEasingCurve &aValue, PropertyTreeWidg
 {
     int aCount=0;
 
-    QMetaEnum aTypeEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
-    QEasingCurve::Type aType=aValue.type();
-
-    PropertyTreeWidgetItem *aTypeItem;
     PropertyTreeWidgetItem *aAmplitudeItem;
     PropertyTreeWidgetItem *aOvershootItem;
     PropertyTreeWidgetItem *aPeriodItem;
 
-    GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aTypeItem,      aCount, qApp->translate("Property", "Type"),      aTypeEnum, aType,   easingCurveTypeChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aAmplitudeItem, aCount, qApp->translate("Property", "Amplitude"), aValue.amplitude(), easingCurveAmplitudeChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aOvershootItem, aCount, qApp->translate("Property", "Overshoot"), aValue.overshoot(), easingCurveOvershootChanged);
-    GET_OR_CREATE_ITEM_SETUP_CONNECT(     aParentItem, aPeriodItem,    aCount, qApp->translate("Property", "Period"),    aValue.period(),    easingCurvePeriodChanged);
+    if (mAttributes.boolValue("allowSetType", true))
+    {
+        QMetaEnum aTypeEnum=aValue.staticMetaObject.enumerator(aValue.staticMetaObject.indexOfEnumerator("Type"));
+        QEasingCurve::Type aType=aValue.type();
+
+        PropertyTreeWidgetItem *aTypeItem;
+
+        GET_OR_CREATE_ITEM_SETUP_ENUM_CONNECT(aParentItem, aTypeItem,      aCount, qApp->translate("Property", "Type"),      aTypeEnum, aType,   easingCurveTypeChanged);
+    }
+
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(         aParentItem, aAmplitudeItem, aCount, qApp->translate("Property", "Amplitude"), aValue.amplitude(), easingCurveAmplitudeChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(         aParentItem, aOvershootItem, aCount, qApp->translate("Property", "Overshoot"), aValue.overshoot(), easingCurveOvershootChanged);
+    GET_OR_CREATE_ITEM_SETUP_CONNECT(         aParentItem, aPeriodItem,    aCount, qApp->translate("Property", "Period"),    aValue.period(),    easingCurvePeriodChanged);
 
     return aCount;
 }
