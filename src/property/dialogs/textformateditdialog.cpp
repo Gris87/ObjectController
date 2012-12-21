@@ -2202,22 +2202,8 @@ void TextFormatEditDialog::charUpdateProperties()
         aFontStyleStrategyFlagStr="ForceIntegerMetrics";
     }
 
-    QStringList aAnchors=((QTextCharFormat *)&mTextFormat)->anchorNames();
-    QString anchorNames="[";
-
-    for (int i=0; i<aAnchors.length(); ++i)
-    {
-        if (i>0)
-        {
-            anchorNames.append(", ");
-        }
-
-        anchorNames.append("\"");
-        anchorNames.append(aAnchors.at(i));
-        anchorNames.append("\"");
-    }
-
-    anchorNames.append("]");
+    QString anchorNames=stringListToString(((QTextCharFormat *)&mTextFormat)->anchorNames(),
+                                           mAttributes->stringValue("echoMode", "Normal"));
 
     QFont::Capitalization aFontCapitalization=((QTextCharFormat *)&mTextFormat)->fontCapitalization();
     QString aFontCapitalizationStr="MixedCase";

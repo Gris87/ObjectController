@@ -1,6 +1,8 @@
 #include "keysequenceeditdialog.h"
 #include "ui_keysequenceeditdialog.h"
 
+#include "../propertyutils.h"
+
 KeySequenceEditDialog::KeySequenceEditDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::KeySequenceEditDialog)
@@ -34,7 +36,7 @@ void KeySequenceEditDialog::init(QKeySequence aKeySequence, const PropertyAttrib
     ui->setupUi(this);
 
     mShortCutEdit=new ShortCutEdit(aAttributes, this);
-    mShortCutEdit->setText(aKeySequence.toString());
+    mShortCutEdit->setText(keySequenceToString(aKeySequence));
     ui->mainLayout->insertWidget(0, mShortCutEdit);
 
     mShortCutEdit->grabKeyboard();

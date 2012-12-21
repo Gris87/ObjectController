@@ -2,6 +2,8 @@
 
 #include <QKeyEvent>
 
+#include "../propertyutils.h"
+
 ShortCutEdit::ShortCutEdit(QWidget *parent) :
     QLineEdit(parent)
 {
@@ -64,7 +66,7 @@ void ShortCutEdit::keyPressEvent(QKeyEvent *event)
         aKey|=Qt::META;
     }
 
-    QString aShortcut=QKeySequence(aKey).toString();
+    QString aShortcut=keySequenceToString(QKeySequence(aKey));
 
     if (!mRejection.contains(aShortcut))
     {
