@@ -451,14 +451,14 @@ QString fontToString(const QFont &aValue)
         aFontAttrs.insert(0, ", ");
     }
 
-    return "["+
+    return "("+
            aValue.family()+
            ", "+
            QString::number(aValue.pointSize())+
            aFontAttrs+
            ", "+
            QString::fromLatin1(aEnum.valueToKey(aValue.styleStrategy()))+
-           "]";
+           ")";
 }
 
 QString pixmapToString(const QPixmap &aValue)
@@ -618,7 +618,7 @@ QString sizePolicyToString(const QSizePolicy &aValue)
 {
     QMetaEnum aEnum=QSizePolicy::staticMetaObject.enumerator(QSizePolicy::staticMetaObject.indexOfEnumerator("Policy"));
 
-    return "["+
+    return "("+
            QString::fromLatin1(aEnum.valueToKey(aValue.horizontalPolicy()))+
            ", "+
            QString::fromLatin1(aEnum.valueToKey(aValue.verticalPolicy()))+
@@ -626,7 +626,7 @@ QString sizePolicyToString(const QSizePolicy &aValue)
            QString::number(aValue.horizontalStretch())+
            ", "+
            QString::number(aValue.verticalStretch())+
-           "]";
+           ")";
 }
 
 QString keySequenceToString(const QKeySequence &aValue)
@@ -634,9 +634,14 @@ QString keySequenceToString(const QKeySequence &aValue)
     return aValue.toString();
 }
 
+QString penToString(const QPen &aValue, bool alphaEnabled, int aDecimals)
+{
+    return "Pen";
+}
+
 QString textLengthToString(const QTextLength &aValue, int aDecimals)
 {
-    QString res="[";
+    QString res="(";
 
     switch (aValue.type())
     {
@@ -647,7 +652,7 @@ QString textLengthToString(const QTextLength &aValue, int aDecimals)
 
     res.append(", ");
     res.append(doubleToString(aValue.rawValue(), aDecimals));
-    res.append("]");
+    res.append(")");
 
     return res;
 }

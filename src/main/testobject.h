@@ -506,7 +506,7 @@ public:
 
     Q_CLASSINFO("Font attributes",        "toolTip            : \"It is a Font\"                                                  ;"
                                           "delay              : 100                                                               ;"
-                                          "default            : [Times New Roman, 12, K, PreferDefault]                                    ;"
+                                          "default            : (Times New Roman, 12, K, PreferDefault)                           ;"
                                           "allowModifySample  : true                                                              ;"
 
                                         //"inputMask          : >A!AAAAAAAAAAAAAAAAAAAA                                           ;"
@@ -583,7 +583,7 @@ public:
 
     Q_CLASSINFO("Palette attributes",     "toolTip            : \"It is a Palette\"                                               ;"
                                           "delay              : 100                                                               ;"
-                                        //"default            : Palette                                                           ;"
+                                        //"default            : []                                                                ;"
                                           "allowFastColor     : false                                                             ;"
                                           "allowChangeDetails : true                                                              ;"
                                           "showDetails        : true                                                              ;"
@@ -713,7 +713,7 @@ public:
 
     Q_CLASSINFO("SizePolicy attributes",  "toolTip            : \"It is a SizePolicy\"                                            ;"
                                           "delay              : 100                                                               ;"
-                                          "default            : [Minimum, Expanding, 0, 0]                                        ;"
+                                          "default            : (Minimum, Expanding, 0, 0)                                        ;"
 
                                           "maxVisibleItems    : 5                                                                 ;"
                                           "editable           : false                                                             ;"
@@ -765,7 +765,7 @@ public:
 
     Q_CLASSINFO("TextLength attributes",  "toolTip            : \"It is a TextLength\"                                            ;"
                                           "delay              : 100                                                               ;"
-                                          "default            : [PercentageLength, 90]                                            ;"
+                                          "default            : (PercentageLength, 90)                                            ;"
                                           "allowSetLengthType : false                                                             ;"
 
                                           "maxVisibleItems    : 5                                                                 ;"

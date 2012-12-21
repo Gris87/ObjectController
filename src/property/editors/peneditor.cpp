@@ -13,8 +13,8 @@ PenEditor::PenEditor(QWidget *parent) :
     ui->setupUi(this);
 
     mAttributes=0;
-
-    ui->valueEdit->setText("Pen");
+    mAlphaEnabled=true;
+    mDecimals=6;
 }
 
 PenEditor::~PenEditor()
@@ -41,7 +41,13 @@ void PenEditor::setValue(const QPen &aValue)
 {
     mValue=aValue;
 
+    updateText();
     setIcon(iconForPen(mValue));
+}
+
+void PenEditor::updateText()
+{
+    ui->valueEdit->setText(penToString(mValue, mAlphaEnabled, mDecimals));
 }
 
 void PenEditor::handleAttributes(const PropertyAttributes *aAttributes)
@@ -49,6 +55,35 @@ void PenEditor::handleAttributes(const PropertyAttributes *aAttributes)
     CustomEditor::handleAttributes(aAttributes);
     mAttributes=aAttributes;
     aAttributes->applyToWidget(ui->valueEdit);
+
+    bool needUpdate=false;
+
+
+
+    bool aAlphaEnabled=aAttributes->boolValue("alphaEnabled", mAlphaEnabled);
+
+    if (mAlphaEnabled!=aAlphaEnabled)
+    {
+        mAlphaEnabled=aAlphaEnabled;
+        needUpdate=true;
+    }
+
+
+
+    int aDecimals=aAttributes->intValue("decimals", mDecimals);
+
+    if (mDecimals!=aDecimals)
+    {
+        mDecimals=aDecimals;
+        needUpdate=true;
+    }
+
+
+
+    if (needUpdate)
+    {
+        updateText();
+    }
 }
 
 void PenEditor::on_editButton_clicked()

@@ -46,6 +46,7 @@ QString bitmapToString(const QBitmap &aValue);
 QString cursorToString(const QCursor &aValue);
 QString sizePolicyToString(const QSizePolicy &aValue);
 QString keySequenceToString(const QKeySequence &aValue);
+QString penToString(const QPen &aValue, bool alphaEnabled=true, int aDecimals=6);
 QString textLengthToString(const QTextLength &aValue, int aDecimals=6);
 QString textFormatToString(const QTextFormat &aValue);
 QString matrixToString(const QMatrix &aValue, int aDecimals=6);

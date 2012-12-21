@@ -620,9 +620,11 @@ QString Property::variantToString(const QKeySequence &aValue, PropertyTreeWidget
     return keySequenceToString(aValue);
 }
 
-QString Property::variantToString(const QPen &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QPen &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    return "Pen";
+    return penToString(aValue,
+                       mAttributes.boolValue("alphaEnabled", true),
+                       mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QTextLength &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
