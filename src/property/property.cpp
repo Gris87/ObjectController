@@ -576,12 +576,12 @@ QString Property::variantToString(const QPalette &/*aValue*/, PropertyTreeWidget
     return "Palette";
 }
 
-QString Property::variantToString(const QIcon &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
+QString Property::variantToString(const QIcon &/*aValue*/, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return "Icon";
 }
 
-QString Property::variantToString(const QImage &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QImage &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return imageToString(aValue);
 }
@@ -596,7 +596,7 @@ QString Property::variantToString(const QRegion &aValue, PropertyTreeWidgetItem 
     return regionToString(aValue);
 }
 
-QString Property::variantToString(const QBitmap &aValue, PropertyTreeWidgetItem *aParentItem)
+QString Property::variantToString(const QBitmap &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
     return bitmapToString(aValue);
 }
@@ -623,62 +623,13 @@ QString Property::variantToString(const QPen &/*aValue*/, PropertyTreeWidgetItem
 
 QString Property::variantToString(const QTextLength &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res="[";
-
-    switch (aValue.type())
-    {
-        case QTextLength::VariableLength:   res.append("VariableLength");   break;
-        case QTextLength::FixedLength:      res.append("FixedLength");      break;
-        case QTextLength::PercentageLength: res.append("PercentageLength"); break;
-    }
-
-    res.append(", ");
-    res.append(doubleToString(aValue.rawValue(), mAttributes.intValue("decimals", 6)));
-    res.append("]");
-
-    return res;
+    return textLengthToString(aValue,
+                              mAttributes.intValue("decimals", 6));
 }
 
 QString Property::variantToString(const QTextFormat &aValue, PropertyTreeWidgetItem * /*aParentItem*/)
 {
-    QString res="[Unknown type]";
-
-    if (aValue.isImageFormat())
-    {
-        res="ImageFormat";
-    }
-    else
-    if (aValue.isTableCellFormat())
-    {
-        res="TableCellFormat";
-    }
-    else
-    if (aValue.isTableFormat())
-    {
-        res="TableFormat";
-    }
-    else
-    if (aValue.isBlockFormat())
-    {
-        res="BlockFormat";
-    }
-    else
-    if (aValue.isCharFormat())
-    {
-        res="CharFormat";
-    }
-    else
-    if (aValue.isFrameFormat())
-    {
-        res="FrameFormat";
-    }
-    else
-    if (aValue.isListFormat())
-    {
-        res="ListFormat";
-    }
-
-    return res;
+    return textFormatToString(aValue);
 }
 
 QString Property::variantToString(const QMatrix &aValue, PropertyTreeWidgetItem * /*aParentItem*/)

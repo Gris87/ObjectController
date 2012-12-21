@@ -42,20 +42,7 @@ void TextLengthEditor::setValue(const QTextLength &aValue)
 
 void TextLengthEditor::updateUI()
 {
-    QString res="[";
-
-    switch (mValue.type())
-    {
-        case QTextLength::VariableLength:   res.append("VariableLength");   break;
-        case QTextLength::FixedLength:      res.append("FixedLength");      break;
-        case QTextLength::PercentageLength: res.append("PercentageLength"); break;
-    }
-
-    res.append(", ");
-    res.append(doubleToString(mValue.rawValue(), mDecimals));
-    res.append("]");
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(textLengthToString(mValue));
 }
 
 void TextLengthEditor::handleAttributes(const PropertyAttributes *aAttributes)

@@ -525,3 +525,67 @@ QString keySequenceToString(const QKeySequence &aValue)
 {
     return aValue.toString();
 }
+
+QString textLengthToString(const QTextLength &aValue, int aDecimals)
+{
+    QString res="[";
+
+    switch (aValue.type())
+    {
+        case QTextLength::VariableLength:   res.append("VariableLength");   break;
+        case QTextLength::FixedLength:      res.append("FixedLength");      break;
+        case QTextLength::PercentageLength: res.append("PercentageLength"); break;
+    }
+
+    res.append(", ");
+    res.append(doubleToString(aValue.rawValue(), aDecimals));
+    res.append("]");
+
+    return res;
+}
+
+QString textFormatToString(const QTextFormat &aValue)
+{
+    QString res=qApp->translate("Property", "[Unknown type]");
+
+    if (aValue.isImageFormat())
+    {
+        res="ImageFormat";
+    }
+    else
+    if (aValue.isTableCellFormat())
+    {
+        res="TableCellFormat";
+    }
+    else
+    if (aValue.isTableFormat())
+    {
+        res="TableFormat";
+    }
+    else
+    if (aValue.isBlockFormat())
+    {
+        res="BlockFormat";
+    }
+    else
+    if (aValue.isCharFormat())
+    {
+        res="CharFormat";
+    }
+    else
+    if (aValue.isFrameFormat())
+    {
+        res="FrameFormat";
+    }
+    else
+    if (aValue.isListFormat())
+    {
+        res="ListFormat";
+    }
+    else
+    {
+        Q_ASSERT(false);
+    }
+
+    return res;
+}

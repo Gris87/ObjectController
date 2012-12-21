@@ -45,5 +45,7 @@ QString bitmapToString(const QBitmap &aValue);
 QString cursorToString(const QCursor &aValue);
 QString sizePolicyToString(const QSizePolicy &aValue);
 QString keySequenceToString(const QKeySequence &aValue);
+QString textLengthToString(const QTextLength &aValue, int aDecimals=6);
+QString textFormatToString(const QTextFormat &aValue);
 
 #endif // PROPERTYUTILS_H

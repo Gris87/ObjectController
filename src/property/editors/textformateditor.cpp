@@ -2,6 +2,7 @@
 #include "ui_dialogeditor.h"
 
 #include "../dialogs/textformateditdialog.h"
+#include "../propertyutils.h"
 
 TextFormatEditor::TextFormatEditor(QWidget *parent) :
     CustomEditor(parent),
@@ -36,52 +37,7 @@ void TextFormatEditor::setValue(const QTextFormat &aValue)
 {
     mValue=aValue;
 
-
-
-    ui->editButton->setEnabled(true);
-
-    QString res="[Unknown type]";
-
-    if (aValue.isImageFormat())
-    {
-        res="ImageFormat";
-    }
-    else
-    if (aValue.isTableCellFormat())
-    {
-        res="TableCellFormat";
-    }
-    else
-    if (aValue.isTableFormat())
-    {
-        res="TableFormat";
-    }
-    else
-    if (aValue.isBlockFormat())
-    {
-        res="BlockFormat";
-    }
-    else
-    if (aValue.isCharFormat())
-    {
-        res="CharFormat";
-    }
-    else
-    if (aValue.isFrameFormat())
-    {
-        res="FrameFormat";
-    }
-    else
-    if (aValue.isListFormat())
-    {
-        res="ListFormat";
-    }
-    else
-    {
-        ui->editButton->setEnabled(false);
-    }
-
-    ui->valueEdit->setText(res);
+    ui->valueEdit->setText(textFormatToString(mValue));
 }
 
 void TextFormatEditor::handleAttributes(const PropertyAttributes *aAttributes)
