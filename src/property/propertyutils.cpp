@@ -189,7 +189,7 @@ QString charToString(const QChar &aValue, const QString &aEchoMode)
         case QLineEdit::Normal:             return QString(aValue);
         case QLineEdit::NoEcho:             return "";
         case QLineEdit::Password:
-        case QLineEdit::PasswordEchoOnEdit: return qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter);
+        case QLineEdit::PasswordEchoOnEdit: return QString(QChar(qApp->style()->styleHint(QStyle::SH_LineEdit_PasswordCharacter)));
         default:
             Q_ASSERT(false);
         break;

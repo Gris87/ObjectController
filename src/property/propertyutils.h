@@ -15,7 +15,7 @@ QString intToString(const quint32 &aValue, const QString &aPrefix=QString(), con
 QString intToString(const qint64 &aValue, const QString &aPrefix=QString(), const QString &aSuffix=QString());
 QString intToString(const quint64 &aValue, const QString &aPrefix=QString(), const QString &aSuffix=QString());
 QString doubleToString(double aValue, int aDecimals=6);
-QString doubleToString(double aValue, const QString &aPrefix=QString(), const QString &aSuffix=QString(), int aDecimals=6);
+QString doubleToString(double aValue, const QString &aPrefix, const QString &aSuffix, int aDecimals=6);
 QString charToString(const QChar &aValue, const QString &aEchoMode=QString());
 QString stringListToString(const QStringList &aValue, const QString &aEchoMode=QString());
 QString stringToString(const QString &aValue, const QString &aEchoMode=QString());
