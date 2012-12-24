@@ -1,6 +1,8 @@
 #include "doubleeditor.h"
 #include "ui_doubleeditor.h"
 
+#include <float.h>
+
 DoubleEditor::DoubleEditor(QWidget *parent) :
     CustomEditor(parent),
     ui(new Ui::DoubleEditor)
