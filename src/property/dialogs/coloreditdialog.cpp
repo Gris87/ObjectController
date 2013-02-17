@@ -250,20 +250,21 @@ QColor ColorEditDialog::selectedColor() const
     return mMainColorArea->color();
 }
 
+#define BLOCK_SIGNALS(aLock) \
+    mColorSpectrum->blockSignals(aLock); \
+    mValueColorBar->blockSignals(aLock); \
+    mTransparencyColorBar->blockSignals(aLock); \
+    ui->hueSpinBox->blockSignals(aLock); \
+    ui->satSpinBox->blockSignals(aLock); \
+    ui->valSpinBox->blockSignals(aLock); \
+    ui->redSpinBox->blockSignals(aLock); \
+    ui->greenSpinBox->blockSignals(aLock); \
+    ui->blueSpinBox->blockSignals(aLock); \
+    ui->alphaSpinBox->blockSignals(aLock);
+
 void ColorEditDialog::setColor(const QColor &aColor)
 {
-    mColorSpectrum->blockSignals(true);
-    mValueColorBar->blockSignals(true);
-    mTransparencyColorBar->blockSignals(true);
-    ui->hueSpinBox->blockSignals(true);
-    ui->satSpinBox->blockSignals(true);
-    ui->valSpinBox->blockSignals(true);
-    ui->redSpinBox->blockSignals(true);
-    ui->greenSpinBox->blockSignals(true);
-    ui->blueSpinBox->blockSignals(true);
-    ui->alphaSpinBox->blockSignals(true);
-
-
+    BLOCK_SIGNALS(true);
 
     mColorSpectrum->setColor(aColor);
     mValueColorBar->setColor(aColor);
@@ -281,18 +282,7 @@ void ColorEditDialog::setColor(const QColor &aColor)
     ui->blueSpinBox->setValue(aColor.blue());
     ui->alphaSpinBox->setValue(aColor.alpha());
 
-
-
-    mColorSpectrum->blockSignals(false);
-    mValueColorBar->blockSignals(false);
-    mTransparencyColorBar->blockSignals(false);
-    ui->hueSpinBox->blockSignals(false);
-    ui->satSpinBox->blockSignals(false);
-    ui->valSpinBox->blockSignals(false);
-    ui->redSpinBox->blockSignals(false);
-    ui->greenSpinBox->blockSignals(false);
-    ui->blueSpinBox->blockSignals(false);
-    ui->alphaSpinBox->blockSignals(false);
+    BLOCK_SIGNALS(false);
 }
 
 void ColorEditDialog::basicColorClicked()
