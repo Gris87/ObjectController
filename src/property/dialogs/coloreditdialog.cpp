@@ -107,8 +107,7 @@ void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
         {
             ColorArea *aArea=new ColorArea(0, this);
             aArea->setColor(aColors.at(i*8+j));
-            aArea->setMinimumSize(26, 22);
-            aArea->setMaximumSize(26, 22);
+            aArea->setFixedSize(26, 22);
             aArea->setFrameRect(QRect(2, 2, 22, 18));
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -151,8 +150,7 @@ void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
         {
             ColorArea *aArea=new ColorArea(0, this);
             aArea->setColor(aColors.at(i*8+j));
-            aArea->setMinimumSize(26, 22);
-            aArea->setMaximumSize(26, 22);
+            aArea->setFixedSize(26, 22);
             aArea->setFrameRect(QRect(2, 2, 22, 18));
             aArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
@@ -173,8 +171,7 @@ void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
 
     mColorSpectrum = new ColorSpectrum(this);
 
-    mColorSpectrum->setMinimumSize(222, 202);
-    mColorSpectrum->setMaximumSize(222, 202);
+    mColorSpectrum->setFixedSize(222, 202);
     mColorSpectrum->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     ui->colorSelectionLayout->addWidget(mColorSpectrum);
@@ -185,8 +182,7 @@ void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
 
     mValueColorBar = new ColorBar(this);
 
-    mValueColorBar->setMinimumSize(20, 208);
-    mValueColorBar->setMaximumSize(20, 208);
+    mValueColorBar->setFixedSize(20, 208);
     mValueColorBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     ui->colorSelectionLayout->addWidget(mValueColorBar);
@@ -197,8 +193,7 @@ void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
 
     mTransparencyColorBar = new ColorBar(this);
 
-    mTransparencyColorBar->setMinimumSize(20, 208);
-    mTransparencyColorBar->setMaximumSize(20, 208);
+    mTransparencyColorBar->setFixedSize(20, 208);
     mTransparencyColorBar->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     ui->colorSelectionLayout->addWidget(mTransparencyColorBar);
@@ -208,8 +203,7 @@ void ColorEditDialog::init(QColor aColor, const PropertyAttributes *aAttributes)
     // --------------------------------------------------------------------------------------------
 
     mMainColorArea=new ColorArea(0, this);
-    mMainColorArea->setMinimumSize(60, 78);
-    mMainColorArea->setMaximumSize(60, 78);
+    mMainColorArea->setFixedSize(60, 78);
     mMainColorArea->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
 
     mMainColorArea->setSelectAllowed(false);
